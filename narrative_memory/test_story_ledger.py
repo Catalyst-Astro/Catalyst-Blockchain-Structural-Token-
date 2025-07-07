@@ -5,6 +5,11 @@ import pytest
 from narrative_memory.story_ledger import StoryLedger
 
 
+
+def test_log_action(tmp_path):
+    tmp_file = tmp_path / "ledger.jsonl"
+    ledger = StoryLedger(str(tmp_file))
+=======
 < codex/desarrollar-dashboard-de-gobernanza-fractaldao
 def test_log_action(tmp_path):
     tmp_file = tmp_path / "ledger.jsonl"
@@ -17,6 +22,7 @@ def tmp_file(tmp_path):
 
 def test_log_action(tmp_file):
     ledger = StoryLedger(tmp_file)
+
 
     ledger.log_action("test", "accion de prueba")
     with open(tmp_file, "r", encoding="utf-8") as f:
