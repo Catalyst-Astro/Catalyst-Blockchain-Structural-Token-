@@ -1,4 +1,7 @@
+< codex/crear-módulo-emisión-de-token-erc-20/721/1155
+=======
 odex/crear-módulo-emisión-de-token-erc-20/721/1155
+>in
 # Catalyst Blockchain Structural Token
 
 Este repositorio contiene un ejemplo sencillo de contrato para la emisión de un token nativo basado en el estándar ERC‑20. El contrato incluye funcionalidades de inflación anual, quema y distribución de recompensas.
@@ -21,6 +24,7 @@ npx hardhat compile
 ```
 
 El archivo del contrato se encuentra en `contracts/CatalystToken.sol`.
+=
 =======
 
 <<< codex/construir-interfaz-de-interoperabilidad-con-blockchains
@@ -137,3 +141,4 @@ Print the hash of the genesis block:
 Again, set `RPC_URL` to your node if necessary.
 
 n
+>
