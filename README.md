@@ -1,3 +1,4 @@
+
 <<< codex/construir-interfaz-de-interoperabilidad-con-blockchains
 # Catalyst Blockchain Structural Token
 
@@ -111,6 +112,4 @@ Print the hash of the genesis block:
 ```
 Again, set `RPC_URL` to your node if necessary.
 
-n
->
->> main
+
