@@ -95,3 +95,7 @@ Again, set `RPC_URL` to your node if necessary.
 
 n
 >
+
+## Red P2P de Ejemplo
+Consulte `docs/network_example.md` para una guía de uso de los nodos Python.
+
