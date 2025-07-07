@@ -270,3 +270,4 @@ Print the hash of the genesis block:
 Again, set `RPC_URL` to your node if necessary.
 
 
+\nFor details on the FRT bridging system, see docs/bridge_interoperabilidad.md.
