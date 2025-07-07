@@ -1,3 +1,4 @@
+
 ntar-sistema-de-memoria-narrativa
 # Catalyst-Blockchain-Structural-Token
 
@@ -63,10 +64,4 @@ Again, set `RPC_URL` to your node if necessary.
 This repository contains a simple RESTful API to integrate wallets, nodes, and blockchain explorers with external platforms. The API is built with Python and Flask.
 
 See [api/README.md](api/README.md) for setup and usage instructions.
-=======
- codex/entrenar-a-codex-para-gestionar-blockchain
-# Catalyst-Blockchain-Structural-Token
 
-Repositorio inicial para experimentos sobre una blockchain basada en tokens estructurales.
-
-Consulta [BLOCKCHAIN_PROMPTS.md](./BLOCKCHAIN_PROMPTS.md) para ejemplos de prompts destinados a entrenar o guiar a Codex en tareas de mantenimiento, escalado y adaptación de la red.
