@@ -1,4 +1,5 @@
 
+
 # Catalyst-Blockchain-Structural-Token
 
 This project provides basic cryptographic utilities for symmetric encryption, RSA key management, hashing, and digital signatures using the [cryptography](https://pypi.org/project/cryptography/) library.
@@ -76,3 +77,4 @@ View the current chain:
 curl http://localhost:8000/chain
 
 ```
+
