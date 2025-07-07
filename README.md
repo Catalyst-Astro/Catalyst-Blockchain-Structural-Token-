@@ -1,6 +1,30 @@
 
 # Catalyst Blockchain Structural Token
 
+This repository demonstrates advanced cryptographic features inspired by
+Schneier's protocols. The implementation includes:
+
+- Zero-knowledge proof of identity based on the Schnorr protocol.
+- Multisignature wallet using ECDSA keys.
+- RSA blind signatures for privacy-preserving transactions.
+
+## Usage
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run the demo:
+
+```bash
+python -m structural_token.main
+```
+=======
+
+# Catalyst Blockchain Structural Token
+
 Este repositorio contiene un ejemplo sencillo de una arquitectura de nodos para una
 red blockchain. Se incluyen nodos completos, nodos ligeros (SPV), funciones de
 minado/validación y una topología P2P basada en sockets.
@@ -176,4 +200,5 @@ Print the hash of the genesis block:
 Again, set `RPC_URL` to your node if necessary.
 
 n
+
 
