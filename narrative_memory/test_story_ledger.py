@@ -1,7 +1,14 @@
 import json
 import os
 from tempfile import NamedTemporaryFile
+import pytest
 from narrative_memory.story_ledger import StoryLedger
+
+
+@pytest.fixture
+def tmp_file(tmp_path):
+    """Return temporary filename for the ledger."""
+    return str(tmp_path / "ledger.jsonl")
 
 def test_log_action(tmp_file):
     ledger = StoryLedger(tmp_file)
