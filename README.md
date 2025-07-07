@@ -1,4 +1,5 @@
 
+
 ntar-sistema-de-memoria-narrativa
 # Catalyst-Blockchain-Structural-Token
 
@@ -57,11 +58,4 @@ Print the hash of the genesis block:
 ./scripts/verify_genesis.py
 ```
 Again, set `RPC_URL` to your node if necessary.
-=======
-
-# Catalyst Blockchain Structural Token
-
-This repository contains a simple RESTful API to integrate wallets, nodes, and blockchain explorers with external platforms. The API is built with Python and Flask.
-
-See [api/README.md](api/README.md) for setup and usage instructions.
 
