@@ -1,3 +1,6 @@
+
+cryptography>=41
+=======
  codex/desarrollar-dashboard-de-gobernanza-fractaldao
 
 ecdsa
@@ -8,7 +11,8 @@ requests
 
 =======
 cryptography>=41
+
 ecdsa
 pytest
 requests
-
+flask
