@@ -99,3 +99,16 @@ n
 ## Red P2P de Ejemplo
 Consulte `docs/network_example.md` para una guía de uso de los nodos Python.
 
+=======
+
+## Consensus Module
+The `consensus` package implements multiple consensus modes:
+
+- **PoW** mining with adjustable difficulty.
+- **PoA** validation where pre-defined validators sign blocks.
+- **BFT** simplified protocol requiring two-thirds validator signatures.
+- **Symbolic** consensus for ritual or reputation based validation.
+
+Use `ConsensusController` to switch modes and process blocks. Example usage is in
+`consensus/examples/simulate_consensus.py`.
+
