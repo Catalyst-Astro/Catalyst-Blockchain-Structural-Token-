@@ -1,3 +1,4 @@
+ntar-sistema-de-memoria-narrativa
 # Catalyst-Blockchain-Structural-Token
 
 Este repositorio contiene ejemplos simples para demostrar conceptos de almacenamiento en libro mayor.
@@ -13,4 +14,59 @@ python narrative_memory/story_ledger.py "Actor" "Descripción de la acción"
 ```
 
 Cada invocación añadirá un registro en `narrative_ledger.jsonl` con la fecha, el actor y la descripción de la acción.
+=======
+x/desplegar-blockchain-en-red-local-y-testnet
+# Catalyst Blockchain Structural Token
 
+This repository provides simple scripts to run an Ethereum-compatible blockchain for development.
+
+## Requirements
+- `geth` client installed
+- `jq` for processing JSON output
+- `python3` with `web3` library
+
+Install Python dependencies:
+```bash
+pip install web3
+```
+
+## Local Testnet
+Run a private Ethereum node locally:
+```bash
+./scripts/init_local_testnet.sh
+```
+This initializes a genesis file and starts a `geth` instance.
+
+## Public Testnet
+Connect to the Sepolia public testnet:
+```bash
+./scripts/init_public_testnet.sh
+```
+
+## Validate Node
+Check node status via JSON-RPC:
+```bash
+./scripts/validate_node.sh
+```
+Set `RPC_URL` if your endpoint differs from `http://localhost:8545`.
+
+## Verify Genesis Block
+Print the hash of the genesis block:
+```bash
+./scripts/verify_genesis.py
+```
+Again, set `RPC_URL` to your node if necessary.
+=======
+
+# Catalyst Blockchain Structural Token
+
+This repository contains a simple RESTful API to integrate wallets, nodes, and blockchain explorers with external platforms. The API is built with Python and Flask.
+
+See [api/README.md](api/README.md) for setup and usage instructions.
+=======
+ codex/entrenar-a-codex-para-gestionar-blockchain
+# Catalyst-Blockchain-Structural-Token
+
+Repositorio inicial para experimentos sobre una blockchain basada en tokens estructurales.
+
+Consulta [BLOCKCHAIN_PROMPTS.md](./BLOCKCHAIN_PROMPTS.md) para ejemplos de prompts destinados a entrenar o guiar a Codex en tareas de mantenimiento, escalado y adaptación de la red.
