@@ -1,5 +1,80 @@
+
+
+# Catalyst-Blockchain-Structural-Token
+
+This project provides basic cryptographic utilities for symmetric encryption, RSA key management, hashing, and digital signatures using the [cryptography](https://pypi.org/project/cryptography/) library.
+
+## Installation
+
+```bash
+pip install -r requirements.txt
+```
+
+## Usage Example
+
+```python
+from catalyst.crypto.symmetric import SymmetricCipher
+from catalyst.crypto.asymmetric import RSAKeyPair
+from catalyst.crypto.signatures import ECDSAKeyPair
+from catalyst.crypto.hashing import sha256
+
+# Symmetric encryption
+key = SymmetricCipher.generate_key()
+cipher = SymmetricCipher(key)
+nonce, ct = cipher.encrypt(b"secret")
+plain = cipher.decrypt(nonce, ct)
+
+# RSA encryption
+rsa_kp = RSAKeyPair.generate()
+ct = rsa_kp.encrypt(b"message")
+plain = rsa_kp.decrypt(ct)
+
+# Signatures
+ecdsa_kp = ECDSAKeyPair.generate()
+sig = ecdsa_kp.sign(b"msg")
+assert ecdsa_kp.verify(sig, b"msg")
+
+# Hashing
+h = sha256(b"data")
+```
+
+Run tests with `pytest`:
+
+```bash
+pytest
+=======
 # Catalyst Blockchain Structural Token
 
-This repository contains minimal examples showing how to scale an Ethereum-like network using sidechains and rollups while keeping the system modular. The contracts are written for Solidity `0.8.19` and licensed under Apache-2.0.
+This repository provides a minimal blockchain prototype inspired by Bitcoin.
+It demonstrates a simple peer-to-peer architecture, proof-of-work consensus,
+and ECDSA-based wallets as described by Antonopoulos and Schneier.
 
-See `docs.md` for details.
+## Features
+- Peer discovery and basic HTTP communication between nodes
+- Transactions signed with ECDSA (secp256k1)
+- Mining blocks using a configurable difficulty
+- Verification of the entire chain
+
+## Usage
+Install dependencies and run a node on a specific port:
+
+```bash
+pip install -r requirements.txt
+python -m simplechain.node 8000
+```
+
+Send transactions and mine blocks via HTTP requests:
+
+```bash
+curl -X POST http://localhost:8000/transactions/new \
+  -d '{"sender": "<pubkey>", "recipient": "<address>", "amount": 1, "signature": "<sig>"}'
+curl -X POST http://localhost:8000/mine
+```
+
+View the current chain:
+
+```bash
+curl http://localhost:8000/chain
+
+```
+
