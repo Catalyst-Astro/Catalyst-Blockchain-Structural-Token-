@@ -135,6 +135,10 @@ This repository contains smart contracts for a native token with flexible issuan
 ## Contracts
 
 - `InflationaryRewardToken.sol` – ERC-20 token with burn functionality, periodic inflation and a reward minting function controlled by an access role.
+- `FractalAssetToken.sol` – ERC-20 token linked to a validated asset from `FractalLandRegistry`.
+- `FractalFundingVault.sol` – Funding contract where participants contribute and later claim tokens.
+- `AssetTokenFactory.sol` – Deploys new asset tokens for registry owners.
+
 
 ## Development
 
