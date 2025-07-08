@@ -222,7 +222,24 @@ Print the hash of the genesis block:
 ```
 Again, set `RPC_URL` to your node if necessary.
 
-n
 
 
 
+
+## FractalApp
+A simple mobile client built with React Native and Expo is included in the `FractalApp` directory. It connects to the `FractalToken`, `SymbolicEventLog` and `FractalStaking` smart contracts using `ethers.js`.
+
+### Development
+Install dependencies and start Expo:
+```bash
+cd FractalApp
+npm install
+npm run start
+```
+
+### Build APK
+To create an APK ready for testing use Expo's build service:
+```bash
+npx expo build:android -t apk
+```
+The generated file will be placed under the `dist` directory.

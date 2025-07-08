@@ -1,0 +1,17 @@
+{
+  "name": "FractalApp",
+  "slug": "fractalapp",
+  "version": "1.0.0",
+  "sdkVersion": "50.0.0",
+  "platforms": ["android", "ios"],
+  "orientation": "portrait",
+  "icon": "./assets/icon.png",
+  "splash": {
+    "image": "./assets/splash.png",
+    "resizeMode": "contain",
+    "backgroundColor": "#ffffff"
+  },
+  "updates": {
+    "fallbackToCacheTimeout": 0
+  }
+}
