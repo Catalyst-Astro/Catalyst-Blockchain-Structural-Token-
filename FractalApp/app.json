@@ -1,0 +1,37 @@
+{
+
+  "name": "FractalApp",
+  "slug": "fractalapp",
+  "version": "1.0.0",
+  "sdkVersion": "50.0.0",
+  "platforms": ["android", "ios"],
+  "orientation": "portrait",
+  "icon": "./assets/icon.png",
+  "splash": {
+    "image": "./assets/splash.png",
+    "resizeMode": "contain",
+    "backgroundColor": "#ffffff"
+  },
+  "updates": {
+    "fallbackToCacheTimeout": 0
+=======
+  "expo": {
+    "name": "FractalApp",
+    "slug": "fractalapp",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/fractalLogo.png",
+    "sdkVersion": "48.0.0",
+    "platforms": ["ios", "android"],
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.example.fractalapp"
+    }
+
+  }
+}

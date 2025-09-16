@@ -1,0 +1,59 @@
+name: "\U0001FA90 Catalyst Symbolic CI"
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  ritual:
+    name: "Blockchain Rite"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "\U0001F4DD Checkout Repository"
+        uses: actions/checkout@v4
+
+      - name: "\U0001F40D Invoke Python Spirit"
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: "\U0001F9EA Prepare Virtual Altar"
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install -r requirements.txt
+
+      - name: "\U0001F6E1\uFE0F Run Sacred Tests"
+        run: |
+          source venv/bin/activate
+          pytest tests
+
+      - name: "\U0001F50D Symbolic Audit"
+        run: |
+          source venv/bin/activate
+          python auditor/run_checks.py
+        continue-on-error: true
+
+      - name: "\U0001F4DC Chronicle in Narrative Ledger"
+        run: |
+          source venv/bin/activate
+          python narrative_memory/story_ledger.py GitHubActions "Auditoría simbólica ejecutada sobre el sistema Catalyst"
+
+      - name: "\U0001F4C2 Detect Changes in Contracts"
+        id: contracts
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            contracts:
+              - 'contracts/**'
+
+      - name: "\u2692\uFE0F Recompile Contracts and Chronicle"
+        if: steps.contracts.outputs.contracts == 'true'
+        run: |
+          npm ci
+          npx hardhat compile
+          source venv/bin/activate
+          python narrative_memory/story_ledger.py GitHubActions "Compilación de contratos Solidity"
