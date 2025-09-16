@@ -1,6 +1,7 @@
 
 require("@nomiclabs/hardhat-ethers");
 
+
 require("@nomicfoundation/hardhat-toolbox");
 require("dotenv").config();
 
@@ -26,8 +27,10 @@ module.exports = {
   }
 
 
+
     artifacts: "artifacts",
   },
+
 
 
 };
