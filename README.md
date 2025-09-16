@@ -222,7 +222,29 @@ Print the hash of the genesis block:
 ```
 Again, set `RPC_URL` to your node if necessary.
 
-n
 
 
 
+
+## FractalManager
+The `fractal_manager` package contains a basic desktop application for managing
+ERC-20 tokens and DAO proposals over an Ethereum compatible network. The GUI is
+implemented with `tkinter` and blockchain calls rely on `web3.py`.
+
+### Packaging for Windows
+To build a standalone executable use `pyinstaller`:
+
+```bash
+pyinstaller fractal_manager.py --onefile --noconsole --icon=fractal.ico
+```
+Provide your own `fractal.ico` icon (not included).
+
+Create a `.env` file with the following variables so the application can sign
+transactions locally:
+
+```
+PRIVATE_KEY=
+RPC_URL=http://localhost:8545
+TOKEN_ADDRESS=
+DAO_CONTROLLER_ADDRESS=
+```
