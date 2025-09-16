@@ -1,4 +1,11 @@
 
+cryptography>=41
+ecdsa
+pycryptodome
+pytest
+requests
+=======
+
 ecdsa
 cryptography>=41
 requests
@@ -14,5 +21,6 @@ web3
 python-dotenv
 
 flask
+
 
 
