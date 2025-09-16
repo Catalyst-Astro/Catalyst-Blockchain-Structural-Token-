@@ -1,3 +1,4 @@
+
 """Fractal hashing utilities using SHA-3 (Keccak).
 
 This module provides a symbolic-resonant hashing algorithm built on
@@ -87,4 +88,20 @@ def compute_fractal_hash(
             fh.write(result.to_json())
 
     return result
+
+
+"""Módulo simple para calcular un hash simbólico."""
+
+from __future__ import annotations
+
+import hashlib
+
+
+def fractal_hash(data: str) -> str:
+    """Devuelve un hash hexadecimal basado en SHA256.
+
+    La función simula un "hash fractal" aplicado sobre la representación de
+    cadena recibida.
+    """
+    return hashlib.sha256(data.encode()).hexdigest()
 
