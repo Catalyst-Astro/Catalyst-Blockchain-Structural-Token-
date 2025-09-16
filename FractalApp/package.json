@@ -1,0 +1,22 @@
+{
+  "name": "FractalApp",
+  "version": "1.0.0",
+  "main": "App.js",
+  "private": true,
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "expo": "^50.0.0",
+    "react": "18.2.0",
+    "react-native": "0.73.5",
+    "@react-navigation/native": "^6.1.7",
+    "@react-navigation/bottom-tabs": "^6.5.14",
+    "ethers": "^6.8.1",
+    "nativewind": "^4.0.8",
+    "lottie-react-native": "^6.2.0"
+  }
+}

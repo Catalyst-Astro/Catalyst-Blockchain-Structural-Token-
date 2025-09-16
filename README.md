@@ -226,6 +226,24 @@ Again, set `RPC_URL` to your node if necessary.
 
 
 
+## FractalApp
+A simple mobile client built with React Native and Expo is included in the `FractalApp` directory. It connects to the `FractalToken`, `SymbolicEventLog` and `FractalStaking` smart contracts using `ethers.js`.
+
+### Development
+Install dependencies and start Expo:
+```bash
+cd FractalApp
+npm install
+npm run start
+```
+
+### Build APK
+To create an APK ready for testing use Expo's build service:
+```bash
+npx expo build:android -t apk
+```
+The generated file will be placed under the `dist` directory.
+=======
 ## FractalManager
 The `fractal_manager` package contains a basic desktop application for managing
 ERC-20 tokens and DAO proposals over an Ethereum compatible network. The GUI is
@@ -248,3 +266,4 @@ RPC_URL=http://localhost:8545
 TOKEN_ADDRESS=
 DAO_CONTROLLER_ADDRESS=
 ```
+

@@ -1,4 +1,16 @@
 import React from 'react';
+
+import { NavigationContainer } from '@react-navigation/native';
+import TabNavigator from './src/navigation/TabNavigator';
+import { SafeAreaView } from 'react-native';
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <SafeAreaView className="flex-1">
+        <TabNavigator />
+      </SafeAreaView>
+=======
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useColorScheme } from 'react-native';
@@ -23,6 +35,7 @@ export default function App() {
         <Tab.Screen name="Contratos" component={ContractsScreen} />
         <Tab.Screen name="Perfil" component={ProfileScreen} />
       </Tab.Navigator>
+
     </NavigationContainer>
   );
 }
