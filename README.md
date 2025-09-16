@@ -1,103 +1,66 @@
-
 # Catalyst Blockchain Structural Token
 
-This repository contains example code demonstrating basic wallet functionality, multisignature operations, and identity protection using zero-knowledge proofs. The implementation is educational and references Schneier's cryptographic protocols.
+Catalyst Blockchain Structural Token is a modular, educational codebase that showcases the building blocks of a blockchain ecosystem. It combines cryptographic tooling, node and consensus implementations, smart contracts, auditing utilities and narrative ledger examples.
 
-## Layout
+## Features
 
-- `src/cbst/wallet.py` – simple ECDSA wallet.
-- `src/cbst/multisig.py` – demonstration of multisignature transactions.
-- `src/cbst/zkp.py` – Schnorr zero-knowledge proof utilities.
-- `tests/` – unit tests covering wallet, multisig, and ZKP.
+- **Blockchain layer** – Block structure, proof‑of‑work mining and full/SPV nodes (`blockchain/`).
+- **Cryptography & wallets** – RSA/ECC key generation, AES encryption, ECDSA wallet, multisignature operations and Schnorr zero‑knowledge proofs (`crypto/`, `src/cbst/`).
+- **Consensus & networking** – Pluggable PoW/PoA/BFT/Symbolic consensus controller (`consensus/`) and a socket‑based P2P network (`network/`).
+- **Smart contracts** – Solidity contracts such as `InflationaryRewardToken.sol` demonstrating ERC‑20 extensions (`contracts/`).
+- **Auditing & narrative memory** – Transaction auditing utilities (`auditor/`) and a JSONL story ledger (`narrative_memory/`).
 
-## Running Tests
+## Repository Layout
 
-```bash
-pip install -r requirements.txt
-pytest
+```
+blockchain/           Node implementations and block structures
+consensus/            Consensus controller and examples
+crypto/               Cryptographic utilities
+src/cbst/             Wallet, multisignature and ZKP modules
+contracts/            Solidity contracts
+auditor/              Automated auditing tools
+narrative_memory/     Narrative ledger components
+tests/                Pytest-based unit tests
 ```
 
-## Cryptographic Notes
+## Getting Started
 
-The zero-knowledge proof in `src/cbst/zkp.py` uses the Schnorr identification protocol. This protocol, described by Bruce Schneier, allows a prover to demonstrate knowledge of a private key without revealing it. The proof is implemented using the Fiat–Shamir heuristic to remove interaction. Multisignature transactions mimic 2-of-3 signing using independent wallets.
-=======
+### Requirements
+- Python 3.10+
+- `pip` for dependency management
 
-# Catalyst Blockchain Structural Token
-
-This repository demonstrates advanced cryptographic features inspired by
-Schneier's protocols. The implementation includes:
-
-- Zero-knowledge proof of identity based on the Schnorr protocol.
-- Multisignature wallet using ECDSA keys.
-- RSA blind signatures for privacy-preserving transactions.
-
-## Usage
-
-Install dependencies:
-
+### Installation
 ```bash
 pip install -r requirements.txt
 ```
 
-Run the demo:
-
+### Run Tests
 ```bash
-python -m structural_token.main
+python -m pytest -q
 ```
-=======
 
-# Catalyst Blockchain Structural Token
+## Documentation
 
-Este repositorio contiene un ejemplo sencillo de una arquitectura de nodos para una
-red blockchain. Se incluyen nodos completos, nodos ligeros (SPV), funciones de
-minado/validación y una topología P2P basada en sockets.
 
-## Estructura
+See [WORKFLOW.md](WORKFLOW.md) for a development workflow and explore the `docs/` directory for additional guides.
 
-- `blockchain/p2p.py` implementa un nodo P2P genérico.
-- `blockchain/block.py` define la estructura de un bloque con un algoritmo de
-  *proof of work* muy básico.
-- `blockchain/full_node.py` implementa nodos completos que almacenan toda la
-  cadena y pueden minar/validar nuevos bloques.
-- `blockchain/spv_node.py` implementa nodos ligeros que solo mantienen los
-  encabezados de los bloques (SPV).
 
-## Uso rápido
+## License
 
-1. Inicie un nodo completo en un terminal:
+This project is distributed under the [MIT License](LICENSE).
 
-   ```bash
-   python3 -m blockchain.full_node 127.0.0.1 5000
-   ```
 
-2. En otro terminal inicie un nodo SPV conectado al nodo completo:
+## FractalApp
+A simple mobile client built with React Native and Expo is included in the `FractalApp` directory. It connects to the `FractalToken`, `SymbolicEventLog` and `FractalStaking` smart contracts using `ethers.js`.
 
-   ```bash
-   python3 -m blockchain.spv_node 127.0.0.1 5001 127.0.0.1:5000
-   ```
-
-Los nodos se comunican a través de sockets TCP. El nodo completo puede minar
-bloques con `mine_block('dato')` desde un intérprete de Python o ampliando el
-código para automatizar la minería.
-=======
-< codex/crear-módulo-emisión-de-token-erc-20/721/1155
-=======
-odex/crear-módulo-emisión-de-token-erc-20/721/1155
->in
-# Catalyst Blockchain Structural Token
-
-Este repositorio contiene un ejemplo sencillo de contrato para la emisión de un token nativo basado en el estándar ERC‑20. El contrato incluye funcionalidades de inflación anual, quema y distribución de recompensas.
-
-## Requisitos
-
-- Node.js 20+
-- npm
-
-## Instalación
-
+### Development
+Install dependencies and start Expo:
 ```bash
+cd FractalApp
 npm install
+npm run start
 ```
+
 
 ## Compilación
 
@@ -127,7 +90,7 @@ bridge = BlockchainBridge(
 eth_balance = bridge.get_eth_balance("0x...")
 ```
 =======
-<<dex/crear-módulo-emisión-token-nativo
+
 # Catalyst-Blockchain-Structural-Token-
 
 This repository contains smart contracts for a native token with flexible issuance mechanics. The `InflationaryRewardToken` contract implements the ERC-20 standard while adding optional inflationary minting, token burning and reward distribution capabilities.
@@ -178,55 +141,35 @@ Se ha implementado un sistema de **memoria narrativa** donde cada acción releva
 
 ### Uso
 
-```bash
-python narrative_memory/story_ledger.py "Actor" "Descripción de la acción"
-```
-
-Cada invocación añadirá un registro en `narrative_ledger.jsonl` con la fecha, el actor y la descripción de la acción.
 =======
-x/desplegar-blockchain-en-red-local-y-testnet
-# Catalyst Blockchain Structural Token
+### Build APK
+To create an APK ready for testing use Expo's build service:
 
-This repository provides simple scripts to run an Ethereum-compatible blockchain for development.
-
-## Requirements
-- `geth` client installed
-- `jq` for processing JSON output
-- `python3` with `web3` library
-
-Install Python dependencies:
 ```bash
-pip install web3
+npx expo build:android -t apk
 ```
+The generated file will be placed under the `dist` directory.
+=======
+## FractalManager
+The `fractal_manager` package contains a basic desktop application for managing
+ERC-20 tokens and DAO proposals over an Ethereum compatible network. The GUI is
+implemented with `tkinter` and blockchain calls rely on `web3.py`.
 
-## Local Testnet
-Run a private Ethereum node locally:
+### Packaging for Windows
+To build a standalone executable use `pyinstaller`:
+
 ```bash
-./scripts/init_local_testnet.sh
+pyinstaller fractal_manager.py --onefile --noconsole --icon=fractal.ico
 ```
-This initializes a genesis file and starts a `geth` instance.
+Provide your own `fractal.ico` icon (not included).
 
-## Public Testnet
-Connect to the Sepolia public testnet:
-```bash
-./scripts/init_public_testnet.sh
+Create a `.env` file with the following variables so the application can sign
+transactions locally:
+
 ```
-
-## Validate Node
-Check node status via JSON-RPC:
-```bash
-./scripts/validate_node.sh
+PRIVATE_KEY=
+RPC_URL=http://localhost:8545
+TOKEN_ADDRESS=
+DAO_CONTROLLER_ADDRESS=
 ```
-Set `RPC_URL` if your endpoint differs from `http://localhost:8545`.
-
-## Verify Genesis Block
-Print the hash of the genesis block:
-```bash
-./scripts/verify_genesis.py
-```
-Again, set `RPC_URL` to your node if necessary.
-
-n
-
-
 

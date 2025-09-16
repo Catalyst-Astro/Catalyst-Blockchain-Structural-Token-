@@ -1,15 +1,26 @@
-odex/add-python-package-and-implement-wallet-functionality
-ecdsa
-pytest
-=======
-
-cryptography
-=======
 
 cryptography>=41
-=======
 ecdsa
+pycryptodome
+pytest
 requests
+=======
+
+ecdsa
+cryptography>=41
+requests
+pytest
+
+cryptography>=41
+ecdsa
+pytest
+requests
+
+
+web3
+python-dotenv
+
+flask
 
 
 

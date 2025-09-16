@@ -1,21 +1,36 @@
-<<< codex/crear-módulo-emisión-de-token-erc-20/721/1155
+
 require("@nomiclabs/hardhat-ethers");
-module.exports = {
-  solidity: "0.8.20",
-=======
-<<< o80i92-codex/crear-módulo-emisión-de-token-erc-20/721/1155
-require("@nomiclabs/hardhat-ethers");
-module.exports = {
-  solidity: "0.8.20",
-=======
+
+
 require("@nomicfoundation/hardhat-toolbox");
+require("dotenv").config();
+
 
 module.exports = {
-  solidity: "0.8.20",
+  solidity: {
+    version: "0.8.20",
+    settings: {
+      optimizer: { enabled: true, runs: 200 },
+      viaIR: true,
+    },
+  },
+  networks: {
+    sepolia: {
+      url: process.env.RPC_URL || "",
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+    },
+  },
   paths: {
     sources: "contracts",
+
     artifacts: "artifacts"
   }
->
-> main
+
+
+
+    artifacts: "artifacts",
+  },
+
+
+
 };
