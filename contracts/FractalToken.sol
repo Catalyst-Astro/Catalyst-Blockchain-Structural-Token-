@@ -1,4 +1,36 @@
 
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/security/Pausable.sol";
+
+import "./extensions/PurposeTag.sol";
+
+/**
+ * @title FractalToken
+ * @notice ERC20 token with permit, pausable transfers and optional narrative tags.
+ * Designed for cooperative DAO ecosystems and symbolic token flows.
+ */
+contract FractalToken is ERC20, ERC20Burnable, ERC20Permit, Pausable, Ownable, PurposeTag {
+    /**
+     * @dev Mint initial supply to deployer and initialize ownership.
+     * @param initialSupply Amount of tokens minted to the owner on deployment.
+     */
+    constructor(uint256 initialSupply)
+        ERC20("Fractal Token", "FRT")
+        ERC20Permit("Fractal Token")
+        Ownable(msg.sender)
+    {
+        _mint(msg.sender, initialSupply);
+    }
+
+    /// @notice Mint new tokens to an address. Restricted to owner.
+=======
+
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity ^0.8.20;
 
@@ -115,10 +147,19 @@ contract FractalToken is ERC20, ERC20Permit, Ownable, Pausable {
     }
 
     /// @notice Mint new tokens to `to`. Only callable by the contract owner.
+
     function mint(address to, uint256 amount) external onlyOwner {
         _mint(to, amount);
     }
 
+
+    /// @notice Burn tokens from the caller while not paused.
+    function burn(uint256 amount) public override whenNotPaused {
+        super.burn(amount);
+    }
+
+    /// @notice Pause all token transfers.
+=======
     /// @notice Mint with an audit purpose hash.
     function mintWithPurpose(address to, uint256 amount, bytes32 purposeHash) external onlyOwner {
         _pendingPurposeHash = purposeHash;
@@ -144,15 +185,32 @@ contract FractalToken is ERC20, ERC20Permit, Ownable, Pausable {
     }
 
     /// @notice Pause all token transfers. Callable only by the owner.
+
     function pause() external onlyOwner {
         _pause();
     }
 
+
+    /// @notice Unpause token transfers.
+=======
     /// @notice Unpause token transfers. Callable only by the owner.
+
     function unpause() external onlyOwner {
         _unpause();
     }
 
+
+    /// @notice Attach a narrative purpose to the next DAO interaction.
+    function purposeTag(string memory purpose) external whenNotPaused {
+        _tagPurpose(_msgSender(), purpose);
+    }
+
+    /// @dev Hook to block transfers while paused.
+    function _update(address from, address to, uint256 amount) internal override whenNotPaused {
+        super._update(from, to, amount);
+    }
+}
+=======
     /// @dev Prevent token transfers while paused by using the ERC-20 hook.
     function _beforeTokenTransfer(address from, address to, uint256 amount)
         internal
