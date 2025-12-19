@@ -1,86 +1,218 @@
-﻿# Catalyst Blockchain Structural Token
 
-This repository is a sandbox that glues together several educational modules for blockchain infrastructure:
-
-- Minimal blockchain implementations (TCP P2P nodes, HTTP API nodes, Merkle trees, simple miners).
-- Cryptographic helpers (wallets, Schnorr proofs, RSA blind signatures, hashing utilities).
-- Governance and auditing tooling (consensus controller, automated transaction auditor, narrative ledger).
-- Solidity smart contracts that model the on-chain token suite used by the examples.
-- GTK dashboard and lightweight Flask/REST entry points used to interact with the system.
-
-The code is intentionally compact so that each component can be studied or adapted independently.
-
-## Repository layout
+# Catalyst Blockchain Structural Token
 
 ```
-auditor/                 # Automated transaction checks and notifications
-blockchain/              # Socket-based full node & SPV prototype
-catalyst/                # Interoperability bridge and crypto utilities
-consensus/               # Switchable PoW / PoA / BFT / symbolic controller
-contracts/               # Solidity contracts (ERC-20, DAO, bridge, etc.)
-crypto/                  # Hashing and symmetric/asymmetric helpers
-narrative_memory/        # Narrative ledger helper used by consensus audit
-network/                 # HTTP-based peer network sharing blocks & txs
-scripts/                 # Tooling for local/testnet blockchain scripts
-simplechain/             # Minimal blockchain + wallet exposed over HTTP
-src/cbst/                # Wallet, Merkle tree, multisig, Schnorr proof demos
-src/structural_token/    # Identity, multisig and blind signature showcase
-src/fractalmanagergtk/   # GTK dashboard that consumes the bridge APIs
-api/                     # Flask API to manage wallets/nodes/explorers
+ ██████╗ █████╗ ████████╗ █████╗ ██╗   ██╗██╗     ██╗███████╗████████╗
+██╔════╝██╔══██╗╚══██╔══╝██╔══██╗██║   ██║██║     ██║██╔════╝╚══██╔══╝
+██║     ███████║   ██║   ███████║██║   ██║██║     ██║███████╗   ██║   
+██║     ██╔══██║   ██║   ██╔══██║██║   ██║██║     ██║╚════██║   ██║   
+╚██████╗██║  ██║   ██║   ██║  ██║╚██████╔╝███████╗██║███████║   ██║   
+ ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝╚══════╝   ╚═╝   
 ```
 
-Supporting documentation lives under `docs/`. Test suites are located in `tests/` and in package-specific folders such as `narrative_memory/`.
+> **Catalyst Blockchain Structural Token (CBST)**
+> *Sandbox educativo retro‑futurista para diseccionar, comprender y recombinar los componentes fundamentales de una infraestructura blockchain.*
 
-## Getting started (Python modules)
+---
 
-1. Create a virtual environment with Python 3.10+.
-2. Install the required dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. Run the core unit tests:
-   ```bash
-   python -m pytest -q
-   ```
+## Filosofía
 
-The list of dependencies covers the modules that ship in this repository, including optional components such as the interoperability bridge and GTK dashboard.
+Este repositorio no intenta ser un *producto terminado*. Es un **laboratorio de arquitectura**: piezas pequeñas, legibles y deliberadamente desacopladas que permiten estudiar **cómo** y **por qué** funciona una blockchain.
 
-### Example commands
+Nada está escondido detrás de abstracciones innecesarias. Si algo ocurre, se puede rastrear hasta el socket, el hash, la firma o la decisión de consenso que lo originó.
 
-- Launch the socket-based full node:
-  ```bash
-  python -m blockchain.full_node 127.0.0.1 5000
-  ```
-- Start a Simplified Payment Verification (SPV) node and request headers:
-  ```bash
-  python -m blockchain.spv_node 127.0.0.1 5001 127.0.0.1:5000
-  ```
-- Run the structural token CLI demo (identity proof, multisig, blind signature):
-  ```bash
-  python -m structural_token.main
-  ```
-- Execute the automated auditor tests:
-  ```bash
-  python -m unittest tests.test_audit
-  ```
+Pensado para:
 
-## Smart contracts
+* Arquitectos de sistemas distribuidos
+* Investigadores en criptografía aplicada
+* Diseñadores de gobernanza on‑chain
+* Ingenieros que prefieren entender el motor antes de usar el tablero
 
-The Solidity folder is configured for Hardhat. After installing Node.js, install dependencies and compile:
+---
+
+## Qué contiene
+
+### ⛓ Blockchain
+
+* Nodos completos por TCP (P2P)
+* Nodos SPV (verificación ligera)
+* Estructuras de bloque y cadena mínimas
+* Minería simplificada y validación
+
+### 🔐 Criptografía
+
+* Wallets (ECDSA / claves asimétricas)
+* Árboles de Merkle
+* Multisig
+* Pruebas de conocimiento cero (Schnorr)
+* Firmas ciegas (blind signatures)
+* Utilidades de hashing y cifrado
+
+### 🧠 Consenso & Gobernanza
+
+* Controlador de consenso conmutables:
+
+  * PoW
+  * PoA
+  * BFT
+  * Simbólico / narrativo
+* Auditor automático de transacciones
+* Ledger narrativo para trazabilidad semántica
+
+### 📜 Smart Contracts
+
+* Contratos Solidity (Hardhat)
+* ERC‑20 extendidos
+* DAO básica
+* Bridges y registries
+
+### 🖥 Interfaces
+
+* API Flask / REST
+* Dashboard GTK (Adwaita)
+* CLI de demostración estructural
+
+---
+
+## Estructura del repositorio
+
+auditor/                 Auditoría automática de transacciones
+blockchain/              Nodo completo y SPV (sockets TCP)
+catalyst/                Bridge e interoperabilidad crypto
+consensus/               Controlador de consenso intercambiable
+contracts/               Smart contracts Solidity (ERC‑20, DAO, bridge)
+crypto/                  Utilidades criptográficas
+narrative_memory/        Ledger narrativo (JSONL)
+network/                 Red HTTP de pares
+scripts/                 Scripts de pruebas y testnet
+simplechain/             Blockchain mínima expuesta vía HTTP
+src/cbst/                Wallet, Merkle, multisig, Schnorr
+src/structural_token/    Identidad y firmas ciegas
+src/fractalmanagergtk/   Dashboard GTK
+api/                     API Flask
+
+La documentación extendida vive en `docs/` y las pruebas en `tests/`.
+
+---
+
+## Arranque rápido (Python)
+
+### Requisitos
+
+* Python **3.10+**
+* Entorno virtual recomendado
+
+### Instalación
+
+```bash
+pip install -r requirements.txt
+```
+
+### Tests
+
+```bash
+python -m pytest -q
+```
+
+---
+
+## Ejemplos
+
+### Nodo completo (P2P por sockets)
+
+```bash
+python -m blockchain.full_node 127.0.0.1 5000
+```
+
+### Nodo SPV
+
+```bash
+python -m blockchain.spv_node 127.0.0.1 5001 127.0.0.1:5000
+```
+
+### Demo del Structural Token
+
+```bash
+python -m structural_token.main
+```
+
+### Auditor automático
+
+```bash
+python -m unittest tests.test_audit
+```
+
+---
+
+## Smart Contracts
+
+El directorio `contracts/` está configurado para **Hardhat**.
 
 ```bash
 npm install
 npx hardhat compile
 ```
 
-Key contracts include `CatalystToken.sol`, `FractalDAO.sol`, `InflationaryRewardToken.sol`, and helper registries/bridges. They rely on OpenZeppelin 5.x.
+Contratos clave:
 
-## Additional tooling
+* `CatalystToken.sol`
+* `FractalDAO.sol`
+* `InflationaryRewardToken.sol`
 
-- `catalyst/bridge.py` exposes helpers for Ethereum, Bitcoin and IPFS experiments. Configure your RPC endpoints before use.
-- `network/` contains a Flask-powered peer node that shares blocks and transactions over HTTP.
-- `src/fractalmanagergtk/` offers a GTK desktop application (Adwaita) that consumes the same blockchain services via Web3.
+Basados en **OpenZeppelin 5.x**.
 
-## Contributing
+---
 
-This project is intentionally modular. When extending a component, add or update the accompanying tests and documentation, and keep dependencies scoped to the module you touch.
+## FractalApp (móvil)
+
+Cliente móvil experimental en **React Native + Expo**.
+
+```bash
+cd FractalApp
+npm install
+npx hardhat compile
+npm run start
+```
+
+Build APK:
+
+```bash
+npx expo build:android -t apk
+```
+
+---
+
+## FractalManager (Desktop)
+
+Aplicación de escritorio para gestión de tokens y DAO.
+
+   bash
+pyinstaller fractal_manager.py --onefile --noconsole --icon=fractal.ico
+
+Variables de entorno (`.env`):
+
+PRIVATE_KEY=
+RPC_URL= http: //localhost: 8545
+TOKEN_ADDRESS=
+DAO_CONTROLLER_ADDRESS=
+
+## Advertencia honesta
+
+Este repositorio **no** es un framework de producción.
+Es un **mapa anatómico**.
+
+Si lo usas para aprender, modificar, romper y volver a armar: funciona exactamente como fue diseñado.
+
+## Contribuciones
+
+* Mantén los módulos pequeños
+* Añade pruebas
+* Documenta la intención
+* No ocultes la complejidad: domestícala
+
+## Licencia
+
+MIT
+
+> *"La seguridad no es un producto. Es un proceso."*
+> — espíritu cypherpunk

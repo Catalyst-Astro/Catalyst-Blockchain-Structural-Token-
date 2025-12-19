@@ -1,5 +1,8 @@
 {
+
   "name": "catalyst-blockchain-structural-token",
+
+
   "version": "1.0.0",
   "description": "Hardhat setup for Catalyst structural token contracts",
   "main": "index.js",
@@ -9,10 +12,12 @@
     "test": "hardhat test",
     "lint": "echo \"add eslint/solhint here\" && exit 0",
     "typecheck": "tsc -v >/dev/null 2>&1 || echo \"no tsconfig\""
+
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^6.1.0",
     "@nomicfoundation/hardhat-verify": "^2.1.1",
