@@ -247,6 +247,6 @@ Open:
 1) Push the repo to GitHub.
 2) Create a new Render Web Service.
 3) Use `render.yaml` or set:
-   - Build: `pip install -r requirements.txt`
+   - Build: `pip install -r requirements.render.txt`
    - Start: `uvicorn app.api.main:app --host 0.0.0.0 --port $PORT`
 4) Set env vars as needed.
