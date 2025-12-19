@@ -6,6 +6,7 @@ from typing import List
 
 DEFAULT_MODULES: List[str] = [
     "whitelist",
+    "token_core",
     "identity_sbt",
     "transfer_restrictions",
     "freeze",
