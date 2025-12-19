@@ -22,9 +22,7 @@ contract FractalToken is ERC20, ERC20Permit, Ownable {
     function mint(address to, uint256 amount) external onlyOwner {
         _mint(to, amount);
     }
-=======
 
-pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
 
@@ -76,7 +74,7 @@ contract FractalToken is ERC20, ERC20Permit, Ownable, Pausable {
 
         _mint(msg.sender, initialSupply);
     }
-=======
+
         _initialSupply = initialSupply;
         _mint(msg.sender, initialSupply);
     }
@@ -159,7 +157,7 @@ contract FractalToken is ERC20, ERC20Permit, Ownable, Pausable {
     }
 
 
-=======
+
 
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
@@ -230,7 +228,7 @@ contract FractalToken is ERC20, ERC20Burnable, Ownable {
     function exportAsJSON(address account) external view returns (string memory) {
         return traceRegistry.exportAsJSON(account);
     }
-=======
+
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity ^0.8.19;
 

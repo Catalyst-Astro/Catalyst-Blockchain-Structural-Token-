@@ -22,7 +22,7 @@ contract BridgeVault is Ownable, ReentrancyGuard {
         _;
     }
 
-    constructor(address _token) {
+    constructor(address _token) Ownable() {
         token = IERC20(_token);
     }
 

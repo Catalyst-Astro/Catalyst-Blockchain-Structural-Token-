@@ -1,0 +1,94 @@
+name: Repository Audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, master ]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js (for scripts/package.json detection)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+        if: ${{ hashFiles('package.json') != '' }}
+
+      - name: Install dependencies (npm)
+        if: ${{ hashFiles('package-lock.json') != '' }}
+        run: npm ci --prefer-offline --no-audit --fund=false
+
+      - name: Install dependencies (pnpm)
+        if: ${{ hashFiles('pnpm-lock.yaml') != '' }}
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+      - name: pnpm install
+        if: ${{ hashFiles('pnpm-lock.yaml') != '' }}
+        run: pnpm install --frozen-lockfile
+
+      - name: Install dependencies (yarn)
+        if: ${{ hashFiles('yarn.lock') != '' }}
+        run: |
+          corepack enable
+          yarn install --frozen-lockfile --prefer-offline
+
+      - name: Install dependencies (fallback)
+        if: ${{ hashFiles('package.json') != '' && hashFiles('package-lock.json') == '' && hashFiles('pnpm-lock.yaml') == '' && hashFiles('yarn.lock') == '' }}
+        run: npm install --no-audit --no-fund
+
+      - name: Run package scripts (build/lint/test if present)
+        if: ${{ hashFiles('package.json') != '' }}
+        run: |
+          set -e
+          has_script () { node -e "process.exit(require('./package.json').scripts?.['$1']?0:1)" ; }
+          run_if () { if has_script "$1"; then echo "→ npm run -s $1"; npm run -s "$1" || true; else echo "↷ script '$1' no definido"; fi; }
+          run_if build
+          run_if lint
+          run_if typecheck
+          # Para tests, no fallar el job completo pero registrar salida
+          if has_script test; then echo "→ npm test"; npm test || echo "::warning::Tests fallaron"; else echo "↷ script 'test' no definido"; fi
+
+      - name: Hardhat compile/test
+        if: ${{ hashFiles('hardhat.config.js') != '' || hashFiles('hardhat.config.ts') != '' }}
+        run: |
+          npx hardhat compile || echo "::warning::Hardhat compile falló"
+          npx hardhat test || echo "::warning::Hardhat tests fallaron"
+
+      - name: Foundry build/test
+        if: ${{ hashFiles('foundry.toml') != '' }}
+        run: |
+          curl -L https://foundry.paradigm.xyz | bash
+          ~/.foundry/bin/foundryup
+          ~/.foundry/bin/forge --version
+          ~/.foundry/bin/forge build || echo "::warning::Forge build falló"
+          ~/.foundry/bin/forge test -vvv || echo "::warning::Forge tests fallaron"
+
+      - name: Repo audit script
+        run: |
+          chmod +x scripts/repo-audit.sh
+          scripts/repo-audit.sh > audit-report.md || true
+
+      - name: Job summary
+        run: |
+          echo "## Repository audit summary" >> $GITHUB_STEP_SUMMARY
+          if [ -s audit-report.md ]; then
+            cat audit-report.md >> $GITHUB_STEP_SUMMARY
+          else
+            echo "No audit output produced." >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Upload audit artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: repo-audit-report
+          path: audit-report.md

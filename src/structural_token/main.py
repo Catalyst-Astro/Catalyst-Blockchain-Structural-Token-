@@ -1,5 +1,4 @@
 """Command line demonstration for the structural token package."""
-import os
 from structural_token.wallet import Wallet, MultiSigWallet
 from structural_token.identity import Identity
 from structural_token.blind_signature import RSABlindSigner, RSABlindSignatureProtocol
@@ -30,7 +29,7 @@ def demo_blind_sign():
     signer = RSABlindSigner()
     protocol = RSABlindSignatureProtocol(signer.public_key)
     message = 42
-    r = 5  # normally random and coprime with n
+    r = protocol.random_blinding_factor()
     blinded = protocol.blind(message, r)
     signed_blind = signer.sign(blinded)
     signature = protocol.unblind(signed_blind, r)

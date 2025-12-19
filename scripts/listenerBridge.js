@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { ethers } = require('ethers');
 
 // Example environment variables

@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const { ethers } = require('ethers');
 
 const SIDECHAIN_RPC = process.env.SIDECHAIN_RPC_URL;

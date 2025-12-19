@@ -1,9 +1,11 @@
 import threading
 import time
+import copy
 import requests
 from network.node import Node
 from network.block_propagator import propagate_block
 from simplechain.wallet import Wallet
+from simplechain.blockchain import Transaction
 
 
 def wait_for_length(port, length, timeout=5):
@@ -29,20 +31,21 @@ def test_sync_between_two_nodes():
     node_a = Node('A', port=5061)
     node_b = Node('B', port=5062, peers=['127.0.0.1:5061'])
     node_a.peer_manager.add_peer('127.0.0.1:5062')
+    node_b.blockchain.chain[0] = copy.deepcopy(node_a.blockchain.chain[0])
     start_node(node_a)
     start_node(node_b)
     time.sleep(1)
 
     w1 = Wallet()
     w2 = Wallet()
-    msg = f"{w1.public_key}{w2.public_key}1".encode()
-    tx = {
-        'sender': w1.public_key,
-        'recipient': w2.public_key,
-        'amount': 1,
-        'signature': w1.sign(msg)
-    }
-    requests.post('http://127.0.0.1:5061/add_transaction', json=tx)
+    tx_obj = Transaction(
+        sender=w1.public_key,
+        recipient=w2.public_key,
+        amount=1,
+        signature='',
+    )
+    tx_obj.signature = w1.sign(tx_obj.hash_payload())
+    node_a.blockchain.new_transaction(tx_obj)
     block = node_a.blockchain.new_block()
     propagate_block(node_a.block_to_dict(block), node_a.peer_manager.peers)
 

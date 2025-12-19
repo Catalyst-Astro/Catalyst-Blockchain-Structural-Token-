@@ -13,8 +13,6 @@ from typing import Optional
 from web3 import Web3
 from web3.exceptions import ContractLogicError
 from bitcoin import SelectParams
-from bitcoin.core import lx
-from bitcoin.core import COIN
 from bitcoin.wallet import CBitcoinSecret, P2PKHBitcoinAddress
 from bitcoin.rpc import RawProxy as BitcoinProxy
 import ipfshttpclient
@@ -81,12 +79,9 @@ class BlockchainBridge:
         if not utxos:
             raise ValueError("No UTXOs available")
         utxo = utxos[0]
-        txid = lx(utxo["txid"])
+        txid = utxo["txid"]
         vout = utxo["vout"]
-        txin = {"txid": txid, "vout": vout}
-        value = int(amount_btc * COIN)
-        txout = {"to": dest_address, "value": value}
-        raw = self.btc.createrawtransaction([txin], {dest_address: amount_btc})
+        raw = self.btc.createrawtransaction([{"txid": txid, "vout": vout}], {dest_address: amount_btc})
         signed = self.btc.signrawtransactionwithkey(raw, [str(key)])
         tx_hash = self.btc.sendrawtransaction(signed["hex"])
         return tx_hash
@@ -100,4 +95,3 @@ class BlockchainBridge:
     def get_file(self, ipfs_hash: str, dest: str) -> None:
         """Download a file from IPFS to the given destination path."""
         self.ipfs.get(ipfs_hash, dest)
-
