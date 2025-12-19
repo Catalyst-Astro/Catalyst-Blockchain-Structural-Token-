@@ -68,6 +68,69 @@ canvas {
   display: block;
 }
 
+.arcade-panel {
+  display: flex;
+  justify-content: center;
+}
+
+.arcade-ui {
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.arcade-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.arcade-row label {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+.arcade-row input {
+  background: #0b140b;
+  color: var(--fg);
+  border: 1px solid var(--muted);
+  padding: 6px 8px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.arcade-row button {
+  background: #0c180c;
+  color: var(--accent);
+  border: 1px solid var(--muted);
+  padding: 6px 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+}
+
+.arcade-row button:hover {
+  background: #142414;
+}
+
+.arcade-status {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.arcade-reward {
+  padding: 8px 10px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  background: rgba(12, 24, 12, 0.7);
+  min-height: 24px;
+}
+
+.arcade-leaderboard table {
+  margin-top: 8px;
+}
+
 h1,
 h2,
 h3 {
