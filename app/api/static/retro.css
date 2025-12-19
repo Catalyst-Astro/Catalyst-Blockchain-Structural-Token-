@@ -1,0 +1,76 @@
+:root {
+  --bg: #050a05;
+  --fg: #7dff7d;
+  --muted: #4a8f4a;
+  --accent: #a8ff60;
+  --glow: 0 0 12px rgba(125, 255, 125, 0.35);
+  --panel: #0b140b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Courier New", Courier, monospace;
+  background: radial-gradient(circle at top left, #0f1b0f 0%, var(--bg) 60%);
+  color: var(--fg);
+  text-shadow: var(--glow);
+}
+
+.container {
+  max-width: 960px;
+  margin: 40px auto;
+  padding: 32px;
+  background: rgba(11, 20, 11, 0.85);
+  border: 1px solid var(--muted);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+h1,
+h2,
+h3 {
+  color: var(--accent);
+  margin-top: 28px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+ul {
+  list-style: square;
+  padding-left: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+th,
+td {
+  border: 1px solid var(--muted);
+  padding: 8px 10px;
+  text-align: left;
+}
+
+th {
+  background: #142414;
+  color: var(--accent);
+}
+
+.scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0) 3px
+  );
+  mix-blend-mode: multiply;
+  opacity: 0.4;
+}

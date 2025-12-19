@@ -11,9 +11,9 @@ contract ExecutionRegistry is Ownable {
     event FunctionAllowed(address indexed target, bytes4 indexed selector, bool allowed);
 
     /// @notice Set permission for a selector on a target contract.
-    function setAllowed(address target, bytes4 selector, bool isAllowed) external onlyOwner {
-        allowed[target][selector] = isAllowed;
-        emit FunctionAllowed(target, selector, isAllowed);
+    function setAllowed(address target, bytes4 selector, bool allowedStatus) external onlyOwner {
+        allowed[target][selector] = allowedStatus;
+        emit FunctionAllowed(target, selector, allowedStatus);
     }
 
     /// @notice Check if a selector on a target is permitted.

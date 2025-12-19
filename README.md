@@ -216,3 +216,37 @@ MIT
 
 > *"La seguridad no es un producto. Es un proceso."*
 > — espíritu cypherpunk
+
+---
+
+# Catalyst Blockchain Core (FastAPI)
+
+This repo includes a modular FastAPI dashboard for Catalyst Blockchain Core.
+
+## Quick start
+
+```bash
+python -m venv .venv
+.venv\\Scripts\\activate
+pip install -r requirements.txt
+uvicorn app.api.main:app --host 0.0.0.0 --port 8000
+```
+
+Open:
+- http://127.0.0.1:8000/dashboard
+- http://127.0.0.1:8000/api/status
+
+## Environment variables
+- `APP_ENV` (dev/staging/prod)
+- `LOG_LEVEL` (INFO/DEBUG)
+- `DATA_BACKEND` (memory/sqlite)
+- `EVENTS_LIMIT` (default 50)
+- `MODULES` (comma-separated module list)
+
+## Deploy to Render
+1) Push the repo to GitHub.
+2) Create a new Render Web Service.
+3) Use `render.yaml` or set:
+   - Build: `pip install -r requirements.txt`
+   - Start: `uvicorn app.api.main:app --host 0.0.0.0 --port $PORT`
+4) Set env vars as needed.

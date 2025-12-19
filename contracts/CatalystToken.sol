@@ -16,7 +16,6 @@ contract CatalystToken is ERC20, ERC20Burnable, Ownable {
 
     constructor(string memory name_, string memory symbol_, uint256 initialSupply_, uint256 inflationRateBps_)
         ERC20(name_, symbol_)
-        Ownable(msg.sender)
     {
         _mint(msg.sender, initialSupply_);
         annualInflationRate = inflationRateBps_;

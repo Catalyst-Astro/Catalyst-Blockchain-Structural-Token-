@@ -1,17 +1,13 @@
-﻿cryptography>=41
+cryptography>=41
 ecdsa
 pytest
 requests
-
-web3
-python-dotenv
-
-flask
-'
 web3>=6
+python-dotenv
+flask
 python-bitcoinlib
 ipfshttpclient
 PyGObject; platform_system != "Windows"
-'
-
-'
+fastapi
+uvicorn
+markdown-it-py

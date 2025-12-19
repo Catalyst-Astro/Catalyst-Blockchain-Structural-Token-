@@ -44,8 +44,10 @@ contract FRTDistributor is Ownable, ReentrancyGuard {
         uint64 cliff,
         uint64 duration,
         address initialOwner
-    ) Ownable(initialOwner) {
+    ) Ownable() {
         require(address(_token) != address(0) && _treasury != address(0), "invalid");
+        require(initialOwner != address(0), "invalid owner");
+        _transferOwnership(initialOwner);
         token = _token;
         treasury = _treasury;
 
