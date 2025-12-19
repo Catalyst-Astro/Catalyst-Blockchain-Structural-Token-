@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from fastapi import APIRouter, Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse, Response
 
 from app.core.models import SystemStatus
 
@@ -23,6 +23,16 @@ def health(request: Request) -> dict:
         "events": status.event_count,
         "build": "catalyst-core",
     }
+
+
+@router.get("/", include_in_schema=False)
+def root() -> RedirectResponse:
+    return RedirectResponse(url="/dashboard")
+
+
+@router.get("/favicon.ico", include_in_schema=False)
+def favicon() -> Response:
+    return Response(status_code=204)
 
 
 @router.get("/dashboard", response_class=HTMLResponse)
