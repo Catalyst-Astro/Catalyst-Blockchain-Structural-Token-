@@ -41,15 +41,56 @@ def build_markdown(
     def policy_line(policy_id: str, label: str) -> str:
         policy = policy_map.get(policy_id)
         if not policy:
-            return f"- {label}: UNKNOWN"
-        detail = f" ({policy.detail})" if policy.detail else ""
-        return f"- {label}: {policy.status}{detail}"
+            return item_row(label, "UNKNOWN", "")
+        return item_row(label, policy.status, policy.detail or "")
 
     def status_line(module_id: str, label: str) -> str:
         status = status_map.get(module_id)
         if not status:
-            return f"- {label}: UNKNOWN"
-        return f"- {label}: {status.status} ({status.detail})"
+            return item_row(label, "UNKNOWN", "")
+        return item_row(label, status.status, status.detail or "")
+
+    def status_class(value: str) -> str:
+        upper = value.upper()
+        mapping = {
+            "NORMAL": "status-normal",
+            "DEGRADED": "status-degraded",
+            "EMERGENCY": "status-emergency",
+            "ON": "status-on",
+            "OFF": "status-off",
+            "OK": "status-ok",
+            "ACTIVE": "status-active",
+            "CONFIGURED": "status-config",
+            "RESTRICTED": "status-config",
+            "PRE-LISTING": "status-config",
+            "MOCK": "status-muted",
+        }
+        return mapping.get(upper, "status-muted")
+
+    def item_row(label: str, value: str, detail: str) -> str:
+        detail_html = f'<span class="detail">{detail}</span>' if detail else ""
+        return (
+            '<div class="item-row">'
+            f'<span class="label">{label}</span>'
+            f'<span class="value {status_class(value)}">{value}</span>'
+            f"{detail_html}"
+            "</div>"
+        )
+
+    def build_module_chips(statuses: list[ModuleStatus]) -> str:
+        if not statuses:
+            return '<div class="module-chips empty">No modules</div>'
+        chips = []
+        for status in statuses:
+            name = status.name.replace("_", " ").upper()
+            value = status.status.upper()
+            chips.append(
+                '<span class="chip">'
+                f'<span class="chip-label">{name}</span>'
+                f'<span class="chip-value {status_class(value)}">{value}</span>'
+                "</span>"
+            )
+        return '<div class="module-chips">' + "".join(chips) + "</div>"
 
     last_updated = system_status.updated_at.isoformat()
     nav = [
@@ -68,6 +109,34 @@ def build_markdown(
         '<a href="#arcade">Arcade</a>',
         '<a href="#events">Events</a>',
         "</nav>",
+    ]
+    chips_html = build_module_chips(statuses)
+    sidebar = [
+        '<aside class="sidebar">',
+        '<div class="sidebar-title">Terminal Console</div>',
+        '<div class="sidebar-block">',
+        '<div class="sidebar-label">Telemetry</div>',
+        f'<div class="sidebar-item">Status: <span class="{status_class(system_status.status)}">{system_status.status}</span></div>',
+        f'<div class="sidebar-item">Env: {settings.app_env}</div>',
+        f'<div class="sidebar-item">Updated: {last_updated}</div>',
+        f'<div class="sidebar-item">Modules: {system_status.module_count}</div>',
+        f'<div class="sidebar-item">Policies: {system_status.policy_count}</div>',
+        f'<div class="sidebar-item">Events: {system_status.event_count}</div>',
+        "</div>",
+        '<div class="sidebar-block">',
+        '<div class="sidebar-label">Endpoints</div>',
+        '<div class="sidebar-item">/dashboard</div>',
+        '<div class="sidebar-item">/api/status</div>',
+        '<div class="sidebar-item">/api/modules</div>',
+        '<div class="sidebar-item">/api/policies</div>',
+        '<div class="sidebar-item">/api/events</div>',
+        "</div>",
+        '<div class="sidebar-block">',
+        '<div class="sidebar-label">Arcade</div>',
+        '<div class="sidebar-item">Submit: /api/arcade/submit</div>',
+        '<div class="sidebar-item">Board: /api/arcade/leaderboard</div>',
+        "</div>",
+        "</aside>",
     ]
     token_chart = [
         '<section class="panel">',
@@ -123,83 +192,124 @@ def build_markdown(
         "</script>",
     ]
     markdown = [
-        "# Catalyst Blockchain Core",
+        '<div class="layout">',
+        *sidebar,
+        '<div class="main">',
+        '<div class="hero">',
+        '<div class="hero-title">Catalyst Blockchain Core</div>',
+        '<div class="hero-subtitle">Operational Control Deck</div>',
+        chips_html,
+        "</div>",
         "",
         *nav,
         "",
-        f"- Environment: {settings.app_env}",
-        f"- Updated: {last_updated}",
-        f"- Modules: {system_status.module_count}",
-        f"- Policies: {system_status.policy_count}",
-        f"- Events: {system_status.event_count}",
+        '<section class="board">',
+        '<div class="card-grid">',
+        '<div class="card">',
+        '<div class="card-label">System Status</div>',
+        f'<div class="card-value {status_class(system_status.status)}">{system_status.status}</div>',
+        "</div>",
+        '<div class="card">',
+        '<div class="card-label">Environment</div>',
+        f'<div class="card-value status-muted">{settings.app_env}</div>',
+        "</div>",
+        '<div class="card">',
+        '<div class="card-label">Updated</div>',
+        f'<div class="card-value status-muted">{last_updated}</div>',
+        "</div>",
+        '<div class="card">',
+        '<div class="card-label">Modules</div>',
+        f'<div class="card-value status-muted">{system_status.module_count}</div>',
+        "</div>",
+        '<div class="card">',
+        '<div class="card-label">Policies</div>',
+        f'<div class="card-value status-muted">{system_status.policy_count}</div>',
+        "</div>",
+        '<div class="card">',
+        '<div class="card-label">Events</div>',
+        f'<div class="card-value status-muted">{system_status.event_count}</div>',
+        "</div>",
+        "</div>",
+        "</section>",
         "",
-        '<a id="general"></a>',
-        "## 1) General Status",
-        f"- Status: {system_status.status}",
+        '<section class="section-panel" id="general">',
+        '<h2>1) General Status</h2>',
+        item_row("Status", system_status.status, ""),
         status_line("compliance_dao", "Governance Health"),
         status_line("operations_audit", "Audit Health"),
+        "</section>",
         "",
-        '<a id="compliance"></a>',
-        "## 2) Compliance",
+        '<section class="section-panel" id="compliance">',
+        '<h2>2) Compliance</h2>',
         policy_line("kyc_aml_gate", "KYC/AML Gate"),
         policy_line("travel_rule", "Travel Rule"),
+        "</section>",
         "",
-        '<a id="identity"></a>',
-        "## 3) Identity",
+        '<section class="section-panel" id="identity">',
+        '<h2>3) Identity</h2>',
         policy_line("sbt_required", "SBT Required"),
         policy_line("sbt_expiry_enforced", "SBT Expiry"),
+        "</section>",
         "",
-        '<a id="tokens"></a>',
-        "## 4) Tokens",
+        '<section class="section-panel" id="tokens">',
+        '<h2>4) Tokens</h2>',
         policy_line("token_symbol", "Symbol"),
         policy_line("token_decimals", "Decimals"),
         policy_line("token_supply", "Total Supply"),
         policy_line("token_minting", "Minting"),
         policy_line("token_enforcement", "Enforcement"),
+        "</section>",
         "",
         *token_chart,
         "",
-        '<a id="restrictions"></a>',
-        "## 5) Restrictions",
+        '<section class="section-panel" id="restrictions">',
+        '<h2>5) Restrictions</h2>',
         policy_line("lockups_active", "Lockups"),
         policy_line("jurisdiction_filter", "Jurisdiction"),
         policy_line("purpose_restriction", "Purpose Restriction"),
+        "</section>",
         "",
-        '<a id="freeze"></a>',
-        "## 6) Freeze",
+        '<section class="section-panel" id="freeze">',
+        '<h2>6) Freeze</h2>',
         policy_line("freeze_wallets", "Wallets"),
         policy_line("freeze_series", "Series"),
         policy_line("freeze_functions", "Functions"),
+        "</section>",
         "",
-        '<a id="governance"></a>',
-        "## 7) Governance",
+        '<section class="section-panel" id="governance">',
+        '<h2>7) Governance</h2>',
         policy_line("dao_quorum", "Quorum"),
         policy_line("vote_period", "Voting Period"),
         policy_line("guardian_enabled", "Guardian Veto"),
+        "</section>",
         "",
-        '<a id="trust"></a>',
-        "## 8) Trust",
+        '<section class="section-panel" id="trust">',
+        '<h2>8) Trust</h2>',
         policy_line("trust_active", "Trusts"),
         policy_line("revenue_reports", "Revenue Reports"),
+        "</section>",
         "",
-        '<a id="listing"></a>',
-        "## 9) Listing",
+        '<section class="section-panel" id="listing">',
+        '<h2>9) Listing</h2>',
         policy_line("listing_phase", "Listing Phase"),
         policy_line("venues_allowed", "Venues"),
+        "</section>",
         "",
-        '<a id="simulation"></a>',
-        "## 10) Simulation",
+        '<section class="section-panel" id="simulation">',
+        '<h2>10) Simulation</h2>',
         policy_line("ssi_index", "SSI"),
         policy_line("bai_index", "BAI"),
+        "</section>",
         "",
-        '<a id="audit"></a>',
-        "## 11) Audit",
+        '<section class="section-panel" id="audit">',
+        '<h2>11) Audit</h2>',
         policy_line("audit_checkpoints", "Checkpoints"),
         policy_line("audit_trail", "Audit Trail"),
+        "</section>",
         "",
-        '<a id="arcade"></a>',
-        "## 12) Arcade",
-        "Galaga-style shooter. Use Arrow keys to move, Space to fire.",
+        '<section class="section-panel" id="arcade">',
+        '<h2>12) Arcade</h2>',
+        '<p class="section-note">Galaga-style shooter. Use Arrow keys to move, Space to fire.</p>',
         '<section class="panel arcade-panel">',
         '<canvas id="arcadeGame" width="860" height="360" aria-label="Arcade shooter game"></canvas>',
         "</section>",
@@ -216,6 +326,7 @@ def build_markdown(
         '<div id="arcadeStatus" class="arcade-status"></div>',
         '<div id="arcadeReward" class="arcade-reward"></div>',
         '<div id="arcadeLeaderboard" class="arcade-leaderboard"></div>',
+        "</section>",
         "</section>",
         '<script>',
         "(function(){",
@@ -436,10 +547,12 @@ def build_markdown(
         "})();",
         "</script>",
         "",
-        '<a id="events"></a>',
-        "## 13) Recent Events",
-        "",
+        '<section class="section-panel" id="events">',
+        '<h2>13) Recent Events</h2>',
         build_event_table(events),
+        "</section>",
+        "</div>",
+        "</div>",
     ]
     return "\n".join(markdown)
 
