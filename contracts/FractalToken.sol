@@ -23,6 +23,8 @@ import "./interfaces/IIdentitySBT.sol";
 import "./interfaces/IIdentityPolicyRegistry.sol";
 import "./IdentityGates.sol";
 import "./interfaces/ITransferRestrictionEngine.sol";
+import "./interfaces/IFreezeRegistry.sol";
+import "./FreezeEnforcement.sol";
 
 /// @title Fractal Token (FRT)
 /// @notice Cohesive ERC20 token with ERC-2612 permit, owner-controlled minting, pausable transfers and simple burn.
@@ -59,6 +61,8 @@ contract FractalToken is ERC20, ERC20Permit, Ownable, Pausable {
     ITransferRestrictionEngine public transferRestrictionEngine;
     bool public advancedRestrictionsEnabled;
     bytes32 private _pendingSeriesId;
+    IFreezeRegistry public freezeRegistry;
+    bool public freezeEnforcementEnabled;
     bool public localWhitelistEnabled;
     mapping(address => bool) private _localWhitelist;
 
@@ -91,6 +95,8 @@ contract FractalToken is ERC20, ERC20Permit, Ownable, Pausable {
     event TransferRestrictionEngineSet(address indexed engine);
     event AdvancedRestrictionsEnabled(bool enabled);
     event SeriesIdSet(bytes32 seriesId);
+    event FreezeRegistrySet(address indexed registry);
+    event FreezeEnforcementEnabled(bool enabled);
     event LocalWhitelistUpdated(address indexed account, bool allowed);
     event LocalWhitelistEnabled(bool enabled);
 
@@ -106,6 +112,7 @@ contract FractalToken is ERC20, ERC20Permit, Ownable, Pausable {
         whitelistPolicyEnabled = false;
         identitySBTEnabled = false;
         advancedRestrictionsEnabled = false;
+        freezeEnforcementEnabled = false;
         _mint(msg.sender, initialSupply_);
     }
 
@@ -309,6 +316,18 @@ contract FractalToken is ERC20, ERC20Permit, Ownable, Pausable {
         emit SeriesIdSet(seriesId);
     }
 
+    /// @notice Set freeze registry used for selective freeze enforcement.
+    function setFreezeRegistry(address registry) external onlyOwner {
+        freezeRegistry = IFreezeRegistry(registry);
+        emit FreezeRegistrySet(registry);
+    }
+
+    /// @notice Toggle freeze enforcement.
+    function setFreezeEnforcementEnabled(bool enabled) external onlyOwner {
+        freezeEnforcementEnabled = enabled;
+        emit FreezeEnforcementEnabled(enabled);
+    }
+
     /// @notice Enable or disable local whitelist fallback.
     function setLocalWhitelistEnabled(bool enabled) external onlyOwner {
         localWhitelistEnabled = enabled;
@@ -337,6 +356,7 @@ contract FractalToken is ERC20, ERC20Permit, Ownable, Pausable {
         _enforceWhitelistPolicy(from, to, amount);
         _enforceIdentitySBT(from, to);
         _enforceAdvancedRestrictions(from, to, amount);
+        _enforceFreeze(from, to);
     }
 
     /// @dev Clear any pending purpose hash after transfers/burns/mints.
@@ -501,6 +521,16 @@ contract FractalToken is ERC20, ERC20Permit, Ownable, Pausable {
             assetType,
             _pendingTravelRuleEvidenceId
         );
+    }
+
+    function _enforceFreeze(address from, address to) internal view {
+        if (!freezeEnforcementEnabled) {
+            return;
+        }
+        FreezeEnforcement.requireNotFrozenFunction(freezeRegistry, msg.sig);
+        FreezeEnforcement.requireNotFrozenSeries(freezeRegistry, _pendingSeriesId);
+        FreezeEnforcement.requireNotFrozenWallet(freezeRegistry, from);
+        FreezeEnforcement.requireNotFrozenWallet(freezeRegistry, to);
     }
 
     function _actionReceive() internal pure returns (uint256) {

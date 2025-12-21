@@ -1,0 +1,11 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+enum ProposalType {
+    POLICY_APPROVAL,
+    FREEZE_RATIFICATION,
+    UNFREEZE_APPROVAL,
+    EXCEPTION_APPROVAL,
+    JURISDICTION_EXCEPTION,
+    EMERGENCY_CONFIRMATION
+}

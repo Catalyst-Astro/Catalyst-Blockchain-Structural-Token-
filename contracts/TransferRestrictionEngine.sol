@@ -14,6 +14,7 @@ import "./interfaces/IInvestorEligibilityRegistry.sol";
 import "./interfaces/IPrivateOfferingRegistry.sol";
 import "./interfaces/IRiskScoreRegistry.sol";
 import "./interfaces/ITravelRuleGate.sol";
+import "./interfaces/IListingPolicyRegistry.sol";
 
 /// @title TransferRestrictionEngine
 /// @notice Enforces advanced transfer restrictions by series, jurisdiction, lockups, and compliance gates.
@@ -40,7 +41,8 @@ contract TransferRestrictionEngine is AccessControl {
         LOCKUP_ACTIVE,
         JURISDICTION_BLOCKED,
         RISK_TOO_HIGH,
-        TRAVEL_RULE_MISSING
+        TRAVEL_RULE_MISSING,
+        LISTING_BLOCKED
     }
 
     struct Policy {
@@ -53,6 +55,7 @@ contract TransferRestrictionEngine is AccessControl {
         uint8 maxRiskLevel;
         bool travelRuleRequired;
         bool seriesActiveRequired;
+        bool listingRequired;
         bytes32 offeringId;
         bytes32 policyHash;
         uint32 version;
@@ -75,6 +78,7 @@ contract TransferRestrictionEngine is AccessControl {
     IPrivateOfferingRegistry public offeringRegistry;
     IRiskScoreRegistry public riskScoreRegistry;
     ITravelRuleGate public travelRuleGate;
+    IListingPolicyRegistry public listingPolicyRegistry;
 
     event PolicyPublished(uint32 version, bytes32 policyHash);
     event PolicyActivated(uint32 version);
@@ -92,6 +96,7 @@ contract TransferRestrictionEngine is AccessControl {
     event OfferingRegistrySet(address indexed registry);
     event RiskScoreRegistrySet(address indexed registry);
     event TravelRuleGateSet(address indexed gate);
+    event ListingPolicyRegistrySet(address indexed registry);
 
     constructor(address admin) {
         require(admin != address(0), "admin required");
@@ -119,24 +124,50 @@ contract TransferRestrictionEngine is AccessControl {
         bytes32 offeringId,
         bytes32 policyHash
     ) external onlyRole(SERIES_ADMIN) returns (uint32 version) {
-        version = nextVersion + 1;
-        nextVersion = version;
-        policies[version] = Policy({
-            identityMode: identityMode,
-            disclosuresRequired: disclosuresRequired,
-            eligibilityRequired: eligibilityRequired,
-            lockupRequired: lockupRequired,
-            jurisdictionRequired: jurisdictionRequired,
-            riskRequired: riskRequired,
-            maxRiskLevel: maxRiskLevel,
-            travelRuleRequired: travelRuleRequired,
-            seriesActiveRequired: seriesActiveRequired,
-            offeringId: offeringId,
-            policyHash: policyHash,
-            version: version,
-            exists: true
-        });
-        emit PolicyPublished(version, policyHash);
+        version = _publishPolicy(
+            identityMode,
+            disclosuresRequired,
+            eligibilityRequired,
+            lockupRequired,
+            jurisdictionRequired,
+            riskRequired,
+            maxRiskLevel,
+            travelRuleRequired,
+            seriesActiveRequired,
+            false,
+            offeringId,
+            policyHash
+        );
+    }
+
+    function publishPolicyWithListing(
+        IdentityMode identityMode,
+        bool disclosuresRequired,
+        bool eligibilityRequired,
+        bool lockupRequired,
+        bool jurisdictionRequired,
+        bool riskRequired,
+        uint8 maxRiskLevel,
+        bool travelRuleRequired,
+        bool seriesActiveRequired,
+        bool listingRequired,
+        bytes32 offeringId,
+        bytes32 policyHash
+    ) external onlyRole(SERIES_ADMIN) returns (uint32 version) {
+        version = _publishPolicy(
+            identityMode,
+            disclosuresRequired,
+            eligibilityRequired,
+            lockupRequired,
+            jurisdictionRequired,
+            riskRequired,
+            maxRiskLevel,
+            travelRuleRequired,
+            seriesActiveRequired,
+            listingRequired,
+            offeringId,
+            policyHash
+        );
     }
 
     function activatePolicy(uint32 version) external onlyRole(DAO_COUNCIL) {
@@ -205,6 +236,11 @@ contract TransferRestrictionEngine is AccessControl {
         emit TravelRuleGateSet(gate);
     }
 
+    function setListingPolicyRegistry(address registry) external onlyRole(SERIES_ADMIN) {
+        listingPolicyRegistry = IListingPolicyRegistry(registry);
+        emit ListingPolicyRegistrySet(registry);
+    }
+
     function validateTransfer(
         address from,
         address to,
@@ -213,8 +249,12 @@ contract TransferRestrictionEngine is AccessControl {
         bytes32 assetType,
         bytes32 travelEvidenceId
     ) external {
+        Policy memory policy = _policyForSeries(seriesId);
         (bool allowed, ReasonCode reason) = checkTransfer(from, to, amount, seriesId, assetType, travelEvidenceId);
         require(allowed, "transfer restricted");
+        if (policy.exists && policy.listingRequired) {
+            _consumeListing(from, to, amount);
+        }
         emit TransferValidated(seriesId, from, to, amount);
     }
 
@@ -261,6 +301,10 @@ contract TransferRestrictionEngine is AccessControl {
 
         if (policy.travelRuleRequired && !_isTravelRuleSatisfied(from, to, amount, assetType, travelEvidenceId)) {
             return (false, ReasonCode.TRAVEL_RULE_MISSING);
+        }
+
+        if (policy.listingRequired && !_isListingAllowed(from, to, amount)) {
+            return (false, ReasonCode.LISTING_BLOCKED);
         }
 
         return (true, ReasonCode.NONE);
@@ -453,5 +497,52 @@ contract TransferRestrictionEngine is AccessControl {
         } catch {
             return false;
         }
+    }
+
+    function _isListingAllowed(address from, address to, uint256 amount) internal view returns (bool) {
+        if (address(listingPolicyRegistry) == address(0)) {
+            return false;
+        }
+        return listingPolicyRegistry.isTransferAllowed(from, to, amount);
+    }
+
+    function _consumeListing(address from, address to, uint256 amount) internal {
+        require(address(listingPolicyRegistry) != address(0), "listing registry not set");
+        listingPolicyRegistry.consumeTransfer(from, to, amount);
+    }
+
+    function _publishPolicy(
+        IdentityMode identityMode,
+        bool disclosuresRequired,
+        bool eligibilityRequired,
+        bool lockupRequired,
+        bool jurisdictionRequired,
+        bool riskRequired,
+        uint8 maxRiskLevel,
+        bool travelRuleRequired,
+        bool seriesActiveRequired,
+        bool listingRequired,
+        bytes32 offeringId,
+        bytes32 policyHash
+    ) internal returns (uint32 version) {
+        version = nextVersion + 1;
+        nextVersion = version;
+        policies[version] = Policy({
+            identityMode: identityMode,
+            disclosuresRequired: disclosuresRequired,
+            eligibilityRequired: eligibilityRequired,
+            lockupRequired: lockupRequired,
+            jurisdictionRequired: jurisdictionRequired,
+            riskRequired: riskRequired,
+            maxRiskLevel: maxRiskLevel,
+            travelRuleRequired: travelRuleRequired,
+            seriesActiveRequired: seriesActiveRequired,
+            listingRequired: listingRequired,
+            offeringId: offeringId,
+            policyHash: policyHash,
+            version: version,
+            exists: true
+        });
+        emit PolicyPublished(version, policyHash);
     }
 }
