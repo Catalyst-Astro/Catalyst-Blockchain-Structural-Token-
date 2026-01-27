@@ -1,3 +1,106 @@
+# CATAYST LEDGE — Blockchain estructural para tokenización, trazabilidad y gobernanza (listo para integración empresarial)
+
+[CATAYST LEDGE] es una infraestructura blockchain enfocada en **emitir, administrar y auditar activos digitales** (tokens, credenciales, derechos, rendimientos, trazabilidad) con **arquitectura modular**, gobernanza configurable y herramientas listas para integrarse a sistemas existentes (ERP, CRM, plataformas web, wallets, APIs).
+
+**Propuesta de valor (en una frase):**  
+Convertimos procesos críticos (activos, cumplimiento, rendimientos, identidad y trazabilidad) en **flujos verificables**, con reglas programables y evidencia auditable.
+
+> Estado del producto: **Piloto**  
+> Licenciamiento: **MIT**  
+> Contacto comercial: **[tu-correo@dominio]**
+
+---
+
+## Por qué existe este producto
+Las organizaciones necesitan:
+- **Trazabilidad** y evidencia verificable (auditoría, compliance, reportes).
+- **Automatización de reglas** (pagos, rendimientos, acceso, permisos, límites).
+- **Gobernanza** (quién aprueba qué, cómo se registra y cómo se audita).
+- **Interoperabilidad** (integrarse sin reescribir toda su plataforma).
+
+CATAYST LEDGE se diseñó para ser **una capa de confianza**, no solo “otra cadena”.
+
+---
+
+## Qué resuelve (casos de uso principales)
+1) **Tokenización de activos y derechos** – participaciones, derechos de uso, certificados, puntos, licencias, membresías.  
+2) **Trazabilidad de procesos y cadenas de custodia** – evidencia de eventos, inspecciones, entregas, mantenimiento, certificaciones.  
+3) **Rendimientos y distribución programable** – reglas de reparto, calendarios, límites, aprobaciones y registro auditable.  
+4) **Identidad / credenciales verificables** – roles, permisos, acceso por niveles, credenciales y revocación.  
+5) **Gobernanza y autorizaciones (DAO/Corp híbrido)** – flujos de aprobación, multi-firma, controles internos, bitácora.
+
+---
+
+## Diferenciadores
+- **Arquitectura estructural y modular:** componentes separables (core, emisión, compliance, gobernanza, trazabilidad).
+- **Diseñado para auditoría:** logs/eventos, evidencia, trazabilidad por diseño.
+- **Gobernanza configurable:** modelos corporativos, comunitarios o híbridos.
+- **Integración-first:** pensado para conectarse a productos existentes.
+- **Roadmap y paquetes claros:** entregables definidos y verificables.
+
+---
+
+## Qué incluye (alto nivel)
+- **Core ledger / contratos / módulos:** emisión y administración de activos digitales.
+- **Módulo de gobernanza:** permisos, roles, aprobaciones, bitácora.
+- **Módulo de trazabilidad:** eventos verificables, cadena de custodia.
+- **Módulo de cumplimiento (opcional):** reglas, listas, límites, control de riesgo.
+- **SDK / API (opcional):** integración con apps web, backends, dashboards.
+- **Panel GUI (opcional):** administración, monitoreo, reportes y usuarios.
+
+---
+
+## Arquitectura (visión ejecutiva)
+**Capa 1 — Core:** reglas del ledger y emisión/gestión de activos  
+**Capa 2 — Control:** permisos, gobernanza, compliance, auditoría  
+**Capa 3 — Integración:** API/SDK, conectores, panel de administración  
+**Capa 4 — Experiencia:** dashboards, flujos, automatización y reportes
+
+---
+
+## Roadmap (orientado a clientes)
+- **Fase 1: MVP funcional (0–6 semanas):** emisión/gestión de tokens + bitácora + APIs básicas + demo operativa.  
+- **Fase 2: Piloto institucional (6–12 semanas):** roles/permiso, reportes, dashboard, hardening, monitoreo y pruebas.  
+- **Fase 3: Producción (12–20 semanas):** seguridad, auditoría externa, escalamiento, redundancia, SLA, documentación.  
+- **Fase 4: Expansión (20+ semanas):** conectores, módulos avanzados (KYC/Compliance, identidad, gobernanza híbrida).
+
+---
+
+## Seguridad y confianza
+- Separación de privilegios (roles y permisos)  
+- Registro de eventos y trazabilidad auditable  
+- Pruebas automatizadas (unitarias/integración) según versión  
+- Hardening de dependencias y revisión de configuración  
+- Auditoría externa: **[planificada / en proceso / completada por …]**
+
+---
+
+## Modelos de entrega
+1) **Starter (Demo + MVP):** demo operativa, emisión básica, trazabilidad mínima, documentación de integración.  
+2) **Business (Piloto institucional):** roles, dashboard, reportes, pruebas, hardening inicial, soporte.  
+3) **Enterprise (Producción + SLA):** auditoría, escalamiento, redundancia, monitoreo, SLA, roadmap conjunto.
+
+---
+
+## Demo rápida (3 minutos)
+- Crear un activo/token (mock)  
+- Registrar 2–3 eventos de trazabilidad  
+- Consultar historial auditable  
+- Cambiar estado/permiso con gobernanza  
+- Exportar evidencia/reporte (panel)
+
+---
+
+## Integración y GUI
+- **Backend/API:** ver `/backend` y `/docs` para endpoints de identidad, eventos, ramp, auditoría.  
+- **GUI de administración (Electron + Vite + React):** ubicada en `apps/catalyst-gui`.  
+  - Instalar: `cd apps/catalyst-gui && npm install`  
+  - Dev (abre ventana Electron): `npm run dev`  
+  - Build: `npm run build`
+- **Hardhat / contratos:** en la raíz (`npm install`, `npm test`, `npx hardhat compile`).
+
+---
+
 # Catalyst Blockchain Structural Token (CBST)
 
 ```

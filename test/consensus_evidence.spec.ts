@@ -1,12 +1,13 @@
 import { anyValue } from "@nomicfoundation/hardhat-chai-matchers/withArgs";
 import { expect } from "chai";
 import { ethers } from "hardhat";
+import { ConsensusEvidence } from "../typechain-types";
 
 describe("ConsensusEvidence", () => {
   it("allows only authorized roles and records once", async () => {
     const [admin, auditor, other] = await ethers.getSigners();
     const ConsensusEvidence = await ethers.getContractFactory("ConsensusEvidence");
-    const registry = await ConsensusEvidence.deploy(admin.address);
+    const registry = (await ConsensusEvidence.deploy(admin.address)) as unknown as ConsensusEvidence;
     await registry.waitForDeployment();
 
     await registry.grantRole(await registry.AUDITOR(), auditor.address);

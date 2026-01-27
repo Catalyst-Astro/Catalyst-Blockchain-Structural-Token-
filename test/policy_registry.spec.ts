@@ -9,7 +9,7 @@ describe("PolicyRegistry", () => {
     await anchor.waitForDeployment();
 
     const PolicyRegistry = await ethers.getContractFactory("PolicyRegistry");
-    const registry = await PolicyRegistry.deploy(admin.address);
+    const registry = await PolicyRegistry.deploy(admin.address) as any;
     await registry.waitForDeployment();
     await registry.setEvidenceAnchor(await anchor.getAddress());
     await anchor.grantRole(await anchor.AUDITOR(), await registry.getAddress());

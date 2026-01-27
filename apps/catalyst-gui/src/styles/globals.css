@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #f6f8fb;
+  --fg: #0e172a;
+  --card: #ffffff;
+  --muted: #64748b;
+  --border: #dfe6f2;
+  --primary: #5565ff;
+  --primary-foreground: #ffffff;
+  --radius: 12px;
+}
+
+[data-theme='dark'] {
+  --bg: #0b1220;
+  --fg: #e2e8f0;
+  --card: #0f172a;
+  --muted: #94a3b8;
+  --border: #1f2a3c;
+  --primary: #7c8dff;
+  --primary-foreground: #0b1220;
+  --radius: 12px;
+}
+
+* {
+  @apply transition-colors duration-200 ease-out;
+}
+
+body {
+  margin: 0;
+  font-family: 'Manrope', 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  margin: 0;
+}
+
+h1 { font-size: 32px; line-height: 1.2; font-weight: 700; }
+h2 { font-size: 28px; line-height: 1.25; font-weight: 700; }
+h3 { font-size: 22px; line-height: 1.3; font-weight: 600; }
+h4 { font-size: 18px; line-height: 1.35; font-weight: 600; }
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.table-sticky thead th {
+  position: sticky;
+  top: 0;
+  background: var(--card);
+  z-index: 10;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.35), rgba(255,255,255,0));
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
