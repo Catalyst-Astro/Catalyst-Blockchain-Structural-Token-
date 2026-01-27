@@ -4,6 +4,7 @@ import HeaderBar from './components/layout/HeaderBar';
 import Dashboard, { ViewState } from './pages/Dashboard';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './components/ui/Card';
 import { Button } from './components/ui/Button';
+import WalletConnectCard from './components/ethereum/WalletConnectCard';
 
 import type { NavKey } from './components/layout/Sidebar';
 
@@ -66,31 +67,34 @@ const App: React.FC = () => {
     }
     if (nav === 'settings') {
       return (
-        <Card>
-          <CardHeader>
-            <CardTitle>Settings</CardTitle>
-            <CardDescription>Theme, notifications, and operator preferences.</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <div className="flex items-center justify-between">
+        <div className="grid gap-4 lg:grid-cols-2">
+          <WalletConnectCard />
+          <Card>
+            <CardHeader>
+              <CardTitle>Settings</CardTitle>
+              <CardDescription>Theme, notifications, and operator preferences.</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-semibold">Theme</p>
+                  <p className="text-sm text-muted">Switch between light and dark for the control room.</p>
+                </div>
+                <Button variant="secondary" size="sm" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+                  {theme === 'light' ? 'Dark mode' : 'Light mode'}
+                </Button>
+              </div>
               <div>
-                <p className="font-semibold">Theme</p>
-                <p className="text-sm text-muted">Switch between light and dark for the control room.</p>
+                <p className="font-semibold">Notifications</p>
+                <p className="text-sm text-muted">Alerts for attestations, AML escalations, and settlement steps.</p>
+                <div className="mt-2 flex gap-2">
+                  <Button variant="primary" size="sm">Enable email</Button>
+                  <Button variant="ghost" size="sm">Slack webhook</Button>
+                </div>
               </div>
-              <Button variant="secondary" size="sm" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
-                {theme === 'light' ? 'Dark mode' : 'Light mode'}
-              </Button>
-            </div>
-            <div>
-              <p className="font-semibold">Notifications</p>
-              <p className="text-sm text-muted">Alerts for attestations, AML escalations, and settlement steps.</p>
-              <div className="mt-2 flex gap-2">
-                <Button variant="primary" size="sm">Enable email</Button>
-                <Button variant="ghost" size="sm">Slack webhook</Button>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        </div>
       );
     }
 

@@ -7,11 +7,11 @@ Convertimos procesos críticos (activos, cumplimiento, rendimientos, identidad y
 
 > Estado del producto: **Piloto**  
 > Licenciamiento: **MIT**  
-> Contacto comercial: **[tu-correo@dominio]**
+> Contacto comercial: **[INCUBADORACATALYST@AIL.COM]**
 
 ---
 
-## Por qué existe este producto
+¿Por qué existe este producto?
 Las organizaciones necesitan:
 - **Trazabilidad** y evidencia verificable (auditoría, compliance, reportes).
 - **Automatización de reglas** (pagos, rendimientos, acceso, permisos, límites).
@@ -99,29 +99,7 @@ CATAYST LEDGE se diseñó para ser **una capa de confianza**, no solo “otra ca
   - Build: `npm run build`
 - **Hardhat / contratos:** en la raíz (`npm install`, `npm test`, `npx hardhat compile`).
 
----
-
-# Catalyst Blockchain Structural Token (CBST)
-
-```
- ██████╗ █████╗ ████████╗ █████╗ ██╗   ██╗██╗     ██╗███████╗████████╗
-██╔════╝██╔══██╗╚══██╔══╝██╔══██╗██║   ██║██║     ██║██╔════╝╚══██╔══╝
-██║     ███████║   ██║   ███████║██║   ██║██║     ██║███████╗   ██║
-██║     ██╔══██║   ██║   ██╔══██║██║   ██║██║     ██║╚════██║   ██║
-╚██████╗██║  ██║   ██║   ██║  ██║╚██████╔╝███████╗██║███████║   ██║
- ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝╚══════╝   ╚═╝
-```
-
-> **Catalyst Blockchain Structural Token (CBST)**
-> *Sandbox educativo retro‑futurista para diseccionar, comprender y recombinar los componentes fundamentales de una infraestructura blockchain.*
-
----
-
 ## Filosofía
-
-Este repositorio no intenta ser un producto terminado. Es un **laboratorio de arquitectura**: piezas pequeñas, legibles y deliberadamente desacopladas que permiten estudiar **cómo** y **por qué** funciona una blockchain.
-
-Pensado para:
 
 - Arquitectos de sistemas distribuidos
 - Investigadores en criptografía aplicada
@@ -167,7 +145,7 @@ Pensado para:
 
 ## Estructura del repositorio
 
-```
+```plaintext
 auditor/                 Auditoría automática de transacciones
 blockchain/              Nodo completo y SPV (sockets TCP)
 catalyst/                Bridge e interoperabilidad crypto
@@ -254,8 +232,8 @@ uvicorn app.api.main:app --host 0.0.0.0 --port 8000
 
 Abrir:
 
-- http://127.0.0.1:8000/dashboard
-- http://127.0.0.1:8000/api/status
+- [http://127.0.0.1:8000/dashboard](http://127.0.0.1:8000/dashboard)
+- [http://127.0.0.1:8000/api/status](http://127.0.0.1:8000/api/status)
 
 ### Variables de entorno
 
@@ -344,4 +322,4 @@ DAO_CONTROLLER_ADDRESS=
 MIT
 
 > *"La seguridad no es un producto. Es un proceso."*
-> — espíritu cypherpunk
+

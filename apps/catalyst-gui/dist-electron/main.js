@@ -6,6 +6,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const electron_1 = require("electron");
 const path_1 = __importDefault(require("path"));
 const isDev = !!process.env.ELECTRON_START_URL;
+async function jsonRpc(url, method, params = []) {
+    const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ jsonrpc: '2.0', id: Date.now(), method, params })
+    });
+    if (!res.ok) {
+        throw new Error(`RPC HTTP ${res.status} ${res.statusText}`);
+    }
+    const payload = (await res.json());
+    if ('error' in payload) {
+        throw new Error(`RPC ${payload.error.code}: ${payload.error.message}`);
+    }
+    return payload.result;
+}
 function createWindow() {
     const win = new electron_1.BrowserWindow({
         title: 'Catalyst GUI',
@@ -56,4 +71,20 @@ electron_1.app.on('window-all-closed', () => {
 });
 electron_1.ipcMain.handle('refresh', () => {
     return { ok: true, at: Date.now() };
+});
+electron_1.ipcMain.handle('sepolia:status', async () => {
+    const rpcUrl = process.env.SEPOLIA_RPC_URL || 'https://rpc.sepolia.org';
+    try {
+        const [chainIdHex, blockHex] = await Promise.all([
+            jsonRpc(rpcUrl, 'eth_chainId'),
+            jsonRpc(rpcUrl, 'eth_blockNumber')
+        ]);
+        const chainId = Number.parseInt(chainIdHex, 16);
+        const blockNumber = Number.parseInt(blockHex, 16);
+        return { ok: true, rpcUrl, chainId, blockNumber, at: Date.now() };
+    }
+    catch (e) {
+        const message = e instanceof Error ? e.message : 'Unknown RPC error';
+        return { ok: false, rpcUrl, error: message, at: Date.now() };
+    }
 });

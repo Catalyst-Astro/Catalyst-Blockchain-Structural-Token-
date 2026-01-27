@@ -7,6 +7,7 @@ import Skeleton from '../components/ui/Skeleton';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/Card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../components/ui/Table';
 import Toast from '../components/ui/Toast';
+import SepoliaStatusCard from '@/components/ethereum/SepoliaStatusCard';
 
 export type ViewState = 'ready' | 'loading' | 'empty' | 'error';
 
@@ -79,6 +80,8 @@ const Dashboard: React.FC<DashboardProps> = ({
         </div>
         <div className="text-xs text-muted">Simula estados para QA: ready / loading / empty / error</div>
       </div>
+
+      <SepoliaStatusCard />
 
       <div className="grid gap-4 md:grid-cols-3">
         {viewState === 'loading'
