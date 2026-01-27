@@ -4,15 +4,15 @@ pragma solidity ^0.8.20;
 import "@openzeppelin/contracts/access/AccessControl.sol";
 
 /// @title UBORegistry
-/// @notice Stores UBO declaration hashes for entity wallets.
+/// @notice Stores hashes of Ultimate Beneficial Owner (UBO) declarations for corporate wallets without PII.
 contract UBORegistry is AccessControl {
     bytes32 public constant COMPLIANCE_ADMIN = keccak256("COMPLIANCE_ADMIN");
 
     mapping(address => bytes32) private uboDeclarationHash;
     mapping(address => uint64) private updatedAt;
+    mapping(address => address) private issuer;
 
-    event UBODeclared(address indexed wallet, bytes32 indexed declarationHash);
-    event UBOUpdated(address indexed wallet, bytes32 indexed declarationHash);
+    event UBODeclared(address indexed entityWallet, bytes32 uboHash, address indexed issuer, uint64 updatedAt);
 
     constructor(address admin) {
         require(admin != address(0), "admin required");
@@ -21,27 +21,24 @@ contract UBORegistry is AccessControl {
         _setRoleAdmin(COMPLIANCE_ADMIN, DEFAULT_ADMIN_ROLE);
     }
 
-    function declareUBO(address wallet, bytes32 declarationHash) external onlyRole(COMPLIANCE_ADMIN) {
-        require(wallet != address(0), "wallet required");
-        require(declarationHash != bytes32(0), "hash required");
-        uboDeclarationHash[wallet] = declarationHash;
-        updatedAt[wallet] = uint64(block.timestamp);
-        emit UBODeclared(wallet, declarationHash);
+    function declareUBO(address entityWallet, bytes32 uboHash) external onlyRole(COMPLIANCE_ADMIN) {
+        require(entityWallet != address(0), "wallet required");
+        require(uboHash != bytes32(0), "ubo hash required");
+        uboDeclarationHash[entityWallet] = uboHash;
+        updatedAt[entityWallet] = uint64(block.timestamp);
+        issuer[entityWallet] = msg.sender;
+        emit UBODeclared(entityWallet, uboHash, msg.sender, uint64(block.timestamp));
     }
 
-    function updateUBO(address wallet, bytes32 declarationHash) external onlyRole(COMPLIANCE_ADMIN) {
-        require(wallet != address(0), "wallet required");
-        require(declarationHash != bytes32(0), "hash required");
-        uboDeclarationHash[wallet] = declarationHash;
-        updatedAt[wallet] = uint64(block.timestamp);
-        emit UBOUpdated(wallet, declarationHash);
+    function uboOf(address entityWallet) external view returns (bytes32) {
+        return uboDeclarationHash[entityWallet];
     }
 
-    function declarationOf(address wallet) external view returns (bytes32) {
-        return uboDeclarationHash[wallet];
+    function updatedAtOf(address entityWallet) external view returns (uint64) {
+        return updatedAt[entityWallet];
     }
 
-    function updatedAtOf(address wallet) external view returns (uint64) {
-        return updatedAt[wallet];
+    function issuerOf(address entityWallet) external view returns (address) {
+        return issuer[entityWallet];
     }
 }

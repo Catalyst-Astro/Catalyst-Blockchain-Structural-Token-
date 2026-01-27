@@ -1,12 +1,16 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+import "./EvidenceAnchor.sol";
+
 /**
  * @title AuditManager
  * @notice Stores audit trail events emitted by other contracts and allows
  * querying aggregated data. A simplified example for demonstration.
  */
 contract AuditManager {
+    EvidenceAnchor public evidenceAnchor;
+
     struct EventRecord {
         address contractAddress;
         address wallet;
@@ -32,6 +36,12 @@ contract AuditManager {
 
     event AuditEventRecorded(uint256 indexed id, address indexed wallet, string eventType);
     event AuditReportRegistered(bytes32 reportHash, uint256 timestamp);
+    event EvidenceAnchorSet(address indexed anchor);
+
+    function setEvidenceAnchor(address anchor) external {
+        evidenceAnchor = EvidenceAnchor(anchor);
+        emit EvidenceAnchorSet(anchor);
+    }
 
     /**
      * @notice Record a generic event emitted by another contract.
@@ -126,6 +136,13 @@ contract AuditManager {
      */
     function registerAuditReport(bytes32 reportHash, uint256 timestamp) external {
         emit AuditReportRegistered(reportHash, timestamp);
+        if (address(evidenceAnchor) != address(0)) {
+            try evidenceAnchor.anchorHash(reportHash, EvidenceAnchor.AnchorType.REPORT, reportHash) {
+                // anchored
+            } catch {
+                // best-effort anchoring to avoid breaking integrations
+            }
+        }
     }
 }
 

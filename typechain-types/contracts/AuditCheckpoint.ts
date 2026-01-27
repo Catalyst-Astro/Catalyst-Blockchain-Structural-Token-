@@ -61,6 +61,7 @@ export interface AuditCheckpointInterface extends Interface {
       | "DEFAULT_ADMIN_ROLE"
       | "LEGAL_AUDITOR"
       | "checkpointOf"
+      | "evidenceAnchor"
       | "getRoleAdmin"
       | "grantRole"
       | "hasRole"
@@ -68,6 +69,7 @@ export interface AuditCheckpointInterface extends Interface {
       | "recordCheckpoint"
       | "renounceRole"
       | "revokeRole"
+      | "setEvidenceAnchor"
       | "setOperationsRegistry"
       | "supportsInterface"
   ): FunctionFragment;
@@ -75,6 +77,7 @@ export interface AuditCheckpointInterface extends Interface {
   getEvent(
     nameOrSignatureOrTopic:
       | "AuditCheckpointCreated"
+      | "EvidenceAnchorSet"
       | "OperationsRegistrySet"
       | "RoleAdminChanged"
       | "RoleGranted"
@@ -100,6 +103,10 @@ export interface AuditCheckpointInterface extends Interface {
   encodeFunctionData(
     functionFragment: "checkpointOf",
     values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "evidenceAnchor",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "getRoleAdmin",
@@ -128,6 +135,10 @@ export interface AuditCheckpointInterface extends Interface {
   encodeFunctionData(
     functionFragment: "revokeRole",
     values: [BytesLike, AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setEvidenceAnchor",
+    values: [AddressLike]
   ): string;
   encodeFunctionData(
     functionFragment: "setOperationsRegistry",
@@ -159,6 +170,10 @@ export interface AuditCheckpointInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "evidenceAnchor",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "getRoleAdmin",
     data: BytesLike
   ): Result;
@@ -177,6 +192,10 @@ export interface AuditCheckpointInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "revokeRole", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setEvidenceAnchor",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "setOperationsRegistry",
     data: BytesLike
@@ -211,6 +230,18 @@ export namespace AuditCheckpointCreatedEvent {
     periodStart: bigint;
     periodEnd: bigint;
     recordedAt: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace EvidenceAnchorSetEvent {
+  export type InputTuple = [anchor: AddressLike];
+  export type OutputTuple = [anchor: string];
+  export interface OutputObject {
+    anchor: string;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -345,6 +376,8 @@ export interface AuditCheckpoint extends BaseContract {
     "view"
   >;
 
+  evidenceAnchor: TypedContractMethod<[], [string], "view">;
+
   getRoleAdmin: TypedContractMethod<[role: BytesLike], [string], "view">;
 
   grantRole: TypedContractMethod<
@@ -384,6 +417,12 @@ export interface AuditCheckpoint extends BaseContract {
     "nonpayable"
   >;
 
+  setEvidenceAnchor: TypedContractMethod<
+    [anchor: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
   setOperationsRegistry: TypedContractMethod<
     [registry: AddressLike],
     [void],
@@ -419,6 +458,9 @@ export interface AuditCheckpoint extends BaseContract {
     [AuditCheckpoint.CheckpointStructOutput],
     "view"
   >;
+  getFunction(
+    nameOrSignature: "evidenceAnchor"
+  ): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "getRoleAdmin"
   ): TypedContractMethod<[role: BytesLike], [string], "view">;
@@ -466,6 +508,9 @@ export interface AuditCheckpoint extends BaseContract {
     "nonpayable"
   >;
   getFunction(
+    nameOrSignature: "setEvidenceAnchor"
+  ): TypedContractMethod<[anchor: AddressLike], [void], "nonpayable">;
+  getFunction(
     nameOrSignature: "setOperationsRegistry"
   ): TypedContractMethod<[registry: AddressLike], [void], "nonpayable">;
   getFunction(
@@ -478,6 +523,13 @@ export interface AuditCheckpoint extends BaseContract {
     AuditCheckpointCreatedEvent.InputTuple,
     AuditCheckpointCreatedEvent.OutputTuple,
     AuditCheckpointCreatedEvent.OutputObject
+  >;
+  getEvent(
+    key: "EvidenceAnchorSet"
+  ): TypedContractEvent<
+    EvidenceAnchorSetEvent.InputTuple,
+    EvidenceAnchorSetEvent.OutputTuple,
+    EvidenceAnchorSetEvent.OutputObject
   >;
   getEvent(
     key: "OperationsRegistrySet"
@@ -518,6 +570,17 @@ export interface AuditCheckpoint extends BaseContract {
       AuditCheckpointCreatedEvent.InputTuple,
       AuditCheckpointCreatedEvent.OutputTuple,
       AuditCheckpointCreatedEvent.OutputObject
+    >;
+
+    "EvidenceAnchorSet(address)": TypedContractEvent<
+      EvidenceAnchorSetEvent.InputTuple,
+      EvidenceAnchorSetEvent.OutputTuple,
+      EvidenceAnchorSetEvent.OutputObject
+    >;
+    EvidenceAnchorSet: TypedContractEvent<
+      EvidenceAnchorSetEvent.InputTuple,
+      EvidenceAnchorSetEvent.OutputTuple,
+      EvidenceAnchorSetEvent.OutputObject
     >;
 
     "OperationsRegistrySet(address)": TypedContractEvent<

@@ -44,7 +44,8 @@ async function deployIdentityAndCredentials() {
     await identityRegistry.getAddress(),
     await scoringRegistry.getAddress(),
     await credentialRegistry.getAddress(),
-    requiredRole
+    requiredRole,
+    ethers.ZeroAddress
   );
   await complianceGate.waitForDeployment();
 

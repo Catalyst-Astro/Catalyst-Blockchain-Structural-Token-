@@ -23,65 +23,32 @@ import type {
   TypedContractMethod,
 } from "../common";
 
-export declare namespace EntityRegistry {
-  export type EntityStruct = {
-    entityId: BytesLike;
-    jurisdictionCode: BytesLike;
-    typeCode: BytesLike;
-    status: BigNumberish;
-    createdAt: BigNumberish;
-    updatedAt: BigNumberish;
-  };
-
-  export type EntityStructOutput = [
-    entityId: string,
-    jurisdictionCode: string,
-    typeCode: string,
-    status: bigint,
-    createdAt: bigint,
-    updatedAt: bigint
-  ] & {
-    entityId: string;
-    jurisdictionCode: string;
-    typeCode: string;
-    status: bigint;
-    createdAt: bigint;
-    updatedAt: bigint;
-  };
-}
-
 export interface EntityRegistryInterface extends Interface {
   getFunction(
     nameOrSignature:
       | "COMPLIANCE_ADMIN"
-      | "DAO_COUNCIL"
       | "DEFAULT_ADMIN_ROLE"
-      | "LEGAL_AUDITOR"
-      | "UBO_VERIFIER"
       | "createEntity"
       | "entityOf"
-      | "getEntity"
       | "getRoleAdmin"
       | "grantRole"
       | "hasRole"
-      | "isActive"
+      | "isActive(bytes32)"
+      | "isActive(address)"
       | "linkWallet"
       | "renounceRole"
       | "revokeRole"
-      | "setEntityStatus"
+      | "setEntityType"
       | "supportsInterface"
-      | "unlinkWallet"
+      | "typeOf"
   ): FunctionFragment;
 
   getEvent(
     nameOrSignatureOrTopic:
-      | "EntityCreated"
-      | "EntityStatusChanged"
+      | "EntityTypeSet"
       | "RoleAdminChanged"
       | "RoleGranted"
       | "RoleRevoked"
-      | "WalletLinked"
-      | "WalletUnlinked"
   ): EventFragment;
 
   encodeFunctionData(
@@ -89,19 +56,7 @@ export interface EntityRegistryInterface extends Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "DAO_COUNCIL",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "DEFAULT_ADMIN_ROLE",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "LEGAL_AUDITOR",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "UBO_VERIFIER",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -111,10 +66,6 @@ export interface EntityRegistryInterface extends Interface {
   encodeFunctionData(
     functionFragment: "entityOf",
     values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getEntity",
-    values: [BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "getRoleAdmin",
@@ -128,7 +79,14 @@ export interface EntityRegistryInterface extends Interface {
     functionFragment: "hasRole",
     values: [BytesLike, AddressLike]
   ): string;
-  encodeFunctionData(functionFragment: "isActive", values: [BytesLike]): string;
+  encodeFunctionData(
+    functionFragment: "isActive(bytes32)",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isActive(address)",
+    values: [AddressLike]
+  ): string;
   encodeFunctionData(
     functionFragment: "linkWallet",
     values: [BytesLike, AddressLike]
@@ -142,24 +100,17 @@ export interface EntityRegistryInterface extends Interface {
     values: [BytesLike, AddressLike]
   ): string;
   encodeFunctionData(
-    functionFragment: "setEntityStatus",
-    values: [BytesLike, BigNumberish]
+    functionFragment: "setEntityType",
+    values: [AddressLike, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "supportsInterface",
     values: [BytesLike]
   ): string;
-  encodeFunctionData(
-    functionFragment: "unlinkWallet",
-    values: [AddressLike]
-  ): string;
+  encodeFunctionData(functionFragment: "typeOf", values: [AddressLike]): string;
 
   decodeFunctionResult(
     functionFragment: "COMPLIANCE_ADMIN",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "DAO_COUNCIL",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -167,26 +118,24 @@ export interface EntityRegistryInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "LEGAL_AUDITOR",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "UBO_VERIFIER",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "createEntity",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "entityOf", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getEntity", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getRoleAdmin",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "grantRole", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "hasRole", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "isActive", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "isActive(bytes32)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isActive(address)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "linkWallet", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "renounceRole",
@@ -194,47 +143,22 @@ export interface EntityRegistryInterface extends Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "revokeRole", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "setEntityStatus",
+    functionFragment: "setEntityType",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "supportsInterface",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "unlinkWallet",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "typeOf", data: BytesLike): Result;
 }
 
-export namespace EntityCreatedEvent {
-  export type InputTuple = [
-    entityId: BytesLike,
-    jurisdictionCode: BytesLike,
-    typeCode: BytesLike
-  ];
-  export type OutputTuple = [
-    entityId: string,
-    jurisdictionCode: string,
-    typeCode: string
-  ];
+export namespace EntityTypeSetEvent {
+  export type InputTuple = [wallet: AddressLike, entityType: BigNumberish];
+  export type OutputTuple = [wallet: string, entityType: bigint];
   export interface OutputObject {
-    entityId: string;
-    jurisdictionCode: string;
-    typeCode: string;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace EntityStatusChangedEvent {
-  export type InputTuple = [entityId: BytesLike, status: BigNumberish];
-  export type OutputTuple = [entityId: string, status: bigint];
-  export interface OutputObject {
-    entityId: string;
-    status: bigint;
+    wallet: string;
+    entityType: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -300,32 +224,6 @@ export namespace RoleRevokedEvent {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
-export namespace WalletLinkedEvent {
-  export type InputTuple = [entityId: BytesLike, wallet: AddressLike];
-  export type OutputTuple = [entityId: string, wallet: string];
-  export interface OutputObject {
-    entityId: string;
-    wallet: string;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace WalletUnlinkedEvent {
-  export type InputTuple = [entityId: BytesLike, wallet: AddressLike];
-  export type OutputTuple = [entityId: string, wallet: string];
-  export interface OutputObject {
-    entityId: string;
-    wallet: string;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
 export interface EntityRegistry extends BaseContract {
   connect(runner?: ContractRunner | null): EntityRegistry;
   waitForDeployment(): Promise<this>;
@@ -371,27 +269,15 @@ export interface EntityRegistry extends BaseContract {
 
   COMPLIANCE_ADMIN: TypedContractMethod<[], [string], "view">;
 
-  DAO_COUNCIL: TypedContractMethod<[], [string], "view">;
-
   DEFAULT_ADMIN_ROLE: TypedContractMethod<[], [string], "view">;
 
-  LEGAL_AUDITOR: TypedContractMethod<[], [string], "view">;
-
-  UBO_VERIFIER: TypedContractMethod<[], [string], "view">;
-
   createEntity: TypedContractMethod<
-    [entityId: BytesLike, jurisdictionCode: BytesLike, typeCode: BytesLike],
+    [entityId: BytesLike, jurisdiction: BytesLike, typeCode: BytesLike],
     [void],
     "nonpayable"
   >;
 
   entityOf: TypedContractMethod<[wallet: AddressLike], [string], "view">;
-
-  getEntity: TypedContractMethod<
-    [entityId: BytesLike],
-    [EntityRegistry.EntityStructOutput],
-    "view"
-  >;
 
   getRoleAdmin: TypedContractMethod<[role: BytesLike], [string], "view">;
 
@@ -407,7 +293,17 @@ export interface EntityRegistry extends BaseContract {
     "view"
   >;
 
-  isActive: TypedContractMethod<[entityId: BytesLike], [boolean], "view">;
+  "isActive(bytes32)": TypedContractMethod<
+    [entityId: BytesLike],
+    [boolean],
+    "view"
+  >;
+
+  "isActive(address)": TypedContractMethod<
+    [wallet: AddressLike],
+    [boolean],
+    "view"
+  >;
 
   linkWallet: TypedContractMethod<
     [entityId: BytesLike, wallet: AddressLike],
@@ -427,8 +323,8 @@ export interface EntityRegistry extends BaseContract {
     "nonpayable"
   >;
 
-  setEntityStatus: TypedContractMethod<
-    [entityId: BytesLike, status: BigNumberish],
+  setEntityType: TypedContractMethod<
+    [wallet: AddressLike, entityType: BigNumberish],
     [void],
     "nonpayable"
   >;
@@ -439,11 +335,7 @@ export interface EntityRegistry extends BaseContract {
     "view"
   >;
 
-  unlinkWallet: TypedContractMethod<
-    [wallet: AddressLike],
-    [void],
-    "nonpayable"
-  >;
+  typeOf: TypedContractMethod<[wallet: AddressLike], [bigint], "view">;
 
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
@@ -453,34 +345,18 @@ export interface EntityRegistry extends BaseContract {
     nameOrSignature: "COMPLIANCE_ADMIN"
   ): TypedContractMethod<[], [string], "view">;
   getFunction(
-    nameOrSignature: "DAO_COUNCIL"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
     nameOrSignature: "DEFAULT_ADMIN_ROLE"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "LEGAL_AUDITOR"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "UBO_VERIFIER"
   ): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "createEntity"
   ): TypedContractMethod<
-    [entityId: BytesLike, jurisdictionCode: BytesLike, typeCode: BytesLike],
+    [entityId: BytesLike, jurisdiction: BytesLike, typeCode: BytesLike],
     [void],
     "nonpayable"
   >;
   getFunction(
     nameOrSignature: "entityOf"
   ): TypedContractMethod<[wallet: AddressLike], [string], "view">;
-  getFunction(
-    nameOrSignature: "getEntity"
-  ): TypedContractMethod<
-    [entityId: BytesLike],
-    [EntityRegistry.EntityStructOutput],
-    "view"
-  >;
   getFunction(
     nameOrSignature: "getRoleAdmin"
   ): TypedContractMethod<[role: BytesLike], [string], "view">;
@@ -499,8 +375,11 @@ export interface EntityRegistry extends BaseContract {
     "view"
   >;
   getFunction(
-    nameOrSignature: "isActive"
+    nameOrSignature: "isActive(bytes32)"
   ): TypedContractMethod<[entityId: BytesLike], [boolean], "view">;
+  getFunction(
+    nameOrSignature: "isActive(address)"
+  ): TypedContractMethod<[wallet: AddressLike], [boolean], "view">;
   getFunction(
     nameOrSignature: "linkWallet"
   ): TypedContractMethod<
@@ -523,9 +402,9 @@ export interface EntityRegistry extends BaseContract {
     "nonpayable"
   >;
   getFunction(
-    nameOrSignature: "setEntityStatus"
+    nameOrSignature: "setEntityType"
   ): TypedContractMethod<
-    [entityId: BytesLike, status: BigNumberish],
+    [wallet: AddressLike, entityType: BigNumberish],
     [void],
     "nonpayable"
   >;
@@ -533,22 +412,15 @@ export interface EntityRegistry extends BaseContract {
     nameOrSignature: "supportsInterface"
   ): TypedContractMethod<[interfaceId: BytesLike], [boolean], "view">;
   getFunction(
-    nameOrSignature: "unlinkWallet"
-  ): TypedContractMethod<[wallet: AddressLike], [void], "nonpayable">;
+    nameOrSignature: "typeOf"
+  ): TypedContractMethod<[wallet: AddressLike], [bigint], "view">;
 
   getEvent(
-    key: "EntityCreated"
+    key: "EntityTypeSet"
   ): TypedContractEvent<
-    EntityCreatedEvent.InputTuple,
-    EntityCreatedEvent.OutputTuple,
-    EntityCreatedEvent.OutputObject
-  >;
-  getEvent(
-    key: "EntityStatusChanged"
-  ): TypedContractEvent<
-    EntityStatusChangedEvent.InputTuple,
-    EntityStatusChangedEvent.OutputTuple,
-    EntityStatusChangedEvent.OutputObject
+    EntityTypeSetEvent.InputTuple,
+    EntityTypeSetEvent.OutputTuple,
+    EntityTypeSetEvent.OutputObject
   >;
   getEvent(
     key: "RoleAdminChanged"
@@ -571,42 +443,17 @@ export interface EntityRegistry extends BaseContract {
     RoleRevokedEvent.OutputTuple,
     RoleRevokedEvent.OutputObject
   >;
-  getEvent(
-    key: "WalletLinked"
-  ): TypedContractEvent<
-    WalletLinkedEvent.InputTuple,
-    WalletLinkedEvent.OutputTuple,
-    WalletLinkedEvent.OutputObject
-  >;
-  getEvent(
-    key: "WalletUnlinked"
-  ): TypedContractEvent<
-    WalletUnlinkedEvent.InputTuple,
-    WalletUnlinkedEvent.OutputTuple,
-    WalletUnlinkedEvent.OutputObject
-  >;
 
   filters: {
-    "EntityCreated(bytes32,bytes32,bytes32)": TypedContractEvent<
-      EntityCreatedEvent.InputTuple,
-      EntityCreatedEvent.OutputTuple,
-      EntityCreatedEvent.OutputObject
+    "EntityTypeSet(address,uint8)": TypedContractEvent<
+      EntityTypeSetEvent.InputTuple,
+      EntityTypeSetEvent.OutputTuple,
+      EntityTypeSetEvent.OutputObject
     >;
-    EntityCreated: TypedContractEvent<
-      EntityCreatedEvent.InputTuple,
-      EntityCreatedEvent.OutputTuple,
-      EntityCreatedEvent.OutputObject
-    >;
-
-    "EntityStatusChanged(bytes32,uint8)": TypedContractEvent<
-      EntityStatusChangedEvent.InputTuple,
-      EntityStatusChangedEvent.OutputTuple,
-      EntityStatusChangedEvent.OutputObject
-    >;
-    EntityStatusChanged: TypedContractEvent<
-      EntityStatusChangedEvent.InputTuple,
-      EntityStatusChangedEvent.OutputTuple,
-      EntityStatusChangedEvent.OutputObject
+    EntityTypeSet: TypedContractEvent<
+      EntityTypeSetEvent.InputTuple,
+      EntityTypeSetEvent.OutputTuple,
+      EntityTypeSetEvent.OutputObject
     >;
 
     "RoleAdminChanged(bytes32,bytes32,bytes32)": TypedContractEvent<
@@ -640,28 +487,6 @@ export interface EntityRegistry extends BaseContract {
       RoleRevokedEvent.InputTuple,
       RoleRevokedEvent.OutputTuple,
       RoleRevokedEvent.OutputObject
-    >;
-
-    "WalletLinked(bytes32,address)": TypedContractEvent<
-      WalletLinkedEvent.InputTuple,
-      WalletLinkedEvent.OutputTuple,
-      WalletLinkedEvent.OutputObject
-    >;
-    WalletLinked: TypedContractEvent<
-      WalletLinkedEvent.InputTuple,
-      WalletLinkedEvent.OutputTuple,
-      WalletLinkedEvent.OutputObject
-    >;
-
-    "WalletUnlinked(bytes32,address)": TypedContractEvent<
-      WalletUnlinkedEvent.InputTuple,
-      WalletUnlinkedEvent.OutputTuple,
-      WalletUnlinkedEvent.OutputObject
-    >;
-    WalletUnlinked: TypedContractEvent<
-      WalletUnlinkedEvent.InputTuple,
-      WalletUnlinkedEvent.OutputTuple,
-      WalletUnlinkedEvent.OutputObject
     >;
   };
 }

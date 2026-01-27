@@ -1,8 +1,10 @@
 import express, { Request, Response } from "express";
 import { ethers } from "ethers";
+import fs from "fs";
 import path from "path";
 import { StoryLedger } from "./storyLedger";
 import { appendJsonl, ensureFile, hashCanonical, readJsonl } from "./utils";
+import { buildEventPacket, canonicalizeEvent, computeEID, computeVID } from "../src/events/canonical";
 
 const app = express();
 app.use(express.json({ limit: "1mb" }));
@@ -11,16 +13,31 @@ const ledger = new StoryLedger();
 const dataDir = path.join(process.cwd(), "backend", "database");
 const identityLogPath = path.join(dataDir, "identity_events.jsonl");
 const credentialLogPath = path.join(dataDir, "credential_events.jsonl");
+const eventLogPath = path.join(dataDir, "events_log.jsonl");
+const evidenceLogPath = path.join(dataDir, "evidence_log.jsonl");
+const amlLogPath = path.join(dataDir, "aml_scoring_log.jsonl");
+const rampLogPath = path.join(dataDir, "ramps_log.jsonl");
 ensureFile(identityLogPath);
 ensureFile(credentialLogPath);
+ensureFile(eventLogPath);
+ensureFile(evidenceLogPath);
+ensureFile(amlLogPath);
+ensureFile(rampLogPath);
 
 const rpcUrl = process.env.RPC_URL;
 const privateKey = process.env.PRIVATE_KEY;
 const identityRegistryAddress = process.env.IDENTITY_REGISTRY_ADDRESS;
 const credentialRegistryAddress = process.env.CREDENTIAL_REGISTRY_ADDRESS;
+const eventRegistryAddress = process.env.EVENT_REGISTRY_ADDRESS;
+const evidenceAnchorAddress = process.env.EVIDENCE_ANCHOR_ADDRESS;
+const batchRegistryAddress = process.env.BATCH_REGISTRY_ADDRESS;
+const amlRegistryAddress = process.env.AML_REGISTRY_ADDRESS;
+const rampVaultAddress = process.env.RAMP_VAULT_ADDRESS;
+const paymentRefRegistryAddress = process.env.PAYMENT_REF_REGISTRY_ADDRESS;
 
 const provider = rpcUrl ? new ethers.JsonRpcProvider(rpcUrl) : null;
 const signer = provider && privateKey ? new ethers.Wallet(privateKey, provider) : null;
+const runner = signer ?? provider;
 const identityAbi = [
   "function verifyIdentity(address wallet, bytes32 identityHash) external",
   "function revokeIdentity(address wallet, bytes32 reasonHash) external",
@@ -31,6 +48,38 @@ const credentialAbi = [
   "function revokeCredential(address wallet, bytes32 role, bytes32 reasonHash) external",
   "function isCredentialActive(address wallet, bytes32 role) external view returns (bool)",
 ];
+const eventAbi = [
+  "function createEvent(bytes32 eid, bytes32 eventType, bytes32 payloadHash, bytes32[] calldata vids) external",
+  "function attestEvent(bytes32 eid) external",
+  "function verifyEvent(bytes32 eid) external",
+  "function rejectEvent(bytes32 eid, bytes32 reasonHash) external",
+  "function statusOf(bytes32 eid) external view returns (uint8)",
+  "function getEvent(bytes32 eid) external view returns (tuple(bytes32 eid, bytes32 eventType, uint64 createdAt, address creator, uint8 status, bytes32 payloadHash, bytes32[] vids, uint32 attestCount, uint32 verifyCount))",
+];
+const evidenceAbi = [
+  "function exists(bytes32 hash) external view returns (bool)",
+  "function getAnchor(bytes32 hash) external view returns (tuple(bytes32 hash,uint8 aType,bytes32 refId,address actor,uint64 anchoredAt))",
+  "function anchorHash(bytes32 hash, uint8 aType, bytes32 refId) external",
+];
+const batchRegistryAbi = [
+  "function getBatch(bytes32 batchId) external view returns (tuple(bytes32 root, bytes32 batchId, uint64 anchoredAt, address actor))",
+];
+const amlAbi = [
+  "function assignRisk(address wallet, uint8 level) external",
+  "function updateRisk(address wallet, uint8 level) external",
+];
+const rampVaultAbi = [
+  "function requestCashIn(bytes32 eid, uint256 amount, bytes32 paymentRefHash) external",
+  "function requestCashOut(bytes32 eid, uint256 amount, bytes32 payoutRefHash) external",
+  "function confirmCashIn(bytes32 eid, bytes32 confirmationVID) external",
+  "function confirmCashOut(bytes32 eid, bytes32 confirmationVID) external",
+  "function settle(bytes32 eid) external",
+  "function getOperation(bytes32 eid) external view returns (tuple(address wallet,uint256 amount,uint8 direction,uint8 status,bytes32 paymentRefHash,bytes32 confirmationVID,address confirmedBy,uint64 requestedAt,uint64 settledAt))",
+];
+const paymentRefAbi = [
+  "function registerRef(bytes32 refHash, bytes32 eid) external",
+  "function getEid(bytes32 refHash) external view returns (bytes32)",
+];
 
 const identityContract =
   signer && identityRegistryAddress
@@ -40,6 +89,22 @@ const credentialContract =
   signer && credentialRegistryAddress
     ? new ethers.Contract(credentialRegistryAddress, credentialAbi, signer)
     : null;
+const eventContract =
+  signer && eventRegistryAddress ? new ethers.Contract(eventRegistryAddress, eventAbi, signer) : null;
+const eventViewContract =
+  runner && eventRegistryAddress ? new ethers.Contract(eventRegistryAddress, eventAbi, runner) : null;
+const evidenceAnchorContract =
+  signer && evidenceAnchorAddress ? new ethers.Contract(evidenceAnchorAddress, evidenceAbi, signer) : null;
+const evidenceAnchorView =
+  runner && evidenceAnchorAddress ? new ethers.Contract(evidenceAnchorAddress, evidenceAbi, runner) : null;
+const batchRegistryView =
+  runner && batchRegistryAddress ? new ethers.Contract(batchRegistryAddress, batchRegistryAbi, runner) : null;
+const amlContract =
+  signer && amlRegistryAddress ? new ethers.Contract(amlRegistryAddress, amlAbi, signer) : null;
+const rampVaultContract =
+  signer && rampVaultAddress ? new ethers.Contract(rampVaultAddress, rampVaultAbi, signer) : null;
+const paymentRefRegistry =
+  signer && paymentRefRegistryAddress ? new ethers.Contract(paymentRefRegistryAddress, paymentRefAbi, signer) : null;
 
 function normalizeRole(roleInput: string): string {
   if (!roleInput) {
@@ -49,6 +114,23 @@ function normalizeRole(roleInput: string): string {
     return roleInput.toLowerCase();
   }
   return ethers.keccak256(ethers.toUtf8Bytes(roleInput.toUpperCase()));
+}
+
+function normalizeEventType(eventType: string): string {
+  if (!eventType) throw new Error("eventType required");
+  if (eventType.startsWith("0x") && eventType.length === 66) {
+    return eventType.toLowerCase();
+  }
+  return ethers.keccak256(ethers.toUtf8Bytes(eventType.toUpperCase()));
+}
+
+async function requireCredential(wallet: string, role: string) {
+  if (!credentialContract) return true;
+  const active = await credentialContract.isCredentialActive(wallet, role);
+  if (!active) {
+    throw new Error("credential not active");
+  }
+  return true;
 }
 
 async function maybeVerifyOnChain(wallet: string, identityHash: string, dryRun?: boolean) {
@@ -99,12 +181,97 @@ async function maybeRevokeCredentialOnChain(
   return receipt?.hash ?? tx.hash;
 }
 
+async function maybeCreateEventOnChain(
+  eid: string,
+  eventType: string,
+  payloadHash: string,
+  vids: string[],
+  dryRun?: boolean
+) {
+  if (!eventContract || dryRun) return null;
+  const tx = await eventContract.createEvent(eid, eventType, payloadHash, vids);
+  const receipt = await tx.wait();
+  return receipt?.hash ?? tx.hash;
+}
+
+async function maybeAttestEventOnChain(eid: string, dryRun?: boolean) {
+  if (!eventContract || dryRun) return null;
+  const tx = await eventContract.attestEvent(eid);
+  const receipt = await tx.wait();
+  return receipt?.hash ?? tx.hash;
+}
+
+async function maybeVerifyEventOnChain(eid: string, dryRun?: boolean) {
+  if (!eventContract || dryRun) return null;
+  const tx = await eventContract.verifyEvent(eid);
+  const receipt = await tx.wait();
+  return receipt?.hash ?? tx.hash;
+}
+
+async function maybeRejectEventOnChain(eid: string, reasonHash: string, dryRun?: boolean) {
+  if (!eventContract || dryRun) return null;
+  const tx = await eventContract.rejectEvent(eid, reasonHash);
+  const receipt = await tx.wait();
+  return receipt?.hash ?? tx.hash;
+}
+
+async function maybeAnchorEvidence(hash: string, aType: number, refId: string, dryRun?: boolean) {
+  if (!evidenceAnchorContract || dryRun) return null;
+  const tx = await evidenceAnchorContract.anchorHash(hash, aType, refId);
+  const receipt = await tx.wait();
+  appendJsonl(evidenceLogPath, {
+    hash,
+    aType,
+    refId,
+    anchoredBy: evidenceAnchorContract.runner?.address ?? "unknown",
+    timestamp: new Date().toISOString(),
+  });
+  return receipt?.hash ?? tx.hash;
+}
+
+function loadBatchesContaining(hash: string) {
+  const batchesDir = path.join(dataDir, "batches");
+  if (!fs.existsSync(batchesDir)) return null;
+  const files = fs.readdirSync(batchesDir).filter((f) => f.endsWith(".json"));
+  for (const file of files) {
+    const batch = JSON.parse(fs.readFileSync(path.join(batchesDir, file), "utf8"));
+    if (Array.isArray(batch.leafHashes) && batch.leafHashes.includes(hash)) {
+      return {
+        batchId: batch.batchId,
+        root: batch.root,
+        proof: batch.proofs?.[hash] ?? [],
+        createdAt: batch.createdAt,
+      };
+    }
+  }
+  return null;
+}
+
+async function maybeUpdateRisk(wallet: string, level: number, dryRun?: boolean) {
+  if (!amlContract || dryRun) return null;
+  try {
+    const tx = await amlContract.updateRisk(wallet, level);
+    const receipt = await tx.wait();
+    return receipt?.hash ?? tx.hash;
+  } catch {
+    const tx = await amlContract.assignRisk(wallet, level);
+    const receipt = await tx.wait();
+    return receipt?.hash ?? tx.hash;
+  }
+}
+
 app.get("/health", (_req, res) => {
   res.json({
     status: "ok",
-    onChain: Boolean(identityContract || credentialContract),
+    onChain: Boolean(identityContract || credentialContract || eventContract || evidenceAnchorContract),
     identityRegistryAddress,
     credentialRegistryAddress,
+    eventRegistryAddress,
+    evidenceAnchorAddress,
+    batchRegistryAddress,
+    amlRegistryAddress,
+    rampVaultAddress,
+    paymentRefRegistryAddress,
   });
 });
 
@@ -240,6 +407,31 @@ app.post("/identity/revoke", async (req: Request, res: Response) => {
   }
 });
 
+app.post("/aml/score", async (req: Request, res: Response) => {
+  try {
+    const { wallet, level, scoringInput, dryRun } = req.body;
+    if (wallet === undefined || level === undefined) {
+      return res.status(400).json({ error: "wallet and level are required" });
+    }
+    const normalizedLevel = Number(level);
+    if (Number.isNaN(normalizedLevel)) {
+      return res.status(400).json({ error: "level must be a number" });
+    }
+    const provenanceHash = hashCanonical(scoringInput ?? {});
+    const walletRef = ethers.keccak256(ethers.getBytes(ethers.getAddress(wallet)));
+    const timestamp = new Date().toISOString();
+    const record = { wallet, level: normalizedLevel, provenanceHash, timestamp };
+    appendJsonl(amlLogPath, record);
+    ledger.logAction("aml", `aml_score wallet=${wallet} level=${normalizedLevel} provHash=${provenanceHash}`);
+
+    const anchorTx = await maybeAnchorEvidence(provenanceHash, 4, walletRef, dryRun);
+    const txHash = await maybeUpdateRisk(wallet, normalizedLevel, dryRun);
+    return res.json({ ...record, anchorTx, txHash, onChain: Boolean(txHash) && !dryRun });
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
 app.get("/identity/:wallet", (req: Request, res: Response) => {
   const { wallet } = req.params;
   const events = readJsonl(identityLogPath).filter((e) => e.wallet === wallet);
@@ -258,6 +450,286 @@ app.get("/credential/:wallet", (req: Request, res: Response) => {
   });
   const latest = events[events.length - 1] ?? null;
   return res.json({ wallet, role: roleFilter, latest, events });
+});
+
+app.post("/events", async (req: Request, res: Response) => {
+  try {
+    const { eventType, payload, vids, actorWallet, jurisdiction, nonce, dryRun } = req.body;
+    if (!eventType || (!payload && !req.body.payloadHash)) {
+      return res.status(400).json({ error: "eventType and payload/payloadHash required" });
+    }
+    const payloadHash = req.body.payloadHash
+      ? req.body.payloadHash
+      : hashCanonical(payload ?? {});
+    const vidList: string[] = Array.isArray(vids)
+      ? vids.map((v: any) => computeVID(typeof v === "string" ? v : JSON.stringify(v)))
+      : [];
+    const packet = buildEventPacket({
+      eventType,
+      actorWallet: actorWallet ?? signer?.address ?? "unknown",
+      payloadHash,
+      vids: vidList,
+      jurisdiction,
+      nonce,
+    });
+    const canonical = canonicalizeEvent(packet);
+    const eid = computeEID(canonical);
+    const evtTypeHash = normalizeEventType(eventType);
+    const record = { eid, eventType: evtTypeHash, payloadHash, vids: vidList, packet: packet };
+    appendJsonl(eventLogPath, record);
+    ledger.logAction("event", `create_event eid=${eid} type=${evtTypeHash}`);
+
+    const txHash = await maybeCreateEventOnChain(eid, evtTypeHash, payloadHash, vidList, dryRun);
+    return res.json({ eid, eventType: evtTypeHash, payloadHash, vids: vidList, txHash, onChain: !!txHash });
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
+app.post("/events/:eid/attest", async (req: Request, res: Response) => {
+  try {
+    const { eid } = req.params;
+    const actor = req.body.actorWallet ?? signer?.address;
+    if (!actor) return res.status(400).json({ error: "actorWallet required" });
+    const notaryRole = normalizeRole("NOTARY");
+    await requireCredential(actor, notaryRole);
+    const txHash = await maybeAttestEventOnChain(eid, req.body.dryRun);
+    ledger.logAction("event", `attest_event eid=${eid} actor=${actor}`);
+    return res.json({ eid, actor, txHash, onChain: !!txHash });
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
+app.post("/events/:eid/verify", async (req: Request, res: Response) => {
+  try {
+    const { eid } = req.params;
+    const actor = req.body.actorWallet ?? signer?.address;
+    if (!actor) return res.status(400).json({ error: "actorWallet required" });
+    const auditorRole = normalizeRole("AUDITOR");
+    await requireCredential(actor, auditorRole);
+    const txHash = await maybeVerifyEventOnChain(eid, req.body.dryRun);
+    ledger.logAction("event", `verify_event eid=${eid} actor=${actor}`);
+    return res.json({ eid, actor, txHash, onChain: !!txHash });
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
+app.post("/events/:eid/reject", async (req: Request, res: Response) => {
+  try {
+    const { eid } = req.params;
+    const { reason, actorWallet, dryRun } = req.body;
+    if (!reason) return res.status(400).json({ error: "reason required" });
+    const actor = actorWallet ?? signer?.address ?? "unknown";
+    const reasonHash = ethers.keccak256(ethers.toUtf8Bytes(reason));
+    const txHash = await maybeRejectEventOnChain(eid, reasonHash, dryRun);
+    ledger.logAction("event", `reject_event eid=${eid} reasonHash=${reasonHash}`);
+    appendJsonl(eventLogPath, { eid, action: "reject", reasonHash, actor, timestamp: new Date().toISOString() });
+    return res.json({ eid, reasonHash, actor, txHash, onChain: !!txHash });
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
+app.get("/events/:eid", async (req: Request, res: Response) => {
+  const { eid } = req.params;
+  const logs = readJsonl(eventLogPath).filter((e) => e.eid === eid);
+  let onChain: any = null;
+  if (eventViewContract) {
+    try {
+      onChain = await eventViewContract["getEvent(bytes32)"](eid);
+    } catch {
+      // ignore if view not available
+    }
+  }
+  res.json({ eid, logs, onChain });
+});
+
+async function verifyHash(hash: string, includeEventStatus: boolean) {
+  let anchor: any = null;
+  let onChain = false;
+  if (evidenceAnchorView) {
+    try {
+      anchor = await evidenceAnchorView.getAnchor(hash);
+      onChain = Boolean(anchor && anchor.anchoredAt && anchor.anchoredAt > 0);
+    } catch {
+      onChain = false;
+    }
+  }
+
+  const batch = loadBatchesContaining(hash);
+  let batchOnChain: any = null;
+  if (batch && batchRegistryView) {
+    try {
+      batchOnChain = await batchRegistryView.getBatch(batch.batchId);
+    } catch {
+      batchOnChain = null;
+    }
+  }
+  let eventStatus: any = null;
+  if (includeEventStatus && eventViewContract) {
+    try {
+      eventStatus = await eventViewContract.statusOf(hash);
+    } catch {
+      eventStatus = null;
+    }
+  }
+  return {
+    hash,
+    anchored: Boolean(onChain || batch),
+    onChain,
+    anchor,
+    batch,
+    batchOnChain,
+    eventStatus,
+  };
+}
+
+app.get("/verify/eid/:eid", async (req: Request, res: Response) => {
+  try {
+    const { eid } = req.params;
+    const result = await verifyHash(eid, true);
+    return res.json(result);
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
+app.get("/verify/vid/:vid", async (req: Request, res: Response) => {
+  try {
+    const { vid } = req.params;
+    const result = await verifyHash(vid, false);
+    return res.json(result);
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
+function canonicalPaymentRef(ref: any) {
+  return hashCanonical(ref ?? {});
+}
+
+app.post("/ramps/cash-in/request", async (req: Request, res: Response) => {
+  try {
+    const { wallet, amount, paymentRef, eventType, payload, vids, dryRun } = req.body;
+    if (!wallet || !amount || !eventType) {
+      return res.status(400).json({ error: "wallet, amount, eventType required" });
+    }
+    const payloadHash = req.body.payloadHash ? req.body.payloadHash : hashCanonical(payload ?? {});
+    const paymentRefHash = canonicalPaymentRef(paymentRef);
+    const evtType = normalizeEventType(eventType);
+    const packet = buildEventPacket({
+      eventType,
+      actorWallet: wallet,
+      payloadHash,
+      vids: Array.isArray(vids) ? vids.map((v: any) => computeVID(typeof v === "string" ? v : JSON.stringify(v))) : [],
+    });
+    const eid = computeEID(canonicalizeEvent(packet));
+
+    appendJsonl(rampLogPath, { eid, wallet, amount, paymentRefHash, action: "cash_in_request", timestamp: new Date().toISOString() });
+    ledger.logAction("ramp", `cash_in_request wallet=${wallet} eid=${eid} amount=${amount}`);
+
+    if (paymentRefRegistry && !dryRun) {
+      await paymentRefRegistry.registerRef(paymentRefHash, eid);
+    }
+    if (eventContract && !dryRun) {
+      await maybeCreateEventOnChain(eid, evtType, payloadHash, packet.vids, dryRun);
+    }
+    if (rampVaultContract && !dryRun) {
+      await rampVaultContract.requestCashIn(eid, amount, paymentRefHash);
+    }
+    return res.json({ eid, paymentRefHash });
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
+app.post("/ramps/cash-in/confirm", async (req: Request, res: Response) => {
+  try {
+    const { eid, confirmation, dryRun } = req.body;
+    if (!eid || !confirmation) return res.status(400).json({ error: "eid and confirmation required" });
+    const confirmationVID = computeVID(typeof confirmation === "string" ? confirmation : JSON.stringify(confirmation));
+    ledger.logAction("ramp", `cash_in_confirm eid=${eid}`);
+    if (rampVaultContract && !dryRun) {
+      await rampVaultContract.confirmCashIn(eid, confirmationVID);
+    }
+    appendJsonl(rampLogPath, { eid, confirmationVID, action: "cash_in_confirm", timestamp: new Date().toISOString() });
+    if (evidenceAnchorContract && !dryRun) {
+      await maybeAnchorEvidence(confirmationVID, 1, eid, dryRun); // AnchorType.EVIDENCE
+    }
+    return res.json({ eid, confirmationVID });
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
+app.post("/ramps/cash-out/request", async (req: Request, res: Response) => {
+  try {
+    const { wallet, amount, payoutRef, eventType, payload, vids, dryRun } = req.body;
+    if (!wallet || !amount || !eventType) {
+      return res.status(400).json({ error: "wallet, amount, eventType required" });
+    }
+    const payloadHash = req.body.payloadHash ? req.body.payloadHash : hashCanonical(payload ?? {});
+    const payoutRefHash = canonicalPaymentRef(payoutRef);
+    const evtType = normalizeEventType(eventType);
+    const packet = buildEventPacket({
+      eventType,
+      actorWallet: wallet,
+      payloadHash,
+      vids: Array.isArray(vids) ? vids.map((v: any) => computeVID(typeof v === "string" ? v : JSON.stringify(v))) : [],
+    });
+    const eid = computeEID(canonicalizeEvent(packet));
+
+    appendJsonl(rampLogPath, { eid, wallet, amount, payoutRefHash, action: "cash_out_request", timestamp: new Date().toISOString() });
+    ledger.logAction("ramp", `cash_out_request wallet=${wallet} eid=${eid} amount=${amount}`);
+
+    if (paymentRefRegistry && !dryRun) {
+      await paymentRefRegistry.registerRef(payoutRefHash, eid);
+    }
+    if (eventContract && !dryRun) {
+      await maybeCreateEventOnChain(eid, evtType, payloadHash, packet.vids, dryRun);
+    }
+    if (rampVaultContract && !dryRun) {
+      await rampVaultContract.requestCashOut(eid, amount, payoutRefHash);
+    }
+    return res.json({ eid, payoutRefHash });
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
+app.post("/ramps/cash-out/confirm", async (req: Request, res: Response) => {
+  try {
+    const { eid, confirmation, dryRun } = req.body;
+    if (!eid || !confirmation) return res.status(400).json({ error: "eid and confirmation required" });
+    const confirmationVID = computeVID(typeof confirmation === "string" ? confirmation : JSON.stringify(confirmation));
+    ledger.logAction("ramp", `cash_out_confirm eid=${eid}`);
+    if (rampVaultContract && !dryRun) {
+      await rampVaultContract.confirmCashOut(eid, confirmationVID);
+    }
+    appendJsonl(rampLogPath, { eid, confirmationVID, action: "cash_out_confirm", timestamp: new Date().toISOString() });
+    if (evidenceAnchorContract && !dryRun) {
+      await maybeAnchorEvidence(confirmationVID, 1, eid, dryRun);
+    }
+    return res.json({ eid, confirmationVID });
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
+app.get("/ramps/:eid", async (req: Request, res: Response) => {
+  const { eid } = req.params;
+  const logs = readJsonl(rampLogPath).filter((e) => e.eid === eid);
+  let onChain: any = null;
+  if (rampVaultContract) {
+    try {
+      onChain = await rampVaultContract.getOperation(eid);
+    } catch {
+      onChain = null;
+    }
+  }
+  return res.json({ eid, logs, onChain });
 });
 
 const port = process.env.PORT || 4000;

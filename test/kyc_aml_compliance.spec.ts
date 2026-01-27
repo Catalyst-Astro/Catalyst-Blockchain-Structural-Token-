@@ -25,13 +25,14 @@ describe("KYC_AML_COMPLIANCE", () => {
     await scoring.waitForDeployment();
 
     const ComplianceGate = await ethers.getContractFactory("ComplianceGate");
-    const gate = await ComplianceGate.deploy(
-      await roleAuthority.getAddress(),
-      await identity.getAddress(),
-      await scoring.getAddress(),
-      await credentialRegistry.getAddress(),
-      ethers.ZeroHash
-    );
+  const gate = await ComplianceGate.deploy(
+    await roleAuthority.getAddress(),
+    await identity.getAddress(),
+    await scoring.getAddress(),
+    await credentialRegistry.getAddress(),
+    ethers.ZeroHash,
+    ethers.ZeroAddress
+  );
     await gate.waitForDeployment();
 
     const FractalToken = await ethers.getContractFactory("FractalToken");

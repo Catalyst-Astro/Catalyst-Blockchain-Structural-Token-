@@ -28,22 +28,32 @@ export interface ComplianceGateInterface extends Interface {
     nameOrSignature:
       | "credentialRegistry"
       | "enforcementEnabled"
+      | "entityRegistry"
+      | "eventRegistry"
       | "identityRegistry"
       | "maxAllowedRisk"
       | "requiredCredentialRole"
       | "roleAuthority"
       | "scoringRegistry"
+      | "setEntityRegistry"
+      | "setEventRegistry"
       | "setPolicy"
       | "setRegistries"
       | "setRoleAuthority"
+      | "setUBORegistry"
+      | "uboRegistry"
       | "validate"
+      | "validateWithEvent"
   ): FunctionFragment;
 
   getEvent(
     nameOrSignatureOrTopic:
+      | "EntityRegistryUpdated"
+      | "EventRegistryUpdated"
       | "GateConfigured"
       | "GatePolicyUpdated"
       | "RoleAuthorityUpdated"
+      | "UBORegistryUpdated"
   ): EventFragment;
 
   encodeFunctionData(
@@ -52,6 +62,14 @@ export interface ComplianceGateInterface extends Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "enforcementEnabled",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "entityRegistry",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "eventRegistry",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -73,6 +91,14 @@ export interface ComplianceGateInterface extends Interface {
   encodeFunctionData(
     functionFragment: "scoringRegistry",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setEntityRegistry",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setEventRegistry",
+    values: [AddressLike]
   ): string;
   encodeFunctionData(
     functionFragment: "setPolicy",
@@ -87,8 +113,20 @@ export interface ComplianceGateInterface extends Interface {
     values: [AddressLike]
   ): string;
   encodeFunctionData(
+    functionFragment: "setUBORegistry",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "uboRegistry",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "validate",
     values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "validateWithEvent",
+    values: [AddressLike, BytesLike]
   ): string;
 
   decodeFunctionResult(
@@ -97,6 +135,14 @@ export interface ComplianceGateInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "enforcementEnabled",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "entityRegistry",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "eventRegistry",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -119,6 +165,14 @@ export interface ComplianceGateInterface extends Interface {
     functionFragment: "scoringRegistry",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "setEntityRegistry",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setEventRegistry",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "setPolicy", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "setRegistries",
@@ -128,7 +182,43 @@ export interface ComplianceGateInterface extends Interface {
     functionFragment: "setRoleAuthority",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "setUBORegistry",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "uboRegistry",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "validate", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "validateWithEvent",
+    data: BytesLike
+  ): Result;
+}
+
+export namespace EntityRegistryUpdatedEvent {
+  export type InputTuple = [entityRegistry: AddressLike];
+  export type OutputTuple = [entityRegistry: string];
+  export interface OutputObject {
+    entityRegistry: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace EventRegistryUpdatedEvent {
+  export type InputTuple = [eventRegistry: AddressLike];
+  export type OutputTuple = [eventRegistry: string];
+  export interface OutputObject {
+    eventRegistry: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
 }
 
 export namespace GateConfiguredEvent {
@@ -187,6 +277,18 @@ export namespace RoleAuthorityUpdatedEvent {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
+export namespace UBORegistryUpdatedEvent {
+  export type InputTuple = [uboRegistry: AddressLike];
+  export type OutputTuple = [uboRegistry: string];
+  export interface OutputObject {
+    uboRegistry: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
 export interface ComplianceGate extends BaseContract {
   connect(runner?: ContractRunner | null): ComplianceGate;
   waitForDeployment(): Promise<this>;
@@ -234,6 +336,10 @@ export interface ComplianceGate extends BaseContract {
 
   enforcementEnabled: TypedContractMethod<[], [boolean], "view">;
 
+  entityRegistry: TypedContractMethod<[], [string], "view">;
+
+  eventRegistry: TypedContractMethod<[], [string], "view">;
+
   identityRegistry: TypedContractMethod<[], [string], "view">;
 
   maxAllowedRisk: TypedContractMethod<[], [bigint], "view">;
@@ -243,6 +349,18 @@ export interface ComplianceGate extends BaseContract {
   roleAuthority: TypedContractMethod<[], [string], "view">;
 
   scoringRegistry: TypedContractMethod<[], [string], "view">;
+
+  setEntityRegistry: TypedContractMethod<
+    [entityRegistry_: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  setEventRegistry: TypedContractMethod<
+    [eventRegistry_: AddressLike],
+    [void],
+    "nonpayable"
+  >;
 
   setPolicy: TypedContractMethod<
     [
@@ -270,7 +388,21 @@ export interface ComplianceGate extends BaseContract {
     "nonpayable"
   >;
 
+  setUBORegistry: TypedContractMethod<
+    [uboRegistry_: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  uboRegistry: TypedContractMethod<[], [string], "view">;
+
   validate: TypedContractMethod<[wallet: AddressLike], [void], "view">;
+
+  validateWithEvent: TypedContractMethod<
+    [wallet: AddressLike, eid: BytesLike],
+    [void],
+    "view"
+  >;
 
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
@@ -282,6 +414,12 @@ export interface ComplianceGate extends BaseContract {
   getFunction(
     nameOrSignature: "enforcementEnabled"
   ): TypedContractMethod<[], [boolean], "view">;
+  getFunction(
+    nameOrSignature: "entityRegistry"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "eventRegistry"
+  ): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "identityRegistry"
   ): TypedContractMethod<[], [string], "view">;
@@ -297,6 +435,12 @@ export interface ComplianceGate extends BaseContract {
   getFunction(
     nameOrSignature: "scoringRegistry"
   ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "setEntityRegistry"
+  ): TypedContractMethod<[entityRegistry_: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setEventRegistry"
+  ): TypedContractMethod<[eventRegistry_: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setPolicy"
   ): TypedContractMethod<
@@ -323,9 +467,32 @@ export interface ComplianceGate extends BaseContract {
     nameOrSignature: "setRoleAuthority"
   ): TypedContractMethod<[roleAuthority_: AddressLike], [void], "nonpayable">;
   getFunction(
+    nameOrSignature: "setUBORegistry"
+  ): TypedContractMethod<[uboRegistry_: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "uboRegistry"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
     nameOrSignature: "validate"
   ): TypedContractMethod<[wallet: AddressLike], [void], "view">;
+  getFunction(
+    nameOrSignature: "validateWithEvent"
+  ): TypedContractMethod<[wallet: AddressLike, eid: BytesLike], [void], "view">;
 
+  getEvent(
+    key: "EntityRegistryUpdated"
+  ): TypedContractEvent<
+    EntityRegistryUpdatedEvent.InputTuple,
+    EntityRegistryUpdatedEvent.OutputTuple,
+    EntityRegistryUpdatedEvent.OutputObject
+  >;
+  getEvent(
+    key: "EventRegistryUpdated"
+  ): TypedContractEvent<
+    EventRegistryUpdatedEvent.InputTuple,
+    EventRegistryUpdatedEvent.OutputTuple,
+    EventRegistryUpdatedEvent.OutputObject
+  >;
   getEvent(
     key: "GateConfigured"
   ): TypedContractEvent<
@@ -347,8 +514,37 @@ export interface ComplianceGate extends BaseContract {
     RoleAuthorityUpdatedEvent.OutputTuple,
     RoleAuthorityUpdatedEvent.OutputObject
   >;
+  getEvent(
+    key: "UBORegistryUpdated"
+  ): TypedContractEvent<
+    UBORegistryUpdatedEvent.InputTuple,
+    UBORegistryUpdatedEvent.OutputTuple,
+    UBORegistryUpdatedEvent.OutputObject
+  >;
 
   filters: {
+    "EntityRegistryUpdated(address)": TypedContractEvent<
+      EntityRegistryUpdatedEvent.InputTuple,
+      EntityRegistryUpdatedEvent.OutputTuple,
+      EntityRegistryUpdatedEvent.OutputObject
+    >;
+    EntityRegistryUpdated: TypedContractEvent<
+      EntityRegistryUpdatedEvent.InputTuple,
+      EntityRegistryUpdatedEvent.OutputTuple,
+      EntityRegistryUpdatedEvent.OutputObject
+    >;
+
+    "EventRegistryUpdated(address)": TypedContractEvent<
+      EventRegistryUpdatedEvent.InputTuple,
+      EventRegistryUpdatedEvent.OutputTuple,
+      EventRegistryUpdatedEvent.OutputObject
+    >;
+    EventRegistryUpdated: TypedContractEvent<
+      EventRegistryUpdatedEvent.InputTuple,
+      EventRegistryUpdatedEvent.OutputTuple,
+      EventRegistryUpdatedEvent.OutputObject
+    >;
+
     "GateConfigured(address,address,address)": TypedContractEvent<
       GateConfiguredEvent.InputTuple,
       GateConfiguredEvent.OutputTuple,
@@ -380,6 +576,17 @@ export interface ComplianceGate extends BaseContract {
       RoleAuthorityUpdatedEvent.InputTuple,
       RoleAuthorityUpdatedEvent.OutputTuple,
       RoleAuthorityUpdatedEvent.OutputObject
+    >;
+
+    "UBORegistryUpdated(address)": TypedContractEvent<
+      UBORegistryUpdatedEvent.InputTuple,
+      UBORegistryUpdatedEvent.OutputTuple,
+      UBORegistryUpdatedEvent.OutputObject
+    >;
+    UBORegistryUpdated: TypedContractEvent<
+      UBORegistryUpdatedEvent.InputTuple,
+      UBORegistryUpdatedEvent.OutputTuple,
+      UBORegistryUpdatedEvent.OutputObject
     >;
   };
 }

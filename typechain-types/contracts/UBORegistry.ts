@@ -3,6 +3,7 @@
 /* eslint-disable */
 import type {
   BaseContract,
+  BigNumberish,
   BytesLike,
   FunctionFragment,
   Result,
@@ -27,15 +28,15 @@ export interface UBORegistryInterface extends Interface {
     nameOrSignature:
       | "COMPLIANCE_ADMIN"
       | "DEFAULT_ADMIN_ROLE"
-      | "declarationOf"
       | "declareUBO"
       | "getRoleAdmin"
       | "grantRole"
       | "hasRole"
+      | "issuerOf"
       | "renounceRole"
       | "revokeRole"
       | "supportsInterface"
-      | "updateUBO"
+      | "uboOf"
       | "updatedAtOf"
   ): FunctionFragment;
 
@@ -45,7 +46,6 @@ export interface UBORegistryInterface extends Interface {
       | "RoleGranted"
       | "RoleRevoked"
       | "UBODeclared"
-      | "UBOUpdated"
   ): EventFragment;
 
   encodeFunctionData(
@@ -55,10 +55,6 @@ export interface UBORegistryInterface extends Interface {
   encodeFunctionData(
     functionFragment: "DEFAULT_ADMIN_ROLE",
     values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "declarationOf",
-    values: [AddressLike]
   ): string;
   encodeFunctionData(
     functionFragment: "declareUBO",
@@ -77,6 +73,10 @@ export interface UBORegistryInterface extends Interface {
     values: [BytesLike, AddressLike]
   ): string;
   encodeFunctionData(
+    functionFragment: "issuerOf",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
     functionFragment: "renounceRole",
     values: [BytesLike, AddressLike]
   ): string;
@@ -88,10 +88,7 @@ export interface UBORegistryInterface extends Interface {
     functionFragment: "supportsInterface",
     values: [BytesLike]
   ): string;
-  encodeFunctionData(
-    functionFragment: "updateUBO",
-    values: [AddressLike, BytesLike]
-  ): string;
+  encodeFunctionData(functionFragment: "uboOf", values: [AddressLike]): string;
   encodeFunctionData(
     functionFragment: "updatedAtOf",
     values: [AddressLike]
@@ -105,10 +102,6 @@ export interface UBORegistryInterface extends Interface {
     functionFragment: "DEFAULT_ADMIN_ROLE",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "declarationOf",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "declareUBO", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getRoleAdmin",
@@ -116,6 +109,7 @@ export interface UBORegistryInterface extends Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "grantRole", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "hasRole", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "issuerOf", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "renounceRole",
     data: BytesLike
@@ -125,7 +119,7 @@ export interface UBORegistryInterface extends Interface {
     functionFragment: "supportsInterface",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "updateUBO", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "uboOf", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "updatedAtOf",
     data: BytesLike
@@ -191,24 +185,23 @@ export namespace RoleRevokedEvent {
 }
 
 export namespace UBODeclaredEvent {
-  export type InputTuple = [wallet: AddressLike, declarationHash: BytesLike];
-  export type OutputTuple = [wallet: string, declarationHash: string];
+  export type InputTuple = [
+    entityWallet: AddressLike,
+    uboHash: BytesLike,
+    issuer: AddressLike,
+    updatedAt: BigNumberish
+  ];
+  export type OutputTuple = [
+    entityWallet: string,
+    uboHash: string,
+    issuer: string,
+    updatedAt: bigint
+  ];
   export interface OutputObject {
-    wallet: string;
-    declarationHash: string;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace UBOUpdatedEvent {
-  export type InputTuple = [wallet: AddressLike, declarationHash: BytesLike];
-  export type OutputTuple = [wallet: string, declarationHash: string];
-  export interface OutputObject {
-    wallet: string;
-    declarationHash: string;
+    entityWallet: string;
+    uboHash: string;
+    issuer: string;
+    updatedAt: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -263,10 +256,8 @@ export interface UBORegistry extends BaseContract {
 
   DEFAULT_ADMIN_ROLE: TypedContractMethod<[], [string], "view">;
 
-  declarationOf: TypedContractMethod<[wallet: AddressLike], [string], "view">;
-
   declareUBO: TypedContractMethod<
-    [wallet: AddressLike, declarationHash: BytesLike],
+    [entityWallet: AddressLike, uboHash: BytesLike],
     [void],
     "nonpayable"
   >;
@@ -284,6 +275,8 @@ export interface UBORegistry extends BaseContract {
     [boolean],
     "view"
   >;
+
+  issuerOf: TypedContractMethod<[entityWallet: AddressLike], [string], "view">;
 
   renounceRole: TypedContractMethod<
     [role: BytesLike, account: AddressLike],
@@ -303,13 +296,13 @@ export interface UBORegistry extends BaseContract {
     "view"
   >;
 
-  updateUBO: TypedContractMethod<
-    [wallet: AddressLike, declarationHash: BytesLike],
-    [void],
-    "nonpayable"
-  >;
+  uboOf: TypedContractMethod<[entityWallet: AddressLike], [string], "view">;
 
-  updatedAtOf: TypedContractMethod<[wallet: AddressLike], [bigint], "view">;
+  updatedAtOf: TypedContractMethod<
+    [entityWallet: AddressLike],
+    [bigint],
+    "view"
+  >;
 
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
@@ -322,12 +315,9 @@ export interface UBORegistry extends BaseContract {
     nameOrSignature: "DEFAULT_ADMIN_ROLE"
   ): TypedContractMethod<[], [string], "view">;
   getFunction(
-    nameOrSignature: "declarationOf"
-  ): TypedContractMethod<[wallet: AddressLike], [string], "view">;
-  getFunction(
     nameOrSignature: "declareUBO"
   ): TypedContractMethod<
-    [wallet: AddressLike, declarationHash: BytesLike],
+    [entityWallet: AddressLike, uboHash: BytesLike],
     [void],
     "nonpayable"
   >;
@@ -349,6 +339,9 @@ export interface UBORegistry extends BaseContract {
     "view"
   >;
   getFunction(
+    nameOrSignature: "issuerOf"
+  ): TypedContractMethod<[entityWallet: AddressLike], [string], "view">;
+  getFunction(
     nameOrSignature: "renounceRole"
   ): TypedContractMethod<
     [role: BytesLike, account: AddressLike],
@@ -366,15 +359,11 @@ export interface UBORegistry extends BaseContract {
     nameOrSignature: "supportsInterface"
   ): TypedContractMethod<[interfaceId: BytesLike], [boolean], "view">;
   getFunction(
-    nameOrSignature: "updateUBO"
-  ): TypedContractMethod<
-    [wallet: AddressLike, declarationHash: BytesLike],
-    [void],
-    "nonpayable"
-  >;
+    nameOrSignature: "uboOf"
+  ): TypedContractMethod<[entityWallet: AddressLike], [string], "view">;
   getFunction(
     nameOrSignature: "updatedAtOf"
-  ): TypedContractMethod<[wallet: AddressLike], [bigint], "view">;
+  ): TypedContractMethod<[entityWallet: AddressLike], [bigint], "view">;
 
   getEvent(
     key: "RoleAdminChanged"
@@ -403,13 +392,6 @@ export interface UBORegistry extends BaseContract {
     UBODeclaredEvent.InputTuple,
     UBODeclaredEvent.OutputTuple,
     UBODeclaredEvent.OutputObject
-  >;
-  getEvent(
-    key: "UBOUpdated"
-  ): TypedContractEvent<
-    UBOUpdatedEvent.InputTuple,
-    UBOUpdatedEvent.OutputTuple,
-    UBOUpdatedEvent.OutputObject
   >;
 
   filters: {
@@ -446,7 +428,7 @@ export interface UBORegistry extends BaseContract {
       RoleRevokedEvent.OutputObject
     >;
 
-    "UBODeclared(address,bytes32)": TypedContractEvent<
+    "UBODeclared(address,bytes32,address,uint64)": TypedContractEvent<
       UBODeclaredEvent.InputTuple,
       UBODeclaredEvent.OutputTuple,
       UBODeclaredEvent.OutputObject
@@ -455,17 +437,6 @@ export interface UBORegistry extends BaseContract {
       UBODeclaredEvent.InputTuple,
       UBODeclaredEvent.OutputTuple,
       UBODeclaredEvent.OutputObject
-    >;
-
-    "UBOUpdated(address,bytes32)": TypedContractEvent<
-      UBOUpdatedEvent.InputTuple,
-      UBOUpdatedEvent.OutputTuple,
-      UBOUpdatedEvent.OutputObject
-    >;
-    UBOUpdated: TypedContractEvent<
-      UBOUpdatedEvent.InputTuple,
-      UBOUpdatedEvent.OutputTuple,
-      UBOUpdatedEvent.OutputObject
     >;
   };
 }

@@ -10,5 +10,5 @@
     "outDir": "dist",
     "skipLibCheck": true
   },
-  "include": ["hardhat.config.*", "scripts", "test", "contracts", "backend/api/**/*.ts"]
+  "include": ["hardhat.config.*", "scripts", "test", "contracts", "backend/**/*.ts"]
 }
