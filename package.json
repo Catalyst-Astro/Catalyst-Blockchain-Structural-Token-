@@ -11,7 +11,8 @@
     "compile": "hardhat compile",
     "test": "hardhat test",
     "lint": "echo \"add eslint/solhint here\" && exit 0",
-    "typecheck": "tsc -v >/dev/null 2>&1 || echo \"no tsconfig\""
+    "typecheck": "tsc -v >/dev/null 2>&1 || echo \"no tsconfig\"",
+    "api:identity": "ts-node backend/api/server.ts"
 
   },
   "keywords": [],
@@ -22,12 +23,16 @@
     "@nomicfoundation/hardhat-toolbox": "^6.1.0",
     "@nomicfoundation/hardhat-verify": "^2.1.1",
     "@openzeppelin/contracts": "^4.9.6",
+    "@types/express": "^4.17.21",
     "@types/node": "^24.5.2",
     "dotenv": "^17.2.2",
     "ethers": "^6.8.1",
     "hardhat": "^2.26.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
   },
   "overrides": {
     "axios": "^1.12.0",

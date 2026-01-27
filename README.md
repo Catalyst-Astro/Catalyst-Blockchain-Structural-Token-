@@ -1,13 +1,12 @@
-
-# Catalyst Blockchain Structural Token
+# Catalyst Blockchain Structural Token (CBST)
 
 ```
  ██████╗ █████╗ ████████╗ █████╗ ██╗   ██╗██╗     ██╗███████╗████████╗
 ██╔════╝██╔══██╗╚══██╔══╝██╔══██╗██║   ██║██║     ██║██╔════╝╚══██╔══╝
-██║     ███████║   ██║   ███████║██║   ██║██║     ██║███████╗   ██║   
-██║     ██╔══██║   ██║   ██╔══██║██║   ██║██║     ██║╚════██║   ██║   
-╚██████╗██║  ██║   ██║   ██║  ██║╚██████╔╝███████╗██║███████║   ██║   
- ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝╚══════╝   ╚═╝   
+██║     ███████║   ██║   ███████║██║   ██║██║     ██║███████╗   ██║
+██║     ██╔══██║   ██║   ██╔══██║██║   ██║██║     ██║╚════██║   ██║
+╚██████╗██║  ██║   ██║   ██║  ██║╚██████╔╝███████╗██║███████║   ██║
+ ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝╚══════╝   ╚═╝
 ```
 
 > **Catalyst Blockchain Structural Token (CBST)**
@@ -17,81 +16,74 @@
 
 ## Filosofía
 
-Este repositorio no intenta ser un *producto terminado*. Es un **laboratorio de arquitectura**: piezas pequeñas, legibles y deliberadamente desacopladas que permiten estudiar **cómo** y **por qué** funciona una blockchain.
-
-Nada está escondido detrás de abstracciones innecesarias. Si algo ocurre, se puede rastrear hasta el socket, el hash, la firma o la decisión de consenso que lo originó.
+Este repositorio no intenta ser un producto terminado. Es un **laboratorio de arquitectura**: piezas pequeñas, legibles y deliberadamente desacopladas que permiten estudiar **cómo** y **por qué** funciona una blockchain.
 
 Pensado para:
 
-* Arquitectos de sistemas distribuidos
-* Investigadores en criptografía aplicada
-* Diseñadores de gobernanza on‑chain
-* Ingenieros que prefieren entender el motor antes de usar el tablero
+- Arquitectos de sistemas distribuidos
+- Investigadores en criptografía aplicada
+- Diseñadores de gobernanza on‑chain
+- Ingenieros que prefieren entender el motor antes de usar el tablero
 
 ---
 
-## Qué contiene
+## Qué incluye (actualizado)
 
-### ⛓ Blockchain
+### ⛓ Core Blockchain
 
-* Nodos completos por TCP (P2P)
-* Nodos SPV (verificación ligera)
-* Estructuras de bloque y cadena mínimas
-* Minería simplificada y validación
+- Nodos completos P2P sobre TCP y red HTTP auxiliar.
+- Nodos SPV y verificación ligera.
+- Estructuras de bloque/tx minimalistas con validación y minería simplificada.
+- Ledger narrativo y auditor automático de transacciones.
 
-### 🔐 Criptografía
+### 🔐 Criptografía aplicada
 
-* Wallets (ECDSA / claves asimétricas)
-* Árboles de Merkle
-* Multisig
-* Pruebas de conocimiento cero (Schnorr)
-* Firmas ciegas (blind signatures)
-* Utilidades de hashing y cifrado
+- Wallets ECDSA y utilidades de hashing.
+- Árboles de Merkle y firmas Schnorr.
+- Multisig, firmas ciegas y utilidades de cifrado.
 
-### 🧠 Consenso & Gobernanza
+### 🧠 Consenso & gobernanza
 
-* Controlador de consenso conmutables:
-
-  * PoW
-  * PoA
-  * BFT
-  * Simbólico / narrativo
-* Auditor automático de transacciones
-* Ledger narrativo para trazabilidad semántica
+- Controlador de consenso conmutables: PoW, PoA, BFT y variantes simbólicas.
+- Componentes de gobernanza para DAO, auditoría y trazabilidad semántica.
 
 ### 📜 Smart Contracts
 
-* Contratos Solidity (Hardhat)
-* ERC‑20 extendidos
-* DAO básica
-* Bridges y registries
+- Solidity + Hardhat.
+- ERC‑20 extendidos, DAO básica, bridges y registries.
+- Compatibilidad con OpenZeppelin 5.x.
 
-### 🖥 Interfaces
+### 🖥 Interfaces y apps
 
-* API Flask / REST
-* Dashboard GTK (Adwaita)
-* CLI de demostración estructural
+- API Flask/REST y panel FastAPI (dashboard).
+- Dashboard GTK de escritorio.
+- Dapp web (`catalyst-dapp`).
+- Cliente móvil experimental (React Native + Expo).
 
 ---
 
 ## Estructura del repositorio
 
+```
 auditor/                 Auditoría automática de transacciones
 blockchain/              Nodo completo y SPV (sockets TCP)
 catalyst/                Bridge e interoperabilidad crypto
+catalyst-dapp/           Dapp web experimental
 consensus/               Controlador de consenso intercambiable
 contracts/               Smart contracts Solidity (ERC‑20, DAO, bridge)
 crypto/                  Utilidades criptográficas
-narrative_memory/        Ledger narrativo (JSONL)
+dashboard/               UI/Panel de control
+docs/                    Documentación extendida
 network/                 Red HTTP de pares
+narrative_memory/        Ledger narrativo (JSONL)
 scripts/                 Scripts de pruebas y testnet
 simplechain/             Blockchain mínima expuesta vía HTTP
 src/cbst/                Wallet, Merkle, multisig, Schnorr
-src/structural_token/    Identidad y firmas ciegas
 src/fractalmanagergtk/   Dashboard GTK
+src/structural_token/    Identidad y firmas ciegas
 api/                     API Flask
-
-La documentación extendida vive en `docs/` y las pruebas en `tests/`.
+app/                     Core FastAPI (dashboard y endpoints)
+```
 
 ---
 
@@ -99,12 +91,14 @@ La documentación extendida vive en `docs/` y las pruebas en `tests/`.
 
 ### Requisitos
 
-* Python **3.10+**
-* Entorno virtual recomendado
+- Python **3.10+**
+- Entorno virtual recomendado
 
 ### Instalación
 
 ```bash
+python -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
@@ -116,7 +110,7 @@ python -m pytest -q
 
 ---
 
-## Ejemplos
+## Ejemplos de ejecución
 
 ### Nodo completo (P2P por sockets)
 
@@ -144,9 +138,33 @@ python -m unittest tests.test_audit
 
 ---
 
-## Smart Contracts
+## Catalyst Blockchain Core (FastAPI)
 
-El directorio `contracts/` está configurado para **Hardhat**.
+Dashboard modular y API de estado del core blockchain.
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn app.api.main:app --host 0.0.0.0 --port 8000
+```
+
+Abrir:
+
+- http://127.0.0.1:8000/dashboard
+- http://127.0.0.1:8000/api/status
+
+### Variables de entorno
+
+- `APP_ENV` (dev/staging/prod)
+- `LOG_LEVEL` (INFO/DEBUG)
+- `DATA_BACKEND` (memory/sqlite)
+- `EVENTS_LIMIT` (default 50)
+- `MODULES` (lista separada por comas)
+
+---
+
+## Smart Contracts (Hardhat)
 
 ```bash
 npm install
@@ -155,11 +173,9 @@ npx hardhat compile
 
 Contratos clave:
 
-* `CatalystToken.sol`
-* `FractalDAO.sol`
-* `InflationaryRewardToken.sol`
-
-Basados en **OpenZeppelin 5.x**.
+- `CatalystToken.sol`
+- `FractalDAO.sol`
+- `InflationaryRewardToken.sol`
 
 ---
 
@@ -170,7 +186,6 @@ Cliente móvil experimental en **React Native + Expo**.
 ```bash
 cd FractalApp
 npm install
-npx hardhat compile
 npm run start
 ```
 
@@ -186,29 +201,40 @@ npx expo build:android -t apk
 
 Aplicación de escritorio para gestión de tokens y DAO.
 
-   bash
+```bash
 pyinstaller fractal_manager.py --onefile --noconsole --icon=fractal.ico
+```
 
 Variables de entorno (`.env`):
 
+```
 PRIVATE_KEY=
-RPC_URL= http: //localhost: 8545
+RPC_URL=http://localhost:8545
 TOKEN_ADDRESS=
 DAO_CONTROLLER_ADDRESS=
+```
 
-## Advertencia honesta
+---
 
-Este repositorio **no** es un framework de producción.
-Es un **mapa anatómico**.
+## Deploy en Render
 
-Si lo usas para aprender, modificar, romper y volver a armar: funciona exactamente como fue diseñado.
+1. Push del repo a GitHub.
+2. Crear un Render Web Service.
+3. Usar `render.yaml` o configurar:
+   - Build: `pip install -r requirements.render.txt`
+   - Start: `uvicorn app.api.main:app --host 0.0.0.0 --port $PORT`
+4. Definir variables de entorno según el entorno.
+
+---
 
 ## Contribuciones
 
-* Mantén los módulos pequeños
-* Añade pruebas
-* Documenta la intención
-* No ocultes la complejidad: domestícala
+- Mantén los módulos pequeños.
+- Añade pruebas cuando introduzcas lógica crítica.
+- Documenta la intención y las decisiones de diseño.
+- No ocultes la complejidad: domestícala.
+
+---
 
 ## Licencia
 
@@ -216,37 +242,3 @@ MIT
 
 > *"La seguridad no es un producto. Es un proceso."*
 > — espíritu cypherpunk
-
----
-
-# Catalyst Blockchain Core (FastAPI)
-
-This repo includes a modular FastAPI dashboard for Catalyst Blockchain Core.
-
-## Quick start
-
-```bash
-python -m venv .venv
-.venv\\Scripts\\activate
-pip install -r requirements.txt
-uvicorn app.api.main:app --host 0.0.0.0 --port 8000
-```
-
-Open:
-- http://127.0.0.1:8000/dashboard
-- http://127.0.0.1:8000/api/status
-
-## Environment variables
-- `APP_ENV` (dev/staging/prod)
-- `LOG_LEVEL` (INFO/DEBUG)
-- `DATA_BACKEND` (memory/sqlite)
-- `EVENTS_LIMIT` (default 50)
-- `MODULES` (comma-separated module list)
-
-## Deploy to Render
-1) Push the repo to GitHub.
-2) Create a new Render Web Service.
-3) Use `render.yaml` or set:
-   - Build: `pip install -r requirements.render.txt`
-   - Start: `uvicorn app.api.main:app --host 0.0.0.0 --port $PORT`
-4) Set env vars as needed.

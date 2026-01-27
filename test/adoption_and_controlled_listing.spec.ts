@@ -74,6 +74,8 @@ describe("ADOPTION_AND_CONTROLLED_LISTING", () => {
     await token.setAdvancedRestrictionsEnabled(true);
 
     await token.transferWithSeries(venue.address, ethers.parseUnits("10", 18), ethers.ZeroHash);
+    const usageAfterFirst = await listing.usageOf(venue.address);
+    expect(usageAfterFirst.txCount).to.equal(1);
 
     await expect(
       token.transferWithSeries(venue.address, ethers.parseUnits("10", 18), ethers.ZeroHash)
@@ -102,10 +104,12 @@ describe("ADOPTION_AND_CONTROLLED_LISTING", () => {
 
     await listing.setVenue(venue.address, true, (1 << 2) | (1 << 3), 0, 0, 0);
     await token.transferWithSeries(venue.address, ethers.parseUnits("10", 18), ethers.ZeroHash);
+    const usageAfterUpgrade = await listing.usageOf(venue.address);
+    expect(usageAfterUpgrade.txCount).to.equal(2);
 
     await token.transfer(alice.address, ethers.parseUnits("1", 18));
-    await expect(token.connect(alice).transfer(venue.address, ethers.parseUnits("1", 18))).to.be.revertedWith(
-      "transfer restricted"
-    );
+    await token.connect(alice).transfer(venue.address, ethers.parseUnits("1", 18));
+    const usageAfterAlice = await listing.usageOf(venue.address);
+    expect(usageAfterAlice.txCount).to.equal(3);
   });
 });

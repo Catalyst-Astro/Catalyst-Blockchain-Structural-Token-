@@ -58,6 +58,22 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC20__factory>;
     getContractFactory(
+      name: "ERC721",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC721__factory>;
+    getContractFactory(
+      name: "IERC721Metadata",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC721Metadata__factory>;
+    getContractFactory(
+      name: "IERC721",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC721__factory>;
+    getContractFactory(
+      name: "IERC721Receiver",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC721Receiver__factory>;
+    getContractFactory(
       name: "EIP712",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.EIP712__factory>;
@@ -82,17 +98,61 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AccessControlLand__factory>;
     getContractFactory(
+      name: "AlertRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AlertRegistry__factory>;
+    getContractFactory(
+      name: "AMLScoringRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AMLScoringRegistry__factory>;
+    getContractFactory(
+      name: "AuditCheckpoint",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AuditCheckpoint__factory>;
+    getContractFactory(
       name: "AuditManager",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AuditManager__factory>;
+    getContractFactory(
+      name: "AutoActionPolicy",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AutoActionPolicy__factory>;
     getContractFactory(
       name: "BridgeVault",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.BridgeVault__factory>;
     getContractFactory(
+      name: "CatalystIdentitySBT",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.CatalystIdentitySBT__factory>;
+    getContractFactory(
+      name: "CatalystStandardRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.CatalystStandardRegistry__factory>;
+    getContractFactory(
       name: "CatalystToken",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.CatalystToken__factory>;
+    getContractFactory(
+      name: "ComplianceDAO",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ComplianceDAO__factory>;
+    getContractFactory(
+      name: "ComplianceExecutionBridge",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ComplianceExecutionBridge__factory>;
+    getContractFactory(
+      name: "ComplianceGate",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ComplianceGate__factory>;
+    getContractFactory(
+      name: "ComplianceVotingPolicy",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ComplianceVotingPolicy__factory>;
+    getContractFactory(
+      name: "CredentialRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.CredentialRegistry__factory>;
     getContractFactory(
       name: "DelegationRegistry",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -102,9 +162,25 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.DisclosureRegistry__factory>;
     getContractFactory(
+      name: "DistributionAuthorization",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.DistributionAuthorization__factory>;
+    getContractFactory(
       name: "DistributionRegistry",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.DistributionRegistry__factory>;
+    getContractFactory(
+      name: "DoctrineHash",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.DoctrineHash__factory>;
+    getContractFactory(
+      name: "EmergencyMode",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.EmergencyMode__factory>;
+    getContractFactory(
+      name: "EntityRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.EntityRegistry__factory>;
     getContractFactory(
       name: "ExecutionController",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -113,6 +189,10 @@ declare module "hardhat/types/runtime" {
       name: "ExecutionRegistry",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ExecutionRegistry__factory>;
+    getContractFactory(
+      name: "FiduciaryOracle",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.FiduciaryOracle__factory>;
     getContractFactory(
       name: "FractalDAO",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -125,6 +205,14 @@ declare module "hardhat/types/runtime" {
       name: "FractalToken",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.FractalToken__factory>;
+    getContractFactory(
+      name: "FreezePolicyRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.FreezePolicyRegistry__factory>;
+    getContractFactory(
+      name: "FreezeRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.FreezeRegistry__factory>;
     getContractFactory(
       name: "FRTAuditTrail",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -146,6 +234,18 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.GuardianModule__factory>;
     getContractFactory(
+      name: "IdentityPolicyRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IdentityPolicyRegistry__factory>;
+    getContractFactory(
+      name: "IdentityRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IdentityRegistry__factory>;
+    getContractFactory(
+      name: "ImplementationCertification",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ImplementationCertification__factory>;
+    getContractFactory(
       name: "InflationaryRewardToken",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.InflationaryRewardToken__factory>;
@@ -154,13 +254,29 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IAcceptanceRegistry__factory>;
     getContractFactory(
+      name: "IAutoActionPolicy",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IAutoActionPolicy__factory>;
+    getContractFactory(
       name: "IBridgeable",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IBridgeable__factory>;
     getContractFactory(
+      name: "ICatalystStandardRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ICatalystStandardRegistry__factory>;
+    getContractFactory(
+      name: "IComplianceGate",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IComplianceGate__factory>;
+    getContractFactory(
       name: "IDisclosureRegistry",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IDisclosureRegistry__factory>;
+    getContractFactory(
+      name: "IEntityRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IEntityRegistry__factory>;
     getContractFactory(
       name: "IERC20",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -174,17 +290,57 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IFractalToken__factory>;
     getContractFactory(
+      name: "IFreezeRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IFreezeRegistry__factory>;
+    getContractFactory(
       name: "IGovernanceControl",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IGovernanceControl__factory>;
+    getContractFactory(
+      name: "IIdentityPolicyRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IIdentityPolicyRegistry__factory>;
+    getContractFactory(
+      name: "IIdentitySBT",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IIdentitySBT__factory>;
+    getContractFactory(
+      name: "IInvestorEligibilityRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IInvestorEligibilityRegistry__factory>;
     getContractFactory(
       name: "ILandAuditable",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ILandAuditable__factory>;
     getContractFactory(
+      name: "IListingPolicyRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IListingPolicyRegistry__factory>;
+    getContractFactory(
+      name: "IOperationsRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IOperationsRegistry__factory>;
+    getContractFactory(
+      name: "IPrivateOfferingRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IPrivateOfferingRegistry__factory>;
+    getContractFactory(
       name: "IReputationAware",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IReputationAware__factory>;
+    getContractFactory(
+      name: "IRiskEnforcement",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IRiskEnforcement__factory>;
+    getContractFactory(
+      name: "IRiskPolicyRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IRiskPolicyRegistry__factory>;
+    getContractFactory(
+      name: "IRiskScoreRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IRiskScoreRegistry__factory>;
     getContractFactory(
       name: "ITokenUsePolicy",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -194,13 +350,57 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ITraceable__factory>;
     getContractFactory(
+      name: "ITransferRestrictionEngine",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ITransferRestrictionEngine__factory>;
+    getContractFactory(
+      name: "ITransferRestrictionPolicy",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ITransferRestrictionPolicy__factory>;
+    getContractFactory(
+      name: "ITravelRuleGate",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ITravelRuleGate__factory>;
+    getContractFactory(
       name: "ITrustRegistry",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ITrustRegistry__factory>;
     getContractFactory(
+      name: "IUBOComplianceGate",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IUBOComplianceGate__factory>;
+    getContractFactory(
+      name: "IWalletJurisdictionRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IWalletJurisdictionRegistry__factory>;
+    getContractFactory(
+      name: "IWhitelistPolicy",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IWhitelistPolicy__factory>;
+    getContractFactory(
       name: "IWhitelistRegistry",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IWhitelistRegistry__factory>;
+    getContractFactory(
+      name: "InvestorEligibilityRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.InvestorEligibilityRegistry__factory>;
+    getContractFactory(
+      name: "JurisdictionPolicyRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.JurisdictionPolicyRegistry__factory>;
+    getContractFactory(
+      name: "JurisdictionRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.JurisdictionRegistry__factory>;
+    getContractFactory(
+      name: "ListingPolicyRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ListingPolicyRegistry__factory>;
+    getContractFactory(
+      name: "LockupRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.LockupRegistry__factory>;
     getContractFactory(
       name: "AuthControl",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -210,9 +410,21 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.OnlyTokenHolder__factory>;
     getContractFactory(
+      name: "MonitoringConfigRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MonitoringConfigRegistry__factory>;
+    getContractFactory(
       name: "MultisigCouncil",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MultisigCouncil__factory>;
+    getContractFactory(
+      name: "OperationsRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.OperationsRegistry__factory>;
+    getContractFactory(
+      name: "PrivateOfferingRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.PrivateOfferingRegistry__factory>;
     getContractFactory(
       name: "ProposalValidator",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -222,13 +434,37 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ReputationGovernance__factory>;
     getContractFactory(
+      name: "RiskEnforcement",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.RiskEnforcement__factory>;
+    getContractFactory(
+      name: "RiskPolicyRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.RiskPolicyRegistry__factory>;
+    getContractFactory(
+      name: "RiskScoreRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.RiskScoreRegistry__factory>;
+    getContractFactory(
+      name: "RoleAuthority",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.RoleAuthority__factory>;
+    getContractFactory(
       name: "RollupAggregator",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.RollupAggregator__factory>;
     getContractFactory(
+      name: "SeriesRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SeriesRegistry__factory>;
+    getContractFactory(
       name: "SidechainBridge",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.SidechainBridge__factory>;
+    getContractFactory(
+      name: "SimulationOracle",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SimulationOracle__factory>;
     getContractFactory(
       name: "TokenUsePolicy",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -238,9 +474,53 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TraceRegistry__factory>;
     getContractFactory(
+      name: "TransferRestrictionEngine",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TransferRestrictionEngine__factory>;
+    getContractFactory(
+      name: "TransferRestrictionPolicy",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TransferRestrictionPolicy__factory>;
+    getContractFactory(
+      name: "TravelRuleConfigRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TravelRuleConfigRegistry__factory>;
+    getContractFactory(
+      name: "TravelRuleEvidenceRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TravelRuleEvidenceRegistry__factory>;
+    getContractFactory(
+      name: "TravelRuleGate",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TravelRuleGate__factory>;
+    getContractFactory(
       name: "TrustRegistry",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TrustRegistry__factory>;
+    getContractFactory(
+      name: "UBOAttestationRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.UBOAttestationRegistry__factory>;
+    getContractFactory(
+      name: "UBOComplianceGate",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.UBOComplianceGate__factory>;
+    getContractFactory(
+      name: "UBOGraphRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.UBOGraphRegistry__factory>;
+    getContractFactory(
+      name: "UBORegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.UBORegistry__factory>;
+    getContractFactory(
+      name: "WhitelistPolicy",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.WhitelistPolicy__factory>;
+    getContractFactory(
+      name: "WhitelistRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.WhitelistRegistry__factory>;
     getContractFactory(
       name: "WrappedFRT",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -306,6 +586,26 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.IERC20>;
     getContractAt(
+      name: "ERC721",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC721>;
+    getContractAt(
+      name: "IERC721Metadata",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC721Metadata>;
+    getContractAt(
+      name: "IERC721",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC721>;
+    getContractAt(
+      name: "IERC721Receiver",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC721Receiver>;
+    getContractAt(
       name: "EIP712",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -336,20 +636,75 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.AccessControlLand>;
     getContractAt(
+      name: "AlertRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AlertRegistry>;
+    getContractAt(
+      name: "AMLScoringRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AMLScoringRegistry>;
+    getContractAt(
+      name: "AuditCheckpoint",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AuditCheckpoint>;
+    getContractAt(
       name: "AuditManager",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.AuditManager>;
+    getContractAt(
+      name: "AutoActionPolicy",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AutoActionPolicy>;
     getContractAt(
       name: "BridgeVault",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.BridgeVault>;
     getContractAt(
+      name: "CatalystIdentitySBT",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.CatalystIdentitySBT>;
+    getContractAt(
+      name: "CatalystStandardRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.CatalystStandardRegistry>;
+    getContractAt(
       name: "CatalystToken",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.CatalystToken>;
+    getContractAt(
+      name: "ComplianceDAO",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ComplianceDAO>;
+    getContractAt(
+      name: "ComplianceExecutionBridge",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ComplianceExecutionBridge>;
+    getContractAt(
+      name: "ComplianceGate",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ComplianceGate>;
+    getContractAt(
+      name: "ComplianceVotingPolicy",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ComplianceVotingPolicy>;
+    getContractAt(
+      name: "CredentialRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.CredentialRegistry>;
     getContractAt(
       name: "DelegationRegistry",
       address: string | ethers.Addressable,
@@ -361,10 +716,30 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.DisclosureRegistry>;
     getContractAt(
+      name: "DistributionAuthorization",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.DistributionAuthorization>;
+    getContractAt(
       name: "DistributionRegistry",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.DistributionRegistry>;
+    getContractAt(
+      name: "DoctrineHash",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.DoctrineHash>;
+    getContractAt(
+      name: "EmergencyMode",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.EmergencyMode>;
+    getContractAt(
+      name: "EntityRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.EntityRegistry>;
     getContractAt(
       name: "ExecutionController",
       address: string | ethers.Addressable,
@@ -375,6 +750,11 @@ declare module "hardhat/types/runtime" {
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.ExecutionRegistry>;
+    getContractAt(
+      name: "FiduciaryOracle",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.FiduciaryOracle>;
     getContractAt(
       name: "FractalDAO",
       address: string | ethers.Addressable,
@@ -390,6 +770,16 @@ declare module "hardhat/types/runtime" {
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.FractalToken>;
+    getContractAt(
+      name: "FreezePolicyRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.FreezePolicyRegistry>;
+    getContractAt(
+      name: "FreezeRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.FreezeRegistry>;
     getContractAt(
       name: "FRTAuditTrail",
       address: string | ethers.Addressable,
@@ -416,6 +806,21 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.GuardianModule>;
     getContractAt(
+      name: "IdentityPolicyRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IdentityPolicyRegistry>;
+    getContractAt(
+      name: "IdentityRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IdentityRegistry>;
+    getContractAt(
+      name: "ImplementationCertification",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ImplementationCertification>;
+    getContractAt(
       name: "InflationaryRewardToken",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -426,15 +831,35 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.IAcceptanceRegistry>;
     getContractAt(
+      name: "IAutoActionPolicy",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IAutoActionPolicy>;
+    getContractAt(
       name: "IBridgeable",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.IBridgeable>;
     getContractAt(
+      name: "ICatalystStandardRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ICatalystStandardRegistry>;
+    getContractAt(
+      name: "IComplianceGate",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IComplianceGate>;
+    getContractAt(
       name: "IDisclosureRegistry",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.IDisclosureRegistry>;
+    getContractAt(
+      name: "IEntityRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IEntityRegistry>;
     getContractAt(
       name: "IERC20",
       address: string | ethers.Addressable,
@@ -451,20 +876,70 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.IFractalToken>;
     getContractAt(
+      name: "IFreezeRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IFreezeRegistry>;
+    getContractAt(
       name: "IGovernanceControl",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.IGovernanceControl>;
+    getContractAt(
+      name: "IIdentityPolicyRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IIdentityPolicyRegistry>;
+    getContractAt(
+      name: "IIdentitySBT",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IIdentitySBT>;
+    getContractAt(
+      name: "IInvestorEligibilityRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IInvestorEligibilityRegistry>;
     getContractAt(
       name: "ILandAuditable",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.ILandAuditable>;
     getContractAt(
+      name: "IListingPolicyRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IListingPolicyRegistry>;
+    getContractAt(
+      name: "IOperationsRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IOperationsRegistry>;
+    getContractAt(
+      name: "IPrivateOfferingRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IPrivateOfferingRegistry>;
+    getContractAt(
       name: "IReputationAware",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.IReputationAware>;
+    getContractAt(
+      name: "IRiskEnforcement",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IRiskEnforcement>;
+    getContractAt(
+      name: "IRiskPolicyRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IRiskPolicyRegistry>;
+    getContractAt(
+      name: "IRiskScoreRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IRiskScoreRegistry>;
     getContractAt(
       name: "ITokenUsePolicy",
       address: string | ethers.Addressable,
@@ -476,15 +951,70 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.ITraceable>;
     getContractAt(
+      name: "ITransferRestrictionEngine",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ITransferRestrictionEngine>;
+    getContractAt(
+      name: "ITransferRestrictionPolicy",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ITransferRestrictionPolicy>;
+    getContractAt(
+      name: "ITravelRuleGate",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ITravelRuleGate>;
+    getContractAt(
       name: "ITrustRegistry",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.ITrustRegistry>;
     getContractAt(
+      name: "IUBOComplianceGate",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IUBOComplianceGate>;
+    getContractAt(
+      name: "IWalletJurisdictionRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IWalletJurisdictionRegistry>;
+    getContractAt(
+      name: "IWhitelistPolicy",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IWhitelistPolicy>;
+    getContractAt(
       name: "IWhitelistRegistry",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.IWhitelistRegistry>;
+    getContractAt(
+      name: "InvestorEligibilityRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.InvestorEligibilityRegistry>;
+    getContractAt(
+      name: "JurisdictionPolicyRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.JurisdictionPolicyRegistry>;
+    getContractAt(
+      name: "JurisdictionRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.JurisdictionRegistry>;
+    getContractAt(
+      name: "ListingPolicyRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ListingPolicyRegistry>;
+    getContractAt(
+      name: "LockupRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.LockupRegistry>;
     getContractAt(
       name: "AuthControl",
       address: string | ethers.Addressable,
@@ -496,10 +1026,25 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.OnlyTokenHolder>;
     getContractAt(
+      name: "MonitoringConfigRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MonitoringConfigRegistry>;
+    getContractAt(
       name: "MultisigCouncil",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.MultisigCouncil>;
+    getContractAt(
+      name: "OperationsRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.OperationsRegistry>;
+    getContractAt(
+      name: "PrivateOfferingRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.PrivateOfferingRegistry>;
     getContractAt(
       name: "ProposalValidator",
       address: string | ethers.Addressable,
@@ -511,15 +1056,45 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.ReputationGovernance>;
     getContractAt(
+      name: "RiskEnforcement",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.RiskEnforcement>;
+    getContractAt(
+      name: "RiskPolicyRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.RiskPolicyRegistry>;
+    getContractAt(
+      name: "RiskScoreRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.RiskScoreRegistry>;
+    getContractAt(
+      name: "RoleAuthority",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.RoleAuthority>;
+    getContractAt(
       name: "RollupAggregator",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.RollupAggregator>;
     getContractAt(
+      name: "SeriesRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SeriesRegistry>;
+    getContractAt(
       name: "SidechainBridge",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.SidechainBridge>;
+    getContractAt(
+      name: "SimulationOracle",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SimulationOracle>;
     getContractAt(
       name: "TokenUsePolicy",
       address: string | ethers.Addressable,
@@ -531,10 +1106,65 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.TraceRegistry>;
     getContractAt(
+      name: "TransferRestrictionEngine",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TransferRestrictionEngine>;
+    getContractAt(
+      name: "TransferRestrictionPolicy",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TransferRestrictionPolicy>;
+    getContractAt(
+      name: "TravelRuleConfigRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TravelRuleConfigRegistry>;
+    getContractAt(
+      name: "TravelRuleEvidenceRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TravelRuleEvidenceRegistry>;
+    getContractAt(
+      name: "TravelRuleGate",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TravelRuleGate>;
+    getContractAt(
       name: "TrustRegistry",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.TrustRegistry>;
+    getContractAt(
+      name: "UBOAttestationRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.UBOAttestationRegistry>;
+    getContractAt(
+      name: "UBOComplianceGate",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.UBOComplianceGate>;
+    getContractAt(
+      name: "UBOGraphRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.UBOGraphRegistry>;
+    getContractAt(
+      name: "UBORegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.UBORegistry>;
+    getContractAt(
+      name: "WhitelistPolicy",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.WhitelistPolicy>;
+    getContractAt(
+      name: "WhitelistRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.WhitelistRegistry>;
     getContractAt(
       name: "WrappedFRT",
       address: string | ethers.Addressable,
@@ -591,6 +1221,22 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IERC20>;
     deployContract(
+      name: "ERC721",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ERC721>;
+    deployContract(
+      name: "IERC721Metadata",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IERC721Metadata>;
+    deployContract(
+      name: "IERC721",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IERC721>;
+    deployContract(
+      name: "IERC721Receiver",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IERC721Receiver>;
+    deployContract(
       name: "EIP712",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.EIP712>;
@@ -615,17 +1261,61 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.AccessControlLand>;
     deployContract(
+      name: "AlertRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.AlertRegistry>;
+    deployContract(
+      name: "AMLScoringRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.AMLScoringRegistry>;
+    deployContract(
+      name: "AuditCheckpoint",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.AuditCheckpoint>;
+    deployContract(
       name: "AuditManager",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.AuditManager>;
+    deployContract(
+      name: "AutoActionPolicy",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.AutoActionPolicy>;
     deployContract(
       name: "BridgeVault",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.BridgeVault>;
     deployContract(
+      name: "CatalystIdentitySBT",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.CatalystIdentitySBT>;
+    deployContract(
+      name: "CatalystStandardRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.CatalystStandardRegistry>;
+    deployContract(
       name: "CatalystToken",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.CatalystToken>;
+    deployContract(
+      name: "ComplianceDAO",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ComplianceDAO>;
+    deployContract(
+      name: "ComplianceExecutionBridge",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ComplianceExecutionBridge>;
+    deployContract(
+      name: "ComplianceGate",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ComplianceGate>;
+    deployContract(
+      name: "ComplianceVotingPolicy",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ComplianceVotingPolicy>;
+    deployContract(
+      name: "CredentialRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.CredentialRegistry>;
     deployContract(
       name: "DelegationRegistry",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -635,9 +1325,25 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.DisclosureRegistry>;
     deployContract(
+      name: "DistributionAuthorization",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.DistributionAuthorization>;
+    deployContract(
       name: "DistributionRegistry",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.DistributionRegistry>;
+    deployContract(
+      name: "DoctrineHash",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.DoctrineHash>;
+    deployContract(
+      name: "EmergencyMode",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.EmergencyMode>;
+    deployContract(
+      name: "EntityRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.EntityRegistry>;
     deployContract(
       name: "ExecutionController",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -646,6 +1352,10 @@ declare module "hardhat/types/runtime" {
       name: "ExecutionRegistry",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.ExecutionRegistry>;
+    deployContract(
+      name: "FiduciaryOracle",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.FiduciaryOracle>;
     deployContract(
       name: "FractalDAO",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -658,6 +1368,14 @@ declare module "hardhat/types/runtime" {
       name: "FractalToken",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.FractalToken>;
+    deployContract(
+      name: "FreezePolicyRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.FreezePolicyRegistry>;
+    deployContract(
+      name: "FreezeRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.FreezeRegistry>;
     deployContract(
       name: "FRTAuditTrail",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -679,6 +1397,18 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.GuardianModule>;
     deployContract(
+      name: "IdentityPolicyRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IdentityPolicyRegistry>;
+    deployContract(
+      name: "IdentityRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IdentityRegistry>;
+    deployContract(
+      name: "ImplementationCertification",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ImplementationCertification>;
+    deployContract(
       name: "InflationaryRewardToken",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.InflationaryRewardToken>;
@@ -687,13 +1417,29 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IAcceptanceRegistry>;
     deployContract(
+      name: "IAutoActionPolicy",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IAutoActionPolicy>;
+    deployContract(
       name: "IBridgeable",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IBridgeable>;
     deployContract(
+      name: "ICatalystStandardRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ICatalystStandardRegistry>;
+    deployContract(
+      name: "IComplianceGate",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IComplianceGate>;
+    deployContract(
       name: "IDisclosureRegistry",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IDisclosureRegistry>;
+    deployContract(
+      name: "IEntityRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IEntityRegistry>;
     deployContract(
       name: "IERC20",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -707,17 +1453,57 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IFractalToken>;
     deployContract(
+      name: "IFreezeRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IFreezeRegistry>;
+    deployContract(
       name: "IGovernanceControl",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IGovernanceControl>;
+    deployContract(
+      name: "IIdentityPolicyRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IIdentityPolicyRegistry>;
+    deployContract(
+      name: "IIdentitySBT",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IIdentitySBT>;
+    deployContract(
+      name: "IInvestorEligibilityRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IInvestorEligibilityRegistry>;
     deployContract(
       name: "ILandAuditable",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.ILandAuditable>;
     deployContract(
+      name: "IListingPolicyRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IListingPolicyRegistry>;
+    deployContract(
+      name: "IOperationsRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IOperationsRegistry>;
+    deployContract(
+      name: "IPrivateOfferingRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IPrivateOfferingRegistry>;
+    deployContract(
       name: "IReputationAware",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IReputationAware>;
+    deployContract(
+      name: "IRiskEnforcement",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IRiskEnforcement>;
+    deployContract(
+      name: "IRiskPolicyRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IRiskPolicyRegistry>;
+    deployContract(
+      name: "IRiskScoreRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IRiskScoreRegistry>;
     deployContract(
       name: "ITokenUsePolicy",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -727,13 +1513,57 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.ITraceable>;
     deployContract(
+      name: "ITransferRestrictionEngine",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ITransferRestrictionEngine>;
+    deployContract(
+      name: "ITransferRestrictionPolicy",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ITransferRestrictionPolicy>;
+    deployContract(
+      name: "ITravelRuleGate",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ITravelRuleGate>;
+    deployContract(
       name: "ITrustRegistry",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.ITrustRegistry>;
     deployContract(
+      name: "IUBOComplianceGate",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IUBOComplianceGate>;
+    deployContract(
+      name: "IWalletJurisdictionRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IWalletJurisdictionRegistry>;
+    deployContract(
+      name: "IWhitelistPolicy",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IWhitelistPolicy>;
+    deployContract(
       name: "IWhitelistRegistry",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IWhitelistRegistry>;
+    deployContract(
+      name: "InvestorEligibilityRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.InvestorEligibilityRegistry>;
+    deployContract(
+      name: "JurisdictionPolicyRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.JurisdictionPolicyRegistry>;
+    deployContract(
+      name: "JurisdictionRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.JurisdictionRegistry>;
+    deployContract(
+      name: "ListingPolicyRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ListingPolicyRegistry>;
+    deployContract(
+      name: "LockupRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.LockupRegistry>;
     deployContract(
       name: "AuthControl",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -743,9 +1573,21 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.OnlyTokenHolder>;
     deployContract(
+      name: "MonitoringConfigRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.MonitoringConfigRegistry>;
+    deployContract(
       name: "MultisigCouncil",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.MultisigCouncil>;
+    deployContract(
+      name: "OperationsRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.OperationsRegistry>;
+    deployContract(
+      name: "PrivateOfferingRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.PrivateOfferingRegistry>;
     deployContract(
       name: "ProposalValidator",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -755,13 +1597,37 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.ReputationGovernance>;
     deployContract(
+      name: "RiskEnforcement",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.RiskEnforcement>;
+    deployContract(
+      name: "RiskPolicyRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.RiskPolicyRegistry>;
+    deployContract(
+      name: "RiskScoreRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.RiskScoreRegistry>;
+    deployContract(
+      name: "RoleAuthority",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.RoleAuthority>;
+    deployContract(
       name: "RollupAggregator",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.RollupAggregator>;
     deployContract(
+      name: "SeriesRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.SeriesRegistry>;
+    deployContract(
       name: "SidechainBridge",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.SidechainBridge>;
+    deployContract(
+      name: "SimulationOracle",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.SimulationOracle>;
     deployContract(
       name: "TokenUsePolicy",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -771,9 +1637,53 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.TraceRegistry>;
     deployContract(
+      name: "TransferRestrictionEngine",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TransferRestrictionEngine>;
+    deployContract(
+      name: "TransferRestrictionPolicy",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TransferRestrictionPolicy>;
+    deployContract(
+      name: "TravelRuleConfigRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TravelRuleConfigRegistry>;
+    deployContract(
+      name: "TravelRuleEvidenceRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TravelRuleEvidenceRegistry>;
+    deployContract(
+      name: "TravelRuleGate",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TravelRuleGate>;
+    deployContract(
       name: "TrustRegistry",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.TrustRegistry>;
+    deployContract(
+      name: "UBOAttestationRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.UBOAttestationRegistry>;
+    deployContract(
+      name: "UBOComplianceGate",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.UBOComplianceGate>;
+    deployContract(
+      name: "UBOGraphRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.UBOGraphRegistry>;
+    deployContract(
+      name: "UBORegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.UBORegistry>;
+    deployContract(
+      name: "WhitelistPolicy",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.WhitelistPolicy>;
+    deployContract(
+      name: "WhitelistRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.WhitelistRegistry>;
     deployContract(
       name: "WrappedFRT",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -839,6 +1749,26 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IERC20>;
     deployContract(
+      name: "ERC721",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ERC721>;
+    deployContract(
+      name: "IERC721Metadata",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IERC721Metadata>;
+    deployContract(
+      name: "IERC721",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IERC721>;
+    deployContract(
+      name: "IERC721Receiver",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IERC721Receiver>;
+    deployContract(
       name: "EIP712",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -869,20 +1799,75 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.AccessControlLand>;
     deployContract(
+      name: "AlertRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.AlertRegistry>;
+    deployContract(
+      name: "AMLScoringRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.AMLScoringRegistry>;
+    deployContract(
+      name: "AuditCheckpoint",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.AuditCheckpoint>;
+    deployContract(
       name: "AuditManager",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.AuditManager>;
+    deployContract(
+      name: "AutoActionPolicy",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.AutoActionPolicy>;
     deployContract(
       name: "BridgeVault",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.BridgeVault>;
     deployContract(
+      name: "CatalystIdentitySBT",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.CatalystIdentitySBT>;
+    deployContract(
+      name: "CatalystStandardRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.CatalystStandardRegistry>;
+    deployContract(
       name: "CatalystToken",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.CatalystToken>;
+    deployContract(
+      name: "ComplianceDAO",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ComplianceDAO>;
+    deployContract(
+      name: "ComplianceExecutionBridge",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ComplianceExecutionBridge>;
+    deployContract(
+      name: "ComplianceGate",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ComplianceGate>;
+    deployContract(
+      name: "ComplianceVotingPolicy",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ComplianceVotingPolicy>;
+    deployContract(
+      name: "CredentialRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.CredentialRegistry>;
     deployContract(
       name: "DelegationRegistry",
       args: any[],
@@ -894,10 +1879,30 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.DisclosureRegistry>;
     deployContract(
+      name: "DistributionAuthorization",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.DistributionAuthorization>;
+    deployContract(
       name: "DistributionRegistry",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.DistributionRegistry>;
+    deployContract(
+      name: "DoctrineHash",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.DoctrineHash>;
+    deployContract(
+      name: "EmergencyMode",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.EmergencyMode>;
+    deployContract(
+      name: "EntityRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.EntityRegistry>;
     deployContract(
       name: "ExecutionController",
       args: any[],
@@ -908,6 +1913,11 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.ExecutionRegistry>;
+    deployContract(
+      name: "FiduciaryOracle",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.FiduciaryOracle>;
     deployContract(
       name: "FractalDAO",
       args: any[],
@@ -923,6 +1933,16 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.FractalToken>;
+    deployContract(
+      name: "FreezePolicyRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.FreezePolicyRegistry>;
+    deployContract(
+      name: "FreezeRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.FreezeRegistry>;
     deployContract(
       name: "FRTAuditTrail",
       args: any[],
@@ -949,6 +1969,21 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.GuardianModule>;
     deployContract(
+      name: "IdentityPolicyRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IdentityPolicyRegistry>;
+    deployContract(
+      name: "IdentityRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IdentityRegistry>;
+    deployContract(
+      name: "ImplementationCertification",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ImplementationCertification>;
+    deployContract(
       name: "InflationaryRewardToken",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -959,15 +1994,35 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IAcceptanceRegistry>;
     deployContract(
+      name: "IAutoActionPolicy",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IAutoActionPolicy>;
+    deployContract(
       name: "IBridgeable",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IBridgeable>;
     deployContract(
+      name: "ICatalystStandardRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ICatalystStandardRegistry>;
+    deployContract(
+      name: "IComplianceGate",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IComplianceGate>;
+    deployContract(
       name: "IDisclosureRegistry",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IDisclosureRegistry>;
+    deployContract(
+      name: "IEntityRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IEntityRegistry>;
     deployContract(
       name: "IERC20",
       args: any[],
@@ -984,20 +2039,70 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IFractalToken>;
     deployContract(
+      name: "IFreezeRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IFreezeRegistry>;
+    deployContract(
       name: "IGovernanceControl",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IGovernanceControl>;
+    deployContract(
+      name: "IIdentityPolicyRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IIdentityPolicyRegistry>;
+    deployContract(
+      name: "IIdentitySBT",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IIdentitySBT>;
+    deployContract(
+      name: "IInvestorEligibilityRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IInvestorEligibilityRegistry>;
     deployContract(
       name: "ILandAuditable",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.ILandAuditable>;
     deployContract(
+      name: "IListingPolicyRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IListingPolicyRegistry>;
+    deployContract(
+      name: "IOperationsRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IOperationsRegistry>;
+    deployContract(
+      name: "IPrivateOfferingRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IPrivateOfferingRegistry>;
+    deployContract(
       name: "IReputationAware",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IReputationAware>;
+    deployContract(
+      name: "IRiskEnforcement",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IRiskEnforcement>;
+    deployContract(
+      name: "IRiskPolicyRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IRiskPolicyRegistry>;
+    deployContract(
+      name: "IRiskScoreRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IRiskScoreRegistry>;
     deployContract(
       name: "ITokenUsePolicy",
       args: any[],
@@ -1009,15 +2114,70 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.ITraceable>;
     deployContract(
+      name: "ITransferRestrictionEngine",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ITransferRestrictionEngine>;
+    deployContract(
+      name: "ITransferRestrictionPolicy",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ITransferRestrictionPolicy>;
+    deployContract(
+      name: "ITravelRuleGate",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ITravelRuleGate>;
+    deployContract(
       name: "ITrustRegistry",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.ITrustRegistry>;
     deployContract(
+      name: "IUBOComplianceGate",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IUBOComplianceGate>;
+    deployContract(
+      name: "IWalletJurisdictionRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IWalletJurisdictionRegistry>;
+    deployContract(
+      name: "IWhitelistPolicy",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.IWhitelistPolicy>;
+    deployContract(
       name: "IWhitelistRegistry",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IWhitelistRegistry>;
+    deployContract(
+      name: "InvestorEligibilityRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.InvestorEligibilityRegistry>;
+    deployContract(
+      name: "JurisdictionPolicyRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.JurisdictionPolicyRegistry>;
+    deployContract(
+      name: "JurisdictionRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.JurisdictionRegistry>;
+    deployContract(
+      name: "ListingPolicyRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ListingPolicyRegistry>;
+    deployContract(
+      name: "LockupRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.LockupRegistry>;
     deployContract(
       name: "AuthControl",
       args: any[],
@@ -1029,10 +2189,25 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.OnlyTokenHolder>;
     deployContract(
+      name: "MonitoringConfigRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.MonitoringConfigRegistry>;
+    deployContract(
       name: "MultisigCouncil",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.MultisigCouncil>;
+    deployContract(
+      name: "OperationsRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.OperationsRegistry>;
+    deployContract(
+      name: "PrivateOfferingRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.PrivateOfferingRegistry>;
     deployContract(
       name: "ProposalValidator",
       args: any[],
@@ -1044,15 +2219,45 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.ReputationGovernance>;
     deployContract(
+      name: "RiskEnforcement",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.RiskEnforcement>;
+    deployContract(
+      name: "RiskPolicyRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.RiskPolicyRegistry>;
+    deployContract(
+      name: "RiskScoreRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.RiskScoreRegistry>;
+    deployContract(
+      name: "RoleAuthority",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.RoleAuthority>;
+    deployContract(
       name: "RollupAggregator",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.RollupAggregator>;
     deployContract(
+      name: "SeriesRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.SeriesRegistry>;
+    deployContract(
       name: "SidechainBridge",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.SidechainBridge>;
+    deployContract(
+      name: "SimulationOracle",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.SimulationOracle>;
     deployContract(
       name: "TokenUsePolicy",
       args: any[],
@@ -1064,10 +2269,65 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.TraceRegistry>;
     deployContract(
+      name: "TransferRestrictionEngine",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TransferRestrictionEngine>;
+    deployContract(
+      name: "TransferRestrictionPolicy",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TransferRestrictionPolicy>;
+    deployContract(
+      name: "TravelRuleConfigRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TravelRuleConfigRegistry>;
+    deployContract(
+      name: "TravelRuleEvidenceRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TravelRuleEvidenceRegistry>;
+    deployContract(
+      name: "TravelRuleGate",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.TravelRuleGate>;
+    deployContract(
       name: "TrustRegistry",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.TrustRegistry>;
+    deployContract(
+      name: "UBOAttestationRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.UBOAttestationRegistry>;
+    deployContract(
+      name: "UBOComplianceGate",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.UBOComplianceGate>;
+    deployContract(
+      name: "UBOGraphRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.UBOGraphRegistry>;
+    deployContract(
+      name: "UBORegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.UBORegistry>;
+    deployContract(
+      name: "WhitelistPolicy",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.WhitelistPolicy>;
+    deployContract(
+      name: "WhitelistRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.WhitelistRegistry>;
     deployContract(
       name: "WrappedFRT",
       args: any[],

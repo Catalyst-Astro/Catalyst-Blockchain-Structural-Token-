@@ -24,12 +24,6 @@ describe("OPERATIONS_AND_CONTINUOUS_AUDIT", () => {
     await operations.setJurisdiction(ethers.keccak256(ethers.toUtf8Bytes("MX")), true);
     expect(await operations.isJurisdictionActive(ethers.keccak256(ethers.toUtf8Bytes("MX")))).to.equal(true);
 
-    const checkpointId = await audit.recordCheckpoint.staticCall(
-      ethers.keccak256(ethers.toUtf8Bytes("AML")),
-      ethers.keccak256(ethers.toUtf8Bytes("EVIDENCE-1")),
-      1,
-      100
-    );
     await audit.recordCheckpoint(
       ethers.keccak256(ethers.toUtf8Bytes("AML")),
       ethers.keccak256(ethers.toUtf8Bytes("EVIDENCE-1")),
@@ -37,6 +31,8 @@ describe("OPERATIONS_AND_CONTINUOUS_AUDIT", () => {
       100
     );
 
+    const checkpointEvents = await audit.queryFilter(audit.filters.AuditCheckpointCreated());
+    const checkpointId = checkpointEvents[checkpointEvents.length - 1].args?.checkpointId as string;
     const checkpoint = await audit.checkpointOf(checkpointId);
     expect(checkpoint.scope).to.equal(ethers.keccak256(ethers.toUtf8Bytes("AML")));
 

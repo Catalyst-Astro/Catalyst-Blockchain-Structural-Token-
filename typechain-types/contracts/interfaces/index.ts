@@ -2,15 +2,35 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { IAcceptanceRegistry } from "./IAcceptanceRegistry";
+export type { IAutoActionPolicy } from "./IAutoActionPolicy";
 export type { IBridgeable } from "./IBridgeable";
+export type { ICatalystStandardRegistry } from "./ICatalystStandardRegistry";
+export type { IComplianceGate } from "./IComplianceGate";
 export type { IDisclosureRegistry } from "./IDisclosureRegistry";
 export type { IERC20 } from "./IERC20";
+export type { IEntityRegistry } from "./IEntityRegistry";
 export type { IExecutable } from "./IExecutable";
 export type { IFractalToken } from "./IFractalToken";
+export type { IFreezeRegistry } from "./IFreezeRegistry";
 export type { IGovernanceControl } from "./IGovernanceControl";
+export type { IIdentityPolicyRegistry } from "./IIdentityPolicyRegistry";
+export type { IIdentitySBT } from "./IIdentitySBT";
+export type { IInvestorEligibilityRegistry } from "./IInvestorEligibilityRegistry";
 export type { ILandAuditable } from "./ILandAuditable";
+export type { IListingPolicyRegistry } from "./IListingPolicyRegistry";
+export type { IOperationsRegistry } from "./IOperationsRegistry";
+export type { IPrivateOfferingRegistry } from "./IPrivateOfferingRegistry";
 export type { IReputationAware } from "./IReputationAware";
+export type { IRiskEnforcement } from "./IRiskEnforcement";
+export type { IRiskPolicyRegistry } from "./IRiskPolicyRegistry";
+export type { IRiskScoreRegistry } from "./IRiskScoreRegistry";
 export type { ITokenUsePolicy } from "./ITokenUsePolicy";
 export type { ITraceable } from "./ITraceable";
+export type { ITransferRestrictionEngine } from "./ITransferRestrictionEngine";
+export type { ITransferRestrictionPolicy } from "./ITransferRestrictionPolicy";
+export type { ITravelRuleGate } from "./ITravelRuleGate";
 export type { ITrustRegistry } from "./ITrustRegistry";
+export type { IUBOComplianceGate } from "./IUBOComplianceGate";
+export type { IWalletJurisdictionRegistry } from "./IWalletJurisdictionRegistry";
+export type { IWhitelistPolicy } from "./IWhitelistPolicy";
 export type { IWhitelistRegistry } from "./IWhitelistRegistry";
