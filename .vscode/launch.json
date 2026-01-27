@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Credential Registry GUI",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/fractal_manager/credential_registry_gui.py",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal"
+        }
+    ]
+}
