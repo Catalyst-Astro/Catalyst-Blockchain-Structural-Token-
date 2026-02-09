@@ -1,5 +1,6 @@
 import { app, BrowserWindow, ipcMain, shell } from 'electron';
 import path from 'path';
+import { spawn } from 'node:child_process';
 
 const isDev = !!process.env.ELECTRON_START_URL;
 
@@ -98,4 +99,58 @@ ipcMain.handle('sepolia:status', async () => {
     const message = e instanceof Error ? e.message : 'Unknown RPC error';
     return { ok: false, rpcUrl, error: message, at: Date.now() };
   }
+});
+
+ipcMain.handle('hefestos:run', async (_evt, payload: {
+  text?: string;
+  cycles?: number;
+  jsonl?: string;
+  na?: { I?: number; E?: number; R?: number; K?: number };
+  mele?: { M?: number; E?: number; L?: number; Et?: number };
+  hefestosPath?: string;
+}) => {
+  const {
+    text,
+    cycles,
+    jsonl,
+    na,
+    mele,
+    hefestosPath
+  } = payload ?? {};
+
+  const bin = hefestosPath || path.resolve(__dirname, '../../core/build/hefestos');
+  const args: string[] = [
+    'run',
+    '--text', text ?? '',
+    '--cycles', String(cycles ?? 1)
+  ];
+
+  if (jsonl) args.push('--jsonl', String(jsonl));
+  if (na) {
+    args.push('--na-I', String(na.I ?? 1));
+    args.push('--na-E', String(na.E ?? 1));
+    args.push('--na-R', String(na.R ?? 2));
+    args.push('--na-K', String(na.K ?? 2));
+  }
+  if (mele) {
+    args.push('--m-M', String(mele.M ?? 4));
+    args.push('--m-E', String(mele.E ?? 3));
+    args.push('--m-L', String(mele.L ?? 4));
+    args.push('--m-Et', String(mele.Et ?? 5));
+  }
+
+  const output = await new Promise<string>((resolve, reject) => {
+    const proc = spawn(bin, args, { shell: false });
+    let stdout = '';
+    let stderr = '';
+
+    proc.stdout.on('data', (data) => { stdout += data.toString(); });
+    proc.stderr.on('data', (data) => { stderr += data.toString(); });
+    proc.on('close', (code) => {
+      if (code === 0) resolve(stdout);
+      else reject(new Error(`hefestos exited ${code}: ${stderr || stdout}`));
+    });
+  });
+
+  return { ok: true, output };
 });
