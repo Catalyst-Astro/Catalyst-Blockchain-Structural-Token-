@@ -5,24 +5,24 @@
 @tailwind utilities;
 
 :root {
-  --bg: #f6f8fb;
-  --fg: #0e172a;
+  --bg: #f3f5f2;
+  --fg: #111827;
   --card: #ffffff;
-  --muted: #64748b;
-  --border: #dfe6f2;
-  --primary: #5565ff;
+  --muted: #5f6b7a;
+  --border: #d7dfd8;
+  --primary: #0f766e;
   --primary-foreground: #ffffff;
   --radius: 12px;
 }
 
 [data-theme='dark'] {
-  --bg: #0b1220;
-  --fg: #e2e8f0;
-  --card: #0f172a;
-  --muted: #94a3b8;
-  --border: #1f2a3c;
-  --primary: #7c8dff;
-  --primary-foreground: #0b1220;
+  --bg: #091217;
+  --fg: #dbe5e7;
+  --card: #0f1d24;
+  --muted: #8ba1a6;
+  --border: #1b3039;
+  --primary: #2dd4bf;
+  --primary-foreground: #062420;
   --radius: 12px;
 }
 
@@ -33,7 +33,10 @@
 body {
   margin: 0;
   font-family: 'Manrope', 'Segoe UI', system-ui, sans-serif;
-  background: var(--bg);
+  background:
+    radial-gradient(circle at 12% -10%, rgba(15, 118, 110, 0.16), transparent 42%),
+    radial-gradient(circle at 90% 0%, rgba(251, 191, 36, 0.12), transparent 36%),
+    var(--bg);
   color: var(--fg);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
@@ -74,6 +77,12 @@ h4 { font-size: 18px; line-height: 1.35; font-weight: 600; }
   top: 0;
   background: var(--card);
   z-index: 10;
+}
+
+.app-shell-background {
+  background:
+    radial-gradient(circle at 30% -30%, rgba(15, 118, 110, 0.1), transparent 45%),
+    radial-gradient(circle at 100% 20%, rgba(56, 189, 248, 0.08), transparent 35%);
 }
 
 .skeleton {

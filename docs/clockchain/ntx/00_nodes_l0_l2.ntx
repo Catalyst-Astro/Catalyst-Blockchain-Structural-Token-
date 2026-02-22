@@ -1,0 +1,81 @@
+﻿# NTX nodes: L0-L2
+
+NT:N#AX-001 [AX] L=0 kappa=H lang=na :
+  "Critical outputs require explicit upstream causes"
+  ports{in:[evidence], out:[causal_graph]} meta{owner:governance, ver:v0.1, tags:[determinism]}
+
+NT:N#AX-002 [AX] L=0 kappa=H lang=na :
+  "REQ and CTR must terminate in TST and MET"
+  ports{in:[trace_graph], out:[coverage_gate]} meta{owner:governance, ver:v0.1, tags:[traceability,nt-r2]}
+
+NT:N#AX-010 [AX] L=0 kappa=H lang=na :
+  "Antropia projects solutions into architecture before execution"
+  ports{in:[requirements], out:[design_projection]} meta{owner:architecture, ver:v0.1, tags:[antropia]}
+
+NT:N#AX-011 [AX] L=0 kappa=H lang=na :
+  "Apoiesis preserves unitary continuity end-to-end"
+  ports{in:[trace_path], out:[continuity_state]} meta{owner:architecture, ver:v0.1, tags:[apoiesis]}
+
+NT:N#POL-SEC-001 [POL] L=0 kappa=H lang=na :
+  "Security policy for deployment keys and network boundaries"
+  ports{in:[ops_controls], out:[security_requirements]} meta{owner:security, ver:v0.1, tags:[x-sec]}
+
+NT:N#POL-PERF-001 [POL] L=0 kappa=H lang=na :
+  "Performance policy for deploy latency and confirmation windows"
+  ports{in:[slo_targets], out:[perf_requirements]} meta{owner:ops, ver:v0.1, tags:[x-perf]}
+
+NT:N#POL-ANT-001 [POL] L=0 kappa=H lang=na :
+  "Antropia projection gate policy"
+  ports{in:[req_inventory], out:[projection_check]} meta{owner:governance, ver:v0.1, tags:[x-antropia]}
+
+NT:N#POL-APO-001 [POL] L=0 kappa=H lang=na :
+  "Apoiesis continuity gate policy"
+  ports{in:[trace_inventory], out:[continuity_check]} meta{owner:governance, ver:v0.1, tags:[x-apoiesis]}
+
+NT:N#ENT-NODE-001 [ENT] L=1 kappa=H lang=na :
+  "Node entity"
+  ports{in:[id], out:[typed_node]} meta{owner:architecture, ver:v0.1, tags:[ontology]}
+
+NT:N#ENT-SYN-001 [ENT] L=1 kappa=H lang=na :
+  "Synapse entity"
+  ports{in:[edge], out:[typed_edge]} meta{owner:architecture, ver:v0.1, tags:[ontology]}
+
+NT:N#ENT-CTR-001 [ENT] L=1 kappa=H lang=na :
+  "Contract entity"
+  ports{in:[interface], out:[contract_node]} meta{owner:architecture, ver:v0.1, tags:[ontology]}
+
+NT:N#ENT-TRC-001 [ENT] L=1 kappa=H lang=na :
+  "Trace entity"
+  ports{in:[path], out:[trace_node]} meta{owner:architecture, ver:v0.1, tags:[ontology]}
+
+NT:N#REQ-VAL-001 [REQ] L=2 kappa=H lang=na :
+  "Deploy value engine contracts deterministically per network"
+  ports{in:[network_config,private_key], out:[deployed_contracts]} meta{owner:core, ver:v0.1, tags:[value-engine,deploy]}
+
+NT:N#REQ-COMP-001 [REQ] L=2 kappa=H lang=na :
+  "Compile contracts and keep deploy artifacts consistent"
+  ports{in:[sources], out:[artifacts]} meta{owner:core, ver:v0.1, tags:[compile]}
+
+NT:N#REQ-OBS-001 [REQ] L=2 kappa=H lang=na :
+  "Capture deployment telemetry and evidence"
+  ports{in:[runtime_logs], out:[ops_metrics]} meta{owner:ops, ver:v0.1, tags:[observability]}
+
+NT:N#REQ-NET-001 [REQ] L=2 kappa=H lang=na :
+  "Validate chain identity before deployment"
+  ports{in:[rpc_endpoint], out:[validated_network]} meta{owner:ops, ver:v0.1, tags:[network,chainid]}
+
+NT:N#C-ANT-001 [C] L=2 kappa=M lang=na :
+  "Antropia reduces operational uncertainty by pre-projected design"
+  ports{in:[architecture], out:[risk_reduction]} meta{owner:architecture, ver:v0.1, tags:[antropia,claim]}
+
+NT:N#H-LAT-001 [H] L=2 kappa=M lang=na :
+  "Deploy latency variance decreases when chain-id validation is enforced"
+  ports{in:[network_checks], out:[latency_stability]} meta{owner:ops, ver:v0.1, tags:[latency,hypothesis]}
+
+NT:N#Q-OPS-001 [Q] L=2 kappa=M lang=na :
+  "Are all critical REQ and CTR nodes covered by TST and MET traces?"
+  ports{in:[trace_graph], out:[audit_question]} meta{owner:qa, ver:v0.1, tags:[nt-r2]}
+
+NT:N#Q-MAIN-001 [Q] L=2 kappa=M lang=na :
+  "Is mainnet gate blocked until P0 contradictions are resolved?"
+  ports{in:[risk_register], out:[gate_question]} meta{owner:governance, ver:v0.1, tags:[mainnet,gate]}

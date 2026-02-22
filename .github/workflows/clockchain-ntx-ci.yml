@@ -1,0 +1,39 @@
+name: Clockchain NTX CI
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - "docs/clockchain/**"
+      - "scripts/clockchain/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/clockchain-ntx-ci.yml"
+  pull_request:
+    paths:
+      - "docs/clockchain/**"
+      - "scripts/clockchain/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/clockchain-ntx-ci.yml"
+  workflow_dispatch:
+
+jobs:
+  ntx_validate:
+    name: Validate NTX Coverage (NT-R2)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit --fund=false
+
+      - name: Run NTX validation
+        run: npm run clockchain:validate

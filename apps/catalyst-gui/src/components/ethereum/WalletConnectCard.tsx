@@ -26,13 +26,15 @@ function shortAddress(addr: string): string {
 }
 
 const WalletConnectCard: React.FC = () => {
-  const projectId = import.meta.env.VITE_WC_PROJECT_ID as string | undefined;
+  const projectIdRaw = import.meta.env.VITE_WC_PROJECT_ID as string | undefined;
+  const placeholderIds = new Set(['TU_PROJECT_ID', 'your_walletconnect_project_id', 'YOUR_PROJECT_ID']);
+  const projectId = projectIdRaw && !placeholderIds.has(projectIdRaw.trim()) ? projectIdRaw.trim() : undefined;
   const sepoliaRpcUrl = (import.meta.env.VITE_SEPOLIA_RPC_URL as string | undefined) || 'https://rpc.sepolia.org';
 
   const [wcProvider, setWcProvider] = useState<EthereumProvider | null>(null);
   const [card, setCard] = useState<CardState>(() => {
     if (!projectId) {
-      return { state: 'empty', message: 'Missing VITE_WC_PROJECT_ID. Add it to apps/catalyst-gui/.env then restart.' };
+      return { state: 'empty', message: 'Missing VITE_WC_PROJECT_ID. Add it to root .env and restart.' };
     }
     return { state: 'empty', message: 'Not connected. Use Connect to link MetaMask (WalletConnect).' };
   });
@@ -72,7 +74,7 @@ const WalletConnectCard: React.FC = () => {
 
   const connect = useCallback(async () => {
     if (!projectId) {
-      setCard({ state: 'empty', message: 'Missing VITE_WC_PROJECT_ID. Add it to apps/catalyst-gui/.env then restart.' });
+      setCard({ state: 'empty', message: 'Missing VITE_WC_PROJECT_ID. Add it to root .env and restart.' });
       return;
     }
 
@@ -100,7 +102,7 @@ const WalletConnectCard: React.FC = () => {
     } finally {
       setWcProvider(null);
       if (!projectId) {
-        setCard({ state: 'empty', message: 'Missing VITE_WC_PROJECT_ID. Add it to apps/catalyst-gui/.env then restart.' });
+        setCard({ state: 'empty', message: 'Missing VITE_WC_PROJECT_ID. Add it to root .env and restart.' });
       } else {
         setCard({ state: 'empty', message: 'Disconnected.' });
       }
@@ -179,9 +181,11 @@ const WalletConnectCard: React.FC = () => {
     setTxHash(null);
     try {
       const signer = await provider.getSigner();
+      const destination = txTo?.trim() ? txTo.trim() : signer.address;
+      const amount = txAmount?.trim() ? txAmount.trim() : '0.001';
       const tx = await signer.sendTransaction({
-        to: txTo || signer.address,
-        value: parseEther(txAmount || '0.001')
+        to: destination,
+        value: parseEther(amount)
       });
       setTxHash(tx.hash);
       await tx.wait();
@@ -353,7 +357,7 @@ const WalletConnectCard: React.FC = () => {
                 disabled={sigStatus === 'signing'}
                 iconLeft={sigStatus === 'signing' ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden /> : <Signature className="h-4 w-4" aria-hidden />}
               >
-                {sigStatus === 'signing' ? 'Signing…' : 'Sign test message'}
+                {sigStatus === 'signing' ? 'Signing...' : 'Sign test message'}
               </Button>
               {sigValue && (
                 <p className="text-xs text-muted break-words">
@@ -376,7 +380,7 @@ const WalletConnectCard: React.FC = () => {
               />
               <div className="flex items-center gap-2">
                 <Button size="sm" variant="secondary" onClick={loadErc20Balance} disabled={erc20Loading}>
-                  {erc20Loading ? 'Checking…' : 'Check balance'}
+                  {erc20Loading ? 'Checking...' : 'Check balance'}
                 </Button>
                 {erc20Meta && <span className="text-xs text-muted">Symbol: {erc20Meta.symbol}</span>}
               </div>

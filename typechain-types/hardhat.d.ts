@@ -458,6 +458,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.PrivateOfferingRegistry__factory>;
     getContractFactory(
+      name: "ProjectRegistry",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ProjectRegistry__factory>;
+    getContractFactory(
       name: "ProposalValidator",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ProposalValidator__factory>;
@@ -493,6 +497,10 @@ declare module "hardhat/types/runtime" {
       name: "SeriesRegistry",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.SeriesRegistry__factory>;
+    getContractFactory(
+      name: "SettlementLog",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SettlementLog__factory>;
     getContractFactory(
       name: "SidechainBridge",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -534,6 +542,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TravelRuleGate__factory>;
     getContractFactory(
+      name: "Treasury",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Treasury__factory>;
+    getContractFactory(
       name: "TrustRegistry",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TrustRegistry__factory>;
@@ -553,6 +565,10 @@ declare module "hardhat/types/runtime" {
       name: "UBORegistry",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.UBORegistry__factory>;
+    getContractFactory(
+      name: "ValuationLedger",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ValuationLedger__factory>;
     getContractFactory(
       name: "WhitelistPolicy",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -1126,6 +1142,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.PrivateOfferingRegistry>;
     getContractAt(
+      name: "ProjectRegistry",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ProjectRegistry>;
+    getContractAt(
       name: "ProposalValidator",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -1170,6 +1191,11 @@ declare module "hardhat/types/runtime" {
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.SeriesRegistry>;
+    getContractAt(
+      name: "SettlementLog",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SettlementLog>;
     getContractAt(
       name: "SidechainBridge",
       address: string | ethers.Addressable,
@@ -1221,6 +1247,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.TravelRuleGate>;
     getContractAt(
+      name: "Treasury",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Treasury>;
+    getContractAt(
       name: "TrustRegistry",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -1245,6 +1276,11 @@ declare module "hardhat/types/runtime" {
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.UBORegistry>;
+    getContractAt(
+      name: "ValuationLedger",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ValuationLedger>;
     getContractAt(
       name: "WhitelistPolicy",
       address: string | ethers.Addressable,
@@ -1711,6 +1747,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.PrivateOfferingRegistry>;
     deployContract(
+      name: "ProjectRegistry",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ProjectRegistry>;
+    deployContract(
       name: "ProposalValidator",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.ProposalValidator>;
@@ -1746,6 +1786,10 @@ declare module "hardhat/types/runtime" {
       name: "SeriesRegistry",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.SeriesRegistry>;
+    deployContract(
+      name: "SettlementLog",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.SettlementLog>;
     deployContract(
       name: "SidechainBridge",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -1787,6 +1831,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.TravelRuleGate>;
     deployContract(
+      name: "Treasury",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.Treasury>;
+    deployContract(
       name: "TrustRegistry",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.TrustRegistry>;
@@ -1806,6 +1854,10 @@ declare module "hardhat/types/runtime" {
       name: "UBORegistry",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.UBORegistry>;
+    deployContract(
+      name: "ValuationLedger",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ValuationLedger>;
     deployContract(
       name: "WhitelistPolicy",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -2379,6 +2431,11 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.PrivateOfferingRegistry>;
     deployContract(
+      name: "ProjectRegistry",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ProjectRegistry>;
+    deployContract(
       name: "ProposalValidator",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -2423,6 +2480,11 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.SeriesRegistry>;
+    deployContract(
+      name: "SettlementLog",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.SettlementLog>;
     deployContract(
       name: "SidechainBridge",
       args: any[],
@@ -2474,6 +2536,11 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.TravelRuleGate>;
     deployContract(
+      name: "Treasury",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.Treasury>;
+    deployContract(
       name: "TrustRegistry",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -2498,6 +2565,11 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.UBORegistry>;
+    deployContract(
+      name: "ValuationLedger",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ValuationLedger>;
     deployContract(
       name: "WhitelistPolicy",
       args: any[],

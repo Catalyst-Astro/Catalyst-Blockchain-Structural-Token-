@@ -1,0 +1,81 @@
+﻿# NTX nodes: L3-L5
+
+NT:N#DEC-NET-001 [DEC] L=3 kappa=H lang=na :
+  "Use hardhat local node for deterministic local deployment"
+  ports{in:[risk,tooling], out:[local_network_mode]} meta{owner:core, ver:v0.1, tags:[network]}
+
+NT:N#DEC-PUB-001 [DEC] L=3 kappa=H lang=na :
+  "Use external RPC for sepolia and mainnet deployments"
+  ports{in:[provider_risk], out:[public_network_mode]} meta{owner:core, ver:v0.1, tags:[sepolia,mainnet]}
+
+NT:N#DEC-CI-001 [DEC] L=3 kappa=H lang=na :
+  "Fail CI when NT-R2 coverage is violated"
+  ports{in:[validation_output], out:[merge_gate]} meta{owner:qa, ver:v0.1, tags:[ci,gate]}
+
+NT:N#RSK-NET-001 [RSK] L=3 kappa=M lang=na :
+  "Deploying to wrong chain due to endpoint mismatch"
+  ports{in:[rpc_url], out:[network_incident]} meta{owner:ops, ver:v0.1, tags:[risk,network]}
+
+NT:N#RSK-COV-001 [RSK] L=3 kappa=M lang=na :
+  "Coverage drift between requirements and telemetry"
+  ports{in:[trace_graph], out:[coverage_incident]} meta{owner:qa, ver:v0.1, tags:[risk,coverage]}
+
+NT:N#CMP-DEPLOY-001 [CMP] L=4 kappa=H lang=na :
+  "Value engine deployment pipeline"
+  ports{in:[config], out:[transactions,addresses]} meta{owner:core, ver:v0.1, tags:[pipeline]}
+
+NT:N#CMP-NETCHECK-001 [CMP] L=4 kappa=H lang=na :
+  "Network identity validation component"
+  ports{in:[rpc_response], out:[chain_validation]} meta{owner:ops, ver:v0.1, tags:[chainid]}
+
+NT:N#CMP-OBS-001 [CMP] L=4 kappa=H lang=na :
+  "Deploy observability component"
+  ports{in:[logs], out:[metrics,evidence]} meta{owner:ops, ver:v0.1, tags:[observability]}
+
+NT:N#CTR-VAL-001 [CTR] L=4 kappa=H lang=na :
+  "Contract set: ProjectRegistry, ValuationLedger, Treasury, SettlementLog"
+  ports{in:[admin], out:[addresses]} meta{owner:core, ver:v0.1, tags:[contracts]}
+
+NT:N#CTR-NET-001 [CTR] L=4 kappa=H lang=na :
+  "Contract: network endpoint and chain-id checks"
+  ports{in:[rpc], out:[chain_id_ok]} meta{owner:ops, ver:v0.1, tags:[network]}
+
+NT:N#CTR-OBS-001 [CTR] L=4 kappa=H lang=na :
+  "Contract: telemetry and evidence generation"
+  ports{in:[runtime], out:[metrics,evidence]} meta{owner:ops, ver:v0.1, tags:[observability]}
+
+NT:N#ART-DEPLOY-TS-001 [ART] L=5 kappa=H lang=ts :
+  "scripts/deploy_value_engine.ts"
+  ports{in:[signer], out:[deployed_addresses]} meta{owner:core, ver:v0.1, tags:[hardhat,ethers]}
+
+NT:N#ART-HH-CONFIG-JS-001 [ART] L=5 kappa=H lang=js :
+  "scripts/hardhat.localnet.js"
+  ports{in:[network_inputs], out:[hardhat_network_config]} meta{owner:core, ver:v0.1, tags:[hardhat,config]}
+
+NT:N#ART-HH-CONFIG-PS1-001 [ART] L=5 kappa=H lang=ps1 :
+  "scripts/localnet/deploy-value-engine.ps1"
+  ports{in:[rpc,chain_id], out:[deploy_execution]} meta{owner:core, ver:v0.1, tags:[powershell,deploy]}
+
+NT:N#ART-CONTRACT-PRJ-001 [ART] L=5 kappa=H lang=sol :
+  "contracts/ProjectRegistry.sol"
+  ports{in:[admin], out:[registry_state]} meta{owner:core, ver:v0.1, tags:[solidity]}
+
+NT:N#ART-CONTRACT-VL-001 [ART] L=5 kappa=H lang=sol :
+  "contracts/ValuationLedger.sol"
+  ports{in:[oracle_input], out:[valuation_state]} meta{owner:core, ver:v0.1, tags:[solidity]}
+
+NT:N#ART-CONTRACT-TRY-001 [ART] L=5 kappa=H lang=sol :
+  "contracts/Treasury.sol"
+  ports{in:[asset_ops], out:[balance_state]} meta{owner:core, ver:v0.1, tags:[solidity]}
+
+NT:N#ART-CONTRACT-SL-001 [ART] L=5 kappa=H lang=sol :
+  "contracts/SettlementLog.sol"
+  ports{in:[settlement_event], out:[audit_state]} meta{owner:core, ver:v0.1, tags:[solidity]}
+
+NT:N#ART-VALIDATOR-JS-001 [ART] L=5 kappa=H lang=js :
+  "scripts/clockchain/validate-ntx.js"
+  ports{in:[ntx_files], out:[validation_report]} meta{owner:qa, ver:v0.1, tags:[validator,nt-r2]}
+
+NT:N#ART-CANVAS-JSON-001 [ART] L=5 kappa=M lang=json :
+  "docs/clockchain/canvas/clockchain_canvas_base.json"
+  ports{in:[ntx_graph], out:[canvas_layout]} meta{owner:architecture, ver:v0.1, tags:[canvas]}

@@ -11,7 +11,8 @@
     "typecheck": "tsc -v >/dev/null 2>&1 || echo \"no tsconfig\"",
     "api:identity": "ts-node backend/api/server.ts",
     "gui:dev": "npm --prefix apps/catalyst-gui run dev",
-    "gui:build": "npm --prefix apps/catalyst-gui run build"
+    "gui:build": "npm --prefix apps/catalyst-gui run build",
+    "clockchain:validate": "node scripts/clockchain/validate-ntx.js"
   },
   "keywords": [],
   "author": "",

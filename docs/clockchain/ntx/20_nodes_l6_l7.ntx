@@ -1,0 +1,41 @@
+﻿# NTX nodes: L6-L7
+
+NT:N#TST-DEPLOY-001 [TST] L=6 kappa=H lang=na :
+  "Deployment smoke test verifies non-zero addresses"
+  ports{in:[rpc], out:[pass_fail]} meta{owner:qa, ver:v0.1, tags:[smoke,deploy]}
+
+NT:N#TST-NET-001 [TST] L=6 kappa=H lang=na :
+  "Network test verifies endpoint and chain-id"
+  ports{in:[rpc_response], out:[pass_fail]} meta{owner:ops, ver:v0.1, tags:[network,test]}
+
+NT:N#TST-NTX-001 [TST] L=6 kappa=H lang=na :
+  "NT-R2 validator test"
+  ports{in:[ntx_files], out:[pass_fail]} meta{owner:qa, ver:v0.1, tags:[traceability,test]}
+
+NT:N#TST-CONTRACT-001 [TST] L=6 kappa=M lang=na :
+  "Contract compile/test gate"
+  ports{in:[solidity_sources], out:[pass_fail]} meta{owner:core, ver:v0.1, tags:[compile,test]}
+
+NT:N#MET-DEPLOY-001 [MET] L=7 kappa=H lang=na :
+  "Metrics: deploy_success_rate, tx_confirm_latency_p95"
+  ports{in:[deploy_logs], out:[deploy_slo]} meta{owner:ops, ver:v0.1, tags:[metric,deploy]}
+
+NT:N#MET-NET-001 [MET] L=7 kappa=H lang=na :
+  "Metrics: chain_id_mismatch_rate, rpc_reachability"
+  ports{in:[rpc_probe], out:[network_slo]} meta{owner:ops, ver:v0.1, tags:[metric,network]}
+
+NT:N#MET-NTX-001 [MET] L=7 kappa=H lang=na :
+  "Metrics: nt_r2_coverage_ratio"
+  ports{in:[validation_output], out:[coverage_slo]} meta{owner:qa, ver:v0.1, tags:[metric,nt-r2]}
+
+NT:N#EVD-CHAIN-001 [EVD] L=7 kappa=H lang=na :
+  "Evidence: validated chain id and endpoint"
+  ports{in:[rpc_reply], out:[signed_evidence]} meta{owner:ops, ver:v0.1, tags:[evidence,chainid]}
+
+NT:N#EVD-CI-001 [EVD] L=7 kappa=H lang=na :
+  "Evidence: CI validation logs and artifact"
+  ports{in:[ci_log], out:[audit_evidence]} meta{owner:qa, ver:v0.1, tags:[evidence,ci]}
+
+NT:N#EVD-DEPLOY-001 [EVD] L=7 kappa=M lang=na :
+  "Evidence: deployment output and addresses"
+  ports{in:[deploy_stdout], out:[audit_evidence]} meta{owner:core, ver:v0.1, tags:[evidence,deploy]}

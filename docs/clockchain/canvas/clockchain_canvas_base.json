@@ -1,0 +1,116 @@
+{
+  "specVersion": "nt-sz-canvas/v1",
+  "source": "docs/clockchain/ntx",
+  "layers": [
+    { "id": "L0", "name": "Epistemology", "index": 0 },
+    { "id": "L1", "name": "Ontology", "index": 1 },
+    { "id": "L2", "name": "Knowledge", "index": 2 },
+    { "id": "L3", "name": "Decisions", "index": 3 },
+    { "id": "L4", "name": "Architecture", "index": 4 },
+    { "id": "L5", "name": "Implementation", "index": 5 },
+    { "id": "L6", "name": "Verification", "index": 6 },
+    { "id": "L7", "name": "Operations", "index": 7 }
+  ],
+  "domains": [
+    { "id": "governance", "label": "Governance" },
+    { "id": "value_engine", "label": "Value Engine" },
+    { "id": "network", "label": "Network" },
+    { "id": "observability", "label": "Observability" },
+    { "id": "quality", "label": "Quality" },
+    { "id": "security", "label": "Security" }
+  ],
+  "ribbons": [
+    "X-Sec",
+    "X-Perf",
+    "X-Comp",
+    "X-L10n",
+    "X-QA",
+    "X-Data",
+    "X-Antropia",
+    "X-Apoiesis"
+  ],
+  "views": [
+    {
+      "id": "VIEW-EP",
+      "name": "Epistemic Graph",
+      "focusKinds": ["AX", "POL", "C", "H", "Q", "EVD"]
+    },
+    {
+      "id": "VIEW-ARCH",
+      "name": "Architecture",
+      "focusKinds": ["CMP", "CTR", "DEC", "RSK"]
+    },
+    {
+      "id": "VIEW-POLY",
+      "name": "Polyglot Overlay",
+      "focusKinds": ["CTR", "ART"]
+    },
+    {
+      "id": "VIEW-QA",
+      "name": "Coverage",
+      "focusKinds": ["REQ", "CTR", "TST", "MET"]
+    },
+    {
+      "id": "VIEW-RISK",
+      "name": "Risk and Gate",
+      "focusKinds": ["RSK", "DEC", "EVD"]
+    }
+  ],
+  "nodes": [
+    { "id": "AX-002", "kind": "AX", "layer": "L0", "domain": "governance", "x": 100, "y": 60 },
+    { "id": "AX-010", "kind": "AX", "layer": "L0", "domain": "governance", "x": 260, "y": 60 },
+    { "id": "AX-011", "kind": "AX", "layer": "L0", "domain": "governance", "x": 420, "y": 60 },
+    { "id": "POL-SEC-001", "kind": "POL", "layer": "L0", "domain": "security", "x": 580, "y": 60 },
+    { "id": "POL-PERF-001", "kind": "POL", "layer": "L0", "domain": "observability", "x": 740, "y": 60 },
+
+    { "id": "REQ-VAL-001", "kind": "REQ", "layer": "L2", "domain": "value_engine", "x": 180, "y": 230 },
+    { "id": "REQ-NET-001", "kind": "REQ", "layer": "L2", "domain": "network", "x": 340, "y": 230 },
+    { "id": "REQ-OBS-001", "kind": "REQ", "layer": "L2", "domain": "observability", "x": 500, "y": 230 },
+    { "id": "REQ-COMP-001", "kind": "REQ", "layer": "L2", "domain": "quality", "x": 660, "y": 230 },
+
+    { "id": "DEC-NET-001", "kind": "DEC", "layer": "L3", "domain": "network", "x": 340, "y": 320 },
+    { "id": "DEC-PUB-001", "kind": "DEC", "layer": "L3", "domain": "network", "x": 500, "y": 320 },
+    { "id": "DEC-CI-001", "kind": "DEC", "layer": "L3", "domain": "quality", "x": 660, "y": 320 },
+
+    { "id": "CTR-VAL-001", "kind": "CTR", "layer": "L4", "domain": "value_engine", "x": 180, "y": 410 },
+    { "id": "CTR-NET-001", "kind": "CTR", "layer": "L4", "domain": "network", "x": 340, "y": 410 },
+    { "id": "CTR-OBS-001", "kind": "CTR", "layer": "L4", "domain": "observability", "x": 500, "y": 410 },
+    { "id": "CMP-DEPLOY-001", "kind": "CMP", "layer": "L4", "domain": "value_engine", "x": 660, "y": 410 },
+
+    { "id": "ART-DEPLOY-TS-001", "kind": "ART", "layer": "L5", "domain": "value_engine", "x": 180, "y": 500 },
+    { "id": "ART-HH-CONFIG-JS-001", "kind": "ART", "layer": "L5", "domain": "network", "x": 340, "y": 500 },
+    { "id": "ART-HH-CONFIG-PS1-001", "kind": "ART", "layer": "L5", "domain": "network", "x": 500, "y": 500 },
+    { "id": "ART-VALIDATOR-JS-001", "kind": "ART", "layer": "L5", "domain": "quality", "x": 660, "y": 500 },
+
+    { "id": "TST-DEPLOY-001", "kind": "TST", "layer": "L6", "domain": "quality", "x": 180, "y": 590 },
+    { "id": "TST-NET-001", "kind": "TST", "layer": "L6", "domain": "quality", "x": 340, "y": 590 },
+    { "id": "TST-NTX-001", "kind": "TST", "layer": "L6", "domain": "quality", "x": 500, "y": 590 },
+    { "id": "TST-CONTRACT-001", "kind": "TST", "layer": "L6", "domain": "quality", "x": 660, "y": 590 },
+
+    { "id": "MET-DEPLOY-001", "kind": "MET", "layer": "L7", "domain": "observability", "x": 180, "y": 680 },
+    { "id": "MET-NET-001", "kind": "MET", "layer": "L7", "domain": "observability", "x": 340, "y": 680 },
+    { "id": "MET-NTX-001", "kind": "MET", "layer": "L7", "domain": "observability", "x": 500, "y": 680 },
+    { "id": "EVD-CI-001", "kind": "EVD", "layer": "L7", "domain": "quality", "x": 660, "y": 680 }
+  ],
+  "edges": [
+    { "id": "S-100", "from": "REQ-VAL-001", "to": "TST-DEPLOY-001", "type": "TRACE", "weight": 0.9 },
+    { "id": "S-101", "from": "REQ-VAL-001", "to": "MET-DEPLOY-001", "type": "TRACE", "weight": 0.88 },
+    { "id": "S-106", "from": "REQ-NET-001", "to": "TST-NET-001", "type": "TRACE", "weight": 0.93 },
+    { "id": "S-107", "from": "REQ-NET-001", "to": "MET-NET-001", "type": "TRACE", "weight": 0.92 },
+    { "id": "S-104", "from": "REQ-OBS-001", "to": "TST-NTX-001", "type": "TRACE", "weight": 0.91 },
+    { "id": "S-105", "from": "REQ-OBS-001", "to": "MET-DEPLOY-001", "type": "TRACE", "weight": 0.89 },
+    { "id": "S-102", "from": "REQ-COMP-001", "to": "TST-CONTRACT-001", "type": "TRACE", "weight": 0.9 },
+    { "id": "S-103", "from": "REQ-COMP-001", "to": "MET-NTX-001", "type": "TRACE", "weight": 0.82 },
+
+    { "id": "S-108", "from": "CTR-VAL-001", "to": "TST-DEPLOY-001", "type": "TRACE", "weight": 0.91 },
+    { "id": "S-109", "from": "CTR-VAL-001", "to": "MET-DEPLOY-001", "type": "TRACE", "weight": 0.88 },
+    { "id": "S-110", "from": "CTR-NET-001", "to": "TST-NET-001", "type": "TRACE", "weight": 0.92 },
+    { "id": "S-111", "from": "CTR-NET-001", "to": "MET-NET-001", "type": "TRACE", "weight": 0.9 },
+    { "id": "S-112", "from": "CTR-OBS-001", "to": "TST-NTX-001", "type": "TRACE", "weight": 0.9 },
+    { "id": "S-113", "from": "CTR-OBS-001", "to": "MET-NTX-001", "type": "TRACE", "weight": 0.9 },
+
+    { "id": "S-040", "from": "ART-DEPLOY-TS-001", "to": "CTR-VAL-001", "type": "IMPL", "weight": 0.9 },
+    { "id": "S-045", "from": "ART-HH-CONFIG-JS-001", "to": "CTR-NET-001", "type": "IMPL", "weight": 0.9 },
+    { "id": "S-046", "from": "ART-VALIDATOR-JS-001", "to": "CTR-OBS-001", "type": "IMPL", "weight": 0.93 }
+  ]
+}

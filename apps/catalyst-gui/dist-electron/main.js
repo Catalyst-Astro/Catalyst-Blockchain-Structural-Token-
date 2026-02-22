@@ -5,7 +5,68 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const electron_1 = require("electron");
 const path_1 = __importDefault(require("path"));
+const fs_1 = __importDefault(require("fs"));
+const dotenv_1 = __importDefault(require("dotenv"));
 const isDev = !!process.env.ELECTRON_START_URL;
+for (const envPath of [
+    path_1.default.resolve(process.cwd(), '.env'),
+    path_1.default.resolve(process.cwd(), '..', '..', '.env')
+]) {
+    if (fs_1.default.existsSync(envPath)) {
+        dotenv_1.default.config({ path: envPath });
+        break;
+    }
+}
+const defaultControlRoomState = {
+    operations: [],
+    notifications: {
+        emailEnabled: false,
+        slackEnabled: false,
+        slackWebhookUrl: ''
+    }
+};
+function getControlRoomStatePath() {
+    return path_1.default.join(electron_1.app.getPath('userData'), 'control-room-state.json');
+}
+function readControlRoomState() {
+    const statePath = getControlRoomStatePath();
+    if (!fs_1.default.existsSync(statePath)) {
+        fs_1.default.writeFileSync(statePath, JSON.stringify(defaultControlRoomState, null, 2), 'utf8');
+        return defaultControlRoomState;
+    }
+    try {
+        const parsed = JSON.parse(fs_1.default.readFileSync(statePath, 'utf8'));
+        const operations = Array.isArray(parsed.operations) ? parsed.operations : [];
+        const notifications = parsed.notifications ?? defaultControlRoomState.notifications;
+        return {
+            operations: operations.filter((row) => Boolean(row &&
+                typeof row.id === 'string' &&
+                typeof row.name === 'string' &&
+                typeof row.owner === 'string' &&
+                typeof row.updatedAt === 'string' &&
+                (row.status === 'active' || row.status === 'pending' || row.status === 'blocked') &&
+                (row.risk === 'low' || row.risk === 'medium' || row.risk === 'high'))),
+            notifications: {
+                emailEnabled: Boolean(notifications.emailEnabled),
+                slackEnabled: Boolean(notifications.slackEnabled),
+                slackWebhookUrl: typeof notifications.slackWebhookUrl === 'string' ? notifications.slackWebhookUrl : ''
+            }
+        };
+    }
+    catch {
+        fs_1.default.writeFileSync(statePath, JSON.stringify(defaultControlRoomState, null, 2), 'utf8');
+        return defaultControlRoomState;
+    }
+}
+function writeControlRoomState(state) {
+    fs_1.default.writeFileSync(getControlRoomStatePath(), JSON.stringify(state, null, 2), 'utf8');
+}
+function asStatus(value) {
+    return value === 'active' || value === 'pending' || value === 'blocked' ? value : 'pending';
+}
+function asRisk(value) {
+    return value === 'low' || value === 'medium' || value === 'high' ? value : 'medium';
+}
 async function jsonRpc(url, method, params = []) {
     const res = await fetch(url, {
         method: 'POST',
@@ -87,4 +148,47 @@ electron_1.ipcMain.handle('sepolia:status', async () => {
         const message = e instanceof Error ? e.message : 'Unknown RPC error';
         return { ok: false, rpcUrl, error: message, at: Date.now() };
     }
+});
+electron_1.ipcMain.handle('operations:list', () => {
+    const state = readControlRoomState();
+    return { ok: true, operations: state.operations };
+});
+electron_1.ipcMain.handle('operations:create', (_event, payload) => {
+    const state = readControlRoomState();
+    const id = `op_${Date.now()}_${state.operations.length + 1}`;
+    const today = new Date().toISOString().slice(0, 10);
+    const operation = {
+        id,
+        name: payload.name?.trim() || `Ops Intake ${state.operations.length + 1}`,
+        owner: payload.owner?.trim() || 'Control Room',
+        status: asStatus(payload.status),
+        updatedAt: payload.updatedAt || today,
+        risk: asRisk(payload.risk)
+    };
+    state.operations = [operation, ...state.operations];
+    writeControlRoomState(state);
+    return { ok: true, operation, operations: state.operations };
+});
+electron_1.ipcMain.handle('notifications:get', () => {
+    const state = readControlRoomState();
+    return { ok: true, notifications: state.notifications };
+});
+electron_1.ipcMain.handle('notifications:update', (_event, payload) => {
+    const state = readControlRoomState();
+    const next = {
+        ...state.notifications,
+        ...payload,
+        emailEnabled: payload.emailEnabled ?? state.notifications.emailEnabled,
+        slackEnabled: payload.slackEnabled ?? state.notifications.slackEnabled,
+        slackWebhookUrl: typeof payload.slackWebhookUrl === 'string'
+            ? payload.slackWebhookUrl.trim()
+            : state.notifications.slackWebhookUrl
+    };
+    // A Slack integration cannot be enabled without a webhook URL.
+    if (next.slackEnabled && next.slackWebhookUrl.length === 0) {
+        throw new Error('Slack webhook URL is required before enabling Slack notifications.');
+    }
+    state.notifications = next;
+    writeControlRoomState(state);
+    return { ok: true, notifications: state.notifications };
 });
