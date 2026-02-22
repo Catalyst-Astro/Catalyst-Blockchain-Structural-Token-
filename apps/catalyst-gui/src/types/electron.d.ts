@@ -22,10 +22,6 @@ declare global {
         | { ok: true; rpcUrl: string; chainId: number; blockNumber: number; at: number }
         | { ok: false; rpcUrl: string; error: string; at: number }
       >;
-      operationsList: () => Promise<{ ok: true; operations: OperationRecord[] }>;
-      operationsCreate: (payload: Partial<OperationRecord>) => Promise<{ ok: true; operation: OperationRecord; operations: OperationRecord[] }>;
-      notificationsGet: () => Promise<{ ok: true; notifications: NotificationSettings }>;
-      notificationsUpdate: (payload: Partial<NotificationSettings>) => Promise<{ ok: true; notifications: NotificationSettings }>;
     };
   }
 }

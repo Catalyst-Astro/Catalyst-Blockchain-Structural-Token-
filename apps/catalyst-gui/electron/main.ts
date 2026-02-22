@@ -1,7 +1,5 @@
 import { app, BrowserWindow, ipcMain, shell } from 'electron';
 import path from 'path';
-import fs from 'fs';
-import dotenv from 'dotenv';
 
 const isDev = !!process.env.ELECTRON_START_URL;
 
@@ -190,55 +188,4 @@ ipcMain.handle('sepolia:status', async () => {
     const message = e instanceof Error ? e.message : 'Unknown RPC error';
     return { ok: false, rpcUrl, error: message, at: Date.now() };
   }
-});
-
-ipcMain.handle('operations:list', () => {
-  const state = readControlRoomState();
-  return { ok: true, operations: state.operations };
-});
-
-ipcMain.handle('operations:create', (_event, payload: Partial<OperationRecord>) => {
-  const state = readControlRoomState();
-  const id = `op_${Date.now()}_${state.operations.length + 1}`;
-  const today = new Date().toISOString().slice(0, 10);
-  const operation: OperationRecord = {
-    id,
-    name: payload.name?.trim() || `Ops Intake ${state.operations.length + 1}`,
-    owner: payload.owner?.trim() || 'Control Room',
-    status: asStatus(payload.status),
-    updatedAt: payload.updatedAt || today,
-    risk: asRisk(payload.risk)
-  };
-
-  state.operations = [operation, ...state.operations];
-  writeControlRoomState(state);
-  return { ok: true, operation, operations: state.operations };
-});
-
-ipcMain.handle('notifications:get', () => {
-  const state = readControlRoomState();
-  return { ok: true, notifications: state.notifications };
-});
-
-ipcMain.handle('notifications:update', (_event, payload: Partial<NotificationSettings>) => {
-  const state = readControlRoomState();
-  const next: NotificationSettings = {
-    ...state.notifications,
-    ...payload,
-    emailEnabled: payload.emailEnabled ?? state.notifications.emailEnabled,
-    slackEnabled: payload.slackEnabled ?? state.notifications.slackEnabled,
-    slackWebhookUrl:
-      typeof payload.slackWebhookUrl === 'string'
-        ? payload.slackWebhookUrl.trim()
-        : state.notifications.slackWebhookUrl
-  };
-
-  // A Slack integration cannot be enabled without a webhook URL.
-  if (next.slackEnabled && next.slackWebhookUrl.length === 0) {
-    throw new Error('Slack webhook URL is required before enabling Slack notifications.');
-  }
-
-  state.notifications = next;
-  writeControlRoomState(state);
-  return { ok: true, notifications: state.notifications };
 });
