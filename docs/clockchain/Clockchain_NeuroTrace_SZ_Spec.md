@@ -272,3 +272,81 @@ TR#VAL-002 := Req{REQ-VAL-001} TRACE Decision{DEC-NET-001} TRACE Runtime{EVD-CHA
 - NT-R2 validator: `scripts/clockchain/validate-ntx.js`
 - CI validation workflow: `.github/workflows/clockchain-ntx-ci.yml`
 - Canvas base layout: `docs/clockchain/canvas/clockchain_canvas_base.json`
+- Commercial terms template (MSA + Order Form): `docs/legal/NT_SZ_Commercial_Terms.md`
+
+## 16. Terms of Use (Condiciones de Uso)
+
+Legal note: this section is an operational template and must be validated by legal counsel before external publication.
+
+Scope and precedence:
+- The repository license remains Apache-2.0 where declared.
+- These NT-SZ terms apply to paid operation layers (certification, SLA support, managed telemetry, and commercial deployment services).
+- If a signed Master Service Agreement (MSA) or Order Form exists, that signed agreement prevails.
+
+Acceptance:
+- Any party that deploys NT-SZ artifacts in production, requests commercial support, or uses official NT-SZ branding accepts these terms.
+
+Permitted use:
+- Internal research and development.
+- Internal testing and validation in non-production environments.
+- Production use only under active commercial agreement (license or service order).
+
+Restricted use:
+- No removal of copyright or attribution notices.
+- No unlawful, sanctions-violating, or fraudulent use.
+- No representation that the project owners endorse third-party products without written approval.
+- No resale of NT-SZ managed services without reseller authorization.
+
+Operational obligations:
+- Maintain chain identity validation before deploy execution.
+- Keep evidence logs for REQ/CTR -> TST/MET traceability on release-critical paths.
+- Apply key management and access controls aligned with X-Sec and X-Comp ribbons.
+
+Warranty and liability baseline:
+- Provided "as is", without warranties of merchantability, fitness, or uninterrupted operation.
+- Liability is limited to the total amount paid under the applicable order in the previous 12 months, except where law forbids limitation.
+
+Termination:
+- Material breach (including non-payment or prohibited use) enables suspension of service rights.
+- Upon termination, production commercial rights end immediately unless otherwise agreed in writing.
+
+## 17. Payment Terms (Condiciones de Pago)
+
+Commercial trigger:
+- Payment terms apply when NT-SZ is used in production, offered to third parties, or operated with paid support/SLA.
+
+Billing model:
+- Fixed platform fee: monthly or annual license/service fee per legal entity.
+- Optional variable fee: percentage of tracked monthly value flow if defined in the Order Form.
+- Optional professional services: implementation, integration, training, and incident response billed separately.
+
+Default payment conditions:
+- Invoice frequency: monthly in advance (or annual in advance if contracted).
+- Payment due: Net 15 calendar days from invoice date.
+- Currency: USD unless another currency is explicitly agreed.
+- Taxes: exclusive; customer pays applicable taxes and withholdings.
+
+Late payment and suspension:
+- Late fee: 1.5% per month on overdue balances (or maximum legal rate, if lower).
+- If overdue for more than 15 days after notice, provider may suspend support, updates, and managed endpoints.
+- If overdue for more than 45 days, provider may terminate commercial operation rights.
+
+Usage reporting and audit:
+- Customer provides monthly usage report (active environments, deploy count, transaction volume if variable fee applies).
+- Provider may perform one commercial audit per year with at least 10 business days notice.
+
+Refund policy:
+- Fees are non-refundable except where mandatory law requires otherwise.
+
+## 18. Commercial Schedule Template (Editable)
+
+Use this schedule as a default baseline until a signed commercial annex replaces it.
+
+| Item | Default value |
+| --- | --- |
+| Base NT-SZ commercial license | USD 1,500 / month / legal entity |
+| Extra production network | USD 500 / month / network |
+| Variable value-flow fee (optional) | 0.15% of monthly value flow above USD 100,000 |
+| SLA support 8x5 | USD 900 / month |
+| SLA support 24x7 | USD 3,000 / month |
+| Professional services | USD 120 / hour |
