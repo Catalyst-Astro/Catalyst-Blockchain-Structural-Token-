@@ -57,7 +57,7 @@ function remoteRefs() {
       const [name, sha, date, subject] = line.split("|");
       return { name, sha, date, subject };
     })
-    .filter((ref) => ref.name !== "origin/main" && ref.name !== "origin/HEAD");
+    .filter((ref) => ref.name !== "origin" && ref.name !== "origin/main" && ref.name !== "origin/HEAD");
 }
 
 function classify(ref) {

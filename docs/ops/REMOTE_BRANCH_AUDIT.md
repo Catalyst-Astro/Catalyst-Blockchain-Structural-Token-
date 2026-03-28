@@ -1,18 +1,17 @@
 # Remote Branch Audit
 
-Generated from `origin/main` at 2026-03-28T16:38:25.093Z.
+Generated from `origin/main` at 2026-03-28T16:41:46.311Z.
 
 ## Summary
 
-- Integrated into main: 51
+- Integrated into main: 50
 - Divergent from main: 27
-- Candidate delete commands prepared: 51
+- Candidate delete commands prepared: 50
 
 ## Integrated Branches
 
 | Rama | SHA | Fecha | Ahead | Behind | Accion | Ultimo commit unico |
 | --- | --- | --- | ---: | ---: | --- | --- |
-| origin | a045d73 | 2026-02-23 | 0 | 0 | borrar remota | Add NT-SZ commercial terms; update Hardhat plugins |
 | origin/codex/ampliar-fractaldao-con-ejecución-automatizada | 3bb356f | 2025-07-07 | 0 | 78 | borrar remota | Merge branch 'main' into codex/ampliar-fractaldao-con-ejecución-automatizada |
 | origin/codex/ampliar-sistema-de-gobernanza-fractaldao | 8f5170c | 2025-07-07 | 0 | 83 | borrar remota | Merge branch 'main' into codex/ampliar-sistema-de-gobernanza-fractaldao |
 | origin/codex/construir-interfaz-de-interoperabilidad-con-blockchains | 5f2ca41 | 2025-07-07 | 0 | 117 | borrar remota | Merge branch 'main' into codex/construir-interfaz-de-interoperabilidad-con-blockchains |
@@ -99,7 +98,6 @@ Generated from `origin/main` at 2026-03-28T16:38:25.093Z.
 ## Prepared Delete Commands
 
 ```bash
-git push origin --delete origin
 git push origin --delete codex/ampliar-fractaldao-con-ejecución-automatizada
 git push origin --delete codex/ampliar-sistema-de-gobernanza-fractaldao
 git push origin --delete codex/construir-interfaz-de-interoperabilidad-con-blockchains

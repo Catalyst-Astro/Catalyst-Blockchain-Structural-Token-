@@ -391,7 +391,8 @@ function collectRuntimeEvidenceFiles() {
   const backendDir = path.join(process.cwd(), "backend", "database");
   if (fs.existsSync(backendDir) && fs.statSync(backendDir).isDirectory()) {
     for (const entry of fs.readdirSync(backendDir, { withFileTypes: true })) {
-      if (entry.isFile() && entry.name.toLowerCase().endsWith(".jsonl")) {
+      const lowerName = entry.name.toLowerCase();
+      if (entry.isFile() && lowerName.endsWith(".jsonl") && !lowerName.endsWith(".seed.jsonl")) {
         candidates.push(path.join(backendDir, entry.name));
       }
     }
@@ -420,10 +421,14 @@ function findLatestEvidenceRecorded() {
 
   for (const file of files) {
     const stats = fs.statSync(file);
+    const entry = readLatestJsonlEntry(file);
+    if (entry === null) {
+      continue;
+    }
     const candidate = {
       file: path.relative(process.cwd(), file),
       modifiedAt: stats.mtime.toISOString(),
-      entry: readLatestJsonlEntry(file),
+      entry,
     };
     if (!latest || stats.mtimeMs > latest.modifiedAtMs) {
       latest = { ...candidate, modifiedAtMs: stats.mtimeMs };
