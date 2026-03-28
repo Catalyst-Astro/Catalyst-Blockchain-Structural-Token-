@@ -17,6 +17,11 @@ pip install -r requirements.txt
 - Node.js and npm for Hardhat-related smart contract tasks.
 - Geth and `jq` for the Ethereum scripts in `scripts/`.
 
+### Runtime Data Hygiene
+- Runtime JSONL files under `backend/database/*.jsonl` and `narrative_memory/narrative_ledger.jsonl` are treated as local operational data.
+- Tracked seed files live next to them as `*.seed.jsonl`.
+- Use `CATALYST_DATA_DIR` and `CATALYST_NARRATIVE_LEDGER_PATH` when you need writable data outside the repo.
+
 ## 2. Run Unit Tests
 
 ```bash
@@ -46,6 +51,15 @@ python -m pytest -q
   npx hardhat compile
   ```
 - Deploy `InflationaryRewardToken.sol` to a local or public network and interact via Hardhat scripts.
+
+### GUI Production Build
+```bash
+npm run gui:build
+npm run gui:test:smoke
+npm run clockchain:validate:ci
+```
+
+- The GUI build is versioned with deterministic filenames so `dist/renderer` and `dist-electron` can be committed without hash churn.
 
 ## 6. Auditing and Narrative Memory
 

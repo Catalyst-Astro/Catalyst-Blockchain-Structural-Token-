@@ -32,6 +32,10 @@ NT:N#POL-APO-001 [POL] L=0 kappa=H lang=na :
   "Apoiesis continuity gate policy"
   ports{in:[trace_inventory], out:[continuity_check]} meta{owner:governance, ver:v0.1, tags:[x-apoiesis]}
 
+NT:N#POL-KRN-001 [POL] L=0 kappa=H lang=na :
+  "Restrictive radial decision policy for Clockchain Operator AI"
+  ports{in:[case_packet,trace_context], out:[restricted_route]} meta{owner:governance, ver:v0.1, tags:[kernel,policy], zref:ZK-KRN-001}
+
 NT:N#ENT-NODE-001 [ENT] L=1 kappa=H lang=na :
   "Node entity"
   ports{in:[id], out:[typed_node]} meta{owner:architecture, ver:v0.1, tags:[ontology]}
@@ -50,7 +54,19 @@ NT:N#ENT-TRC-001 [ENT] L=1 kappa=H lang=na :
 
 NT:N#REQ-VAL-001 [REQ] L=2 kappa=H lang=na :
   "Deploy value engine contracts deterministically per network"
-  ports{in:[network_config,private_key], out:[deployed_contracts]} meta{owner:core, ver:v0.1, tags:[value-engine,deploy]}
+  ports{in:[network_config,private_key], out:[deployed_contracts]} meta{owner:core, ver:v0.1, tags:[value-engine,deploy], zref:ZK-VAL-001}
+
+NT:N#REQ-EVT-001 [REQ] L=2 kappa=H lang=na :
+  "Preserve canonical trace metadata in event packets and evidence flows"
+  ports{in:[payload,trace_context], out:[eid,vids,trace_record]} meta{owner:core, ver:v0.1, tags:[events,traceability], zref:ZK-EVT-001}
+
+NT:N#REQ-IDC-001 [REQ] L=2 kappa=H lang=na :
+  "Persist identity and compliance actions with causal trace context"
+  ports{in:[identity_ops,trace_context], out:[jsonl_trace,audit_story]} meta{owner:compliance, ver:v0.1, tags:[identity,compliance], zref:ZK-IDC-001}
+
+NT:N#REQ-RMP-001 [REQ] L=2 kappa=H lang=na :
+  "Keep ramp request and confirmation flows linked by EID, VID and trace context"
+  ports{in:[ramp_ops,event_context], out:[settlement_trace]} meta{owner:ops, ver:v0.1, tags:[ramp,settlement], zref:ZK-RMP-001}
 
 NT:N#REQ-COMP-001 [REQ] L=2 kappa=H lang=na :
   "Compile contracts and keep deploy artifacts consistent"
@@ -63,6 +79,14 @@ NT:N#REQ-OBS-001 [REQ] L=2 kappa=H lang=na :
 NT:N#REQ-NET-001 [REQ] L=2 kappa=H lang=na :
   "Validate chain identity before deployment"
   ports{in:[rpc_endpoint], out:[validated_network]} meta{owner:ops, ver:v0.1, tags:[network,chainid]}
+
+NT:N#REQ-KRN-001 [REQ] L=2 kappa=H lang=na :
+  "Classify each operator case through taxonomic factor, radial centers and restricted ZK routes"
+  ports{in:[case_packet,trace_context], out:[decision_class,radial_votes,route_state]} meta{owner:ops, ver:v0.1, tags:[kernel,operator-ai], zref:ZK-KRN-001}
+
+NT:N#REQ-GUI-001 [REQ] L=2 kappa=H lang=na :
+  "Activate the Electron GUI with a reproducible backend flow, renderer smoke tests, and governed UI review evidence"
+  ports{in:[backend_url,renderer_shell,bridge_contract], out:[ui_runtime,ui_evidence]} meta{owner:ops, ver:v0.1, tags:[gui,activation], zref:ZK-GUI-001}
 
 NT:N#C-ANT-001 [C] L=2 kappa=M lang=na :
   "Antropia reduces operational uncertainty by pre-projected design"
@@ -79,3 +103,11 @@ NT:N#Q-OPS-001 [Q] L=2 kappa=M lang=na :
 NT:N#Q-MAIN-001 [Q] L=2 kappa=M lang=na :
   "Is mainnet gate blocked until P0 contradictions are resolved?"
   ports{in:[risk_register], out:[gate_question]} meta{owner:governance, ver:v0.1, tags:[mainnet,gate]}
+
+NT:N#Q-KRN-001 [Q] L=2 kappa=M lang=na :
+  "Does every live decision preserve the radial intersection and the REQ-to-evidence route?"
+  ports{in:[case_trace], out:[kernel_question]} meta{owner:ops, ver:v0.1, tags:[kernel,question], zref:ZK-KRN-001}
+
+NT:N#Q-GUI-001 [Q] L=2 kappa=M lang=na :
+  "Do renderer smoke tests, screenshots, and UI reports still match the GUI surface contract?"
+  ports{in:[ui_artifacts], out:[gui_question]} meta{owner:ops, ver:v0.1, tags:[gui,question], zref:ZK-GUI-001}

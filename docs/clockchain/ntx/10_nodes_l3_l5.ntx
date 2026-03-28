@@ -12,6 +12,26 @@ NT:N#DEC-CI-001 [DEC] L=3 kappa=H lang=na :
   "Fail CI when NT-R2 coverage is violated"
   ports{in:[validation_output], out:[merge_gate]} meta{owner:qa, ver:v0.1, tags:[ci,gate]}
 
+NT:N#DEC-EVT-001 [DEC] L=3 kappa=H lang=na :
+  "Treat trace metadata as optional off-chain fields in canonical event packets"
+  ports{in:[trace_policy], out:[event_packet_shape]} meta{owner:core, ver:v0.1, tags:[events,metadata], zref:ZK-EVT-001}
+
+NT:N#DEC-IDC-001 [DEC] L=3 kappa=H lang=na :
+  "Use EID or wallet references as runtime trace anchors for compliance actions"
+  ports{in:[identity_ops], out:[trace_anchor]} meta{owner:compliance, ver:v0.1, tags:[identity,trace-anchor], zref:ZK-IDC-001}
+
+NT:N#DEC-RMP-001 [DEC] L=3 kappa=H lang=na :
+  "Default ramp trace continuity to request EID when explicit traceId is absent"
+  ports{in:[ramp_event], out:[trace_anchor]} meta{owner:ops, ver:v0.1, tags:[ramp,continuity], zref:ZK-RMP-001}
+
+NT:N#DEC-KRN-001 [DEC] L=3 kappa=H lang=na :
+  "Degrade execution to propose_only when continuity is broken, conflicts block the route, or AX12 remains pending"
+  ports{in:[taxonomic_factor], out:[effective_decision]} meta{owner:ops, ver:v0.1, tags:[kernel,decision], zref:ZK-KRN-001}
+
+NT:N#DEC-GUI-001 [DEC] L=3 kappa=H lang=na :
+  "Validate the GUI through renderer-first smoke tests and governed UI reports before accepting interface drift"
+  ports{in:[ui_case,smoke_output], out:[effective_ui_review]} meta{owner:ops, ver:v0.1, tags:[gui,decision], zref:ZK-GUI-001}
+
 NT:N#RSK-NET-001 [RSK] L=3 kappa=M lang=na :
   "Deploying to wrong chain due to endpoint mismatch"
   ports{in:[rpc_url], out:[network_incident]} meta{owner:ops, ver:v0.1, tags:[risk,network]}
@@ -32,9 +52,41 @@ NT:N#CMP-OBS-001 [CMP] L=4 kappa=H lang=na :
   "Deploy observability component"
   ports{in:[logs], out:[metrics,evidence]} meta{owner:ops, ver:v0.1, tags:[observability]}
 
+NT:N#CMP-EVT-001 [CMP] L=4 kappa=H lang=na :
+  "Event traceability pipeline"
+  ports{in:[payload_hash,trace_context], out:[canonical_event,eid]} meta{owner:core, ver:v0.1, tags:[events,pipeline], zref:ZK-EVT-001}
+
+NT:N#CMP-IDC-001 [CMP] L=4 kappa=H lang=na :
+  "Identity and compliance trace logging pipeline"
+  ports{in:[identity_action,trace_context], out:[jsonl_story]} meta{owner:compliance, ver:v0.1, tags:[identity,pipeline], zref:ZK-IDC-001}
+
+NT:N#CMP-RMP-001 [CMP] L=4 kappa=H lang=na :
+  "Ramp request and confirmation traceability pipeline"
+  ports{in:[eid,vid,trace_context], out:[ramp_log,evidence_anchor]} meta{owner:ops, ver:v0.1, tags:[ramp,pipeline], zref:ZK-RMP-001}
+
+NT:N#CMP-KRN-001 [CMP] L=4 kappa=H lang=na :
+  "Decision kernel component for taxonomic and radial case assessment"
+  ports{in:[case_trace,policy_state], out:[decision_kernel_assessment]} meta{owner:ops, ver:v0.1, tags:[kernel,component], zref:ZK-KRN-001}
+
+NT:N#CMP-GUI-001 [CMP] L=4 kappa=H lang=na :
+  "GUI activation and review component"
+  ports{in:[electron_bridge,ui_case,smoke_result], out:[ui_review_report]} meta{owner:ops, ver:v0.1, tags:[gui,component], zref:ZK-GUI-001}
+
 NT:N#CTR-VAL-001 [CTR] L=4 kappa=H lang=na :
   "Contract set: ProjectRegistry, ValuationLedger, Treasury, SettlementLog"
-  ports{in:[admin], out:[addresses]} meta{owner:core, ver:v0.1, tags:[contracts]}
+  ports{in:[admin], out:[addresses]} meta{owner:core, ver:v0.1, tags:[contracts], zref:ZK-VAL-001}
+
+NT:N#CTR-EVT-001 [CTR] L=4 kappa=H lang=na :
+  "Canonical event packets may carry traceId, reqId, ctrId, zkRefs and evidenceRefs without breaking legacy EID flows"
+  ports{in:[event_input], out:[canonical_packet]} meta{owner:core, ver:v0.1, tags:[events,contract], zref:ZK-EVT-001}
+
+NT:N#CTR-IDC-001 [CTR] L=4 kappa=H lang=na :
+  "Identity and credential logs preserve causal trace context in JSONL and StoryLedger"
+  ports{in:[identity_action], out:[trace_record]} meta{owner:compliance, ver:v0.1, tags:[identity,contract], zref:ZK-IDC-001}
+
+NT:N#CTR-RMP-001 [CTR] L=4 kappa=H lang=na :
+  "Ramp logs preserve request and confirmation trace context across EID and confirmation VID"
+  ports{in:[ramp_action], out:[trace_record]} meta{owner:ops, ver:v0.1, tags:[ramp,contract], zref:ZK-RMP-001}
 
 NT:N#CTR-NET-001 [CTR] L=4 kappa=H lang=na :
   "Contract: network endpoint and chain-id checks"
@@ -44,9 +96,17 @@ NT:N#CTR-OBS-001 [CTR] L=4 kappa=H lang=na :
   "Contract: telemetry and evidence generation"
   ports{in:[runtime], out:[metrics,evidence]} meta{owner:ops, ver:v0.1, tags:[observability]}
 
+NT:N#CTR-KRN-001 [CTR] L=4 kappa=H lang=na :
+  "Operator AI must classify each case by taxonomic factor and radial intersection before plan or execute"
+  ports{in:[case_packet], out:[governed_decision]} meta{owner:ops, ver:v0.1, tags:[kernel,contract], zref:ZK-KRN-001}
+
+NT:N#CTR-GUI-001 [CTR] L=4 kappa=H lang=na :
+  "The GUI must expose a governed UI copilot surface and keep preload, main, renderer, smoke tests, and evidence aligned"
+  ports{in:[renderer_shell], out:[ui_trace_contract]} meta{owner:ops, ver:v0.1, tags:[gui,contract], zref:ZK-GUI-001}
+
 NT:N#ART-DEPLOY-TS-001 [ART] L=5 kappa=H lang=ts :
   "scripts/deploy_value_engine.ts"
-  ports{in:[signer], out:[deployed_addresses]} meta{owner:core, ver:v0.1, tags:[hardhat,ethers]}
+  ports{in:[signer], out:[deployed_addresses]} meta{owner:core, ver:v0.1, tags:[hardhat,ethers], zref:ZK-VAL-001}
 
 NT:N#ART-HH-CONFIG-JS-001 [ART] L=5 kappa=H lang=js :
   "scripts/hardhat.localnet.js"
@@ -58,19 +118,35 @@ NT:N#ART-HH-CONFIG-PS1-001 [ART] L=5 kappa=H lang=ps1 :
 
 NT:N#ART-CONTRACT-PRJ-001 [ART] L=5 kappa=H lang=sol :
   "contracts/ProjectRegistry.sol"
-  ports{in:[admin], out:[registry_state]} meta{owner:core, ver:v0.1, tags:[solidity]}
+  ports{in:[admin], out:[registry_state]} meta{owner:core, ver:v0.1, tags:[solidity], zref:ZK-VAL-001}
 
 NT:N#ART-CONTRACT-VL-001 [ART] L=5 kappa=H lang=sol :
   "contracts/ValuationLedger.sol"
-  ports{in:[oracle_input], out:[valuation_state]} meta{owner:core, ver:v0.1, tags:[solidity]}
+  ports{in:[oracle_input], out:[valuation_state]} meta{owner:core, ver:v0.1, tags:[solidity], zref:ZK-VAL-001}
 
 NT:N#ART-CONTRACT-TRY-001 [ART] L=5 kappa=H lang=sol :
   "contracts/Treasury.sol"
-  ports{in:[asset_ops], out:[balance_state]} meta{owner:core, ver:v0.1, tags:[solidity]}
+  ports{in:[asset_ops], out:[balance_state]} meta{owner:core, ver:v0.1, tags:[solidity], zref:ZK-VAL-001}
 
 NT:N#ART-CONTRACT-SL-001 [ART] L=5 kappa=H lang=sol :
   "contracts/SettlementLog.sol"
-  ports{in:[settlement_event], out:[audit_state]} meta{owner:core, ver:v0.1, tags:[solidity]}
+  ports{in:[settlement_event], out:[audit_state]} meta{owner:core, ver:v0.1, tags:[solidity], zref:ZK-VAL-001}
+
+NT:N#ART-EVT-CANON-TS-001 [ART] L=5 kappa=H lang=ts :
+  "backend/src/events/canonical.ts"
+  ports{in:[event_input], out:[canonical_json,eid]} meta{owner:core, ver:v0.1, tags:[events,canonical], zref:ZK-EVT-001}
+
+NT:N#ART-IDC-SERVER-TS-001 [ART] L=5 kappa=H lang=ts :
+  "backend/api/server.ts#identity-compliance"
+  ports{in:[identity_action], out:[jsonl_records]} meta{owner:compliance, ver:v0.1, tags:[identity,server], zref:ZK-IDC-001}
+
+NT:N#ART-RMP-SERVER-TS-001 [ART] L=5 kappa=H lang=ts :
+  "backend/api/server.ts#ramps"
+  ports{in:[ramp_action], out:[ramp_records]} meta{owner:ops, ver:v0.1, tags:[ramp,server], zref:ZK-RMP-001}
+
+NT:N#ART-IDC-STORY-TS-001 [ART] L=5 kappa=H lang=ts :
+  "backend/api/storyLedger.ts#causal-context"
+  ports{in:[runtime_action], out:[narrative_record]} meta{owner:ops, ver:v0.1, tags:[story,traceability], zref:ZK-IDC-001}
 
 NT:N#ART-VALIDATOR-JS-001 [ART] L=5 kappa=H lang=js :
   "scripts/clockchain/validate-ntx.js"
@@ -79,3 +155,19 @@ NT:N#ART-VALIDATOR-JS-001 [ART] L=5 kappa=H lang=js :
 NT:N#ART-CANVAS-JSON-001 [ART] L=5 kappa=M lang=json :
   "docs/clockchain/canvas/clockchain_canvas_base.json"
   ports{in:[ntx_graph], out:[canvas_layout]} meta{owner:architecture, ver:v0.1, tags:[canvas]}
+
+NT:N#ART-KRN-KERNEL-TS-001 [ART] L=5 kappa=H lang=ts :
+  "backend/api/ai/decisionKernel.ts"
+  ports{in:[case_record,trace], out:[decision_kernel_assessment]} meta{owner:ops, ver:v0.1, tags:[kernel,typescript], zref:ZK-KRN-001}
+
+NT:N#ART-GUI-APP-TSX-001 [ART] L=5 kappa=H lang=tsx :
+  "apps/catalyst-gui/src/App.tsx"
+  ports{in:[renderer_routes], out:[surface_shell]} meta{owner:ops, ver:v0.1, tags:[gui,renderer], zref:ZK-GUI-001}
+
+NT:N#ART-GUI-UILAB-TSX-001 [ART] L=5 kappa=H lang=tsx :
+  "apps/catalyst-gui/src/pages/UiLab.tsx"
+  ports{in:[ui_case], out:[ui_lab_surface]} meta{owner:ops, ver:v0.1, tags:[gui,renderer], zref:ZK-GUI-001}
+
+NT:N#ART-GUI-COPILOT-TS-001 [ART] L=5 kappa=H lang=ts :
+  "backend/api/ai/uiCopilot.ts"
+  ports{in:[ui_case,trace], out:[ui_review_report]} meta{owner:ops, ver:v0.1, tags:[gui,copilot], zref:ZK-GUI-001}

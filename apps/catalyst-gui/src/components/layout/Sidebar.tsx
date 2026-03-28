@@ -1,8 +1,8 @@
 import React from 'react';
-import { LayoutDashboard, FolderOpen, Settings } from 'lucide-react';
+import { LayoutDashboard, Palette, Settings, ShieldCheck } from 'lucide-react';
 import clsx from 'clsx';
 
-type NavKey = 'dashboard' | 'projects' | 'settings';
+type NavKey = 'dashboard' | 'operator' | 'ui_lab' | 'settings';
 
 interface SidebarProps {
   active: NavKey;
@@ -11,7 +11,8 @@ interface SidebarProps {
 
 const items: { key: NavKey; label: string; icon: React.ReactNode }[] = [
   { key: 'dashboard', label: 'Dashboard', icon: <LayoutDashboard className="h-4 w-4" aria-hidden /> },
-  { key: 'projects', label: 'Projects', icon: <FolderOpen className="h-4 w-4" aria-hidden /> },
+  { key: 'operator', label: 'Operator', icon: <ShieldCheck className="h-4 w-4" aria-hidden /> },
+  { key: 'ui_lab', label: 'UI Lab', icon: <Palette className="h-4 w-4" aria-hidden /> },
   { key: 'settings', label: 'Settings', icon: <Settings className="h-4 w-4" aria-hidden /> }
 ];
 

@@ -1,7 +1,10 @@
 import { app, BrowserWindow, ipcMain, shell } from 'electron';
+import dotenv from 'dotenv';
+import fs from 'fs';
 import path from 'path';
 
 const isDev = !!process.env.ELECTRON_START_URL;
+let mainWindow: BrowserWindow | null = null;
 
 for (const envPath of [
   path.resolve(process.cwd(), '.env'),
@@ -35,6 +38,93 @@ type ControlRoomState = {
   operations: OperationRecord[];
   notifications: NotificationSettings;
 };
+type BackendError = { error?: string };
+type OperatorExecutionMode = 'dry_run' | 'live';
+type UiSurface = 'dashboard' | 'operator' | 'settings';
+type UiCopilotIntent = 'surface_review' | 'component_brief' | 'layout_proposal' | 'a11y_audit' | 'design_regression';
+type UiCaseStatus = 'open' | 'planned' | 'reviewed';
+type OperatorCaseRecord = {
+  id: string;
+  domain: 'VAL' | 'EVT' | 'IDC' | 'RMP';
+  intent: string;
+  severity: 'low' | 'medium' | 'high' | 'critical';
+  status: 'open' | 'planned' | 'awaiting_approval' | 'approved' | 'executing' | 'completed' | 'blocked' | 'failed';
+  approvalState: 'not_required' | 'pending' | 'approved' | 'rejected';
+  requester: string;
+  updatedAt: string;
+  traceContext?: {
+    traceId?: string;
+    reqId?: string;
+    ctrId?: string;
+    zkRefs?: string[];
+    evidenceRefs?: string[];
+    eid?: string;
+    vids?: string[];
+  };
+  plan?: {
+    steps: Array<{
+      id: string;
+      label: string;
+      kind: string;
+      adapter?: string;
+    }>;
+  };
+  report?: {
+    summary: string;
+    narrative: string;
+    evidence: string[];
+    openRisks: string[];
+    recommendations: string[];
+    timeline: Array<Record<string, unknown>>;
+  };
+};
+type UiProposal = {
+  tokens: string[];
+  layoutChanges: string[];
+  componentChanges: string[];
+  a11yChecks: string[];
+  acceptanceCriteria: string[];
+};
+type UiReviewReport = {
+  id: string;
+  caseId: string;
+  generatedAt: string;
+  summary: string;
+  recommendations: string[];
+  regressions: string[];
+  screenshots: string[];
+  evidenceRefs: string[];
+  zkRefs: string[];
+  traceId?: string;
+  proposal: UiProposal;
+};
+type UiCopilotCase = {
+  id: string;
+  requester: string;
+  surface: UiSurface;
+  intent: UiCopilotIntent;
+  summary: string;
+  status: UiCaseStatus;
+  traceId?: string;
+  zkRefs: string[];
+  createdAt: string;
+  updatedAt: string;
+  proposal?: UiProposal;
+  report?: UiReviewReport;
+};
+type ReleaseReadiness = {
+  releaseGate: 'pass' | 'fail';
+  coverageRatio?: number;
+  errors: string[];
+  criticalFailures: string[];
+  envChecks: {
+    rpcConfigured: boolean;
+    privateKeyConfigured: boolean;
+    deployScriptPresent: boolean;
+    hardhatConfigPresent: boolean;
+    liveDeployEnabled: boolean;
+  };
+};
 
 const defaultControlRoomState: ControlRoomState = {
   operations: [],
@@ -44,6 +134,10 @@ const defaultControlRoomState: ControlRoomState = {
     slackWebhookUrl: ''
   }
 };
+
+function getBackendBaseUrl(): string {
+  return process.env.CATALYST_API_URL || `http://127.0.0.1:${process.env.PORT || 4000}`;
+}
 
 function getControlRoomStatePath(): string {
   return path.join(app.getPath('userData'), 'control-room-state.json');
@@ -116,8 +210,22 @@ async function jsonRpc<T>(url: string, method: string, params: unknown[] = []): 
   return payload.result;
 }
 
+async function backendRequest<T>(pathname: string, init?: RequestInit): Promise<T> {
+  const response = await fetch(`${getBackendBaseUrl()}${pathname}`, {
+    headers: { 'content-type': 'application/json', ...(init?.headers ?? {}) },
+    ...init
+  });
+
+  const payload = (await response.json()) as T & BackendError;
+  if (!response.ok) {
+    throw new Error(payload.error || `Backend HTTP ${response.status}`);
+  }
+
+  return payload;
+}
+
 function createWindow() {
-  const win = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     title: 'Catalyst GUI',
     width: 1200,
     height: 800,
@@ -133,19 +241,23 @@ function createWindow() {
     }
   });
 
+  mainWindow.on('closed', () => {
+    mainWindow = null;
+  });
+
   if (isDev && process.env.ELECTRON_START_URL) {
-    win.loadURL(process.env.ELECTRON_START_URL);
-    win.webContents.on('did-fail-load', () => {
-      win.loadURL(process.env.ELECTRON_START_URL!);
+    mainWindow.loadURL(process.env.ELECTRON_START_URL);
+    mainWindow.webContents.on('did-fail-load', () => {
+      mainWindow?.loadURL(process.env.ELECTRON_START_URL!);
     });
-    win.webContents.setWindowOpenHandler(({ url }) => {
+    mainWindow.webContents.setWindowOpenHandler(({ url }) => {
       shell.openExternal(url);
       return { action: 'deny' };
     });
   } else {
     const indexPath = path.join(__dirname, '../dist/renderer/index.html');
-    win.loadFile(indexPath);
-    win.webContents.setWindowOpenHandler(({ url }) => {
+    mainWindow.loadFile(indexPath);
+    mainWindow.webContents.setWindowOpenHandler(({ url }) => {
       shell.openExternal(url);
       return { action: 'deny' };
     });
@@ -166,6 +278,42 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
   }
+});
+
+ipcMain.handle('operations:list', () => {
+  const state = readControlRoomState();
+  return { operations: state.operations };
+});
+
+ipcMain.handle('operations:create', (_event, input: Partial<OperationRecord>) => {
+  const state = readControlRoomState();
+  const next: OperationRecord = {
+    id: typeof input?.id === 'string' && input.id ? input.id : `op-${Date.now()}`,
+    name: typeof input?.name === 'string' && input.name ? input.name : 'New Clockchain operation',
+    owner: typeof input?.owner === 'string' && input.owner ? input.owner : 'Ops Desk',
+    status: asStatus(input?.status),
+    updatedAt: new Date().toISOString(),
+    risk: asRisk(input?.risk)
+  };
+  const operations = [next, ...state.operations].slice(0, 25);
+  writeControlRoomState({ ...state, operations });
+  return { operations };
+});
+
+ipcMain.handle('notifications:get', () => {
+  const state = readControlRoomState();
+  return { notifications: state.notifications };
+});
+
+ipcMain.handle('notifications:update', (_event, patch: Partial<NotificationSettings>) => {
+  const state = readControlRoomState();
+  const notifications: NotificationSettings = {
+    emailEnabled: patch?.emailEnabled ?? state.notifications.emailEnabled,
+    slackEnabled: patch?.slackEnabled ?? state.notifications.slackEnabled,
+    slackWebhookUrl: typeof patch?.slackWebhookUrl === 'string' ? patch.slackWebhookUrl : state.notifications.slackWebhookUrl
+  };
+  writeControlRoomState({ ...state, notifications });
+  return { notifications };
 });
 
 ipcMain.handle('refresh', () => {
@@ -189,3 +337,53 @@ ipcMain.handle('sepolia:status', async () => {
     return { ok: false, rpcUrl, error: message, at: Date.now() };
   }
 });
+
+ipcMain.handle('ai:cases:list', async () => backendRequest<{ cases: OperatorCaseRecord[] }>('/ai/cases'));
+ipcMain.handle('ai:cases:create', async (_event, input: Record<string, unknown>) =>
+  backendRequest<OperatorCaseRecord>('/ai/cases', {
+    method: 'POST',
+    body: JSON.stringify(input)
+  })
+);
+ipcMain.handle('ai:cases:plan', async (_event, caseId: string) =>
+  backendRequest<OperatorCaseRecord>(`/ai/cases/${caseId}/plan`, { method: 'POST', body: '{}' })
+);
+ipcMain.handle('ai:cases:approve', async (_event, caseId: string, input: Record<string, unknown>) =>
+  backendRequest<OperatorCaseRecord>(`/ai/cases/${caseId}/approve`, {
+    method: 'POST',
+    body: JSON.stringify(input)
+  })
+);
+ipcMain.handle(
+  'ai:cases:execute',
+  async (_event, caseId: string, input: { mode?: OperatorExecutionMode; requestedBy?: string }) =>
+    backendRequest<{ case: OperatorCaseRecord; receipt: Record<string, unknown>; report: OperatorCaseRecord['report'] }>(
+      `/ai/cases/${caseId}/execute`,
+      {
+        method: 'POST',
+        body: JSON.stringify(input ?? {})
+      }
+    )
+);
+ipcMain.handle('ai:cases:report', async (_event, caseId: string) =>
+  backendRequest<OperatorCaseRecord['report']>(`/ai/cases/${caseId}/report`)
+);
+ipcMain.handle('ai:release:readiness', async (_event, domain?: string) =>
+  backendRequest<ReleaseReadiness>(domain ? `/ai/release/readiness?domain=${encodeURIComponent(domain)}` : '/ai/release/readiness')
+);
+ipcMain.handle('ui:cases:list', async () => backendRequest<{ cases: UiCopilotCase[] }>('/ai/ui/cases'));
+ipcMain.handle('ui:cases:create', async (_event, input: Record<string, unknown>) =>
+  backendRequest<UiCopilotCase>('/ai/ui/cases', {
+    method: 'POST',
+    body: JSON.stringify(input)
+  })
+);
+ipcMain.handle('ui:cases:plan', async (_event, caseId: string) =>
+  backendRequest<UiCopilotCase>(`/ai/ui/cases/${caseId}/plan`, {
+    method: 'POST',
+    body: '{}'
+  })
+);
+ipcMain.handle('ui:cases:report', async (_event, caseId: string) =>
+  backendRequest<UiReviewReport>(`/ai/ui/cases/${caseId}/report`)
+);

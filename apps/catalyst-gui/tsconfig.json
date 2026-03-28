@@ -8,12 +8,12 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "types": ["vite/client"],
+    "types": ["vite/client", "vitest/globals"],
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]
     }
   },
-  "include": ["src/**/*", "electron/**/*.ts", "vite.config.ts"],
+  "include": ["src/**/*", "electron/**/*.ts", "vite.config.ts", "vitest.config.ts"],
   "exclude": ["dist", "dist-electron", "node_modules"]
 }

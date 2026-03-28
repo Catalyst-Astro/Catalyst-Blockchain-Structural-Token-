@@ -7,3 +7,10 @@ build/
 .env
 localnet/
 hardhat.localnet.js
+pytest-cache-files-*/
+
+# Runtime JSONL data stays local; only seed files are tracked.
+backend/database/*.jsonl
+!backend/database/*.seed.jsonl
+narrative_memory/*.jsonl
+!narrative_memory/*.seed.jsonl

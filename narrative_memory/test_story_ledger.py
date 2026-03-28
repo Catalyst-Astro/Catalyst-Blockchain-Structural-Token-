@@ -3,27 +3,30 @@ from narrative_memory.story_ledger import StoryLedger
 
 
 def test_log_action(tmp_path):
-
-    tmp_file = tmp_path / "log.json"
-
     tmp_file = tmp_path / "ledger.jsonl"
 
     ledger = StoryLedger(str(tmp_file))
-    ledger.log_action("test", "accion de prueba")
+    ledger.log_action(
+        "test",
+        "accion de prueba",
+        {
+            "traceId": "TRACE-001",
+            "reqId": "REQ-IDC-001",
+            "ctrId": "CTR-IDC-001",
+            "vids": ["0xbbb", "0xaaa"],
+            "zkRefs": ["ZK-IDC-001"],
+            "status": "logged",
+        },
+    )
     with tmp_file.open("r", encoding="utf-8") as f:
         data = json.loads(f.readline())
     assert data["actor"] == "test"
     assert data["action"] == "accion de prueba"
     assert "timestamp" in data
-
-
-if __name__ == "__main__":
-    with NamedTemporaryFile(delete=False) as tmp:
-        tmp_name = tmp.name
-    try:
-        ledger = StoryLedger(tmp_name)
-        ledger.log_action("test", "accion de prueba")
-        print("Tests passed")
-    finally:
-        os.remove(tmp_name)
+    assert data["traceId"] == "TRACE-001"
+    assert data["reqId"] == "REQ-IDC-001"
+    assert data["ctrId"] == "CTR-IDC-001"
+    assert data["status"] == "logged"
+    assert data["vids"] == ["0xaaa", "0xbbb"]
+    assert data["zkRefs"] == ["ZK-IDC-001"]
 

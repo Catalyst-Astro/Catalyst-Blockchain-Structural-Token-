@@ -1,24 +1,52 @@
 import React, { useEffect, useMemo, useState } from 'react';
+
 import Shell from './components/layout/Shell';
 import HeaderBar from './components/layout/HeaderBar';
 import Dashboard, { ViewState } from './pages/Dashboard';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './components/ui/Card';
-import { Button } from './components/ui/Button';
-import WalletConnectCard from './components/ethereum/WalletConnectCard';
-
+import OperatorInbox from './pages/OperatorInbox';
+import SettingsPanel from './pages/SettingsPanel';
+import UiLab from './pages/UiLab';
+import { ControlRoomService } from './services/ControlRoomService';
+import { OperatorAiService } from './services/OperatorAiService';
+import { UiCopilotService } from './services/UiCopilotService';
 import type { NavKey } from './components/layout/Sidebar';
+import type { OperationRecordProps } from './domain/operations/OperationRecord';
+import type { NotificationSettings } from './domain/settings/NotificationSettings';
 
 const usePreferredTheme = (): 'light' | 'dark' => {
   if (typeof window === 'undefined') return 'light';
   return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 };
 
+const activationCommands = [
+  'npm run gui:install',
+  'npm run api:identity',
+  'npm run gui:doctor',
+  'npm run gui:up',
+  'npm run gui:build'
+];
+
 const App: React.FC = () => {
+  const controlRoomService = useMemo(() => new ControlRoomService(window.catalyst), []);
+  const operatorAiService = useMemo(() => new OperatorAiService(window.catalyst), []);
+  const uiCopilotService = useMemo(() => new UiCopilotService(window.catalyst), []);
+
   const [nav, setNav] = useState<NavKey>('dashboard');
   const [theme, setTheme] = useState<'light' | 'dark'>(usePreferredTheme());
-  const [viewState, setViewState] = useState<ViewState>('ready');
+  const [dashboardViewState, setDashboardViewState] = useState<ViewState>('loading');
+  const [operatorViewState, setOperatorViewState] = useState<ViewState>('loading');
+  const [uiViewState, setUiViewState] = useState<ViewState>('loading');
   const [search, setSearch] = useState('');
   const [status, setStatus] = useState('all');
+  const [operations, setOperations] = useState<OperationRecordProps[]>([]);
+  const [notifications, setNotifications] = useState<NotificationSettings | null>(null);
+  const [cases, setCases] = useState<OperatorCaseRecord[]>([]);
+  const [readiness, setReadiness] = useState<ReleaseReadiness | null>(null);
+  const [selectedCaseId, setSelectedCaseId] = useState<string | undefined>();
+  const [report, setReport] = useState<OperatorCaseRecord['report'] | null>(null);
+  const [uiCases, setUiCases] = useState<UiCopilotCase[]>([]);
+  const [selectedUiCaseId, setSelectedUiCaseId] = useState<string | undefined>();
+  const [uiReport, setUiReport] = useState<UiReviewReport | null>(null);
   const [toast, setToast] = useState<{ show: boolean; message: string }>({ show: false, message: '' });
 
   useEffect(() => {
@@ -27,8 +55,10 @@ const App: React.FC = () => {
 
   const sectionTitle = useMemo(() => {
     switch (nav) {
-      case 'projects':
-        return 'Projects';
+      case 'operator':
+        return 'Operator';
+      case 'ui_lab':
+        return 'UI Lab';
       case 'settings':
         return 'Settings';
       default:
@@ -36,76 +66,282 @@ const App: React.FC = () => {
     }
   }, [nav]);
 
-  const handleRefresh = async () => {
-    setViewState('loading');
+  const flashToast = (message: string) => {
+    setToast({ show: true, message });
+    window.setTimeout(() => setToast({ show: false, message: '' }), 1800);
+  };
+
+  const loadDashboard = async () => {
+    setDashboardViewState('loading');
     try {
-      if (window.catalyst?.refresh) await window.catalyst.refresh();
-      setTimeout(() => {
-        setViewState('ready');
-        setToast({ show: true, message: 'View refreshed' });
-        setTimeout(() => setToast({ show: false, message: '' }), 1800);
-      }, 450);
-    } catch (e) {
-      setViewState('error');
+      const [nextOperations, nextNotifications] = await Promise.all([
+        controlRoomService.listOperations().catch(() => []),
+        controlRoomService.getNotifications().catch(() => null)
+      ]);
+      setOperations(nextOperations);
+      setNotifications(nextNotifications);
+      setDashboardViewState(nextOperations.length === 0 ? 'empty' : 'ready');
+    } catch {
+      setDashboardViewState('error');
+    }
+  };
+
+  const loadOperator = async () => {
+    setOperatorViewState('loading');
+    try {
+      const [nextCases, nextReadiness] = await Promise.all([
+        operatorAiService.listCases(),
+        operatorAiService.getReleaseReadiness()
+      ]);
+      setCases(nextCases);
+      setReadiness(nextReadiness);
+      setSelectedCaseId((current) => current ?? nextCases[0]?.id);
+      setOperatorViewState(nextCases.length === 0 ? 'empty' : 'ready');
+    } catch {
+      setOperatorViewState('error');
+    }
+  };
+
+  const loadUiLab = async () => {
+    setUiViewState('loading');
+    try {
+      const nextCases = await uiCopilotService.listCases();
+      setUiCases(nextCases);
+      setSelectedUiCaseId((current) => current ?? nextCases[0]?.id);
+      setUiViewState(nextCases.length === 0 ? 'empty' : 'ready');
+    } catch {
+      setUiViewState('error');
+    }
+  };
+
+  const loadSelectedReport = async (caseId?: string) => {
+    if (!caseId) {
+      setReport(null);
+      return;
+    }
+    try {
+      const nextReport = await operatorAiService.getReport(caseId);
+      setReport(nextReport ?? null);
+    } catch {
+      setReport(null);
+    }
+  };
+
+  const loadSelectedUiReport = async (caseId?: string) => {
+    if (!caseId) {
+      setUiReport(null);
+      return;
+    }
+    try {
+      const nextReport = await uiCopilotService.getReport(caseId);
+      setUiReport(nextReport ?? null);
+    } catch {
+      setUiReport(null);
+    }
+  };
+
+  const refreshAll = async (message = 'View refreshed') => {
+    await Promise.all([loadDashboard(), loadOperator(), loadUiLab()]);
+    flashToast(message);
+  };
+
+  useEffect(() => {
+    void refreshAll('Control room synced');
+  }, []);
+
+  useEffect(() => {
+    void loadSelectedReport(selectedCaseId);
+  }, [selectedCaseId]);
+
+  useEffect(() => {
+    void loadSelectedUiReport(selectedUiCaseId);
+  }, [selectedUiCaseId]);
+
+  const handleRefresh = async () => {
+    await refreshAll();
+  };
+
+  const handleCreateOperation = async () => {
+    try {
+      const nextOperations = await controlRoomService.createOperation({
+        name: 'Operator escalation',
+        owner: 'Ops Desk',
+        status: 'pending',
+        risk: 'medium'
+      });
+      setOperations(nextOperations);
+      setDashboardViewState('ready');
+      flashToast('Operation added');
+    } catch {
+      setDashboardViewState('error');
+    }
+  };
+
+  const handleCreateCase = async (input: { requester: string; domain: OperatorDomain; intent: string; summary: string }) => {
+    try {
+      const created = await operatorAiService.createCase({
+        requester: input.requester,
+        domain: input.domain,
+        intent: input.intent,
+        summary: input.summary,
+        input: { action: input.intent }
+      });
+      setSelectedCaseId(created.id);
+      await loadOperator();
+      await loadSelectedReport(created.id);
+      flashToast('Operator case created');
+    } catch {
+      setOperatorViewState('error');
+    }
+  };
+
+  const handlePlanCase = async (caseId: string) => {
+    try {
+      await operatorAiService.planCase(caseId);
+      await loadOperator();
+      await loadSelectedReport(caseId);
+      flashToast('Case planned');
+    } catch {
+      setOperatorViewState('error');
+    }
+  };
+
+  const handleApproveCase = async (caseId: string) => {
+    try {
+      await operatorAiService.approveCase(caseId, {
+        decidedBy: 'ops-approver',
+        decision: 'approved',
+        reason: 'Approved from Catalyst GUI'
+      });
+      await loadOperator();
+      await loadSelectedReport(caseId);
+      flashToast('Approval recorded');
+    } catch {
+      setOperatorViewState('error');
+    }
+  };
+
+  const handleExecuteCase = async (caseId: string, mode: OperatorExecutionMode) => {
+    try {
+      const execution = await operatorAiService.executeCase(caseId, {
+        mode,
+        requestedBy: 'ops-desk'
+      });
+      setReport(execution.report ?? null);
+      await loadOperator();
+      flashToast(mode === 'live' ? 'Live execution completed' : 'Dry run completed');
+    } catch {
+      setOperatorViewState('error');
+    }
+  };
+
+  const handleCreateUiCase = async (input: {
+    requester: string;
+    surface: UiSurface;
+    intent: UiCopilotIntent;
+    summary: string;
+  }) => {
+    try {
+      const created = await uiCopilotService.createCase(input);
+      setSelectedUiCaseId(created.id);
+      await loadUiLab();
+      await loadSelectedUiReport(created.id);
+      flashToast('UI case created');
+    } catch {
+      setUiViewState('error');
+    }
+  };
+
+  const handlePlanUiCase = async (caseId: string) => {
+    try {
+      await uiCopilotService.planCase(caseId);
+      await loadUiLab();
+      await loadSelectedUiReport(caseId);
+      flashToast('UI proposal planned');
+    } catch {
+      setUiViewState('error');
+    }
+  };
+
+  const handleReportUiCase = async (caseId: string) => {
+    try {
+      const nextReport = await uiCopilotService.getReport(caseId);
+      setUiReport(nextReport);
+      await loadUiLab();
+      flashToast('UI report generated');
+    } catch {
+      setUiViewState('error');
+    }
+  };
+
+  const updateNotifications = async (patch: Partial<NotificationSettings>) => {
+    try {
+      const next = await controlRoomService.updateNotifications(patch);
+      setNotifications(next);
+      flashToast('Notifications updated');
+    } catch {
+      flashToast('Notification update failed');
     }
   };
 
   const renderOutput = () => {
-    if (status === 'loading') {
+    if (nav === 'operator') {
       return (
-        <Card>
-          <CardHeader>
-            <CardTitle>Projects</CardTitle>
-            <CardDescription>High-level overview of ongoing Catalyst engagements.</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <p className="text-sm text-muted">Connect Fractal milestones to auto-generate events and ramp releases.</p>
-            <Button variant="primary" size="sm">Link a project</Button>
-          </CardContent>
-        </Card>
+        <OperatorInbox
+          viewState={operatorViewState}
+          cases={cases}
+          readiness={readiness}
+          report={report}
+          selectedCaseId={selectedCaseId}
+          onSelectCase={setSelectedCaseId}
+          onRefresh={loadOperator}
+          onCreateCase={handleCreateCase}
+          onPlanCase={handlePlanCase}
+          onApproveCase={handleApproveCase}
+          onExecuteCase={handleExecuteCase}
+        />
       );
     }
+
+    if (nav === 'ui_lab') {
+      return (
+        <UiLab
+          viewState={uiViewState}
+          cases={uiCases}
+          report={uiReport}
+          selectedCaseId={selectedUiCaseId}
+          onSelectCase={setSelectedUiCaseId}
+          onRefresh={loadUiLab}
+          onCreateCase={handleCreateUiCase}
+          onPlanCase={handlePlanUiCase}
+          onReportCase={handleReportUiCase}
+        />
+      );
+    }
+
     if (nav === 'settings') {
       return (
-        <div className="grid gap-4 lg:grid-cols-2">
-          <WalletConnectCard />
-          <Card>
-            <CardHeader>
-              <CardTitle>Settings</CardTitle>
-              <CardDescription>Theme, notifications, and operator preferences.</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-semibold">Theme</p>
-                  <p className="text-sm text-muted">Switch between light and dark for the control room.</p>
-                </div>
-                <Button variant="secondary" size="sm" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
-                  {theme === 'light' ? 'Dark mode' : 'Light mode'}
-                </Button>
-              </div>
-              <div>
-                <p className="font-semibold">Notifications</p>
-                <p className="text-sm text-muted">Alerts for attestations, AML escalations, and settlement steps.</p>
-                <div className="mt-2 flex gap-2">
-                  <Button variant="primary" size="sm">Enable email</Button>
-                  <Button variant="ghost" size="sm">Slack webhook</Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        <SettingsPanel
+          theme={theme}
+          notifications={notifications}
+          apiBaseUrl={'CATALYST_API_URL or http://127.0.0.1:4000'}
+          activationCommands={activationCommands}
+          onToggleTheme={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+          onUpdateNotifications={updateNotifications}
+        />
       );
     }
+
     return (
       <Dashboard
-        viewState={viewState}
-        onStateChange={setViewState}
-        onRetry={() => setViewState('ready')}
+        viewState={dashboardViewState}
+        onRetry={loadDashboard}
         search={search}
         status={status}
         onSearch={setSearch}
         onStatus={setStatus}
+        operations={operations}
+        onCreateOperation={handleCreateOperation}
         toastMessage={toast.message}
         showToast={toast.show}
       />
@@ -120,7 +356,7 @@ const App: React.FC = () => {
         onToggleTheme={() => setTheme(theme === 'light' ? 'dark' : 'light')}
         onRefresh={handleRefresh}
       />
-      {renderSection()}
+      {renderOutput()}
     </Shell>
   );
 };

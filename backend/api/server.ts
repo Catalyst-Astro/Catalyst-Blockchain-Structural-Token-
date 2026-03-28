@@ -2,7 +2,11 @@ import express, { Request, Response } from "express";
 import { ethers } from "ethers";
 import fs from "fs";
 import path from "path";
-import { StoryLedger } from "./storyLedger";
+import { StoryLedger, StoryLedgerContext } from "./storyLedger";
+import { ClockchainOperatorAI } from "./ai/controlPlane";
+import { registerClockchainOperatorRoutes } from "./ai/routes";
+import { ClockchainUiCopilot } from "./ai/uiCopilot";
+import { registerClockchainUiCopilotRoutes } from "./ai/uiRoutes";
 import { appendJsonl, ensureFile, hashCanonical, readJsonl } from "./utils";
 import { buildEventPacket, canonicalizeEvent, computeEID, computeVID } from "../src/events/canonical";
 
@@ -10,7 +14,25 @@ const app = express();
 app.use(express.json({ limit: "1mb" }));
 
 const ledger = new StoryLedger();
-const dataDir = path.join(process.cwd(), "backend", "database");
+const apiKey = process.env.CLOCKCHAIN_API_KEY;
+
+if (apiKey) {
+  app.use((req, res, next) => {
+    if (req.method === "GET" || req.method === "HEAD") {
+      return next();
+    }
+    const candidate = req.header("x-api-key") ?? (typeof req.query.apiKey === "string" ? req.query.apiKey : undefined);
+    if (candidate !== apiKey) {
+      ledger.logAction("security", `blocked request ${req.method} ${req.path}`, { status: "blocked" });
+      return res.status(401).json({ error: "unauthorized" });
+    }
+    return next();
+  });
+}
+
+const dataDir = process.env.CATALYST_DATA_DIR
+  ? path.resolve(process.env.CATALYST_DATA_DIR)
+  : path.join(process.cwd(), "backend", "database");
 const identityLogPath = path.join(dataDir, "identity_events.jsonl");
 const credentialLogPath = path.join(dataDir, "credential_events.jsonl");
 const eventLogPath = path.join(dataDir, "events_log.jsonl");
@@ -23,6 +45,9 @@ ensureFile(eventLogPath);
 ensureFile(evidenceLogPath);
 ensureFile(amlLogPath);
 ensureFile(rampLogPath);
+
+const operatorAI = new ClockchainOperatorAI();
+const uiCopilot = new ClockchainUiCopilot();
 
 const rpcUrl = process.env.RPC_URL;
 const privateKey = process.env.PRIVATE_KEY;
@@ -105,6 +130,36 @@ const rampVaultContract =
   signer && rampVaultAddress ? new ethers.Contract(rampVaultAddress, rampVaultAbi, signer) : null;
 const paymentRefRegistry =
   signer && paymentRefRegistryAddress ? new ethers.Contract(paymentRefRegistryAddress, paymentRefAbi, signer) : null;
+
+type TraceContext = Omit<StoryLedgerContext, "eid" | "vids" | "status">;
+
+function normalizeTraceRefs(value: unknown): string[] {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return [...new Set(value.filter((entry): entry is string => typeof entry === "string").map((entry) => entry.trim()).filter(Boolean))].sort();
+}
+
+function extractTraceContext(payload: Record<string, unknown>): TraceContext {
+  return {
+    traceId: typeof payload.traceId === "string" && payload.traceId.trim() ? payload.traceId.trim() : undefined,
+    reqId: typeof payload.reqId === "string" && payload.reqId.trim() ? payload.reqId.trim() : undefined,
+    ctrId: typeof payload.ctrId === "string" && payload.ctrId.trim() ? payload.ctrId.trim() : undefined,
+    zkRefs: normalizeTraceRefs(payload.zkRefs),
+    evidenceRefs: normalizeTraceRefs(payload.evidenceRefs),
+  };
+}
+
+function withTraceContext<T extends Record<string, unknown>>(record: T, traceContext: TraceContext): T & TraceContext {
+  const enriched: Record<string, unknown> = { ...record };
+  if (traceContext.traceId) enriched.traceId = traceContext.traceId;
+  if (traceContext.reqId) enriched.reqId = traceContext.reqId;
+  if (traceContext.ctrId) enriched.ctrId = traceContext.ctrId;
+  if (traceContext.zkRefs && traceContext.zkRefs.length > 0) enriched.zkRefs = traceContext.zkRefs;
+  if (traceContext.evidenceRefs && traceContext.evidenceRefs.length > 0) enriched.evidenceRefs = traceContext.evidenceRefs;
+  return enriched as T & TraceContext;
+}
 
 function normalizeRole(roleInput: string): string {
   if (!roleInput) {
@@ -215,17 +270,30 @@ async function maybeRejectEventOnChain(eid: string, reasonHash: string, dryRun?:
   return receipt?.hash ?? tx.hash;
 }
 
-async function maybeAnchorEvidence(hash: string, aType: number, refId: string, dryRun?: boolean) {
+async function maybeAnchorEvidence(
+  hash: string,
+  aType: number,
+  refId: string,
+  dryRun?: boolean,
+  traceContext: TraceContext = {}
+) {
   if (!evidenceAnchorContract || dryRun) return null;
   const tx = await evidenceAnchorContract.anchorHash(hash, aType, refId);
   const receipt = await tx.wait();
-  appendJsonl(evidenceLogPath, {
-    hash,
-    aType,
-    refId,
-    anchoredBy: evidenceAnchorContract.runner?.address ?? "unknown",
-    timestamp: new Date().toISOString(),
-  });
+  appendJsonl(
+    evidenceLogPath,
+    withTraceContext(
+      {
+        hash,
+        aType,
+        refId,
+        anchoredBy: signer?.address ?? "unknown",
+        timestamp: new Date().toISOString(),
+        traceId: traceContext.traceId ?? refId,
+      },
+      traceContext
+    )
+  );
   return receipt?.hash ?? tx.hash;
 }
 
@@ -275,9 +343,13 @@ app.get("/health", (_req, res) => {
   });
 });
 
+registerClockchainOperatorRoutes(app, operatorAI);
+registerClockchainUiCopilotRoutes(app, uiCopilot);
+
 app.post("/identity/verify", async (req: Request, res: Response) => {
   try {
     const { wallet, identityPacket, issuer, dryRun } = req.body;
+    const traceContext = extractTraceContext(req.body);
     if (!wallet || !identityPacket) {
       return res.status(400).json({ error: "wallet and identityPacket are required" });
     }
@@ -292,11 +364,18 @@ app.post("/identity/verify", async (req: Request, res: Response) => {
       issuer: actor,
       vid: identityHash,
       timestamp,
+      ...withTraceContext({}, traceContext),
     };
     const eid = hashCanonical(eventPayload);
-    const record = { ...eventPayload, eid };
+    const runtimeTrace = { ...traceContext, traceId: traceContext.traceId ?? eid };
+    const record = withTraceContext({ ...eventPayload, eid }, runtimeTrace);
     appendJsonl(identityLogPath, record);
-    ledger.logAction("identity", `verify_identity wallet=${wallet} hash=${identityHash} issuer=${actor}`);
+    ledger.logAction("identity", `verify_identity wallet=${wallet} hash=${identityHash} issuer=${actor}`, {
+      ...runtimeTrace,
+      eid,
+      vids: [identityHash],
+      status: "verified",
+    });
 
     const txHash = await maybeVerifyOnChain(wallet, identityHash, dryRun);
     return res.json({ ...record, txHash, onChain: Boolean(txHash) && !dryRun });
@@ -308,6 +387,7 @@ app.post("/identity/verify", async (req: Request, res: Response) => {
 app.post("/credential/issue", async (req: Request, res: Response) => {
   try {
     const { wallet, role, credentialPacket, validFrom, validTo, issuer, dryRun } = req.body;
+    const traceContext = extractTraceContext(req.body);
     if (!wallet || !role || !credentialPacket || !validTo) {
       return res
         .status(400)
@@ -333,13 +413,21 @@ app.post("/credential/issue", async (req: Request, res: Response) => {
       issuer: actor,
       vid: credentialHash,
       timestamp,
+      ...withTraceContext({}, traceContext),
     };
     const eid = hashCanonical(eventPayload);
-    const record = { ...eventPayload, eid };
+    const runtimeTrace = { ...traceContext, traceId: traceContext.traceId ?? eid };
+    const record = withTraceContext({ ...eventPayload, eid }, runtimeTrace);
     appendJsonl(credentialLogPath, record);
     ledger.logAction(
       "credential",
-      `issue_credential wallet=${wallet} role=${normalizedRole} validTo=${end}`
+      `issue_credential wallet=${wallet} role=${normalizedRole} validTo=${end}`,
+      {
+        ...runtimeTrace,
+        eid,
+        vids: [credentialHash],
+        status: "issued",
+      }
     );
 
     const txHash = await maybeIssueCredentialOnChain(wallet, normalizedRole, credentialHash, start, end, dryRun);
@@ -352,6 +440,7 @@ app.post("/credential/issue", async (req: Request, res: Response) => {
 app.post("/credential/revoke", async (req: Request, res: Response) => {
   try {
     const { wallet, role, reason, dryRun } = req.body;
+    const traceContext = extractTraceContext(req.body);
     if (!wallet || !role || !reason) {
       return res.status(400).json({ error: "wallet, role, reason are required" });
     }
@@ -366,11 +455,17 @@ app.post("/credential/revoke", async (req: Request, res: Response) => {
       reasonHash,
       issuer: actor,
       timestamp,
+      ...withTraceContext({}, traceContext),
     };
     const eid = hashCanonical(eventPayload);
-    const record = { ...eventPayload, eid };
+    const runtimeTrace = { ...traceContext, traceId: traceContext.traceId ?? eid };
+    const record = withTraceContext({ ...eventPayload, eid }, runtimeTrace);
     appendJsonl(credentialLogPath, record);
-    ledger.logAction("credential", `revoke_credential wallet=${wallet} reasonHash=${reasonHash}`);
+    ledger.logAction("credential", `revoke_credential wallet=${wallet} reasonHash=${reasonHash}`, {
+      ...runtimeTrace,
+      eid,
+      status: "revoked",
+    });
 
     const txHash = await maybeRevokeCredentialOnChain(wallet, normalizedRole, reasonHash, dryRun);
     return res.json({ ...record, txHash, onChain: Boolean(txHash) && !dryRun });
@@ -382,6 +477,7 @@ app.post("/credential/revoke", async (req: Request, res: Response) => {
 app.post("/identity/revoke", async (req: Request, res: Response) => {
   try {
     const { wallet, reason, dryRun } = req.body;
+    const traceContext = extractTraceContext(req.body);
     if (!wallet || !reason) {
       return res.status(400).json({ error: "wallet and reason are required" });
     }
@@ -394,11 +490,17 @@ app.post("/identity/revoke", async (req: Request, res: Response) => {
       reasonHash,
       issuer: actor,
       timestamp,
+      ...withTraceContext({}, traceContext),
     };
     const eid = hashCanonical(eventPayload);
-    const record = { ...eventPayload, eid };
+    const runtimeTrace = { ...traceContext, traceId: traceContext.traceId ?? eid };
+    const record = withTraceContext({ ...eventPayload, eid }, runtimeTrace);
     appendJsonl(identityLogPath, record);
-    ledger.logAction("identity", `revoke_identity wallet=${wallet} reasonHash=${reasonHash}`);
+    ledger.logAction("identity", `revoke_identity wallet=${wallet} reasonHash=${reasonHash}`, {
+      ...runtimeTrace,
+      eid,
+      status: "revoked",
+    });
 
     const txHash = await maybeRevokeIdentityOnChain(wallet, reasonHash, dryRun);
     return res.json({ ...record, txHash, onChain: Boolean(txHash) && !dryRun });
@@ -410,6 +512,7 @@ app.post("/identity/revoke", async (req: Request, res: Response) => {
 app.post("/aml/score", async (req: Request, res: Response) => {
   try {
     const { wallet, level, scoringInput, dryRun } = req.body;
+    const traceContext = extractTraceContext(req.body);
     if (wallet === undefined || level === undefined) {
       return res.status(400).json({ error: "wallet and level are required" });
     }
@@ -420,11 +523,16 @@ app.post("/aml/score", async (req: Request, res: Response) => {
     const provenanceHash = hashCanonical(scoringInput ?? {});
     const walletRef = ethers.keccak256(ethers.getBytes(ethers.getAddress(wallet)));
     const timestamp = new Date().toISOString();
-    const record = { wallet, level: normalizedLevel, provenanceHash, timestamp };
+    const runtimeTrace = { ...traceContext, traceId: traceContext.traceId ?? walletRef };
+    const record = withTraceContext({ wallet, level: normalizedLevel, provenanceHash, timestamp }, runtimeTrace);
     appendJsonl(amlLogPath, record);
-    ledger.logAction("aml", `aml_score wallet=${wallet} level=${normalizedLevel} provHash=${provenanceHash}`);
+    ledger.logAction("aml", `aml_score wallet=${wallet} level=${normalizedLevel} provHash=${provenanceHash}`, {
+      ...runtimeTrace,
+      vids: [provenanceHash],
+      status: "scored",
+    });
 
-    const anchorTx = await maybeAnchorEvidence(provenanceHash, 4, walletRef, dryRun);
+    const anchorTx = await maybeAnchorEvidence(provenanceHash, 4, walletRef, dryRun, runtimeTrace);
     const txHash = await maybeUpdateRisk(wallet, normalizedLevel, dryRun);
     return res.json({ ...record, anchorTx, txHash, onChain: Boolean(txHash) && !dryRun });
   } catch (err: any) {
@@ -455,6 +563,7 @@ app.get("/credential/:wallet", (req: Request, res: Response) => {
 app.post("/events", async (req: Request, res: Response) => {
   try {
     const { eventType, payload, vids, actorWallet, jurisdiction, nonce, dryRun } = req.body;
+    const traceContext = extractTraceContext(req.body);
     if (!eventType || (!payload && !req.body.payloadHash)) {
       return res.status(400).json({ error: "eventType and payload/payloadHash required" });
     }
@@ -471,13 +580,20 @@ app.post("/events", async (req: Request, res: Response) => {
       vids: vidList,
       jurisdiction,
       nonce,
+      ...traceContext,
     });
     const canonical = canonicalizeEvent(packet);
     const eid = computeEID(canonical);
     const evtTypeHash = normalizeEventType(eventType);
-    const record = { eid, eventType: evtTypeHash, payloadHash, vids: vidList, packet: packet };
+    const runtimeTrace = { ...traceContext, traceId: traceContext.traceId ?? eid };
+    const record = withTraceContext({ eid, eventType: evtTypeHash, payloadHash, vids: vidList, packet }, runtimeTrace);
     appendJsonl(eventLogPath, record);
-    ledger.logAction("event", `create_event eid=${eid} type=${evtTypeHash}`);
+    ledger.logAction("event", `create_event eid=${eid} type=${evtTypeHash}`, {
+      ...runtimeTrace,
+      eid,
+      vids: vidList,
+      status: "created",
+    });
 
     const txHash = await maybeCreateEventOnChain(eid, evtTypeHash, payloadHash, vidList, dryRun);
     return res.json({ eid, eventType: evtTypeHash, payloadHash, vids: vidList, txHash, onChain: !!txHash });
@@ -489,13 +605,19 @@ app.post("/events", async (req: Request, res: Response) => {
 app.post("/events/:eid/attest", async (req: Request, res: Response) => {
   try {
     const { eid } = req.params;
+    const traceContext = extractTraceContext(req.body);
     const actor = req.body.actorWallet ?? signer?.address;
     if (!actor) return res.status(400).json({ error: "actorWallet required" });
     const notaryRole = normalizeRole("NOTARY");
     await requireCredential(actor, notaryRole);
     const txHash = await maybeAttestEventOnChain(eid, req.body.dryRun);
-    ledger.logAction("event", `attest_event eid=${eid} actor=${actor}`);
-    return res.json({ eid, actor, txHash, onChain: !!txHash });
+    const runtimeTrace = { ...traceContext, traceId: traceContext.traceId ?? eid };
+    ledger.logAction("event", `attest_event eid=${eid} actor=${actor}`, {
+      ...runtimeTrace,
+      eid,
+      status: "attested",
+    });
+    return res.json(withTraceContext({ eid, actor, txHash, onChain: !!txHash }, runtimeTrace));
   } catch (err: any) {
     return res.status(500).json({ error: err.message });
   }
@@ -504,13 +626,19 @@ app.post("/events/:eid/attest", async (req: Request, res: Response) => {
 app.post("/events/:eid/verify", async (req: Request, res: Response) => {
   try {
     const { eid } = req.params;
+    const traceContext = extractTraceContext(req.body);
     const actor = req.body.actorWallet ?? signer?.address;
     if (!actor) return res.status(400).json({ error: "actorWallet required" });
     const auditorRole = normalizeRole("AUDITOR");
     await requireCredential(actor, auditorRole);
     const txHash = await maybeVerifyEventOnChain(eid, req.body.dryRun);
-    ledger.logAction("event", `verify_event eid=${eid} actor=${actor}`);
-    return res.json({ eid, actor, txHash, onChain: !!txHash });
+    const runtimeTrace = { ...traceContext, traceId: traceContext.traceId ?? eid };
+    ledger.logAction("event", `verify_event eid=${eid} actor=${actor}`, {
+      ...runtimeTrace,
+      eid,
+      status: "verified",
+    });
+    return res.json(withTraceContext({ eid, actor, txHash, onChain: !!txHash }, runtimeTrace));
   } catch (err: any) {
     return res.status(500).json({ error: err.message });
   }
@@ -520,13 +648,22 @@ app.post("/events/:eid/reject", async (req: Request, res: Response) => {
   try {
     const { eid } = req.params;
     const { reason, actorWallet, dryRun } = req.body;
+    const traceContext = extractTraceContext(req.body);
     if (!reason) return res.status(400).json({ error: "reason required" });
     const actor = actorWallet ?? signer?.address ?? "unknown";
     const reasonHash = ethers.keccak256(ethers.toUtf8Bytes(reason));
     const txHash = await maybeRejectEventOnChain(eid, reasonHash, dryRun);
-    ledger.logAction("event", `reject_event eid=${eid} reasonHash=${reasonHash}`);
-    appendJsonl(eventLogPath, { eid, action: "reject", reasonHash, actor, timestamp: new Date().toISOString() });
-    return res.json({ eid, reasonHash, actor, txHash, onChain: !!txHash });
+    const runtimeTrace = { ...traceContext, traceId: traceContext.traceId ?? eid };
+    ledger.logAction("event", `reject_event eid=${eid} reasonHash=${reasonHash}`, {
+      ...runtimeTrace,
+      eid,
+      status: "rejected",
+    });
+    appendJsonl(
+      eventLogPath,
+      withTraceContext({ eid, action: "reject", reasonHash, actor, timestamp: new Date().toISOString() }, runtimeTrace)
+    );
+    return res.json(withTraceContext({ eid, reasonHash, actor, txHash, onChain: !!txHash }, runtimeTrace));
   } catch (err: any) {
     return res.status(500).json({ error: err.message });
   }
@@ -613,6 +750,7 @@ function canonicalPaymentRef(ref: any) {
 app.post("/ramps/cash-in/request", async (req: Request, res: Response) => {
   try {
     const { wallet, amount, paymentRef, eventType, payload, vids, dryRun } = req.body;
+    const traceContext = extractTraceContext(req.body);
     if (!wallet || !amount || !eventType) {
       return res.status(400).json({ error: "wallet, amount, eventType required" });
     }
@@ -624,22 +762,36 @@ app.post("/ramps/cash-in/request", async (req: Request, res: Response) => {
       actorWallet: wallet,
       payloadHash,
       vids: Array.isArray(vids) ? vids.map((v: any) => computeVID(typeof v === "string" ? v : JSON.stringify(v))) : [],
+      ...traceContext,
     });
     const eid = computeEID(canonicalizeEvent(packet));
+    const runtimeTrace = { ...traceContext, traceId: traceContext.traceId ?? eid };
+    const packetVids = Array.isArray(packet.vids) ? (packet.vids as string[]) : [];
 
-    appendJsonl(rampLogPath, { eid, wallet, amount, paymentRefHash, action: "cash_in_request", timestamp: new Date().toISOString() });
-    ledger.logAction("ramp", `cash_in_request wallet=${wallet} eid=${eid} amount=${amount}`);
+    appendJsonl(
+      rampLogPath,
+      withTraceContext(
+        { eid, wallet, amount, paymentRefHash, action: "cash_in_request", timestamp: new Date().toISOString() },
+        runtimeTrace
+      )
+    );
+    ledger.logAction("ramp", `cash_in_request wallet=${wallet} eid=${eid} amount=${amount}`, {
+      ...runtimeTrace,
+      eid,
+      vids: packetVids,
+      status: "requested",
+    });
 
     if (paymentRefRegistry && !dryRun) {
       await paymentRefRegistry.registerRef(paymentRefHash, eid);
     }
     if (eventContract && !dryRun) {
-      await maybeCreateEventOnChain(eid, evtType, payloadHash, packet.vids, dryRun);
+      await maybeCreateEventOnChain(eid, evtType, payloadHash, packetVids, dryRun);
     }
     if (rampVaultContract && !dryRun) {
       await rampVaultContract.requestCashIn(eid, amount, paymentRefHash);
     }
-    return res.json({ eid, paymentRefHash });
+    return res.json(withTraceContext({ eid, paymentRefHash }, runtimeTrace));
   } catch (err: any) {
     return res.status(500).json({ error: err.message });
   }
@@ -648,17 +800,27 @@ app.post("/ramps/cash-in/request", async (req: Request, res: Response) => {
 app.post("/ramps/cash-in/confirm", async (req: Request, res: Response) => {
   try {
     const { eid, confirmation, dryRun } = req.body;
+    const traceContext = extractTraceContext(req.body);
     if (!eid || !confirmation) return res.status(400).json({ error: "eid and confirmation required" });
     const confirmationVID = computeVID(typeof confirmation === "string" ? confirmation : JSON.stringify(confirmation));
-    ledger.logAction("ramp", `cash_in_confirm eid=${eid}`);
+    const runtimeTrace = { ...traceContext, traceId: traceContext.traceId ?? eid };
+    ledger.logAction("ramp", `cash_in_confirm eid=${eid}`, {
+      ...runtimeTrace,
+      eid,
+      vids: [confirmationVID],
+      status: "confirmed",
+    });
     if (rampVaultContract && !dryRun) {
       await rampVaultContract.confirmCashIn(eid, confirmationVID);
     }
-    appendJsonl(rampLogPath, { eid, confirmationVID, action: "cash_in_confirm", timestamp: new Date().toISOString() });
+    appendJsonl(
+      rampLogPath,
+      withTraceContext({ eid, confirmationVID, action: "cash_in_confirm", timestamp: new Date().toISOString() }, runtimeTrace)
+    );
     if (evidenceAnchorContract && !dryRun) {
-      await maybeAnchorEvidence(confirmationVID, 1, eid, dryRun); // AnchorType.EVIDENCE
+      await maybeAnchorEvidence(confirmationVID, 1, eid, dryRun, runtimeTrace); // AnchorType.EVIDENCE
     }
-    return res.json({ eid, confirmationVID });
+    return res.json(withTraceContext({ eid, confirmationVID }, runtimeTrace));
   } catch (err: any) {
     return res.status(500).json({ error: err.message });
   }
@@ -667,6 +829,7 @@ app.post("/ramps/cash-in/confirm", async (req: Request, res: Response) => {
 app.post("/ramps/cash-out/request", async (req: Request, res: Response) => {
   try {
     const { wallet, amount, payoutRef, eventType, payload, vids, dryRun } = req.body;
+    const traceContext = extractTraceContext(req.body);
     if (!wallet || !amount || !eventType) {
       return res.status(400).json({ error: "wallet, amount, eventType required" });
     }
@@ -678,22 +841,36 @@ app.post("/ramps/cash-out/request", async (req: Request, res: Response) => {
       actorWallet: wallet,
       payloadHash,
       vids: Array.isArray(vids) ? vids.map((v: any) => computeVID(typeof v === "string" ? v : JSON.stringify(v))) : [],
+      ...traceContext,
     });
     const eid = computeEID(canonicalizeEvent(packet));
+    const runtimeTrace = { ...traceContext, traceId: traceContext.traceId ?? eid };
+    const packetVids = Array.isArray(packet.vids) ? (packet.vids as string[]) : [];
 
-    appendJsonl(rampLogPath, { eid, wallet, amount, payoutRefHash, action: "cash_out_request", timestamp: new Date().toISOString() });
-    ledger.logAction("ramp", `cash_out_request wallet=${wallet} eid=${eid} amount=${amount}`);
+    appendJsonl(
+      rampLogPath,
+      withTraceContext(
+        { eid, wallet, amount, payoutRefHash, action: "cash_out_request", timestamp: new Date().toISOString() },
+        runtimeTrace
+      )
+    );
+    ledger.logAction("ramp", `cash_out_request wallet=${wallet} eid=${eid} amount=${amount}`, {
+      ...runtimeTrace,
+      eid,
+      vids: packetVids,
+      status: "requested",
+    });
 
     if (paymentRefRegistry && !dryRun) {
       await paymentRefRegistry.registerRef(payoutRefHash, eid);
     }
     if (eventContract && !dryRun) {
-      await maybeCreateEventOnChain(eid, evtType, payloadHash, packet.vids, dryRun);
+      await maybeCreateEventOnChain(eid, evtType, payloadHash, packetVids, dryRun);
     }
     if (rampVaultContract && !dryRun) {
       await rampVaultContract.requestCashOut(eid, amount, payoutRefHash);
     }
-    return res.json({ eid, payoutRefHash });
+    return res.json(withTraceContext({ eid, payoutRefHash }, runtimeTrace));
   } catch (err: any) {
     return res.status(500).json({ error: err.message });
   }
@@ -702,17 +879,27 @@ app.post("/ramps/cash-out/request", async (req: Request, res: Response) => {
 app.post("/ramps/cash-out/confirm", async (req: Request, res: Response) => {
   try {
     const { eid, confirmation, dryRun } = req.body;
+    const traceContext = extractTraceContext(req.body);
     if (!eid || !confirmation) return res.status(400).json({ error: "eid and confirmation required" });
     const confirmationVID = computeVID(typeof confirmation === "string" ? confirmation : JSON.stringify(confirmation));
-    ledger.logAction("ramp", `cash_out_confirm eid=${eid}`);
+    const runtimeTrace = { ...traceContext, traceId: traceContext.traceId ?? eid };
+    ledger.logAction("ramp", `cash_out_confirm eid=${eid}`, {
+      ...runtimeTrace,
+      eid,
+      vids: [confirmationVID],
+      status: "confirmed",
+    });
     if (rampVaultContract && !dryRun) {
       await rampVaultContract.confirmCashOut(eid, confirmationVID);
     }
-    appendJsonl(rampLogPath, { eid, confirmationVID, action: "cash_out_confirm", timestamp: new Date().toISOString() });
+    appendJsonl(
+      rampLogPath,
+      withTraceContext({ eid, confirmationVID, action: "cash_out_confirm", timestamp: new Date().toISOString() }, runtimeTrace)
+    );
     if (evidenceAnchorContract && !dryRun) {
-      await maybeAnchorEvidence(confirmationVID, 1, eid, dryRun);
+      await maybeAnchorEvidence(confirmationVID, 1, eid, dryRun, runtimeTrace);
     }
-    return res.json({ eid, confirmationVID });
+    return res.json(withTraceContext({ eid, confirmationVID }, runtimeTrace));
   } catch (err: any) {
     return res.status(500).json({ error: err.message });
   }
@@ -732,7 +919,18 @@ app.get("/ramps/:eid", async (req: Request, res: Response) => {
   return res.json({ eid, logs, onChain });
 });
 
-const port = process.env.PORT || 4000;
-app.listen(port, () => {
-  console.log(`Identity & Roles API listening on port ${port} (on-chain=${Boolean(signer)})`);
-});
+function startServer(port = Number(process.env.PORT || 4000)) {
+  const listener = app.listen(port, () => {
+    const address = listener.address();
+    const resolvedPort = typeof address === "object" && address ? address.port : port;
+    process.env.CLOCKCHAIN_OPERATOR_API_URL = `http://127.0.0.1:${resolvedPort}`;
+    console.log(`Identity & Roles API listening on port ${resolvedPort} (on-chain=${Boolean(signer)})`);
+  });
+  return listener;
+}
+
+if (require.main === module) {
+  startServer();
+}
+
+export { app, startServer, operatorAI, uiCopilot };

@@ -4,10 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const electron_1 = require("electron");
-const path_1 = __importDefault(require("path"));
-const fs_1 = __importDefault(require("fs"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const fs_1 = __importDefault(require("fs"));
+const path_1 = __importDefault(require("path"));
 const isDev = !!process.env.ELECTRON_START_URL;
+let mainWindow = null;
 for (const envPath of [
     path_1.default.resolve(process.cwd(), '.env'),
     path_1.default.resolve(process.cwd(), '..', '..', '.env')
@@ -25,6 +26,9 @@ const defaultControlRoomState = {
         slackWebhookUrl: ''
     }
 };
+function getBackendBaseUrl() {
+    return process.env.CATALYST_API_URL || `http://127.0.0.1:${process.env.PORT || 4000}`;
+}
 function getControlRoomStatePath() {
     return path_1.default.join(electron_1.app.getPath('userData'), 'control-room-state.json');
 }
@@ -82,8 +86,19 @@ async function jsonRpc(url, method, params = []) {
     }
     return payload.result;
 }
+async function backendRequest(pathname, init) {
+    const response = await fetch(`${getBackendBaseUrl()}${pathname}`, {
+        headers: { 'content-type': 'application/json', ...(init?.headers ?? {}) },
+        ...init
+    });
+    const payload = (await response.json());
+    if (!response.ok) {
+        throw new Error(payload.error || `Backend HTTP ${response.status}`);
+    }
+    return payload;
+}
 function createWindow() {
-    const win = new electron_1.BrowserWindow({
+    mainWindow = new electron_1.BrowserWindow({
         title: 'Catalyst GUI',
         width: 1200,
         height: 800,
@@ -98,20 +113,23 @@ function createWindow() {
             sandbox: true
         }
     });
+    mainWindow.on('closed', () => {
+        mainWindow = null;
+    });
     if (isDev && process.env.ELECTRON_START_URL) {
-        win.loadURL(process.env.ELECTRON_START_URL);
-        win.webContents.on('did-fail-load', () => {
-            win.loadURL(process.env.ELECTRON_START_URL);
+        mainWindow.loadURL(process.env.ELECTRON_START_URL);
+        mainWindow.webContents.on('did-fail-load', () => {
+            mainWindow?.loadURL(process.env.ELECTRON_START_URL);
         });
-        win.webContents.setWindowOpenHandler(({ url }) => {
+        mainWindow.webContents.setWindowOpenHandler(({ url }) => {
             electron_1.shell.openExternal(url);
             return { action: 'deny' };
         });
     }
     else {
         const indexPath = path_1.default.join(__dirname, '../dist/renderer/index.html');
-        win.loadFile(indexPath);
-        win.webContents.setWindowOpenHandler(({ url }) => {
+        mainWindow.loadFile(indexPath);
+        mainWindow.webContents.setWindowOpenHandler(({ url }) => {
             electron_1.shell.openExternal(url);
             return { action: 'deny' };
         });
@@ -129,6 +147,38 @@ electron_1.app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
         electron_1.app.quit();
     }
+});
+electron_1.ipcMain.handle('operations:list', () => {
+    const state = readControlRoomState();
+    return { operations: state.operations };
+});
+electron_1.ipcMain.handle('operations:create', (_event, input) => {
+    const state = readControlRoomState();
+    const next = {
+        id: typeof input?.id === 'string' && input.id ? input.id : `op-${Date.now()}`,
+        name: typeof input?.name === 'string' && input.name ? input.name : 'New Clockchain operation',
+        owner: typeof input?.owner === 'string' && input.owner ? input.owner : 'Ops Desk',
+        status: asStatus(input?.status),
+        updatedAt: new Date().toISOString(),
+        risk: asRisk(input?.risk)
+    };
+    const operations = [next, ...state.operations].slice(0, 25);
+    writeControlRoomState({ ...state, operations });
+    return { operations };
+});
+electron_1.ipcMain.handle('notifications:get', () => {
+    const state = readControlRoomState();
+    return { notifications: state.notifications };
+});
+electron_1.ipcMain.handle('notifications:update', (_event, patch) => {
+    const state = readControlRoomState();
+    const notifications = {
+        emailEnabled: patch?.emailEnabled ?? state.notifications.emailEnabled,
+        slackEnabled: patch?.slackEnabled ?? state.notifications.slackEnabled,
+        slackWebhookUrl: typeof patch?.slackWebhookUrl === 'string' ? patch.slackWebhookUrl : state.notifications.slackWebhookUrl
+    };
+    writeControlRoomState({ ...state, notifications });
+    return { notifications };
 });
 electron_1.ipcMain.handle('refresh', () => {
     return { ok: true, at: Date.now() };
@@ -149,46 +199,29 @@ electron_1.ipcMain.handle('sepolia:status', async () => {
         return { ok: false, rpcUrl, error: message, at: Date.now() };
     }
 });
-electron_1.ipcMain.handle('operations:list', () => {
-    const state = readControlRoomState();
-    return { ok: true, operations: state.operations };
-});
-electron_1.ipcMain.handle('operations:create', (_event, payload) => {
-    const state = readControlRoomState();
-    const id = `op_${Date.now()}_${state.operations.length + 1}`;
-    const today = new Date().toISOString().slice(0, 10);
-    const operation = {
-        id,
-        name: payload.name?.trim() || `Ops Intake ${state.operations.length + 1}`,
-        owner: payload.owner?.trim() || 'Control Room',
-        status: asStatus(payload.status),
-        updatedAt: payload.updatedAt || today,
-        risk: asRisk(payload.risk)
-    };
-    state.operations = [operation, ...state.operations];
-    writeControlRoomState(state);
-    return { ok: true, operation, operations: state.operations };
-});
-electron_1.ipcMain.handle('notifications:get', () => {
-    const state = readControlRoomState();
-    return { ok: true, notifications: state.notifications };
-});
-electron_1.ipcMain.handle('notifications:update', (_event, payload) => {
-    const state = readControlRoomState();
-    const next = {
-        ...state.notifications,
-        ...payload,
-        emailEnabled: payload.emailEnabled ?? state.notifications.emailEnabled,
-        slackEnabled: payload.slackEnabled ?? state.notifications.slackEnabled,
-        slackWebhookUrl: typeof payload.slackWebhookUrl === 'string'
-            ? payload.slackWebhookUrl.trim()
-            : state.notifications.slackWebhookUrl
-    };
-    // A Slack integration cannot be enabled without a webhook URL.
-    if (next.slackEnabled && next.slackWebhookUrl.length === 0) {
-        throw new Error('Slack webhook URL is required before enabling Slack notifications.');
-    }
-    state.notifications = next;
-    writeControlRoomState(state);
-    return { ok: true, notifications: state.notifications };
-});
+electron_1.ipcMain.handle('ai:cases:list', async () => backendRequest('/ai/cases'));
+electron_1.ipcMain.handle('ai:cases:create', async (_event, input) => backendRequest('/ai/cases', {
+    method: 'POST',
+    body: JSON.stringify(input)
+}));
+electron_1.ipcMain.handle('ai:cases:plan', async (_event, caseId) => backendRequest(`/ai/cases/${caseId}/plan`, { method: 'POST', body: '{}' }));
+electron_1.ipcMain.handle('ai:cases:approve', async (_event, caseId, input) => backendRequest(`/ai/cases/${caseId}/approve`, {
+    method: 'POST',
+    body: JSON.stringify(input)
+}));
+electron_1.ipcMain.handle('ai:cases:execute', async (_event, caseId, input) => backendRequest(`/ai/cases/${caseId}/execute`, {
+    method: 'POST',
+    body: JSON.stringify(input ?? {})
+}));
+electron_1.ipcMain.handle('ai:cases:report', async (_event, caseId) => backendRequest(`/ai/cases/${caseId}/report`));
+electron_1.ipcMain.handle('ai:release:readiness', async (_event, domain) => backendRequest(domain ? `/ai/release/readiness?domain=${encodeURIComponent(domain)}` : '/ai/release/readiness'));
+electron_1.ipcMain.handle('ui:cases:list', async () => backendRequest('/ai/ui/cases'));
+electron_1.ipcMain.handle('ui:cases:create', async (_event, input) => backendRequest('/ai/ui/cases', {
+    method: 'POST',
+    body: JSON.stringify(input)
+}));
+electron_1.ipcMain.handle('ui:cases:plan', async (_event, caseId) => backendRequest(`/ai/ui/cases/${caseId}/plan`, {
+    method: 'POST',
+    body: '{}'
+}));
+electron_1.ipcMain.handle('ui:cases:report', async (_event, caseId) => backendRequest(`/ai/ui/cases/${caseId}/report`));

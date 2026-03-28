@@ -55,3 +55,64 @@ NT:S#S-120 (EVD-CHAIN-001 -SUP[w=0.93]-> H-LAT-001) why{validated network suppor
 NT:S#S-121 (C-ANT-001 -SUP[w=0.79]-> DEC-CI-001) why{projected architecture requires ci controls} evd{EVD#EVD-CI-001} rev{allowed}
 NT:S#S-122 (Q-OPS-001 -DEP[w=0.85]-> TST-NTX-001) why{question answered by ntx validator} evd{EVD#EVD-CI-001} rev{allowed}
 NT:S#S-123 (Q-MAIN-001 -DEP[w=0.80]-> DEC-CI-001) why{mainnet question depends on ci gate} evd{EVD#EVD-CI-001} rev{allowed}
+
+NT:S#S-200 (REQ-EVT-001 -IMP[w=0.93]-> CTR-EVT-001) why{event traceability requirement implies canonical packet contract} evd{EVD#EVD-EVT-001} rev{allowed}
+NT:S#S-201 (REQ-IDC-001 -IMP[w=0.93]-> CTR-IDC-001) why{identity traceability requirement implies runtime logging contract} evd{EVD#EVD-IDC-001} rev{allowed}
+NT:S#S-202 (REQ-RMP-001 -IMP[w=0.93]-> CTR-RMP-001) why{ramp traceability requirement implies continuity contract} evd{EVD#EVD-RMP-001} rev{allowed}
+
+NT:S#S-210 (DEC-EVT-001 -DEP[w=0.88]-> CMP-EVT-001) why{event metadata policy drives runtime component} evd{EVD#EVD-EVT-001} rev{allowed}
+NT:S#S-211 (DEC-IDC-001 -DEP[w=0.88]-> CMP-IDC-001) why{identity trace anchor drives runtime component} evd{EVD#EVD-IDC-001} rev{allowed}
+NT:S#S-212 (DEC-RMP-001 -DEP[w=0.88]-> CMP-RMP-001) why{ramp continuity policy drives runtime component} evd{EVD#EVD-RMP-001} rev{allowed}
+
+NT:S#S-220 (CMP-EVT-001 -DEP[w=0.90]-> ART-EVT-CANON-TS-001) why{event component depends on canonical event builder} evd{EVD#EVD-EVT-001} rev{allowed}
+NT:S#S-221 (CMP-IDC-001 -DEP[w=0.90]-> ART-IDC-SERVER-TS-001) why{identity component depends on backend route handlers} evd{EVD#EVD-IDC-001} rev{allowed}
+NT:S#S-222 (CMP-IDC-001 -DEP[w=0.86]-> ART-IDC-STORY-TS-001) why{identity component depends on narrative ledger} evd{EVD#EVD-IDC-001} rev{allowed}
+NT:S#S-223 (CMP-RMP-001 -DEP[w=0.90]-> ART-RMP-SERVER-TS-001) why{ramp component depends on backend route handlers} evd{EVD#EVD-RMP-001} rev{allowed}
+NT:S#S-224 (CMP-RMP-001 -DEP[w=0.86]-> ART-IDC-STORY-TS-001) why{ramp component depends on narrative ledger} evd{EVD#EVD-RMP-001} rev{allowed}
+
+NT:S#S-230 (ART-EVT-CANON-TS-001 -IMPL[w=0.94]-> CTR-EVT-001) why{canonical builder implements event trace contract} evd{EVD#EVD-EVT-001} rev{allowed}
+NT:S#S-231 (ART-IDC-SERVER-TS-001 -IMPL[w=0.92]-> CTR-IDC-001) why{server handlers implement identity trace contract} evd{EVD#EVD-IDC-001} rev{allowed}
+NT:S#S-232 (ART-IDC-STORY-TS-001 -IMPL[w=0.90]-> CTR-IDC-001) why{story ledger implements narrative continuity} evd{EVD#EVD-IDC-001} rev{allowed}
+NT:S#S-233 (ART-RMP-SERVER-TS-001 -IMPL[w=0.92]-> CTR-RMP-001) why{server handlers implement ramp trace contract} evd{EVD#EVD-RMP-001} rev{allowed}
+NT:S#S-234 (ART-IDC-STORY-TS-001 -IMPL[w=0.90]-> CTR-RMP-001) why{story ledger captures ramp continuity} evd{EVD#EVD-RMP-001} rev{allowed}
+
+NT:S#S-240 (REQ-EVT-001 -TRACE[w=0.92]-> TST-EVT-001) why{event requirement validated by canonical metadata tests} evd{EVD#EVD-EVT-001} rev{allowed}
+NT:S#S-241 (REQ-EVT-001 -TRACE[w=0.90]-> MET-EVT-001) why{event requirement observed by trace coverage metric} evd{EVD#EVD-EVT-001} rev{allowed}
+NT:S#S-242 (CTR-EVT-001 -TRACE[w=0.92]-> TST-EVT-001) why{event contract validated by canonical metadata tests} evd{EVD#EVD-EVT-001} rev{allowed}
+NT:S#S-243 (CTR-EVT-001 -TRACE[w=0.90]-> MET-EVT-001) why{event contract observed by trace coverage metric} evd{EVD#EVD-EVT-001} rev{allowed}
+
+NT:S#S-244 (REQ-IDC-001 -TRACE[w=0.92]-> TST-IDC-001) why{identity requirement validated by persistence tests} evd{EVD#EVD-IDC-001} rev{allowed}
+NT:S#S-245 (REQ-IDC-001 -TRACE[w=0.90]-> MET-IDC-001) why{identity requirement observed by trace coverage metric} evd{EVD#EVD-IDC-001} rev{allowed}
+NT:S#S-246 (CTR-IDC-001 -TRACE[w=0.92]-> TST-IDC-001) why{identity contract validated by persistence tests} evd{EVD#EVD-IDC-001} rev{allowed}
+NT:S#S-247 (CTR-IDC-001 -TRACE[w=0.90]-> MET-IDC-001) why{identity contract observed by trace coverage metric} evd{EVD#EVD-IDC-001} rev{allowed}
+
+NT:S#S-248 (REQ-RMP-001 -TRACE[w=0.92]-> TST-RMP-001) why{ramp requirement validated by continuity tests} evd{EVD#EVD-RMP-001} rev{allowed}
+NT:S#S-249 (REQ-RMP-001 -TRACE[w=0.90]-> MET-RMP-001) why{ramp requirement observed by trace coverage metric} evd{EVD#EVD-RMP-001} rev{allowed}
+NT:S#S-250 (CTR-RMP-001 -TRACE[w=0.92]-> TST-RMP-001) why{ramp contract validated by continuity tests} evd{EVD#EVD-RMP-001} rev{allowed}
+NT:S#S-251 (CTR-RMP-001 -TRACE[w=0.90]-> MET-RMP-001) why{ramp contract observed by trace coverage metric} evd{EVD#EVD-RMP-001} rev{allowed}
+
+NT:S#S-260 (AX-001 -SUP[w=0.95]-> REQ-KRN-001) why{critical decisions need explicit upstream causes} evd{EVD#EVD-KRN-001} rev{allowed}
+NT:S#S-261 (POL-KRN-001 -SUP[w=0.94]-> DEC-KRN-001) why{kernel policy constrains effective decision} evd{EVD#EVD-KRN-001} rev{allowed}
+NT:S#S-262 (REQ-KRN-001 -IMP[w=0.93]-> CTR-KRN-001) why{kernel requirement implies governed case contract} evd{EVD#EVD-KRN-001} rev{allowed}
+NT:S#S-263 (DEC-KRN-001 -DEP[w=0.90]-> CMP-KRN-001) why{decision policy drives kernel component} evd{EVD#EVD-KRN-001} rev{allowed}
+NT:S#S-264 (CMP-KRN-001 -DEP[w=0.91]-> ART-KRN-KERNEL-TS-001) why{kernel component depends on decision kernel artifact} evd{EVD#EVD-KRN-001} rev{allowed}
+NT:S#S-265 (ART-KRN-KERNEL-TS-001 -IMPL[w=0.94]-> CTR-KRN-001) why{decision kernel artifact implements governed case contract} evd{EVD#EVD-KRN-001} rev{allowed}
+NT:S#S-266 (REQ-KRN-001 -TRACE[w=0.92]-> TST-KRN-001) why{kernel requirement validated by operator ai tests} evd{EVD#EVD-KRN-001} rev{allowed}
+NT:S#S-267 (REQ-KRN-001 -TRACE[w=0.90]-> MET-KRN-001) why{kernel requirement observed by case and report metrics} evd{EVD#EVD-KRN-001} rev{allowed}
+NT:S#S-268 (CTR-KRN-001 -TRACE[w=0.92]-> TST-KRN-001) why{kernel contract validated by operator ai tests} evd{EVD#EVD-KRN-001} rev{allowed}
+NT:S#S-269 (CTR-KRN-001 -TRACE[w=0.90]-> MET-KRN-001) why{kernel contract observed by operator ai metrics} evd{EVD#EVD-KRN-001} rev{allowed}
+NT:S#S-270 (Q-KRN-001 -DEP[w=0.84]-> TST-KRN-001) why{kernel question answered by operator ai tests} evd{EVD#EVD-KRN-001} rev{allowed}
+
+NT:S#S-280 (REQ-GUI-001 -IMP[w=0.93]-> CTR-GUI-001) why{gui requirement implies governed shell contract} evd{EVD#EVD-GUI-001} rev{allowed}
+NT:S#S-281 (DEC-GUI-001 -DEP[w=0.90]-> CMP-GUI-001) why{gui review decision drives activation component} evd{EVD#EVD-GUI-001} rev{allowed}
+NT:S#S-282 (CMP-GUI-001 -DEP[w=0.90]-> ART-GUI-APP-TSX-001) why{gui component depends on app shell} evd{EVD#EVD-GUI-001} rev{allowed}
+NT:S#S-283 (CMP-GUI-001 -DEP[w=0.88]-> ART-GUI-UILAB-TSX-001) why{gui component depends on ui lab surface} evd{EVD#EVD-GUI-001} rev{allowed}
+NT:S#S-284 (CMP-GUI-001 -DEP[w=0.88]-> ART-GUI-COPILOT-TS-001) why{gui component depends on ui copilot backend} evd{EVD#EVD-GUI-001} rev{allowed}
+NT:S#S-285 (ART-GUI-APP-TSX-001 -IMPL[w=0.93]-> CTR-GUI-001) why{app shell implements gui trace contract} evd{EVD#EVD-GUI-001} rev{allowed}
+NT:S#S-286 (ART-GUI-UILAB-TSX-001 -IMPL[w=0.92]-> CTR-GUI-001) why{ui lab implements gui review contract} evd{EVD#EVD-GUI-001} rev{allowed}
+NT:S#S-287 (ART-GUI-COPILOT-TS-001 -IMPL[w=0.92]-> CTR-GUI-001) why{ui copilot backend implements governed review contract} evd{EVD#EVD-GUI-001} rev{allowed}
+NT:S#S-288 (REQ-GUI-001 -TRACE[w=0.92]-> TST-GUI-001) why{gui requirement validated by renderer smoke tests} evd{EVD#EVD-GUI-001} rev{allowed}
+NT:S#S-289 (REQ-GUI-001 -TRACE[w=0.90]-> MET-GUI-001) why{gui requirement observed by smoke and artifact metrics} evd{EVD#EVD-GUI-001} rev{allowed}
+NT:S#S-290 (CTR-GUI-001 -TRACE[w=0.92]-> TST-GUI-001) why{gui contract validated by renderer smoke tests} evd{EVD#EVD-GUI-001} rev{allowed}
+NT:S#S-291 (CTR-GUI-001 -TRACE[w=0.90]-> MET-GUI-001) why{gui contract observed by smoke and artifact metrics} evd{EVD#EVD-GUI-001} rev{allowed}
+NT:S#S-292 (Q-GUI-001 -DEP[w=0.84]-> TST-GUI-001) why{gui question answered by smoke tests} evd{EVD#EVD-GUI-001} rev{allowed}

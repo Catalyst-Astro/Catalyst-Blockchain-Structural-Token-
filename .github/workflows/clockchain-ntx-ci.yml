@@ -20,7 +20,7 @@ on:
 
 jobs:
   ntx_validate:
-    name: Validate NTX Coverage (NT-R2)
+    name: Validate Clockchain Traceability
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -36,4 +36,15 @@ jobs:
         run: npm ci --prefer-offline --no-audit --fund=false
 
       - name: Run NTX validation
-        run: npm run clockchain:validate
+        run: npm run clockchain:validate:ci
+
+      - name: Publish traceability summary
+        run: |
+          echo "## Clockchain traceability" >> $GITHUB_STEP_SUMMARY
+          cat artifacts/clockchain/traceability-summary.md >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload traceability artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: clockchain-traceability
+          path: artifacts/clockchain/

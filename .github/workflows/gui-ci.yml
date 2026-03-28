@@ -1,0 +1,103 @@
+name: GUI CI
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - "apps/catalyst-gui/**"
+      - "backend/api/ai/**"
+      - "docs/clockchain/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/gui-ci.yml"
+  pull_request:
+    paths:
+      - "apps/catalyst-gui/**"
+      - "backend/api/ai/**"
+      - "docs/clockchain/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/gui-ci.yml"
+  workflow_dispatch:
+
+jobs:
+  gui:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install root dependencies
+        run: npm ci --prefer-offline --no-audit --fund=false
+
+      - name: Install GUI dependencies
+        run: npm --prefix apps/catalyst-gui ci --prefer-offline --no-audit --fund=false
+
+      - name: Install Playwright Chromium
+        run: npm --prefix apps/catalyst-gui exec playwright install --with-deps chromium
+
+      - name: Start backend API
+        run: |
+          mkdir -p artifacts/gui
+          npm run api:identity > artifacts/gui/backend.log 2>&1 &
+          echo $! > artifacts/gui/backend.pid
+          sleep 5
+
+      - name: Run GUI doctor
+        run: npm run gui:doctor
+
+      - name: Build GUI
+        run: npm run gui:build
+
+      - name: Run renderer smoke tests
+        run: npm run gui:test:smoke
+
+      - name: Validate Clockchain traceability
+        run: npm run clockchain:validate:ci
+
+      - name: Capture GUI smoke artifacts
+        run: npm run gui:artifacts
+
+      - name: Stop backend API
+        if: always()
+        run: |
+          if [ -f artifacts/gui/backend.pid ]; then
+            kill $(cat artifacts/gui/backend.pid) || true
+          fi
+
+      - name: Publish summary
+        if: always()
+        run: |
+          echo "## GUI smoke" >> $GITHUB_STEP_SUMMARY
+          if [ -f artifacts/gui/smoke-report.md ]; then
+            cat artifacts/gui/smoke-report.md >> $GITHUB_STEP_SUMMARY
+          else
+            echo "GUI smoke report not generated." >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## Clockchain traceability" >> $GITHUB_STEP_SUMMARY
+          if [ -f artifacts/clockchain/traceability-summary.md ]; then
+            cat artifacts/clockchain/traceability-summary.md >> $GITHUB_STEP_SUMMARY
+          else
+            echo "Clockchain traceability summary not generated." >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Upload GUI artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gui-artifacts
+          path: artifacts/gui/
+
+      - name: Upload Clockchain traceability artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: clockchain-traceability
+          path: artifacts/clockchain/
