@@ -96,6 +96,7 @@ type UiReviewReport = {
   evidenceRefs: string[];
   zkRefs: string[];
   traceId?: string;
+  artifactManifestPath?: string;
   proposal: UiProposal;
 };
 type UiCopilotCase = {
@@ -123,6 +124,12 @@ type ReleaseReadiness = {
     deployScriptPresent: boolean;
     hardhatConfigPresent: boolean;
     liveDeployEnabled: boolean;
+  };
+  latestGuiEvidence?: {
+    uiCaseId: string;
+    manifestPath: string;
+    generatedAt: string;
+    captureMode: 'backend_coupled';
   };
 };
 

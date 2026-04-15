@@ -132,6 +132,54 @@ function buildRefList(...values: Array<string | undefined | null | string[]>): s
   return [...new Set(values.flat().filter((entry): entry is string => typeof entry === "string" && entry.length > 0))].sort();
 }
 
+type LatestGuiEvidenceSummary = {
+  uiCaseId: string;
+  manifestPath: string;
+  generatedAt: string;
+  captureMode: "backend_coupled";
+};
+
+function findLatestGuiEvidence(): LatestGuiEvidenceSummary | undefined {
+  const casesRoot = path.join(process.cwd(), "artifacts", "gui", "cases");
+  if (!fs.existsSync(casesRoot)) {
+    return undefined;
+  }
+
+  let latest: LatestGuiEvidenceSummary | undefined;
+  for (const entry of fs.readdirSync(casesRoot, { withFileTypes: true })) {
+    if (!entry.isDirectory()) {
+      continue;
+    }
+    const manifestPath = path.join(casesRoot, entry.name, "manifest.json");
+    if (!fs.existsSync(manifestPath)) {
+      continue;
+    }
+
+    try {
+      const parsed = JSON.parse(fs.readFileSync(manifestPath, "utf8")) as Record<string, unknown>;
+      const uiCaseId = typeof parsed.uiCaseId === "string" ? parsed.uiCaseId : entry.name;
+      const generatedAt = typeof parsed.generatedAt === "string" ? parsed.generatedAt : "";
+      const captureMode = parsed.captureMode === "backend_coupled" ? "backend_coupled" : undefined;
+      if (!uiCaseId || !generatedAt || !captureMode) {
+        continue;
+      }
+      const candidate: LatestGuiEvidenceSummary = {
+        uiCaseId,
+        manifestPath: path.relative(process.cwd(), manifestPath).replace(/\\/g, "/"),
+        generatedAt,
+        captureMode,
+      };
+      if (!latest || latest.generatedAt.localeCompare(candidate.generatedAt) < 0) {
+        latest = candidate;
+      }
+    } catch {
+      continue;
+    }
+  }
+
+  return latest;
+}
+
 function buildExecutionAdapter(intent: ClockchainIntent): ExecutionAdapter | null {
   switch (intent) {
     case "verify_identity":
@@ -789,6 +837,7 @@ export class ClockchainOperatorAI {
 
   getReleaseReadiness(domain?: ClockchainDomain) {
     const readiness = this.traceResolver.getReleaseReadiness(domain);
+    const latestGuiEvidence = findLatestGuiEvidence();
     const envChecks = {
       rpcConfigured: Boolean(process.env.RPC_URL),
       privateKeyConfigured: Boolean(process.env.PRIVATE_KEY),
@@ -812,6 +861,7 @@ export class ClockchainOperatorAI {
       coverageRatio,
       envChecks,
       releaseGate,
+      latestGuiEvidence,
     };
   }
 

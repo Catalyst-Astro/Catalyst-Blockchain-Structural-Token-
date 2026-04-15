@@ -108,10 +108,11 @@ describe('GUI_SURFACE_STATES', () => {
           summary: 'Governed review report',
           recommendations: ['Review before merge.'],
           regressions: [],
-          screenshots: ['artifacts/gui/screenshots/ui-lab.png'],
-          evidenceRefs: ['backend/database/ui_reviews.jsonl'],
+          screenshots: ['artifacts/gui/cases/ui-case-1/screenshots/ui-lab.png'],
+          evidenceRefs: ['backend/database/ui_reviews.jsonl', 'artifacts/gui/cases/ui-case-1/manifest.json'],
           zkRefs: ['ZK-GUI-001'],
           traceId: 'GUI-001',
+          artifactManifestPath: 'artifacts/gui/cases/ui-case-1/manifest.json',
           proposal: {
             tokens: ['--primary'],
             layoutChanges: ['Keep KPI band grouped.'],

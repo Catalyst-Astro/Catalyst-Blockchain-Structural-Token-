@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 
 export type StoryLedgerContext = {
+  caseId?: string;
   traceId?: string;
   reqId?: string;
   ctrId?: string;
@@ -48,6 +49,7 @@ export class StoryLedger {
     if (context.traceId) entry.traceId = context.traceId;
     if (context.reqId) entry.reqId = context.reqId;
     if (context.ctrId) entry.ctrId = context.ctrId;
+    if (context.caseId) entry.caseId = context.caseId;
     if (context.eid) entry.eid = context.eid;
     if (context.status) entry.status = context.status;
 

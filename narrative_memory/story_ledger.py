@@ -20,7 +20,7 @@ class StoryLedger:
             "action": action,
         }
         context = context or {}
-        for key in ("traceId", "reqId", "ctrId", "eid", "status"):
+        for key in ("traceId", "reqId", "ctrId", "caseId", "eid", "status"):
             value = context.get(key)
             if value:
                 entry[key] = value

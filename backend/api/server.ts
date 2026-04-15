@@ -7,6 +7,7 @@ import { ClockchainOperatorAI } from "./ai/controlPlane";
 import { registerClockchainOperatorRoutes } from "./ai/routes";
 import { ClockchainUiCopilot } from "./ai/uiCopilot";
 import { registerClockchainUiCopilotRoutes } from "./ai/uiRoutes";
+import { buildEventReadModel, findRelatedEventIdsByVid } from "./eventReadModel";
 import { appendJsonl, ensureFile, hashCanonical, readJsonl } from "./utils";
 import { buildEventPacket, canonicalizeEvent, computeEID, computeVID } from "../src/events/canonical";
 
@@ -131,7 +132,7 @@ const rampVaultContract =
 const paymentRefRegistry =
   signer && paymentRefRegistryAddress ? new ethers.Contract(paymentRefRegistryAddress, paymentRefAbi, signer) : null;
 
-type TraceContext = Omit<StoryLedgerContext, "eid" | "vids" | "status">;
+type TraceContext = Omit<StoryLedgerContext, "caseId" | "eid" | "vids" | "status">;
 
 function normalizeTraceRefs(value: unknown): string[] {
   if (!Array.isArray(value)) {
@@ -268,6 +269,15 @@ async function maybeRejectEventOnChain(eid: string, reasonHash: string, dryRun?:
   const tx = await eventContract.rejectEvent(eid, reasonHash);
   const receipt = await tx.wait();
   return receipt?.hash ?? tx.hash;
+}
+
+async function readEventOnChain(eid: string) {
+  if (!eventViewContract) return null;
+  try {
+    return await eventViewContract["getEvent(bytes32)"](eid);
+  } catch {
+    return null;
+  }
 }
 
 async function maybeAnchorEvidence(
@@ -571,7 +581,7 @@ app.post("/events", async (req: Request, res: Response) => {
       ? req.body.payloadHash
       : hashCanonical(payload ?? {});
     const vidList: string[] = Array.isArray(vids)
-      ? vids.map((v: any) => computeVID(typeof v === "string" ? v : JSON.stringify(v)))
+      ? vids.map((v: any) => computeVID(v))
       : [];
     const packet = buildEventPacket({
       eventType,
@@ -671,16 +681,9 @@ app.post("/events/:eid/reject", async (req: Request, res: Response) => {
 
 app.get("/events/:eid", async (req: Request, res: Response) => {
   const { eid } = req.params;
-  const logs = readJsonl(eventLogPath).filter((e) => e.eid === eid);
-  let onChain: any = null;
-  if (eventViewContract) {
-    try {
-      onChain = await eventViewContract["getEvent(bytes32)"](eid);
-    } catch {
-      // ignore if view not available
-    }
-  }
-  res.json({ eid, logs, onChain });
+  const onChain = await readEventOnChain(eid);
+  const readModel = buildEventReadModel({ eid, eventLogPath, onChain });
+  res.json(readModel);
 });
 
 async function verifyHash(hash: string, includeEventStatus: boolean) {
@@ -727,7 +730,19 @@ app.get("/verify/eid/:eid", async (req: Request, res: Response) => {
   try {
     const { eid } = req.params;
     const result = await verifyHash(eid, true);
-    return res.json(result);
+    const onChain = await readEventOnChain(eid);
+    const readModel = buildEventReadModel({ eid, eventLogPath, onChain });
+    const hasLocalCorrelation = readModel.logs.length > 0 || readModel.timeline.length > 0;
+    return res.json({
+      ...result,
+      relatedEvent: hasLocalCorrelation
+        ? {
+            eid: readModel.eid,
+            traceContext: readModel.traceContext,
+            lifecycle: readModel.lifecycle,
+          }
+        : null,
+    });
   } catch (err: any) {
     return res.status(500).json({ error: err.message });
   }
@@ -737,7 +752,23 @@ app.get("/verify/vid/:vid", async (req: Request, res: Response) => {
   try {
     const { vid } = req.params;
     const result = await verifyHash(vid, false);
-    return res.json(result);
+    const relatedEventIds = findRelatedEventIdsByVid(vid, eventLogPath);
+    const relatedEvents = await Promise.all(
+      relatedEventIds.map(async (eid) => {
+        const onChain = await readEventOnChain(eid);
+        const readModel = buildEventReadModel({ eid, eventLogPath, onChain });
+        return {
+          eid: readModel.eid,
+          traceId: readModel.traceContext.traceId,
+          reqId: readModel.traceContext.reqId,
+          ctrId: readModel.traceContext.ctrId,
+          payloadHash: readModel.lifecycle.payloadHash,
+          status: readModel.lifecycle.status,
+          lastTimestamp: readModel.lifecycle.lastTimestamp,
+        };
+      })
+    );
+    return res.json({ ...result, relatedEvents });
   } catch (err: any) {
     return res.status(500).json({ error: err.message });
   }
@@ -761,7 +792,7 @@ app.post("/ramps/cash-in/request", async (req: Request, res: Response) => {
       eventType,
       actorWallet: wallet,
       payloadHash,
-      vids: Array.isArray(vids) ? vids.map((v: any) => computeVID(typeof v === "string" ? v : JSON.stringify(v))) : [],
+      vids: Array.isArray(vids) ? vids.map((v: any) => computeVID(v)) : [],
       ...traceContext,
     });
     const eid = computeEID(canonicalizeEvent(packet));
@@ -802,7 +833,7 @@ app.post("/ramps/cash-in/confirm", async (req: Request, res: Response) => {
     const { eid, confirmation, dryRun } = req.body;
     const traceContext = extractTraceContext(req.body);
     if (!eid || !confirmation) return res.status(400).json({ error: "eid and confirmation required" });
-    const confirmationVID = computeVID(typeof confirmation === "string" ? confirmation : JSON.stringify(confirmation));
+    const confirmationVID = computeVID(confirmation);
     const runtimeTrace = { ...traceContext, traceId: traceContext.traceId ?? eid };
     ledger.logAction("ramp", `cash_in_confirm eid=${eid}`, {
       ...runtimeTrace,
@@ -840,7 +871,7 @@ app.post("/ramps/cash-out/request", async (req: Request, res: Response) => {
       eventType,
       actorWallet: wallet,
       payloadHash,
-      vids: Array.isArray(vids) ? vids.map((v: any) => computeVID(typeof v === "string" ? v : JSON.stringify(v))) : [],
+      vids: Array.isArray(vids) ? vids.map((v: any) => computeVID(v)) : [],
       ...traceContext,
     });
     const eid = computeEID(canonicalizeEvent(packet));
@@ -881,7 +912,7 @@ app.post("/ramps/cash-out/confirm", async (req: Request, res: Response) => {
     const { eid, confirmation, dryRun } = req.body;
     const traceContext = extractTraceContext(req.body);
     if (!eid || !confirmation) return res.status(400).json({ error: "eid and confirmation required" });
-    const confirmationVID = computeVID(typeof confirmation === "string" ? confirmation : JSON.stringify(confirmation));
+    const confirmationVID = computeVID(confirmation);
     const runtimeTrace = { ...traceContext, traceId: traceContext.traceId ?? eid };
     ledger.logAction("ramp", `cash_out_confirm eid=${eid}`, {
       ...runtimeTrace,

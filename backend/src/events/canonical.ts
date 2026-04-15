@@ -54,8 +54,13 @@ export function computeEID(canonicalEvent: string): string {
   return ethers.keccak256(ethers.toUtf8Bytes(canonicalEvent));
 }
 
-export function computeVID(data: Buffer | string): string {
-  const bytes = typeof data === "string" ? ethers.toUtf8Bytes(data) : data;
+export function computeVID(data: Buffer | Uint8Array | string | JsonValue): string {
+  const bytes =
+    typeof data === "string"
+      ? ethers.toUtf8Bytes(data)
+      : Buffer.isBuffer(data) || data instanceof Uint8Array
+        ? data
+        : ethers.toUtf8Bytes(JSON.stringify(canonicalize(data)));
   return ethers.keccak256(bytes);
 }
 

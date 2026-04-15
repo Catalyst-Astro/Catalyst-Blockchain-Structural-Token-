@@ -72,6 +72,7 @@ declare global {
     evidenceRefs: string[];
     zkRefs: string[];
     traceId?: string;
+    artifactManifestPath?: string;
     proposal: UiProposal;
   };
   type UiCopilotCase = {
@@ -137,6 +138,12 @@ declare global {
       deployScriptPresent: boolean;
       hardhatConfigPresent: boolean;
       liveDeployEnabled: boolean;
+    };
+    latestGuiEvidence?: {
+      uiCaseId: string;
+      manifestPath: string;
+      generatedAt: string;
+      captureMode: 'backend_coupled';
     };
   };
 

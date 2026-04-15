@@ -83,10 +83,22 @@ const uiReport: UiReviewReport = {
   summary: 'dashboard surface_review stays anchored to GUI-001 and emits a governed UI proposal.',
   recommendations: ['Review the proposal before merging any UI change.'],
   regressions: [],
-  screenshots: ['artifacts/gui/screenshots/dashboard.png'],
-  evidenceRefs: ['backend/database/ui_reviews.jsonl', 'artifacts/gui/reports/ui-case-1.md'],
+  screenshots: [
+    'artifacts/gui/cases/ui-case-1/screenshots/dashboard.png',
+    'artifacts/gui/cases/ui-case-1/screenshots/operator.png',
+    'artifacts/gui/cases/ui-case-1/screenshots/ui-lab.png',
+    'artifacts/gui/cases/ui-case-1/screenshots/settings.png'
+  ],
+  evidenceRefs: [
+    'backend/database/ui_reviews.jsonl',
+    'artifacts/gui/cases/ui-case-1/report.md',
+    'artifacts/gui/cases/ui-case-1/report.json',
+    'artifacts/gui/cases/ui-case-1/manifest.json',
+    'artifacts/gui/cases/ui-case-1/summary.md'
+  ],
   zkRefs: ['ZK-GUI-001'],
   traceId: 'GUI-001',
+  artifactManifestPath: 'artifacts/gui/cases/ui-case-1/manifest.json',
   proposal: uiCase.proposal!
 };
 
@@ -164,6 +176,12 @@ export function installMockCatalyst() {
         deployScriptPresent: true,
         hardhatConfigPresent: true,
         liveDeployEnabled: false
+      },
+      latestGuiEvidence: {
+        uiCaseId: 'ui-case-1',
+        manifestPath: 'artifacts/gui/cases/ui-case-1/manifest.json',
+        generatedAt: new Date('2026-03-20T11:05:00Z').toISOString(),
+        captureMode: 'backend_coupled'
       }
     }),
     uiCasesList: async () => ({ cases: [uiCase] }),

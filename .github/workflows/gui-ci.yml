@@ -75,10 +75,15 @@ jobs:
         if: always()
         run: |
           echo "## GUI smoke" >> $GITHUB_STEP_SUMMARY
-          if [ -f artifacts/gui/smoke-report.md ]; then
-            cat artifacts/gui/smoke-report.md >> $GITHUB_STEP_SUMMARY
+          if [ -f artifacts/gui/latest.json ]; then
+            node -e "const fs=require('fs'); const latest=JSON.parse(fs.readFileSync('artifacts/gui/latest.json','utf8')); process.stdout.write(latest.summaryPath || '');" > artifacts/gui/.latest-summary-path
+            if [ -s artifacts/gui/.latest-summary-path ] && [ -f "$(cat artifacts/gui/.latest-summary-path)" ]; then
+              cat "$(cat artifacts/gui/.latest-summary-path)" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "GUI latest summary pointer is empty." >> $GITHUB_STEP_SUMMARY
+            fi
           else
-            echo "GUI smoke report not generated." >> $GITHUB_STEP_SUMMARY
+            echo "GUI evidence summary not generated." >> $GITHUB_STEP_SUMMARY
           fi
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "## Clockchain traceability" >> $GITHUB_STEP_SUMMARY
@@ -93,7 +98,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: gui-artifacts
-          path: artifacts/gui/
+          path: |
+            artifacts/gui/cases/
+            artifacts/gui/latest.json
+            artifacts/gui/latest.md
+            artifacts/gui/backend.log
 
       - name: Upload Clockchain traceability artifacts
         if: always()

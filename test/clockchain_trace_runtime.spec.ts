@@ -64,6 +64,7 @@ describe("CLOCKCHAIN_TRACE_RUNTIME", () => {
     try {
       const ledger = new StoryLedger(ledgerPath);
       ledger.logAction("event", "create_event eid=0xabc", {
+        caseId: "ui-case-trace-1",
         traceId: "TRACE-EVT-001",
         reqId: "REQ-EVT-001",
         ctrId: "CTR-EVT-001",
@@ -80,6 +81,7 @@ describe("CLOCKCHAIN_TRACE_RUNTIME", () => {
       expect(entry.traceId).to.equal("TRACE-EVT-001");
       expect(entry.reqId).to.equal("REQ-EVT-001");
       expect(entry.ctrId).to.equal("CTR-EVT-001");
+      expect(entry.caseId).to.equal("ui-case-trace-1");
       expect(entry.eid).to.equal("0xabc");
       expect(entry.status).to.equal("created");
       expect(entry.vids).to.deep.equal(["0xaaa", "0xbbb"]);

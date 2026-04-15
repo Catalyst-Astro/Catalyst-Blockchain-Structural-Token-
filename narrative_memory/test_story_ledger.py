@@ -13,6 +13,7 @@ def test_log_action(tmp_path):
             "traceId": "TRACE-001",
             "reqId": "REQ-IDC-001",
             "ctrId": "CTR-IDC-001",
+            "caseId": "ui-case-1",
             "vids": ["0xbbb", "0xaaa"],
             "zkRefs": ["ZK-IDC-001"],
             "status": "logged",
@@ -26,6 +27,7 @@ def test_log_action(tmp_path):
     assert data["traceId"] == "TRACE-001"
     assert data["reqId"] == "REQ-IDC-001"
     assert data["ctrId"] == "CTR-IDC-001"
+    assert data["caseId"] == "ui-case-1"
     assert data["status"] == "logged"
     assert data["vids"] == ["0xaaa", "0xbbb"]
     assert data["zkRefs"] == ["ZK-IDC-001"]

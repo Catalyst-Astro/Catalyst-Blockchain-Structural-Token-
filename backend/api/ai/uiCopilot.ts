@@ -2,6 +2,7 @@ import { randomUUID } from "crypto";
 import fs from "fs";
 import path from "path";
 
+import { StoryLedger } from "../storyLedger";
 import { appendJsonl, ensureFile, hashCanonical, readJsonl } from "../utils";
 import { ClockchainTraceResolver } from "./traceability";
 
@@ -33,7 +34,39 @@ export type UiReviewReport = {
   evidenceRefs: string[];
   zkRefs: string[];
   traceId?: string;
+  artifactManifestPath?: string;
   proposal: UiProposal;
+};
+
+export type GuiEvidenceCaptureMode = "backend_coupled";
+
+export type GuiEvidenceManifest = {
+  schemaVersion: 1;
+  uiCaseId: string;
+  operatorCaseId?: string;
+  traceId?: string;
+  zkRefs: string[];
+  generatedAt: string;
+  captureMode: GuiEvidenceCaptureMode;
+  backendBaseUrl: string;
+  artifacts: {
+    caseRoot: string;
+    reportJson: string;
+    reportMd: string;
+    manifestJson: string;
+    summaryMd: string;
+    latestJson: string;
+    latestMd: string;
+    backendLog?: string;
+  };
+  screenshots: {
+    dashboard: string;
+    operator: string;
+    "ui-lab": string;
+    settings: string;
+  };
+  evidenceRefs: string[];
+  releaseReadiness: Record<string, unknown>;
 };
 
 export type UiCopilotCase = {
@@ -147,9 +180,70 @@ class UiCopilotStore {
 }
 
 const REDACTED_KEYS = new Set(["payload", "mock", "token", "apikey", "privatekey", "email"]);
+const NARRATIVE_LEDGER_PATH =
+  process.env.CATALYST_NARRATIVE_LEDGER_PATH ?? path.join(process.cwd(), "narrative_memory", "narrative_ledger.jsonl");
+const GUI_CASE_SCREENSHOT_NAMES = ["dashboard", "operator", "ui-lab", "settings"] as const;
+
+type GuiCaseScreenshotName = (typeof GUI_CASE_SCREENSHOT_NAMES)[number];
+type GuiCaseArtifactPaths = {
+  caseRootAbs: string;
+  caseRoot: string;
+  reportJsonAbs: string;
+  reportJson: string;
+  reportMdAbs: string;
+  reportMd: string;
+  manifestAbs: string;
+  manifest: string;
+  summaryAbs: string;
+  summary: string;
+  latestJsonAbs: string;
+  latestJson: string;
+  latestMdAbs: string;
+  latestMd: string;
+  screenshotsDirAbs: string;
+  screenshots: Record<GuiCaseScreenshotName, string>;
+  screenshotAbsPaths: Record<GuiCaseScreenshotName, string>;
+};
 
 function normalizeStringArray(values: string[]): string[] {
   return [...new Set(values.filter(Boolean))].sort();
+}
+
+function toRelativePosix(filePath: string): string {
+  return path.relative(process.cwd(), filePath).replace(/\\/g, "/");
+}
+
+function buildGuiCaseArtifactPaths(caseId: string): GuiCaseArtifactPaths {
+  const guiRootAbs = path.join(process.cwd(), "artifacts", "gui");
+  const caseRootAbs = path.join(guiRootAbs, "cases", caseId);
+  const screenshotsDirAbs = path.join(caseRootAbs, "screenshots");
+  const screenshotAbsPaths = GUI_CASE_SCREENSHOT_NAMES.reduce<Record<GuiCaseScreenshotName, string>>((acc, name) => {
+    acc[name] = path.join(screenshotsDirAbs, `${name}.png`);
+    return acc;
+  }, {} as Record<GuiCaseScreenshotName, string>);
+
+  return {
+    caseRootAbs,
+    caseRoot: toRelativePosix(caseRootAbs),
+    reportJsonAbs: path.join(caseRootAbs, "report.json"),
+    reportJson: toRelativePosix(path.join(caseRootAbs, "report.json")),
+    reportMdAbs: path.join(caseRootAbs, "report.md"),
+    reportMd: toRelativePosix(path.join(caseRootAbs, "report.md")),
+    manifestAbs: path.join(caseRootAbs, "manifest.json"),
+    manifest: toRelativePosix(path.join(caseRootAbs, "manifest.json")),
+    summaryAbs: path.join(caseRootAbs, "summary.md"),
+    summary: toRelativePosix(path.join(caseRootAbs, "summary.md")),
+    latestJsonAbs: path.join(guiRootAbs, "latest.json"),
+    latestJson: toRelativePosix(path.join(guiRootAbs, "latest.json")),
+    latestMdAbs: path.join(guiRootAbs, "latest.md"),
+    latestMd: toRelativePosix(path.join(guiRootAbs, "latest.md")),
+    screenshotsDirAbs,
+    screenshots: GUI_CASE_SCREENSHOT_NAMES.reduce<Record<GuiCaseScreenshotName, string>>((acc, name) => {
+      acc[name] = toRelativePosix(screenshotAbsPaths[name]);
+      return acc;
+    }, {} as Record<GuiCaseScreenshotName, string>),
+    screenshotAbsPaths,
+  };
 }
 
 function sanitizeSummary(summary: string): string {
@@ -358,18 +452,21 @@ function renderMarkdownReport(record: UiCopilotCase, report: UiReviewReport): st
     ``,
     `## Evidence`,
     ...report.evidenceRefs.map((entry) => `- \`${entry}\``),
+    ...(report.artifactManifestPath ? ["", `## Manifest`, `- \`${report.artifactManifestPath}\``] : []),
   ].join("\n");
 }
 
 export class ClockchainUiCopilot {
   private readonly store: UiCopilotStore;
   private readonly traceResolver: ClockchainTraceResolver;
-  private readonly artifactsDir: string;
+  private readonly artifactsRoot: string;
+  private readonly ledger: StoryLedger;
 
-  constructor(options: { store?: UiCopilotStore; traceResolver?: ClockchainTraceResolver } = {}) {
+  constructor(options: { store?: UiCopilotStore; traceResolver?: ClockchainTraceResolver; ledger?: StoryLedger } = {}) {
     this.store = options.store ?? new UiCopilotStore();
     this.traceResolver = options.traceResolver ?? new ClockchainTraceResolver();
-    this.artifactsDir = path.join(process.cwd(), "artifacts", "gui", "reports");
+    this.artifactsRoot = path.join(process.cwd(), "artifacts", "gui");
+    this.ledger = options.ledger ?? new StoryLedger(NARRATIVE_LEDGER_PATH);
   }
 
   listCases(): UiCopilotCase[] {
@@ -431,11 +528,12 @@ export class ClockchainUiCopilot {
     const trace = this.traceResolver.resolve("GUI" as never, record.traceId);
     const readiness = this.traceResolver.getReleaseReadiness("GUI" as never);
     const proposal = record.proposal ?? buildProposal(record.surface, record.intent);
-    const screenshotPath = path.posix.join("artifacts", "gui", "screenshots", `${record.surface}.png`);
-    const markdownPath = path.join(this.artifactsDir, `${record.id}.md`);
-    const jsonPath = path.join(this.artifactsDir, `${record.id}.json`);
+    const artifacts = buildGuiCaseArtifactPaths(record.id);
+    const screenshots = Object.values(artifacts.screenshots);
     const regressions = [
-      ...(fs.existsSync(path.join(process.cwd(), screenshotPath)) ? [] : [`Missing screenshot artifact for ${record.surface}.`]),
+      ...GUI_CASE_SCREENSHOT_NAMES.flatMap((surface) =>
+        fs.existsSync(artifacts.screenshotAbsPaths[surface]) ? [] : [`Missing screenshot artifact for ${surface}.`]
+      ),
       ...(readiness.errors.length > 0 ? readiness.errors.map((entry) => `Traceability drift: ${entry}`) : []),
     ];
     const report: UiReviewReport = {
@@ -449,22 +547,26 @@ export class ClockchainUiCopilot {
         "Keep ZK-GUI-001 and TR#GUI-001 aligned with the actual surface contract.",
       ],
       regressions: normalizeStringArray(regressions),
-      screenshots: [screenshotPath],
+      screenshots,
       evidenceRefs: normalizeStringArray([
-        path.relative(process.cwd(), this.store.getEvidencePath()).replace(/\\/g, "/"),
-        path.relative(process.cwd(), markdownPath).replace(/\\/g, "/"),
-        path.relative(process.cwd(), jsonPath).replace(/\\/g, "/"),
-        screenshotPath,
+        toRelativePosix(this.store.getEvidencePath()),
+        artifacts.reportMd,
+        artifacts.reportJson,
+        artifacts.manifest,
+        artifacts.summary,
+        ...screenshots,
         ...trace.evidenceRefs,
       ]),
       zkRefs: normalizeStringArray(["ZK-GUI-001", ...trace.zkRefs]),
       traceId: trace.traceId,
+      artifactManifestPath: artifacts.manifest,
       proposal,
     };
 
-    fs.mkdirSync(this.artifactsDir, { recursive: true });
-    fs.writeFileSync(jsonPath, JSON.stringify(report, null, 2), "utf8");
-    fs.writeFileSync(markdownPath, renderMarkdownReport(record, report), "utf8");
+    fs.mkdirSync(this.artifactsRoot, { recursive: true });
+    fs.mkdirSync(artifacts.caseRootAbs, { recursive: true });
+    fs.writeFileSync(artifacts.reportJsonAbs, JSON.stringify(report, null, 2), "utf8");
+    fs.writeFileSync(artifacts.reportMdAbs, renderMarkdownReport(record, report), "utf8");
     this.store.saveReport(report);
     this.store.saveCase({
       ...record,
@@ -473,6 +575,13 @@ export class ClockchainUiCopilot {
       version: record.version + 1,
       proposal,
       report,
+    });
+    this.ledger.logAction("ui_copilot", `ui_report caseId=${record.id} surface=${record.surface}`, {
+      caseId: record.id,
+      traceId: report.traceId,
+      zkRefs: report.zkRefs,
+      evidenceRefs: report.evidenceRefs,
+      status: "reviewed",
     });
     return report;
   }

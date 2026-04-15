@@ -127,19 +127,6 @@ const App: React.FC = () => {
     }
   };
 
-  const loadSelectedUiReport = async (caseId?: string) => {
-    if (!caseId) {
-      setUiReport(null);
-      return;
-    }
-    try {
-      const nextReport = await uiCopilotService.getReport(caseId);
-      setUiReport(nextReport ?? null);
-    } catch {
-      setUiReport(null);
-    }
-  };
-
   const refreshAll = async (message = 'View refreshed') => {
     await Promise.all([loadDashboard(), loadOperator(), loadUiLab()]);
     flashToast(message);
@@ -154,8 +141,9 @@ const App: React.FC = () => {
   }, [selectedCaseId]);
 
   useEffect(() => {
-    void loadSelectedUiReport(selectedUiCaseId);
-  }, [selectedUiCaseId]);
+    const selectedUiCase = uiCases.find((entry) => entry.id === selectedUiCaseId) ?? uiCases[0] ?? null;
+    setUiReport(selectedUiCase?.report ?? null);
+  }, [uiCases, selectedUiCaseId]);
 
   const handleRefresh = async () => {
     await refreshAll();
@@ -245,7 +233,7 @@ const App: React.FC = () => {
       const created = await uiCopilotService.createCase(input);
       setSelectedUiCaseId(created.id);
       await loadUiLab();
-      await loadSelectedUiReport(created.id);
+      setUiReport(null);
       flashToast('UI case created');
     } catch {
       setUiViewState('error');
@@ -256,7 +244,7 @@ const App: React.FC = () => {
     try {
       await uiCopilotService.planCase(caseId);
       await loadUiLab();
-      await loadSelectedUiReport(caseId);
+      setUiReport(null);
       flashToast('UI proposal planned');
     } catch {
       setUiViewState('error');

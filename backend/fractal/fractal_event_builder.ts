@@ -23,7 +23,7 @@ export function createFractalEvent(eventType: string, payload: any, artifacts: a
   if (!tmpl) throw new Error("template not found");
   if ((artifacts?.length || 0) < (tmpl.requiredVIDs || 0)) throw new Error("insufficient VIDs");
 
-  const vids = (artifacts || []).map((a) => computeVID(typeof a === "string" ? a : JSON.stringify(a)));
+  const vids = (artifacts || []).map((artifact) => computeVID(artifact));
   const payloadHash = ethers.keccak256(ethers.toUtf8Bytes(canonicalJson(payload)));
   const packet = buildEventPacket({ eventType, payloadHash, vids, actorWallet: payload.actorWallet || "0x0" });
   const canonical = canonicalizeEvent(packet);

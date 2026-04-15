@@ -55,5 +55,5 @@ npm run gui:artifacts
 ## Notes
 
 - `gui:doctor` fails if the backend is not reachable at the resolved URL.
-- `smoke:artifacts` captures renderer-first screenshots with a mocked `window.catalyst` bridge, so it does not require a live backend.
+- `smoke:artifacts` is now backend-coupled: it requires a live backend, seeds real UI/operator cases, captures case-scoped screenshots, and writes `artifacts/gui/cases/<uiCaseId>/manifest.json` as the canonical GUI evidence pack.
 - The UI copilot is governed: it proposes reviews and reports, but never publishes directly to `main`.
