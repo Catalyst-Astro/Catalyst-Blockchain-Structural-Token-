@@ -25,21 +25,36 @@ export class StoryLedger {
   private filepath: string;
 
   constructor(
-    filename =
-      process.env.CATALYST_NARRATIVE_LEDGER_PATH ??
-      path.join(process.cwd(), "narrative_memory", "narrative_ledger.jsonl")
+    filename?: string
   ) {
-    this.filepath = filename;
-    const dir = path.dirname(this.filepath);
+    this.filepath = filename ?? "";
+    if (this.filepath) {
+      this.ensureFilepath(this.filepath);
+    }
+  }
+
+  private resolvePath(): string {
+    const resolved = process.env.CATALYST_NARRATIVE_LEDGER_PATH ?? this.filepath;
+    if (!resolved) {
+      return path.join(process.cwd(), "narrative_memory", "narrative_ledger.jsonl");
+    }
+    return resolved;
+  }
+
+  private ensureFilepath(target: string): void {
+    const dir = path.dirname(target);
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });
     }
-    if (!fs.existsSync(this.filepath)) {
-      fs.writeFileSync(this.filepath, "");
+    if (!fs.existsSync(target)) {
+      fs.writeFileSync(target, "");
     }
   }
 
   logAction(actor: string, action: string, context: StoryLedgerContext = {}) {
+    const targetPath = this.resolvePath();
+    this.ensureFilepath(targetPath);
+
     const entry: Record<string, unknown> = {
       timestamp: new Date().toISOString(),
       actor,
@@ -60,6 +75,6 @@ export class StoryLedger {
     if (zkRefs) entry.zkRefs = zkRefs;
     if (evidenceRefs) entry.evidenceRefs = evidenceRefs;
 
-    fs.appendFileSync(this.filepath, JSON.stringify(entry) + "\n", { encoding: "utf8" });
+    fs.appendFileSync(targetPath, JSON.stringify(entry) + "\n", { encoding: "utf8" });
   }
 }

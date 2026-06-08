@@ -180,8 +180,12 @@ class UiCopilotStore {
 }
 
 const REDACTED_KEYS = new Set(["payload", "mock", "token", "apikey", "privatekey", "email"]);
-const NARRATIVE_LEDGER_PATH =
-  process.env.CATALYST_NARRATIVE_LEDGER_PATH ?? path.join(process.cwd(), "narrative_memory", "narrative_ledger.jsonl");
+function resolveNarrativeLedgerPath(): string {
+  return (
+    process.env.CATALYST_NARRATIVE_LEDGER_PATH ??
+    path.join(process.cwd(), "narrative_memory", "narrative_ledger.jsonl")
+  );
+}
 const GUI_CASE_SCREENSHOT_NAMES = ["dashboard", "operator", "ui-lab", "settings"] as const;
 
 type GuiCaseScreenshotName = (typeof GUI_CASE_SCREENSHOT_NAMES)[number];
@@ -466,7 +470,7 @@ export class ClockchainUiCopilot {
     this.store = options.store ?? new UiCopilotStore();
     this.traceResolver = options.traceResolver ?? new ClockchainTraceResolver();
     this.artifactsRoot = path.join(process.cwd(), "artifacts", "gui");
-    this.ledger = options.ledger ?? new StoryLedger(NARRATIVE_LEDGER_PATH);
+    this.ledger = options.ledger ?? new StoryLedger(resolveNarrativeLedgerPath());
   }
 
   listCases(): UiCopilotCase[] {
