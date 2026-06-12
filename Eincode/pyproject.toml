@@ -1,0 +1,45 @@
+[tool.poetry]
+name = "arke"
+version = "0.1.0"
+description = "Arquitectura Epistémica – IA Consciente"
+authors = ["<TU_NOMBRE>"]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "*"
+sqlmodel = "*"
+sqlalchemy = ">=2"
+asyncpg = "*"
+aiosqlite = "*"
+alembic = "*"
+uvicorn = {extras = ["standard"], version = "*"}
+pydantic = "*"
+loguru = "*"
+pydantic-settings = "*"
+pyjwt = "^2.10.1"
+cryptography = "^45.0.5"
+apscheduler = "^3.11.0"
+aiocache = "*"
+pyyaml = "*"
+transformers = "*"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+pytest-asyncio = "*"
+pytest-cov = "*"
+black = "*"
+ruff = "*"
+mypy = "*"
+pre-commit = "*"
+
+
+[tool.poetry.scripts]
+arke = "main:entrypoint"
+audit-ledger = "arke.audit.ledger:cli"
+
+[tool.black]
+line-length = 100
+
+[tool.ruff]
+line-length = 100

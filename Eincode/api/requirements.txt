@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard]
+sqlmodel
+sqlalchemy>=2
+asyncpg
+aiosqlite
+pydantic
+pydantic-settings
+loguru
+cryptography
+aiocache
+PyYAML
+transformers

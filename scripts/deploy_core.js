@@ -51,6 +51,10 @@ async function main() {
   const fltToken = await deploy("FractalToken", ethers.parseEther("1000000000")); // 1B FLT = same as CAT
   deployed.push(fltToken);
 
+  const aimToken = await deploy("AIMToken"); // AI Module Token — minted on demand, no initial supply
+  deployed.push(aimToken);
+  console.log(`  AIM Token: 0 initial supply (minted when users pay CAT for AI)`);
+
   // ── 3. Identity ──
   console.log("\n── 3. Identity ──");
   const identitySBT = await deploy("CatalystIdentitySBT", ADDR);
@@ -122,6 +126,31 @@ async function main() {
     treasury.address // staking pool = treasury initially
   );
   deployed.push(svcPricing);
+
+  // ── 7b. AI Service Meter ──
+  console.log("\n── 7b. AI Service Meter (AIM) ──");
+  const aiMeter = await deploy(
+    "AIServiceMeter",
+    aimToken.address,
+    catToken.address,
+    svcPricing.address,
+    treasury.address
+  );
+  deployed.push(aiMeter);
+
+  // Transfer MINTER_ROLE and METER_ROLE of AIM to AIServiceMeter
+  const aimContract = await ethers.getContractAt("AIMToken", aimToken.address);
+  const MINTER_ROLE = aimContract.MINTER_ROLE();
+  const METER_ROLE = aimContract.METER_ROLE();
+  const DEFAULT_ADMIN = aimContract.DEFAULT_ADMIN_ROLE();
+  await aimContract.grantRole(MINTER_ROLE, aiMeter.address);
+  await aimContract.grantRole(METER_ROLE, aiMeter.address);
+  await aimContract.renounceRole(MINTER_ROLE, ADDR);  // deployer no longer minter
+  await aimContract.renounceRole(METER_ROLE, ADDR);    // only meter can consume
+  console.log("  ✓ AIM roles delegated to AIServiceMeter");
+  console.log("  ✓ AI Services: Chat(10) | Cognitive(50) | Research(500) | Review(100) | Training(1000)");
+  console.log("  ✓ Revenue: 80% provider | 15% treasury | 5% burn");
+  console.log("  ✓ Exchange: 1 CAT = 10 AIM");
 
   // ── 8. Bridge ──
   console.log("\n── 8. Bridge ──");
