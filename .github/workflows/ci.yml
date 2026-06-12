@@ -1,0 +1,80 @@
+name: CI — Full Stack
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # ── Smart Contracts (Hardhat) ──
+  solidity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      - run: npx hardhat compile
+      - run: npx hardhat test
+      - name: Check contract sizes
+        run: npx hardhat size-contracts 2>/dev/null || true
+
+  # ── Python Backend ──
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+      - run: pip install -r requirements.txt sqlalchemy sqlmodel pytest-asyncio aiosqlite httpx
+      - run: python -m pytest app/tests/ -q --tb=short
+
+  # ── Catalyst Studio (React/Vite) ──
+  studio:
+    runs-on: ubuntu-latest
+    needs: [solidity]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install & Build Studio
+        working-directory: apps/catalyst-studio
+        run: |
+          npm install --legacy-peer-deps
+          npm run build
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalyst-studio-build
+          path: apps/catalyst-studio/dist/
+
+  # ── Security Audit (Slither) ──
+  security:
+    runs-on: ubuntu-latest
+    needs: [solidity]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install slither-analyzer
+      - run: slither contracts/ --exclude-dependencies --fail-pedantic 2>&1 || true
+        continue-on-error: true
+
+  # ── Lint ──
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pre-commit
+      - run: pre-commit run --all-files || true
+        continue-on-error: true

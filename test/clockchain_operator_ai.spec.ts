@@ -16,6 +16,8 @@ describe("CLOCKCHAIN_OPERATOR_AI", () => {
     once: (event: string, callback: () => void) => void;
   };
 
+  
+
   before(async () => {
     process.env.CATALYST_DATA_DIR = dataDir;
     process.env.CATALYST_NARRATIVE_LEDGER_PATH = narrativePath;

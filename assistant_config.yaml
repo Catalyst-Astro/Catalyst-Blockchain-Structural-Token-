@@ -1,0 +1,17 @@
+deepseek:
+  api_key: ${DEEPSEEK_API_KEY}   # se leerá desde variable de entorno
+  base_url: "https://api.deepseek.com"
+  model: "deepseek-chat"         # modelo estable
+  max_tokens: 1024
+  reasoning_effort: "high"       # opcional, solo para modelos que lo soporten
+  thinking_enabled: false        # no todos los modelos lo aceptan; poner false
+
+asistente:
+  voz_activada: false
+  comando_salida: ["salir", "exit", "adiós"]
+  tiempo_escucha: 5
+  usar_api: true                  # true: API oficial; false: web scraping
+
+arke:
+  icd_umbral: 0.75
+  registrar_bitacora: true

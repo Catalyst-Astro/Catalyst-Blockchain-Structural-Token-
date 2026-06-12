@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Importar CAT y FRT — MetaMask</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #060e06; color: #c8e6c8; font-family: 'Segoe UI', sans-serif;
+      display: flex; justify-content: center; align-items: center; min-height: 100vh;
+    }
+    .card {
+      background: #0a1a0a; border: 1px solid #2a5a2a; border-radius: 12px;
+      padding: 40px; max-width: 500px; width: 100%;
+    }
+    h1 { color: #7dff7d; font-size: 22px; margin-bottom: 8px; text-align: center; }
+    p { color: #6a8a6a; margin-bottom: 24px; font-size: 14px; text-align: center; }
+    .token-card {
+      background: #0d1f0d; border: 1px solid #2a5a2a; border-radius: 8px;
+      padding: 20px; margin-bottom: 16px;
+    }
+    .token-name { font-size: 18px; font-weight: 700; color: #7dff7d; }
+    .token-addr { font-size: 11px; color: #4af0ff; font-family: monospace; word-break: break-all; margin: 8px 0; }
+    .token-info { font-size: 12px; color: #9abe9a; margin-bottom: 12px; }
+    button {
+      background: #0d1f0d; color: #7dff7d; border: 2px solid #3a7a3a;
+      padding: 10px 24px; border-radius: 6px; font-size: 14px; cursor: pointer;
+      font-weight: 600; transition: all 0.2s; width: 100%;
+    }
+    button:hover { background: #1a3a1a; border-color: #7dff7d; }
+    button.gold { border-color: #ff9a4a; color: #ff9a4a; }
+    button.gold:hover { background: #2a1a0a; border-color: #ffcc4a; }
+    #status { margin-top: 20px; font-size: 13px; font-family: monospace; padding: 12px; border-radius: 8px; text-align: center; }
+    .success { background: rgba(125,255,125,0.1); color: #7dff7d; }
+    .error { background: rgba(255,74,106,0.1); color: #ff4a6a; }
+    .info { background: rgba(74,240,255,0.1); color: #4af0ff; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>◆ Importar Tokens Catalyst</h1>
+    <p>Agregá CAT y FRT a tu MetaMask en la red Catalyst Local (31337).<br>Asegurate de estar en la red correcta primero.</p>
+
+    <div class="token-card">
+      <div class="token-name">🟢 CAT — Catalyst Token</div>
+      <div class="token-addr" id="catAddr">0x9E54...3042</div>
+      <div class="token-info">Token de gobernanza e inflación. 2.5% anual.</div>
+      <button onclick="addToken('cat')">➕ Agregar CAT a MetaMask</button>
+    </div>
+
+    <div class="token-card">
+      <div class="token-name">🟡 FRT — Fractal Reward Token</div>
+      <div class="token-addr" id="frtAddr">0xa82f...CFc9</div>
+      <div class="token-info">Token de recompensa. Staking y distribución.</div>
+      <button onclick="addToken('frt')">➕ Agregar FRT a MetaMask</button>
+    </div>
+
+    <button class="gold" onclick="addBoth()">⚡ Agregar AMBOS tokens</button>
+
+    <div id="status"></div>
+  </div>
+
+  <script>
+    // Actualizar con las direcciones reales después del deploy
+    const TOKENS = {
+      cat: {
+        address: '0x9E545E3C0baAB3E08CdfD552C960A1050f373042',
+        symbol: 'CAT',
+        decimals: 18,
+        image: null,
+      },
+      frt: {
+        address: '0xa82fF9aFd8f496c3d6ac40E2a0F282E47488CFc9',
+        symbol: 'FRT',
+        decimals: 18,
+        image: null,
+      },
+    };
+
+    // Mostrar direcciones reales
+    document.getElementById('catAddr').textContent = TOKENS.cat.address;
+    document.getElementById('frtAddr').textContent = TOKENS.frt.address;
+
+    function status(msg, cls) {
+      document.getElementById('status').innerHTML = msg;
+      document.getElementById('status').className = cls || 'info';
+    }
+
+    async function addToken(type) {
+      if (!window.ethereum) {
+        status('❌ MetaMask no detectado.<br>Instalalo en <a href="https://metamask.io" style="color:#ff9a4a">metamask.io</a>', 'error');
+        return;
+      }
+
+      const token = TOKENS[type];
+      try {
+        const wasAdded = await window.ethereum.request({
+          method: 'wallet_watchAsset',
+          params: {
+            type: 'ERC20',
+            options: {
+              address: token.address,
+              symbol: token.symbol,
+              decimals: token.decimals,
+            },
+          },
+        });
+
+        if (wasAdded) {
+          status(`✅ ${token.symbol} agregado a MetaMask!<br>${token.address}`, 'success');
+        } else {
+          status(`⚠️ Cancelaste agregar ${token.symbol}.`, 'info');
+        }
+      } catch (err) {
+        status(`❌ Error: ${err.message}`, 'error');
+      }
+    }
+
+    async function addBoth() {
+      await addToken('cat');
+      setTimeout(() => addToken('frt'), 500);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+import customtkinter as ctk
+
+ctk.set_appearance_mode("dark")  # Modes: "System" (standard), "Dark", "Light"
+ctk.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
+
+app = ctk.CTk()
+app.geometry("400x150")
+app.title("Prueba CustomTkinter")
+
+label = ctk.CTkLabel(app, text="¡Funciona!")
+label.pack(padx=20, pady=20)
+
+app.mainloop()

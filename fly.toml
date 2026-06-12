@@ -1,0 +1,32 @@
+app = "arke"
+
+[deploy]
+  release_command = "alembic upgrade head"
+
+[env]
+  ARKE_POSTGRES_HOST = "db"
+  ARKE_POSTGRES_USER = "arke_user"
+  ARKE_POSTGRES_PASSWORD = "arke_pass"
+  ARKE_POSTGRES_DB = "arke"
+  ARKE_REDIS_HOST = "redis"
+  ARKE_REDIS_PORT = "6379"
+
+[[services]]
+  internal_port = 8000
+  protocol = "tcp"
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = 80
+
+[experimental]
+  auto_rollback = true
+
+[[vm]]
+  size = "shared-cpu-1x"
+
+[scale]
+  min_machines = 1
+  max_machines = 5
+  balance_by = "connections"
+

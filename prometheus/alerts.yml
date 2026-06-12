@@ -1,0 +1,15 @@
+- alert: HighErrorRate
+  expr: rate(http_requests_total{status!~"2.."}[1m]) > 0.02
+  for: 2m
+  labels:
+    severity: critical
+  annotations:
+    summary: High request error rate
+
+- alert: HighLatency
+  expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 0.15
+  for: 2m
+  labels:
+    severity: warning
+  annotations:
+    summary: Latency P95 above 150ms
