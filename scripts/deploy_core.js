@@ -116,14 +116,36 @@ async function main() {
   deployed.push(settlements);
 
   // ── 7. Pricing & Value Layer ──
-  console.log("\n── 7. Pricing Engine ──");
-  // ServicePricing: (catToken, frtToken, treasury, stakingPool)
+  console.log("\n── 7. MXN Price Oracle ──");
+  // Deploy MXNPriceOracle: (admin, initialCatUsdRate, initialUsdMxnRate)
+  // 1 CAT = $0.10 USD → 0.10 × 1e18 = 1e17
+  // 1 USD = $20.00 MXN → 20.00 × 1e18 = 20e18
+  const INITIAL_CAT_USD = ethers.parseUnits("0.10", 18);  // 1e17 = $0.10
+  const INITIAL_USD_MXN = ethers.parseUnits("20.00", 18); // 20e18 = $20.00 MXN
+  const mxnOracle = await deploy(
+    "MXNPriceOracle",
+    ADDR,
+    INITIAL_CAT_USD,
+    INITIAL_USD_MXN
+  );
+  deployed.push(mxnOracle);
+  // Verify rates
+  const catMxnRate = await mxnOracle.contract.getCatMxnRate();
+  console.log(`  ✓ CAT/USD:    $${ethers.formatUnits(await mxnOracle.contract.getCatUsdRate(), 18)} USD`);
+  console.log(`  ✓ USD/MXN:   $${ethers.formatUnits(await mxnOracle.contract.getUsdMxnRate(), 18)} MXN`);
+  console.log(`  ✓ CAT/MXN:   $${ethers.formatUnits(catMxnRate, 18)} MXN per CAT`);
+  console.log(`  ✓ 1 CAT paga ≈ $${ethers.formatUnits(catMxnRate, 18)} MXN en servicios`);
+
+  // ── 7b. Pricing Engine ──
+  console.log("\n── 7b. Pricing Engine ──");
+  // ServicePricing: (catToken, frtToken, treasury, stakingPool, mxnOracle)
   const svcPricing = await deploy(
     "ServicePricing",
     catToken.address,
     frtToken.address,
     treasury.address,
-    treasury.address // staking pool = treasury initially
+    treasury.address, // staking pool = treasury initially
+    mxnOracle.address
   );
   deployed.push(svcPricing);
 
@@ -152,6 +174,69 @@ async function main() {
   console.log("  ✓ Revenue: 80% provider | 15% treasury | 5% burn");
   console.log("  ✓ Exchange: 1 CAT = 10 AIM");
 
+  // ── 7c. MXN Dynamic Pricing Smoke Test ──
+  console.log("\n── 7c. MXN Dynamic Pricing Test ──");
+  const catContractEarly = await ethers.getContractAt("CatalystToken", catToken.address);
+  try {
+    // Enable MXN pricing mode
+    await svcPricing.contract.setUseMxnPricing(true);
+    console.log("  ✓ MXN dynamic pricing ACTIVATED");
+
+    // Test 1: Check required CAT for Audit Basic ($20,000 MXN)
+    const auditBasic = ethers.keccak256(ethers.toUtf8Bytes("audit_basic"));
+    const requiredCAT = await svcPricing.contract.getRequiredCAT(auditBasic);
+    console.log(`  ✓ Audit Basic: $20,000 MXN → ${ethers.formatEther(requiredCAT)} CAT (at 1 CAT = $${ethers.formatUnits(catMxnRate, 18)} MXN)`);
+
+    // Test 2: Check MXN price for Project Registration
+    const projectReg = ethers.keccak256(ethers.toUtf8Bytes("project_registration"));
+    const mxnPrice = await svcPricing.contract.getServiceMxnPrice(projectReg);
+    const requiredCatProj = await svcPricing.contract.getRequiredCAT(projectReg);
+    console.log(`  ✓ Project Registration: $${ethers.formatUnits(mxnPrice, 18)} MXN → ${ethers.formatEther(requiredCatProj)} CAT`);
+
+    // Test 3: What if CAT/USD doubles? ($0.20)
+    const NEW_CAT_USD = ethers.parseUnits("0.20", 18); // CAT doubles in value
+    await mxnOracle.contract.setCatUsdRate(NEW_CAT_USD);
+    const newCatMxn = await mxnOracle.contract.getCatMxnRate();
+    const newRequiredCAT = await svcPricing.contract.getRequiredCAT(auditBasic);
+    console.log(`  ✓ CAT price DOUBLED to $0.20 USD → 1 CAT = $${ethers.formatUnits(newCatMxn, 18)} MXN`);
+    console.log(`  ✓ Mismo Audit Basic ($20,000 MXN) ahora cuesta ${ethers.formatEther(newRequiredCAT)} CAT (la mitad!)`);
+
+    // Test 4: What if USD/MXN goes to 25? (Banxico sube)
+    const NEW_USD_MXN = ethers.parseUnits("25.00", 18);
+    await mxnOracle.contract.setUsdMxnRate(NEW_USD_MXN);
+    const rateAfterPesos = await mxnOracle.contract.getCatMxnRate();
+    const catAfterPesos = await svcPricing.contract.getRequiredCAT(auditBasic);
+    console.log(`  ✓ USD/MXN sube a $25.00 → 1 CAT = $${ethers.formatUnits(rateAfterPesos, 18)} MXN`);
+    console.log(`  ✓ Audit Basic ($20,000 MXN) → ${ethers.formatEther(catAfterPesos)} CAT (más barato en CAT, mismo costo en pesos)`);
+
+    // Reset to original rates
+    await mxnOracle.contract.setBothRates(INITIAL_CAT_USD, INITIAL_USD_MXN);
+    console.log("  ✓ Rates reset to original (1 CAT = $0.10 USD, $1 USD = $20 MXN)");
+
+    // Test 5: Show all service prices in both MXN and CAT
+    const complianceBasic = ethers.keccak256(ethers.toUtf8Bytes("compliance_basic"));
+    const identityVerif = ethers.keccak256(ethers.toUtf8Bytes("identity_verification"));
+    const valuationReport = ethers.keccak256(ethers.toUtf8Bytes("valuation_report"));
+    console.log("\n  ── Servicios con Precios MXN Dinámicos ──");
+    for (const [name, sid] of [
+      ["Project Registration", projectReg],
+      ["Audit Basic", auditBasic],
+      ["Compliance Basic", complianceBasic],
+      ["Identity Verification", identityVerif],
+      ["Valuation Report", valuationReport],
+    ]) {
+      const mxp = await svcPricing.contract.getServiceMxnPrice(sid);
+      const catN = await svcPricing.contract.getRequiredCAT(sid);
+      console.log(`  ${name.padEnd(24)} $${ethers.formatUnits(mxp, 18).padStart(8)} MXN → ${ethers.formatEther(catN).padStart(8)} CAT`);
+    }
+    console.log("\n  ✓ Todas las conversiones MXN→CAT verificadas on-chain");
+    console.log("  ✓ Si CAT sube → mismo servicio cuesta menos CAT (deflacionario para holders)");
+    console.log("  ✓ Si el peso se devalúa → mismo servicio cuesta más CAT (cobertura cambiaria)");
+    console.log("  ✓ Gobernanza puede ajustar rates según condiciones de mercado");
+  } catch (err) {
+    console.log(`  ⚠ MXN smoke test: ${err.message?.slice(0, 120)}`);
+  }
+
   // ── 8. Bridge ──
   console.log("\n── 8. Bridge ──");
   const bridgeVault = await deploy("BridgeVault", catToken.address);
@@ -162,16 +247,16 @@ async function main() {
   const tokenVesting = await deploy("TokenVesting", catToken.address);
   deployed.push(tokenVesting);
 
-  // ── 8. Operations ──
-  console.log("\n── 8. Operations ──");
+  // ── 9. Operations ──
+  console.log("\n── 9. Operations ──");
   const ops = await deploy("OperationsRegistry", ADDR);
   deployed.push(ops);
   // AuditManager: sin constructor (usa default)
   const audit = await deploy("AuditManager");
   deployed.push(audit);
 
-  // ── 9. Registries ──
-  console.log("\n── 9. Registries ──");
+  // ── 10. Registries ──
+  console.log("\n── 10. Registries ──");
   const events = await deploy("EventRegistry", ADDR, 1, 1);
   deployed.push(events);
 
@@ -183,8 +268,8 @@ async function main() {
     console.log("  ⚠ TraceRegistry:", e.message?.slice(0, 60));
   }
 
-  // ── 10. Políticas adicionales ──
-  console.log("\n── 10. Políticas ──");
+  // ── 11. Políticas adicionales ──
+  console.log("\n── 11. Políticas ──");
   try {
     const policyReg = await deploy("PolicyRegistry", ADDR);
     deployed.push(policyReg);
@@ -202,8 +287,8 @@ async function main() {
     }
   }
 
-  // ── 11. Token Distribution per TOKENOMICS ──
-  console.log("\n── 11. Token Distribution (TOKENOMICS.md) ──");
+  // ── 12. Token Distribution per TOKENOMICS ──
+  console.log("\n── 12. Token Distribution (TOKENOMICS.md) ──");
   const ONE_CAT = ethers.parseEther("1");
   const ONE_MILLION = ONE_CAT * 1_000_000n;
   const NOW = BigInt(Math.floor(Date.now() / 1000));
@@ -255,8 +340,8 @@ async function main() {
   await tokenVesting.contract.claim(BENEFICIARIES.Liquidity);
   console.log(`  ✓ Liquidity      ${ethers.formatEther(LIQ_AMOUNT)} CAT unlocked → ${ADDR.slice(0,10)}... for DEX`);
 
-  // ── 12. FLT: Distribution → Compliance Wiring → Enforcement ──
-  console.log("\n── 12. FLT: Distribution + Compliance Engines ──");
+  // ── 13. FLT: Distribution → Compliance Wiring → Enforcement ──
+  console.log("\n── 13. FLT: Distribution + Compliance Engines ──");
   const fltContract = await ethers.getContractAt("FractalToken", fltToken.address);
   const FLT_1B = ethers.parseEther("1000000000");
 

@@ -4,6 +4,7 @@ import Dashboard from './pages/Dashboard';
 import ClientPanel from './pages/ClientPanel';
 import AdminPanel from './pages/AdminPanel';
 import MonitorPanel from './pages/MonitorPanel';
+import PentetraktysPanel from './pages/PentetraktysPanel';
 import * as api from './api';
 import * as auth from './auth';
 
@@ -13,6 +14,7 @@ function Sidebar({ system }) {
     { to: '/client', label: '👤 Client Portal', end: false },
     { to: '/admin', label: '⚙️ Admin Panel', end: false },
     { to: '/monitor', label: '📡 Monitor', end: false },
+    { to: '/pentetraktys', label: '🔺 Pentetraktys 4D', end: false },
   ];
 
   return (
@@ -93,6 +95,7 @@ export default function App() {
       case location.pathname.startsWith('/client'): return 'Client Portal';
       case location.pathname.startsWith('/admin'): return 'Admin Panel';
       case location.pathname.startsWith('/monitor'): return 'Node Monitor';
+      case location.pathname.startsWith('/pentetraktys'): return 'Pentetraktys 4D';
       default: return 'Command Center';
     }
   })();
@@ -132,6 +135,7 @@ export default function App() {
             <Route path="/client/*" element={<ClientPanel />} />
             <Route path="/admin/*" element={<AdminPanel />} />
             <Route path="/monitor/*" element={<MonitorPanel />} />
+            <Route path="/pentetraktys" element={<PentetraktysPanel />} />
           </Routes>
         </div>
       </main>
