@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="theme-color" content="#0a0a1a">
+<title>Catalyst Bank</title>
+<style>
+:root{--gold:#ffd700;--cyan:#4af0ff;--red:#ff6b6b;--green:#7dff7d;--bg:#0a0a1a;--card:#111122;--text:#e0e0e0;--gray:#666;--phi:1.618}
+*{margin:0;padding:0;box-sizing:border-box}
+html{height:100%;background:var(--bg)}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);height:100%;max-width:420px;margin:0 auto;overflow-x:hidden;position:relative;display:flex;flex-direction:column}
+.screen{flex:1;overflow-y:auto;padding:16px;padding-bottom:80px;-webkit-overflow-scrolling:touch}
+.screen.hidden{display:none}
+
+/* Header */
+.header{display:flex;justify-content:space-between;align-items:center;padding:8px 0 16px}
+.logo{font-size:20px;font-weight:900;letter-spacing:-1px}
+.logo span{color:var(--gold)}
+.badge{font-size:10px;background:rgba(255,215,0,.15);color:var(--gold);padding:4px 8px;border-radius:20px}
+
+/* Balance */
+.balance-label{font-size:12px;color:var(--gray);text-transform:uppercase;letter-spacing:1px}
+.balance-amount{font-size:42px;font-weight:900;margin:4px 0 2px;letter-spacing:-2px}
+.balance-sub{font-size:13px;color:var(--gray)}
+
+/* Card */
+.card-wrap{margin:20px 0}
+.credit-card{background:linear-gradient(145deg,#1a1a3e,#0d1b3e,#0a1628);border-radius:20px;padding:24px;position:relative;overflow:hidden;border:1px solid rgba(255,215,0,.15);box-shadow:0 20px 40px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.03)}
+.credit-card::after{content:'';position:absolute;top:-40%;right:-30%;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(255,215,0,.08),transparent)}
+.card-chip{width:44px;height:34px;background:linear-gradient(135deg,#ffd700,#b8860b,#ffd700);border-radius:6px;margin-bottom:20px;position:relative;z-index:1}
+.card-chip::after{content:'';position:absolute;top:7px;left:7px;right:7px;bottom:7px;border:1px solid rgba(0,0,0,.25);border-radius:3px}
+.card-number{font-family:'Courier New',monospace;font-size:19px;letter-spacing:3px;margin:12px 0;color:rgba(255,255,255,.9);position:relative;z-index:1}
+.card-name{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1px;position:relative;z-index:1}
+.card-exp{font-size:10px;color:var(--gray);margin-top:4px;position:relative;z-index:1}
+.nfc-badge{display:inline-flex;align-items:center;gap:6px;margin-top:12px;position:relative;z-index:1}
+.nfc-dot{width:7px;height:7px;background:var(--cyan);border-radius:50%;animation:nfcpulse 2s infinite}
+@keyframes nfcpulse{0%,100%{opacity:1;box-shadow:0 0 6px var(--cyan)}50%{opacity:.3;box-shadow:0 0 1px var(--cyan)}}
+.nfc-label{font-size:10px;color:var(--cyan);text-transform:uppercase;letter-spacing:2px}
+
+/* Token List */
+.section-title{font-size:13px;color:var(--gray);text-transform:uppercase;letter-spacing:2px;margin:24px 0 12px}
+.token-item{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;margin:6px 0;background:var(--card);border-radius:14px;border:1px solid rgba(255,255,255,.03);transition:.15s;cursor:pointer}
+.token-item:active{background:#1a1a35;transform:scale(.98)}
+.token-left{display:flex;align-items:center;gap:12px}
+.token-icon{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px}
+.token-info{line-height:1.3}
+.token-sym{font-weight:700;font-size:15px}
+.token-name{font-size:11px;color:var(--gray)}
+.token-right{text-align:right;line-height:1.3}
+.token-bal{font-weight:700;font-size:15px}
+.token-fiat{font-size:11px;color:var(--gray)}
+
+/* Buttons */
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0}
+.btn{display:block;width:100%;padding:16px;border:none;border-radius:14px;font-size:15px;font-weight:700;text-align:center;cursor:pointer;transition:.15s}
+.btn:active{transform:scale(.96)}
+.btn-gold{background:linear-gradient(135deg,var(--gold),#b8860b);color:#000}
+.btn-dark{background:var(--card);color:#fff;border:1px solid rgba(255,255,255,.08)}
+.btn-full{grid-column:1/-1;background:linear-gradient(135deg,var(--cyan),#0077b6);color:#000}
+
+/* Bottom Nav */
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:420px;background:rgba(10,10,26,.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;border-top:1px solid rgba(255,255,255,.05);z-index:100;padding:8px 0 env(safe-area-inset-bottom,8px)}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 0;color:var(--gray);font-size:10px;border:none;background:none;cursor:pointer;transition:.2s}
+.nav-item.active{color:var(--gold)}
+.nav-icon{font-size:20px}
+
+/* Convert Screen */
+.convert-form{background:var(--card);border-radius:20px;padding:24px;margin:16px 0;border:1px solid rgba(255,255,255,.05)}
+.input-label{font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.input-amount{width:100%;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,.1);color:var(--text);font-size:28px;font-weight:700;padding:12px 0;outline:none;transition:.2s}
+.input-amount:focus{border-bottom-color:var(--gold)}
+.rate-display{display:flex;justify-content:space-between;padding:12px 0;color:var(--gray);font-size:13px}
+.convert-result{text-align:center;padding:20px;margin-top:12px;background:rgba(125,255,125,.05);border-radius:12px}
+.result-amount{font-size:36px;font-weight:900;color:var(--green)}
+
+/* Activity Screen */
+.tx-item{display:flex;align-items:center;justify-content:space-between;padding:14px;margin:6px 0;border-bottom:1px solid rgba(255,255,255,.03)}
+.tx-left{display:flex;align-items:center;gap:10px}
+.tx-icon{font-size:20px}
+.tx-desc{font-size:14px;font-weight:600}
+.tx-date{font-size:11px;color:var(--gray)}
+.tx-right{text-align:right}
+.tx-amount{font-weight:700;font-size:15px}
+.tx-status{font-size:10px;padding:2px 6px;border-radius:4px}
+.tx-in{color:var(--green)}.tx-out{color:var(--red)}
+.tx-pending{background:rgba(255,215,0,.1);color:var(--gold)}
+
+/* More Screen */
+.more-section{margin:20px 0}
+.more-item{display:flex;justify-content:space-between;align-items:center;padding:16px;background:var(--card);border-radius:14px;margin:6px 0;border:1px solid rgba(255,255,255,.03)}
+.more-label{font-size:14px}.more-value{font-size:12px;color:var(--gray);font-family:monospace}
+
+/* Toast */
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:var(--gold);color:#000;padding:12px 24px;border-radius:30px;font-weight:700;font-size:14px;z-index:999;opacity:0;transition:opacity .3s}
+.toast.show{opacity:1}
+
+/* Responsive fixes */
+@media(max-width:380px){.balance-amount{font-size:34px}.card-number{font-size:16px;letter-spacing:2px}}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ SCREEN 1: WALLET ═══════════════════ -->
+<div id="screen-wallet" class="screen">
+  <div class="header">
+    <div class="logo">CATALYST<span>.</span></div>
+    <div class="badge">BELL 13450.50</div>
+  </div>
+
+  <div class="balance-label">Balance Total</div>
+  <div class="balance-amount" id="totalMXN">$3,481,275</div>
+  <div class="balance-sub">~$174,064 USD | ~¥1,261,963 CNY</div>
+
+  <div class="card-wrap">
+    <div class="credit-card" onclick="this.querySelector('.card-number').textContent=this.querySelector('.card-number').textContent.includes('•')?'4246  1234  5678  9012':'••••  ••••  ••••  4246'">
+      <div class="card-chip"></div>
+      <div style="position:absolute;top:24px;right:24px;font-weight:900;color:var(--gold);font-size:13px;z-index:1">CATALYST</div>
+      <div class="card-number">••••  ••••  ••••  4246</div>
+      <div class="card-name">Mauricio Rodriguez Tellez</div>
+      <div class="card-exp">VALIDO 06/30</div>
+      <div class="nfc-badge">
+        <div class="nfc-dot"></div>
+        <div class="nfc-label">NFC ACTIVO — TAP TO PAY</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-gold" onclick="tapNFC()">📳 TAP NFC</button>
+    <button class="btn btn-dark" onclick="navigateTo('convert')">💱 CONVERTIR</button>
+    <button class="btn btn-full" onclick="showToast('SWIFT BCRMXMMPYM → CLABE 012290015202390246\n67,586,206,547 MXN depositados')">🏦 DATOS SWIFT</button>
+  </div>
+
+  <div class="section-title">Mis Divisas</div>
+  <div id="tokenList"></div>
+</div>
+
+<!-- ═══════════════════ SCREEN 2: CONVERT ═══════════════════ -->
+<div id="screen-convert" class="screen hidden">
+  <div class="header">
+    <div class="logo">💱 Convertir</div>
+    <button onclick="navigateTo('wallet')" style="background:none;border:none;color:var(--cyan);font-size:14px;cursor:pointer">← Volver</button>
+  </div>
+
+  <div class="convert-form">
+    <div class="input-label">De</div>
+    <select id="convFrom" onchange="updateRate()" style="width:100%;background:var(--card);border:1px solid rgba(255,255,255,.1);color:#fff;padding:12px;border-radius:10px;font-size:16px;margin-bottom:16px">
+      <option value="GNC">GNC — Ganancia Token (CNY)</option>
+      <option value="CAT">CAT — Catalyst Token</option>
+      <option value="CTV">CTV — Token Cautivo</option>
+      <option value="FLT">FLT — Fractal Token</option>
+      <option value="AIM">AIM — AI Module Token</option>
+    </select>
+
+    <div class="input-label">Cantidad</div>
+    <input type="number" class="input-amount" id="convAmount" value="100000" oninput="updateRate()" placeholder="0">
+
+    <div class="input-label" style="margin-top:16px">A</div>
+    <select id="convTo" onchange="updateRate()" style="width:100%;background:var(--card);border:1px solid rgba(255,255,255,.1);color:#fff;padding:12px;border-radius:10px;font-size:16px">
+      <option value="MXN">MXN — Peso Mexicano</option>
+      <option value="USD">USD — Dólar</option>
+      <option value="CNY">CNY — Yuan</option>
+      <option value="CAT">CAT — Catalyst Token</option>
+    </select>
+
+    <div class="rate-display">
+      <span>Rate (4-pillar Pareto)</span>
+      <span id="convRate">1 GNC = 2.76 MXN</span>
+    </div>
+
+    <button class="btn btn-gold" style="width:100%;margin-top:12px" onclick="executeConversion()">⚡ CONVERTIR AHORA</button>
+
+    <div class="convert-result" id="convResult" style="display:none">
+      <div style="font-size:12px;color:var(--gray)">Recibirás</div>
+      <div class="result-amount" id="convResultAmount">$0</div>
+      <div style="font-size:11px;color:var(--gray);margin-top:4px">via SWIFT BCRMXMMPYM → CLABE 012290...246</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ SCREEN 3: ACTIVITY ═══════════════════ -->
+<div id="screen-activity" class="screen hidden">
+  <div class="header">
+    <div class="logo">📊 Actividad</div>
+    <button onclick="navigateTo('wallet')" style="background:none;border:none;color:var(--cyan);font-size:14px;cursor:pointer">← Volver</button>
+  </div>
+  <div class="section-title">Últimas Transacciones</div>
+  <div id="activityList"></div>
+</div>
+
+<!-- ═══════════════════ SCREEN 4: MORE ═══════════════════ -->
+<div id="screen-more" class="screen hidden">
+  <div class="header">
+    <div class="logo">⚙️ Más</div>
+    <button onclick="navigateTo('wallet')" style="background:none;border:none;color:var(--cyan);font-size:14px;cursor:pointer">← Volver</button>
+  </div>
+
+  <div class="more-section">
+    <div class="section-title">Cuentas Bancarias</div>
+    <div class="more-item"><span class="more-label">CLABE Principal</span><span class="more-value" onclick="copyToClipboard('012290015202390246')">012290015202390246 📋</span></div>
+    <div class="more-item"><span class="more-label">CLABE Secundaria</span><span class="more-value" onclick="copyToClipboard('012180015123243964')">012180015123243964 📋</span></div>
+    <div class="more-item"><span class="more-label">SWIFT BIC</span><span class="more-value">BCRMXMMPYM</span></div>
+  </div>
+
+  <div class="more-section">
+    <div class="section-title">Contratos On-Chain</div>
+    <div class="more-item"><span class="more-label">GNC Token</span><span class="more-value">0xc0Bb...f4c11</span></div>
+    <div class="more-item"><span class="more-label">CTV Token</span><span class="more-value">0x90c8...bc70</span></div>
+    <div class="more-item"><span class="more-label">CAT Token</span><span class="more-value">0xefAB...b2Fd</span></div>
+    <div class="more-item"><span class="more-label">Node</span><span class="more-value">localhost:8080</span></div>
+  </div>
+
+  <div class="more-section">
+    <div class="section-title">Sellos Activos</div>
+    <div class="more-item"><span class="more-label">Session</span><span class="more-value" style="font-size:10px">b0ca96fc88fc...</span></div>
+    <div class="more-item"><span class="more-label">Security</span><span class="more-value" style="font-size:10px">57c39bd222e2...</span></div>
+    <div class="more-item"><span class="more-label">Bell Grade</span><span class="more-value" style="color:var(--gold)">100% Prime Resonance</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════ BOTTOM NAV ═══════════════════ -->
+<nav class="nav">
+  <button class="nav-item active" id="nav-wallet" onclick="navigateTo('wallet')">
+    <span class="nav-icon">💰</span> Wallet
+  </button>
+  <button class="nav-item" id="nav-convert" onclick="navigateTo('convert')">
+    <span class="nav-icon">💱</span> Convertir
+  </button>
+  <button class="nav-item" id="nav-activity" onclick="navigateTo('activity')">
+    <span class="nav-icon">📊</span> Actividad
+  </button>
+  <button class="nav-item" id="nav-more" onclick="navigateTo('more')">
+    <span class="nav-icon">⚙️</span> Más
+  </button>
+</nav>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// CATALYST MOBILE BANKING APP — Vanilla JS
+// ═══════════════════════════════════════════════════════════
+
+const CAT_USD=0.10, USD_MXN=20, USD_CNY=7.25, RATE=0.686343;
+
+const tokens = [
+  {sym:'CAT',name:'Catalyst Token',bal:1000000,color:'#ffd700',bg:'rgba(255,215,0,.15)'},
+  {sym:'FRT',name:'Fractal Reward',bal:1000000,color:'#7dff7d',bg:'rgba(125,255,125,.15)'},
+  {sym:'FLT',name:'Fractal Token',bal:1000000000,color:'#4af0ff',bg:'rgba(74,240,255,.15)'},
+  {sym:'AIM',name:'AI Module',bal:100000,color:'#ff6b6b',bg:'rgba(255,107,107,.15)'},
+  {sym:'GNC',name:'Ganancia Token',bal:900000,color:'#ffa500',bg:'rgba(255,165,0,.15)'},
+  {sym:'CTV',name:'Token Cautivo',bal:900000,color:'#c084fc',bg:'rgba(192,132,252,.15)'},
+];
+
+const history = [
+  {type:'in',desc:'R1 Mexico Pilot — IBU',date:'18 Jun 2026',amt:'+67,586,206,547 MXN',status:'done'},
+  {type:'in',desc:'UnionPay QR 95516 v6',date:'17 Jun 2026',amt:'+13,425,050 CNY',status:'done'},
+  {type:'out',desc:'SPEI → CLABE 964',date:'17 Jun 2026',amt:'-13,425.50 MXN',status:'done'},
+  {type:'out',desc:'CAT Burn — 0xdead',date:'17 Jun 2026',amt:'-7,284 CAT',status:'done'},
+  {type:'in',desc:'GNC Mint — Treasury',date:'17 Jun 2026',amt:'+18T GNC',status:'done'},
+  {type:'pending',desc:'SWIFT MT103 — BBVA',date:'17 Jun 2026',amt:'49,925 CNY',status:'pending'},
+  {type:'in',desc:'CTV Libre Usanza',date:'17 Jun 2026',amt:'+100,000 CTV',status:'done'},
+];
+
+function f(n){return n.toLocaleString('es-MX',{maximumFractionDigits:0})}
+function fmxn(n){return '$'+f(n)+' MXN'}
+
+// Calculate total MXN
+function calcTotal(){
+  let t=0;
+  tokens.forEach(tk=>{
+    if(tk.sym==='CAT')t+=tk.bal*CAT_USD*USD_MXN;
+    else if(tk.sym==='GNC')t+=tk.bal*(1/USD_CNY)*USD_MXN;
+    else if(tk.sym==='CTV')t+=tk.bal*1000*(1/USD_CNY)*USD_MXN;
+    else if(tk.sym==='FLT')t+=tk.bal*0.05*USD_MXN;
+    else t+=tk.bal*0.001*USD_MXN;
+  });
+  return t;
+}
+
+// Token value in MXN
+function tokenToMXN(tk){
+  if(tk.sym==='CAT')return tk.bal*CAT_USD*USD_MXN;
+  if(tk.sym==='GNC')return tk.bal*(1/USD_CNY)*USD_MXN;
+  if(tk.sym==='CTV')return tk.bal*1000*(1/USD_CNY)*USD_MXN;
+  return tk.bal*0.001*USD_MXN;
+}
+
+// Render wallet
+function renderWallet(){
+  const total=calcTotal();
+  document.getElementById('totalMXN').textContent=fmxn(total);
+  document.getElementById('tokenList').innerHTML=tokens.map(t=>`
+    <div class="token-item" onclick="showToast('${t.sym}: ${t.name}\\nBalance: ${f(t.bal)} ${t.sym}\\nEquivalente: ${fmxn(tokenToMXN(t))}')">
+      <div class="token-left">
+        <div class="token-icon" style="background:${t.bg};color:${t.color}">${t.sym[0]}</div>
+        <div class="token-info">
+          <div class="token-sym">${t.sym}</div>
+          <div class="token-name">${t.name}</div>
+        </div>
+      </div>
+      <div class="token-right">
+        <div class="token-bal">${f(t.bal)} ${t.sym}</div>
+        <div class="token-fiat">≈ ${fmxn(tokenToMXN(t))}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Render activity
+function renderActivity(){
+  document.getElementById('activityList').innerHTML=history.map(tx=>`
+    <div class="tx-item">
+      <div class="tx-left">
+        <div class="tx-icon">${tx.type==='in'?'📥':tx.type==='out'?'📤':'⏳'}</div>
+        <div>
+          <div class="tx-desc">${tx.desc}</div>
+          <div class="tx-date">${tx.date}</div>
+        </div>
+      </div>
+      <div class="tx-right">
+        <div class="tx-amount ${tx.type==='in'?'tx-in':tx.type==='out'?'tx-out':''}">${tx.amt}</div>
+        <div class="tx-status ${tx.status==='pending'?'tx-pending':''}">${tx.status}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Navigation
+function navigateTo(screen){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));
+  document.getElementById('screen-'+screen).classList.remove('hidden');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('nav-'+screen).classList.add('active');
+  if(screen==='activity')renderActivity();
+}
+
+// NFC Tap
+function tapNFC(){
+  const total=calcTotal();
+  const amount=Math.round(total*0.1);
+  showToast('📳 TAP NFC: '+fmxn(amount)+'\nAcerque al terminal...\n✅ PAGO APROBADO');
+}
+
+// Conversion
+function updateRate(){
+  const from=document.getElementById('convFrom').value;
+  const to=document.getElementById('convTo').value;
+  const rates={GNC:{MXN:(1/USD_CNY)*USD_MXN,USD:(1/USD_CNY),CNY:1},
+    CAT:{MXN:CAT_USD*USD_MXN,USD:CAT_USD,CNY:CAT_USD*USD_CNY},
+    CTV:{MXN:1000*(1/USD_CNY)*USD_MXN,USD:1000*(1/USD_CNY),CNY:1000}};
+  const rate=rates[from]?.[to]||1;
+  document.getElementById('convRate').textContent=`1 ${from} = ${rate.toFixed(2)} ${to}`;
+  const amt=parseFloat(document.getElementById('convAmount').value)||0;
+  const result=amt*rate;
+  if(result>0){
+    document.getElementById('convResult').style.display='block';
+    document.getElementById('convResultAmount').textContent=to==='MXN'?fmxn(result):`${f(result)} ${to}`;
+  }
+}
+
+function executeConversion(){
+  updateRate();
+  showToast('✅ Conversion ejecutada\nvia SWIFT BCRMXMMPYM\nCLABE 012290015202390246');
+}
+
+// Toast
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// Copy
+function copyToClipboard(text){
+  navigator.clipboard?.writeText(text);
+  showToast('📋 Copiado: '+text);
+}
+
+// Init
+renderWallet();
+updateRate();
+</script>
+</body>
+</html>
