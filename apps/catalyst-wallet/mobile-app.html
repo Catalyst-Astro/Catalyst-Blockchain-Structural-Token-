@@ -7,6 +7,11 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="theme-color" content="#0a0a1a">
 <title>Catalyst Bank</title>
+<script>
+  if (!localStorage.getItem('catalyst_auth')) {
+    window.location.href = 'verify-face.html';
+  }
+</script>
 <style>
 :root{--gold:#ffd700;--cyan:#4af0ff;--red:#ff6b6b;--green:#7dff7d;--bg:#0a0a1a;--card:#111122;--text:#e0e0e0;--gray:#666;--phi:1.618}
 *{margin:0;padding:0;box-sizing:border-box}
