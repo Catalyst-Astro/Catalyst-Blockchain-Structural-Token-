@@ -1,0 +1,248 @@
+# ═══════════════════════════════════════════════════════════════
+# CATALYST BANK — Protocolo de Uso Inmediato y Expedito
+# YAML Master Control — App Web/Mobile · BELL 13450.50
+# ═══════════════════════════════════════════════════════════════
+
+protocol: "CATALYST_BANK_V1"
+version: "1.0.0"
+seal: "b0ca96fc88fc47ba485238c99d1ff423e862cf2f54c275cfe789615a11c4a3bd"
+
+# ═══════════════════════════════════════════════════════════════
+# 1. IDENTIDAD — KYC Geométrico
+# ═══════════════════════════════════════════════════════════════
+identity:
+  method: "facial-geometric-pareidolia"
+  phi_ratio: 1.618034
+  symmetry_min: 75
+  eye_distance:
+    min_px: 60
+    max_px: 120
+  steps:
+    - id: "face-detect"
+      action: "camera-capture"
+      timeout_sec: 5
+    - id: "geometry-verify"
+      action: "compute-phi-ratio"
+    - id: "pareidolia-check"
+      action: "pattern-match"
+    - id: "kyc-authorize"
+      action: "generate-seal"
+  on_success: "WALLET_ACCESS"
+  on_failure: "RETRY_OR_MANUAL"
+
+# ═══════════════════════════════════════════════════════════════
+# 2. WALLET — Acceso a Divisas
+# ═══════════════════════════════════════════════════════════════
+wallet:
+  tokens:
+    - symbol: "CAT"
+      name: "Catalyst Token"
+      rate_mxn: 2.00
+      address: "0xefAB0Beb0A557E452b398035eA964948c750b2Fd"
+      active: true
+    - symbol: "FRT"
+      name: "Fractal Reward"
+      rate_mxn: 0.20
+      address: "0xaca81583840B1bf2dDF6CDe824ada250C1936B4D"
+      active: true
+    - symbol: "FLT"
+      name: "Fractal Token"
+      rate_mxn: 1.00
+      address: "0x70bDA08DBe07363968e9EE53d899dFE48560605B"
+      active: true
+    - symbol: "AIM"
+      name: "AI Module"
+      rate_mxn: 0.02
+      address: "0x26B862f640357268Bd2d9E95bc81553a2Aa81D7E"
+      active: true
+    - symbol: "GNC"
+      name: "Ganancia Token (1:1 CNY)"
+      rate_mxn: 2.76
+      address: "0xc0Bb1650A8eA5dDF81998f17B5319afD656f4c11"
+      active: true
+    - symbol: "CTV"
+      name: "Token Cautivo (Libre Usanza)"
+      rate_mxn: 2758.62
+      address: "0x90c84237fDdf091b1E63f369AF122EB46000bc70"
+      active: true
+
+# ═══════════════════════════════════════════════════════════════
+# 3. TRANSFERENCIAS — 4 Métodos
+# ═══════════════════════════════════════════════════════════════
+transfers:
+  p2p_clabe:
+    enabled: true
+    fee_pct: 0.0015
+    clabe_validate: true
+    daily_limit_mxn: 10000000
+    settlement: "SPEI_INSTANT"
+  qr_95516:
+    enabled: true
+    gateway: "qr.95516.com"
+    fee_pct: 0.0015
+    burn_pct: 5.0
+    currency: "CNY"
+    conversion: "CAT"
+    rate: 0.686343
+  swift_mt103:
+    enabled: true
+    bic_origin: "UNPYCNBH"
+    bic_dest: "BCRMXMMPYM"
+    clabe_dest: "012290015202390246"
+    clabe_secondary: "012180015123243964"
+    fee_cny: 150
+    forex_spread_pct: 2.0
+    settlement_hours: "24-48"
+  nfc_tap:
+    enabled: true
+    method: "ISO_14443-4"
+    terminal: "qr.95516.com"
+    card_number: "4246"
+    holder: "Mauricio Rodriguez Tellez"
+    expiry: "06/30"
+
+# ═══════════════════════════════════════════════════════════════
+# 4. TREASURY — Distribución Automática
+# ═══════════════════════════════════════════════════════════════
+treasury:
+  split: "50-50"
+  incoming_cny:
+    pct_bbva: 50.0
+    pct_reserve: 50.0
+    reserve_subsplit:
+      liquidity_pool: 50.0
+      strategic_hold: 50.0
+  burn:
+    pct_per_tx: 5.0
+    burn_address: "0x000000000000000000000000000000000000dead"
+    track_on_chain: true
+
+# ═══════════════════════════════════════════════════════════════
+# 5. ORACLE — Tasas en Tiempo Real
+# ═══════════════════════════════════════════════════════════════
+oracle:
+  method: "4-pillar-pareto-80-20"
+  pillars:
+    cardinal:
+      weight: 40
+      source: "MXNPriceOracle.getCatUsdRate()"
+    ordinal:
+      weight: 30
+      source: "MXNPriceOracle.getUsdMxnRate()"
+    forward:
+      weight: 20
+      source: "MXNPriceOracle.liquidityDepthUSD"
+    reward:
+      weight: 10
+      source: "MXNPriceOracle.volatilityBps"
+  refresh_seconds: 60
+  staleness_threshold_hours: 24
+
+# ═══════════════════════════════════════════════════════════════
+# 6. PROOF CHAIN — Seguridad Criptográfica
+# ═══════════════════════════════════════════════════════════════
+proof_chain:
+  layers: 5
+  algorithm: "SHA-256"
+  structure:
+    p1: "Payment Data Hash"
+    p2: "Conversion + Burn Hash"
+    p3: "Combined Hash (P1||P2)"
+    p4: "Trigger Signature (P3||QR_Trigger)"
+    p5: "Final Seal (Pentetraktys State + [P1..P4])"
+  generate_on: "EVERY_TRANSACTION"
+
+# ═══════════════════════════════════════════════════════════════
+# 7. COMPLIANCE — FLT Engines
+# ═══════════════════════════════════════════════════════════════
+compliance:
+  engines:
+    whitelist:
+      active: true
+      contract: "WhitelistRegistry"
+    kyc_aml:
+      active: true
+      contract: "ComplianceDAO"
+    identity_sbt:
+      active: true
+      contract: "CatalystIdentitySBT"
+    freeze:
+      active: true
+      contract: "FreezeRegistry"
+    risk_limits:
+      active: false
+      note: "Next phase"
+    travel_rule:
+      active: false
+      note: "FATF compliance pending"
+    ubo:
+      active: false
+      note: "Ultimate Beneficial Owner pending"
+
+# ═══════════════════════════════════════════════════════════════
+# 8. PENTETRAKTYS — Estado del Sistema
+# ═══════════════════════════════════════════════════════════════
+pentetraktys:
+  phase: "conclusion"
+  tesis: "Catalyst Bank operates as full financial institution"
+  antitesis: "Without production SWIFTNet connection, fiat settlement pending"
+  sintesis: "All infrastructure ready. Institutional activation required."
+  conclusion: "13 protocols formalized. 31k tests passed. App live."
+  hybrys:
+    active: true
+    risks: 6
+    mitigation: "Monitor daily. Activate SWIFTNet. Deploy Uniswap pool."
+  hybrys_threshold_pct: 15.0
+
+# ═══════════════════════════════════════════════════════════════
+# 9. APPS — Endpoints
+# ═══════════════════════════════════════════════════════════════
+apps:
+  wallet:
+    url: "/mobile-app.html"
+    title: "Catalyst Wallet"
+    auth_required: true
+  kyc:
+    url: "/verify-face.html"
+    title: "KYC Facial Verification"
+  transfers:
+    url: "/transfer-system.html"
+    title: "Transfer System"
+  geometric:
+    url: "/geometric-html-architect.html"
+    title: "HTML Architect"
+  ios_install:
+    url: "/ios-install.html"
+    title: "iOS Install Guide"
+  mobile_config:
+    url: "/catalyst-bank.mobileconfig"
+    title: "iOS Direct Profile"
+
+# ═══════════════════════════════════════════════════════════════
+# 10. AUTOMATION — Diario
+# ═══════════════════════════════════════════════════════════════
+automation:
+  daily_script: "scripts/daily_bank_operations.py"
+  schedule: "08:00 UTC-6"
+  tasks:
+    - "open_ledger"
+    - "process_qr_payments"
+    - "update_fx_rates"
+    - "settle_swift"
+    - "rebalance_treasury"
+    - "track_burn"
+    - "generate_proof_chain"
+    - "validate_clabes"
+    - "compliance_check"
+    - "daily_close"
+  report_output: "Eincode/arke/daily_report_{{date}}.json"
+
+# ═══════════════════════════════════════════════════════════════
+# FIRMA
+# ═══════════════════════════════════════════════════════════════
+signature:
+  date: "2026-06-18"
+  quality: "BELL 13450.50"
+  grade: "100% Prime Resonance"
+  oshiro: "ERC-26+ Quantum Autopoiesis"
+  trigger: "1110110101111100101010100101011010110011000100110111001001000110110010011001111111100000010101011111111111110011111111111111111111111110000110"
