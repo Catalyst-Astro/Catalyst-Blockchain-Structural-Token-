@@ -14,3 +14,6 @@ backend/database/*.jsonl
 !backend/database/*.seed.jsonl
 narrative_memory/*.jsonl
 !narrative_memory/*.seed.jsonl
+.claude/settings.json
+catalyst_wallets.json
+*.mobileconfig
