@@ -132,11 +132,12 @@ export default function SpeiRetiro() {
       {/* Header */}
       <div style={s.header}>
         <div style={s.logo}>◆ CATALYST BANK</div>
-        <div style={s.sub}>SPEI + OXXO — Linea LC-001</div>
+        <div style={s.sub}>SPEI + OXXO — LC-001 BBVA {balance?.network?.chain_id === 8453 ? '⚡ BASE MAINNET' : '🧪 LOCAL'}</div>
 
         {/* Pool Status */}
         <div style={s.poolBar}>
           <span>🟢 Pool: {poolStatus?.swap || "1 ETH = 20,000 CAT"}</span>
+          {balance?.network?.chain_id === 8453 && <span style={{marginLeft: 8, color: '#ef4444'}}>🔴 REAL</span>}
         </div>
 
         {/* Credit Line Available */}

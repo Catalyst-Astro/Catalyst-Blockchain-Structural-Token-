@@ -42,6 +42,11 @@ export async function ethRPC(method, params = []) {
 //  SPEI Payout Endpoints
 // ═════════════════════════════════════════════════════
 
+/** Get chain/network info (Base mainnet / localhost / Sepolia) */
+export async function getChainInfo() {
+  return fetchJSON("/api/chain");
+}
+
 /** Burn CAT on-chain + send MXN via Bitso SPEI */
 export async function cobrar({ amount_cat, clabe, recipient_name, concept }) {
   return fetchJSON("/api/cobrar", {
@@ -56,7 +61,7 @@ export async function getFxQuote(catAmount = 100) {
   return fetchJSON(`/api/fx/quote?cat=${catAmount}`);
 }
 
-/** Get wallet balance + Bitso balance */
+/** Get wallet balance + network info + Bitso balance */
 export async function getBalance() {
   return fetchJSON("/api/balance");
 }
@@ -69,4 +74,10 @@ export async function getSpeiStatus(payoutId) {
 /** Get transaction history */
 export async function getTransactions(limit = 50) {
   return fetchJSON(`/api/transactions?limit=${limit}`);
+}
+
+/** Get accounting data */
+export async function getAccounting(endpoint, params = {}) {
+  const qs = new URLSearchParams(params).toString();
+  return fetchJSON(`/api/accounting/${endpoint}${qs ? "?" + qs : ""}`);
 }

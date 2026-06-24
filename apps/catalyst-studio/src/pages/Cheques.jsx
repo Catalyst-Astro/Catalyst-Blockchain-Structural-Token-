@@ -25,6 +25,7 @@ export default function Cheques() {
       <div style={s.header}>
         <div style={s.logo}>✈ PAN AM CHECKS</div>
         <div style={s.sub}>UTF-38 Certified Bearer — Catch Me If You Can</div>
+        <div style={{marginTop: 4, fontSize: '0.5rem', color: '#f59e0b'}}>⚡ Base Mainnet · SHA-256 Proof Chain · 38-bit Cipher</div>
         <div style={s.badge}>
           {data.todos_integros ? "✅ TODOS INTEGROS" : "⚠ REVISAR"}
         </div>

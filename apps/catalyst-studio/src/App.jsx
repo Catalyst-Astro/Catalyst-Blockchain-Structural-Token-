@@ -49,8 +49,10 @@ function Sidebar({ system }) {
       </nav>
       <div className="sidebar-status">
         <div className="status-dot" data-status={system?.status || 'unknown'} />
-        <span>{system?.status || '...'}</span>
-        <span className="sidebar-env">{system?.app_env || ''}</span>
+        <span>{system?.app_env || system?.network || '...'}</span>
+        <span className="sidebar-env" style={{fontSize: '8px', display: 'block', color: '#64748b'}}>
+          {system?.chain_id === 8453 ? '⚡ Base Mainnet' : system?.chain_id === 31337 ? '🏠 Localhost' : system?.mode === 'production' ? '🔐 PROD' : '🧪 Sandbox'}
+        </span>
       </div>
     </aside>
   );

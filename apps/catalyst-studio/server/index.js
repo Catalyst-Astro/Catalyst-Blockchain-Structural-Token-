@@ -25,8 +25,9 @@ const { ethers } = require("ethers");
 
 // ── Config ──
 const PORT = process.env.PORT || 8000;
-const HARDHAT_RPC = process.env.HARDHAT_RPC || "http://127.0.0.1:8545";
+const CHAIN_RPC = process.env.CHAIN_RPC || process.env.HARDHAT_RPC || "https://mainnet.base.org";
 const SANDBOX = process.env.BITSO_SANDBOX !== "false";
+const PRIVATE_KEY = process.env.PRIVATE_KEY || "";
 
 // ── Init Bitso Client ──
 let bitso;
@@ -42,22 +43,67 @@ if (SANDBOX || !process.env.BITSO_API_KEY) {
   });
 }
 
-// ── Ethereum Provider (Hardhat localhost) ──
-const provider = new ethers.JsonRpcProvider(HARDHAT_RPC);
+// ── Ethereum Provider ──
+const provider = new ethers.JsonRpcProvider(CHAIN_RPC);
+let signer = null;
+let deployerAddress = null;
 
-// Load contract addresses
-const contractsPath = path.join(__dirname, "..", "src", "contracts.json");
+async function initSigner() {
+  if (PRIVATE_KEY) {
+    try {
+      signer = new ethers.Wallet(PRIVATE_KEY, provider);
+      deployerAddress = await signer.getAddress();
+      const bal = await provider.getBalance(deployerAddress);
+      console.log(`🔑 Signer: ${deployerAddress.slice(0,10)}... (${ethers.formatEther(bal).slice(0,6)} ETH)`);
+      return;
+    } catch (e) {
+      console.log("⚠️ Invalid PRIVATE_KEY, trying getSigner fallback...");
+    }
+  }
+  try {
+    signer = await provider.getSigner(0);
+    deployerAddress = await signer.getAddress();
+    console.log(`🔑 Signer (node): ${deployerAddress.slice(0,10)}...`);
+  } catch (e) {
+    console.log("⚠️ No signer available — burns will be simulated");
+  }
+}
+
+// Detect chain and load appropriate contracts
 let contracts = [];
-try {
-  contracts = JSON.parse(fs.readFileSync(contractsPath, "utf8"));
-  console.log(`📋 ${contracts.length} contratos cargados`);
-} catch (e) {
-  console.log("⚠️ contracts.json no encontrado — solo SPEI sandbox");
+let chainId = 0;
+let networkName = "unknown";
+
+async function loadContracts() {
+  try {
+    const network = await provider.getNetwork();
+    chainId = Number(network.chainId);
+    networkName = network.name;
+
+    let contractsFile;
+    if (chainId === 8453) {
+      contractsFile = "contracts_base.json";
+    } else if (chainId === 31337 || chainId === 1337) {
+      contractsFile = "contracts.json";
+    } else {
+      contractsFile = "contracts.json"; // fallback
+    }
+
+    const contractsPath = path.join(__dirname, "..", "src", contractsFile);
+    if (fs.existsSync(contractsPath)) {
+      contracts = JSON.parse(fs.readFileSync(contractsPath, "utf8"));
+      console.log(`📋 ${contracts.length} contratos (${contractsFile}) — chain ${chainId}`);
+    } else {
+      console.log(`⚠️ ${contractsFile} no encontrado — SPEI-only mode`);
+    }
+  } catch (e) {
+    console.log("⚠️ Chain detection failed — contracts not loaded");
+  }
 }
 
 function getAddr(name) {
   const c = contracts.find((c) => c.name === name);
-  if (!c) throw new Error(`${name} not found`);
+  if (!c) throw new Error(`${name} not found in contracts (chain ${chainId})`);
   return c.address;
 }
 
@@ -324,15 +370,19 @@ app.post("/api/cobrar", async (req, res) => {
 
     let burnTx = null;
     try {
-      // Use Hardhat Account #0 as signer
-      const signer = await provider.getSigner(0);
+      if (!signer) {
+        throw new Error("No signer configured — set PRIVATE_KEY in .env");
+      }
       const cat = new ethers.Contract(catAddr, catAbi, signer);
       const tx = await cat.burn(catAmountWei);
       await tx.wait();
       burnTx = tx.hash;
+      console.log(`🔥 Burn on-chain: ${tx.hash.slice(0,20)}...`);
     } catch (burnErr) {
-      console.log("⚠️ Burn on-chain falló (modo sandbox):", burnErr.message.slice(0, 80));
-      // Continue anyway — in sandbox mode the burn may not work
+      console.log("⚠️ Burn on-chain falló:", burnErr.message.slice(0, 80));
+      if (!SANDBOX) {
+        return res.status(500).json({ error: `Burn failed: ${burnErr.message.slice(0, 100)}` });
+      }
       burnTx = `sandbox_burn_${Date.now()}`;
     }
 
@@ -447,10 +497,6 @@ app.get("/api/fx/quote", async (req, res) => {
 // ═══════════════════════════════════════════════════════════
 app.get("/api/balance", async (req, res) => {
   try {
-    const catAddr = getAddr("CatalystToken");
-    const gncAddr = getAddr("GananciaToken");
-    const ctvAddr = getAddr("TokenCautivo");
-    const fltAddr = getAddr("FractalToken");
     const erc20Abi = [
       "function balanceOf(address) view returns (uint256)",
       "function totalSupply() view returns (uint256)",
@@ -459,54 +505,67 @@ app.get("/api/balance", async (req, res) => {
       "function totalBurned() view returns (uint256)",
     ];
 
-    const deployer = (await provider.getSigner(0)).address;
+    const addr = deployerAddress || "0x0000000000000000000000000000000000000000";
+    const treasuryAddr = contracts.find(c => c.name === "Treasury")?.address || addr;
 
-    const cat = new ethers.Contract(catAddr, [...erc20Abi, ...catBurnAbi], provider);
-    const gnc = new ethers.Contract(gncAddr, erc20Abi, provider);
-    const ctv = new ethers.Contract(ctvAddr, erc20Abi, provider);
-    const flt = new ethers.Contract(fltAddr, erc20Abi, provider);
-
-    const treasuryAddr = "0x7bb22e84217F4c8f10AD0792E1ae54d77B36D546";
-
-    const [catBal, catSupply, catBurned, gncBal, ctvBal, fltBal] =
-      await Promise.all([
+    // CAT — always available
+    let catBal = "0", catSupply = "0", catBurned = "0", catMxnRate = "2.00";
+    try {
+      const catAddr = getAddr("CatalystToken");
+      const cat = new ethers.Contract(catAddr, [...erc20Abi, ...catBurnAbi], provider);
+      [catBal, catSupply, catBurned] = await Promise.all([
         cat.balanceOf(treasuryAddr),
         cat.totalSupply(),
         cat.totalBurned(),
-        gnc.balanceOf(treasuryAddr),
-        ctv.balanceOf(treasuryAddr),
-        flt.balanceOf(treasuryAddr),
       ]);
+    } catch (e) { console.log("⚠️ CAT balance unavailable"); }
+
+    // Oracle — try to get rate
+    try {
+      const oracleAddr = getAddr("MXNPriceOracle");
+      const oracleAbi = ["function getCatMxnRate() view returns (uint256)"];
+      const oracle = new ethers.Contract(oracleAddr, oracleAbi, provider);
+      catMxnRate = ethers.formatEther(await oracle.getCatMxnRate());
+    } catch (e) { /* use default 2.00 */ }
+
+    // GNC, CTV, FLT — optional
+    let gncBal = "0", ctvBal = "0", fltBal = "0";
+    try {
+      const gncAddr = getAddr("GananciaToken");
+      gncBal = ethers.formatEther(await new ethers.Contract(gncAddr, erc20Abi, provider).balanceOf(treasuryAddr));
+    } catch (e) {}
+    try {
+      const ctvAddr = getAddr("TokenCautivo");
+      ctvBal = ethers.formatEther(await new ethers.Contract(ctvAddr, erc20Abi, provider).balanceOf(treasuryAddr));
+    } catch (e) {}
+    try {
+      const fltAddr = getAddr("FractalToken");
+      fltBal = ethers.formatEther(await new ethers.Contract(fltAddr, erc20Abi, provider).balanceOf(treasuryAddr));
+    } catch (e) {}
 
     // Bitso balance
     let bitsoBal = null;
-    try {
-      bitsoBal = await bitso.getBalances();
-    } catch (e) {
-      bitsoBal = { note: "sandbox" };
-    }
-
-    const oracleAddr = getAddr("MXNPriceOracle");
-    const oracleAbi = ["function getCatMxnRate() view returns (uint256)"];
-    const oracle = new ethers.Contract(oracleAddr, oracleAbi, provider);
-    const catMxn = await oracle.getCatMxnRate();
+    try { bitsoBal = await bitso.getBalances(); } catch (e) { bitsoBal = { note: SANDBOX ? "sandbox" : "unavailable" }; }
 
     res.json({
       success: true,
+      network: { chain_id: chainId, name: networkName },
       wallet: treasuryAddr,
       tokens: {
         CAT: {
-          balance: ethers.formatEther(catBal),
-          totalSupply: ethers.formatEther(catSupply),
-          totalBurned: ethers.formatEther(catBurned),
-          value_mxn: parseFloat(ethers.formatEther(catBal)) * parseFloat(ethers.formatEther(catMxn)),
-          value_usd: parseFloat(ethers.formatEther(catBal)) * 0.10,
+          balance: catBal,
+          totalSupply: catSupply,
+          totalBurned: catBurned,
+          value_mxn: parseFloat(catBal) * parseFloat(catMxnRate),
+          value_usd: parseFloat(catBal) * 0.10,
         },
-        GNC: { balance: ethers.formatEther(gncBal) },
-        CTV: { balance: ethers.formatEther(ctvBal) },
-        FLT: { balance: ethers.formatEther(fltBal) },
+        GNC: { balance: gncBal },
+        CTV: { balance: ctvBal },
+        FLT: { balance: fltBal },
       },
+      oracle: { cat_mxn: parseFloat(catMxnRate) },
       bitso: bitsoBal,
+      treasury_address: treasuryAddr,
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -970,29 +1029,67 @@ app.get("/api/buzon", (req, res) => {
 // ═══════════════════════════════════════════════════════════
 app.get("/health", async (req, res) => {
   let chainOk = false;
+  let blockNum = 0;
   try {
-    const block = await provider.getBlockNumber();
-    chainOk = block > 0;
+    blockNum = await provider.getBlockNumber();
+    chainOk = blockNum > 0;
   } catch (e) {}
 
   res.json({
     status: "ok",
     mode: SANDBOX ? "sandbox" : "production",
     chain: chainOk ? "connected" : "disconnected",
+    chain_id: chainId,
+    network: networkName,
+    block: blockNum,
+    rpc: CHAIN_RPC.replace(/\/\/.*@/, "//***@"), // hide credentials
     contracts: contracts.length,
     transactions: txLog.length,
     bitso: SANDBOX ? "sandbox" : "production",
+    signer: deployerAddress ? `${deployerAddress.slice(0,10)}...` : "none",
+    app_env: SANDBOX ? "sandbox" : (chainId === 8453 ? "BASE_MAINNET" : "CUSTOM"),
   });
 });
 
+// ═══════════════════════════════════════════════════════════
+//  GET /api/chain — Network info
+// ═══════════════════════════════════════════════════════════
+app.get("/api/chain", async (req, res) => {
+  try {
+    const block = await provider.getBlockNumber();
+    const feeData = await provider.getFeeData();
+    res.json({
+      success: true,
+      chain_id: chainId,
+      network: networkName,
+      block,
+      rpc: CHAIN_RPC.replace(/\/\/.*@/, "//***@"),
+      deployer: deployerAddress,
+      gas: {
+        gas_price_gwei: feeData.gasPrice ? parseFloat(ethers.formatUnits(feeData.gasPrice, "gwei")).toFixed(2) : "N/A",
+        max_fee_gwei: feeData.maxFeePerGas ? parseFloat(ethers.formatUnits(feeData.maxFeePerGas, "gwei")).toFixed(2) : "N/A",
+      },
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 // ── Start ──
-app.listen(PORT, () => {
-  console.log(`
+(async () => {
+  // Initialize signer and contracts before starting
+  await initSigner();
+  await loadContracts();
+
+  app.listen(PORT, () => {
+    console.log(`
 ═══════════════════════════════════════════════════════════
   🏦 CATALYST BANK — SPEI Payout Server
   📡 Puerto: ${PORT}
   🏧 Modo: ${SANDBOX ? "SANDBOX (pruebas)" : "PRODUCCIÓN (dinero real)"}
-  ⛓️  RPC: ${HARDHAT_RPC}
+  ⛓️  Chain: ${networkName} (${chainId})
+  ⛽ RPC: ${CHAIN_RPC.replace(/\/\/.*@/, "//***@")}
+  🔑 Signer: ${deployerAddress ? deployerAddress.slice(0,10)+"..." : "NONE"}
   💳 Bitso: ${SANDBOX ? "Sandbox" : "API Keys configuradas"}
 
   Endpoints:
@@ -1000,10 +1097,12 @@ app.listen(PORT, () => {
     GET  /api/spei/status/:id → Payout status
     GET  /api/fx/quote        → Exchange rate
     GET  /api/balance         → Wallet + Bitso
+    GET  /api/chain            → Network info
     GET  /api/transactions    → History
     GET  /health              → Server status
 ═══════════════════════════════════════════════════════════
 `);
-});
+  });
+})();
 
 module.exports = app;

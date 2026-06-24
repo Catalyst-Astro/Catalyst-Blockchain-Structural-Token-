@@ -28,7 +28,10 @@ export default function Buzon() {
     <div style={s.container}>
       <div style={s.header}>
         <div style={s.logo}>📬 BUZON REGULATORIO</div>
-        <div style={s.sub}>Catalyst Bank — Comunicacion Diaria con Autoridades</div>
+        <div style={s.sub}>Catalyst Bank — CNBV · Banxico · SAT · UIF · BBVA · Bitso · UnionPay</div>
+        <div style={{marginTop: 8, fontSize: '0.55rem', color: '#f59e0b', background: 'rgba(245,158,11,0.06)', padding: '3px 10px', borderRadius: 8, display: 'inline-block'}}>
+          📡 Despacho: Lun-Vie 09:00 | Verificación: SHA-256 | Blockchain: Base L2
+        </div>
       </div>
 
       {/* Status */}

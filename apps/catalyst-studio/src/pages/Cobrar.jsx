@@ -17,6 +17,7 @@ export default function Cobrar() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
+  const [health, setHealth] = useState(null);
   const [form, setForm] = useState({
     amount_cat: "10000",
     clabe: "012290015202390246",
@@ -24,18 +25,19 @@ export default function Cobrar() {
     concept: "Catalyst Cobro — SPEI",
   });
 
+  const isProduction = health?.app_env === "BASE_MAINNET" || health?.mode === "production";
+  const isRealMoney = isProduction && !health?.chain_id === false;
+
   useEffect(() => {
-    // Get FX rates
+    fetch("/health").then(r => r.json()).then(setHealth).catch(() => {});
     fetch("/api/fx/quote?cat=100")
       .then((r) => r.json())
       .then(setFx)
       .catch(() => {});
-    // Get balance
     fetch("/api/balance")
       .then((r) => r.json())
       .then(setBalance)
       .catch(() => {});
-    // Get transactions
     fetch("/api/transactions?limit=10")
       .then((r) => r.json())
       .then((d) => setTransactions(d.transactions || []))
@@ -82,10 +84,27 @@ export default function Cobrar() {
 
   return (
     <div className="dashboard">
-      <h1>💳 Cobrar — SPEI Payout</h1>
+      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+        <h1>💳 Cobrar — SPEI Payout</h1>
+        <span style={{
+          fontSize: '0.6rem', fontWeight: '700', padding: '3px 10px', borderRadius: '12px',
+          background: isRealMoney ? 'rgba(239,68,68,0.15)' : 'rgba(245,158,11,0.1)',
+          color: isRealMoney ? '#ef4444' : '#f59e0b',
+          border: `1px solid ${isRealMoney ? '#ef4444' : '#f59e0b'}33`,
+        }}>
+          {isRealMoney ? '🔴 DINERO REAL' : '🟡 SANDBOX'}
+        </span>
+      </div>
       <p className="subtitle">
-        Quema CAT on-chain → Recibe MXN en tu CLABE vía Bitso SPEI
+        {isProduction
+          ? `⚡ Base Mainnet (${health?.block?.toLocaleString() || '?'}) — Quema CAT on-chain → SPEI real a BBVA`
+          : 'Quema CAT on-chain → Recibe MXN en tu CLABE vía Bitso SPEI'}
       </p>
+      {isProduction && (
+        <div style={{marginBottom: 12, padding: '8px 12px', background: 'rgba(239,68,68,0.08)', borderRadius: 8, fontSize: '0.65rem', color: '#ef4444', border: '1px solid rgba(239,68,68,0.2)'}}>
+          ⚠️ MODO PRODUCCIÓN — Cada transacción quema CAT real y envía MXN real. Verifica CLABE antes de confirmar.
+        </div>
+      )}
 
       {/* FX Rate Cards */}
       {fx && (
