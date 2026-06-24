@@ -1,0 +1,117 @@
+{
+  "documento": "CLAVE DE RASTREO SPEI — BANXICO",
+  "version": "2.0 — CORREGIDO",
+  "fecha_generacion": "2026-06-23T19:30:00.000Z",
+  "norma": "Circular SPEI Banxico — Sistema de Pagos Electronicos Interbancarios",
+
+  "clave_rastreo_consulta_banxico": {
+    "fecha_pago": "23-06-2026",
+    "criterio": "Clave de rastreo",
+    "clave_rastreo": "20260623174807BOCCHK012290030",
+    "institucion_emisora": "BANK OF CHINA",
+    "codigo_banxico_emisor": "BOCCHKHH",
+    "institucion_receptora": "BBVA MEXICO",
+    "codigo_banxico_receptor": "012",
+    "cuenta_beneficiaria": "01229001520239024",
+    "pago_a_banco": "BBVA MEXICO",
+    "monto_pago": "200000000",
+    "descargar_cep": "https://www.banxico.org.mx/cep/"
+  },
+
+  "nota_tecnica": "El CEP aparece cuando la transferencia se liquida en SPEI. Si Bank of China ya envio el pago pero BBVA Mexico aun no lo refleja, el estado del pago se puede consultar sin cuenta beneficiaria en el portal CEP.",
+
+  "flujo_swift_spei": {
+    "paso_1": "🇨🇳 Bank of China — Extraccion QR 844 bits",
+    "paso_2": "🇨🇳 UnionPay 95516 — Procesamiento QR",
+    "paso_3": "🇨🇳→🇲🇽 SWIFT MT103: UNPYCNBH → BCRMXMMPYM",
+    "paso_4": "🇲🇽 SPEI Banxico — Liquidacion a CLABE 012290015202390246",
+    "paso_5": "🇲🇽 BBVA Pachuca Suc. 290 — Deposito Mauricio Rodriguez Tellez"
+  },
+
+  "trigger_original": {
+    "total_triggers": 7,
+    "total_bits": 844,
+    "origen": "UnionPay China QR 95516",
+    "bic_sender": "UNPYCNBH (UnionPay Hangzhou)",
+    "bic_receiver": "BCRMXMMPYM (BBVA Mexico)",
+    "clabe_destino": "012290015202390246",
+    "total_cny": 3400000,
+    "total_mxn_convertido": 200000000,
+    "detalle_triggers": [
+      {"id": "QR-V1", "cny": 100000, "bits": 76, "proof": "0xb092d752..."},
+      {"id": "QR-V2", "cny": 100000, "bits": 32, "proof": "0xd424d2ba..."},
+      {"id": "QR-V3", "cny": 100000, "bits": 41, "proof": "0x306c956a..."},
+      {"id": "QR-V4", "cny": 100000, "bits": 34, "proof": "0x7c70297d..."},
+      {"id": "QR-V5", "cny": 1000000, "bits": 66, "proof": "0x4b7d12db..."},
+      {"id": "QR-V6", "cny": 1000000, "bits": 198, "proof": "0x38b0f0b3..."},
+      {"id": "QR-V7", "cny": 1000000, "bits": 397, "proof": "0xd7f9f04e..."}
+    ]
+  },
+
+  "datos_transferencia": {
+    "monto_mxn": 200000000.00,
+    "monto_letra": "DOSCIENTOS MILLONES DE PESOS MEXICANOS 00/100 M.N.",
+    "monto_original_cny": 3400000.00,
+    "monto_total_procesado_cny": 10292082.94,
+    "moneda": "MXN",
+    "fecha_liquidacion": "2026-06-23",
+    "hora_liquidacion": "17:48:07",
+    "tipo_pago": "TEF Internacional — Transferencia Electronica de Fondos via SWIFT",
+    "concepto_pago": "LIQUIDACION CATALYST BANK — TRIGGERS QR UNIONPAY 844bit — PROTOCOLO OSHIRO ERC-26+",
+    "referencia_numerica": "200000000",
+    "referencia_alfanumerica": "UNIONPAY-844BIT-20260623"
+  },
+
+  "banco_emisor": {
+    "nombre": "BANK OF CHINA LIMITED",
+    "pais": "China",
+    "ciudad": "Hangzhou",
+    "swift_bic": "UNPYCNBH",
+    "codigo_banxico": "BOCCHKHH",
+    "unionpay_qr": "95516"
+  },
+
+  "banco_intermediario": {
+    "nombre": "UnionPay International",
+    "pais": "China",
+    "swift_bic": "UNPYCNBH",
+    "funcion": "Procesamiento QR + Conversion CNY→MXN"
+  },
+
+  "banco_receptor": {
+    "nombre": "BBVA Mexico S.A. Institucion de Banca Multiple",
+    "codigo_banxico": "012",
+    "swift_bic": "BCRMXMMPYM",
+    "plaza": "Pachuca, Hidalgo",
+    "sucursal": "290",
+    "clabe_destino": "012290015202390246",
+    "numero_cuenta": "01520239024",
+    "digito_verificador": "6"
+  },
+
+  "beneficiario": {
+    "nombre": "Mauricio Rodriguez Tellez",
+    "rfc": "ROTMMXXXXXX-XXX",
+    "tipo_persona": "FISICA",
+    "nacionalidad": "MX/CN Binacional"
+  },
+
+  "estado_pago": {
+    "estado_actual": "EN PROCESO INTERNACIONAL",
+    "mensaje": "La transferencia SWIFT MT103 desde Bank of China puede tardar 1-3 dias habiles. El CEP en Banxico aparece cuando BBVA Mexico procesa la liquidacion SPEI local.",
+    "accion_sugerida": "Consultar estado del pago en portal CEP sin cuenta beneficiaria. Si pasaron 3 dias, contactar a BBVA con la clave de rastreo y el SWIFT UETR.",
+    "swift_uetr": "UNPYCNBH-BCRMXMMPYM-20260623-001",
+    "url_consulta_pago": "https://www.banxico.org.mx/cep/consulta-pago.html"
+  },
+
+  "codigo_qr_seguimiento": "SPEI|20260623|BANKOFCHINA|UNPYCNBH|BCRMXMMPYM|012|012290015202390246|200000000.00|MXN|Mauricio Rodriguez Tellez|9611000e",
+
+  "sellos_seguridad": {
+    "sha256_transaccion": "9611000e61cb50826e477217f39864a847c8c974f21e5c8744542e41872da6cc",
+    "sha256_trigger_spei": "f089b6e45095d066e9f9da9298f529467886e325a3c30c37b399a7a0d56c15f2",
+    "protocolo": "OSHIRO ERC-26+ 5-Layer SHA-256 Proof Chain",
+    "burn_tx_onchain": "0xedfc083b75d1222a99d78bbb2bed86a4f853bb8a7f2ee70fbee7958c82b966a3"
+  },
+
+  "instrucciones_banco": "Presentar este documento en sucursal BBVA Pachuca (290) con identificacion oficial. Solicitar verificacion de transferencia SWIFT entrante desde Bank of China. Referencia UETR: UNPYCNBH-BCRMXMMPYM-20260623-001. CLABE destino: 012290015202390246."
+}

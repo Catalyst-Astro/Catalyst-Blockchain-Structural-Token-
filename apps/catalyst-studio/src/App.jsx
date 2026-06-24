@@ -5,6 +5,11 @@ import ClientPanel from './pages/ClientPanel';
 import AdminPanel from './pages/AdminPanel';
 import MonitorPanel from './pages/MonitorPanel';
 import PentetraktysPanel from './pages/PentetraktysPanel';
+import Cobrar from './pages/Cobrar';
+import Tarjetas from './pages/Tarjetas';
+import SpeiRetiro from './pages/SpeiRetiro';
+import Buzon from './pages/Buzon';
+import Cheques from './pages/Cheques';
 import * as api from './api';
 import * as auth from './auth';
 
@@ -15,6 +20,11 @@ function Sidebar({ system }) {
     { to: '/admin', label: '⚙️ Admin Panel', end: false },
     { to: '/monitor', label: '📡 Monitor', end: false },
     { to: '/pentetraktys', label: '🔺 Pentetraktys 4D', end: false },
+    { to: '/cobrar', label: '💳 Cobrar SPEI', end: false },
+    { to: '/tarjetas', label: '💳 Tarjetas + QR MX', end: false },
+    { to: '/spei', label: '🏧 SPEI + OXXO', end: false },
+    { to: '/buzon', label: '📬 Buzon Regulatorio', end: false },
+    { to: '/cheques', label: '✈ Pan Am Cheques', end: false },
   ];
 
   return (
@@ -96,6 +106,11 @@ export default function App() {
       case location.pathname.startsWith('/admin'): return 'Admin Panel';
       case location.pathname.startsWith('/monitor'): return 'Node Monitor';
       case location.pathname.startsWith('/pentetraktys'): return 'Pentetraktys 4D';
+      case location.pathname.startsWith('/cobrar'): return 'Cobrar SPEI';
+      case location.pathname.startsWith('/tarjetas'): return 'Tarjetas de Credito + QR Mexico';
+      case location.pathname.startsWith('/spei'): return 'SPEI + OXXO Retiro';
+      case location.pathname.startsWith('/buzon'): return 'Buzon Regulatorio';
+      case location.pathname.startsWith('/cheques'): return 'Cheques Certificados';
       default: return 'Command Center';
     }
   })();
@@ -136,6 +151,11 @@ export default function App() {
             <Route path="/admin/*" element={<AdminPanel />} />
             <Route path="/monitor/*" element={<MonitorPanel />} />
             <Route path="/pentetraktys" element={<PentetraktysPanel />} />
+            <Route path="/cobrar" element={<Cobrar />} />
+            <Route path="/tarjetas" element={<Tarjetas />} />
+            <Route path="/spei" element={<SpeiRetiro />} />
+            <Route path="/buzon" element={<Buzon />} />
+            <Route path="/cheques" element={<Cheques />} />
           </Routes>
         </div>
       </main>

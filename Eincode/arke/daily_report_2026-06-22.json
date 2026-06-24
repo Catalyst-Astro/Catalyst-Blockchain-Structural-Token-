@@ -1,0 +1,70 @@
+{
+  "date": "2026-06-22",
+  "network": "localhost:8545",
+  "chainId": 31337,
+  "blockNumber": 99,
+  "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+  "tokens": {
+    "CAT": {
+      "supply": "999830000.0",
+      "burned": "170000.0",
+      "deployer": "99830000.0",
+      "vesting": "900000000.0"
+    },
+    "FRT": {
+      "supply": "1000000.0"
+    },
+    "FLT": {
+      "supply": "1000000000.0",
+      "deployer": "250000000.0",
+      "vesting": "750000000.0"
+    },
+    "GNC": {
+      "supply": "4390000.0",
+      "backing_cny": "4400000.0",
+      "ratio": 1.0022779043280183,
+      "deployer": "4390000.0"
+    },
+    "CTV": {
+      "supply": "10.0",
+      "deployer": "10.0"
+    },
+    "AIM": {
+      "supply": "0.0"
+    }
+  },
+  "oracle": {
+    "cat_usd": 0.1,
+    "usd_mxn": 20,
+    "cat_mxn": 2,
+    "cat_cny": 0.7250000000000001
+  },
+  "compliance_engines": {
+    "whitelist": true,
+    "compliance": true,
+    "identity_sbt": true,
+    "freeze_enforcement": true,
+    "risk_limits": false,
+    "travel_rule": false,
+    "ubo": false
+  },
+  "settlements": 7,
+  "total_operations": 21,
+  "total_fees_cny": 6162.5,
+  "total_burned_cat": 170000,
+  "total_processed_cny": 3400000,
+  "hybrys": {
+    "score": 0.02,
+    "threshold": 15,
+    "alerts": []
+  },
+  "proof_chain": {
+    "L1": "0xa931ccb22b74e10ea8a5ee9eb4d21f673f4cabb67bb9ec1026063b08adeebafe",
+    "L2": "0xa55ae21e41cdc9a13a6bd6435ce2a6be462a443925b30da40eb64ef23070010f",
+    "L3": "0x7c3df786e5917f1ef503ae2937522c31dfbcec24377e70532a904743260aead1",
+    "L4": "0x1da8dab7edc75444414395bcc7e2688e07eb6499de80f2d150b89c49457312e7",
+    "L5": "0x8f4d17a6a3a02461be71d6c3c420e7081aebfa214507e149c26e8929670a50b2"
+  },
+  "status": "HEALTHY",
+  "seal": "0x8f4d17a6a3a02461be71d6c3c420e7081aebfa214507e149c26e8929670a50b2"
+}

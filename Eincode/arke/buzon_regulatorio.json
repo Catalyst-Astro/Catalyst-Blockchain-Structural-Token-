@@ -1,0 +1,198 @@
+{
+  "inbox": [],
+  "outbox": [
+    {
+      "id": "OUT-2026-06-23-0001",
+      "direction": "OUTBOUND",
+      "to": "banxico",
+      "to_name": "Banco de Mexico",
+      "to_email": "bancodemexico@banxico.org.mx",
+      "type": "R1_POSICION_DIARIA",
+      "subject": "[CATALYST BANK] R1_POSICION_DIARIA - 2026-06-23",
+      "body": "Posicion Diaria de Liquidez al 2026-06-23. Activos: $363,862,974.94. Pasivos: $10,285,482.32. Capital: $353,577,492.62. Encaje: 33.33% (excede 10% requerido). SPEI tracking activo: 1782236887550.",
+      "attachments": [],
+      "timestamp": "2026-06-23T14:57:00.224392",
+      "seal": "d00a5599a779a4e462e006392822bea843492b46a683c21f6a14e361be887c58",
+      "status": "SENT",
+      "acknowledged": false,
+      "response": null
+    },
+    {
+      "id": "OUT-2026-06-23-0002",
+      "direction": "OUTBOUND",
+      "to": "cnbv",
+      "to_name": "Comision Nacional Bancaria y de Valores",
+      "to_email": "cnbv@cnbv.gob.mx",
+      "type": "R2_CAPITALIZACION",
+      "subject": "[CATALYST BANK] R2_CAPITALIZACION - 2026-06-23",
+      "body": "Indice de Capitalizacion (ICAP): 97.17%. Minimo requerido: 10.50%. Capital Neto: $353,577,492.62. Activos Ponderados: $363,862,974.94. El banco excede ampliamente el minimo regulatorio.",
+      "attachments": [],
+      "timestamp": "2026-06-23T14:57:00.224392",
+      "seal": "bba17a5c23fe80ada356a841d4b40a829354a24a23727f7cb794a849e4560b68",
+      "status": "SENT",
+      "acknowledged": false,
+      "response": null
+    },
+    {
+      "id": "OUT-2026-06-23-0003",
+      "direction": "OUTBOUND",
+      "to": "uif",
+      "to_name": "Unidad de Inteligencia Financiera",
+      "to_email": "uif@hacienda.gob.mx",
+      "type": "R3_AML",
+      "subject": "[CATALYST BANK] R3_AML - 2026-06-23",
+      "body": "Reporte de Operaciones Relevantes al 2026-06-23. Sin operaciones inusuales detectadas. Oficial de Cumplimiento: Mauricio Rodriguez Tellez. 13 asientos contables verificados con partida doble. Proof chains SHA-256 en todas las operaciones.",
+      "attachments": [],
+      "timestamp": "2026-06-23T14:57:00.224392",
+      "seal": "4c146676b9ee0aab7cc6d40e8804c9a1fa62c7eaef33882a732ad61ebb685c30",
+      "status": "SENT",
+      "acknowledged": false,
+      "response": null
+    },
+    {
+      "id": "OUT-2026-06-23-0004",
+      "direction": "OUTBOUND",
+      "to": "sat",
+      "to_name": "Servicio de Administracion Tributaria",
+      "to_email": "sat@sat.gob.mx",
+      "type": "R4_FISCAL",
+      "subject": "[CATALYST BANK] R4_FISCAL - 2026-06-23",
+      "body": "Posicion Fiscal al 2026-06-23. Ingresos acumulados: $16,600.62. Gastos acumulados: $659,118.00. Perdida fiscal: -$642,517.38 (atribuible a quema deflacionaria CAT 5%). IVA por acreditar. ISR diferido.",
+      "attachments": [],
+      "timestamp": "2026-06-23T14:57:00.224392",
+      "seal": "e9f4c91e7dd25488b00571fd1429365cf21d282175b3a7bc25d6e3e792a1f1a5",
+      "status": "SENT",
+      "acknowledged": false,
+      "response": null
+    },
+    {
+      "id": "OUT-2026-06-23-0005",
+      "direction": "OUTBOUND",
+      "to": "bbva",
+      "to_name": "BBVA Mexico",
+      "to_email": "bancaempresarial@bbva.com",
+      "type": "R5_BBVA_STATUS",
+      "subject": "[CATALYST BANK] R5_BBVA_STATUS - 2026-06-23",
+      "body": "Estado de Cuenta CLABE 012290015202390246 al 2026-06-23. SPEI pendientes: 2. Monto total en transito: $200,000,000 MXN. SWIFT MT103: UNPYCNBH -> BCRMXMMPYM. Favor confirmar recepcion.",
+      "attachments": [],
+      "timestamp": "2026-06-23T14:57:00.224392",
+      "seal": "04adec2e6b81ace9f9fcfbba061111f1b3419063fe38c788363b34d9bcefc9e4",
+      "status": "SENT",
+      "acknowledged": false,
+      "response": null
+    },
+    {
+      "id": "OUT-2026-06-23-0006",
+      "direction": "OUTBOUND",
+      "to": "unionpay",
+      "to_name": "UnionPay International",
+      "to_email": "service@unionpayintl.com",
+      "type": "R6_QR_VERIFICATION",
+      "subject": "[CATALYST BANK] R6_QR_VERIFICATION - 2026-06-23",
+      "body": "Verificacion de 7 QR Triggers ejecutados el 2026-06-22. Total: 844 bits, Y=3,400,000 CNY. Proof chains on-chain verificables. GNC backing ratio: 1.0023. Favor confirmar liquidacion en UnionPay 95516.",
+      "attachments": [],
+      "timestamp": "2026-06-23T14:57:00.224392",
+      "seal": "ba335fcac9cf83aad25d28a9e310d6cd63e34e672dec4e9552614c7a9185d7cc",
+      "status": "SENT",
+      "acknowledged": false,
+      "response": null
+    },
+    {
+      "id": "OUT-2026-06-23-0007",
+      "direction": "OUTBOUND",
+      "to": "bitso",
+      "to_name": "Bitso Business",
+      "to_email": "business@bitso.com",
+      "type": "R7_BITSO_INTEGRATION",
+      "subject": "[CATALYST BANK] R7_BITSO_INTEGRATION - 2026-06-23",
+      "body": "Estado de integracion SPEI via Bitso Business API al 2026-06-23. Modo: SANDBOX. Listo para produccion. Se requieren API Keys de produccion. CLABE destino: 012290015202390246.",
+      "attachments": [],
+      "timestamp": "2026-06-23T14:57:00.224392",
+      "seal": "06217db3936f54a022ab8d2f238cded60bab7ac0c94a80b839f656c08684cde3",
+      "status": "SENT",
+      "acknowledged": false,
+      "response": null
+    }
+  ],
+  "daily_log": [
+    {
+      "date": "2026-06-23",
+      "time": "2026-06-23T14:57:00.224392",
+      "action": "Reporte R1_POSICION_DIARIA enviado a Banco de Mexico",
+      "seal": "d00a5599a779a4e4"
+    },
+    {
+      "date": "2026-06-23",
+      "time": "2026-06-23T14:57:00.224392",
+      "action": "Reporte R2_CAPITALIZACION enviado a Comision Nacional Bancaria y de Valores",
+      "seal": "bba17a5c23fe80ad"
+    },
+    {
+      "date": "2026-06-23",
+      "time": "2026-06-23T14:57:00.224392",
+      "action": "Reporte R3_AML enviado a Unidad de Inteligencia Financiera",
+      "seal": "4c146676b9ee0aab"
+    },
+    {
+      "date": "2026-06-23",
+      "time": "2026-06-23T14:57:00.224392",
+      "action": "Reporte R4_FISCAL enviado a Servicio de Administracion Tributaria",
+      "seal": "e9f4c91e7dd25488"
+    },
+    {
+      "date": "2026-06-23",
+      "time": "2026-06-23T14:57:00.224392",
+      "action": "Reporte R5_BBVA_STATUS enviado a BBVA Mexico",
+      "seal": "04adec2e6b81ace9"
+    },
+    {
+      "date": "2026-06-23",
+      "time": "2026-06-23T14:57:00.224392",
+      "action": "Reporte R6_QR_VERIFICATION enviado a UnionPay International",
+      "seal": "ba335fcac9cf83aa"
+    },
+    {
+      "date": "2026-06-23",
+      "time": "2026-06-23T14:57:00.224392",
+      "action": "Reporte R7_BITSO_INTEGRATION enviado a Bitso Business",
+      "seal": "06217db3936f54a0"
+    }
+  ],
+  "authorities": {
+    "banxico": {
+      "name": "Banco de Mexico",
+      "email": "bancodemexico@banxico.org.mx",
+      "portal": "https://www.banxico.org.mx/cep/"
+    },
+    "cnbv": {
+      "name": "Comision Nacional Bancaria y de Valores",
+      "email": "cnbv@cnbv.gob.mx",
+      "portal": "https://www.cnbv.gob.mx/"
+    },
+    "uif": {
+      "name": "Unidad de Inteligencia Financiera",
+      "email": "uif@hacienda.gob.mx",
+      "portal": "https://www.gob.mx/uif"
+    },
+    "sat": {
+      "name": "Servicio de Administracion Tributaria",
+      "email": "sat@sat.gob.mx",
+      "portal": "https://www.sat.gob.mx/"
+    },
+    "bbva": {
+      "name": "BBVA Mexico",
+      "email": "bancaempresarial@bbva.com",
+      "portal": "https://www.bbva.mx/"
+    },
+    "bitso": {
+      "name": "Bitso Business",
+      "email": "business@bitso.com",
+      "portal": "https://business.bitso.com/"
+    },
+    "unionpay": {
+      "name": "UnionPay International",
+      "email": "service@unionpayintl.com",
+      "portal": "https://qr.95516.com/"
+    }
+  }
+}

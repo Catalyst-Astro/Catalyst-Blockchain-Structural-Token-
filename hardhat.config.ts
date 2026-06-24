@@ -49,6 +49,18 @@ const config: HardhatUserConfig = {
       accounts: PRIVATE_KEY ? [PRIVATE_KEY] : [],
       chainId: 17000,
     },
+    // Base L2 (Coinbase) — Testnet
+    "base-sepolia": {
+      url: process.env.BASE_SEPOLIA_RPC || "https://sepolia.base.org",
+      accounts: PRIVATE_KEY ? [PRIVATE_KEY] : [],
+      chainId: 84532,
+    },
+    // Base L2 (Coinbase) — Mainnet
+    base: {
+      url: process.env.BASE_RPC || "https://mainnet.base.org",
+      accounts: PRIVATE_KEY ? [PRIVATE_KEY] : [],
+      chainId: 8453,
+    },
   },
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY || "",

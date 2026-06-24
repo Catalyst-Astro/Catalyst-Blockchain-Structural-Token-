@@ -1,0 +1,68 @@
+{
+  "manifiesto": "ENVIOS — VIÑEDOS RESIDENCIAL MOSCATO 185",
+  "direccion": {
+    "calle": "Moscato 185",
+    "colonia": "Viñedos Residencial",
+    "ciudad": "Zempoala",
+    "estado": "Hidalgo",
+    "cp": "42039",
+    "pais": "Mexico",
+    "destinatario": "Mauricio Rodriguez Tellez",
+    "telefono": "+52 771 000 0000"
+  },
+  "envios": [
+    {
+      "id": "ENV-1782263625438",
+      "tienda": "Amazon Mexico",
+      "producto": "iPhone 15 Pro Max 256GB — Titanio Natural",
+      "precio_mxn": 17999,
+      "spei_tracking": "1782263625438",
+      "guia": "AMZ-MX-1782263625438",
+      "transportista": "DHL Express",
+      "tiempo_estimado": "1-2 dias habiles",
+      "rastreo": "https://www.dhl.com/mx-es/home/tracking.html?tracking-id=AMZ-MX-1782263625438"
+    },
+    {
+      "id": "ENV-1782263626062",
+      "tienda": "MercadoLibre",
+      "producto": "MacBook Air M4 13\" — Medianoche",
+      "precio_mxn": 24999,
+      "spei_tracking": "1782263626062",
+      "guia": "ML-MX-1782263626062",
+      "transportista": "FedEx",
+      "tiempo_estimado": "1-2 dias habiles",
+      "rastreo": "https://www.fedex.com/es-mx/tracking.html?tracking-number=ML-MX-1782263626062"
+    },
+    {
+      "id": "ENV-1782263626606",
+      "tienda": "Netflix",
+      "producto": "Suscripcion Premium 4K — 1 mes",
+      "precio_mxn": 299,
+      "spei_tracking": "1782263626606",
+      "tipo": "Digital — Activado inmediatamente",
+      "cuenta": "mauricio.rodriguez@catalyst-bank.mx",
+      "perfiles": 4,
+      "dispositivos": "Ilimitados"
+    },
+    {
+      "id": "ENV-1782263627193",
+      "tienda": "Uber Eats",
+      "producto": "Cena completa 2 personas",
+      "precio_mxn": 850,
+      "spei_tracking": "1782263627193",
+      "restaurante": "Casa de la Abuela — Cocina Mexicana",
+      "entrega": "Domicilio — Moscato 185, Viñedos Residencial",
+      "tiempo_estimado": "30-45 minutos"
+    }
+  ],
+  "totales": {
+    "productos": 4,
+    "total_mxn": 44147,
+    "total_usd": 2544.61,
+    "todos_pagados": true,
+    "todos_verificados_cep": true,
+    "tarjeta_usada": "Visa Debit ****0005",
+    "clabe_origen": "012290015202390259"
+  },
+  "sello": "ENVIOS-MOSCATO-185-COMPLETADO-2026-06-24"
+}

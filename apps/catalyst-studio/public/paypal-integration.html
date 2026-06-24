@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>PayPal — Catalyst Bank</title></head>
+<body style="font-family:system-ui,sans-serif;background:#06060f;color:#e2e8f0;max-width:480px;margin:0 auto;padding:20px;">
+<h1 style="color:#f59e0b">PayPal + Catalyst</h1>
+
+<div style="background:#0a0a2e;border-radius:16px;padding:20px;margin:12px 0;border:1px solid #1e293b;">
+<h3>Agregar Tarjeta a PayPal</h3>
+<p style="font-size:0.8rem;color:#94a3b8;">Abre PayPal en tu navegador o app, ve a Cartera > Agregar tarjeta y usa estos datos:</p>
+<table style="width:100%;font-size:0.75rem;border-collapse:collapse;">
+<tr><td style="padding:6px;color:#64748b">Numero</td><td style="padding:6px;font-family:monospace">4761 1220 2400 0005</td></tr>
+<tr><td style="padding:6px;color:#64748b">Titular</td><td style="padding:6px">Mauricio Rodriguez Tellez</td></tr>
+<tr><td style="padding:6px;color:#64748b">Vence</td><td style="padding:6px">06/2030</td></tr>
+<tr><td style="padding:6px;color:#64748b">CVV</td><td style="padding:6px;color:#ef4444">049 (dinamico)</td></tr>
+</table>
+</div>
+
+<div style="background:#0a1a0a;border-radius:16px;padding:20px;margin:12px 0;border:1px solid #1e293b;">
+<h3>Recibir pagos PayPal → BBVA</h3>
+<p style="font-size:0.8rem;color:#94a3b8;">1. Crea cuenta PayPal Business</p>
+<p style="font-size:0.8rem;color:#94a3b8;">2. Vincula la CLABE: <code>012290015202390246</code></p>
+<p style="font-size:0.8rem;color:#94a3b8;">3. Retira saldo PayPal a BBVA en 24-48h</p>
+</div>
+
+<div style="background:#1a0a0a;border-radius:16px;padding:20px;margin:12px 0;border:1px solid #1e293b;">
+<h3>PayPal Checkout API</h3>
+<p style="font-size:0.8rem;color:#94a3b8;">Integracion via Orders API v2 — MXN soportado</p>
+<p style="font-size:0.8rem;color:#94a3b8;">Endpoint: <code>POST /api/paypal/checkout</code></p>
+<p style="font-size:0.8rem;color:#94a3b8;">Sandbox: developer.paypal.com</p>
+</div>
+
+<div style="text-align:center;margin-top:20px;padding:12px;background:#0070ba;border-radius:12px;cursor:pointer" onclick="alert('Abre paypal.com en tu navegador.\n\n1. Ve a Cartera > Vincular tarjeta\n2. Ingresa: 4761 1220 2400 0005\n3. Titular: Mauricio Rodriguez Tellez\n\nPayPal validara la tarjeta con un cargo de $1 USD que se reembolsa.')">
+<strong>AGREGAR TARJETA A PAYPAL AHORA</strong>
+</div>
+</body>
+</html>

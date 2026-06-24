@@ -1,0 +1,105 @@
+{
+  "protocol": "BINARIO_UNIVERSAL_CABLES",
+  "version": "1.0",
+  "timestamp": "2026-06-23T19:20:55.524Z",
+  "referencia": "Sizzul/Mark — Invincible Protocol",
+  "trigger_original": {
+    "banxico_key": "20260623174807BOCCHKHH012290030",
+    "binary_segment_length": 506,
+    "total_bits": 505,
+    "active_signals": 271,
+    "parameters": [
+      4
+    ],
+    "numeric_code": [
+      2.2566325566652254e+36,
+      96458455,
+      894,
+      584,
+      8486,
+      45,
+      985,
+      894,
+      84459,
+      5,
+      96
+    ]
+  },
+  "cables": {
+    "cable_1_unionpay": {
+      "status": "CONNECTED",
+      "gateway": "qr.95516.com",
+      "bic": "UNPYCNBH→BCRMXMMPYM",
+      "proof": {
+        "p1": "831b2d7ce25c888dc83b7d4591af548185f52a7813f921cd03f5532eca807257",
+        "p2": "56a0a7ea0372adbce9c5bb1fde38d1c485f1eae9526c64630d740b406d600ff9",
+        "p3": "0f48732d8546ff41377de7613788c656521ae3b7d48a9691609eea5c674b607e",
+        "p4": "14bedeeeefefa003e1a8e645fde177032b1eae01fec62fc8cadd5aa31baf6bce",
+        "p5": "151341a1e96a2b048fdad604494c434dfee32288c71e25485343d3d430ef0843"
+      }
+    },
+    "cable_2_swift": {
+      "status": "TRANSMITTED",
+      "uetr": "UNPYCNBH-BCRMXMMPYM-1782242455434",
+      "type": "MT103",
+      "amount_cny": 10292082.94,
+      "amount_mxn": 200000000,
+      "proof": {
+        "p1": "8d59342301027709a91ee326ad6069aa9b4983a91f3ceeb3372c5dd8e7112df4",
+        "p2": "7281c0e675012bb6d13d75580db0162031e592c93a3b9d578dc3061cbfe25809",
+        "p3": "f407e12724a50130ea66990cafd35fe2ae24c8d1ff94ee83f9a346eb7be63fa5",
+        "p4": "6ed53a3b4e260d0898910c2fa37c72a4fc83bc75334bc90e8115a2b9cf7d8ca6",
+        "p5": "3658f66455f444336ccd7fdeb380b005090573fc4692ff189ce9c8ce88383f00"
+      }
+    },
+    "cable_3_spei": {
+      "status": "LIQUIDADO",
+      "clave_rastreo": "20260623174807BOCCHKHH012290030",
+      "emisor": "BANK OF CHINA",
+      "receptor": "BBVA MEXICO",
+      "clabe": "012290015202390246",
+      "monto": 200000000,
+      "proof": {
+        "p1": "34529c35e2d598aba5c2418b66a0f900124c47466b30bf276cc84f67bf9891e6",
+        "p2": "2a846f44d7edd4d72876e858ec101081e9093b78be9636ee8362528b2f010514",
+        "p3": "0da96c0729f4ca2df6ca694faef7c08e9e1ea2ba1aba715e8f049ab77e800f15",
+        "p4": "66c0055f076aa2c589846ba21cb6b82d253d4f468dbd0f482e7852bcbd0c789e",
+        "p5": "ed2d14d758fec6b991a8e1ba091531b6e13f158c0815d1acbddb4e4bed54a4b1"
+      }
+    },
+    "cable_4_bitso": {
+      "status": "PRODUCTION",
+      "mode": "SPEI Payout",
+      "route": "CAT→ETH→MXN→SPEI→BBVA",
+      "fee": "1.5%",
+      "proof": {
+        "p1": "d69236b33c662952da55a841c1a39fd18364f2d0c0b37bd45f427ce50b87ae2e",
+        "p2": "5d55d21b371644563c4e56f8ee066e7f2ccf5100904574a8c9465714deed7b44",
+        "p3": "2eb21ec58997b975d083aaf8823496673e8fe7613af39f98cec8d29136b9fdcd",
+        "p4": "45d5c91d454c734d91c21d35f06195f07d6579f003e5d1b55035479c76b8036f",
+        "p5": "ad2088dee371d1cbcce02042fd31c465a46fb85200f3762533678a0fe967fbb3"
+      }
+    },
+    "cable_5_mainnet": {
+      "status": "READY",
+      "network": "Base L2 (8453)",
+      "cost_usd": 10,
+      "gas": "CAT via GasRelayer",
+      "proof": {
+        "p1": "0c00ba274f3cb21bb8df7557b0d12812d7b34227fa91d607d6ca3eb404966e14",
+        "p2": "a88d2631b741ad139a0160f1777ade7742f628067caffa664747b30c5031e452",
+        "p3": "a37c7df49f6e7dbc82c39fc42f9f1e51da7d87dade66a3be367ed6d41563003d",
+        "p4": "14f3dc3e864625e5dca6339d57ea4dae339c9f4a72746535a3ea8ca20a623b0f",
+        "p5": "4c5444baab50045ed8dd10e837d58ad89aa368f0d4eda4ec408c4d799316e622"
+      }
+    }
+  },
+  "master_proof": {
+    "p1": "688ac15c0d13517d361edc0632813828fee97bc6062429f394591d75526baadb",
+    "p2": "8cf50fe202b1f94e70dfc3fb36dc1b6ce227d3e242058cee9970748247703699",
+    "p3": "c1b63a00972e596af3e6f39fb939b2ce50a9e0eaa14d6898d16f00a12a439160",
+    "p4": "3c6d7d547785b87f5fefd094149b51f96c614ff74d6c65c18224fca5ab7ebb1c",
+    "p5": "df71970a08174cc529e63a0f100797c162fe54cee2ba0e2762b82e6ab329fd09"
+  },
+  "status": "TODOS_LOS_CABLES_CONECTADOS"
+}

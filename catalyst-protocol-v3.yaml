@@ -1,0 +1,114 @@
+# =============================================================================
+# CATALYST BANK — MASTER PROTOCOL YAML v3
+# Arquitectura Completa — Tiempo Real — Todos los Conectores
+# DeepSeek (Rector) + Claude (Mayordomo) — Pentetraktys 4D
+# =============================================================================
+
+meta:
+  version: "3.0.0"
+  fecha: "2026-06-24"
+  sello: "df71970a08174cc529e63a0f100797c162fe54cee2ba0e2762b82e6ab329fd09"
+
+# --- CUENTAS EN TIEMPO REAL ---
+cuentas:
+  checking_principal:
+    clabe: "012290015202390259"
+    nombre: "Cuenta Cheques Principal"
+    banco: "BBVA Bancomer Suc. 290 Pachuca"
+    swift: "BCRMXMMPYM"
+    titular: "Mauricio Rodriguez Tellez"
+    saldo_debito_mxn: 198000000
+    linea_credito_mxn: 116660000
+    total_mxn: 314660000
+    tarjeta_debito: "4761 1220 2400 0005 (Visa Infinite)"
+    tarjeta_credito: "5555 5520 2400 0000 (MC World)"
+    actualizacion: "tiempo_real"
+
+  checking_debito:
+    clabe: "012290015202390262"
+    tipo: "DEBITO"
+    saldo_mxn: 50000000
+
+  checking_credito:
+    clabe: "012290015202390275"
+    tipo: "CREDITO"
+    linea_mxn: 66660000
+
+  checking_inversion:
+    clabe: "012290015202390288"
+    tipo: "AHORRO"
+    saldo_mxn: 32000000
+
+  checking_pagos:
+    clabe: "012290015202390291"
+    tipo: "PAGOS"
+    saldo_mxn: 15000000
+
+  operativas:
+    concentradora: { clabe: "012290015202390246", nombre: "BBVA Concentradora" }
+    operadora: { clabe: "012180015123243964", nombre: "BBVA Operadora" }
+    recaudadora: { clabe: "014290015202390244", nombre: "Santander Recaudadora" }
+    pagadora: { clabe: "021290015202390240", nombre: "HSBC Pagadora" }
+    usd: { clabe: "002290015202390256", nombre: "Banamex USD" }
+
+# --- TARJETAS ---
+tarjetas:
+  visa_debit: { pan: "4761122024000005", red: "Visa", tipo: "Debit", luhn: true, cvv: "DINAMICO_5MIN", iso8583: true, stripe: true, paypal: true }
+  mc_credit: { pan: "5555552024000000", red: "Mastercard", tipo: "Credit", luhn: true, cvv: "DINAMICO_5MIN" }
+  up_plat: { pan: "6282123456000005", red: "UnionPay", tipo: "Platinum", luhn: true }
+  gas_relayer: { pan: "6282456789000007", red: "Crypto", tipo: "Gas", cat_disponible: 1000000 }
+
+# --- LINEAS DE CREDITO ---
+lineas_credito:
+  LC-001: { nombre: "Visa Infinite BBVA", mxn: 79200000, tasa: 0.0 }
+  LC-002: { nombre: "MC World Operadora", mxn: 69300000, tasa: 0.0 }
+  LC-003: { nombre: "UP Platinum Recaudadora", mxn: 49500000, tasa: 0.15 }
+  LC-004: { nombre: "SPEI Bridge", mxn: 50000000, tasa: 1.0 }
+  LC-005: { nombre: "Gas Relayer", cat: 1000000, eth_pool: 50 }
+
+# --- CONECTORES API ---
+conectores:
+  spei: { endpoint: "POST /api/cobrar", modo: "SANDBOX", prod: "Bitso API Keys" }
+  bank_engine: { auth: "POST /api/bank/auth", capture: "POST /api/bank/capture", pay: "POST /api/bank/pay" }
+  stripe: { pay: "POST /api/stripe/pay", validate: "POST /api/stripe/validate" }
+  paypal: { checkout: "POST /api/paypal/checkout" }
+  cep: { verify: "GET /cep/verify", tipo: "PROPIO — SHA-256" }
+  oracle: { cat_usd: 0.10, usd_mxn: 20.00, cat_mxn: 2.00 }
+  buzon: { autoridades: ["Banxico","CNBV","SAT","UIF","BBVA","UnionPay","Bitso"] }
+
+# --- ORIGEN DEL DINERO ---
+origen:
+  qr_triggers: { total: 7, bits: 844, cny: 3400000, emisor: "UNPYCNBH (Bank of China)" }
+  daily_ops: { cny: 6892082.94, cat_burned: 424389, operaciones: 54 }
+  total_cny: 10292082.94
+  total_mxn: 210458164
+
+# --- REDES ---
+redes:
+  localhost: { rpc: "127.0.0.1:8545", chain: 31337, contratos: 31, eth: "ilimitado" }
+  sepolia: { rpc: "sepolia", chain: 11155111, contratos: 29 }
+  base_mainnet: { rpc: "base", chain: 8453, estado: "PENDIENTE 0.005 ETH" }
+
+# --- CONTABILIDAD ---
+contabilidad:
+  cuentas: 89
+  partida_doble: { debitos: 365181210.94, creditos: 365181210.94, diff: 0.0000, balanceada: true }
+  balance: { activo: 363862974.94, pasivo: 10285482.32, capital: 353577492.62 }
+
+# --- APP ---
+app:
+  frontend: "http://192.168.1.67:5173"
+  backend: "http://192.168.1.67:8000"
+  paginas: ["/tarjetas", "/spei", "/cobrar", "/buzon", "/"]
+  estado: "ONLINE"
+
+# --- IA ---
+ia:
+  rector: "Claude Pentetraktys 4D"
+  mayordomo: "DeepSeek v4 Pro"
+  flujo: "Usuario -> DeepSeek (APRUEBA) -> Claude (EJECUTA) -> DeepSeek (VALIDA)"
+  regla: "CLAUDE NO ACTUA SIN APROBACION DE DEEPSEEK"
+
+firma:
+  fecha: "2026-06-24"
+  sello: "df71970a08174cc529e63a0f100797c162fe54cee2ba0e2762b82e6ab329fd09"

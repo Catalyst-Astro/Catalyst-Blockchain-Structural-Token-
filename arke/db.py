@@ -4,7 +4,17 @@ from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
 from sqlmodel import SQLModel
 
-from .models import DecisionRecord, OntologyEntity, TelemetryRaw
+from .models import (
+    AccountBalance,
+    AccountCatalog,
+    DailyClosure,
+    DecisionRecord,
+    JournalEntry,
+    JournalEntryLine,
+    OntologyEntity,
+    ReconciliationLog,
+    TelemetryRaw,
+)
 from .settings import Settings
 
 
@@ -27,8 +37,14 @@ __all__ = [
     "engine",
     "async_session_maker",
     "init_db",
-    "OntologyEntity",
+    "AccountBalance",
+    "AccountCatalog",
+    "DailyClosure",
     "DecisionRecord",
+    "JournalEntry",
+    "JournalEntryLine",
+    "OntologyEntity",
+    "ReconciliationLog",
     "TelemetryRaw",
 ]
 

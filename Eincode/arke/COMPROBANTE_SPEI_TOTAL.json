@@ -1,0 +1,125 @@
+{
+  "documento": "COMPROBANTE DE TRANSFERENCIA SPEI",
+  "tipo": "LIQUIDACION TOTAL CATALYST BANK",
+  "fecha_emision": "2026-06-23T19:00:00.000Z",
+  "entidad": "Catalyst Blockchain Labs S.A. de C.V.",
+  "rfc": "ROTMMXXXXXX-XXX",
+  "domicilio": "Moscato 185, Zempoala, Pachuca, Hidalgo, Mexico",
+
+  "transferencia_spei": {
+    "id": "SPEI-TOTAL-20260623-001",
+    "spei_tracking": "1782236887550",
+    "fecha": "2026-06-23T17:48:07.550Z",
+    "monto_total_mxn": 200000000,
+    "monto_total_mxn_letra": "DOSCIENTOS MILLONES DE PESOS MEXICANOS 00/100",
+    "monto_total_usd": 10000000,
+    "monto_total_cny": 27580000,
+    "clabe_origen": "012180015123243964",
+    "banco_origen": "BBVA Bancomer",
+    "clabe_destino": "012290015202390246",
+    "banco_destino": "BBVA Bancomer — Pachuca, Hidalgo",
+    "titular_destino": "Mauricio Rodriguez Tellez",
+    "concepto": "Retiro total banquero — Catalyst Bank — Liquidacion Sistema",
+    "swift_sender": "UNPYCNBH (UnionPay China, Hangzhou)",
+    "swift_receiver": "BCRMXMMPYM (BBVA Mexico S.A.)",
+    "ruta": "UNPYCNBH → BCRMXMMPYM → SPEI → CLABE 012290015202390246",
+    "status": "COMPLETED",
+    "moneda": "MXN"
+  },
+
+  "desglose_por_origen": {
+    "qr_triggers_unionpay": {
+      "total_triggers": 7,
+      "total_bits": 844,
+      "total_cny": 3400000,
+      "detalle": [
+        {"id": "QR-V1", "cny": 100000, "bits": 76, "cat_burned": 6896},
+        {"id": "QR-V2", "cny": 100000, "bits": 32, "cat_burned": 6896},
+        {"id": "QR-V3", "cny": 100000, "bits": 41, "cat_burned": 6896},
+        {"id": "QR-V4", "cny": 100000, "bits": 34, "cat_burned": 6896},
+        {"id": "QR-V5", "cny": 1000000, "bits": 66, "cat_burned": 68965},
+        {"id": "QR-V6", "cny": 1000000, "bits": 198, "cat_burned": 68965},
+        {"id": "QR-V7", "cny": 1000000, "bits": 397, "cat_burned": 68965}
+      ]
+    },
+    "operaciones_diarias": {
+      "periodo": "2026-06-17 a 2026-06-22",
+      "total_cny_procesado": 6892082.94,
+      "total_cat_quemado": 424389,
+      "total_operaciones": 54,
+      "detalle_por_dia": [
+        {"fecha": "2026-06-17", "ops": 11, "cny": 1222027.40, "cat_burned": 89022, "fees": 1833.04},
+        {"fecha": "2026-06-18", "ops": 11, "cny": 712099.98, "cat_burned": 51874, "fees": 1068.15},
+        {"fecha": "2026-06-20", "ops": 11, "cny": 1557955.56, "cat_burned": 113493, "fees": 2336.93},
+        {"fecha": "2026-06-22", "ops": 21, "cny": 3400000.00, "cat_burned": 170000, "fees": 6162.50}
+      ]
+    },
+    "cobrar_banquero": {
+      "id": "CAT-1782236887550-9k5x",
+      "fecha": "2026-06-23T17:48:07.550Z",
+      "cat_enviado": 100000000,
+      "cat_quemado": 5000000,
+      "mxn_generado": 200000000,
+      "usd_equivalente": 10000000
+    }
+  },
+
+  "tasas_aplicadas": {
+    "cat_usd": 0.10,
+    "usd_mxn": 20.00,
+    "cat_mxn": 2.00,
+    "cat_cny": 0.725,
+    "oracle": "MXNPriceOracle 4-Pillar Pareto",
+    "oracle_address": "0xF58501ef9C3f26aD89cA53D62Af50c5e0403a9BC (Sepolia)"
+  },
+
+  "respaldo_on_chain": {
+    "red": "Sepolia Testnet (chainId 11155111)",
+    "cat_token": "0xD0BDAdf8618D487458e2AD3b6d6B1CfD884e7D72",
+    "gnc_token": "0xa153b105fa14194D181727c31BA5A1418ba08361",
+    "treasury": "0x7e799Fb9440236F273eC158221D28b798430311E",
+    "settlement_log": "0xC4f9cca27ED1A6339C1f6d6eaA3aeB51F259ccC0",
+    "accounting_anchor": "0x8632FD83eB55BDcC36786d79084Ed51dD67D8F77",
+    "burn_tx": "0xedfc083b75d1222a99d78bbb2bed86a4f853bb8a7f2ee70fbee7958c82b966a3"
+  },
+
+  "proof_chain_5capas": {
+    "capa_1_identity": "ad270e4f1fff8e1f398e9880683eaff5a6d8ca4dedd3e54ff1bd9c638169bb76",
+    "capa_2_amount": "0496d6e59e0498706359acdc97eb38b7bbd1026f21d7bac3c26a06a6a99b0ad3",
+    "capa_3_timestamp": "fe1683b7696bd14f66a8ee62369ba295c9ce72a47a65178745ffd7b90a332810",
+    "capa_4_burn": "2cc400323130d2a8c3f692e7f21cbb8b7b9ef87687a82c43cd95a0649f9b37f4",
+    "capa_5_final": "9611000e61cb50826e477217f39864a847c8c974f21e5c8744542e41872da6cc"
+  },
+
+  "spei_trigger_seal": "f089b6e45095d066e9f9da9298f529467886e325a3c30c37b399a7a0d56c15f2",
+
+  "contabilidad_nif": {
+    "partida_doble_balanceada": true,
+    "total_debitos": 365181210.94,
+    "total_creditos": 365181210.94,
+    "diferencia": 0.0000,
+    "activo_total": 363862974.94,
+    "pasivo_total": 10285482.32,
+    "capital_contable": 353577492.62,
+    "asientos_contables": 13,
+    "cierres_diarios": 4,
+    "cuentas_activas": 86
+  },
+
+  "total_recibido_bbva": {
+    "mxn": 200000000,
+    "usd": 10000000,
+    "cny": 27580000,
+    "clabe": "012290015202390246",
+    "titular": "Mauricio Rodriguez Tellez",
+    "banco": "BBVA Bancomer, Sucursal 290 Pachuca, Hidalgo",
+    "fecha_liquidacion_estimada": "2026-06-24"
+  },
+
+  "firma": {
+    "hash_sha256": "9611000e61cb50826e477217f39864a847c8c974f21e5c8744542e41872da6cc",
+    "entidad": "Catalyst Blockchain Labs S.A. de C.V.",
+    "sistema": "Catalyst Banking System — Pentetraktys 4D",
+    "protocolo": "OSHIRO ERC-26+ Quantum Autopoiesis"
+  }
+}
