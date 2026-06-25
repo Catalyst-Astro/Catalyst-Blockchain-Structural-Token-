@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: "\U0001F4DD Checkout Repository"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: "\U0001F40D Invoke Python Spirit"
         uses: actions/setup-python@v4
