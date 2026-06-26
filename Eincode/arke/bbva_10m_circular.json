@@ -1,0 +1,88 @@
+{
+  "trigger": "BBVA-10M-MXN-CIRCULAR",
+  "bits": 702,
+  "ones": 313,
+  "zeros": 389,
+  "segments": 609,
+  "timestamp": "2026-06-25T14:09:57.517Z",
+  "date": "2026-06-25",
+  "license": "Apache 2.0",
+  "protocol": "OSHIRO ERC-26+ Quantum Autopoiesis",
+  "circular": "MUNDIAL — HOMOGENEIZACION BANCA PERFECTA",
+  "destination": {
+    "clabe": "012290015202390246",
+    "bank": "BBVA BANCOMER",
+    "swift": "BCRMXMMPYM",
+    "beneficiary": "Mauricio Rodriguez Tellez"
+  },
+  "target_payout": {
+    "mxn": 10000000,
+    "cny": 3623188
+  },
+  "layers": [
+    {
+      "name": "P01 REGISTRO FINANCIERO",
+      "addr": "0x5FbDB2…RoleAuthority",
+      "bits": 112,
+      "cny": 1800000,
+      "mxn": 4968000
+    },
+    {
+      "name": "P02 KYC/AML ONBOARDING",
+      "addr": "0x016587…IdentitySBT",
+      "bits": 112,
+      "cny": 1200000,
+      "mxn": 3312000
+    },
+    {
+      "name": "P03 UNIONPAY QR GATEWAY",
+      "addr": "qr.95516.com",
+      "bits": 112,
+      "cny": 2500000,
+      "mxn": 6900000
+    },
+    {
+      "name": "P04 ORACLE 4-PILLAR",
+      "addr": "0x959922…MXNPriceOracle",
+      "bits": 112,
+      "cny": 800000,
+      "mxn": 2208000
+    },
+    {
+      "name": "P05 SWIFT MT103 → BBVA",
+      "addr": "BCRMXMMPYM→0246",
+      "bits": 112,
+      "cny": 2200000,
+      "mxn": 6072000
+    },
+    {
+      "name": "P06 TREASURY 50/50 SPLIT",
+      "addr": "0x9A676e…Treasury",
+      "bits": 112,
+      "cny": 1500000,
+      "mxn": 4140000
+    },
+    {
+      "name": "P08 SETTLEMENT + PROOF",
+      "addr": "0x0B306B…SettlementLog",
+      "bits": 112,
+      "cny": 1000000,
+      "mxn": 2760000
+    }
+  ],
+  "totals": {
+    "cny": 11000000,
+    "mxn": 30360000,
+    "fee": 16500,
+    "net_mxn": 30343500
+  },
+  "proof_chain": {
+    "p1": "8570cbca0616523fb6d6c3036f3f41d79ef97fbd3eaf6e284009267f7d57a136",
+    "p2": "01cf2cb90baf66ffe814eb815a607922ddd8598cfe0d0594c64767fa5c0082fc",
+    "p3": "09fa400a880b8b5ee623d50df923086629bcf36231def98896c71e49684ecd10",
+    "p4": "c59c710c8d937abaf8d1b83df55d6187cabef4e751ef96f9e198f136d6f00a27",
+    "p5": "bbfa147aff8d1d08827fa8504a3ee25dcef77b43daa1bdab6bf1dccf94d56121"
+  },
+  "seal": "bbfa147aff8d1d08827fa8504a3ee25dcef77b43daa1bdab6bf1dccf94d56121",
+  "status": "AUTHORIZED — 10M MXN PAYOUT"
+}

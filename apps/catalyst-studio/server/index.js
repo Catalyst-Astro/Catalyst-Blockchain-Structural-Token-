@@ -44,7 +44,20 @@ if (SANDBOX || !process.env.BITSO_API_KEY) {
 }
 
 // ── Ethereum Provider ──
-const provider = new ethers.JsonRpcProvider(CHAIN_RPC);
+let provider;
+try {
+  const isLocalhost = CHAIN_RPC.includes("127.0.0.1") || CHAIN_RPC.includes("localhost");
+  if (isLocalhost) {
+    const net = new ethers.Network("localhost", 31337);
+    provider = new ethers.JsonRpcProvider(CHAIN_RPC, net, { staticNetwork: net });
+    console.log("🏠 Localhost provider (chain 31337)");
+  } else {
+    provider = new ethers.JsonRpcProvider(CHAIN_RPC);
+  }
+} catch (e) {
+  console.log("⚠️ Provider fallback:", e.message.slice(0,60));
+  provider = new ethers.JsonRpcProvider(CHAIN_RPC);
+}
 let signer = null;
 let deployerAddress = null;
 
@@ -82,11 +95,13 @@ async function loadContracts() {
 
     let contractsFile;
     if (chainId === 8453) {
-      contractsFile = "contracts_base.json";
+      contractsFile = "contracts_base.json";           // Base Mainnet
+    } else if (chainId === 11155111) {
+      contractsFile = "contracts_sepolia.json";        // Sepolia Testnet (29 contratos)
     } else if (chainId === 31337 || chainId === 1337) {
-      contractsFile = "contracts.json";
+      contractsFile = "contracts.json";                // Hardhat Localhost
     } else {
-      contractsFile = "contracts.json"; // fallback
+      contractsFile = "contracts.json";                // fallback
     }
 
     const contractsPath = path.join(__dirname, "..", "src", contractsFile);
@@ -105,6 +120,13 @@ function getAddr(name) {
   const c = contracts.find((c) => c.name === name);
   if (!c) throw new Error(`${name} not found in contracts (chain ${chainId})`);
   return c.address;
+}
+
+// ── BigInt-safe JSON serialization ──
+function toJSON(obj) {
+  return JSON.parse(JSON.stringify(obj, (key, value) =>
+    typeof value === "bigint" ? value.toString() : value
+  ));
 }
 
 // ── Express App ──
@@ -513,12 +535,15 @@ app.get("/api/balance", async (req, res) => {
     try {
       const catAddr = getAddr("CatalystToken");
       const cat = new ethers.Contract(catAddr, [...erc20Abi, ...catBurnAbi], provider);
-      [catBal, catSupply, catBurned] = await Promise.all([
+      const [bal, sup, burned] = await Promise.all([
         cat.balanceOf(treasuryAddr),
         cat.totalSupply(),
         cat.totalBurned(),
       ]);
-    } catch (e) { console.log("⚠️ CAT balance unavailable"); }
+      catBal = ethers.formatEther(bal);
+      catSupply = ethers.formatEther(sup);
+      catBurned = ethers.formatEther(burned);
+    } catch (e) { console.log("⚠️ CAT balance unavailable:", e.message.slice(0,50)); }
 
     // Oracle — try to get rate
     try {
@@ -547,7 +572,7 @@ app.get("/api/balance", async (req, res) => {
     let bitsoBal = null;
     try { bitsoBal = await bitso.getBalances(); } catch (e) { bitsoBal = { note: SANDBOX ? "sandbox" : "unavailable" }; }
 
-    res.json({
+    res.json(toJSON({
       success: true,
       network: { chain_id: chainId, name: networkName },
       wallet: treasuryAddr,
@@ -566,7 +591,7 @@ app.get("/api/balance", async (req, res) => {
       oracle: { cat_mxn: parseFloat(catMxnRate) },
       bitso: bitsoBal,
       treasury_address: treasuryAddr,
-    });
+    }));
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

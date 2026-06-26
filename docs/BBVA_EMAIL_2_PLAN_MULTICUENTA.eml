@@ -1,0 +1,202 @@
+From: Catalyst Blockchain Labs <catalyst-bank@proton.me>
+To: servicio.clientes@bbva.com, contacto@bbva.com, atencion.clientes@bbva.com, banca.empresarial@bbva.com
+Subject: CATALYST BANK - Plan Multi-Cuenta BBVA - Distribucion $1.5B MXN - COBOL Apache 2.0
+Date: Thu, 25 Jun 2026 15:01:00 -0600
+MIME-Version: 1.0
+Content-Type: text/html; charset=UTF-8
+
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>PLAN MULTI-CUENTA BBVA</title><style>body{font-family:Segoe UI,Arial,sans-serif;max-width:900px;margin:30px auto;color:#1a1a2e;line-height:1.6}h1{font-size:24px;border-bottom:3px solid #1a1a2e;padding-bottom:10px}h2{font-size:18px;color:#1a1a2e;border-bottom:1px solid #ddd;padding:10px 0}h3{font-size:15px}pre{background:#f5f5f5;padding:15px;border-radius:6px;font-size:12px;overflow-x:auto;white-space:pre}code{font-family:Courier New,monospace;font-size:12px;background:#f0f0f0;padding:2px 5px}table{width:100%;border-collapse:collapse;margin:15px 0}th{background:#1a1a2e;color:#fff;padding:10px;text-align:left;font-size:13px}td{padding:8px;border-bottom:1px solid #eee;font-size:13px}blockquote{background:#fffde7;border-left:4px solid #f59e0b;padding:10px 15px;font-style:italic}strong{color:#c00}.footer{text-align:center;font-size:10px;color:#999;margin-top:30px;border-top:1px solid #eee;padding:15px}@media print{body{margin:15px}}</style></head><body><h1></h1>
+<h2></h2>
+
+<blockquote></blockquote>
+<blockquote></blockquote>
+<blockquote></blockquote>
+
+---
+
+<h2></h2>
+
+BBVA no puede procesar un pago único de <strong></strong>. Ni SPEI ni SWIFT manejan montos de esta magnitud en una sola transacción. Se requiere una estrategia de <strong></strong> para cumplir con límites bancarios, regulatorios y fiscales.
+
+---
+
+<h2></h2>
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    CATALYST BBVA MULTI-ACCOUNT PROJECT                    │
+│                        Waterfall-Hybrid SDLC                              │
+└─────────────────────────────────────────────────────────────────────────┘
+                                    │
+            ┌───────────────────────┼───────────────────────┐
+            ▼                       ▼                       ▼
+    ┌───────────────┐       ┌───────────────┐       ┌───────────────┐
+    │ F1: ANÁLISIS  │       │ F2: DISEÑO    │       │ F3: DESARROLLO │
+    │ Regulatorio   │  ───▶ │ Multi-Cuenta  │  ───▶ │ COBOL CATDIST  │
+    └───────────────┘       └───────────────┘       └───────────────┘
+            │                       │                       │
+    ┌───────┴───────┐       ┌───────┴───────┐       ┌───────┴───────┐
+    │ SPEI limits   │       │ 10 CLABEs      │       │ CATDIST.cbl   │
+    │ CNBV MTU caps │       │ Capacidad $3B  │       │ CATBANK.cbl   │
+    │ SAT reporting │       │ Batch 100 TX   │       │ CATJRNL.cbl   │
+    │ SWIFT >$500K  │       │ Fee 0.1%       │       │ CATSWIFT.cbl  │
+    └───────────────┘       └───────────────┘       └───────────────┘
+                                    │
+            ┌───────────────────────┼───────────────────────┐
+            ▼                       ▼                       ▼
+    ┌───────────────┐       ┌───────────────┐       ┌───────────────┐
+    │ F4: PRUEBAS   │       │ F5: DESPLIEGUE│       │ F6: MANTEN.   │
+    │ Sandbox SPEI   │  ───▶ │ Producción     │  ───▶ │ Monitoreo     │
+    └───────────────┘       └───────────────┘       └───────────────┘
+            │                       │                       │
+    ┌───────┴───────┐       ┌───────┴───────┐       ┌───────┴───────┐
+    │ Bitso sandbox  │       │ 10 BBVA real   │       │ Auditoría     │
+    │ CEP verif.     │       │ SPEI + SWIFT   │       │ Reportes CNBV │
+    │ Proof chain    │       │ CEP tracking   │       │ ICAP 10.5%    │
+    └───────────────┘       └───────────────┘       └───────────────┘
+```
+
+---
+
+<h2></h2>
+
+```
+                        ┌─────────────────┐
+                        │  TOTAL FUNDS    │
+                        │ $1,553,462M MXN │
+                        └────────┬────────┘
+                                 │
+                    ┌────────────▼────────────┐
+                    │ VALIDAR CAPACIDAD        │
+                    │ 10 cuentas × $500M = $3B │
+                    │ ✅ Suficiente             │
+                    └────────────┬────────────┘
+                                 │
+              ┌──────────────────┼──────────────────┐
+              ▼                  ▼                  ▼
+    ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐
+    │ CUENTA 1: CONC. │ │ CUENTA 2: OPER. │ │ CUENTA 3: CHEQ. │
+    │ $500M       │ │ $500M       │ │ $300M       │
+    └────────┬────────┘ └────────┬────────┘ └────────┬────────┘
+              │                  │                  │
+    ┌─────────▼─────────┐ ┌─────▼──────────┐ ┌─────▼──────────┐
+    │ 50 TX × $10M      │ │ 50 TX × $10M   │ │ 30 TX × $10M   │
+    │ Fee: $500K        │ │ Fee: $500K     │ │ Fee: $300K     │
+    └───────────────────┘ └────────────────┘ └────────────────┘
+              │                  │                  │
+              └──────────────────┼──────────────────┘
+                                 │
+                    ┌────────────▼────────────┐
+                    │ SWIFT MT103 (>$300M)     │
+                    │ 5 cuentas con UETR       │
+                    └────────────┬────────────┘
+                                 │
+                    ┌────────────▼────────────┐
+                    │ REPORTE FINAL + SEAL    │
+                    │ CATRPT + CATSWIFT       │
+                    └─────────────────────────┘
+```
+
+---
+
+<h2></h2>
+
+<tr><td>#</td><td>CLABE</td><td>Tipo</td><td>Capacidad</td><td>Estrategia</td></tr>
+<tr><td>---</td><td>---</td><td>---</td><td>---</td><td>---</td></tr>
+<tr><td>1</td><td>012290015202390246</td><td>Concentradora</td><td>$500M</td><td>Principal — recibe lotes de $10M</td></tr>
+<tr><td>2</td><td>012180015123243964</td><td>Operadora</td><td>$500M</td><td>Secundaria — distribución SPEI</td></tr>
+<tr><td>3</td><td>012290015202390259</td><td>Cheques Principal</td><td>$300M</td><td>Cheques certificados</td></tr>
+<tr><td>4</td><td>012290015202390262</td><td>Débito</td><td>$200M</td><td>Gastos operativos</td></tr>
+<tr><td>5</td><td>012290015202390275</td><td>Crédito</td><td>$200M</td><td>Líneas de crédito</td></tr>
+<tr><td>6</td><td>012290015202390288</td><td>Ahorro/Inversión</td><td>$500M</td><td>Reserva largo plazo</td></tr>
+<tr><td>7</td><td>012290015202390291</td><td>Pagos Servicios</td><td>$100M</td><td>Pagos recurrentes</td></tr>
+<tr><td>8</td><td>072290015202390252</td><td>Crypto Bridge</td><td>$300M</td><td>Bitso on/off ramp</td></tr>
+<tr><td>9</td><td>014290015202390247</td><td>Santander Recaudadora</td><td>$200M</td><td>Diversificación bancaria</td></tr>
+<tr><td>10</td><td>021290015202390248</td><td>HSBC Pagadora</td><td>$200M</td><td>Diversificación bancaria</td></tr>
+<tr><td><strong></strong></td><td><strong></strong></td></tr>
+
+---
+
+<h2></h2>
+
+<tr><td>Parámetro</td><td>Valor</td><td>Fundamento</td></tr>
+<tr><td>---</td><td>---</td><td>---</td></tr>
+<tr><td>Fondos totales</td><td>$1,553,462,360,000 MXN</td><td>COBOL CATBANK</td></tr>
+<tr><td>Máximo por cuenta</td><td>$500,000,000 MXN</td><td>SPEI límite práctico</td></tr>
+<tr><td>Máximo por transacción</td><td>$10,000,000 MXN</td><td>CNBV MTU + SAT</td></tr>
+<tr><td>Transacciones por lote</td><td>100</td><td>Eficiencia operativa</td></tr>
+<tr><td>Fee por transacción</td><td>0.1%</td><td>SPEI + Bitso</td></tr>
+<tr><td>Número de cuentas</td><td>10</td><td>Diversificación</td></tr>
+<tr><td>Capacidad total</td><td>$3,000,000,000 MXN</td><td>Margen de seguridad</td></tr>
+<tr><td>SWIFT (>$300M)</td><td>5 cuentas</td><td>Trazabilidad internacional</td></tr>
+
+---
+
+<h2></h2>
+
+```
+F1 ANÁLISIS         ████████░░░░░░░░░░░░░░░░░░░░  2 días
+F2 DISEÑO           ░░░░░░░░████████░░░░░░░░░░░░░░  3 días
+F3 DESARROLLO       ░░░░░░░░░░░░░░░░████████░░░░░░  5 días
+F4 PRUEBAS          ░░░░░░░░░░░░░░░░░░░░░░░░████░░  3 días
+F5 DESPLIEGUE       ░░░░░░░░░░░░░░░░░░░░░░░░░░░░██  2 días
+F6 MANTENIMIENTO    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  continuo
+────────────────────────────────────────────────────
+TOTAL: 15 días hábiles
+```
+
+---
+
+<h2></h2>
+
+<h3></h3>
+- [x] SPEI limits: sin máximo sistema, límites por banco
+- [x] CNBV MTU: $12,500 MXN default, configurable
+- [x] SAT: reporte automático >$15,000 MXN
+- [x] SWIFT: recomendado >$500,000 MXN por transacción
+
+<h3></h3>
+- [x] 10 CLABEs BBVA (7 BBVA + 2 otros bancos + 1 crypto)
+- [x] Capacidad total $3B MXN (>$1.5B requerido)
+- [x] Estrategia de lotes: 100 TX por cuenta
+- [x] SWIFT para cuentas con >$300M
+
+<h3></h3>
+- [x] CATDIST.cbl — Distribución multi-cuenta
+- [x] CATBANK.cbl — Sistema bancario orquestador
+- [x] CATJRNL.cbl — Partida doble NIF
+- [x] CATSWIFT.cbl — MT103 generator
+
+<h3></h3>
+- [ ] Bitso sandbox SPEI
+- [ ] CEP Banxico verificación
+- [ ] Proof chain SHA-256
+- [ ] Stress test: 10,000 TX
+
+<h3></h3>
+- [ ] Activar 10 CLABEs BBVA reales
+- [ ] SPEI producción via Bitso
+- [ ] SWIFT MT103 transmisión
+- [ ] Monitoreo en tiempo real
+
+<h3></h3>
+- [ ] Auditoría diaria (reportes CNBV)
+- [ ] ICAP >10.5%
+- [ ] Proof of Reserves semanal
+- [ ] Buzón regulatorio automático
+
+---
+
+<h2></h2>
+
+```bash
+export COB_CONFIG_DIR=/ucrt64/share/gnucobol/config
+cd "docs/cobol"
+cobc -x -free -std=cobol85 -o catdist.exe CATDIST.cbl && ./catdist.exe
+```
+
+---
+
+<blockquote></blockquote>
+<blockquote></blockquote>
+<div class="footer">CATALYST BANK SYSTEM — COBOL ANSI-85 — Apache 2.0<br/>PLAN DE PROYECTO — DISTRIBUCION MULTI-CUENTA BBVA</div></body></html>

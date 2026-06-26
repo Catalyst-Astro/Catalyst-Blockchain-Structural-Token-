@@ -1,0 +1,95 @@
+{
+  "trigger": "512-BIT-COMPOSITE",
+  "bits": 512,
+  "bytes": 64,
+  "layers": [
+    {
+      "name": "CAT ISSUANCE",
+      "bits": 64,
+      "cny": 25000000000,
+      "desc": "Catalyst Token Supply Lock",
+      "mxn": 69000000000,
+      "usd": 3448275862.0689654
+    },
+    {
+      "name": "GNC BACKING",
+      "bits": 64,
+      "cny": 22000000000,
+      "desc": "Ganancia Token 1:1 CNY",
+      "mxn": 60719999999.99999,
+      "usd": 3034482758.62069
+    },
+    {
+      "name": "CTV LIBRE USANZA",
+      "bits": 64,
+      "cny": 18000000000,
+      "desc": "Token Cautivo — Retiro Fiat",
+      "mxn": 49679999999.99999,
+      "usd": 2482758620.6896553
+    },
+    {
+      "name": "FLT COMPLIANCE",
+      "bits": 64,
+      "cny": 15000000000,
+      "desc": "Fractal Token Compliance",
+      "mxn": 41400000000,
+      "usd": 2068965517.2413793
+    },
+    {
+      "name": "UNIONPAY QR 95516",
+      "bits": 64,
+      "cny": 28000000000,
+      "desc": "Gateway qr.95516.com",
+      "mxn": 77280000000,
+      "usd": 3862068965.5172415
+    },
+    {
+      "name": "SWIFT MT103 ROUTING",
+      "bits": 64,
+      "cny": 20000000000,
+      "desc": "BCRMXMMPYM → BBVA Mexico",
+      "mxn": 55199999999.99999,
+      "usd": 2758620689.6551723
+    },
+    {
+      "name": "SPEI BBVA PAYOUT",
+      "bits": 64,
+      "cny": 30000000000,
+      "desc": "CLABE 012290015202390246",
+      "mxn": 82800000000,
+      "usd": 4137931034.4827585
+    },
+    {
+      "name": "MASTER SEAL",
+      "bits": 64,
+      "cny": 35000000000,
+      "desc": "Proof Chain Final — LA HAYA",
+      "mxn": 96600000000,
+      "usd": 4827586206.896552
+    }
+  ],
+  "timestamp": "2026-06-25T13:49:46.982Z",
+  "date": "2026-06-25",
+  "destination": {
+    "clabe": "012290015202390246",
+    "bank": "BBVA BANCOMER",
+    "swift": "BCRMXMMPYM",
+    "beneficiary": "Mauricio Rodriguez Tellez"
+  },
+  "totals": {
+    "cny": 193000000000,
+    "mxn": 532679999999.99994,
+    "usd": 26620689655.172413,
+    "fee": 289500000,
+    "net_mxn": 532390499999.99994
+  },
+  "proof_chain": {
+    "p1": "b62eb9597660d5859e2dfa26919e86dc9a7e998004ffc734a56117b961f1f20f",
+    "p2": "7d0d759f8a276de7c2fc2c91277ad39b03be4ef040ef8e0d8ae82643fc36292d",
+    "p3": "144d2726bcccb5dd9c4c00955df444c148a4a2bb1bd11b9c0627948b25621fc0",
+    "p4": "4529f30e0e602f82d116d44e1643a7a0f3bb489cb9c78089291e937278070203",
+    "p5": "42a70b24228f27d37bcdeae1c13cc9d49cb1677e3129c5b77e609c064111adfc"
+  },
+  "seal": "42a70b24228f27d37bcdeae1c13cc9d49cb1677e3129c5b77e609c064111adfc",
+  "status": "EXECUTED"
+}
