@@ -1,0 +1,2127 @@
+[
+  {
+    "document_type": "FACTURA / INVOICE / 发票 (FA PIAO)",
+    "invoice_number": "FACT-20260617-001",
+    "date": "2026-06-17",
+    "generated_at": "2026-06-26T06:26:12Z",
+    "issuer": {
+      "legal_name": "Catalyst Blockchain Labs S.A. de C.V.",
+      "trade_name": "Catalyst Blockchain Labs / UnionPay QR 95516",
+      "gateway": "qr.95516.com",
+      "swift_bic": "BCRMXMMPYM",
+      "swift_correspondent": "UNPYCNBH",
+      "jurisdiction": "Mexico, Hidalgo, Pachuca de Soto",
+      "license": "Apache 2.0 — Sistema Bancario Abierto",
+      "rfc": "CBL260617XXX"
+    },
+    "recipient": {
+      "name": "Mauricio Rodriguez Tellez",
+      "address": "Moscato 185, Zempoala, Pachuca, Hidalgo, Mexico",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "clabe_principal": "012290015202390246",
+      "identity": "CN/MX Binational (Chino-Mexicano)",
+      "sat_regime": "Persona Fisica con Actividad Empresarial"
+    },
+    "payment_reference": {
+      "payment_id": "DAILY-2026-06-17",
+      "source": "DAILY_REPORT",
+      "source_file": "daily_report_2026-06-17.json",
+      "description": "Daily Bank Operations — 2026-06-17",
+      "gateway": "qr.95516.com"
+    },
+    "amounts": {
+      "cny": 1222027.402578657,
+      "mxn": 3371110.0,
+      "usd": 168555.5,
+      "cat_required": 1780490,
+      "cat_burned": 89024,
+      "fee_cny": 1833.04,
+      "net_cny": 1220194.36,
+      "cat_total_supply_before": 1000000000,
+      "cat_total_supply_after": 999910976,
+      "cat_treasury_before": 300000000,
+      "cat_treasury_after": 298219510,
+      "circulating_impact": -1780490
+    },
+    "rates": {
+      "cat_usd": 0.1,
+      "usd_cny": 7.25,
+      "usd_mxn": 20.0,
+      "cat_cny_rate": 0.686343,
+      "fwd_p3": 1.05,
+      "rwd_p4": 0.98,
+      "risk_p4": 0.92,
+      "fee_pct": 0.0015,
+      "burn_pct": 0.05
+    },
+    "cat_supply_impact": {
+      "before_payment": {
+        "total_supply": 1000000000,
+        "circulating": 100000000,
+        "treasury": 300000000
+      },
+      "transaction": {
+        "cat_withdrawn_from_treasury": 1780490,
+        "cat_burned_irreversible": 89024,
+        "cny_received_treasury": 1220194.36
+      },
+      "after_payment": {
+        "total_supply": 999910976,
+        "treasury_cat": 298219510,
+        "treasury_cny_increased": 1220194.36
+      },
+      "effect": "DEFLACIONARIO — Burn reduce supply total irreversiblemente",
+      "burn_pct": "5.0%"
+    },
+    "chinese_terms_binary": {
+      "FA_PIAO (发票 - Invoice)": {
+        "characters": "发 票",
+        "utf8_hex": "e58f9120e7a5a8",
+        "utf8_binary": "11100101 10001111 10010001 00100000 11100111 10100101 10101000"
+      },
+      "YI_FU_QING (已付清 - Paid in Full)": {
+        "characters": "已 付 清",
+        "utf8_hex": "e5b7b220e4bb9820e6b885",
+        "utf8_binary": "11100101 10110111 10110010 00100000 11100100 10111011 10011000 00100000 11100110 10111000 10000101"
+      },
+      "CHENG_GONG (成功 - Success)": {
+        "characters": "成 功",
+        "utf8_hex": "e6889020e58a9f",
+        "utf8_binary": "11100110 10001000 10010000 00100000 11100101 10001010 10011111"
+      },
+      "YIN_LIAN (银联 - UnionPay)": {
+        "characters": "银 联",
+        "utf8_hex": "e993b620e88194",
+        "utf8_binary": "11101001 10010011 10110110 00100000 11101000 10000001 10010100"
+      },
+      "ZHI_FU (支付 - Payment)": {
+        "characters": "支 付",
+        "utf8_hex": "e694af20e4bb98",
+        "utf8_binary": "11100110 10010100 10101111 00100000 11100100 10111011 10011000"
+      }
+    },
+    "pentetraktys_4d_audit": {
+      "framework": "PENTETRAKTYS 4D",
+      "p1_cardinal_40pct": "Service demand anchor — $0.04 USD/CAT",
+      "p2_ordinal_30pct": "Forex conversion — $0.03 USD/CAT",
+      "p3_forward_20pct": "Liquidity premium — $0.02 USD/CAT",
+      "p4_reward_10pct": "Low volatility bonus — $0.01 USD/CAT",
+      "total_intrinsic_value": "$0.10 USD / CAT",
+      "hybrys_check": "PASS — Confidence < 0.9, Validation > 0.3"
+    },
+    "proof_chain": {
+      "p1": "503ffc15082bad8c881142c9c37b5066787457f57c441f9c073fb1c3e5cb80fc",
+      "p2": "755285f3cd84e892a7879d4127128dc4f963790eb16852e52b5275a5117b63ef",
+      "p3": "e26b988f238480cf4039e6ab732d884236b2d46695520f09e345b8dcb45ccfbb",
+      "p4": "dcbab8111db3287a9ad28f32814b00b1296a74ce095b3dcce6762764414ce4ce",
+      "p5": "a79a04b287ff04e6adb71564cd18dcc6aea3f213378e8706730569f43a9f71fa"
+    },
+    "trigger_signature": {
+      "master_trigger_hash": "75d417aa26c93b758f25a617500f2cdbe7d61902c4c12c9aeb293254a4ec1159",
+      "derived_seed": "57db3506fe3f0625e8ece98c6cfc7241bdc1beded0ab5de4d167368b91785b3f",
+      "signing_method": "SHA-256 5-Layer Proof Chain derived from Master Binary Trigger"
+    },
+    "seal": "a79a04b287ff04e6adb71564cd18dcc6aea3f213378e8706730569f43a9f71fa",
+    "status": "PAID — YI FU QING — PAGADO"
+  },
+  {
+    "document_type": "FACTURA / INVOICE / 发票 (FA PIAO)",
+    "invoice_number": "FACT-20260618-002",
+    "date": "2026-06-18",
+    "generated_at": "2026-06-26T06:26:12Z",
+    "issuer": {
+      "legal_name": "Catalyst Blockchain Labs S.A. de C.V.",
+      "trade_name": "Catalyst Blockchain Labs / UnionPay QR 95516",
+      "gateway": "qr.95516.com",
+      "swift_bic": "BCRMXMMPYM",
+      "swift_correspondent": "UNPYCNBH",
+      "jurisdiction": "Mexico, Hidalgo, Pachuca de Soto",
+      "license": "Apache 2.0 — Sistema Bancario Abierto",
+      "rfc": "CBL260617XXX"
+    },
+    "recipient": {
+      "name": "Mauricio Rodriguez Tellez",
+      "address": "Moscato 185, Zempoala, Pachuca, Hidalgo, Mexico",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "clabe_principal": "012290015202390246",
+      "identity": "CN/MX Binational (Chino-Mexicano)",
+      "sat_regime": "Persona Fisica con Actividad Empresarial"
+    },
+    "payment_reference": {
+      "payment_id": "DAILY-2026-06-18",
+      "source": "DAILY_REPORT",
+      "source_file": "daily_report_2026-06-18.json",
+      "description": "Daily Bank Operations — 2026-06-18",
+      "gateway": "qr.95516.com"
+    },
+    "amounts": {
+      "cny": 712099.9813222191,
+      "mxn": 1964413.8,
+      "usd": 98220.69,
+      "cat_required": 1037527,
+      "cat_burned": 51876,
+      "fee_cny": 1068.15,
+      "net_cny": 711031.83,
+      "cat_total_supply_before": 1000000000,
+      "cat_total_supply_after": 999948124,
+      "cat_treasury_before": 300000000,
+      "cat_treasury_after": 298962473,
+      "circulating_impact": -1037527
+    },
+    "rates": {
+      "cat_usd": 0.1,
+      "usd_cny": 7.25,
+      "usd_mxn": 20.0,
+      "cat_cny_rate": 0.686343,
+      "fwd_p3": 1.05,
+      "rwd_p4": 0.98,
+      "risk_p4": 0.92,
+      "fee_pct": 0.0015,
+      "burn_pct": 0.05
+    },
+    "cat_supply_impact": {
+      "before_payment": {
+        "total_supply": 1000000000,
+        "circulating": 100000000,
+        "treasury": 300000000
+      },
+      "transaction": {
+        "cat_withdrawn_from_treasury": 1037527,
+        "cat_burned_irreversible": 51876,
+        "cny_received_treasury": 711031.83
+      },
+      "after_payment": {
+        "total_supply": 999948124,
+        "treasury_cat": 298962473,
+        "treasury_cny_increased": 711031.83
+      },
+      "effect": "DEFLACIONARIO — Burn reduce supply total irreversiblemente",
+      "burn_pct": "5.0%"
+    },
+    "chinese_terms_binary": {
+      "FA_PIAO (发票 - Invoice)": {
+        "characters": "发 票",
+        "utf8_hex": "e58f9120e7a5a8",
+        "utf8_binary": "11100101 10001111 10010001 00100000 11100111 10100101 10101000"
+      },
+      "YI_FU_QING (已付清 - Paid in Full)": {
+        "characters": "已 付 清",
+        "utf8_hex": "e5b7b220e4bb9820e6b885",
+        "utf8_binary": "11100101 10110111 10110010 00100000 11100100 10111011 10011000 00100000 11100110 10111000 10000101"
+      },
+      "CHENG_GONG (成功 - Success)": {
+        "characters": "成 功",
+        "utf8_hex": "e6889020e58a9f",
+        "utf8_binary": "11100110 10001000 10010000 00100000 11100101 10001010 10011111"
+      },
+      "YIN_LIAN (银联 - UnionPay)": {
+        "characters": "银 联",
+        "utf8_hex": "e993b620e88194",
+        "utf8_binary": "11101001 10010011 10110110 00100000 11101000 10000001 10010100"
+      },
+      "ZHI_FU (支付 - Payment)": {
+        "characters": "支 付",
+        "utf8_hex": "e694af20e4bb98",
+        "utf8_binary": "11100110 10010100 10101111 00100000 11100100 10111011 10011000"
+      }
+    },
+    "pentetraktys_4d_audit": {
+      "framework": "PENTETRAKTYS 4D",
+      "p1_cardinal_40pct": "Service demand anchor — $0.04 USD/CAT",
+      "p2_ordinal_30pct": "Forex conversion — $0.03 USD/CAT",
+      "p3_forward_20pct": "Liquidity premium — $0.02 USD/CAT",
+      "p4_reward_10pct": "Low volatility bonus — $0.01 USD/CAT",
+      "total_intrinsic_value": "$0.10 USD / CAT",
+      "hybrys_check": "PASS — Confidence < 0.9, Validation > 0.3"
+    },
+    "proof_chain": {
+      "p1": "abd31d913ed5367e9983954992dd2646f43a3a2e3c388f192e3c8a2a255cc415",
+      "p2": "7783e30d9674741f5061bf3b748d0d8eb4878b9fb06203bd09cd329af54c1332",
+      "p3": "88c20f7c80294b05de4c583b60cb6f3f8dafbf5a813d65c677d138bf7fb0beaa",
+      "p4": "f0c459d88b61de6d8853f372030d5081ee9df9e199e66266c8558a73b3082985",
+      "p5": "85e1b677c891793233715d2697176ad7826c7fd8e60722bfe8fae00c84a903d5"
+    },
+    "trigger_signature": {
+      "master_trigger_hash": "75d417aa26c93b758f25a617500f2cdbe7d61902c4c12c9aeb293254a4ec1159",
+      "derived_seed": "2572801dad637c7cc8bf5f0e0606aa3dc900dfe204b7e040c13de34d6dd17c9a",
+      "signing_method": "SHA-256 5-Layer Proof Chain derived from Master Binary Trigger"
+    },
+    "seal": "85e1b677c891793233715d2697176ad7826c7fd8e60722bfe8fae00c84a903d5",
+    "status": "PAID — YI FU QING — PAGADO"
+  },
+  {
+    "document_type": "FACTURA / INVOICE / 发票 (FA PIAO)",
+    "invoice_number": "FACT-20260620-003",
+    "date": "2026-06-20",
+    "generated_at": "2026-06-26T06:26:12Z",
+    "issuer": {
+      "legal_name": "Catalyst Blockchain Labs S.A. de C.V.",
+      "trade_name": "Catalyst Blockchain Labs / UnionPay QR 95516",
+      "gateway": "qr.95516.com",
+      "swift_bic": "BCRMXMMPYM",
+      "swift_correspondent": "UNPYCNBH",
+      "jurisdiction": "Mexico, Hidalgo, Pachuca de Soto",
+      "license": "Apache 2.0 — Sistema Bancario Abierto",
+      "rfc": "CBL260617XXX"
+    },
+    "recipient": {
+      "name": "Mauricio Rodriguez Tellez",
+      "address": "Moscato 185, Zempoala, Pachuca, Hidalgo, Mexico",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "clabe_principal": "012290015202390246",
+      "identity": "CN/MX Binational (Chino-Mexicano)",
+      "sat_regime": "Persona Fisica con Actividad Empresarial"
+    },
+    "payment_reference": {
+      "payment_id": "DAILY-2026-06-20",
+      "source": "DAILY_REPORT",
+      "source_file": "daily_report_2026-06-20.json",
+      "description": "Daily Bank Operations — 2026-06-20",
+      "gateway": "qr.95516.com"
+    },
+    "amounts": {
+      "cny": 1557955.5588571362,
+      "mxn": 4297808.4,
+      "usd": 214890.42,
+      "cat_required": 2269937,
+      "cat_burned": 113496,
+      "fee_cny": 2336.93,
+      "net_cny": 1555618.63,
+      "cat_total_supply_before": 1000000000,
+      "cat_total_supply_after": 999886504,
+      "cat_treasury_before": 300000000,
+      "cat_treasury_after": 297730063,
+      "circulating_impact": -2269937
+    },
+    "rates": {
+      "cat_usd": 0.1,
+      "usd_cny": 7.25,
+      "usd_mxn": 20.0,
+      "cat_cny_rate": 0.686343,
+      "fwd_p3": 1.05,
+      "rwd_p4": 0.98,
+      "risk_p4": 0.92,
+      "fee_pct": 0.0015,
+      "burn_pct": 0.05
+    },
+    "cat_supply_impact": {
+      "before_payment": {
+        "total_supply": 1000000000,
+        "circulating": 100000000,
+        "treasury": 300000000
+      },
+      "transaction": {
+        "cat_withdrawn_from_treasury": 2269937,
+        "cat_burned_irreversible": 113496,
+        "cny_received_treasury": 1555618.63
+      },
+      "after_payment": {
+        "total_supply": 999886504,
+        "treasury_cat": 297730063,
+        "treasury_cny_increased": 1555618.63
+      },
+      "effect": "DEFLACIONARIO — Burn reduce supply total irreversiblemente",
+      "burn_pct": "5.0%"
+    },
+    "chinese_terms_binary": {
+      "FA_PIAO (发票 - Invoice)": {
+        "characters": "发 票",
+        "utf8_hex": "e58f9120e7a5a8",
+        "utf8_binary": "11100101 10001111 10010001 00100000 11100111 10100101 10101000"
+      },
+      "YI_FU_QING (已付清 - Paid in Full)": {
+        "characters": "已 付 清",
+        "utf8_hex": "e5b7b220e4bb9820e6b885",
+        "utf8_binary": "11100101 10110111 10110010 00100000 11100100 10111011 10011000 00100000 11100110 10111000 10000101"
+      },
+      "CHENG_GONG (成功 - Success)": {
+        "characters": "成 功",
+        "utf8_hex": "e6889020e58a9f",
+        "utf8_binary": "11100110 10001000 10010000 00100000 11100101 10001010 10011111"
+      },
+      "YIN_LIAN (银联 - UnionPay)": {
+        "characters": "银 联",
+        "utf8_hex": "e993b620e88194",
+        "utf8_binary": "11101001 10010011 10110110 00100000 11101000 10000001 10010100"
+      },
+      "ZHI_FU (支付 - Payment)": {
+        "characters": "支 付",
+        "utf8_hex": "e694af20e4bb98",
+        "utf8_binary": "11100110 10010100 10101111 00100000 11100100 10111011 10011000"
+      }
+    },
+    "pentetraktys_4d_audit": {
+      "framework": "PENTETRAKTYS 4D",
+      "p1_cardinal_40pct": "Service demand anchor — $0.04 USD/CAT",
+      "p2_ordinal_30pct": "Forex conversion — $0.03 USD/CAT",
+      "p3_forward_20pct": "Liquidity premium — $0.02 USD/CAT",
+      "p4_reward_10pct": "Low volatility bonus — $0.01 USD/CAT",
+      "total_intrinsic_value": "$0.10 USD / CAT",
+      "hybrys_check": "PASS — Confidence < 0.9, Validation > 0.3"
+    },
+    "proof_chain": {
+      "p1": "4a989995fb5b41fd42305b38afade2a6ecce6072bfc7de7dc610cf2c53aa00da",
+      "p2": "54874f4e7a45433a531cddbca4d605ddd919a7a0a456ac92ad58ef51b6363196",
+      "p3": "3a7a7ccb6172f6d693fe451dd7dda8101d396d891bacc4773d4c5ae335739ceb",
+      "p4": "a3b4f4863e9e9d1178710468ed3bfd2071148d461896eb576b864b72769d73a4",
+      "p5": "0a93fc5feb1ed87fea1e1813ceb1d9806c98723045d1a44c3e1a8c99c577dac6"
+    },
+    "trigger_signature": {
+      "master_trigger_hash": "75d417aa26c93b758f25a617500f2cdbe7d61902c4c12c9aeb293254a4ec1159",
+      "derived_seed": "9f3a3724e455d12674b06cb6186d6c19add391b56f438b880a66f9a91cff231d",
+      "signing_method": "SHA-256 5-Layer Proof Chain derived from Master Binary Trigger"
+    },
+    "seal": "0a93fc5feb1ed87fea1e1813ceb1d9806c98723045d1a44c3e1a8c99c577dac6",
+    "status": "PAID — YI FU QING — PAGADO"
+  },
+  {
+    "document_type": "FACTURA / INVOICE / 发票 (FA PIAO)",
+    "invoice_number": "FACT-20260622-004",
+    "date": "2026-06-22",
+    "generated_at": "2026-06-26T06:26:12Z",
+    "issuer": {
+      "legal_name": "Catalyst Blockchain Labs S.A. de C.V.",
+      "trade_name": "Catalyst Blockchain Labs / UnionPay QR 95516",
+      "gateway": "qr.95516.com",
+      "swift_bic": "BCRMXMMPYM",
+      "swift_correspondent": "UNPYCNBH",
+      "jurisdiction": "Mexico, Hidalgo, Pachuca de Soto",
+      "license": "Apache 2.0 — Sistema Bancario Abierto",
+      "rfc": "CBL260617XXX"
+    },
+    "recipient": {
+      "name": "Mauricio Rodriguez Tellez",
+      "address": "Moscato 185, Zempoala, Pachuca, Hidalgo, Mexico",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "clabe_principal": "012290015202390246",
+      "identity": "CN/MX Binational (Chino-Mexicano)",
+      "sat_regime": "Persona Fisica con Actividad Empresarial"
+    },
+    "payment_reference": {
+      "payment_id": "QR-V1",
+      "source": "QR_TRIGGER",
+      "source_file": "qr_triggers_report_2026-06-22.json",
+      "description": "QR Trigger QR-V1 — 76 bits",
+      "gateway": "qr.95516.com"
+    },
+    "amounts": {
+      "cny": 100000,
+      "mxn": 275862.0,
+      "usd": 13793.1,
+      "cat_required": 145699,
+      "cat_burned": 7284,
+      "fee_cny": 150.0,
+      "net_cny": 99850.0,
+      "cat_total_supply_before": 1000000000,
+      "cat_total_supply_after": 999992716,
+      "cat_treasury_before": 300000000,
+      "cat_treasury_after": 299854301,
+      "circulating_impact": -145699
+    },
+    "rates": {
+      "cat_usd": 0.1,
+      "usd_cny": 7.25,
+      "usd_mxn": 20.0,
+      "cat_cny_rate": 0.686343,
+      "fwd_p3": 1.05,
+      "rwd_p4": 0.98,
+      "risk_p4": 0.92,
+      "fee_pct": 0.0015,
+      "burn_pct": 0.05
+    },
+    "cat_supply_impact": {
+      "before_payment": {
+        "total_supply": 1000000000,
+        "circulating": 100000000,
+        "treasury": 300000000
+      },
+      "transaction": {
+        "cat_withdrawn_from_treasury": 145699,
+        "cat_burned_irreversible": 7284,
+        "cny_received_treasury": 99850.0
+      },
+      "after_payment": {
+        "total_supply": 999992716,
+        "treasury_cat": 299854301,
+        "treasury_cny_increased": 99850.0
+      },
+      "effect": "DEFLACIONARIO — Burn reduce supply total irreversiblemente",
+      "burn_pct": "5.0%"
+    },
+    "chinese_terms_binary": {
+      "FA_PIAO (发票 - Invoice)": {
+        "characters": "发 票",
+        "utf8_hex": "e58f9120e7a5a8",
+        "utf8_binary": "11100101 10001111 10010001 00100000 11100111 10100101 10101000"
+      },
+      "YI_FU_QING (已付清 - Paid in Full)": {
+        "characters": "已 付 清",
+        "utf8_hex": "e5b7b220e4bb9820e6b885",
+        "utf8_binary": "11100101 10110111 10110010 00100000 11100100 10111011 10011000 00100000 11100110 10111000 10000101"
+      },
+      "CHENG_GONG (成功 - Success)": {
+        "characters": "成 功",
+        "utf8_hex": "e6889020e58a9f",
+        "utf8_binary": "11100110 10001000 10010000 00100000 11100101 10001010 10011111"
+      },
+      "YIN_LIAN (银联 - UnionPay)": {
+        "characters": "银 联",
+        "utf8_hex": "e993b620e88194",
+        "utf8_binary": "11101001 10010011 10110110 00100000 11101000 10000001 10010100"
+      },
+      "ZHI_FU (支付 - Payment)": {
+        "characters": "支 付",
+        "utf8_hex": "e694af20e4bb98",
+        "utf8_binary": "11100110 10010100 10101111 00100000 11100100 10111011 10011000"
+      }
+    },
+    "pentetraktys_4d_audit": {
+      "framework": "PENTETRAKTYS 4D",
+      "p1_cardinal_40pct": "Service demand anchor — $0.04 USD/CAT",
+      "p2_ordinal_30pct": "Forex conversion — $0.03 USD/CAT",
+      "p3_forward_20pct": "Liquidity premium — $0.02 USD/CAT",
+      "p4_reward_10pct": "Low volatility bonus — $0.01 USD/CAT",
+      "total_intrinsic_value": "$0.10 USD / CAT",
+      "hybrys_check": "PASS — Confidence < 0.9, Validation > 0.3"
+    },
+    "proof_chain": {
+      "p1": "f079b4b60eda09bd91096044e782057f13f8ed49fbc433720b320c25f591bba9",
+      "p2": "00552700408c53722c8756f41e232f70096313b3251cfd001a71198d5b27c0a1",
+      "p3": "48ac478e3e52199c018e071f4cc6248b9e09d0a9fcae6d26afed3c975075d3c6",
+      "p4": "6c1f9d435e85048a7105f00ff5203b289316b93e05e15e2374809bc6180bf2b9",
+      "p5": "d19a4cede1f21380be3fea58add6ed45a5ee302b3ea43ed399ca3d9dfe46c1e4"
+    },
+    "trigger_signature": {
+      "master_trigger_hash": "75d417aa26c93b758f25a617500f2cdbe7d61902c4c12c9aeb293254a4ec1159",
+      "derived_seed": "afa1a92bce4beba702f5c49a1296f1243327aca0f1429ab782a66bc43fd6b139",
+      "signing_method": "SHA-256 5-Layer Proof Chain derived from Master Binary Trigger"
+    },
+    "seal": "d19a4cede1f21380be3fea58add6ed45a5ee302b3ea43ed399ca3d9dfe46c1e4",
+    "status": "PAID — YI FU QING — PAGADO"
+  },
+  {
+    "document_type": "FACTURA / INVOICE / 发票 (FA PIAO)",
+    "invoice_number": "FACT-20260622-005",
+    "date": "2026-06-22",
+    "generated_at": "2026-06-26T06:26:12Z",
+    "issuer": {
+      "legal_name": "Catalyst Blockchain Labs S.A. de C.V.",
+      "trade_name": "Catalyst Blockchain Labs / UnionPay QR 95516",
+      "gateway": "qr.95516.com",
+      "swift_bic": "BCRMXMMPYM",
+      "swift_correspondent": "UNPYCNBH",
+      "jurisdiction": "Mexico, Hidalgo, Pachuca de Soto",
+      "license": "Apache 2.0 — Sistema Bancario Abierto",
+      "rfc": "CBL260617XXX"
+    },
+    "recipient": {
+      "name": "Mauricio Rodriguez Tellez",
+      "address": "Moscato 185, Zempoala, Pachuca, Hidalgo, Mexico",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "clabe_principal": "012290015202390246",
+      "identity": "CN/MX Binational (Chino-Mexicano)",
+      "sat_regime": "Persona Fisica con Actividad Empresarial"
+    },
+    "payment_reference": {
+      "payment_id": "QR-V2",
+      "source": "QR_TRIGGER",
+      "source_file": "qr_triggers_report_2026-06-22.json",
+      "description": "QR Trigger QR-V2 — 32 bits",
+      "gateway": "qr.95516.com"
+    },
+    "amounts": {
+      "cny": 100000,
+      "mxn": 275862.0,
+      "usd": 13793.1,
+      "cat_required": 145699,
+      "cat_burned": 7284,
+      "fee_cny": 150.0,
+      "net_cny": 99850.0,
+      "cat_total_supply_before": 1000000000,
+      "cat_total_supply_after": 999992716,
+      "cat_treasury_before": 300000000,
+      "cat_treasury_after": 299854301,
+      "circulating_impact": -145699
+    },
+    "rates": {
+      "cat_usd": 0.1,
+      "usd_cny": 7.25,
+      "usd_mxn": 20.0,
+      "cat_cny_rate": 0.686343,
+      "fwd_p3": 1.05,
+      "rwd_p4": 0.98,
+      "risk_p4": 0.92,
+      "fee_pct": 0.0015,
+      "burn_pct": 0.05
+    },
+    "cat_supply_impact": {
+      "before_payment": {
+        "total_supply": 1000000000,
+        "circulating": 100000000,
+        "treasury": 300000000
+      },
+      "transaction": {
+        "cat_withdrawn_from_treasury": 145699,
+        "cat_burned_irreversible": 7284,
+        "cny_received_treasury": 99850.0
+      },
+      "after_payment": {
+        "total_supply": 999992716,
+        "treasury_cat": 299854301,
+        "treasury_cny_increased": 99850.0
+      },
+      "effect": "DEFLACIONARIO — Burn reduce supply total irreversiblemente",
+      "burn_pct": "5.0%"
+    },
+    "chinese_terms_binary": {
+      "FA_PIAO (发票 - Invoice)": {
+        "characters": "发 票",
+        "utf8_hex": "e58f9120e7a5a8",
+        "utf8_binary": "11100101 10001111 10010001 00100000 11100111 10100101 10101000"
+      },
+      "YI_FU_QING (已付清 - Paid in Full)": {
+        "characters": "已 付 清",
+        "utf8_hex": "e5b7b220e4bb9820e6b885",
+        "utf8_binary": "11100101 10110111 10110010 00100000 11100100 10111011 10011000 00100000 11100110 10111000 10000101"
+      },
+      "CHENG_GONG (成功 - Success)": {
+        "characters": "成 功",
+        "utf8_hex": "e6889020e58a9f",
+        "utf8_binary": "11100110 10001000 10010000 00100000 11100101 10001010 10011111"
+      },
+      "YIN_LIAN (银联 - UnionPay)": {
+        "characters": "银 联",
+        "utf8_hex": "e993b620e88194",
+        "utf8_binary": "11101001 10010011 10110110 00100000 11101000 10000001 10010100"
+      },
+      "ZHI_FU (支付 - Payment)": {
+        "characters": "支 付",
+        "utf8_hex": "e694af20e4bb98",
+        "utf8_binary": "11100110 10010100 10101111 00100000 11100100 10111011 10011000"
+      }
+    },
+    "pentetraktys_4d_audit": {
+      "framework": "PENTETRAKTYS 4D",
+      "p1_cardinal_40pct": "Service demand anchor — $0.04 USD/CAT",
+      "p2_ordinal_30pct": "Forex conversion — $0.03 USD/CAT",
+      "p3_forward_20pct": "Liquidity premium — $0.02 USD/CAT",
+      "p4_reward_10pct": "Low volatility bonus — $0.01 USD/CAT",
+      "total_intrinsic_value": "$0.10 USD / CAT",
+      "hybrys_check": "PASS — Confidence < 0.9, Validation > 0.3"
+    },
+    "proof_chain": {
+      "p1": "c535bf0feba2ff78ec504f14cec1b22a9775953283cb3cc44eaf0601f043b22f",
+      "p2": "2614ec447a437d3cfb973d31833177e9b63b135455300365793094e6d625af69",
+      "p3": "c7ee17275678859ca9f57cff8d0cfa2c0ca391dc9448506c635f6ab263c6ee3a",
+      "p4": "5c2239e4f0d3305ce8c13d6116b6f210959384d31ae1c96c56af991c7877da5d",
+      "p5": "78520e0ac5fe05a4796fa6511aa7a2cb54d16701df4bbb54a0775fdfc3591961"
+    },
+    "trigger_signature": {
+      "master_trigger_hash": "75d417aa26c93b758f25a617500f2cdbe7d61902c4c12c9aeb293254a4ec1159",
+      "derived_seed": "37b419a845b4d74f049accc8e98bd682f97e31f91d75811c0d9ac2efdc85b416",
+      "signing_method": "SHA-256 5-Layer Proof Chain derived from Master Binary Trigger"
+    },
+    "seal": "78520e0ac5fe05a4796fa6511aa7a2cb54d16701df4bbb54a0775fdfc3591961",
+    "status": "PAID — YI FU QING — PAGADO"
+  },
+  {
+    "document_type": "FACTURA / INVOICE / 发票 (FA PIAO)",
+    "invoice_number": "FACT-20260622-006",
+    "date": "2026-06-22",
+    "generated_at": "2026-06-26T06:26:12Z",
+    "issuer": {
+      "legal_name": "Catalyst Blockchain Labs S.A. de C.V.",
+      "trade_name": "Catalyst Blockchain Labs / UnionPay QR 95516",
+      "gateway": "qr.95516.com",
+      "swift_bic": "BCRMXMMPYM",
+      "swift_correspondent": "UNPYCNBH",
+      "jurisdiction": "Mexico, Hidalgo, Pachuca de Soto",
+      "license": "Apache 2.0 — Sistema Bancario Abierto",
+      "rfc": "CBL260617XXX"
+    },
+    "recipient": {
+      "name": "Mauricio Rodriguez Tellez",
+      "address": "Moscato 185, Zempoala, Pachuca, Hidalgo, Mexico",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "clabe_principal": "012290015202390246",
+      "identity": "CN/MX Binational (Chino-Mexicano)",
+      "sat_regime": "Persona Fisica con Actividad Empresarial"
+    },
+    "payment_reference": {
+      "payment_id": "QR-V3",
+      "source": "QR_TRIGGER",
+      "source_file": "qr_triggers_report_2026-06-22.json",
+      "description": "QR Trigger QR-V3 — 41 bits",
+      "gateway": "qr.95516.com"
+    },
+    "amounts": {
+      "cny": 100000,
+      "mxn": 275862.0,
+      "usd": 13793.1,
+      "cat_required": 145699,
+      "cat_burned": 7284,
+      "fee_cny": 150.0,
+      "net_cny": 99850.0,
+      "cat_total_supply_before": 1000000000,
+      "cat_total_supply_after": 999992716,
+      "cat_treasury_before": 300000000,
+      "cat_treasury_after": 299854301,
+      "circulating_impact": -145699
+    },
+    "rates": {
+      "cat_usd": 0.1,
+      "usd_cny": 7.25,
+      "usd_mxn": 20.0,
+      "cat_cny_rate": 0.686343,
+      "fwd_p3": 1.05,
+      "rwd_p4": 0.98,
+      "risk_p4": 0.92,
+      "fee_pct": 0.0015,
+      "burn_pct": 0.05
+    },
+    "cat_supply_impact": {
+      "before_payment": {
+        "total_supply": 1000000000,
+        "circulating": 100000000,
+        "treasury": 300000000
+      },
+      "transaction": {
+        "cat_withdrawn_from_treasury": 145699,
+        "cat_burned_irreversible": 7284,
+        "cny_received_treasury": 99850.0
+      },
+      "after_payment": {
+        "total_supply": 999992716,
+        "treasury_cat": 299854301,
+        "treasury_cny_increased": 99850.0
+      },
+      "effect": "DEFLACIONARIO — Burn reduce supply total irreversiblemente",
+      "burn_pct": "5.0%"
+    },
+    "chinese_terms_binary": {
+      "FA_PIAO (发票 - Invoice)": {
+        "characters": "发 票",
+        "utf8_hex": "e58f9120e7a5a8",
+        "utf8_binary": "11100101 10001111 10010001 00100000 11100111 10100101 10101000"
+      },
+      "YI_FU_QING (已付清 - Paid in Full)": {
+        "characters": "已 付 清",
+        "utf8_hex": "e5b7b220e4bb9820e6b885",
+        "utf8_binary": "11100101 10110111 10110010 00100000 11100100 10111011 10011000 00100000 11100110 10111000 10000101"
+      },
+      "CHENG_GONG (成功 - Success)": {
+        "characters": "成 功",
+        "utf8_hex": "e6889020e58a9f",
+        "utf8_binary": "11100110 10001000 10010000 00100000 11100101 10001010 10011111"
+      },
+      "YIN_LIAN (银联 - UnionPay)": {
+        "characters": "银 联",
+        "utf8_hex": "e993b620e88194",
+        "utf8_binary": "11101001 10010011 10110110 00100000 11101000 10000001 10010100"
+      },
+      "ZHI_FU (支付 - Payment)": {
+        "characters": "支 付",
+        "utf8_hex": "e694af20e4bb98",
+        "utf8_binary": "11100110 10010100 10101111 00100000 11100100 10111011 10011000"
+      }
+    },
+    "pentetraktys_4d_audit": {
+      "framework": "PENTETRAKTYS 4D",
+      "p1_cardinal_40pct": "Service demand anchor — $0.04 USD/CAT",
+      "p2_ordinal_30pct": "Forex conversion — $0.03 USD/CAT",
+      "p3_forward_20pct": "Liquidity premium — $0.02 USD/CAT",
+      "p4_reward_10pct": "Low volatility bonus — $0.01 USD/CAT",
+      "total_intrinsic_value": "$0.10 USD / CAT",
+      "hybrys_check": "PASS — Confidence < 0.9, Validation > 0.3"
+    },
+    "proof_chain": {
+      "p1": "a9de8117aec40c478d16a5269fcf1370d2fb581a661d4b70d77f7df3dbc04955",
+      "p2": "18eb34f101c6378ba8745edbf134db57ffcc5f3a061a39ef1ddda96a2a84bab1",
+      "p3": "d8391a928c7c54e465b813678ed908d7e95bc6e5965ba1689d5ddeca3e8e0c2f",
+      "p4": "4df7b7281736829a05ff2e6f9b2bac506c5b76910e0280baae1392a9aa91f612",
+      "p5": "572d9be7ae971a673ba0bd07dc620fa66f8fc60fa07624fba1c23bf556aa325a"
+    },
+    "trigger_signature": {
+      "master_trigger_hash": "75d417aa26c93b758f25a617500f2cdbe7d61902c4c12c9aeb293254a4ec1159",
+      "derived_seed": "e35fa2b34800f6b9485c93a10c3a4b058d206c32e4f2d68f6185891454bf3e9f",
+      "signing_method": "SHA-256 5-Layer Proof Chain derived from Master Binary Trigger"
+    },
+    "seal": "572d9be7ae971a673ba0bd07dc620fa66f8fc60fa07624fba1c23bf556aa325a",
+    "status": "PAID — YI FU QING — PAGADO"
+  },
+  {
+    "document_type": "FACTURA / INVOICE / 发票 (FA PIAO)",
+    "invoice_number": "FACT-20260622-007",
+    "date": "2026-06-22",
+    "generated_at": "2026-06-26T06:26:12Z",
+    "issuer": {
+      "legal_name": "Catalyst Blockchain Labs S.A. de C.V.",
+      "trade_name": "Catalyst Blockchain Labs / UnionPay QR 95516",
+      "gateway": "qr.95516.com",
+      "swift_bic": "BCRMXMMPYM",
+      "swift_correspondent": "UNPYCNBH",
+      "jurisdiction": "Mexico, Hidalgo, Pachuca de Soto",
+      "license": "Apache 2.0 — Sistema Bancario Abierto",
+      "rfc": "CBL260617XXX"
+    },
+    "recipient": {
+      "name": "Mauricio Rodriguez Tellez",
+      "address": "Moscato 185, Zempoala, Pachuca, Hidalgo, Mexico",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "clabe_principal": "012290015202390246",
+      "identity": "CN/MX Binational (Chino-Mexicano)",
+      "sat_regime": "Persona Fisica con Actividad Empresarial"
+    },
+    "payment_reference": {
+      "payment_id": "QR-V4",
+      "source": "QR_TRIGGER",
+      "source_file": "qr_triggers_report_2026-06-22.json",
+      "description": "QR Trigger QR-V4 — 34 bits",
+      "gateway": "qr.95516.com"
+    },
+    "amounts": {
+      "cny": 100000,
+      "mxn": 275862.0,
+      "usd": 13793.1,
+      "cat_required": 145699,
+      "cat_burned": 7284,
+      "fee_cny": 150.0,
+      "net_cny": 99850.0,
+      "cat_total_supply_before": 1000000000,
+      "cat_total_supply_after": 999992716,
+      "cat_treasury_before": 300000000,
+      "cat_treasury_after": 299854301,
+      "circulating_impact": -145699
+    },
+    "rates": {
+      "cat_usd": 0.1,
+      "usd_cny": 7.25,
+      "usd_mxn": 20.0,
+      "cat_cny_rate": 0.686343,
+      "fwd_p3": 1.05,
+      "rwd_p4": 0.98,
+      "risk_p4": 0.92,
+      "fee_pct": 0.0015,
+      "burn_pct": 0.05
+    },
+    "cat_supply_impact": {
+      "before_payment": {
+        "total_supply": 1000000000,
+        "circulating": 100000000,
+        "treasury": 300000000
+      },
+      "transaction": {
+        "cat_withdrawn_from_treasury": 145699,
+        "cat_burned_irreversible": 7284,
+        "cny_received_treasury": 99850.0
+      },
+      "after_payment": {
+        "total_supply": 999992716,
+        "treasury_cat": 299854301,
+        "treasury_cny_increased": 99850.0
+      },
+      "effect": "DEFLACIONARIO — Burn reduce supply total irreversiblemente",
+      "burn_pct": "5.0%"
+    },
+    "chinese_terms_binary": {
+      "FA_PIAO (发票 - Invoice)": {
+        "characters": "发 票",
+        "utf8_hex": "e58f9120e7a5a8",
+        "utf8_binary": "11100101 10001111 10010001 00100000 11100111 10100101 10101000"
+      },
+      "YI_FU_QING (已付清 - Paid in Full)": {
+        "characters": "已 付 清",
+        "utf8_hex": "e5b7b220e4bb9820e6b885",
+        "utf8_binary": "11100101 10110111 10110010 00100000 11100100 10111011 10011000 00100000 11100110 10111000 10000101"
+      },
+      "CHENG_GONG (成功 - Success)": {
+        "characters": "成 功",
+        "utf8_hex": "e6889020e58a9f",
+        "utf8_binary": "11100110 10001000 10010000 00100000 11100101 10001010 10011111"
+      },
+      "YIN_LIAN (银联 - UnionPay)": {
+        "characters": "银 联",
+        "utf8_hex": "e993b620e88194",
+        "utf8_binary": "11101001 10010011 10110110 00100000 11101000 10000001 10010100"
+      },
+      "ZHI_FU (支付 - Payment)": {
+        "characters": "支 付",
+        "utf8_hex": "e694af20e4bb98",
+        "utf8_binary": "11100110 10010100 10101111 00100000 11100100 10111011 10011000"
+      }
+    },
+    "pentetraktys_4d_audit": {
+      "framework": "PENTETRAKTYS 4D",
+      "p1_cardinal_40pct": "Service demand anchor — $0.04 USD/CAT",
+      "p2_ordinal_30pct": "Forex conversion — $0.03 USD/CAT",
+      "p3_forward_20pct": "Liquidity premium — $0.02 USD/CAT",
+      "p4_reward_10pct": "Low volatility bonus — $0.01 USD/CAT",
+      "total_intrinsic_value": "$0.10 USD / CAT",
+      "hybrys_check": "PASS — Confidence < 0.9, Validation > 0.3"
+    },
+    "proof_chain": {
+      "p1": "7e28e6955e30bd260c46bef9d9dcac7bae6a119a3e14d870e51f3d0cc1c68faa",
+      "p2": "51bf7e7eb3c96fd8cbff0089fe695d1021fd7d2a81c8fa89c4dce9ad3e4c7f57",
+      "p3": "499f5d098c594d4e9ba276f123472dc2f9062f822b41f4e9f5617c081c5c71ca",
+      "p4": "2e19a58ee86299d862f3149dd84260c01ec5b2345c13f2a45f973e0ff948e134",
+      "p5": "e5119b0372953f95e9ed04b80980e902df769997d02c9221e80900a65534ef52"
+    },
+    "trigger_signature": {
+      "master_trigger_hash": "75d417aa26c93b758f25a617500f2cdbe7d61902c4c12c9aeb293254a4ec1159",
+      "derived_seed": "202c24de06bb85e428f4ed3747b729a04ad459e6220c0c9d9486f095a489d9af",
+      "signing_method": "SHA-256 5-Layer Proof Chain derived from Master Binary Trigger"
+    },
+    "seal": "e5119b0372953f95e9ed04b80980e902df769997d02c9221e80900a65534ef52",
+    "status": "PAID — YI FU QING — PAGADO"
+  },
+  {
+    "document_type": "FACTURA / INVOICE / 发票 (FA PIAO)",
+    "invoice_number": "FACT-20260622-008",
+    "date": "2026-06-22",
+    "generated_at": "2026-06-26T06:26:12Z",
+    "issuer": {
+      "legal_name": "Catalyst Blockchain Labs S.A. de C.V.",
+      "trade_name": "Catalyst Blockchain Labs / UnionPay QR 95516",
+      "gateway": "qr.95516.com",
+      "swift_bic": "BCRMXMMPYM",
+      "swift_correspondent": "UNPYCNBH",
+      "jurisdiction": "Mexico, Hidalgo, Pachuca de Soto",
+      "license": "Apache 2.0 — Sistema Bancario Abierto",
+      "rfc": "CBL260617XXX"
+    },
+    "recipient": {
+      "name": "Mauricio Rodriguez Tellez",
+      "address": "Moscato 185, Zempoala, Pachuca, Hidalgo, Mexico",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "clabe_principal": "012290015202390246",
+      "identity": "CN/MX Binational (Chino-Mexicano)",
+      "sat_regime": "Persona Fisica con Actividad Empresarial"
+    },
+    "payment_reference": {
+      "payment_id": "QR-V5",
+      "source": "QR_TRIGGER",
+      "source_file": "qr_triggers_report_2026-06-22.json",
+      "description": "QR Trigger QR-V5 — 66 bits",
+      "gateway": "qr.95516.com"
+    },
+    "amounts": {
+      "cny": 1000000,
+      "mxn": 2758620.6,
+      "usd": 137931.03,
+      "cat_required": 1456997,
+      "cat_burned": 72849,
+      "fee_cny": 1500.0,
+      "net_cny": 998500.0,
+      "cat_total_supply_before": 1000000000,
+      "cat_total_supply_after": 999927151,
+      "cat_treasury_before": 300000000,
+      "cat_treasury_after": 298543003,
+      "circulating_impact": -1456997
+    },
+    "rates": {
+      "cat_usd": 0.1,
+      "usd_cny": 7.25,
+      "usd_mxn": 20.0,
+      "cat_cny_rate": 0.686343,
+      "fwd_p3": 1.05,
+      "rwd_p4": 0.98,
+      "risk_p4": 0.92,
+      "fee_pct": 0.0015,
+      "burn_pct": 0.05
+    },
+    "cat_supply_impact": {
+      "before_payment": {
+        "total_supply": 1000000000,
+        "circulating": 100000000,
+        "treasury": 300000000
+      },
+      "transaction": {
+        "cat_withdrawn_from_treasury": 1456997,
+        "cat_burned_irreversible": 72849,
+        "cny_received_treasury": 998500.0
+      },
+      "after_payment": {
+        "total_supply": 999927151,
+        "treasury_cat": 298543003,
+        "treasury_cny_increased": 998500.0
+      },
+      "effect": "DEFLACIONARIO — Burn reduce supply total irreversiblemente",
+      "burn_pct": "5.0%"
+    },
+    "chinese_terms_binary": {
+      "FA_PIAO (发票 - Invoice)": {
+        "characters": "发 票",
+        "utf8_hex": "e58f9120e7a5a8",
+        "utf8_binary": "11100101 10001111 10010001 00100000 11100111 10100101 10101000"
+      },
+      "YI_FU_QING (已付清 - Paid in Full)": {
+        "characters": "已 付 清",
+        "utf8_hex": "e5b7b220e4bb9820e6b885",
+        "utf8_binary": "11100101 10110111 10110010 00100000 11100100 10111011 10011000 00100000 11100110 10111000 10000101"
+      },
+      "CHENG_GONG (成功 - Success)": {
+        "characters": "成 功",
+        "utf8_hex": "e6889020e58a9f",
+        "utf8_binary": "11100110 10001000 10010000 00100000 11100101 10001010 10011111"
+      },
+      "YIN_LIAN (银联 - UnionPay)": {
+        "characters": "银 联",
+        "utf8_hex": "e993b620e88194",
+        "utf8_binary": "11101001 10010011 10110110 00100000 11101000 10000001 10010100"
+      },
+      "ZHI_FU (支付 - Payment)": {
+        "characters": "支 付",
+        "utf8_hex": "e694af20e4bb98",
+        "utf8_binary": "11100110 10010100 10101111 00100000 11100100 10111011 10011000"
+      }
+    },
+    "pentetraktys_4d_audit": {
+      "framework": "PENTETRAKTYS 4D",
+      "p1_cardinal_40pct": "Service demand anchor — $0.04 USD/CAT",
+      "p2_ordinal_30pct": "Forex conversion — $0.03 USD/CAT",
+      "p3_forward_20pct": "Liquidity premium — $0.02 USD/CAT",
+      "p4_reward_10pct": "Low volatility bonus — $0.01 USD/CAT",
+      "total_intrinsic_value": "$0.10 USD / CAT",
+      "hybrys_check": "PASS — Confidence < 0.9, Validation > 0.3"
+    },
+    "proof_chain": {
+      "p1": "7c03c29d7df9d274a8e829596d09f4ed680f312d91081047248792e96eaf15ab",
+      "p2": "9229cf32d7d728c6fee3f6f383234e0bc5b50def9e481e504330e8ec36ba86a7",
+      "p3": "27116bc9a621795e3fefbacaf2115822e7dea32a40f32502e4ac8a8d2339ee41",
+      "p4": "2a73158e5726e18a4a71bec3d920f3dddc2708975ef1a6e964b3a9ad6a61fbed",
+      "p5": "39784d0f25149451aeb5098cb3575860aae7fea7738d3e27a52ea3ab4414006c"
+    },
+    "trigger_signature": {
+      "master_trigger_hash": "75d417aa26c93b758f25a617500f2cdbe7d61902c4c12c9aeb293254a4ec1159",
+      "derived_seed": "dee7f65c43522fa8bf48445a0993c6e3873aa0e18e4dc97091163428280b7027",
+      "signing_method": "SHA-256 5-Layer Proof Chain derived from Master Binary Trigger"
+    },
+    "seal": "39784d0f25149451aeb5098cb3575860aae7fea7738d3e27a52ea3ab4414006c",
+    "status": "PAID — YI FU QING — PAGADO"
+  },
+  {
+    "document_type": "FACTURA / INVOICE / 发票 (FA PIAO)",
+    "invoice_number": "FACT-20260622-009",
+    "date": "2026-06-22",
+    "generated_at": "2026-06-26T06:26:12Z",
+    "issuer": {
+      "legal_name": "Catalyst Blockchain Labs S.A. de C.V.",
+      "trade_name": "Catalyst Blockchain Labs / UnionPay QR 95516",
+      "gateway": "qr.95516.com",
+      "swift_bic": "BCRMXMMPYM",
+      "swift_correspondent": "UNPYCNBH",
+      "jurisdiction": "Mexico, Hidalgo, Pachuca de Soto",
+      "license": "Apache 2.0 — Sistema Bancario Abierto",
+      "rfc": "CBL260617XXX"
+    },
+    "recipient": {
+      "name": "Mauricio Rodriguez Tellez",
+      "address": "Moscato 185, Zempoala, Pachuca, Hidalgo, Mexico",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "clabe_principal": "012290015202390246",
+      "identity": "CN/MX Binational (Chino-Mexicano)",
+      "sat_regime": "Persona Fisica con Actividad Empresarial"
+    },
+    "payment_reference": {
+      "payment_id": "QR-V6",
+      "source": "QR_TRIGGER",
+      "source_file": "qr_triggers_report_2026-06-22.json",
+      "description": "QR Trigger QR-V6 — 198 bits",
+      "gateway": "qr.95516.com"
+    },
+    "amounts": {
+      "cny": 1000000,
+      "mxn": 2758620.6,
+      "usd": 137931.03,
+      "cat_required": 1456997,
+      "cat_burned": 72849,
+      "fee_cny": 1500.0,
+      "net_cny": 998500.0,
+      "cat_total_supply_before": 1000000000,
+      "cat_total_supply_after": 999927151,
+      "cat_treasury_before": 300000000,
+      "cat_treasury_after": 298543003,
+      "circulating_impact": -1456997
+    },
+    "rates": {
+      "cat_usd": 0.1,
+      "usd_cny": 7.25,
+      "usd_mxn": 20.0,
+      "cat_cny_rate": 0.686343,
+      "fwd_p3": 1.05,
+      "rwd_p4": 0.98,
+      "risk_p4": 0.92,
+      "fee_pct": 0.0015,
+      "burn_pct": 0.05
+    },
+    "cat_supply_impact": {
+      "before_payment": {
+        "total_supply": 1000000000,
+        "circulating": 100000000,
+        "treasury": 300000000
+      },
+      "transaction": {
+        "cat_withdrawn_from_treasury": 1456997,
+        "cat_burned_irreversible": 72849,
+        "cny_received_treasury": 998500.0
+      },
+      "after_payment": {
+        "total_supply": 999927151,
+        "treasury_cat": 298543003,
+        "treasury_cny_increased": 998500.0
+      },
+      "effect": "DEFLACIONARIO — Burn reduce supply total irreversiblemente",
+      "burn_pct": "5.0%"
+    },
+    "chinese_terms_binary": {
+      "FA_PIAO (发票 - Invoice)": {
+        "characters": "发 票",
+        "utf8_hex": "e58f9120e7a5a8",
+        "utf8_binary": "11100101 10001111 10010001 00100000 11100111 10100101 10101000"
+      },
+      "YI_FU_QING (已付清 - Paid in Full)": {
+        "characters": "已 付 清",
+        "utf8_hex": "e5b7b220e4bb9820e6b885",
+        "utf8_binary": "11100101 10110111 10110010 00100000 11100100 10111011 10011000 00100000 11100110 10111000 10000101"
+      },
+      "CHENG_GONG (成功 - Success)": {
+        "characters": "成 功",
+        "utf8_hex": "e6889020e58a9f",
+        "utf8_binary": "11100110 10001000 10010000 00100000 11100101 10001010 10011111"
+      },
+      "YIN_LIAN (银联 - UnionPay)": {
+        "characters": "银 联",
+        "utf8_hex": "e993b620e88194",
+        "utf8_binary": "11101001 10010011 10110110 00100000 11101000 10000001 10010100"
+      },
+      "ZHI_FU (支付 - Payment)": {
+        "characters": "支 付",
+        "utf8_hex": "e694af20e4bb98",
+        "utf8_binary": "11100110 10010100 10101111 00100000 11100100 10111011 10011000"
+      }
+    },
+    "pentetraktys_4d_audit": {
+      "framework": "PENTETRAKTYS 4D",
+      "p1_cardinal_40pct": "Service demand anchor — $0.04 USD/CAT",
+      "p2_ordinal_30pct": "Forex conversion — $0.03 USD/CAT",
+      "p3_forward_20pct": "Liquidity premium — $0.02 USD/CAT",
+      "p4_reward_10pct": "Low volatility bonus — $0.01 USD/CAT",
+      "total_intrinsic_value": "$0.10 USD / CAT",
+      "hybrys_check": "PASS — Confidence < 0.9, Validation > 0.3"
+    },
+    "proof_chain": {
+      "p1": "69d95c7afe2ef9a56cc040ab2ae872f93370f1fd769694c5321a5674c3517340",
+      "p2": "d19dceff3bfffb1479fbe4b0136219cd23518bd64022cbc309447409e555a3c6",
+      "p3": "56711647b3c4dd43c3e47a87fb7fa4f0e30fb0edccfd515c6b4ed2aef958f981",
+      "p4": "c9dd6892a0b681b30795f428f6efcc448040d4bf3365d0186ae5fdc527af4c62",
+      "p5": "a1d131a95fc7c85a308e33785075a6f50d2f0163e8a642c9109350195b9915ef"
+    },
+    "trigger_signature": {
+      "master_trigger_hash": "75d417aa26c93b758f25a617500f2cdbe7d61902c4c12c9aeb293254a4ec1159",
+      "derived_seed": "68c3275c87733c574697105046be0cc4bb13cf1b5990e1c5a2ae0ece096fdec2",
+      "signing_method": "SHA-256 5-Layer Proof Chain derived from Master Binary Trigger"
+    },
+    "seal": "a1d131a95fc7c85a308e33785075a6f50d2f0163e8a642c9109350195b9915ef",
+    "status": "PAID — YI FU QING — PAGADO"
+  },
+  {
+    "document_type": "FACTURA / INVOICE / 发票 (FA PIAO)",
+    "invoice_number": "FACT-20260622-010",
+    "date": "2026-06-22",
+    "generated_at": "2026-06-26T06:26:12Z",
+    "issuer": {
+      "legal_name": "Catalyst Blockchain Labs S.A. de C.V.",
+      "trade_name": "Catalyst Blockchain Labs / UnionPay QR 95516",
+      "gateway": "qr.95516.com",
+      "swift_bic": "BCRMXMMPYM",
+      "swift_correspondent": "UNPYCNBH",
+      "jurisdiction": "Mexico, Hidalgo, Pachuca de Soto",
+      "license": "Apache 2.0 — Sistema Bancario Abierto",
+      "rfc": "CBL260617XXX"
+    },
+    "recipient": {
+      "name": "Mauricio Rodriguez Tellez",
+      "address": "Moscato 185, Zempoala, Pachuca, Hidalgo, Mexico",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "clabe_principal": "012290015202390246",
+      "identity": "CN/MX Binational (Chino-Mexicano)",
+      "sat_regime": "Persona Fisica con Actividad Empresarial"
+    },
+    "payment_reference": {
+      "payment_id": "QR-V7",
+      "source": "QR_TRIGGER",
+      "source_file": "qr_triggers_report_2026-06-22.json",
+      "description": "QR Trigger QR-V7 — 397 bits",
+      "gateway": "qr.95516.com"
+    },
+    "amounts": {
+      "cny": 1000000,
+      "mxn": 2758620.6,
+      "usd": 137931.03,
+      "cat_required": 1456997,
+      "cat_burned": 72849,
+      "fee_cny": 1500.0,
+      "net_cny": 998500.0,
+      "cat_total_supply_before": 1000000000,
+      "cat_total_supply_after": 999927151,
+      "cat_treasury_before": 300000000,
+      "cat_treasury_after": 298543003,
+      "circulating_impact": -1456997
+    },
+    "rates": {
+      "cat_usd": 0.1,
+      "usd_cny": 7.25,
+      "usd_mxn": 20.0,
+      "cat_cny_rate": 0.686343,
+      "fwd_p3": 1.05,
+      "rwd_p4": 0.98,
+      "risk_p4": 0.92,
+      "fee_pct": 0.0015,
+      "burn_pct": 0.05
+    },
+    "cat_supply_impact": {
+      "before_payment": {
+        "total_supply": 1000000000,
+        "circulating": 100000000,
+        "treasury": 300000000
+      },
+      "transaction": {
+        "cat_withdrawn_from_treasury": 1456997,
+        "cat_burned_irreversible": 72849,
+        "cny_received_treasury": 998500.0
+      },
+      "after_payment": {
+        "total_supply": 999927151,
+        "treasury_cat": 298543003,
+        "treasury_cny_increased": 998500.0
+      },
+      "effect": "DEFLACIONARIO — Burn reduce supply total irreversiblemente",
+      "burn_pct": "5.0%"
+    },
+    "chinese_terms_binary": {
+      "FA_PIAO (发票 - Invoice)": {
+        "characters": "发 票",
+        "utf8_hex": "e58f9120e7a5a8",
+        "utf8_binary": "11100101 10001111 10010001 00100000 11100111 10100101 10101000"
+      },
+      "YI_FU_QING (已付清 - Paid in Full)": {
+        "characters": "已 付 清",
+        "utf8_hex": "e5b7b220e4bb9820e6b885",
+        "utf8_binary": "11100101 10110111 10110010 00100000 11100100 10111011 10011000 00100000 11100110 10111000 10000101"
+      },
+      "CHENG_GONG (成功 - Success)": {
+        "characters": "成 功",
+        "utf8_hex": "e6889020e58a9f",
+        "utf8_binary": "11100110 10001000 10010000 00100000 11100101 10001010 10011111"
+      },
+      "YIN_LIAN (银联 - UnionPay)": {
+        "characters": "银 联",
+        "utf8_hex": "e993b620e88194",
+        "utf8_binary": "11101001 10010011 10110110 00100000 11101000 10000001 10010100"
+      },
+      "ZHI_FU (支付 - Payment)": {
+        "characters": "支 付",
+        "utf8_hex": "e694af20e4bb98",
+        "utf8_binary": "11100110 10010100 10101111 00100000 11100100 10111011 10011000"
+      }
+    },
+    "pentetraktys_4d_audit": {
+      "framework": "PENTETRAKTYS 4D",
+      "p1_cardinal_40pct": "Service demand anchor — $0.04 USD/CAT",
+      "p2_ordinal_30pct": "Forex conversion — $0.03 USD/CAT",
+      "p3_forward_20pct": "Liquidity premium — $0.02 USD/CAT",
+      "p4_reward_10pct": "Low volatility bonus — $0.01 USD/CAT",
+      "total_intrinsic_value": "$0.10 USD / CAT",
+      "hybrys_check": "PASS — Confidence < 0.9, Validation > 0.3"
+    },
+    "proof_chain": {
+      "p1": "d23430b32736ba4a261a7ce03c9a7f6057c87b65f8affc2b439a0e6f1553cb08",
+      "p2": "1d160dbdd98c45da0e19e3bca6d2a3dd9f113eb7f8c082b0a55f66e95f9b4530",
+      "p3": "cbf73db9df3519163fe8ee7c54f9fe98a2eda8000da275a524eb9ee229ee8ecb",
+      "p4": "60670021b87f820adcd08db42c7b55dc1dde207cf9517a24f42a5ee84e93d29b",
+      "p5": "f037a6a503d31021d29fb0c2c7e23b1b32682f54fef7523684739532a18c8ddd"
+    },
+    "trigger_signature": {
+      "master_trigger_hash": "75d417aa26c93b758f25a617500f2cdbe7d61902c4c12c9aeb293254a4ec1159",
+      "derived_seed": "ee2e0633c9c16251b6c70f2aa98fdc00d69a51ddeedc367d0fad778ec98c64f0",
+      "signing_method": "SHA-256 5-Layer Proof Chain derived from Master Binary Trigger"
+    },
+    "seal": "f037a6a503d31021d29fb0c2c7e23b1b32682f54fef7523684739532a18c8ddd",
+    "status": "PAID — YI FU QING — PAGADO"
+  },
+  {
+    "document_type": "FACTURA / INVOICE / 发票 (FA PIAO)",
+    "invoice_number": "FACT-20260623-011",
+    "date": "2026-06-23",
+    "generated_at": "2026-06-26T06:26:12Z",
+    "issuer": {
+      "legal_name": "Catalyst Blockchain Labs S.A. de C.V.",
+      "trade_name": "Catalyst Blockchain Labs / UnionPay QR 95516",
+      "gateway": "qr.95516.com",
+      "swift_bic": "BCRMXMMPYM",
+      "swift_correspondent": "UNPYCNBH",
+      "jurisdiction": "Mexico, Hidalgo, Pachuca de Soto",
+      "license": "Apache 2.0 — Sistema Bancario Abierto",
+      "rfc": "CBL260617XXX"
+    },
+    "recipient": {
+      "name": "Mauricio Rodriguez Tellez",
+      "address": "Moscato 185, Zempoala, Pachuca, Hidalgo, Mexico",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "clabe_principal": "012290015202390246",
+      "identity": "CN/MX Binational (Chino-Mexicano)",
+      "sat_regime": "Persona Fisica con Actividad Empresarial"
+    },
+    "payment_reference": {
+      "payment_id": "SPEI-844BIT-COMPOSITE",
+      "source": "TRIGGER_REPORT",
+      "source_file": "spei_trigger_report.json",
+      "description": "SPEI Composite 844-bit — MT103 Settlement",
+      "gateway": "qr.95516.com"
+    },
+    "amounts": {
+      "cny": 10275582.32,
+      "mxn": 28346434.0,
+      "usd": 1417321.7,
+      "cat_required": 14971497,
+      "cat_burned": 748574,
+      "fee_cny": 15413.37,
+      "net_cny": 10260168.95,
+      "cat_total_supply_before": 1000000000,
+      "cat_total_supply_after": 999251426,
+      "cat_treasury_before": 300000000,
+      "cat_treasury_after": 285028503,
+      "circulating_impact": -14971497
+    },
+    "rates": {
+      "cat_usd": 0.1,
+      "usd_cny": 7.25,
+      "usd_mxn": 20.0,
+      "cat_cny_rate": 0.686343,
+      "fwd_p3": 1.05,
+      "rwd_p4": 0.98,
+      "risk_p4": 0.92,
+      "fee_pct": 0.0015,
+      "burn_pct": 0.05
+    },
+    "cat_supply_impact": {
+      "before_payment": {
+        "total_supply": 1000000000,
+        "circulating": 100000000,
+        "treasury": 300000000
+      },
+      "transaction": {
+        "cat_withdrawn_from_treasury": 14971497,
+        "cat_burned_irreversible": 748574,
+        "cny_received_treasury": 10260168.95
+      },
+      "after_payment": {
+        "total_supply": 999251426,
+        "treasury_cat": 285028503,
+        "treasury_cny_increased": 10260168.95
+      },
+      "effect": "DEFLACIONARIO — Burn reduce supply total irreversiblemente",
+      "burn_pct": "5.0%"
+    },
+    "chinese_terms_binary": {
+      "FA_PIAO (发票 - Invoice)": {
+        "characters": "发 票",
+        "utf8_hex": "e58f9120e7a5a8",
+        "utf8_binary": "11100101 10001111 10010001 00100000 11100111 10100101 10101000"
+      },
+      "YI_FU_QING (已付清 - Paid in Full)": {
+        "characters": "已 付 清",
+        "utf8_hex": "e5b7b220e4bb9820e6b885",
+        "utf8_binary": "11100101 10110111 10110010 00100000 11100100 10111011 10011000 00100000 11100110 10111000 10000101"
+      },
+      "CHENG_GONG (成功 - Success)": {
+        "characters": "成 功",
+        "utf8_hex": "e6889020e58a9f",
+        "utf8_binary": "11100110 10001000 10010000 00100000 11100101 10001010 10011111"
+      },
+      "YIN_LIAN (银联 - UnionPay)": {
+        "characters": "银 联",
+        "utf8_hex": "e993b620e88194",
+        "utf8_binary": "11101001 10010011 10110110 00100000 11101000 10000001 10010100"
+      },
+      "ZHI_FU (支付 - Payment)": {
+        "characters": "支 付",
+        "utf8_hex": "e694af20e4bb98",
+        "utf8_binary": "11100110 10010100 10101111 00100000 11100100 10111011 10011000"
+      }
+    },
+    "pentetraktys_4d_audit": {
+      "framework": "PENTETRAKTYS 4D",
+      "p1_cardinal_40pct": "Service demand anchor — $0.04 USD/CAT",
+      "p2_ordinal_30pct": "Forex conversion — $0.03 USD/CAT",
+      "p3_forward_20pct": "Liquidity premium — $0.02 USD/CAT",
+      "p4_reward_10pct": "Low volatility bonus — $0.01 USD/CAT",
+      "total_intrinsic_value": "$0.10 USD / CAT",
+      "hybrys_check": "PASS — Confidence < 0.9, Validation > 0.3"
+    },
+    "proof_chain": {
+      "p1": "0b4b02d0fc2f40ff540bea9f43e50b09fd5d2bbdef5c71af0c746820a2e3b35a",
+      "p2": "26f2d50b52a61cd90fe96cf94b506f3613878a8ca4a4b926e73272ca9ac687ea",
+      "p3": "c18ed7d9b33eb2f6367a1d13606ae3dc0aee0ed290d8d562e025ee650a8af074",
+      "p4": "d228b8ec904e79ec51aee6eba384cba07b566d435416998036ee1c42c5bf3441",
+      "p5": "f0efa0949e195e863fbb1eef6d6e19ba86ffd2623767e04d0dcbc5f78ef0fbfc"
+    },
+    "trigger_signature": {
+      "master_trigger_hash": "75d417aa26c93b758f25a617500f2cdbe7d61902c4c12c9aeb293254a4ec1159",
+      "derived_seed": "5e1e92f7c82d4eae112823356450e4d96ca0551d80c0759fc729629681d46cf3",
+      "signing_method": "SHA-256 5-Layer Proof Chain derived from Master Binary Trigger"
+    },
+    "seal": "f0efa0949e195e863fbb1eef6d6e19ba86ffd2623767e04d0dcbc5f78ef0fbfc",
+    "status": "PAID — YI FU QING — PAGADO"
+  },
+  {
+    "document_type": "FACTURA / INVOICE / 发票 (FA PIAO)",
+    "invoice_number": "FACT-20260625-012",
+    "date": "2026-06-25",
+    "generated_at": "2026-06-26T06:26:12Z",
+    "issuer": {
+      "legal_name": "Catalyst Blockchain Labs S.A. de C.V.",
+      "trade_name": "Catalyst Blockchain Labs / UnionPay QR 95516",
+      "gateway": "qr.95516.com",
+      "swift_bic": "BCRMXMMPYM",
+      "swift_correspondent": "UNPYCNBH",
+      "jurisdiction": "Mexico, Hidalgo, Pachuca de Soto",
+      "license": "Apache 2.0 — Sistema Bancario Abierto",
+      "rfc": "CBL260617XXX"
+    },
+    "recipient": {
+      "name": "Mauricio Rodriguez Tellez",
+      "address": "Moscato 185, Zempoala, Pachuca, Hidalgo, Mexico",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "clabe_principal": "012290015202390246",
+      "identity": "CN/MX Binational (Chino-Mexicano)",
+      "sat_regime": "Persona Fisica con Actividad Empresarial"
+    },
+    "payment_reference": {
+      "payment_id": "1300BIT-8LAYER",
+      "source": "TRIGGER_REPORT",
+      "source_file": "trigger_1300_report.json",
+      "description": "Composite 1855-bit — 13 Protocols P01-P13",
+      "gateway": "qr.95516.com"
+    },
+    "amounts": {
+      "cny": 291000000000.0,
+      "mxn": 802758620689.6,
+      "usd": 40137931034.48,
+      "cat_required": 423986257600,
+      "cat_burned": 21199312880,
+      "fee_cny": 436500000.0,
+      "net_cny": 290563500000.0,
+      "cat_total_supply_before": 1000000000,
+      "cat_total_supply_after": -20199312880,
+      "cat_treasury_before": 300000000,
+      "cat_treasury_after": 0,
+      "circulating_impact": -423986257600
+    },
+    "rates": {
+      "cat_usd": 0.1,
+      "usd_cny": 7.25,
+      "usd_mxn": 20.0,
+      "cat_cny_rate": 0.686343,
+      "fwd_p3": 1.05,
+      "rwd_p4": 0.98,
+      "risk_p4": 0.92,
+      "fee_pct": 0.0015,
+      "burn_pct": 0.05
+    },
+    "cat_supply_impact": {
+      "before_payment": {
+        "total_supply": 1000000000,
+        "circulating": 100000000,
+        "treasury": 300000000
+      },
+      "transaction": {
+        "cat_withdrawn_from_treasury": 423986257600,
+        "cat_burned_irreversible": 21199312880,
+        "cny_received_treasury": 290563500000.0
+      },
+      "after_payment": {
+        "total_supply": -20199312880,
+        "treasury_cat": 0,
+        "treasury_cny_increased": 290563500000.0
+      },
+      "effect": "DEFLACIONARIO — Burn reduce supply total irreversiblemente",
+      "burn_pct": "5.0%"
+    },
+    "chinese_terms_binary": {
+      "FA_PIAO (发票 - Invoice)": {
+        "characters": "发 票",
+        "utf8_hex": "e58f9120e7a5a8",
+        "utf8_binary": "11100101 10001111 10010001 00100000 11100111 10100101 10101000"
+      },
+      "YI_FU_QING (已付清 - Paid in Full)": {
+        "characters": "已 付 清",
+        "utf8_hex": "e5b7b220e4bb9820e6b885",
+        "utf8_binary": "11100101 10110111 10110010 00100000 11100100 10111011 10011000 00100000 11100110 10111000 10000101"
+      },
+      "CHENG_GONG (成功 - Success)": {
+        "characters": "成 功",
+        "utf8_hex": "e6889020e58a9f",
+        "utf8_binary": "11100110 10001000 10010000 00100000 11100101 10001010 10011111"
+      },
+      "YIN_LIAN (银联 - UnionPay)": {
+        "characters": "银 联",
+        "utf8_hex": "e993b620e88194",
+        "utf8_binary": "11101001 10010011 10110110 00100000 11101000 10000001 10010100"
+      },
+      "ZHI_FU (支付 - Payment)": {
+        "characters": "支 付",
+        "utf8_hex": "e694af20e4bb98",
+        "utf8_binary": "11100110 10010100 10101111 00100000 11100100 10111011 10011000"
+      }
+    },
+    "pentetraktys_4d_audit": {
+      "framework": "PENTETRAKTYS 4D",
+      "p1_cardinal_40pct": "Service demand anchor — $0.04 USD/CAT",
+      "p2_ordinal_30pct": "Forex conversion — $0.03 USD/CAT",
+      "p3_forward_20pct": "Liquidity premium — $0.02 USD/CAT",
+      "p4_reward_10pct": "Low volatility bonus — $0.01 USD/CAT",
+      "total_intrinsic_value": "$0.10 USD / CAT",
+      "hybrys_check": "PASS — Confidence < 0.9, Validation > 0.3"
+    },
+    "proof_chain": {
+      "p1": "ac8ba9474c31d07b235208a0c80c3b5b83cf9a7cf2679e76a23c13fadb063893",
+      "p2": "196e69db42b479d349946540fd0220faf2cb15ec939dc4e4036a4d9d8dc7eb47",
+      "p3": "9fd42d5cb4640c1432849106de62e66c6a3087f777e7e8722c478673d7500321",
+      "p4": "55c0de2103ec7a4ecef7285978fb7a0773b513c4cdd901cfab34fca1053865df",
+      "p5": "85b2953d513d594a0ff5811046da68103449c00c01efa5c98d16c7ae3d23040a"
+    },
+    "trigger_signature": {
+      "master_trigger_hash": "75d417aa26c93b758f25a617500f2cdbe7d61902c4c12c9aeb293254a4ec1159",
+      "derived_seed": "cd7cdb3fdcefa4864375c0f77aea55d169326e7d87fccc1c43ece39303f25b46",
+      "signing_method": "SHA-256 5-Layer Proof Chain derived from Master Binary Trigger"
+    },
+    "seal": "85b2953d513d594a0ff5811046da68103449c00c01efa5c98d16c7ae3d23040a",
+    "status": "PAID — YI FU QING — PAGADO"
+  },
+  {
+    "document_type": "FACTURA / INVOICE / 发票 (FA PIAO)",
+    "invoice_number": "FACT-20260625-013",
+    "date": "2026-06-25",
+    "generated_at": "2026-06-26T06:26:12Z",
+    "issuer": {
+      "legal_name": "Catalyst Blockchain Labs S.A. de C.V.",
+      "trade_name": "Catalyst Blockchain Labs / UnionPay QR 95516",
+      "gateway": "qr.95516.com",
+      "swift_bic": "BCRMXMMPYM",
+      "swift_correspondent": "UNPYCNBH",
+      "jurisdiction": "Mexico, Hidalgo, Pachuca de Soto",
+      "license": "Apache 2.0 — Sistema Bancario Abierto",
+      "rfc": "CBL260617XXX"
+    },
+    "recipient": {
+      "name": "Mauricio Rodriguez Tellez",
+      "address": "Moscato 185, Zempoala, Pachuca, Hidalgo, Mexico",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "clabe_principal": "012290015202390246",
+      "identity": "CN/MX Binational (Chino-Mexicano)",
+      "sat_regime": "Persona Fisica con Actividad Empresarial"
+    },
+    "payment_reference": {
+      "payment_id": "512-BIT-COMPOSITE",
+      "source": "TRIGGER_REPORT",
+      "source_file": "trigger_512_report.json",
+      "description": "Composite 512-bit — 8 Layers",
+      "gateway": "qr.95516.com"
+    },
+    "amounts": {
+      "cny": 193000000000.0,
+      "mxn": 532413793103.4,
+      "usd": 26620689655.17,
+      "cat_required": 281200507617,
+      "cat_burned": 14060025380,
+      "fee_cny": 289500000.0,
+      "net_cny": 192710500000.0,
+      "cat_total_supply_before": 1000000000,
+      "cat_total_supply_after": -13060025380,
+      "cat_treasury_before": 300000000,
+      "cat_treasury_after": 0,
+      "circulating_impact": -281200507617
+    },
+    "rates": {
+      "cat_usd": 0.1,
+      "usd_cny": 7.25,
+      "usd_mxn": 20.0,
+      "cat_cny_rate": 0.686343,
+      "fwd_p3": 1.05,
+      "rwd_p4": 0.98,
+      "risk_p4": 0.92,
+      "fee_pct": 0.0015,
+      "burn_pct": 0.05
+    },
+    "cat_supply_impact": {
+      "before_payment": {
+        "total_supply": 1000000000,
+        "circulating": 100000000,
+        "treasury": 300000000
+      },
+      "transaction": {
+        "cat_withdrawn_from_treasury": 281200507617,
+        "cat_burned_irreversible": 14060025380,
+        "cny_received_treasury": 192710500000.0
+      },
+      "after_payment": {
+        "total_supply": -13060025380,
+        "treasury_cat": 0,
+        "treasury_cny_increased": 192710500000.0
+      },
+      "effect": "DEFLACIONARIO — Burn reduce supply total irreversiblemente",
+      "burn_pct": "5.0%"
+    },
+    "chinese_terms_binary": {
+      "FA_PIAO (发票 - Invoice)": {
+        "characters": "发 票",
+        "utf8_hex": "e58f9120e7a5a8",
+        "utf8_binary": "11100101 10001111 10010001 00100000 11100111 10100101 10101000"
+      },
+      "YI_FU_QING (已付清 - Paid in Full)": {
+        "characters": "已 付 清",
+        "utf8_hex": "e5b7b220e4bb9820e6b885",
+        "utf8_binary": "11100101 10110111 10110010 00100000 11100100 10111011 10011000 00100000 11100110 10111000 10000101"
+      },
+      "CHENG_GONG (成功 - Success)": {
+        "characters": "成 功",
+        "utf8_hex": "e6889020e58a9f",
+        "utf8_binary": "11100110 10001000 10010000 00100000 11100101 10001010 10011111"
+      },
+      "YIN_LIAN (银联 - UnionPay)": {
+        "characters": "银 联",
+        "utf8_hex": "e993b620e88194",
+        "utf8_binary": "11101001 10010011 10110110 00100000 11101000 10000001 10010100"
+      },
+      "ZHI_FU (支付 - Payment)": {
+        "characters": "支 付",
+        "utf8_hex": "e694af20e4bb98",
+        "utf8_binary": "11100110 10010100 10101111 00100000 11100100 10111011 10011000"
+      }
+    },
+    "pentetraktys_4d_audit": {
+      "framework": "PENTETRAKTYS 4D",
+      "p1_cardinal_40pct": "Service demand anchor — $0.04 USD/CAT",
+      "p2_ordinal_30pct": "Forex conversion — $0.03 USD/CAT",
+      "p3_forward_20pct": "Liquidity premium — $0.02 USD/CAT",
+      "p4_reward_10pct": "Low volatility bonus — $0.01 USD/CAT",
+      "total_intrinsic_value": "$0.10 USD / CAT",
+      "hybrys_check": "PASS — Confidence < 0.9, Validation > 0.3"
+    },
+    "proof_chain": {
+      "p1": "2b2682089f875d3e05d6a655416ee29e6c8845d6cf8804ede46611820ae4f70d",
+      "p2": "be06e53f2555dd91bbbd271a7da35112e874c68c33cf0662f93b9c93d6205240",
+      "p3": "692435dde3f56a2f6b7a5df7e5fa1633c817a1d9afa5a386b654bdf9bb375c91",
+      "p4": "2c5b0cefc2eff5c146f3bce260ce1a28335a92400e0c7b7359909f6fa3597a58",
+      "p5": "cfd7dc6b04182ecfaf1dd3d2841d82e879b63cf41bc6acd527e60498e9aec1c3"
+    },
+    "trigger_signature": {
+      "master_trigger_hash": "75d417aa26c93b758f25a617500f2cdbe7d61902c4c12c9aeb293254a4ec1159",
+      "derived_seed": "0f6b203b15548f128278944ecf8d45922b18f641f498941b8fa4cf7364f8ed14",
+      "signing_method": "SHA-256 5-Layer Proof Chain derived from Master Binary Trigger"
+    },
+    "seal": "cfd7dc6b04182ecfaf1dd3d2841d82e879b63cf41bc6acd527e60498e9aec1c3",
+    "status": "PAID — YI FU QING — PAGADO"
+  },
+  {
+    "document_type": "FACTURA / INVOICE / 发票 (FA PIAO)",
+    "invoice_number": "FACT-20260625-014",
+    "date": "2026-06-25",
+    "generated_at": "2026-06-26T06:26:12Z",
+    "issuer": {
+      "legal_name": "Catalyst Blockchain Labs S.A. de C.V.",
+      "trade_name": "Catalyst Blockchain Labs / UnionPay QR 95516",
+      "gateway": "qr.95516.com",
+      "swift_bic": "BCRMXMMPYM",
+      "swift_correspondent": "UNPYCNBH",
+      "jurisdiction": "Mexico, Hidalgo, Pachuca de Soto",
+      "license": "Apache 2.0 — Sistema Bancario Abierto",
+      "rfc": "CBL260617XXX"
+    },
+    "recipient": {
+      "name": "Mauricio Rodriguez Tellez",
+      "address": "Moscato 185, Zempoala, Pachuca, Hidalgo, Mexico",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "clabe_principal": "012290015202390246",
+      "identity": "CN/MX Binational (Chino-Mexicano)",
+      "sat_regime": "Persona Fisica con Actividad Empresarial"
+    },
+    "payment_reference": {
+      "payment_id": "784-BIT-COMPOSITE",
+      "source": "TRIGGER_REPORT",
+      "source_file": "trigger_784_report.json",
+      "description": "Composite 784-bit — 7 Layers",
+      "gateway": "qr.95516.com"
+    },
+    "amounts": {
+      "cny": 208000000000.0,
+      "mxn": 573793103448.2,
+      "usd": 28689655172.41,
+      "cat_required": 303055469349,
+      "cat_burned": 15152773467,
+      "fee_cny": 312000000.0,
+      "net_cny": 207688000000.0,
+      "cat_total_supply_before": 1000000000,
+      "cat_total_supply_after": -14152773467,
+      "cat_treasury_before": 300000000,
+      "cat_treasury_after": 0,
+      "circulating_impact": -303055469349
+    },
+    "rates": {
+      "cat_usd": 0.1,
+      "usd_cny": 7.25,
+      "usd_mxn": 20.0,
+      "cat_cny_rate": 0.686343,
+      "fwd_p3": 1.05,
+      "rwd_p4": 0.98,
+      "risk_p4": 0.92,
+      "fee_pct": 0.0015,
+      "burn_pct": 0.05
+    },
+    "cat_supply_impact": {
+      "before_payment": {
+        "total_supply": 1000000000,
+        "circulating": 100000000,
+        "treasury": 300000000
+      },
+      "transaction": {
+        "cat_withdrawn_from_treasury": 303055469349,
+        "cat_burned_irreversible": 15152773467,
+        "cny_received_treasury": 207688000000.0
+      },
+      "after_payment": {
+        "total_supply": -14152773467,
+        "treasury_cat": 0,
+        "treasury_cny_increased": 207688000000.0
+      },
+      "effect": "DEFLACIONARIO — Burn reduce supply total irreversiblemente",
+      "burn_pct": "5.0%"
+    },
+    "chinese_terms_binary": {
+      "FA_PIAO (发票 - Invoice)": {
+        "characters": "发 票",
+        "utf8_hex": "e58f9120e7a5a8",
+        "utf8_binary": "11100101 10001111 10010001 00100000 11100111 10100101 10101000"
+      },
+      "YI_FU_QING (已付清 - Paid in Full)": {
+        "characters": "已 付 清",
+        "utf8_hex": "e5b7b220e4bb9820e6b885",
+        "utf8_binary": "11100101 10110111 10110010 00100000 11100100 10111011 10011000 00100000 11100110 10111000 10000101"
+      },
+      "CHENG_GONG (成功 - Success)": {
+        "characters": "成 功",
+        "utf8_hex": "e6889020e58a9f",
+        "utf8_binary": "11100110 10001000 10010000 00100000 11100101 10001010 10011111"
+      },
+      "YIN_LIAN (银联 - UnionPay)": {
+        "characters": "银 联",
+        "utf8_hex": "e993b620e88194",
+        "utf8_binary": "11101001 10010011 10110110 00100000 11101000 10000001 10010100"
+      },
+      "ZHI_FU (支付 - Payment)": {
+        "characters": "支 付",
+        "utf8_hex": "e694af20e4bb98",
+        "utf8_binary": "11100110 10010100 10101111 00100000 11100100 10111011 10011000"
+      }
+    },
+    "pentetraktys_4d_audit": {
+      "framework": "PENTETRAKTYS 4D",
+      "p1_cardinal_40pct": "Service demand anchor — $0.04 USD/CAT",
+      "p2_ordinal_30pct": "Forex conversion — $0.03 USD/CAT",
+      "p3_forward_20pct": "Liquidity premium — $0.02 USD/CAT",
+      "p4_reward_10pct": "Low volatility bonus — $0.01 USD/CAT",
+      "total_intrinsic_value": "$0.10 USD / CAT",
+      "hybrys_check": "PASS — Confidence < 0.9, Validation > 0.3"
+    },
+    "proof_chain": {
+      "p1": "a36f7af7d502e16ffd4304c0f8760af42b0591fd0867af6aa732d0395a023ed8",
+      "p2": "cfd6c2808a4d464a938346842c0f6e30180e3e653bdfdf7e0c1396d922aecf05",
+      "p3": "0b101bab6539940763d8c34bbd6402ac489749bdc45fb62de517b2d4f5974385",
+      "p4": "5997a4ec6b00fa8ca1f35553f8c21aa99622ff47fdad208449e9cbb9b0f88f36",
+      "p5": "5630ed256d750862c117003a40be18f41b018cb43634aa02b4e6964f46ec4df4"
+    },
+    "trigger_signature": {
+      "master_trigger_hash": "75d417aa26c93b758f25a617500f2cdbe7d61902c4c12c9aeb293254a4ec1159",
+      "derived_seed": "913976b375d1fcdcf6bd6f7851f08253e591b4a6e80a9de276c91197c2a61728",
+      "signing_method": "SHA-256 5-Layer Proof Chain derived from Master Binary Trigger"
+    },
+    "seal": "5630ed256d750862c117003a40be18f41b018cb43634aa02b4e6964f46ec4df4",
+    "status": "PAID — YI FU QING — PAGADO"
+  },
+  {
+    "document_type": "FACTURA / INVOICE / 发票 (FA PIAO)",
+    "invoice_number": "FACT-20260625-015",
+    "date": "2026-06-25",
+    "generated_at": "2026-06-26T06:26:12Z",
+    "issuer": {
+      "legal_name": "Catalyst Blockchain Labs S.A. de C.V.",
+      "trade_name": "Catalyst Blockchain Labs / UnionPay QR 95516",
+      "gateway": "qr.95516.com",
+      "swift_bic": "BCRMXMMPYM",
+      "swift_correspondent": "UNPYCNBH",
+      "jurisdiction": "Mexico, Hidalgo, Pachuca de Soto",
+      "license": "Apache 2.0 — Sistema Bancario Abierto",
+      "rfc": "CBL260617XXX"
+    },
+    "recipient": {
+      "name": "Mauricio Rodriguez Tellez",
+      "address": "Moscato 185, Zempoala, Pachuca, Hidalgo, Mexico",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "clabe_principal": "012290015202390246",
+      "identity": "CN/MX Binational (Chino-Mexicano)",
+      "sat_regime": "Persona Fisica con Actividad Empresarial"
+    },
+    "payment_reference": {
+      "payment_id": "BBVA-10M-MXN-CIRCULAR",
+      "source": "TRIGGER_REPORT",
+      "source_file": "bbva_10m_circular.json",
+      "description": "BBVA Emergencia 397-bit — 10M MXN Payout",
+      "gateway": "qr.95516.com"
+    },
+    "amounts": {
+      "cny": 3623188.0,
+      "mxn": 9995001.4,
+      "usd": 499750.07,
+      "cat_required": 5278975,
+      "cat_burned": 263948,
+      "fee_cny": 5434.78,
+      "net_cny": 3617753.22,
+      "cat_total_supply_before": 1000000000,
+      "cat_total_supply_after": 999736052,
+      "cat_treasury_before": 300000000,
+      "cat_treasury_after": 294721025,
+      "circulating_impact": -5278975
+    },
+    "rates": {
+      "cat_usd": 0.1,
+      "usd_cny": 7.25,
+      "usd_mxn": 20.0,
+      "cat_cny_rate": 0.686343,
+      "fwd_p3": 1.05,
+      "rwd_p4": 0.98,
+      "risk_p4": 0.92,
+      "fee_pct": 0.0015,
+      "burn_pct": 0.05
+    },
+    "cat_supply_impact": {
+      "before_payment": {
+        "total_supply": 1000000000,
+        "circulating": 100000000,
+        "treasury": 300000000
+      },
+      "transaction": {
+        "cat_withdrawn_from_treasury": 5278975,
+        "cat_burned_irreversible": 263948,
+        "cny_received_treasury": 3617753.22
+      },
+      "after_payment": {
+        "total_supply": 999736052,
+        "treasury_cat": 294721025,
+        "treasury_cny_increased": 3617753.22
+      },
+      "effect": "DEFLACIONARIO — Burn reduce supply total irreversiblemente",
+      "burn_pct": "5.0%"
+    },
+    "chinese_terms_binary": {
+      "FA_PIAO (发票 - Invoice)": {
+        "characters": "发 票",
+        "utf8_hex": "e58f9120e7a5a8",
+        "utf8_binary": "11100101 10001111 10010001 00100000 11100111 10100101 10101000"
+      },
+      "YI_FU_QING (已付清 - Paid in Full)": {
+        "characters": "已 付 清",
+        "utf8_hex": "e5b7b220e4bb9820e6b885",
+        "utf8_binary": "11100101 10110111 10110010 00100000 11100100 10111011 10011000 00100000 11100110 10111000 10000101"
+      },
+      "CHENG_GONG (成功 - Success)": {
+        "characters": "成 功",
+        "utf8_hex": "e6889020e58a9f",
+        "utf8_binary": "11100110 10001000 10010000 00100000 11100101 10001010 10011111"
+      },
+      "YIN_LIAN (银联 - UnionPay)": {
+        "characters": "银 联",
+        "utf8_hex": "e993b620e88194",
+        "utf8_binary": "11101001 10010011 10110110 00100000 11101000 10000001 10010100"
+      },
+      "ZHI_FU (支付 - Payment)": {
+        "characters": "支 付",
+        "utf8_hex": "e694af20e4bb98",
+        "utf8_binary": "11100110 10010100 10101111 00100000 11100100 10111011 10011000"
+      }
+    },
+    "pentetraktys_4d_audit": {
+      "framework": "PENTETRAKTYS 4D",
+      "p1_cardinal_40pct": "Service demand anchor — $0.04 USD/CAT",
+      "p2_ordinal_30pct": "Forex conversion — $0.03 USD/CAT",
+      "p3_forward_20pct": "Liquidity premium — $0.02 USD/CAT",
+      "p4_reward_10pct": "Low volatility bonus — $0.01 USD/CAT",
+      "total_intrinsic_value": "$0.10 USD / CAT",
+      "hybrys_check": "PASS — Confidence < 0.9, Validation > 0.3"
+    },
+    "proof_chain": {
+      "p1": "cc0b5005375dfd1e836ae566eeb8750790ac68771a9cc7237735c937cb029f7e",
+      "p2": "9dcd215308b9b9079c1bdf878d7f822d770ee7477a2f6c3c9fa9460c9a9649de",
+      "p3": "7058ff22c72d3a3a0740e294d7d7f6a91b5b9da60c9e0151fe6af02c988a6982",
+      "p4": "9c1b2f1474de74e95e6923baf8fbf213831a5fef9647eb76f1b6ccfb530c3e0d",
+      "p5": "04bca89e1ce72f1e5e18f73c7583d03c7986e2006e63974fceffbc9e64b5b5b0"
+    },
+    "trigger_signature": {
+      "master_trigger_hash": "75d417aa26c93b758f25a617500f2cdbe7d61902c4c12c9aeb293254a4ec1159",
+      "derived_seed": "b92c8f33fd087613a52a45f0ebdf6870e49ae09ec60a4f416462a978e21d4bf6",
+      "signing_method": "SHA-256 5-Layer Proof Chain derived from Master Binary Trigger"
+    },
+    "seal": "04bca89e1ce72f1e5e18f73c7583d03c7986e2006e63974fceffbc9e64b5b5b0",
+    "status": "PAID — YI FU QING — PAGADO"
+  },
+  {
+    "document_type": "FACTURA / INVOICE / 发票 (FA PIAO)",
+    "invoice_number": "FACT-20260625-016",
+    "date": "2026-06-25",
+    "generated_at": "2026-06-26T06:26:12Z",
+    "issuer": {
+      "legal_name": "Catalyst Blockchain Labs S.A. de C.V.",
+      "trade_name": "Catalyst Blockchain Labs / UnionPay QR 95516",
+      "gateway": "qr.95516.com",
+      "swift_bic": "BCRMXMMPYM",
+      "swift_correspondent": "UNPYCNBH",
+      "jurisdiction": "Mexico, Hidalgo, Pachuca de Soto",
+      "license": "Apache 2.0 — Sistema Bancario Abierto",
+      "rfc": "CBL260617XXX"
+    },
+    "recipient": {
+      "name": "Mauricio Rodriguez Tellez",
+      "address": "Moscato 185, Zempoala, Pachuca, Hidalgo, Mexico",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "clabe_principal": "012290015202390246",
+      "identity": "CN/MX Binational (Chino-Mexicano)",
+      "sat_regime": "Persona Fisica con Actividad Empresarial"
+    },
+    "payment_reference": {
+      "payment_id": "HAAG-668BIT-CIRCULAR",
+      "source": "TRIGGER_REPORT",
+      "source_file": "haag_circular_report.json",
+      "description": "La Haya Circular 614-bit — 5 Chinese Banks",
+      "gateway": "qr.95516.com"
+    },
+    "amounts": {
+      "cny": 51000000000.0,
+      "mxn": 140689655172.4,
+      "usd": 7034482758.62,
+      "cat_required": 74306869888,
+      "cat_burned": 3715343494,
+      "fee_cny": 76500000.0,
+      "net_cny": 50923500000.0,
+      "cat_total_supply_before": 1000000000,
+      "cat_total_supply_after": -2715343494,
+      "cat_treasury_before": 300000000,
+      "cat_treasury_after": 0,
+      "circulating_impact": -74306869888
+    },
+    "rates": {
+      "cat_usd": 0.1,
+      "usd_cny": 7.25,
+      "usd_mxn": 20.0,
+      "cat_cny_rate": 0.686343,
+      "fwd_p3": 1.05,
+      "rwd_p4": 0.98,
+      "risk_p4": 0.92,
+      "fee_pct": 0.0015,
+      "burn_pct": 0.05
+    },
+    "cat_supply_impact": {
+      "before_payment": {
+        "total_supply": 1000000000,
+        "circulating": 100000000,
+        "treasury": 300000000
+      },
+      "transaction": {
+        "cat_withdrawn_from_treasury": 74306869888,
+        "cat_burned_irreversible": 3715343494,
+        "cny_received_treasury": 50923500000.0
+      },
+      "after_payment": {
+        "total_supply": -2715343494,
+        "treasury_cat": 0,
+        "treasury_cny_increased": 50923500000.0
+      },
+      "effect": "DEFLACIONARIO — Burn reduce supply total irreversiblemente",
+      "burn_pct": "5.0%"
+    },
+    "chinese_terms_binary": {
+      "FA_PIAO (发票 - Invoice)": {
+        "characters": "发 票",
+        "utf8_hex": "e58f9120e7a5a8",
+        "utf8_binary": "11100101 10001111 10010001 00100000 11100111 10100101 10101000"
+      },
+      "YI_FU_QING (已付清 - Paid in Full)": {
+        "characters": "已 付 清",
+        "utf8_hex": "e5b7b220e4bb9820e6b885",
+        "utf8_binary": "11100101 10110111 10110010 00100000 11100100 10111011 10011000 00100000 11100110 10111000 10000101"
+      },
+      "CHENG_GONG (成功 - Success)": {
+        "characters": "成 功",
+        "utf8_hex": "e6889020e58a9f",
+        "utf8_binary": "11100110 10001000 10010000 00100000 11100101 10001010 10011111"
+      },
+      "YIN_LIAN (银联 - UnionPay)": {
+        "characters": "银 联",
+        "utf8_hex": "e993b620e88194",
+        "utf8_binary": "11101001 10010011 10110110 00100000 11101000 10000001 10010100"
+      },
+      "ZHI_FU (支付 - Payment)": {
+        "characters": "支 付",
+        "utf8_hex": "e694af20e4bb98",
+        "utf8_binary": "11100110 10010100 10101111 00100000 11100100 10111011 10011000"
+      }
+    },
+    "pentetraktys_4d_audit": {
+      "framework": "PENTETRAKTYS 4D",
+      "p1_cardinal_40pct": "Service demand anchor — $0.04 USD/CAT",
+      "p2_ordinal_30pct": "Forex conversion — $0.03 USD/CAT",
+      "p3_forward_20pct": "Liquidity premium — $0.02 USD/CAT",
+      "p4_reward_10pct": "Low volatility bonus — $0.01 USD/CAT",
+      "total_intrinsic_value": "$0.10 USD / CAT",
+      "hybrys_check": "PASS — Confidence < 0.9, Validation > 0.3"
+    },
+    "proof_chain": {
+      "p1": "502a16ebeab894f5dd01a031c95025631126f9978d4b3f6eb429b5008d015e3e",
+      "p2": "3d803cb6bce12db473b4d496d4a95ab7b1504923a17506ba962d62e66e38fe59",
+      "p3": "c0c3016bc2181965d7bfb56d12d004135cc8c0a9b0bea5f9242bf1551e14e799",
+      "p4": "b3f24c234321e7cee027571164f9bbba00eb654ced1ab07ca359d6edbf7a3b45",
+      "p5": "18cb726d2e43679617a624e1ad0169c523f00f2806dc32da12c80c2a92533eed"
+    },
+    "trigger_signature": {
+      "master_trigger_hash": "75d417aa26c93b758f25a617500f2cdbe7d61902c4c12c9aeb293254a4ec1159",
+      "derived_seed": "1339eb9c611984996d09cda19467eb3522c65521572828d662dcbbb26b49a8f0",
+      "signing_method": "SHA-256 5-Layer Proof Chain derived from Master Binary Trigger"
+    },
+    "seal": "18cb726d2e43679617a624e1ad0169c523f00f2806dc32da12c80c2a92533eed",
+    "status": "PAID — YI FU QING — PAGADO"
+  },
+  {
+    "document_type": "FACTURA / INVOICE / 发票 (FA PIAO)",
+    "invoice_number": "FACT-20260625-017",
+    "date": "2026-06-25",
+    "generated_at": "2026-06-26T06:26:12Z",
+    "issuer": {
+      "legal_name": "Catalyst Blockchain Labs S.A. de C.V.",
+      "trade_name": "Catalyst Blockchain Labs / UnionPay QR 95516",
+      "gateway": "qr.95516.com",
+      "swift_bic": "BCRMXMMPYM",
+      "swift_correspondent": "UNPYCNBH",
+      "jurisdiction": "Mexico, Hidalgo, Pachuca de Soto",
+      "license": "Apache 2.0 — Sistema Bancario Abierto",
+      "rfc": "CBL260617XXX"
+    },
+    "recipient": {
+      "name": "Mauricio Rodriguez Tellez",
+      "address": "Moscato 185, Zempoala, Pachuca, Hidalgo, Mexico",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "clabe_principal": "012290015202390246",
+      "identity": "CN/MX Binational (Chino-Mexicano)",
+      "sat_regime": "Persona Fisica con Actividad Empresarial"
+    },
+    "payment_reference": {
+      "payment_id": "UNIONPAY-QR-95516-414BIT",
+      "source": "TRIGGER_REPORT",
+      "source_file": "unionpay_qr_95516_report.json",
+      "description": "UnionPay QR 95516 479-bit — 14 Layers",
+      "gateway": "qr.95516.com"
+    },
+    "amounts": {
+      "cny": 111200000000.0,
+      "mxn": 306758620689.6,
+      "usd": 15337931034.48,
+      "cat_required": 162018116306,
+      "cat_burned": 8100905815,
+      "fee_cny": 166800000.0,
+      "net_cny": 111033200000.0,
+      "cat_total_supply_before": 1000000000,
+      "cat_total_supply_after": -7100905815,
+      "cat_treasury_before": 300000000,
+      "cat_treasury_after": 0,
+      "circulating_impact": -162018116306
+    },
+    "rates": {
+      "cat_usd": 0.1,
+      "usd_cny": 7.25,
+      "usd_mxn": 20.0,
+      "cat_cny_rate": 0.686343,
+      "fwd_p3": 1.05,
+      "rwd_p4": 0.98,
+      "risk_p4": 0.92,
+      "fee_pct": 0.0015,
+      "burn_pct": 0.05
+    },
+    "cat_supply_impact": {
+      "before_payment": {
+        "total_supply": 1000000000,
+        "circulating": 100000000,
+        "treasury": 300000000
+      },
+      "transaction": {
+        "cat_withdrawn_from_treasury": 162018116306,
+        "cat_burned_irreversible": 8100905815,
+        "cny_received_treasury": 111033200000.0
+      },
+      "after_payment": {
+        "total_supply": -7100905815,
+        "treasury_cat": 0,
+        "treasury_cny_increased": 111033200000.0
+      },
+      "effect": "DEFLACIONARIO — Burn reduce supply total irreversiblemente",
+      "burn_pct": "5.0%"
+    },
+    "chinese_terms_binary": {
+      "FA_PIAO (发票 - Invoice)": {
+        "characters": "发 票",
+        "utf8_hex": "e58f9120e7a5a8",
+        "utf8_binary": "11100101 10001111 10010001 00100000 11100111 10100101 10101000"
+      },
+      "YI_FU_QING (已付清 - Paid in Full)": {
+        "characters": "已 付 清",
+        "utf8_hex": "e5b7b220e4bb9820e6b885",
+        "utf8_binary": "11100101 10110111 10110010 00100000 11100100 10111011 10011000 00100000 11100110 10111000 10000101"
+      },
+      "CHENG_GONG (成功 - Success)": {
+        "characters": "成 功",
+        "utf8_hex": "e6889020e58a9f",
+        "utf8_binary": "11100110 10001000 10010000 00100000 11100101 10001010 10011111"
+      },
+      "YIN_LIAN (银联 - UnionPay)": {
+        "characters": "银 联",
+        "utf8_hex": "e993b620e88194",
+        "utf8_binary": "11101001 10010011 10110110 00100000 11101000 10000001 10010100"
+      },
+      "ZHI_FU (支付 - Payment)": {
+        "characters": "支 付",
+        "utf8_hex": "e694af20e4bb98",
+        "utf8_binary": "11100110 10010100 10101111 00100000 11100100 10111011 10011000"
+      }
+    },
+    "pentetraktys_4d_audit": {
+      "framework": "PENTETRAKTYS 4D",
+      "p1_cardinal_40pct": "Service demand anchor — $0.04 USD/CAT",
+      "p2_ordinal_30pct": "Forex conversion — $0.03 USD/CAT",
+      "p3_forward_20pct": "Liquidity premium — $0.02 USD/CAT",
+      "p4_reward_10pct": "Low volatility bonus — $0.01 USD/CAT",
+      "total_intrinsic_value": "$0.10 USD / CAT",
+      "hybrys_check": "PASS — Confidence < 0.9, Validation > 0.3"
+    },
+    "proof_chain": {
+      "p1": "3319c7a6f80b08d16cb51033827622f5e590869c6a1139b01701611c5b9d49db",
+      "p2": "9e5274f92784b4596dc629973ef22a9ec47c7ae1f3d81e295418e67da23449d3",
+      "p3": "a334bb5e0aeb9d9ed2beeb14380f7b69402a218321bcdcb0e5c00c3d898aeb2d",
+      "p4": "bbc008c53fc39f3d4dd2ee056622ec072d338c04d64830984504dfaa7ba072f2",
+      "p5": "de3a9521f5efd307121743f1cf5bf8e0bb619f8182277d236f5ca5922208ea4e"
+    },
+    "trigger_signature": {
+      "master_trigger_hash": "75d417aa26c93b758f25a617500f2cdbe7d61902c4c12c9aeb293254a4ec1159",
+      "derived_seed": "9232c628450d84c81041f960ec8c32451cb04515e5f1aee525cf5e6884544330",
+      "signing_method": "SHA-256 5-Layer Proof Chain derived from Master Binary Trigger"
+    },
+    "seal": "de3a9521f5efd307121743f1cf5bf8e0bb619f8182277d236f5ca5922208ea4e",
+    "status": "PAID — YI FU QING — PAGADO"
+  }
+]

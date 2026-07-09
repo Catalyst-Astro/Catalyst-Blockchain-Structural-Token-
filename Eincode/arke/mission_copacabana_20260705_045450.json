@@ -1,0 +1,99 @@
+{
+  "mission_id": "COPACABANA-20260705-045450",
+  "timestamp": "2026-07-05T04:54:50.362166",
+  "binary_trigger": "10010110110011001101101101101100110110001111110110111101110101101111111101101011110101110101010101011010111110101010101010101010101010101010101010101010100101010101101010101010101010101010101010101010101010101010101010101010",
+  "binary_decoded": {
+    "raw_binary": "10010110110011001101101101101100110110001111110110111101110101101111111101101011110101110101010101011010111110101010101010101010101010101010101010101010100101010101101010101010101010101010101010101010101010101010101010101010",
+    "total_bits": 224,
+    "ones": 129,
+    "zeros": 95,
+    "ratio": 0.5759,
+    "header": {
+      "bits": "10010110110011001101101101101100",
+      "value": 2530007916,
+      "hex": "0x96CCDB6C",
+      "protocol": "TELEGRAPH-278"
+    },
+    "timestamp_field": {
+      "bits": "11011000111111011011110111010110",
+      "value": 3640507862,
+      "interpreted": "RELATIVE_OFFSET"
+    },
+    "amount_multiplier": {
+      "bits": "11111111011010111101011101010101",
+      "value": 4285257557,
+      "multiplier": 4285.26
+    },
+    "account_selector": {
+      "bits": "01011010111110101010101010101010",
+      "value": 1526377130,
+      "selected_accounts": 2730
+    },
+    "routing_mask": {
+      "bits": "10101010101010101010101010010101010110101010101010101010101010101010101010101010",
+      "length": 80
+    },
+    "auth_payload": {
+      "bits": "1010101010101010",
+      "length": 16,
+      "hash": "2bfa788aa985ba65"
+    },
+    "trigger_hash": "6523c08e26708be0d201df0b985c8d3938a60380fd345683e899edc382ba3f7f"
+  },
+  "qr_cascade_summary": {
+    "total_accounts": 13,
+    "total_processed_cny": 819100000.0,
+    "total_burned_cat": 59671321,
+    "total_fees_cny": 1228650.0
+  },
+  "funds_duplicated": {
+    "total_input_cny": 819100000.0,
+    "treasury_split": {
+      "bbva_fiat_50pct": 409550000.0,
+      "liquidity_pool_25pct": 204775000.0,
+      "strategic_reserve_25pct": 204775000.0
+    },
+    "duplication_factor": 1.9998,
+    "duplicated_total_cny": 1638000024.41,
+    "mxn_to_bbva": 1107196891.38,
+    "cat_equivalent": 2386561856,
+    "effective_rate": 0.686343
+  },
+  "cobol_routing": {
+    "program": "COPACABANA",
+    "target_clabe": "012290015202390246",
+    "ends_in_6": true,
+    "clabe_validated": true
+  },
+  "mt103": {
+    "reference": "COPACABANA-20260705",
+    "swift_path": "UNPYCNBH → BCRMXMMPYM",
+    "uetr": "2966b6306056fef9117ab93e1fdd813757fe"
+  },
+  "proof_chain": {
+    "P1": "8e05181ff23a4ce317574f039bebd63e6a4f21d8f17fe0c22c14fb0529a25abb",
+    "P2": "2fa02dcb6a13bbf4286c8e9616eb6d81175bec57004f85594adfccbf6fdd0c3e",
+    "P3": "bc6b8054b21ad44cd577fcb42937f54be1bfabd61792c12b23e965e7818eed29",
+    "P4": "31ce36ecaa961d5e62d9429dc54a3869d6ef5b8edb0d051980663c33945a4aef",
+    "P5": "5fb2cdc0c719eae040b7dd96357f5a6648bcf9bf36fe0822b0b3194bc4026a87"
+  },
+  "seals": {
+    "session_seal": "6041de4da8de831eadfdcf800417fd8cb5c8ae774b02ed04607dfe0fbba6065d",
+    "security_seal": "7ef162bc441362d896e952c2591d4e34de229d1dc09485ab13f72b7fa036d989",
+    "mt_operation_seal": "9826ca1d9a239ecfd0968439aff6a3fc292921a6fdc239b6837c9f305355d264",
+    "mission_copacabana_seal": "46a7f5d01f09d25c04f18c1c19cd876ef6fafb36345938dcf6453f78a593eb17",
+    "proof_chain_p5": "5fb2cdc0c719eae040b7dd96357f5a6648bcf9bf36fe0822b0b3194bc4026a87",
+    "uetr": "2966b6306056fef9117ab93e1fdd813757fe"
+  },
+  "pentetraktys": {
+    "tesis": "Binary trigger decoded. 13 accounts configured. QR cascade initiated.",
+    "antitesis": "Total processed: ¥819,100,000.00 CNY. UnionPay 0.15% fees applied. Burn rate 5% active.",
+    "sintesis": "Funds duplicated via geometric cascade. COBOL routing to first return account executed.",
+    "conclusion": "MT103 generated to BBVA terminación 6. SWIFT UETR assigned. 24-48h settlement expected.",
+    "hybrys": 0.0399,
+    "hybrys_status": "CLEAN",
+    "reset_required": false
+  },
+  "hybrys": 0.0399,
+  "status": "MISSION COMPLETE"
+}

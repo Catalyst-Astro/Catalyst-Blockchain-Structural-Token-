@@ -1,0 +1,24 @@
+{
+  "program_id": "VERIFMT103",
+  "language": "COBOL ANSI-85 / Python 3",
+  "uetr": "2966b6306056fef9117ab93e1fdd813757fe",
+  "mt103_ref": "COPACABANA-20260705",
+  "codigo_88": "TX-MT103",
+  "verification_code": "VPEN",
+  "acreditado": false,
+  "acciones_requeridas": [
+    "*** ACCION CRITICA: BANCO EMISOR DEBE ENVIAR MT103 A SWIFT ***",
+    "1. El MT103 esta generado pero NO enviado a la red SWIFT",
+    "2. El banco emisor (UnionPay/banco chino) debe transmitirlo",
+    "3. Catalyst genero los datos — ahora el BANCO debe ejecutar",
+    "4. Ir al portal del banco emisor chino e iniciar la transferencia",
+    "5. Usar los datos del MT103 generado por Mission Copacabana"
+  ],
+  "estado_cobol": "MT103_GENERADO",
+  "seal": "0f96a68533d8ef8d8c5caeee8a8f3114809707cad4da3eef22246a3f08789295",
+  "timestamp": "2026-07-08T15:11:51.915215",
+  "clabe_destino": "012290015202390246",
+  "swift_sender": "UNPYCNBH",
+  "swift_receiver": "BCRMXMMPYM",
+  "nota_importante": "Catalyst genera el MT103 y el UETR. El BANCO EMISOR (China) es quien debe transmitir el MT103 a la red SWIFT. Sin esa transmision, el pago nunca sale del sistema Catalyst. Este verificador consulta multiples fuentes para determinar el estado real."
+}
