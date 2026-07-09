@@ -18,14 +18,24 @@ services:
       - key: GETH_RPC_URL
         sync: false
       - key: CORS_ORIGINS
-        value: "https://catalyst-studio.onrender.com,http://localhost:5173"
+        value: "https://catalyst-studio.onrender.com,http://localhost:5173,https://catalyst-bank.onrender.com"
       - key: ADMIN_ADDRESSES
         sync: false
       - key: SESSION_SECRET
         generateValue: true
+      - key: CATALYST_BANK_ACTIVE
+        value: "true"
+      - key: DEFAULT_TREASURY_SPLIT
+        value: "0.50"
+      - key: DEFAULT_SWIFT_BIC
+        value: "BCRMXMMPYM"
+      - key: DEFAULT_CLABE
+        value: "012290015202390246"
+      - key: DEFAULT_CAT_RATE
+        value: "1.6544"
     healthCheckPath: /health
 
-  # ── Catalyst Studio Frontend ──
+  # ── Catalyst Studio Frontend (Static SPA) ──
   - type: web
     name: catalyst-studio
     env: static
@@ -40,3 +50,67 @@ services:
     envVars:
       - key: VITE_API_URL
         value: https://catalyst-api.onrender.com
+      - key: VITE_CHAIN_ID
+        value: "8453"
+      - key: VITE_CHAIN_NAME
+        value: "Base Mainnet"
+      - key: VITE_CAT_ADDRESS
+        value: "0xcf0440fAB2cfF8D7c885a292FB8A7b94643a1F80"
+      - key: VITE_MXN_ORACLE_ADDRESS
+        value: "0x7E53fd42b998c13C60E3733d4449aeee576E7383"
+      - key: VITE_TREASURY_ADDRESS
+        value: "0xD0BDAdf8618D487458e2AD3b6d6B1CfD884e7D72"
+      - key: VITE_CAT_MXN_RATE
+        value: "1.6544"
+      - key: VITE_USD_MXN_FIX
+        value: "17.4758"
+
+  # ── Catalyst Bank Server (Node.js — Cobros SPEI reales) ──
+  - type: web
+    name: catalyst-bank
+    env: node
+    region: oregon
+    plan: starter
+    buildCommand: cd apps/catalyst-studio && npm install --legacy-peer-deps
+    startCommand: cd apps/catalyst-studio && node server/index.js
+    autoDeploy: true
+    envVars:
+      - key: PORT
+        value: "8000"
+      - key: CHAIN_RPC
+        value: "https://mainnet.base.org"
+      - key: BITSO_SANDBOX
+        value: "false"
+      - key: PRIVATE_KEY
+        sync: false
+      - key: BITSO_API_KEY
+        sync: false
+      - key: BITSO_API_SECRET
+        sync: false
+      - key: CORS_ORIGINS
+        value: "https://catalyst-studio.onrender.com,https://catalyst-bank.onrender.com,http://localhost:5173"
+      - key: BANXICO_API_TOKEN
+        sync: false
+      - key: BANXICO_BASE_URL
+        value: "https://www.banxico.org.mx/SieAPIRest/service/v1"
+      - key: CAT_ADDRESS
+        value: "0xcf0440fAB2cfF8D7c885a292FB8A7b94643a1F80"
+      - key: MXN_ORACLE_ADDRESS
+        value: "0x7E53fd42b998c13C60E3733d4449aeee576E7383"
+      - key: TREASURY_ADDRESS
+        value: "0xD0BDAdf8618D487458e2AD3b6d6B1CfD884e7D72"
+      - key: SETTLEMENT_LOG_ADDRESS
+        value: "0x3176a6d4B5a4AB892636b851bf3875BF1664f886"
+      - key: CLABE_PRINCIPAL
+        value: "012290015202390246"
+      - key: CLABE_SECUNDARIA
+        value: "012180015123243964"
+      - key: DEFAULT_CAT_MXN_RATE
+        value: "1.6544"
+      - key: DEFAULT_USD_MXN_FIX
+        value: "17.4758"
+      - key: BELL_QUALITY
+        value: "13450.50"
+      - key: LICENSE_VERSION
+        value: "BELL-13450.50"
+    healthCheckPath: /api/health
