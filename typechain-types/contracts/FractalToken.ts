@@ -28,16 +28,27 @@ export interface FractalTokenInterface extends Interface {
     nameOrSignature:
       | "DOMAIN_SEPARATOR"
       | "acceptanceRegistry"
+      | "advancedRestrictionsEnabled"
       | "allowance"
       | "approve"
+      | "assetType"
       | "balanceOf"
       | "burn"
       | "burnWithPurpose"
+      | "complianceEnabled"
+      | "complianceGate"
       | "decimals"
       | "decreaseAllowance"
       | "disclosureRegistry"
       | "eip712Domain"
+      | "eligibilityRegistry"
       | "enforcementEnabled"
+      | "entityRegistry"
+      | "freezeEnforcementEnabled"
+      | "freezeRegistry"
+      | "identityPolicyRegistry"
+      | "identitySBT"
+      | "identitySBTEnabled"
       | "increaseAllowance"
       | "initialSupply"
       | "localWhitelistEnabled"
@@ -45,17 +56,48 @@ export interface FractalTokenInterface extends Interface {
       | "mintWithPurpose"
       | "name"
       | "nonces"
+      | "offeringId"
+      | "offeringRegistry"
       | "owner"
       | "pause"
       | "paused"
       | "permit"
+      | "privateOfferingEnabled"
       | "renounceOwnership"
+      | "riskEnforcement"
+      | "riskLimitsEnabled"
       | "setAcceptanceRegistry"
+      | "setAdvancedRestrictionsEnabled"
+      | "setAssetType"
+      | "setComplianceEnabled"
+      | "setComplianceGate"
       | "setDisclosureRegistry"
       | "setEnforcementEnabled"
+      | "setEntityRegistry"
+      | "setFreezeEnforcementEnabled"
+      | "setFreezeRegistry"
+      | "setIdentityPolicyRegistry"
+      | "setIdentitySBT"
+      | "setIdentitySBTEnabled"
+      | "setInvestorEligibilityRegistry"
       | "setLocalWhitelist"
       | "setLocalWhitelistEnabled"
+      | "setOfferingId"
+      | "setPrivateOfferingEnabled"
+      | "setPrivateOfferingRegistry"
+      | "setRiskEnforcement"
+      | "setRiskLimitsEnabled"
+      | "setSeriesId"
       | "setTokenUsePolicy"
+      | "setTransferRestrictionEngine"
+      | "setTransferRestrictionPolicy"
+      | "setTravelRuleEnabled"
+      | "setTravelRuleEvidence"
+      | "setTravelRuleGate"
+      | "setUBOComplianceEnabled"
+      | "setUBOComplianceGate"
+      | "setWhitelistPolicy"
+      | "setWhitelistPolicyEnabled"
       | "setWhitelistRegistry"
       | "symbol"
       | "tokenUsePolicy"
@@ -63,25 +105,62 @@ export interface FractalTokenInterface extends Interface {
       | "transfer"
       | "transferFrom"
       | "transferOwnership"
+      | "transferRestrictionEngine"
+      | "transferRestrictionPolicy"
       | "transferWithPurpose"
+      | "transferWithSeries"
+      | "transferWithSeriesAndTravelRule"
+      | "transferWithTravelRule"
+      | "travelRuleEnabled"
+      | "travelRuleGate"
+      | "uboComplianceEnabled"
+      | "uboComplianceGate"
       | "unpause"
+      | "whitelistPolicy"
+      | "whitelistPolicyEnabled"
       | "whitelistRegistry"
   ): FunctionFragment;
 
   getEvent(
     nameOrSignatureOrTopic:
       | "AcceptanceRegistrySet"
+      | "AdvancedRestrictionsEnabled"
       | "Approval"
+      | "AssetTypeSet"
+      | "ComplianceEnabled"
+      | "ComplianceGateSet"
       | "DisclosureRegistrySet"
       | "EIP712DomainChanged"
       | "EnforcementEnabled"
+      | "EntityRegistrySet"
+      | "FreezeEnforcementEnabled"
+      | "FreezeRegistrySet"
+      | "IdentityPolicyRegistrySet"
+      | "IdentitySBTEnabled"
+      | "IdentitySBTSet"
+      | "InvestorEligibilityRegistrySet"
       | "LocalWhitelistEnabled"
       | "LocalWhitelistUpdated"
+      | "OfferingIdSet"
       | "OwnershipTransferred"
       | "Paused"
+      | "PrivateOfferingEnabled"
+      | "PrivateOfferingRegistrySet"
+      | "RiskEnforcementSet"
+      | "RiskLimitsEnabled"
+      | "SeriesIdSet"
       | "TokenUsePolicySet"
       | "Transfer"
+      | "TransferRestrictionEngineSet"
+      | "TransferRestrictionPolicySet"
+      | "TravelRuleEnabled"
+      | "TravelRuleEvidenceSet"
+      | "TravelRuleGateSet"
+      | "UBOComplianceEnabled"
+      | "UBOComplianceGateSet"
       | "Unpaused"
+      | "WhitelistPolicyEnabled"
+      | "WhitelistPolicySet"
       | "WhitelistRegistrySet"
   ): EventFragment;
 
@@ -94,6 +173,10 @@ export interface FractalTokenInterface extends Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "advancedRestrictionsEnabled",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "allowance",
     values: [AddressLike, AddressLike]
   ): string;
@@ -101,6 +184,7 @@ export interface FractalTokenInterface extends Interface {
     functionFragment: "approve",
     values: [AddressLike, BigNumberish]
   ): string;
+  encodeFunctionData(functionFragment: "assetType", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "balanceOf",
     values: [AddressLike]
@@ -109,6 +193,14 @@ export interface FractalTokenInterface extends Interface {
   encodeFunctionData(
     functionFragment: "burnWithPurpose",
     values: [BigNumberish, BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "complianceEnabled",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "complianceGate",
+    values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "decimals", values?: undefined): string;
   encodeFunctionData(
@@ -124,7 +216,35 @@ export interface FractalTokenInterface extends Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "eligibilityRegistry",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "enforcementEnabled",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "entityRegistry",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "freezeEnforcementEnabled",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "freezeRegistry",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "identityPolicyRegistry",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "identitySBT",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "identitySBTEnabled",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -149,6 +269,14 @@ export interface FractalTokenInterface extends Interface {
   ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(functionFragment: "nonces", values: [AddressLike]): string;
+  encodeFunctionData(
+    functionFragment: "offeringId",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "offeringRegistry",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "pause", values?: undefined): string;
   encodeFunctionData(functionFragment: "paused", values?: undefined): string;
@@ -165,11 +293,39 @@ export interface FractalTokenInterface extends Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "privateOfferingEnabled",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "renounceOwnership",
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "riskEnforcement",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "riskLimitsEnabled",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "setAcceptanceRegistry",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setAdvancedRestrictionsEnabled",
+    values: [boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setAssetType",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setComplianceEnabled",
+    values: [boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setComplianceGate",
     values: [AddressLike]
   ): string;
   encodeFunctionData(
@@ -181,6 +337,34 @@ export interface FractalTokenInterface extends Interface {
     values: [boolean]
   ): string;
   encodeFunctionData(
+    functionFragment: "setEntityRegistry",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setFreezeEnforcementEnabled",
+    values: [boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setFreezeRegistry",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setIdentityPolicyRegistry",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setIdentitySBT",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setIdentitySBTEnabled",
+    values: [boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setInvestorEligibilityRegistry",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
     functionFragment: "setLocalWhitelist",
     values: [AddressLike, boolean]
   ): string;
@@ -189,8 +373,68 @@ export interface FractalTokenInterface extends Interface {
     values: [boolean]
   ): string;
   encodeFunctionData(
+    functionFragment: "setOfferingId",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setPrivateOfferingEnabled",
+    values: [boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setPrivateOfferingRegistry",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setRiskEnforcement",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setRiskLimitsEnabled",
+    values: [boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setSeriesId",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
     functionFragment: "setTokenUsePolicy",
     values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setTransferRestrictionEngine",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setTransferRestrictionPolicy",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setTravelRuleEnabled",
+    values: [boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setTravelRuleEvidence",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setTravelRuleGate",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setUBOComplianceEnabled",
+    values: [boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setUBOComplianceGate",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setWhitelistPolicy",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setWhitelistPolicyEnabled",
+    values: [boolean]
   ): string;
   encodeFunctionData(
     functionFragment: "setWhitelistRegistry",
@@ -218,10 +462,54 @@ export interface FractalTokenInterface extends Interface {
     values: [AddressLike]
   ): string;
   encodeFunctionData(
+    functionFragment: "transferRestrictionEngine",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferRestrictionPolicy",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "transferWithPurpose",
     values: [AddressLike, BigNumberish, BytesLike]
   ): string;
+  encodeFunctionData(
+    functionFragment: "transferWithSeries",
+    values: [AddressLike, BigNumberish, BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferWithSeriesAndTravelRule",
+    values: [AddressLike, BigNumberish, BytesLike, BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferWithTravelRule",
+    values: [AddressLike, BigNumberish, BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "travelRuleEnabled",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "travelRuleGate",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "uboComplianceEnabled",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "uboComplianceGate",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "unpause", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "whitelistPolicy",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "whitelistPolicyEnabled",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "whitelistRegistry",
     values?: undefined
@@ -235,12 +523,25 @@ export interface FractalTokenInterface extends Interface {
     functionFragment: "acceptanceRegistry",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "advancedRestrictionsEnabled",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "assetType", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "burnWithPurpose",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "complianceEnabled",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "complianceGate",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
@@ -257,7 +558,35 @@ export interface FractalTokenInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "eligibilityRegistry",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "enforcementEnabled",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "entityRegistry",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "freezeEnforcementEnabled",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "freezeRegistry",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "identityPolicyRegistry",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "identitySBT",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "identitySBTEnabled",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -279,16 +608,49 @@ export interface FractalTokenInterface extends Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "nonces", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "offeringId", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "offeringRegistry",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "pause", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "paused", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "permit", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "privateOfferingEnabled",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "renounceOwnership",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "riskEnforcement",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "riskLimitsEnabled",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "setAcceptanceRegistry",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setAdvancedRestrictionsEnabled",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setAssetType",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setComplianceEnabled",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setComplianceGate",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -300,6 +662,34 @@ export interface FractalTokenInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "setEntityRegistry",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setFreezeEnforcementEnabled",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setFreezeRegistry",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setIdentityPolicyRegistry",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setIdentitySBT",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setIdentitySBTEnabled",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setInvestorEligibilityRegistry",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "setLocalWhitelist",
     data: BytesLike
   ): Result;
@@ -308,7 +698,67 @@ export interface FractalTokenInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "setOfferingId",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setPrivateOfferingEnabled",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setPrivateOfferingRegistry",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setRiskEnforcement",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setRiskLimitsEnabled",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setSeriesId",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "setTokenUsePolicy",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setTransferRestrictionEngine",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setTransferRestrictionPolicy",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setTravelRuleEnabled",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setTravelRuleEvidence",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setTravelRuleGate",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setUBOComplianceEnabled",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setUBOComplianceGate",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setWhitelistPolicy",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setWhitelistPolicyEnabled",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -334,10 +784,54 @@ export interface FractalTokenInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "transferRestrictionEngine",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferRestrictionPolicy",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "transferWithPurpose",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferWithSeries",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferWithSeriesAndTravelRule",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferWithTravelRule",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "travelRuleEnabled",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "travelRuleGate",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "uboComplianceEnabled",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "uboComplianceGate",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "unpause", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "whitelistPolicy",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "whitelistPolicyEnabled",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "whitelistRegistry",
     data: BytesLike
@@ -356,6 +850,18 @@ export namespace AcceptanceRegistrySetEvent {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
+export namespace AdvancedRestrictionsEnabledEvent {
+  export type InputTuple = [enabled: boolean];
+  export type OutputTuple = [enabled: boolean];
+  export interface OutputObject {
+    enabled: boolean;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
 export namespace ApprovalEvent {
   export type InputTuple = [
     owner: AddressLike,
@@ -367,6 +873,42 @@ export namespace ApprovalEvent {
     owner: string;
     spender: string;
     value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace AssetTypeSetEvent {
+  export type InputTuple = [assetType: BytesLike];
+  export type OutputTuple = [assetType: string];
+  export interface OutputObject {
+    assetType: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace ComplianceEnabledEvent {
+  export type InputTuple = [enabled: boolean];
+  export type OutputTuple = [enabled: boolean];
+  export interface OutputObject {
+    enabled: boolean;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace ComplianceGateSetEvent {
+  export type InputTuple = [gate: AddressLike];
+  export type OutputTuple = [gate: string];
+  export interface OutputObject {
+    gate: string;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -408,6 +950,90 @@ export namespace EnforcementEnabledEvent {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
+export namespace EntityRegistrySetEvent {
+  export type InputTuple = [registry: AddressLike];
+  export type OutputTuple = [registry: string];
+  export interface OutputObject {
+    registry: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace FreezeEnforcementEnabledEvent {
+  export type InputTuple = [enabled: boolean];
+  export type OutputTuple = [enabled: boolean];
+  export interface OutputObject {
+    enabled: boolean;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace FreezeRegistrySetEvent {
+  export type InputTuple = [registry: AddressLike];
+  export type OutputTuple = [registry: string];
+  export interface OutputObject {
+    registry: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace IdentityPolicyRegistrySetEvent {
+  export type InputTuple = [registry: AddressLike];
+  export type OutputTuple = [registry: string];
+  export interface OutputObject {
+    registry: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace IdentitySBTEnabledEvent {
+  export type InputTuple = [enabled: boolean];
+  export type OutputTuple = [enabled: boolean];
+  export interface OutputObject {
+    enabled: boolean;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace IdentitySBTSetEvent {
+  export type InputTuple = [sbt: AddressLike];
+  export type OutputTuple = [sbt: string];
+  export interface OutputObject {
+    sbt: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace InvestorEligibilityRegistrySetEvent {
+  export type InputTuple = [registry: AddressLike];
+  export type OutputTuple = [registry: string];
+  export interface OutputObject {
+    registry: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
 export namespace LocalWhitelistEnabledEvent {
   export type InputTuple = [enabled: boolean];
   export type OutputTuple = [enabled: boolean];
@@ -433,6 +1059,18 @@ export namespace LocalWhitelistUpdatedEvent {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
+export namespace OfferingIdSetEvent {
+  export type InputTuple = [offeringId: BytesLike];
+  export type OutputTuple = [offeringId: string];
+  export interface OutputObject {
+    offeringId: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
 export namespace OwnershipTransferredEvent {
   export type InputTuple = [previousOwner: AddressLike, newOwner: AddressLike];
   export type OutputTuple = [previousOwner: string, newOwner: string];
@@ -451,6 +1089,66 @@ export namespace PausedEvent {
   export type OutputTuple = [account: string];
   export interface OutputObject {
     account: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace PrivateOfferingEnabledEvent {
+  export type InputTuple = [enabled: boolean];
+  export type OutputTuple = [enabled: boolean];
+  export interface OutputObject {
+    enabled: boolean;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace PrivateOfferingRegistrySetEvent {
+  export type InputTuple = [registry: AddressLike];
+  export type OutputTuple = [registry: string];
+  export interface OutputObject {
+    registry: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace RiskEnforcementSetEvent {
+  export type InputTuple = [enforcement: AddressLike];
+  export type OutputTuple = [enforcement: string];
+  export interface OutputObject {
+    enforcement: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace RiskLimitsEnabledEvent {
+  export type InputTuple = [enabled: boolean];
+  export type OutputTuple = [enabled: boolean];
+  export interface OutputObject {
+    enabled: boolean;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace SeriesIdSetEvent {
+  export type InputTuple = [seriesId: BytesLike];
+  export type OutputTuple = [seriesId: string];
+  export interface OutputObject {
+    seriesId: string;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -488,11 +1186,119 @@ export namespace TransferEvent {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
+export namespace TransferRestrictionEngineSetEvent {
+  export type InputTuple = [engine: AddressLike];
+  export type OutputTuple = [engine: string];
+  export interface OutputObject {
+    engine: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace TransferRestrictionPolicySetEvent {
+  export type InputTuple = [policy: AddressLike];
+  export type OutputTuple = [policy: string];
+  export interface OutputObject {
+    policy: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace TravelRuleEnabledEvent {
+  export type InputTuple = [enabled: boolean];
+  export type OutputTuple = [enabled: boolean];
+  export interface OutputObject {
+    enabled: boolean;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace TravelRuleEvidenceSetEvent {
+  export type InputTuple = [evidenceId: BytesLike];
+  export type OutputTuple = [evidenceId: string];
+  export interface OutputObject {
+    evidenceId: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace TravelRuleGateSetEvent {
+  export type InputTuple = [gate: AddressLike];
+  export type OutputTuple = [gate: string];
+  export interface OutputObject {
+    gate: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace UBOComplianceEnabledEvent {
+  export type InputTuple = [enabled: boolean];
+  export type OutputTuple = [enabled: boolean];
+  export interface OutputObject {
+    enabled: boolean;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace UBOComplianceGateSetEvent {
+  export type InputTuple = [gate: AddressLike];
+  export type OutputTuple = [gate: string];
+  export interface OutputObject {
+    gate: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
 export namespace UnpausedEvent {
   export type InputTuple = [account: AddressLike];
   export type OutputTuple = [account: string];
   export interface OutputObject {
     account: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace WhitelistPolicyEnabledEvent {
+  export type InputTuple = [enabled: boolean];
+  export type OutputTuple = [enabled: boolean];
+  export interface OutputObject {
+    enabled: boolean;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace WhitelistPolicySetEvent {
+  export type InputTuple = [policy: AddressLike];
+  export type OutputTuple = [policy: string];
+  export interface OutputObject {
+    policy: string;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -559,6 +1365,8 @@ export interface FractalToken extends BaseContract {
 
   acceptanceRegistry: TypedContractMethod<[], [string], "view">;
 
+  advancedRestrictionsEnabled: TypedContractMethod<[], [boolean], "view">;
+
   allowance: TypedContractMethod<
     [owner: AddressLike, spender: AddressLike],
     [bigint],
@@ -571,6 +1379,8 @@ export interface FractalToken extends BaseContract {
     "nonpayable"
   >;
 
+  assetType: TypedContractMethod<[], [string], "view">;
+
   balanceOf: TypedContractMethod<[account: AddressLike], [bigint], "view">;
 
   burn: TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
@@ -580,6 +1390,10 @@ export interface FractalToken extends BaseContract {
     [void],
     "nonpayable"
   >;
+
+  complianceEnabled: TypedContractMethod<[], [boolean], "view">;
+
+  complianceGate: TypedContractMethod<[], [string], "view">;
 
   decimals: TypedContractMethod<[], [bigint], "view">;
 
@@ -607,7 +1421,21 @@ export interface FractalToken extends BaseContract {
     "view"
   >;
 
+  eligibilityRegistry: TypedContractMethod<[], [string], "view">;
+
   enforcementEnabled: TypedContractMethod<[], [boolean], "view">;
+
+  entityRegistry: TypedContractMethod<[], [string], "view">;
+
+  freezeEnforcementEnabled: TypedContractMethod<[], [boolean], "view">;
+
+  freezeRegistry: TypedContractMethod<[], [string], "view">;
+
+  identityPolicyRegistry: TypedContractMethod<[], [string], "view">;
+
+  identitySBT: TypedContractMethod<[], [string], "view">;
+
+  identitySBTEnabled: TypedContractMethod<[], [boolean], "view">;
 
   increaseAllowance: TypedContractMethod<
     [spender: AddressLike, addedValue: BigNumberish],
@@ -635,6 +1463,10 @@ export interface FractalToken extends BaseContract {
 
   nonces: TypedContractMethod<[owner: AddressLike], [bigint], "view">;
 
+  offeringId: TypedContractMethod<[], [string], "view">;
+
+  offeringRegistry: TypedContractMethod<[], [string], "view">;
+
   owner: TypedContractMethod<[], [string], "view">;
 
   pause: TypedContractMethod<[], [void], "nonpayable">;
@@ -655,10 +1487,40 @@ export interface FractalToken extends BaseContract {
     "nonpayable"
   >;
 
+  privateOfferingEnabled: TypedContractMethod<[], [boolean], "view">;
+
   renounceOwnership: TypedContractMethod<[], [void], "nonpayable">;
+
+  riskEnforcement: TypedContractMethod<[], [string], "view">;
+
+  riskLimitsEnabled: TypedContractMethod<[], [boolean], "view">;
 
   setAcceptanceRegistry: TypedContractMethod<
     [registry: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  setAdvancedRestrictionsEnabled: TypedContractMethod<
+    [enabled: boolean],
+    [void],
+    "nonpayable"
+  >;
+
+  setAssetType: TypedContractMethod<
+    [newAssetType: BytesLike],
+    [void],
+    "nonpayable"
+  >;
+
+  setComplianceEnabled: TypedContractMethod<
+    [enabled: boolean],
+    [void],
+    "nonpayable"
+  >;
+
+  setComplianceGate: TypedContractMethod<
+    [gate: AddressLike],
     [void],
     "nonpayable"
   >;
@@ -675,6 +1537,44 @@ export interface FractalToken extends BaseContract {
     "nonpayable"
   >;
 
+  setEntityRegistry: TypedContractMethod<
+    [registry: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  setFreezeEnforcementEnabled: TypedContractMethod<
+    [enabled: boolean],
+    [void],
+    "nonpayable"
+  >;
+
+  setFreezeRegistry: TypedContractMethod<
+    [registry: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  setIdentityPolicyRegistry: TypedContractMethod<
+    [registry: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  setIdentitySBT: TypedContractMethod<[sbt: AddressLike], [void], "nonpayable">;
+
+  setIdentitySBTEnabled: TypedContractMethod<
+    [enabled: boolean],
+    [void],
+    "nonpayable"
+  >;
+
+  setInvestorEligibilityRegistry: TypedContractMethod<
+    [registry: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
   setLocalWhitelist: TypedContractMethod<
     [account: AddressLike, allowed: boolean],
     [void],
@@ -687,8 +1587,94 @@ export interface FractalToken extends BaseContract {
     "nonpayable"
   >;
 
+  setOfferingId: TypedContractMethod<
+    [newOfferingId: BytesLike],
+    [void],
+    "nonpayable"
+  >;
+
+  setPrivateOfferingEnabled: TypedContractMethod<
+    [enabled: boolean],
+    [void],
+    "nonpayable"
+  >;
+
+  setPrivateOfferingRegistry: TypedContractMethod<
+    [registry: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  setRiskEnforcement: TypedContractMethod<
+    [enforcement: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  setRiskLimitsEnabled: TypedContractMethod<
+    [enabled: boolean],
+    [void],
+    "nonpayable"
+  >;
+
+  setSeriesId: TypedContractMethod<[seriesId: BytesLike], [void], "nonpayable">;
+
   setTokenUsePolicy: TypedContractMethod<
     [policy: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  setTransferRestrictionEngine: TypedContractMethod<
+    [engine: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  setTransferRestrictionPolicy: TypedContractMethod<
+    [policy: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  setTravelRuleEnabled: TypedContractMethod<
+    [enabled: boolean],
+    [void],
+    "nonpayable"
+  >;
+
+  setTravelRuleEvidence: TypedContractMethod<
+    [evidenceId: BytesLike],
+    [void],
+    "nonpayable"
+  >;
+
+  setTravelRuleGate: TypedContractMethod<
+    [gate: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  setUBOComplianceEnabled: TypedContractMethod<
+    [enabled: boolean],
+    [void],
+    "nonpayable"
+  >;
+
+  setUBOComplianceGate: TypedContractMethod<
+    [gate: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  setWhitelistPolicy: TypedContractMethod<
+    [policy: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  setWhitelistPolicyEnabled: TypedContractMethod<
+    [enabled: boolean],
     [void],
     "nonpayable"
   >;
@@ -723,13 +1709,52 @@ export interface FractalToken extends BaseContract {
     "nonpayable"
   >;
 
+  transferRestrictionEngine: TypedContractMethod<[], [string], "view">;
+
+  transferRestrictionPolicy: TypedContractMethod<[], [string], "view">;
+
   transferWithPurpose: TypedContractMethod<
     [to: AddressLike, amount: BigNumberish, purposeHash: BytesLike],
     [boolean],
     "nonpayable"
   >;
 
+  transferWithSeries: TypedContractMethod<
+    [to: AddressLike, amount: BigNumberish, seriesId: BytesLike],
+    [boolean],
+    "nonpayable"
+  >;
+
+  transferWithSeriesAndTravelRule: TypedContractMethod<
+    [
+      to: AddressLike,
+      amount: BigNumberish,
+      seriesId: BytesLike,
+      evidenceId: BytesLike
+    ],
+    [boolean],
+    "nonpayable"
+  >;
+
+  transferWithTravelRule: TypedContractMethod<
+    [to: AddressLike, amount: BigNumberish, evidenceId: BytesLike],
+    [boolean],
+    "nonpayable"
+  >;
+
+  travelRuleEnabled: TypedContractMethod<[], [boolean], "view">;
+
+  travelRuleGate: TypedContractMethod<[], [string], "view">;
+
+  uboComplianceEnabled: TypedContractMethod<[], [boolean], "view">;
+
+  uboComplianceGate: TypedContractMethod<[], [string], "view">;
+
   unpause: TypedContractMethod<[], [void], "nonpayable">;
+
+  whitelistPolicy: TypedContractMethod<[], [string], "view">;
+
+  whitelistPolicyEnabled: TypedContractMethod<[], [boolean], "view">;
 
   whitelistRegistry: TypedContractMethod<[], [string], "view">;
 
@@ -743,6 +1768,9 @@ export interface FractalToken extends BaseContract {
   getFunction(
     nameOrSignature: "acceptanceRegistry"
   ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "advancedRestrictionsEnabled"
+  ): TypedContractMethod<[], [boolean], "view">;
   getFunction(
     nameOrSignature: "allowance"
   ): TypedContractMethod<
@@ -758,6 +1786,9 @@ export interface FractalToken extends BaseContract {
     "nonpayable"
   >;
   getFunction(
+    nameOrSignature: "assetType"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
     nameOrSignature: "balanceOf"
   ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
   getFunction(
@@ -770,6 +1801,12 @@ export interface FractalToken extends BaseContract {
     [void],
     "nonpayable"
   >;
+  getFunction(
+    nameOrSignature: "complianceEnabled"
+  ): TypedContractMethod<[], [boolean], "view">;
+  getFunction(
+    nameOrSignature: "complianceGate"
+  ): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "decimals"
   ): TypedContractMethod<[], [bigint], "view">;
@@ -801,7 +1838,28 @@ export interface FractalToken extends BaseContract {
     "view"
   >;
   getFunction(
+    nameOrSignature: "eligibilityRegistry"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
     nameOrSignature: "enforcementEnabled"
+  ): TypedContractMethod<[], [boolean], "view">;
+  getFunction(
+    nameOrSignature: "entityRegistry"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "freezeEnforcementEnabled"
+  ): TypedContractMethod<[], [boolean], "view">;
+  getFunction(
+    nameOrSignature: "freezeRegistry"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "identityPolicyRegistry"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "identitySBT"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "identitySBTEnabled"
   ): TypedContractMethod<[], [boolean], "view">;
   getFunction(
     nameOrSignature: "increaseAllowance"
@@ -837,6 +1895,12 @@ export interface FractalToken extends BaseContract {
     nameOrSignature: "nonces"
   ): TypedContractMethod<[owner: AddressLike], [bigint], "view">;
   getFunction(
+    nameOrSignature: "offeringId"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "offeringRegistry"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
     nameOrSignature: "owner"
   ): TypedContractMethod<[], [string], "view">;
   getFunction(
@@ -861,17 +1925,59 @@ export interface FractalToken extends BaseContract {
     "nonpayable"
   >;
   getFunction(
+    nameOrSignature: "privateOfferingEnabled"
+  ): TypedContractMethod<[], [boolean], "view">;
+  getFunction(
     nameOrSignature: "renounceOwnership"
   ): TypedContractMethod<[], [void], "nonpayable">;
   getFunction(
+    nameOrSignature: "riskEnforcement"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "riskLimitsEnabled"
+  ): TypedContractMethod<[], [boolean], "view">;
+  getFunction(
     nameOrSignature: "setAcceptanceRegistry"
   ): TypedContractMethod<[registry: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setAdvancedRestrictionsEnabled"
+  ): TypedContractMethod<[enabled: boolean], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setAssetType"
+  ): TypedContractMethod<[newAssetType: BytesLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setComplianceEnabled"
+  ): TypedContractMethod<[enabled: boolean], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setComplianceGate"
+  ): TypedContractMethod<[gate: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setDisclosureRegistry"
   ): TypedContractMethod<[registry: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setEnforcementEnabled"
   ): TypedContractMethod<[enabled: boolean], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setEntityRegistry"
+  ): TypedContractMethod<[registry: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setFreezeEnforcementEnabled"
+  ): TypedContractMethod<[enabled: boolean], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setFreezeRegistry"
+  ): TypedContractMethod<[registry: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setIdentityPolicyRegistry"
+  ): TypedContractMethod<[registry: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setIdentitySBT"
+  ): TypedContractMethod<[sbt: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setIdentitySBTEnabled"
+  ): TypedContractMethod<[enabled: boolean], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setInvestorEligibilityRegistry"
+  ): TypedContractMethod<[registry: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setLocalWhitelist"
   ): TypedContractMethod<
@@ -883,8 +1989,53 @@ export interface FractalToken extends BaseContract {
     nameOrSignature: "setLocalWhitelistEnabled"
   ): TypedContractMethod<[enabled: boolean], [void], "nonpayable">;
   getFunction(
+    nameOrSignature: "setOfferingId"
+  ): TypedContractMethod<[newOfferingId: BytesLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setPrivateOfferingEnabled"
+  ): TypedContractMethod<[enabled: boolean], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setPrivateOfferingRegistry"
+  ): TypedContractMethod<[registry: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setRiskEnforcement"
+  ): TypedContractMethod<[enforcement: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setRiskLimitsEnabled"
+  ): TypedContractMethod<[enabled: boolean], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setSeriesId"
+  ): TypedContractMethod<[seriesId: BytesLike], [void], "nonpayable">;
+  getFunction(
     nameOrSignature: "setTokenUsePolicy"
   ): TypedContractMethod<[policy: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setTransferRestrictionEngine"
+  ): TypedContractMethod<[engine: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setTransferRestrictionPolicy"
+  ): TypedContractMethod<[policy: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setTravelRuleEnabled"
+  ): TypedContractMethod<[enabled: boolean], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setTravelRuleEvidence"
+  ): TypedContractMethod<[evidenceId: BytesLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setTravelRuleGate"
+  ): TypedContractMethod<[gate: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setUBOComplianceEnabled"
+  ): TypedContractMethod<[enabled: boolean], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setUBOComplianceGate"
+  ): TypedContractMethod<[gate: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setWhitelistPolicy"
+  ): TypedContractMethod<[policy: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setWhitelistPolicyEnabled"
+  ): TypedContractMethod<[enabled: boolean], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setWhitelistRegistry"
   ): TypedContractMethod<[registry: AddressLike], [void], "nonpayable">;
@@ -915,6 +2066,12 @@ export interface FractalToken extends BaseContract {
     nameOrSignature: "transferOwnership"
   ): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
   getFunction(
+    nameOrSignature: "transferRestrictionEngine"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "transferRestrictionPolicy"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
     nameOrSignature: "transferWithPurpose"
   ): TypedContractMethod<
     [to: AddressLike, amount: BigNumberish, purposeHash: BytesLike],
@@ -922,8 +2079,52 @@ export interface FractalToken extends BaseContract {
     "nonpayable"
   >;
   getFunction(
+    nameOrSignature: "transferWithSeries"
+  ): TypedContractMethod<
+    [to: AddressLike, amount: BigNumberish, seriesId: BytesLike],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "transferWithSeriesAndTravelRule"
+  ): TypedContractMethod<
+    [
+      to: AddressLike,
+      amount: BigNumberish,
+      seriesId: BytesLike,
+      evidenceId: BytesLike
+    ],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "transferWithTravelRule"
+  ): TypedContractMethod<
+    [to: AddressLike, amount: BigNumberish, evidenceId: BytesLike],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "travelRuleEnabled"
+  ): TypedContractMethod<[], [boolean], "view">;
+  getFunction(
+    nameOrSignature: "travelRuleGate"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "uboComplianceEnabled"
+  ): TypedContractMethod<[], [boolean], "view">;
+  getFunction(
+    nameOrSignature: "uboComplianceGate"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
     nameOrSignature: "unpause"
   ): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "whitelistPolicy"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "whitelistPolicyEnabled"
+  ): TypedContractMethod<[], [boolean], "view">;
   getFunction(
     nameOrSignature: "whitelistRegistry"
   ): TypedContractMethod<[], [string], "view">;
@@ -936,11 +2137,39 @@ export interface FractalToken extends BaseContract {
     AcceptanceRegistrySetEvent.OutputObject
   >;
   getEvent(
+    key: "AdvancedRestrictionsEnabled"
+  ): TypedContractEvent<
+    AdvancedRestrictionsEnabledEvent.InputTuple,
+    AdvancedRestrictionsEnabledEvent.OutputTuple,
+    AdvancedRestrictionsEnabledEvent.OutputObject
+  >;
+  getEvent(
     key: "Approval"
   ): TypedContractEvent<
     ApprovalEvent.InputTuple,
     ApprovalEvent.OutputTuple,
     ApprovalEvent.OutputObject
+  >;
+  getEvent(
+    key: "AssetTypeSet"
+  ): TypedContractEvent<
+    AssetTypeSetEvent.InputTuple,
+    AssetTypeSetEvent.OutputTuple,
+    AssetTypeSetEvent.OutputObject
+  >;
+  getEvent(
+    key: "ComplianceEnabled"
+  ): TypedContractEvent<
+    ComplianceEnabledEvent.InputTuple,
+    ComplianceEnabledEvent.OutputTuple,
+    ComplianceEnabledEvent.OutputObject
+  >;
+  getEvent(
+    key: "ComplianceGateSet"
+  ): TypedContractEvent<
+    ComplianceGateSetEvent.InputTuple,
+    ComplianceGateSetEvent.OutputTuple,
+    ComplianceGateSetEvent.OutputObject
   >;
   getEvent(
     key: "DisclosureRegistrySet"
@@ -964,6 +2193,55 @@ export interface FractalToken extends BaseContract {
     EnforcementEnabledEvent.OutputObject
   >;
   getEvent(
+    key: "EntityRegistrySet"
+  ): TypedContractEvent<
+    EntityRegistrySetEvent.InputTuple,
+    EntityRegistrySetEvent.OutputTuple,
+    EntityRegistrySetEvent.OutputObject
+  >;
+  getEvent(
+    key: "FreezeEnforcementEnabled"
+  ): TypedContractEvent<
+    FreezeEnforcementEnabledEvent.InputTuple,
+    FreezeEnforcementEnabledEvent.OutputTuple,
+    FreezeEnforcementEnabledEvent.OutputObject
+  >;
+  getEvent(
+    key: "FreezeRegistrySet"
+  ): TypedContractEvent<
+    FreezeRegistrySetEvent.InputTuple,
+    FreezeRegistrySetEvent.OutputTuple,
+    FreezeRegistrySetEvent.OutputObject
+  >;
+  getEvent(
+    key: "IdentityPolicyRegistrySet"
+  ): TypedContractEvent<
+    IdentityPolicyRegistrySetEvent.InputTuple,
+    IdentityPolicyRegistrySetEvent.OutputTuple,
+    IdentityPolicyRegistrySetEvent.OutputObject
+  >;
+  getEvent(
+    key: "IdentitySBTEnabled"
+  ): TypedContractEvent<
+    IdentitySBTEnabledEvent.InputTuple,
+    IdentitySBTEnabledEvent.OutputTuple,
+    IdentitySBTEnabledEvent.OutputObject
+  >;
+  getEvent(
+    key: "IdentitySBTSet"
+  ): TypedContractEvent<
+    IdentitySBTSetEvent.InputTuple,
+    IdentitySBTSetEvent.OutputTuple,
+    IdentitySBTSetEvent.OutputObject
+  >;
+  getEvent(
+    key: "InvestorEligibilityRegistrySet"
+  ): TypedContractEvent<
+    InvestorEligibilityRegistrySetEvent.InputTuple,
+    InvestorEligibilityRegistrySetEvent.OutputTuple,
+    InvestorEligibilityRegistrySetEvent.OutputObject
+  >;
+  getEvent(
     key: "LocalWhitelistEnabled"
   ): TypedContractEvent<
     LocalWhitelistEnabledEvent.InputTuple,
@@ -976,6 +2254,13 @@ export interface FractalToken extends BaseContract {
     LocalWhitelistUpdatedEvent.InputTuple,
     LocalWhitelistUpdatedEvent.OutputTuple,
     LocalWhitelistUpdatedEvent.OutputObject
+  >;
+  getEvent(
+    key: "OfferingIdSet"
+  ): TypedContractEvent<
+    OfferingIdSetEvent.InputTuple,
+    OfferingIdSetEvent.OutputTuple,
+    OfferingIdSetEvent.OutputObject
   >;
   getEvent(
     key: "OwnershipTransferred"
@@ -992,6 +2277,41 @@ export interface FractalToken extends BaseContract {
     PausedEvent.OutputObject
   >;
   getEvent(
+    key: "PrivateOfferingEnabled"
+  ): TypedContractEvent<
+    PrivateOfferingEnabledEvent.InputTuple,
+    PrivateOfferingEnabledEvent.OutputTuple,
+    PrivateOfferingEnabledEvent.OutputObject
+  >;
+  getEvent(
+    key: "PrivateOfferingRegistrySet"
+  ): TypedContractEvent<
+    PrivateOfferingRegistrySetEvent.InputTuple,
+    PrivateOfferingRegistrySetEvent.OutputTuple,
+    PrivateOfferingRegistrySetEvent.OutputObject
+  >;
+  getEvent(
+    key: "RiskEnforcementSet"
+  ): TypedContractEvent<
+    RiskEnforcementSetEvent.InputTuple,
+    RiskEnforcementSetEvent.OutputTuple,
+    RiskEnforcementSetEvent.OutputObject
+  >;
+  getEvent(
+    key: "RiskLimitsEnabled"
+  ): TypedContractEvent<
+    RiskLimitsEnabledEvent.InputTuple,
+    RiskLimitsEnabledEvent.OutputTuple,
+    RiskLimitsEnabledEvent.OutputObject
+  >;
+  getEvent(
+    key: "SeriesIdSet"
+  ): TypedContractEvent<
+    SeriesIdSetEvent.InputTuple,
+    SeriesIdSetEvent.OutputTuple,
+    SeriesIdSetEvent.OutputObject
+  >;
+  getEvent(
     key: "TokenUsePolicySet"
   ): TypedContractEvent<
     TokenUsePolicySetEvent.InputTuple,
@@ -1006,11 +2326,74 @@ export interface FractalToken extends BaseContract {
     TransferEvent.OutputObject
   >;
   getEvent(
+    key: "TransferRestrictionEngineSet"
+  ): TypedContractEvent<
+    TransferRestrictionEngineSetEvent.InputTuple,
+    TransferRestrictionEngineSetEvent.OutputTuple,
+    TransferRestrictionEngineSetEvent.OutputObject
+  >;
+  getEvent(
+    key: "TransferRestrictionPolicySet"
+  ): TypedContractEvent<
+    TransferRestrictionPolicySetEvent.InputTuple,
+    TransferRestrictionPolicySetEvent.OutputTuple,
+    TransferRestrictionPolicySetEvent.OutputObject
+  >;
+  getEvent(
+    key: "TravelRuleEnabled"
+  ): TypedContractEvent<
+    TravelRuleEnabledEvent.InputTuple,
+    TravelRuleEnabledEvent.OutputTuple,
+    TravelRuleEnabledEvent.OutputObject
+  >;
+  getEvent(
+    key: "TravelRuleEvidenceSet"
+  ): TypedContractEvent<
+    TravelRuleEvidenceSetEvent.InputTuple,
+    TravelRuleEvidenceSetEvent.OutputTuple,
+    TravelRuleEvidenceSetEvent.OutputObject
+  >;
+  getEvent(
+    key: "TravelRuleGateSet"
+  ): TypedContractEvent<
+    TravelRuleGateSetEvent.InputTuple,
+    TravelRuleGateSetEvent.OutputTuple,
+    TravelRuleGateSetEvent.OutputObject
+  >;
+  getEvent(
+    key: "UBOComplianceEnabled"
+  ): TypedContractEvent<
+    UBOComplianceEnabledEvent.InputTuple,
+    UBOComplianceEnabledEvent.OutputTuple,
+    UBOComplianceEnabledEvent.OutputObject
+  >;
+  getEvent(
+    key: "UBOComplianceGateSet"
+  ): TypedContractEvent<
+    UBOComplianceGateSetEvent.InputTuple,
+    UBOComplianceGateSetEvent.OutputTuple,
+    UBOComplianceGateSetEvent.OutputObject
+  >;
+  getEvent(
     key: "Unpaused"
   ): TypedContractEvent<
     UnpausedEvent.InputTuple,
     UnpausedEvent.OutputTuple,
     UnpausedEvent.OutputObject
+  >;
+  getEvent(
+    key: "WhitelistPolicyEnabled"
+  ): TypedContractEvent<
+    WhitelistPolicyEnabledEvent.InputTuple,
+    WhitelistPolicyEnabledEvent.OutputTuple,
+    WhitelistPolicyEnabledEvent.OutputObject
+  >;
+  getEvent(
+    key: "WhitelistPolicySet"
+  ): TypedContractEvent<
+    WhitelistPolicySetEvent.InputTuple,
+    WhitelistPolicySetEvent.OutputTuple,
+    WhitelistPolicySetEvent.OutputObject
   >;
   getEvent(
     key: "WhitelistRegistrySet"
@@ -1032,6 +2415,17 @@ export interface FractalToken extends BaseContract {
       AcceptanceRegistrySetEvent.OutputObject
     >;
 
+    "AdvancedRestrictionsEnabled(bool)": TypedContractEvent<
+      AdvancedRestrictionsEnabledEvent.InputTuple,
+      AdvancedRestrictionsEnabledEvent.OutputTuple,
+      AdvancedRestrictionsEnabledEvent.OutputObject
+    >;
+    AdvancedRestrictionsEnabled: TypedContractEvent<
+      AdvancedRestrictionsEnabledEvent.InputTuple,
+      AdvancedRestrictionsEnabledEvent.OutputTuple,
+      AdvancedRestrictionsEnabledEvent.OutputObject
+    >;
+
     "Approval(address,address,uint256)": TypedContractEvent<
       ApprovalEvent.InputTuple,
       ApprovalEvent.OutputTuple,
@@ -1041,6 +2435,39 @@ export interface FractalToken extends BaseContract {
       ApprovalEvent.InputTuple,
       ApprovalEvent.OutputTuple,
       ApprovalEvent.OutputObject
+    >;
+
+    "AssetTypeSet(bytes32)": TypedContractEvent<
+      AssetTypeSetEvent.InputTuple,
+      AssetTypeSetEvent.OutputTuple,
+      AssetTypeSetEvent.OutputObject
+    >;
+    AssetTypeSet: TypedContractEvent<
+      AssetTypeSetEvent.InputTuple,
+      AssetTypeSetEvent.OutputTuple,
+      AssetTypeSetEvent.OutputObject
+    >;
+
+    "ComplianceEnabled(bool)": TypedContractEvent<
+      ComplianceEnabledEvent.InputTuple,
+      ComplianceEnabledEvent.OutputTuple,
+      ComplianceEnabledEvent.OutputObject
+    >;
+    ComplianceEnabled: TypedContractEvent<
+      ComplianceEnabledEvent.InputTuple,
+      ComplianceEnabledEvent.OutputTuple,
+      ComplianceEnabledEvent.OutputObject
+    >;
+
+    "ComplianceGateSet(address)": TypedContractEvent<
+      ComplianceGateSetEvent.InputTuple,
+      ComplianceGateSetEvent.OutputTuple,
+      ComplianceGateSetEvent.OutputObject
+    >;
+    ComplianceGateSet: TypedContractEvent<
+      ComplianceGateSetEvent.InputTuple,
+      ComplianceGateSetEvent.OutputTuple,
+      ComplianceGateSetEvent.OutputObject
     >;
 
     "DisclosureRegistrySet(address)": TypedContractEvent<
@@ -1076,6 +2503,83 @@ export interface FractalToken extends BaseContract {
       EnforcementEnabledEvent.OutputObject
     >;
 
+    "EntityRegistrySet(address)": TypedContractEvent<
+      EntityRegistrySetEvent.InputTuple,
+      EntityRegistrySetEvent.OutputTuple,
+      EntityRegistrySetEvent.OutputObject
+    >;
+    EntityRegistrySet: TypedContractEvent<
+      EntityRegistrySetEvent.InputTuple,
+      EntityRegistrySetEvent.OutputTuple,
+      EntityRegistrySetEvent.OutputObject
+    >;
+
+    "FreezeEnforcementEnabled(bool)": TypedContractEvent<
+      FreezeEnforcementEnabledEvent.InputTuple,
+      FreezeEnforcementEnabledEvent.OutputTuple,
+      FreezeEnforcementEnabledEvent.OutputObject
+    >;
+    FreezeEnforcementEnabled: TypedContractEvent<
+      FreezeEnforcementEnabledEvent.InputTuple,
+      FreezeEnforcementEnabledEvent.OutputTuple,
+      FreezeEnforcementEnabledEvent.OutputObject
+    >;
+
+    "FreezeRegistrySet(address)": TypedContractEvent<
+      FreezeRegistrySetEvent.InputTuple,
+      FreezeRegistrySetEvent.OutputTuple,
+      FreezeRegistrySetEvent.OutputObject
+    >;
+    FreezeRegistrySet: TypedContractEvent<
+      FreezeRegistrySetEvent.InputTuple,
+      FreezeRegistrySetEvent.OutputTuple,
+      FreezeRegistrySetEvent.OutputObject
+    >;
+
+    "IdentityPolicyRegistrySet(address)": TypedContractEvent<
+      IdentityPolicyRegistrySetEvent.InputTuple,
+      IdentityPolicyRegistrySetEvent.OutputTuple,
+      IdentityPolicyRegistrySetEvent.OutputObject
+    >;
+    IdentityPolicyRegistrySet: TypedContractEvent<
+      IdentityPolicyRegistrySetEvent.InputTuple,
+      IdentityPolicyRegistrySetEvent.OutputTuple,
+      IdentityPolicyRegistrySetEvent.OutputObject
+    >;
+
+    "IdentitySBTEnabled(bool)": TypedContractEvent<
+      IdentitySBTEnabledEvent.InputTuple,
+      IdentitySBTEnabledEvent.OutputTuple,
+      IdentitySBTEnabledEvent.OutputObject
+    >;
+    IdentitySBTEnabled: TypedContractEvent<
+      IdentitySBTEnabledEvent.InputTuple,
+      IdentitySBTEnabledEvent.OutputTuple,
+      IdentitySBTEnabledEvent.OutputObject
+    >;
+
+    "IdentitySBTSet(address)": TypedContractEvent<
+      IdentitySBTSetEvent.InputTuple,
+      IdentitySBTSetEvent.OutputTuple,
+      IdentitySBTSetEvent.OutputObject
+    >;
+    IdentitySBTSet: TypedContractEvent<
+      IdentitySBTSetEvent.InputTuple,
+      IdentitySBTSetEvent.OutputTuple,
+      IdentitySBTSetEvent.OutputObject
+    >;
+
+    "InvestorEligibilityRegistrySet(address)": TypedContractEvent<
+      InvestorEligibilityRegistrySetEvent.InputTuple,
+      InvestorEligibilityRegistrySetEvent.OutputTuple,
+      InvestorEligibilityRegistrySetEvent.OutputObject
+    >;
+    InvestorEligibilityRegistrySet: TypedContractEvent<
+      InvestorEligibilityRegistrySetEvent.InputTuple,
+      InvestorEligibilityRegistrySetEvent.OutputTuple,
+      InvestorEligibilityRegistrySetEvent.OutputObject
+    >;
+
     "LocalWhitelistEnabled(bool)": TypedContractEvent<
       LocalWhitelistEnabledEvent.InputTuple,
       LocalWhitelistEnabledEvent.OutputTuple,
@@ -1096,6 +2600,17 @@ export interface FractalToken extends BaseContract {
       LocalWhitelistUpdatedEvent.InputTuple,
       LocalWhitelistUpdatedEvent.OutputTuple,
       LocalWhitelistUpdatedEvent.OutputObject
+    >;
+
+    "OfferingIdSet(bytes32)": TypedContractEvent<
+      OfferingIdSetEvent.InputTuple,
+      OfferingIdSetEvent.OutputTuple,
+      OfferingIdSetEvent.OutputObject
+    >;
+    OfferingIdSet: TypedContractEvent<
+      OfferingIdSetEvent.InputTuple,
+      OfferingIdSetEvent.OutputTuple,
+      OfferingIdSetEvent.OutputObject
     >;
 
     "OwnershipTransferred(address,address)": TypedContractEvent<
@@ -1120,6 +2635,61 @@ export interface FractalToken extends BaseContract {
       PausedEvent.OutputObject
     >;
 
+    "PrivateOfferingEnabled(bool)": TypedContractEvent<
+      PrivateOfferingEnabledEvent.InputTuple,
+      PrivateOfferingEnabledEvent.OutputTuple,
+      PrivateOfferingEnabledEvent.OutputObject
+    >;
+    PrivateOfferingEnabled: TypedContractEvent<
+      PrivateOfferingEnabledEvent.InputTuple,
+      PrivateOfferingEnabledEvent.OutputTuple,
+      PrivateOfferingEnabledEvent.OutputObject
+    >;
+
+    "PrivateOfferingRegistrySet(address)": TypedContractEvent<
+      PrivateOfferingRegistrySetEvent.InputTuple,
+      PrivateOfferingRegistrySetEvent.OutputTuple,
+      PrivateOfferingRegistrySetEvent.OutputObject
+    >;
+    PrivateOfferingRegistrySet: TypedContractEvent<
+      PrivateOfferingRegistrySetEvent.InputTuple,
+      PrivateOfferingRegistrySetEvent.OutputTuple,
+      PrivateOfferingRegistrySetEvent.OutputObject
+    >;
+
+    "RiskEnforcementSet(address)": TypedContractEvent<
+      RiskEnforcementSetEvent.InputTuple,
+      RiskEnforcementSetEvent.OutputTuple,
+      RiskEnforcementSetEvent.OutputObject
+    >;
+    RiskEnforcementSet: TypedContractEvent<
+      RiskEnforcementSetEvent.InputTuple,
+      RiskEnforcementSetEvent.OutputTuple,
+      RiskEnforcementSetEvent.OutputObject
+    >;
+
+    "RiskLimitsEnabled(bool)": TypedContractEvent<
+      RiskLimitsEnabledEvent.InputTuple,
+      RiskLimitsEnabledEvent.OutputTuple,
+      RiskLimitsEnabledEvent.OutputObject
+    >;
+    RiskLimitsEnabled: TypedContractEvent<
+      RiskLimitsEnabledEvent.InputTuple,
+      RiskLimitsEnabledEvent.OutputTuple,
+      RiskLimitsEnabledEvent.OutputObject
+    >;
+
+    "SeriesIdSet(bytes32)": TypedContractEvent<
+      SeriesIdSetEvent.InputTuple,
+      SeriesIdSetEvent.OutputTuple,
+      SeriesIdSetEvent.OutputObject
+    >;
+    SeriesIdSet: TypedContractEvent<
+      SeriesIdSetEvent.InputTuple,
+      SeriesIdSetEvent.OutputTuple,
+      SeriesIdSetEvent.OutputObject
+    >;
+
     "TokenUsePolicySet(address)": TypedContractEvent<
       TokenUsePolicySetEvent.InputTuple,
       TokenUsePolicySetEvent.OutputTuple,
@@ -1142,6 +2712,83 @@ export interface FractalToken extends BaseContract {
       TransferEvent.OutputObject
     >;
 
+    "TransferRestrictionEngineSet(address)": TypedContractEvent<
+      TransferRestrictionEngineSetEvent.InputTuple,
+      TransferRestrictionEngineSetEvent.OutputTuple,
+      TransferRestrictionEngineSetEvent.OutputObject
+    >;
+    TransferRestrictionEngineSet: TypedContractEvent<
+      TransferRestrictionEngineSetEvent.InputTuple,
+      TransferRestrictionEngineSetEvent.OutputTuple,
+      TransferRestrictionEngineSetEvent.OutputObject
+    >;
+
+    "TransferRestrictionPolicySet(address)": TypedContractEvent<
+      TransferRestrictionPolicySetEvent.InputTuple,
+      TransferRestrictionPolicySetEvent.OutputTuple,
+      TransferRestrictionPolicySetEvent.OutputObject
+    >;
+    TransferRestrictionPolicySet: TypedContractEvent<
+      TransferRestrictionPolicySetEvent.InputTuple,
+      TransferRestrictionPolicySetEvent.OutputTuple,
+      TransferRestrictionPolicySetEvent.OutputObject
+    >;
+
+    "TravelRuleEnabled(bool)": TypedContractEvent<
+      TravelRuleEnabledEvent.InputTuple,
+      TravelRuleEnabledEvent.OutputTuple,
+      TravelRuleEnabledEvent.OutputObject
+    >;
+    TravelRuleEnabled: TypedContractEvent<
+      TravelRuleEnabledEvent.InputTuple,
+      TravelRuleEnabledEvent.OutputTuple,
+      TravelRuleEnabledEvent.OutputObject
+    >;
+
+    "TravelRuleEvidenceSet(bytes32)": TypedContractEvent<
+      TravelRuleEvidenceSetEvent.InputTuple,
+      TravelRuleEvidenceSetEvent.OutputTuple,
+      TravelRuleEvidenceSetEvent.OutputObject
+    >;
+    TravelRuleEvidenceSet: TypedContractEvent<
+      TravelRuleEvidenceSetEvent.InputTuple,
+      TravelRuleEvidenceSetEvent.OutputTuple,
+      TravelRuleEvidenceSetEvent.OutputObject
+    >;
+
+    "TravelRuleGateSet(address)": TypedContractEvent<
+      TravelRuleGateSetEvent.InputTuple,
+      TravelRuleGateSetEvent.OutputTuple,
+      TravelRuleGateSetEvent.OutputObject
+    >;
+    TravelRuleGateSet: TypedContractEvent<
+      TravelRuleGateSetEvent.InputTuple,
+      TravelRuleGateSetEvent.OutputTuple,
+      TravelRuleGateSetEvent.OutputObject
+    >;
+
+    "UBOComplianceEnabled(bool)": TypedContractEvent<
+      UBOComplianceEnabledEvent.InputTuple,
+      UBOComplianceEnabledEvent.OutputTuple,
+      UBOComplianceEnabledEvent.OutputObject
+    >;
+    UBOComplianceEnabled: TypedContractEvent<
+      UBOComplianceEnabledEvent.InputTuple,
+      UBOComplianceEnabledEvent.OutputTuple,
+      UBOComplianceEnabledEvent.OutputObject
+    >;
+
+    "UBOComplianceGateSet(address)": TypedContractEvent<
+      UBOComplianceGateSetEvent.InputTuple,
+      UBOComplianceGateSetEvent.OutputTuple,
+      UBOComplianceGateSetEvent.OutputObject
+    >;
+    UBOComplianceGateSet: TypedContractEvent<
+      UBOComplianceGateSetEvent.InputTuple,
+      UBOComplianceGateSetEvent.OutputTuple,
+      UBOComplianceGateSetEvent.OutputObject
+    >;
+
     "Unpaused(address)": TypedContractEvent<
       UnpausedEvent.InputTuple,
       UnpausedEvent.OutputTuple,
@@ -1151,6 +2798,28 @@ export interface FractalToken extends BaseContract {
       UnpausedEvent.InputTuple,
       UnpausedEvent.OutputTuple,
       UnpausedEvent.OutputObject
+    >;
+
+    "WhitelistPolicyEnabled(bool)": TypedContractEvent<
+      WhitelistPolicyEnabledEvent.InputTuple,
+      WhitelistPolicyEnabledEvent.OutputTuple,
+      WhitelistPolicyEnabledEvent.OutputObject
+    >;
+    WhitelistPolicyEnabled: TypedContractEvent<
+      WhitelistPolicyEnabledEvent.InputTuple,
+      WhitelistPolicyEnabledEvent.OutputTuple,
+      WhitelistPolicyEnabledEvent.OutputObject
+    >;
+
+    "WhitelistPolicySet(address)": TypedContractEvent<
+      WhitelistPolicySetEvent.InputTuple,
+      WhitelistPolicySetEvent.OutputTuple,
+      WhitelistPolicySetEvent.OutputObject
+    >;
+    WhitelistPolicySet: TypedContractEvent<
+      WhitelistPolicySetEvent.InputTuple,
+      WhitelistPolicySetEvent.OutputTuple,
+      WhitelistPolicySetEvent.OutputObject
     >;
 
     "WhitelistRegistrySet(address)": TypedContractEvent<

@@ -1,0 +1,551 @@
+{
+  "execution_id": "13TRIG-EXEC-20260708-155128",
+  "timestamp": "2026-07-08T15:51:28.498633",
+  "protocol": "13-TRIGGERS-QR-BINARIO-95516",
+  "trigger_original": {
+    "raw": "101010101010100101010101010101001010101010010101001010101010101010010101010010101010010101010101001010101010100101010100101010100101010101001010101010100101010101001010101010100101010010101010010101010010101001010101001010101001010101001010101001010101010010101010010101010010101010010101001010101001010101001010100101010100101234657687745664567555745877676668I6657634668678863467686577447667656765465810101010101010100101000010100101000000101111011100101010100101010101001010101011111111001010010101001010100101",
+    "bits_puros": 437,
+    "parametros": [
+      234657687745664567555745877676668,
+      66576346686788634676865774476676567654658
+    ],
+    "marcador": "I",
+    "header": "0xAAA95554",
+    "trigger_hash": "c7fbed13aed95d27df1a2bc2a0e232258f8af1df02f72b5257cfbe546239d886"
+  },
+  "summary": {
+    "total_triggers": 13,
+    "total_cny": 971598000.0,
+    "total_mxn": 2626660387.93,
+    "total_usd": 131333019.4,
+    "total_cat": 1415615800,
+    "total_burn_cat": 70780784,
+    "total_fees_cny": 1457397.0
+  },
+  "triggers": [
+    {
+      "index": 1,
+      "cuenta": {
+        "id": "C-01",
+        "nombre": "CONCENTRADORA Principal",
+        "clabe": "012290015202390246",
+        "tipo": "BBVA",
+        "retorno": true
+      },
+      "amount_cny": 116000.0,
+      "amount_mxn": 313250.0,
+      "amount_cat": 169011,
+      "burn_cat": 8450,
+      "fee_cny": 174.0,
+      "qr_url": "https://qr.95516.com/pay?id=c6f14ffd4e1bec88&m=CAT-BLOCKCHAIN-001&a=116000&c=CNY&t=c7fbed13&s=01",
+      "qr_id": "c6f14ffd4e1bec88",
+      "qr_payload": "{\"protocol\": \"UNIONPAY-QR-95516\", \"version\": \"1.0\", \"merchant_id\": \"CAT-BLOCKCHAIN-001\", \"order_id\": \"TRIGGER-01-c7fbed13\", \"amount_cny\": 116000.0, \"currency\": \"CNY\", \"settlement_currency\": \"MXN\", \"clabe_destino\": \"012290015202390246\", \"beneficiary\": \"Mauricio Rodriguez Tellez\", \"binary_trigger_segment\": \"101010101010100101010101010101001\", \"parametric_payload\": \"234657687745664567555745877676668\", \"timestamp\": \"2026-07-08T15:51:28.497720\"}",
+      "mt103": {
+        ":20:": "CAT-13TRIG-QR-01-20260708",
+        ":32A:": "260708CNY116,000",
+        ":50K:": "Catalyst Blockchain Labs S.A. de C.V.\nMoscato 185, Zempoala\nPachuca, Hidalgo, Mexico",
+        ":52A:": "UNPYCNBH",
+        ":57A:": "BCRMXMMPYM",
+        ":59:": "/012290015202390246\nMauricio Rodriguez Tellez",
+        ":70:": "13-TRIGGER QR BINARIO — CONCENTRADORA Principal — Trigger 01",
+        ":71A:": "SHA",
+        ":72:": "/ACC/TRIGGER-01 TERMINACION 6",
+        "UETR": "dc377d00-c362-4c8f-ac69-a72cef83bf3d"
+      },
+      "proof_chain": {
+        "P1": "301577f6c808f20487f15cb2435922ed872fcb3105a9a21e53c73a195e62d35d",
+        "P2": "04d08c7b74408bcbd878152b74d09646cf79951a1092ba3162ad7e5d98de23c0",
+        "P3": "8afd0c7678019202e45f1ac61f897eeda42854305b90246864afaeed018cfd68",
+        "P4": "2e1a812cd78a75919fd6052fd68ee8ba8cc5a328650cf36fb43ebc067ffb37ef",
+        "P5": "49c654a34e07ad6f2e221680f56cbe2f16ee08ec527367c7d0ccfdeb4b639049"
+      },
+      "seal": "49c654a34e07ad6f2e221680f56cbe2f16ee08ec527367c7d0ccfdeb4b639049",
+      "uetr": "dc377d00-c362-4c8f-ac69-a72cef83bf3d"
+    },
+    {
+      "index": 2,
+      "cuenta": {
+        "id": "C-02",
+        "nombre": "OPERADORA Secundaria",
+        "clabe": "012180015123243964",
+        "tipo": "BBVA",
+        "retorno": false
+      },
+      "amount_cny": 230000.0,
+      "amount_mxn": 621443.1,
+      "amount_cat": 335109,
+      "burn_cat": 16755,
+      "fee_cny": 345.0,
+      "qr_url": "https://qr.95516.com/pay?id=6b6bef7cfe1609b8&m=CAT-BLOCKCHAIN-001&a=230000&c=CNY&t=c7fbed13&s=02",
+      "qr_id": "6b6bef7cfe1609b8",
+      "qr_payload": "{\"protocol\": \"UNIONPAY-QR-95516\", \"version\": \"1.0\", \"merchant_id\": \"CAT-BLOCKCHAIN-001\", \"order_id\": \"TRIGGER-02-c7fbed13\", \"amount_cny\": 230000.0, \"currency\": \"CNY\", \"settlement_currency\": \"MXN\", \"clabe_destino\": \"012180015123243964\", \"beneficiary\": \"Mauricio Rodriguez Tellez\", \"binary_trigger_segment\": \"010101010010101001010101010101010\", \"parametric_payload\": \"234657687745664567555745877676668\", \"timestamp\": \"2026-07-08T15:51:28.497895\"}",
+      "mt103": {
+        ":20:": "CAT-13TRIG-QR-02-20260708",
+        ":32A:": "260708CNY230,000",
+        ":50K:": "Catalyst Blockchain Labs S.A. de C.V.\nMoscato 185, Zempoala\nPachuca, Hidalgo, Mexico",
+        ":52A:": "UNPYCNBH",
+        ":57A:": "BCRMXMMPYM",
+        ":59:": "/012180015123243964\nMauricio Rodriguez Tellez",
+        ":70:": "13-TRIGGER QR BINARIO — OPERADORA Secundaria — Trigger 02",
+        ":71A:": "SHA",
+        ":72:": "/ACC/TRIGGER-02 TERMINACION 6",
+        "UETR": "ac91308a-eba3-4746-bb99-79275551fab5"
+      },
+      "proof_chain": {
+        "P1": "0a1d9cd7165aa3338853236c1a9641afe224b5e4b026edf259e7a768feb67ecb",
+        "P2": "b926f9d41b4edb4da9a28fc21abb25bb8e268e8bd8e0a921b2a7c2ff5debbc33",
+        "P3": "5158fc22a8cf8eb0f26f7168793e91ed7c17ea46a1773c52865526240212fc55",
+        "P4": "74a82e3f0189b9a2f55b2b147dffc19a33735291b5b0857c28a6dace3ff43c5a",
+        "P5": "a161bad5286ba62ef4e57b315dce15850381014909989b97ea6fd8df4c009737"
+      },
+      "seal": "a161bad5286ba62ef4e57b315dce15850381014909989b97ea6fd8df4c009737",
+      "uetr": "ac91308a-eba3-4746-bb99-79275551fab5"
+    },
+    {
+      "index": 3,
+      "cuenta": {
+        "id": "C-03",
+        "nombre": "CHEQUES Principal",
+        "clabe": "012290015202390259",
+        "tipo": "BBVA",
+        "retorno": false
+      },
+      "amount_cny": 460000.0,
+      "amount_mxn": 1243236.21,
+      "amount_cat": 670218,
+      "burn_cat": 33510,
+      "fee_cny": 690.0,
+      "qr_url": "https://qr.95516.com/pay?id=2e2fc5a146fd9827&m=CAT-BLOCKCHAIN-001&a=460000&c=CNY&t=c7fbed13&s=03",
+      "qr_id": "2e2fc5a146fd9827",
+      "qr_payload": "{\"protocol\": \"UNIONPAY-QR-95516\", \"version\": \"1.0\", \"merchant_id\": \"CAT-BLOCKCHAIN-001\", \"order_id\": \"TRIGGER-03-c7fbed13\", \"amount_cny\": 460000.0, \"currency\": \"CNY\", \"settlement_currency\": \"MXN\", \"clabe_destino\": \"012290015202390259\", \"beneficiary\": \"Mauricio Rodriguez Tellez\", \"binary_trigger_segment\": \"010101010010101010010101010101001\", \"parametric_payload\": \"234657687745664567555745877676668\", \"timestamp\": \"2026-07-08T15:51:28.497970\"}",
+      "mt103": {
+        ":20:": "CAT-13TRIG-QR-03-20260708",
+        ":32A:": "260708CNY460,000",
+        ":50K:": "Catalyst Blockchain Labs S.A. de C.V.\nMoscato 185, Zempoala\nPachuca, Hidalgo, Mexico",
+        ":52A:": "UNPYCNBH",
+        ":57A:": "BCRMXMMPYM",
+        ":59:": "/012290015202390259\nMauricio Rodriguez Tellez",
+        ":70:": "13-TRIGGER QR BINARIO — CHEQUES Principal — Trigger 03",
+        ":71A:": "SHA",
+        ":72:": "/ACC/TRIGGER-03 TERMINACION 6",
+        "UETR": "40263ad3-b9d7-40cd-986b-949abd587e93"
+      },
+      "proof_chain": {
+        "P1": "e4a2a26f6102968a0348567e1927263f7cf7154c10847860fb4012979b39c0fa",
+        "P2": "2944d76e8c230a3a108dd3bd5e855729a7b60522ef62ffb1fa95ded01d8b93f0",
+        "P3": "149f3983e8137c3756d514ae7b435a2f94a40b81ad009ee4270f3b57a8275562",
+        "P4": "4189493a33ff7269a429ac76a5905ca3f076b94899f826f8b3d16698dff859bc",
+        "P5": "22c489b15f43905ebb02d6c3492da87e3bf15ec7db57687d2814465389d0f1b8"
+      },
+      "seal": "22c489b15f43905ebb02d6c3492da87e3bf15ec7db57687d2814465389d0f1b8",
+      "uetr": "40263ad3-b9d7-40cd-986b-949abd587e93"
+    },
+    {
+      "index": 4,
+      "cuenta": {
+        "id": "C-04",
+        "nombre": "DEBITO Operaciones",
+        "clabe": "012290015202390262",
+        "tipo": "BBVA",
+        "retorno": false
+      },
+      "amount_cny": 920000.0,
+      "amount_mxn": 2486822.41,
+      "amount_cat": 1340437,
+      "burn_cat": 67021,
+      "fee_cny": 1380.0,
+      "qr_url": "https://qr.95516.com/pay?id=cd15521af7b60ef4&m=CAT-BLOCKCHAIN-001&a=920000&c=CNY&t=c7fbed13&s=04",
+      "qr_id": "cd15521af7b60ef4",
+      "qr_payload": "{\"protocol\": \"UNIONPAY-QR-95516\", \"version\": \"1.0\", \"merchant_id\": \"CAT-BLOCKCHAIN-001\", \"order_id\": \"TRIGGER-04-c7fbed13\", \"amount_cny\": 920000.0, \"currency\": \"CNY\", \"settlement_currency\": \"MXN\", \"clabe_destino\": \"012290015202390262\", \"beneficiary\": \"Mauricio Rodriguez Tellez\", \"binary_trigger_segment\": \"010101010100101010100101010100101\", \"parametric_payload\": \"234657687745664567555745877676668\", \"timestamp\": \"2026-07-08T15:51:28.498027\"}",
+      "mt103": {
+        ":20:": "CAT-13TRIG-QR-04-20260708",
+        ":32A:": "260708CNY920,000",
+        ":50K:": "Catalyst Blockchain Labs S.A. de C.V.\nMoscato 185, Zempoala\nPachuca, Hidalgo, Mexico",
+        ":52A:": "UNPYCNBH",
+        ":57A:": "BCRMXMMPYM",
+        ":59:": "/012290015202390262\nMauricio Rodriguez Tellez",
+        ":70:": "13-TRIGGER QR BINARIO — DEBITO Operaciones — Trigger 04",
+        ":71A:": "SHA",
+        ":72:": "/ACC/TRIGGER-04 TERMINACION 6",
+        "UETR": "c6131faa-762b-4f6c-88f7-dbb044edb66f"
+      },
+      "proof_chain": {
+        "P1": "ec7f41af49846e5d632eb28f06ffe87145664534cc535b23588808d25f32046f",
+        "P2": "7179763aebe5cec2e8f0e1ebf074505ef9a9e6aa7076597bbae8a7bf9c1118a0",
+        "P3": "4913c731231e1d816de012144a457db0f7fc37fce0791c19cf637405ce653bc1",
+        "P4": "a88b060e0092121dc35d9c6cbcad9ff1250924894f7779e1606634551d3677b9",
+        "P5": "be17ce5b7633f01f912d2a126fee456ad4d26034058f7344c020b7db92aceaed"
+      },
+      "seal": "be17ce5b7633f01f912d2a126fee456ad4d26034058f7344c020b7db92aceaed",
+      "uetr": "c6131faa-762b-4f6c-88f7-dbb044edb66f"
+    },
+    {
+      "index": 5,
+      "cuenta": {
+        "id": "C-05",
+        "nombre": "CREDITO Puente",
+        "clabe": "012290015202390275",
+        "tipo": "BBVA",
+        "retorno": false
+      },
+      "amount_cny": 1840000.0,
+      "amount_mxn": 4973994.83,
+      "amount_cat": 2680875,
+      "burn_cat": 134043,
+      "fee_cny": 2760.0,
+      "qr_url": "https://qr.95516.com/pay?id=bbce9c5554981a3b&m=CAT-BLOCKCHAIN-001&a=1840000&c=CNY&t=c7fbed13&s=05",
+      "qr_id": "bbce9c5554981a3b",
+      "qr_payload": "{\"protocol\": \"UNIONPAY-QR-95516\", \"version\": \"1.0\", \"merchant_id\": \"CAT-BLOCKCHAIN-001\", \"order_id\": \"TRIGGER-05-c7fbed13\", \"amount_cny\": 1840000.0, \"currency\": \"CNY\", \"settlement_currency\": \"MXN\", \"clabe_destino\": \"012290015202390275\", \"beneficiary\": \"Mauricio Rodriguez Tellez\", \"binary_trigger_segment\": \"010101001010101010100101010101001\", \"parametric_payload\": \"234657687745664567555745877676668\", \"timestamp\": \"2026-07-08T15:51:28.498097\"}",
+      "mt103": {
+        ":20:": "CAT-13TRIG-QR-05-20260708",
+        ":32A:": "260708CNY1,840,000",
+        ":50K:": "Catalyst Blockchain Labs S.A. de C.V.\nMoscato 185, Zempoala\nPachuca, Hidalgo, Mexico",
+        ":52A:": "UNPYCNBH",
+        ":57A:": "BCRMXMMPYM",
+        ":59:": "/012290015202390275\nMauricio Rodriguez Tellez",
+        ":70:": "13-TRIGGER QR BINARIO — CREDITO Puente — Trigger 05",
+        ":71A:": "SHA",
+        ":72:": "/ACC/TRIGGER-05 TERMINACION 6",
+        "UETR": "f5766eba-c042-4c0a-b107-cf1fe23f66c9"
+      },
+      "proof_chain": {
+        "P1": "00d7cc8938456adfc1ddf80a95712cab4f6318feda02ea78921f88b42ed10fd9",
+        "P2": "2e2149a852d864286b9b06cdfb363d9cd129ba1697a8c9db77fef69c47baa641",
+        "P3": "dac438fd7b4c2c07f5179184ff86c0b54b85c1a24f10925775144bd229cf8c7a",
+        "P4": "b5efa4acde4a37d3dceb5582011e084803a6c00f273387454ed048f584bd6139",
+        "P5": "1b61efbef27f575c37a44868766e989e219771eb2ade0baf12a6d4f819168d77"
+      },
+      "seal": "1b61efbef27f575c37a44868766e989e219771eb2ade0baf12a6d4f819168d77",
+      "uetr": "f5766eba-c042-4c0a-b107-cf1fe23f66c9"
+    },
+    {
+      "index": 6,
+      "cuenta": {
+        "id": "C-06",
+        "nombre": "AHORRO-INVERSION",
+        "clabe": "012290015202390288",
+        "tipo": "BBVA",
+        "retorno": false
+      },
+      "amount_cny": 3680000.0,
+      "amount_mxn": 9948339.66,
+      "amount_cat": 5361750,
+      "burn_cat": 268087,
+      "fee_cny": 5520.0,
+      "qr_url": "https://qr.95516.com/pay?id=beadab7f9cc3af59&m=CAT-BLOCKCHAIN-001&a=3680000&c=CNY&t=c7fbed13&s=06",
+      "qr_id": "beadab7f9cc3af59",
+      "qr_payload": "{\"protocol\": \"UNIONPAY-QR-95516\", \"version\": \"1.0\", \"merchant_id\": \"CAT-BLOCKCHAIN-001\", \"order_id\": \"TRIGGER-06-c7fbed13\", \"amount_cny\": 3680000.0, \"currency\": \"CNY\", \"settlement_currency\": \"MXN\", \"clabe_destino\": \"012290015202390288\", \"beneficiary\": \"Mauricio Rodriguez Tellez\", \"binary_trigger_segment\": \"010101010100101010010101010010101\", \"parametric_payload\": \"234657687745664567555745877676668\", \"timestamp\": \"2026-07-08T15:51:28.498153\"}",
+      "mt103": {
+        ":20:": "CAT-13TRIG-QR-06-20260708",
+        ":32A:": "260708CNY3,680,000",
+        ":50K:": "Catalyst Blockchain Labs S.A. de C.V.\nMoscato 185, Zempoala\nPachuca, Hidalgo, Mexico",
+        ":52A:": "UNPYCNBH",
+        ":57A:": "BCRMXMMPYM",
+        ":59:": "/012290015202390288\nMauricio Rodriguez Tellez",
+        ":70:": "13-TRIGGER QR BINARIO — AHORRO-INVERSION — Trigger 06",
+        ":71A:": "SHA",
+        ":72:": "/ACC/TRIGGER-06 TERMINACION 6",
+        "UETR": "392178f4-a620-41e1-b3ad-5a13b5ea289a"
+      },
+      "proof_chain": {
+        "P1": "56c01826a7d3e37c47b67390b160f992fc2964571a0d1af56f75c15aced21d8c",
+        "P2": "fc6f524bf459b175b13e689f9cdda0e3486b9e26ddbb6ec5f039b99315d32e56",
+        "P3": "8dc87ad3ff9805a765e8127df89720951b114e579001cd47bf2b5e586db17841",
+        "P4": "90a0a9c64e2c4d708cd11ee4a0e098169e1a9aa4ad33b0b6a20e1beda7e7cf60",
+        "P5": "f4939434aa105c8740ebdb2c08b9e2feb7bdc2a3de602eb875f156c344daf37e"
+      },
+      "seal": "f4939434aa105c8740ebdb2c08b9e2feb7bdc2a3de602eb875f156c344daf37e",
+      "uetr": "392178f4-a620-41e1-b3ad-5a13b5ea289a"
+    },
+    {
+      "index": 7,
+      "cuenta": {
+        "id": "C-07",
+        "nombre": "PAGOS SERVICIOS",
+        "clabe": "012290015202390291",
+        "tipo": "BBVA",
+        "retorno": false
+      },
+      "amount_cny": 7296000.0,
+      "amount_mxn": 19724008.62,
+      "amount_cat": 10630253,
+      "burn_cat": 531512,
+      "fee_cny": 10944.0,
+      "qr_url": "https://qr.95516.com/pay?id=f13e0a00261313b6&m=CAT-BLOCKCHAIN-001&a=7296000&c=CNY&t=c7fbed13&s=07",
+      "qr_id": "f13e0a00261313b6",
+      "qr_payload": "{\"protocol\": \"UNIONPAY-QR-95516\", \"version\": \"1.0\", \"merchant_id\": \"CAT-BLOCKCHAIN-001\", \"order_id\": \"TRIGGER-07-c7fbed13\", \"amount_cny\": 7296000.0, \"currency\": \"CNY\", \"settlement_currency\": \"MXN\", \"clabe_destino\": \"012290015202390291\", \"beneficiary\": \"Mauricio Rodriguez Tellez\", \"binary_trigger_segment\": \"010010101001010101001010101001010\", \"parametric_payload\": \"234657687745664567555745877676668\", \"timestamp\": \"2026-07-08T15:51:28.498205\"}",
+      "mt103": {
+        ":20:": "CAT-13TRIG-QR-07-20260708",
+        ":32A:": "260708CNY7,296,000",
+        ":50K:": "Catalyst Blockchain Labs S.A. de C.V.\nMoscato 185, Zempoala\nPachuca, Hidalgo, Mexico",
+        ":52A:": "UNPYCNBH",
+        ":57A:": "BCRMXMMPYM",
+        ":59:": "/012290015202390291\nMauricio Rodriguez Tellez",
+        ":70:": "13-TRIGGER QR BINARIO — PAGOS SERVICIOS — Trigger 07",
+        ":71A:": "SHA",
+        ":72:": "/ACC/TRIGGER-07 TERMINACION 6",
+        "UETR": "81bcae7d-927a-4af4-b242-1ce0ff5c26f2"
+      },
+      "proof_chain": {
+        "P1": "eac3f08645cc3bd8d6f0f98599bc90145dfa50a2fc87c2d7a21dd2b3becb5426",
+        "P2": "03000e936d5b902715f41d89643440ff0b6f53f7d57ac64f7ba6ee08fce0f8c4",
+        "P3": "60d5dacd73986cc0a02b6b9797f78af96754999c50983443e3bd44ab934b7a21",
+        "P4": "c901dcb2cf50014fc6024303edc66e574a900152f5e75b9ce247cb5c4d30bf96",
+        "P5": "e29990e9b64dcec7bc67e6a7188f3eeca40b125acf8b72a6e0a516dbcd8eb735"
+      },
+      "seal": "e29990e9b64dcec7bc67e6a7188f3eeca40b125acf8b72a6e0a516dbcd8eb735",
+      "uetr": "81bcae7d-927a-4af4-b242-1ce0ff5c26f2"
+    },
+    {
+      "index": 8,
+      "cuenta": {
+        "id": "C-08",
+        "nombre": "CRYPTO BRIDGE (ETH→MXN)",
+        "clabe": "072290015202390252",
+        "tipo": "BANORTE",
+        "retorno": false
+      },
+      "amount_cny": 14720000.0,
+      "amount_mxn": 39794408.62,
+      "amount_cat": 21447002,
+      "burn_cat": 1072350,
+      "fee_cny": 22080.0,
+      "qr_url": "https://qr.95516.com/pay?id=aab17e1849a79faa&m=CAT-BLOCKCHAIN-001&a=14720000&c=CNY&t=c7fbed13&s=08",
+      "qr_id": "aab17e1849a79faa",
+      "qr_payload": "{\"protocol\": \"UNIONPAY-QR-95516\", \"version\": \"1.0\", \"merchant_id\": \"CAT-BLOCKCHAIN-001\", \"order_id\": \"TRIGGER-08-c7fbed13\", \"amount_cny\": 14720000.0, \"currency\": \"CNY\", \"settlement_currency\": \"MXN\", \"clabe_destino\": \"072290015202390252\", \"beneficiary\": \"Mauricio Rodriguez Tellez\", \"binary_trigger_segment\": \"101001010101001010101010010101010\", \"parametric_payload\": \"234657687745664567555745877676668\", \"timestamp\": \"2026-07-08T15:51:28.498288\"}",
+      "mt103": {
+        ":20:": "CAT-13TRIG-QR-08-20260708",
+        ":32A:": "260708CNY14,720,000",
+        ":50K:": "Catalyst Blockchain Labs S.A. de C.V.\nMoscato 185, Zempoala\nPachuca, Hidalgo, Mexico",
+        ":52A:": "UNPYCNBH",
+        ":57A:": "BCRMXMMPYM",
+        ":59:": "/072290015202390252\nMauricio Rodriguez Tellez",
+        ":70:": "13-TRIGGER QR BINARIO — CRYPTO BRIDGE (ETH→MXN) — Trigger 08",
+        ":71A:": "SHA",
+        ":72:": "/ACC/TRIGGER-08 TERMINACION 6",
+        "UETR": "71e35b7c-27ad-450b-b13f-8fd1ca9633e1"
+      },
+      "proof_chain": {
+        "P1": "d3275eb9f96100cad12874b2caf75ebc17a91a360aad93e2f908e71828b40458",
+        "P2": "27f57575706bc913275ac919774a7222c011f33a2101a700954d5f55fa3909d7",
+        "P3": "116cff1f06a629868f5bd94fea8bff58184f1926f6835af52033b13d8c7348e7",
+        "P4": "253a01a7c4da3bc9c82c34e67de7c613b33520b507499154b6257629fde487e1",
+        "P5": "02e410a28b873013eb99b636125dbe3bb832ef08b8193e5923d0e2ad14fabf70"
+      },
+      "seal": "02e410a28b873013eb99b636125dbe3bb832ef08b8193e5923d0e2ad14fabf70",
+      "uetr": "71e35b7c-27ad-450b-b13f-8fd1ca9633e1"
+    },
+    {
+      "index": 9,
+      "cuenta": {
+        "id": "C-09",
+        "nombre": "SANTANDER RECAUDADORA",
+        "clabe": "014290015202390247",
+        "tipo": "SANTANDER",
+        "retorno": false
+      },
+      "amount_cny": 29440000.0,
+      "amount_mxn": 79589167.24,
+      "amount_cat": 42894004,
+      "burn_cat": 2144700,
+      "fee_cny": 44160.0,
+      "qr_url": "https://qr.95516.com/pay?id=fa8656e70e322470&m=CAT-BLOCKCHAIN-001&a=29440000&c=CNY&t=c7fbed13&s=09",
+      "qr_id": "fa8656e70e322470",
+      "qr_payload": "{\"protocol\": \"UNIONPAY-QR-95516\", \"version\": \"1.0\", \"merchant_id\": \"CAT-BLOCKCHAIN-001\", \"order_id\": \"TRIGGER-09-c7fbed13\", \"amount_cny\": 29440000.0, \"currency\": \"CNY\", \"settlement_currency\": \"MXN\", \"clabe_destino\": \"014290015202390247\", \"beneficiary\": \"Mauricio Rodriguez Tellez\", \"binary_trigger_segment\": \"010101010010101010010101001010101\", \"parametric_payload\": \"234657687745664567555745877676668\", \"timestamp\": \"2026-07-08T15:51:28.498349\"}",
+      "mt103": {
+        ":20:": "CAT-13TRIG-QR-09-20260708",
+        ":32A:": "260708CNY29,440,000",
+        ":50K:": "Catalyst Blockchain Labs S.A. de C.V.\nMoscato 185, Zempoala\nPachuca, Hidalgo, Mexico",
+        ":52A:": "UNPYCNBH",
+        ":57A:": "BCRMXMMPYM",
+        ":59:": "/014290015202390247\nMauricio Rodriguez Tellez",
+        ":70:": "13-TRIGGER QR BINARIO — SANTANDER RECAUDADORA — Trigger 09",
+        ":71A:": "SHA",
+        ":72:": "/ACC/TRIGGER-09 TERMINACION 6",
+        "UETR": "d9185812-10f3-4cbc-989a-fd7f38e16688"
+      },
+      "proof_chain": {
+        "P1": "eb455444a21e837977cfd0bf385fcc49f5d3fdc50e15844c83a3c58ba7d7d109",
+        "P2": "6ad8759923c025049cd94d7f670937ba6c7b8327555c7ea3a13e35c19fb5bc58",
+        "P3": "1ddd64502b8ee1be37c88ce4a832b6c564bf05718d205b234d2b0f80ee0d9712",
+        "P4": "4ff48afcd3030dcfcc73f9e6bf060e4bc96dd253ace5bbf81b7494a20d54efe6",
+        "P5": "abc601025275830604f1c819f93f35f896c5c6dff4bbb4d1d66805fdfd2a708e"
+      },
+      "seal": "abc601025275830604f1c819f93f35f896c5c6dff4bbb4d1d66805fdfd2a708e",
+      "uetr": "d9185812-10f3-4cbc-989a-fd7f38e16688"
+    },
+    {
+      "index": 10,
+      "cuenta": {
+        "id": "C-10",
+        "nombre": "HSBC PAGADORA",
+        "clabe": "021290015202390248",
+        "tipo": "HSBC",
+        "retorno": false
+      },
+      "amount_cny": 58880000.0,
+      "amount_mxn": 159178684.48,
+      "amount_cat": 85788009,
+      "burn_cat": 4289400,
+      "fee_cny": 88320.0,
+      "qr_url": "https://qr.95516.com/pay?id=a2fe1513445847c1&m=CAT-BLOCKCHAIN-001&a=58880000&c=CNY&t=c7fbed13&s=10",
+      "qr_id": "a2fe1513445847c1",
+      "qr_payload": "{\"protocol\": \"UNIONPAY-QR-95516\", \"version\": \"1.0\", \"merchant_id\": \"CAT-BLOCKCHAIN-001\", \"order_id\": \"TRIGGER-10-c7fbed13\", \"amount_cny\": 58880000.0, \"currency\": \"CNY\", \"settlement_currency\": \"MXN\", \"clabe_destino\": \"021290015202390248\", \"beneficiary\": \"Mauricio Rodriguez Tellez\", \"binary_trigger_segment\": \"001010101001010100101010100101101\", \"parametric_payload\": \"234657687745664567555745877676668\", \"timestamp\": \"2026-07-08T15:51:28.498401\"}",
+      "mt103": {
+        ":20:": "CAT-13TRIG-QR-10-20260708",
+        ":32A:": "260708CNY58,880,000",
+        ":50K:": "Catalyst Blockchain Labs S.A. de C.V.\nMoscato 185, Zempoala\nPachuca, Hidalgo, Mexico",
+        ":52A:": "UNPYCNBH",
+        ":57A:": "BCRMXMMPYM",
+        ":59:": "/021290015202390248\nMauricio Rodriguez Tellez",
+        ":70:": "13-TRIGGER QR BINARIO — HSBC PAGADORA — Trigger 10",
+        ":71A:": "SHA",
+        ":72:": "/ACC/TRIGGER-10 TERMINACION 6",
+        "UETR": "adb12d81-dd31-45b9-85bd-f893abcaa20c"
+      },
+      "proof_chain": {
+        "P1": "8590dbf607fe814b9872cb3080ae4069de499c52662b219346249d3c526f65ab",
+        "P2": "6bb6617553f4f49a65c2289a639323d1c59816277700c48c675e01a93fd93368",
+        "P3": "ef4ebd3d3bf4719c7da464644dffdc3a3d0b2f29a1b8e414a366b71cc484d4e6",
+        "P4": "05eb7782e8cecf210b909e650c5dfc62cc325fd92e8392091c0425f01b05255f",
+        "P5": "89b109ace292b3f0cda45217a440bc61983d72d8e39c3978b689c0f8b60739ed"
+      },
+      "seal": "89b109ace292b3f0cda45217a440bc61983d72d8e39c3978b689c0f8b60739ed",
+      "uetr": "adb12d81-dd31-45b9-85bd-f893abcaa20c"
+    },
+    {
+      "index": 11,
+      "cuenta": {
+        "id": "C-11",
+        "nombre": "SCOTIABANK BRIDGE",
+        "clabe": "044290015202390249",
+        "tipo": "SCOTIABANK",
+        "retorno": false
+      },
+      "amount_cny": 114688000.0,
+      "amount_mxn": 310052725.86,
+      "amount_cat": 167100123,
+      "burn_cat": 8355006,
+      "fee_cny": 172032.0,
+      "qr_url": "https://qr.95516.com/pay?id=0e527e7d3b2f9074&m=CAT-BLOCKCHAIN-001&a=114688000&c=CNY&t=c7fbed13&s=11",
+      "qr_id": "0e527e7d3b2f9074",
+      "qr_payload": "{\"protocol\": \"UNIONPAY-QR-95516\", \"version\": \"1.0\", \"merchant_id\": \"CAT-BLOCKCHAIN-001\", \"order_id\": \"TRIGGER-11-c7fbed13\", \"amount_cny\": 114688000.0, \"currency\": \"CNY\", \"settlement_currency\": \"MXN\", \"clabe_destino\": \"044290015202390249\", \"beneficiary\": \"Mauricio Rodriguez Tellez\", \"binary_trigger_segment\": \"010101010101001010000101001010000\", \"parametric_payload\": \"234657687745664567555745877676668\", \"timestamp\": \"2026-07-08T15:51:28.498469\"}",
+      "mt103": {
+        ":20:": "CAT-13TRIG-QR-11-20260708",
+        ":32A:": "260708CNY114,688,000",
+        ":50K:": "Catalyst Blockchain Labs S.A. de C.V.\nMoscato 185, Zempoala\nPachuca, Hidalgo, Mexico",
+        ":52A:": "UNPYCNBH",
+        ":57A:": "BCRMXMMPYM",
+        ":59:": "/044290015202390249\nMauricio Rodriguez Tellez",
+        ":70:": "13-TRIGGER QR BINARIO — SCOTIABANK BRIDGE — Trigger 11",
+        ":71A:": "SHA",
+        ":72:": "/ACC/TRIGGER-11 TERMINACION 6",
+        "UETR": "db9d6b99-7fa2-4c89-8cd8-9ae3d4c2209d"
+      },
+      "proof_chain": {
+        "P1": "7157113e5f76f8256021447296a44e4614b8b5502fd3c8cb2bd82b547d8e39ec",
+        "P2": "222dfe23020b9b2585282574d0ac27dceffb5476dc995c736f620445d567c083",
+        "P3": "7d1072808bb6cb36bc354de1a9cebf1075f0efbc98226138f50b4342701f9cdd",
+        "P4": "fa9ccf9c0b701cda6fa47fd6da3870a765111124def4157ef76a2adeec699c7d",
+        "P5": "91b9bb008914d61b402be813f0600682d7667bfffa10d9c22d112ca28c1c65f9"
+      },
+      "seal": "91b9bb008914d61b402be813f0600682d7667bfffa10d9c22d112ca28c1c65f9",
+      "uetr": "db9d6b99-7fa2-4c89-8cd8-9ae3d4c2209d"
+    },
+    {
+      "index": 12,
+      "cuenta": {
+        "id": "C-12",
+        "nombre": "INBURSA EMERGENCIA",
+        "clabe": "036290015202390250",
+        "tipo": "INBURSA",
+        "retorno": false
+      },
+      "amount_cny": 239616000.0,
+      "amount_mxn": 647789112.07,
+      "amount_cat": 349119900,
+      "burn_cat": 17455995,
+      "fee_cny": 359424.0,
+      "qr_url": "https://qr.95516.com/pay?id=9cfb63e19094a8c4&m=CAT-BLOCKCHAIN-001&a=239616000&c=CNY&t=c7fbed13&s=12",
+      "qr_id": "9cfb63e19094a8c4",
+      "qr_payload": "{\"protocol\": \"UNIONPAY-QR-95516\", \"version\": \"1.0\", \"merchant_id\": \"CAT-BLOCKCHAIN-001\", \"order_id\": \"TRIGGER-12-c7fbed13\", \"amount_cny\": 239616000.0, \"currency\": \"CNY\", \"settlement_currency\": \"MXN\", \"clabe_destino\": \"036290015202390250\", \"beneficiary\": \"Mauricio Rodriguez Tellez\", \"binary_trigger_segment\": \"001011110111001010101001010101010\", \"parametric_payload\": \"234657687745664567555745877676668\", \"timestamp\": \"2026-07-08T15:51:28.498522\"}",
+      "mt103": {
+        ":20:": "CAT-13TRIG-QR-12-20260708",
+        ":32A:": "260708CNY239,616,000",
+        ":50K:": "Catalyst Blockchain Labs S.A. de C.V.\nMoscato 185, Zempoala\nPachuca, Hidalgo, Mexico",
+        ":52A:": "UNPYCNBH",
+        ":57A:": "BCRMXMMPYM",
+        ":59:": "/036290015202390250\nMauricio Rodriguez Tellez",
+        ":70:": "13-TRIGGER QR BINARIO — INBURSA EMERGENCIA — Trigger 12",
+        ":71A:": "SHA",
+        ":72:": "/ACC/TRIGGER-12 TERMINACION 6",
+        "UETR": "16c1b0d4-8df6-4b30-8dc8-3aba327e060b"
+      },
+      "proof_chain": {
+        "P1": "2d72f4273f4bb095812fde149b7204df00390ad875cf4759a628fdeba8d1f432",
+        "P2": "9ee6be646f3b9d1eab6a7393a8c7d53e9882e3ed8be788fa77b30c12d2b70b19",
+        "P3": "b760d42f1e1eb344243da4ec4d1f05bcf23f557fd17f46fecfae8e1b4ea5c1f2",
+        "P4": "51891b191e42772c70868af693cee71152ee03991d67607ca813f9f019148bb1",
+        "P5": "0572f5d1821428a74119e8909560eaae7a7dd0306506463ae985e2d13b6247c3"
+      },
+      "seal": "0572f5d1821428a74119e8909560eaae7a7dd0306506463ae985e2d13b6247c3",
+      "uetr": "16c1b0d4-8df6-4b30-8dc8-3aba327e060b"
+    },
+    {
+      "index": 13,
+      "cuenta": {
+        "id": "C-13",
+        "nombre": "RETORNO FINAL COPACABANA",
+        "clabe": "012290015202390246",
+        "tipo": "BBVA",
+        "retorno": true
+      },
+      "amount_cny": 499712000.0,
+      "amount_mxn": 1350945194.83,
+      "amount_cat": 728079109,
+      "burn_cat": 36403955,
+      "fee_cny": 749568.0,
+      "qr_url": "https://qr.95516.com/pay?id=a637d31e61e63771&m=CAT-BLOCKCHAIN-001&a=499712000&c=CNY&t=c7fbed13&s=13",
+      "qr_id": "a637d31e61e63771",
+      "qr_payload": "{\"protocol\": \"UNIONPAY-QR-95516\", \"version\": \"1.0\", \"merchant_id\": \"CAT-BLOCKCHAIN-001\", \"order_id\": \"TRIGGER-13-c7fbed13\", \"amount_cny\": 499712000.0, \"currency\": \"CNY\", \"settlement_currency\": \"MXN\", \"clabe_destino\": \"012290015202390246\", \"beneficiary\": \"Mauricio Rodriguez Tellez\", \"binary_trigger_segment\": \"01010101011111111001010010101001010100101\", \"parametric_payload\": \"234657687745664567555745877676668\", \"timestamp\": \"2026-07-08T15:51:28.498575\"}",
+      "mt103": {
+        ":20:": "CAT-13TRIG-QR-13-20260708",
+        ":32A:": "260708CNY499,712,000",
+        ":50K:": "Catalyst Blockchain Labs S.A. de C.V.\nMoscato 185, Zempoala\nPachuca, Hidalgo, Mexico",
+        ":52A:": "UNPYCNBH",
+        ":57A:": "BCRMXMMPYM",
+        ":59:": "/012290015202390246\nMauricio Rodriguez Tellez",
+        ":70:": "13-TRIGGER QR BINARIO — RETORNO FINAL COPACABANA — Trigger 13",
+        ":71A:": "SHA",
+        ":72:": "/ACC/TRIGGER-13 TERMINACION 6",
+        "UETR": "6fa34276-9fc5-4c08-a99b-62fa849176bf"
+      },
+      "proof_chain": {
+        "P1": "b0f35601c1c0ed3d4c12a5c7a900446ce9ecf549d773cc3afb1673a41816c486",
+        "P2": "e9cbb1c9337d01e8f9166faa2b9c2c68ee8611ebbe2237fb036d4cc0d61a5731",
+        "P3": "818f16ac054a491190d339ac1e18862bdc55a515ce665cc1215d58529631460f",
+        "P4": "9f17cc182f200a090ba854de514be4db184e87d75744d118f27ebfcb8ad946e7",
+        "P5": "b002498ae52842e4cb8281f56d00b303e29431a361ca4e9ca8ee82e207a596a4"
+      },
+      "seal": "b002498ae52842e4cb8281f56d00b303e29431a361ca4e9ca8ee82e207a596a4",
+      "uetr": "6fa34276-9fc5-4c08-a99b-62fa849176bf"
+    }
+  ],
+  "qr_urls": [
+    "https://qr.95516.com/pay?id=c6f14ffd4e1bec88&m=CAT-BLOCKCHAIN-001&a=116000&c=CNY&t=c7fbed13&s=01",
+    "https://qr.95516.com/pay?id=6b6bef7cfe1609b8&m=CAT-BLOCKCHAIN-001&a=230000&c=CNY&t=c7fbed13&s=02",
+    "https://qr.95516.com/pay?id=2e2fc5a146fd9827&m=CAT-BLOCKCHAIN-001&a=460000&c=CNY&t=c7fbed13&s=03",
+    "https://qr.95516.com/pay?id=cd15521af7b60ef4&m=CAT-BLOCKCHAIN-001&a=920000&c=CNY&t=c7fbed13&s=04",
+    "https://qr.95516.com/pay?id=bbce9c5554981a3b&m=CAT-BLOCKCHAIN-001&a=1840000&c=CNY&t=c7fbed13&s=05",
+    "https://qr.95516.com/pay?id=beadab7f9cc3af59&m=CAT-BLOCKCHAIN-001&a=3680000&c=CNY&t=c7fbed13&s=06",
+    "https://qr.95516.com/pay?id=f13e0a00261313b6&m=CAT-BLOCKCHAIN-001&a=7296000&c=CNY&t=c7fbed13&s=07",
+    "https://qr.95516.com/pay?id=aab17e1849a79faa&m=CAT-BLOCKCHAIN-001&a=14720000&c=CNY&t=c7fbed13&s=08",
+    "https://qr.95516.com/pay?id=fa8656e70e322470&m=CAT-BLOCKCHAIN-001&a=29440000&c=CNY&t=c7fbed13&s=09",
+    "https://qr.95516.com/pay?id=a2fe1513445847c1&m=CAT-BLOCKCHAIN-001&a=58880000&c=CNY&t=c7fbed13&s=10",
+    "https://qr.95516.com/pay?id=0e527e7d3b2f9074&m=CAT-BLOCKCHAIN-001&a=114688000&c=CNY&t=c7fbed13&s=11",
+    "https://qr.95516.com/pay?id=9cfb63e19094a8c4&m=CAT-BLOCKCHAIN-001&a=239616000&c=CNY&t=c7fbed13&s=12",
+    "https://qr.95516.com/pay?id=a637d31e61e63771&m=CAT-BLOCKCHAIN-001&a=499712000&c=CNY&t=c7fbed13&s=13"
+  ],
+  "master_seal": "979d2003672394f185558d81b53f4895d5b834622a9bdb77b80e5fc58b47643c",
+  "delivery_channels": {}
+}

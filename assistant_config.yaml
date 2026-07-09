@@ -1,0 +1,17 @@
+deepseek:
+  api_key: ${DEEPSEEK_API_KEY}        # desde variable de entorno
+  base_url: "https://api.deepseek.com"
+  model: "deepseek-chat"
+  max_tokens: 1024                     # restaurado a full poder
+  reasoning_effort: "high"             # maxima calidad
+  thinking_enabled: false
+
+asistente:
+  voz_activada: false
+  comando_salida: ["salir", "exit", "adiós"]
+  tiempo_escucha: 5
+  usar_api: true
+
+arke:
+  icd_umbral: 0.75
+  registrar_bitacora: true

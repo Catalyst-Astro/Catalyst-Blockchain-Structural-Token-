@@ -1,0 +1,57 @@
+{
+  "trigger": "HAAG-668BIT-CIRCULAR",
+  "timestamp": "2026-06-25T13:19:24.537Z",
+  "date": "2026-06-25",
+  "entity": "Corte Permanente de Arbitraje — La Haya, Países Bajos",
+  "destination_clabe": "012290015202390246",
+  "destination_swift": "BCRMXMMPYM",
+  "beneficiary": "Mauricio Rodriguez Tellez",
+  "banks": [
+    {
+      "name": "ICBC",
+      "bic": "ICBKCNBJXXX",
+      "cny": 15000000000,
+      "mxn": 41400000000
+    },
+    {
+      "name": "BANK OF CHINA",
+      "bic": "BKCHCNBJXXX",
+      "cny": 12500000000,
+      "mxn": 34500000000
+    },
+    {
+      "name": "CHINA CONSTRUCTION BANK",
+      "bic": "PCBCCNBJXXX",
+      "cny": 10000000000,
+      "mxn": 27599999999.999996
+    },
+    {
+      "name": "AGRICULTURAL BANK OF CHINA",
+      "bic": "ABOCCNBJXXX",
+      "cny": 8500000000,
+      "mxn": 23460000000
+    },
+    {
+      "name": "BBVA BANCOMER",
+      "bic": "BCRMXMMPYM",
+      "cny": 5000000000,
+      "mxn": 13799999999.999998
+    }
+  ],
+  "totals": {
+    "cny_total": 51000000000,
+    "mxn_total": 140760000000,
+    "usd_total": 7034482758.620689,
+    "fee_cny": 76500000,
+    "net_cny": 50923500000
+  },
+  "proof_chain": {
+    "p1": "137eac2e43e96bc90c7db58c5a33bb2bd6859cd08c6fb13af3fca4b8d9c6601d",
+    "p2": "5b268919ecd4e57f2f3aed0d6cdecf77346d0d5ec5e3291a16028e13d673c627",
+    "p3": "094ad89368818e509b574990ebe3c1310e730312693d7deb3f1b79814839ce3a",
+    "p4": "8ade09e03231754fab4ea31a59d36e1adfef72dab7a4ad919c5098a64a4553b6",
+    "p5": "5ba446e710d8a69a52abdcd23eb40b3c1bc32d13a86482e9208c390d7bf8858f"
+  },
+  "seal": "5ba446e710d8a69a52abdcd23eb40b3c1bc32d13a86482e9208c390d7bf8858f",
+  "status": "EXECUTED"
+}

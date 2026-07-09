@@ -20,6 +20,7 @@ describe("SELECTIVE_FREEZE_AND_LEGAL_ORDERS", () => {
       await emergencyMode.getAddress()
     );
     await freezeRegistry.waitForDeployment();
+    await freezeRegistry.renounceRole(await freezeRegistry.ORACLE_OPERATOR(), deployer.address);
 
     const policyVersion = await policyRegistry.publishPolicy.staticCall(
       ethers.keccak256(ethers.toUtf8Bytes("FREEZE-POLICY-V1"))
@@ -80,7 +81,9 @@ describe("SELECTIVE_FREEZE_AND_LEGAL_ORDERS", () => {
 
     await freezeRegistry.freezeWallet(alice.address, caseId, justification, 2);
     await expect(
-      freezeRegistry.unfreezeWallet(alice.address, ethers.keccak256(ethers.toUtf8Bytes("RESOLUTION-5")))
+      freezeRegistry
+        .connect(alice)
+        .unfreezeWallet(alice.address, ethers.keccak256(ethers.toUtf8Bytes("RESOLUTION-5")))
     ).to.be.revertedWith("dao required");
   });
 });

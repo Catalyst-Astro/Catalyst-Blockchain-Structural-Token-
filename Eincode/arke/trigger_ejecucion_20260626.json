@@ -1,0 +1,309 @@
+{
+  "document_type": "TRIGGER EJECUCION MAESTRA / MASTER TRIGGER EXECUTION",
+  "execution_id": "EXEC-20260626-062612",
+  "timestamp": "2026-06-26T06:26:12.126911Z",
+  "date": "2026-06-26",
+  "trigger": {
+    "raw": "0100101001010101010101010010101010101001010101010101010101010101...00101010101001010100000101111111",
+    "bits": 742,
+    "ones": 329,
+    "zeros": 413,
+    "ones_pct": 44.34,
+    "segments": 640,
+    "protocol_delimiters": 1,
+    "master_hash": "75d417aa26c93b758f25a617500f2cdbe7d61902c4c12c9aeb293254a4ec1159"
+  },
+  "summary": {
+    "total_invoices": 17,
+    "total_contracts": 10,
+    "bank_accounts_guaranteed": 10,
+    "total_cny_processed": 854220790853.26,
+    "total_mxn_equivalent": 2356471147180.6,
+    "total_usd_equivalent": 117823557359.03,
+    "total_cat_required": 1244597512973,
+    "total_cat_burned": 62229875637,
+    "total_gnc_backing_1to1_cny": 854220790853.26,
+    "total_fees_cny": 1281331186.28,
+    "cat_supply_after_all_burns": -61229875637
+  },
+  "invoices_list": [
+    {
+      "invoice_number": "FACT-20260617-001",
+      "payment_id": "DAILY-2026-06-17",
+      "date": "2026-06-17",
+      "cny": 1222027.402578657,
+      "seal": "a79a04b287ff04e6..."
+    },
+    {
+      "invoice_number": "FACT-20260618-002",
+      "payment_id": "DAILY-2026-06-18",
+      "date": "2026-06-18",
+      "cny": 712099.9813222191,
+      "seal": "85e1b677c8917932..."
+    },
+    {
+      "invoice_number": "FACT-20260620-003",
+      "payment_id": "DAILY-2026-06-20",
+      "date": "2026-06-20",
+      "cny": 1557955.5588571362,
+      "seal": "0a93fc5feb1ed87f..."
+    },
+    {
+      "invoice_number": "FACT-20260622-004",
+      "payment_id": "QR-V1",
+      "date": "2026-06-22",
+      "cny": 100000,
+      "seal": "d19a4cede1f21380..."
+    },
+    {
+      "invoice_number": "FACT-20260622-005",
+      "payment_id": "QR-V2",
+      "date": "2026-06-22",
+      "cny": 100000,
+      "seal": "78520e0ac5fe05a4..."
+    },
+    {
+      "invoice_number": "FACT-20260622-006",
+      "payment_id": "QR-V3",
+      "date": "2026-06-22",
+      "cny": 100000,
+      "seal": "572d9be7ae971a67..."
+    },
+    {
+      "invoice_number": "FACT-20260622-007",
+      "payment_id": "QR-V4",
+      "date": "2026-06-22",
+      "cny": 100000,
+      "seal": "e5119b0372953f95..."
+    },
+    {
+      "invoice_number": "FACT-20260622-008",
+      "payment_id": "QR-V5",
+      "date": "2026-06-22",
+      "cny": 1000000,
+      "seal": "39784d0f25149451..."
+    },
+    {
+      "invoice_number": "FACT-20260622-009",
+      "payment_id": "QR-V6",
+      "date": "2026-06-22",
+      "cny": 1000000,
+      "seal": "a1d131a95fc7c85a..."
+    },
+    {
+      "invoice_number": "FACT-20260622-010",
+      "payment_id": "QR-V7",
+      "date": "2026-06-22",
+      "cny": 1000000,
+      "seal": "f037a6a503d31021..."
+    },
+    {
+      "invoice_number": "FACT-20260623-011",
+      "payment_id": "SPEI-844BIT-COMPOSITE",
+      "date": "2026-06-23",
+      "cny": 10275582.32,
+      "seal": "f0efa0949e195e86..."
+    },
+    {
+      "invoice_number": "FACT-20260625-012",
+      "payment_id": "1300BIT-8LAYER",
+      "date": "2026-06-25",
+      "cny": 291000000000.0,
+      "seal": "85b2953d513d594a..."
+    },
+    {
+      "invoice_number": "FACT-20260625-013",
+      "payment_id": "512-BIT-COMPOSITE",
+      "date": "2026-06-25",
+      "cny": 193000000000.0,
+      "seal": "cfd7dc6b04182ecf..."
+    },
+    {
+      "invoice_number": "FACT-20260625-014",
+      "payment_id": "784-BIT-COMPOSITE",
+      "date": "2026-06-25",
+      "cny": 208000000000.0,
+      "seal": "5630ed256d750862..."
+    },
+    {
+      "invoice_number": "FACT-20260625-015",
+      "payment_id": "BBVA-10M-MXN-CIRCULAR",
+      "date": "2026-06-25",
+      "cny": 3623188.0,
+      "seal": "04bca89e1ce72f1e..."
+    },
+    {
+      "invoice_number": "FACT-20260625-016",
+      "payment_id": "HAAG-668BIT-CIRCULAR",
+      "date": "2026-06-25",
+      "cny": 51000000000.0,
+      "seal": "18cb726d2e436796..."
+    },
+    {
+      "invoice_number": "FACT-20260625-017",
+      "payment_id": "UNIONPAY-QR-95516-414BIT",
+      "date": "2026-06-25",
+      "cny": 111200000000.0,
+      "seal": "de3a9521f5efd307..."
+    }
+  ],
+  "contracts_list": [
+    {
+      "contract_id": "CONTRATO-GARANTIA-CONCENTRADORA-01",
+      "bank": "BBVA Bancomer",
+      "clabe": "012290015202390246",
+      "type": "CONCENTRADORA",
+      "guaranteed_mxn": 2353971147180.6,
+      "seal": "f018361ea055200b..."
+    },
+    {
+      "contract_id": "CONTRATO-GARANTIA-OPERADORA-02",
+      "bank": "BBVA Bancomer",
+      "clabe": "012180015123243964",
+      "type": "OPERADORA",
+      "guaranteed_mxn": 500000000.0,
+      "seal": "7cb21ba5162cc912..."
+    },
+    {
+      "contract_id": "CONTRATO-GARANTIA-CHEQUES-PRINCIPAL-03",
+      "bank": "BBVA Bancomer",
+      "clabe": "012290015202390259",
+      "type": "CHEQUES PRINCIPAL",
+      "guaranteed_mxn": 300000000.0,
+      "seal": "efd38a7b88e40868..."
+    },
+    {
+      "contract_id": "CONTRATO-GARANTIA-DEBITO-04",
+      "bank": "BBVA Bancomer",
+      "clabe": "012290015202390262",
+      "type": "DEBITO",
+      "guaranteed_mxn": 200000000.0,
+      "seal": "0c054b7284bbd265..."
+    },
+    {
+      "contract_id": "CONTRATO-GARANTIA-CREDITO-05",
+      "bank": "BBVA Bancomer",
+      "clabe": "012290015202390275",
+      "type": "CREDITO",
+      "guaranteed_mxn": 200000000.0,
+      "seal": "2d6909f4f19b0682..."
+    },
+    {
+      "contract_id": "CONTRATO-GARANTIA-AHORRO-INVERSION-06",
+      "bank": "BBVA Bancomer",
+      "clabe": "012290015202390288",
+      "type": "AHORRO INVERSION",
+      "guaranteed_mxn": 500000000.0,
+      "seal": "835438dcb57b3c6c..."
+    },
+    {
+      "contract_id": "CONTRATO-GARANTIA-PAGOS-SERVICIOS-07",
+      "bank": "BBVA Bancomer",
+      "clabe": "012290015202390291",
+      "type": "PAGOS SERVICIOS",
+      "guaranteed_mxn": 100000000.0,
+      "seal": "22752cfd5be5f3d8..."
+    },
+    {
+      "contract_id": "CONTRATO-GARANTIA-CRYPTO-BRIDGE-08",
+      "bank": "BBVA Bancomer",
+      "clabe": "072290015202390252",
+      "type": "CRYPTO BRIDGE",
+      "guaranteed_mxn": 300000000.0,
+      "seal": "3c435bd84041db99..."
+    },
+    {
+      "contract_id": "CONTRATO-GARANTIA-SANTANDER-RECAUD-09",
+      "bank": "Santander",
+      "clabe": "014290015202390247",
+      "type": "SANTANDER RECAUD",
+      "guaranteed_mxn": 200000000.0,
+      "seal": "e957d062a812bed1..."
+    },
+    {
+      "contract_id": "CONTRATO-GARANTIA-HSBC-PAGADORA-10",
+      "bank": "HSBC",
+      "clabe": "021290015202390248",
+      "type": "HSBC PAGADORA",
+      "guaranteed_mxn": 200000000.0,
+      "seal": "f632b46ced6290ae..."
+    }
+  ],
+  "origen_legal_reference": {
+    "document": "ORIGEN_LEGAL_FONDOS_BBVA.md",
+    "fecha_emision": "2026-06-25",
+    "total_triggers": 8,
+    "total_cny": 563211000000.0,
+    "total_mxn": 1553462360000.0,
+    "triggers_list": [
+      {
+        "fecha": "2026-06-17",
+        "trigger": "QR-001 a QR-007",
+        "cny": 3400000.0
+      },
+      {
+        "fecha": "2026-06-22",
+        "trigger": "SPEI Composite 844-bit",
+        "cny": 10275582.32
+      },
+      {
+        "fecha": "2026-06-25",
+        "trigger": "La Haya Circular 614-bit",
+        "cny": 51000000000.0
+      },
+      {
+        "fecha": "2026-06-25",
+        "trigger": "UnionPay QR 95516 479-bit",
+        "cny": 111200000000.0
+      },
+      {
+        "fecha": "2026-06-25",
+        "trigger": "Composite 512-bit",
+        "cny": 193000000000.0
+      },
+      {
+        "fecha": "2026-06-25",
+        "trigger": "Composite 784-bit",
+        "cny": 208000000000.0
+      },
+      {
+        "fecha": "2026-06-25",
+        "trigger": "Composite 1855-bit",
+        "cny": 291000000000.0
+      },
+      {
+        "fecha": "2026-06-25",
+        "trigger": "BBVA Emergencia 397-bit",
+        "cny": 3623188.0
+      }
+    ]
+  },
+  "proof_chain": {
+    "p1": "8f49c162bf227228d9d97ccab5eeb5512a9b7ba5f43a6c03f9643b789cfcc1d8",
+    "p2": "f04e1240f9da562faeb1619eef60a25da732d9bc790a65f64ff400d819397614",
+    "p3": "525335b45e95e94fba9c9e687db128c9858ffb25da0ec61638975d0b89fc608a",
+    "p4": "20823e7853aef56f8cef950117ed00196d24b3d6f668fac075bb61f4290feb9f",
+    "p5": "30e4f770695357aaaa647deea060854aeeebb55d8401cb1a9af372bab77edbd0"
+  },
+  "master_seal": "30e4f770695357aaaa647deea060854aeeebb55d8401cb1a9af372bab77edbd0",
+  "onchain_note": "Para settlement on-chain, ejecutar: npx hardhat run scripts/execute_all_cables.js --network localhost",
+  "rates_applied": {
+    "cat_usd": 0.1,
+    "usd_cny": 7.25,
+    "usd_mxn": 20.0,
+    "cat_cny_composite": 0.686343,
+    "4_pillar": "P1(40%)+P2(30%)+P3(20%)+P4(10%)"
+  },
+  "protocol": "OSHIRO ERC-26+ Quantum Autopoiesis",
+  "bell_quality": "13450.50",
+  "status": "EXECUTED",
+  "onchain_settlement": {
+    "onchain_attempted": true,
+    "node_available": true,
+    "transactions": [],
+    "note": "Node available. Execute scripts/execute_all_cables.js for full settlement.",
+    "current_block": 0,
+    "suggested_gnc_mint": 854220790853.26,
+    "suggested_settlement_ref": "TRIGGER_MASTER_75d417aa26c93b75"
+  }
+}

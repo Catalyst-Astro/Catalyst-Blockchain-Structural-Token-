@@ -1,0 +1,138 @@
+{
+  "delivery_id": "DELIVERY-20260708-152415",
+  "timestamp": "2026-07-08T15:24:15.496921",
+  "total_channels": 12,
+  "channels_sent": 6,
+  "channels_pending": 5,
+  "channels_failed": 0,
+  "master_seal": "dad7bc153b078ea358508b9582293a1cc709016da3d72ce49de5269d9a884440",
+  "package_file": "C:\\Users\\h\\Documents\\GitHub\\Catalyst-Blockchain-Structural-Token-\\Eincode\\arke\\banco_emisor_instrucciones_20260708_151740.json",
+  "channels": [
+    {
+      "channel_id": "UP-MEX-001",
+      "channel_name": "UnionPay International — Oficina Mexico (LATAM)",
+      "type": "EMAIL",
+      "target": "laadmin@unionpayintl.com",
+      "status": "SENT",
+      "tracking_id": "7cd36a272f615d08",
+      "response_deadline": "2026-07-10T15:24:15.496921"
+    },
+    {
+      "channel_id": "UP-OPEN-002",
+      "channel_name": "UnionPay Open Platform (银联开放平台)",
+      "type": "EMAIL",
+      "target": "4008395516@unionpay.com",
+      "status": "SENT",
+      "tracking_id": "33f27bb39debe2ad",
+      "response_deadline": "2026-07-10T15:24:15.496921"
+    },
+    {
+      "channel_id": "UP-DEV-003",
+      "channel_name": "UnionPay Developer Relations — Liu Pei (刘培)",
+      "type": "EMAIL",
+      "target": "liupei2@unionpay.com",
+      "status": "SENT",
+      "tracking_id": "1a50aac70ce37ff2",
+      "response_deadline": "2026-07-10T15:24:15.496921"
+    },
+    {
+      "channel_id": "UP-DEV-004",
+      "channel_name": "UnionPay Developer Relations — Zhang Ming",
+      "type": "EMAIL",
+      "target": "zhangming@unionpay.com",
+      "status": "SENT",
+      "tracking_id": "5c922c93477945c4",
+      "response_deadline": "2026-07-10T15:24:15.496921"
+    },
+    {
+      "channel_id": "UP-DEV-005",
+      "channel_name": "UnionPay — Liu Yanyan (Certificates)",
+      "type": "EMAIL",
+      "target": "liuyanyan@unionpay.com",
+      "status": "SENT",
+      "tracking_id": "d175e197f72f345b",
+      "response_deadline": "2026-07-10T15:24:15.496921"
+    },
+    {
+      "channel_id": "BOC-INTL-006",
+      "channel_name": "Bank of China — International Settlement Dept (国际结算部)",
+      "type": "PHONE",
+      "target": "95566",
+      "status": "PENDING_CALL",
+      "tracking_id": "68a44986b4f10d99",
+      "response_deadline": "2026-07-09T15:24:15.496921"
+    },
+    {
+      "channel_id": "BOC-HK-007",
+      "channel_name": "Bank of China (Hong Kong) — Remittance Department",
+      "type": "PHONE",
+      "target": "(+852) 2836 8788",
+      "status": "PENDING_CALL",
+      "tracking_id": "da0f72a469f6f087",
+      "response_deadline": "2026-07-09T15:24:15.496921"
+    },
+    {
+      "channel_id": "BOC-NY-008",
+      "channel_name": "Bank of China — New York Branch",
+      "type": "PHONE",
+      "target": "001-212-935-3101 ext 285",
+      "status": "PENDING_CALL",
+      "tracking_id": "e31961fe0db2ee5c",
+      "response_deadline": "2026-07-09T15:24:15.496921"
+    },
+    {
+      "channel_id": "UP-HQ-009",
+      "channel_name": "UnionPay International HQ (Shanghai)",
+      "type": "EMAIL",
+      "target": "dispute@unionpayintl.com",
+      "status": "SENT",
+      "tracking_id": "20dbab70dba3311b",
+      "response_deadline": "2026-07-10T15:24:15.496921"
+    },
+    {
+      "channel_id": "UP-PORTAL-010",
+      "channel_name": "UnionPay Merchant Portal (95516)",
+      "type": "WEB_PORTAL",
+      "target": "https://portal.95516.com",
+      "status": "PENDING_MANUAL_UPLOAD",
+      "tracking_id": "48194233a9fddab0",
+      "response_deadline": "2026-07-10T15:24:15.496921"
+    },
+    {
+      "channel_id": "BBVA-PRE-011",
+      "channel_name": "BBVA Mexico — Incoming Wire Pre-Notification",
+      "type": "EMAIL_AND_DOCUMENT",
+      "target": "BBVA Sucursal Pachuca / Banca Empresarial",
+      "status": "READY",
+      "tracking_id": "eaefee740ffc6b2f",
+      "response_deadline": "2026-07-11T15:24:15.496921"
+    },
+    {
+      "channel_id": "CAT-ONCHAIN-012",
+      "channel_name": "Catalyst Blockchain — On-Chain Settlement",
+      "type": "BLOCKCHAIN_EXECUTION",
+      "target": "npx hardhat run scripts/execute_all_cables.js --network localhost",
+      "status": "PENDING_EXECUTION",
+      "tracking_id": "1478ce1bb250afd7",
+      "response_deadline": "N/A (self-executing)"
+    }
+  ],
+  "monitoring_instructions": {
+    "check_email_for": [
+      "@unionpay.com",
+      "@unionpayintl.com",
+      "bank-of-china.com"
+    ],
+    "check_spam": true,
+    "phone_followup_48h": [
+      "+52-55-28816682 (UnionPay Mexico)",
+      "+86-21-20265666 (UnionPay HQ Shanghai)",
+      "(+852) 2836 8788 (Bank of China HK Remittance)"
+    ],
+    "web_portals": [
+      "https://portal.95516.com (UnionPay Merchant Portal)",
+      "https://open.unionpay.com (UnionPay Open Platform)"
+    ],
+    "bbva_check": "Ask BBVA executive to check incoming wire queue for CLABE 012290015202390246"
+  }
+}

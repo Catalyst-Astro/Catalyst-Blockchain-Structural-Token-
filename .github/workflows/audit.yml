@@ -1,0 +1,27 @@
+name: Ledger Audit
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python -
+          export PATH="$HOME/.local/bin:$PATH"
+          poetry --version
+      - name: Install dependencies
+        run: |
+          poetry install --no-root
+      - name: Verify Ledger
+        run: |
+          poetry run audit-ledger verify

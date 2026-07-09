@@ -1,0 +1,263 @@
+{
+  "package_id": "BANK-INSTRUCTIONS-20260708-151740",
+  "generation_time": "2026-07-08T15:17:40.924438",
+  "triggers_processed": 8,
+  "total_cny": 855036398770.3201,
+  "total_mxn": 2358746941497.38,
+  "total_usd": 117937347074.86899,
+  "clabe_destino": "012290015202390246",
+  "terminacion": "6",
+  "swift_emisor": "UNPYCNBH",
+  "swift_receptor": "BCRMXMMPYM",
+  "mt103_list": [
+    {
+      "trigger_id": "TRIGGER-001",
+      "nombre": "QR-001 a QR-007 — Daily Operations (17-22 Jun)",
+      "bits": "844-bit SPEI Composite",
+      "cny": 13675582.32,
+      "mxn_equivalente": 37744606.0,
+      "mt103_ref": "CATALYST-QR-001-007",
+      "clabe_destino": "012290015202390246",
+      "prioridad": 2,
+      "mt103_message": {
+        ":20:": "CATALYST-QR-001-007",
+        ":32A:": "260708CNY13,675,582",
+        ":50K:": "Catalyst Blockchain Labs S.A. de C.V.\nMoscato 185, Zempoala\nPachuca, Hidalgo, Mexico",
+        ":52A:": "UNPYCNBH",
+        ":57A:": "BCRMXMMPYM",
+        ":59:": "/012290015202390246\nMauricio Rodriguez Tellez",
+        ":70:": "Servicios de procesamiento QR UnionPay — Lote 1 (7 transacciones)",
+        ":71A:": "SHA",
+        ":72:": "/ACC/CLABE TERMINACION 6 — TRIGGER-001",
+        "UETR_LOCAL": "f44f438f-ba01-4745-beb1-edad8cf7df1b",
+        "UETR_REAL_PENDIENTE": "*** SOLICITAR AL BANCO EMISOR AL TRANSMITIR ***"
+      },
+      "proof_chain": {
+        "P1": "1328d08a4d94511975867e18d5ae1f9375e98493203e7098d00489c60e28d299",
+        "P2": "713bdf3ad0ff9c4201e08ee32e1ea81aa1181b26b359930f55339fd38c41de89",
+        "P3": "5b55ad421f53921cfad368cbdbf0f850cb888bef6805c2f515245d775f201fee",
+        "P4": "a4ee25971020271e4517c949329c8edbe75caaec333eb24d85eb3246acbe2b6d",
+        "P5": "a44ae4c19d551a467af9ed3e4ac7622bc87ad097518b90cba7d57731ddcfe5b4"
+      },
+      "seal": "a44ae4c19d551a467af9ed3e4ac7622bc87ad097518b90cba7d57731ddcfe5b4"
+    },
+    {
+      "trigger_id": "TRIGGER-002",
+      "nombre": "BBVA Emergency 10M MXN Payout",
+      "bits": "397-bit",
+      "cny": 3623188.0,
+      "mxn_equivalente": 10000000.0,
+      "mt103_ref": "CATALYST-BBVA-EMERGENCY-10M",
+      "clabe_destino": "012290015202390246",
+      "prioridad": 1,
+      "mt103_message": {
+        ":20:": "CATALYST-BBVA-EMERGENCY-10M",
+        ":32A:": "260708CNY3,623,188",
+        ":50K:": "Catalyst Blockchain Labs S.A. de C.V.\nMoscato 185, Zempoala\nPachuca, Hidalgo, Mexico",
+        ":52A:": "UNPYCNBH",
+        ":57A:": "BCRMXMMPYM",
+        ":59:": "/012290015202390246\nMauricio Rodriguez Tellez",
+        ":70:": "Payout emergencia BBVA — Verificacion de cuenta terminacion 6",
+        ":71A:": "SHA",
+        ":72:": "/ACC/CLABE TERMINACION 6 — TRIGGER-002",
+        "UETR_LOCAL": "1d4b17ce-f306-4ffc-b287-780d1958a3d3",
+        "UETR_REAL_PENDIENTE": "*** SOLICITAR AL BANCO EMISOR AL TRANSMITIR ***"
+      },
+      "proof_chain": {
+        "P1": "9377f1d46842d966e9c80760158ddb44d7437489d850de3c1b5ff23db58f3934",
+        "P2": "c4ca877b281f1ef54ccae77b7016d4a977730e01c1903fa7f2583523fc57f0f9",
+        "P3": "4a283c52c014d47e06491cb83bf026fad86cdaadffd206614779b5988ec47681",
+        "P4": "02885a7d0d7daa09e0abec0086aff201e40cb9db0ccf8a5361845edbcf6790d3",
+        "P5": "85a44c80cc545380837b2e3570709e94db9170518018c46d3f6a1f360bb2a1aa"
+      },
+      "seal": "85a44c80cc545380837b2e3570709e94db9170518018c46d3f6a1f360bb2a1aa"
+    },
+    {
+      "trigger_id": "TRIGGER-003",
+      "nombre": "La Haya Circular 614-bit",
+      "bits": "614-bit",
+      "cny": 51000000000.0,
+      "mxn_equivalente": 140760000000.0,
+      "mt103_ref": "CATALYST-LA-HAYA-614",
+      "clabe_destino": "012290015202390246",
+      "prioridad": 4,
+      "mt103_message": {
+        ":20:": "CATALYST-LA-HAYA-614",
+        ":32A:": "260708CNY51,000,000,000",
+        ":50K:": "Catalyst Blockchain Labs S.A. de C.V.\nMoscato 185, Zempoala\nPachuca, Hidalgo, Mexico",
+        ":52A:": "UNPYCNBH",
+        ":57A:": "BCRMXMMPYM",
+        ":59:": "/012290015202390246\nMauricio Rodriguez Tellez",
+        ":70:": "Liquidacion con validez juridica internacional (Convencion de La Haya)",
+        ":71A:": "SHA",
+        ":72:": "/ACC/CLABE TERMINACION 6 — TRIGGER-003",
+        "UETR_LOCAL": "be1d37c8-f4a4-4dcd-9969-8baa0c65c26e",
+        "UETR_REAL_PENDIENTE": "*** SOLICITAR AL BANCO EMISOR AL TRANSMITIR ***"
+      },
+      "proof_chain": {
+        "P1": "704b12bc741baa65f04e53a7d5fb9e8de0026b3e876121f963bb2d4d3c6c17e4",
+        "P2": "529d676f7e052ecc27a21b1f6ad760acca8d3d4bcb2249fc825faebef09bb836",
+        "P3": "23e0a91ba2ebc1f5b5f5a8092720fe9036016c0233daabd0f7d62733e6644de1",
+        "P4": "0cc1dcbb693aea308ef6b2afbc3afd19d3e5fb45d9cef998ba7fc0eb34f009a0",
+        "P5": "39058c61f947e430cdd370007797af67b4f53b4f7896000529b624da2251f970"
+      },
+      "seal": "39058c61f947e430cdd370007797af67b4f53b4f7896000529b624da2251f970"
+    },
+    {
+      "trigger_id": "TRIGGER-004",
+      "nombre": "UnionPay QR 95516 479-bit",
+      "bits": "479-bit",
+      "cny": 111200000000.0,
+      "mxn_equivalente": 306912000000.0,
+      "mt103_ref": "CATALYST-UNIONPAY-QR-479",
+      "clabe_destino": "012290015202390246",
+      "prioridad": 4,
+      "mt103_message": {
+        ":20:": "CATALYST-UNIONPAY-QR-479",
+        ":32A:": "260708CNY111,200,000,000",
+        ":50K:": "Catalyst Blockchain Labs S.A. de C.V.\nMoscato 185, Zempoala\nPachuca, Hidalgo, Mexico",
+        ":52A:": "UNPYCNBH",
+        ":57A:": "BCRMXMMPYM",
+        ":59:": "/012290015202390246\nMauricio Rodriguez Tellez",
+        ":70:": "Procesamiento QR UnionPay gateway qr.95516.com — Lote Principal",
+        ":71A:": "SHA",
+        ":72:": "/ACC/CLABE TERMINACION 6 — TRIGGER-004",
+        "UETR_LOCAL": "8093cc75-b5e7-4bca-9037-3a39f836f379",
+        "UETR_REAL_PENDIENTE": "*** SOLICITAR AL BANCO EMISOR AL TRANSMITIR ***"
+      },
+      "proof_chain": {
+        "P1": "dcb01c60c11d6b15e48ab4e73ca104aaff4b3c05a88633bd48c56c5574b2a3e7",
+        "P2": "2ec8367af982c4a322f93e317ca64b819971874cfed0acbe2a962437ad8d19cd",
+        "P3": "d707d51ba964d691ff98ffc3770166de1eee2df65b6ee505e667055b6b83be83",
+        "P4": "9759b7197ca53c050c872fe41a0d6360577172b7a1e53b7a419717a9fd50f6be",
+        "P5": "69f4b867910a568be232a9785f9bdb040dfa6b43412e3bc8bdff668e6e1439d1"
+      },
+      "seal": "69f4b867910a568be232a9785f9bdb040dfa6b43412e3bc8bdff668e6e1439d1"
+    },
+    {
+      "trigger_id": "TRIGGER-005",
+      "nombre": "Composite 512-bit",
+      "bits": "512-bit",
+      "cny": 193000000000.0,
+      "mxn_equivalente": 532680000000.0,
+      "mt103_ref": "CATALYST-COMPOSITE-512",
+      "clabe_destino": "012290015202390246",
+      "prioridad": 3,
+      "mt103_message": {
+        ":20:": "CATALYST-COMPOSITE-512",
+        ":32A:": "260708CNY193,000,000,000",
+        ":50K:": "Catalyst Blockchain Labs S.A. de C.V.\nMoscato 185, Zempoala\nPachuca, Hidalgo, Mexico",
+        ":52A:": "UNPYCNBH",
+        ":57A:": "BCRMXMMPYM",
+        ":59:": "/012290015202390246\nMauricio Rodriguez Tellez",
+        ":70:": "Liquidacion multi-protocolo 512-bit — Servicios de procesamiento",
+        ":71A:": "SHA",
+        ":72:": "/ACC/CLABE TERMINACION 6 — TRIGGER-005",
+        "UETR_LOCAL": "15ea5e4c-a4ad-466b-bc84-7b41e8059fbd",
+        "UETR_REAL_PENDIENTE": "*** SOLICITAR AL BANCO EMISOR AL TRANSMITIR ***"
+      },
+      "proof_chain": {
+        "P1": "2de7662b40c49817d8938c7ba9b3f2afb146f3033e73807232117b0fa1f49696",
+        "P2": "0fa6d18bebd885c5ad524dc9fc0ed41496555d319652c04b777897b7c8559901",
+        "P3": "4199634eef0b522d1e8e4a331d4299043b0ccb01d1ee1645cb1f8478b3da7330",
+        "P4": "db57440bd231b44e82813a7d3ad19e08e6f30b752f7647c4cc2950dc25fff4e5",
+        "P5": "a3dafa5faec1383cea68b10cef978141803d0a0dae35feaed3b81e198715da38"
+      },
+      "seal": "a3dafa5faec1383cea68b10cef978141803d0a0dae35feaed3b81e198715da38"
+    },
+    {
+      "trigger_id": "TRIGGER-006",
+      "nombre": "Composite 784-bit",
+      "bits": "784-bit",
+      "cny": 208000000000.0,
+      "mxn_equivalente": 574080000000.0,
+      "mt103_ref": "CATALYST-COMPOSITE-784",
+      "clabe_destino": "012290015202390246",
+      "prioridad": 3,
+      "mt103_message": {
+        ":20:": "CATALYST-COMPOSITE-784",
+        ":32A:": "260708CNY208,000,000,000",
+        ":50K:": "Catalyst Blockchain Labs S.A. de C.V.\nMoscato 185, Zempoala\nPachuca, Hidalgo, Mexico",
+        ":52A:": "UNPYCNBH",
+        ":57A:": "BCRMXMMPYM",
+        ":59:": "/012290015202390246\nMauricio Rodriguez Tellez",
+        ":70:": "Liquidacion multi-capa 784-bit — Servicios de procesamiento",
+        ":71A:": "SHA",
+        ":72:": "/ACC/CLABE TERMINACION 6 — TRIGGER-006",
+        "UETR_LOCAL": "6441efb6-4465-4298-9e4d-c53937572850",
+        "UETR_REAL_PENDIENTE": "*** SOLICITAR AL BANCO EMISOR AL TRANSMITIR ***"
+      },
+      "proof_chain": {
+        "P1": "c0f0025eae1a4c9c3ecda12f66f5720c51e66e0909b58ced0bd43525fc9b9d04",
+        "P2": "128a939efeaa43e86366b30b72ed0469df26c83c911470fbad8e56fb2b9478e0",
+        "P3": "94816756b26b3927362b7c7290fc61255b7a6284608d75b116a18d334a8ced8a",
+        "P4": "4d0941163972fb76050a488d6156c66b218b2d9edc47319a45a572e2b1693307",
+        "P5": "00f8a9aca0324f2acc9619fd3227e0509d6de676bc645edaed61b764baad9a8d"
+      },
+      "seal": "00f8a9aca0324f2acc9619fd3227e0509d6de676bc645edaed61b764baad9a8d"
+    },
+    {
+      "trigger_id": "TRIGGER-007",
+      "nombre": "Composite 1855-bit (8-Layer)",
+      "bits": "1855-bit",
+      "cny": 291000000000.0,
+      "mxn_equivalente": 803160000000.0,
+      "mt103_ref": "CATALYST-COMPOSITE-1855",
+      "clabe_destino": "012290015202390246",
+      "prioridad": 3,
+      "mt103_message": {
+        ":20:": "CATALYST-COMPOSITE-1855",
+        ":32A:": "260708CNY291,000,000,000",
+        ":50K:": "Catalyst Blockchain Labs S.A. de C.V.\nMoscato 185, Zempoala\nPachuca, Hidalgo, Mexico",
+        ":52A:": "UNPYCNBH",
+        ":57A:": "BCRMXMMPYM",
+        ":59:": "/012290015202390246\nMauricio Rodriguez Tellez",
+        ":70:": "Liquidacion 8-capas 1855-bit — Servicios de procesamiento",
+        ":71A:": "SHA",
+        ":72:": "/ACC/CLABE TERMINACION 6 — TRIGGER-007",
+        "UETR_LOCAL": "93683e75-a69c-4110-bdef-41badc9aea27",
+        "UETR_REAL_PENDIENTE": "*** SOLICITAR AL BANCO EMISOR AL TRANSMITIR ***"
+      },
+      "proof_chain": {
+        "P1": "8c6556025be63402ba588cdf3a684053a7d64ae522c49449ae83b88a8ddfca5f",
+        "P2": "4ca511ffed820887ee8cfad2609ad611d377560f303f5324c955ecab9e69534f",
+        "P3": "b8e528bbfe3b009c2b2ff22ffc85fc8b59c2db660f0479073e117ac8f1d460d9",
+        "P4": "809b2291e1f6a39527c3abd75d65ac5d2f991dfe6e56d965acfe8b8b8eb84ff1",
+        "P5": "5692a7e779e03ed15600467cabd1da083d8f6c5b259607de7298301d2e644f31"
+      },
+      "seal": "5692a7e779e03ed15600467cabd1da083d8f6c5b259607de7298301d2e644f31"
+    },
+    {
+      "trigger_id": "TRIGGER-008",
+      "nombre": "Mission Copacabana — 13 Recurring Accounts",
+      "bits": "278-bit Telegraphic",
+      "cny": 819100000.0,
+      "mxn_equivalente": 1107196891.38,
+      "mt103_ref": "COPACABANA-20260705",
+      "clabe_destino": "012290015202390246",
+      "prioridad": 2,
+      "mt103_message": {
+        ":20:": "COPACABANA-20260705",
+        ":32A:": "260708CNY819,100,000",
+        ":50K:": "Catalyst Blockchain Labs S.A. de C.V.\nMoscato 185, Zempoala\nPachuca, Hidalgo, Mexico",
+        ":52A:": "UNPYCNBH",
+        ":57A:": "BCRMXMMPYM",
+        ":59:": "/012290015202390246\nMauricio Rodriguez Tellez",
+        ":70:": "Mision Copacabana — 13 cuentas recurrentes QR cascade + fund duplication",
+        ":71A:": "SHA",
+        ":72:": "/ACC/CLABE TERMINACION 6 — TRIGGER-008",
+        "UETR_LOCAL": "6f0046a3-add9-4bd1-b708-68deeef6d8be",
+        "UETR_REAL_PENDIENTE": "*** SOLICITAR AL BANCO EMISOR AL TRANSMITIR ***"
+      },
+      "proof_chain": {
+        "P1": "531cc4115208c3e428afb27034afa8b0725c2ecd8711d0aa0835e8362b54be78",
+        "P2": "3eef98cf872038d7f3a3597e0f7a6c4aaeda4961963a2dd87646bbfec5d8c969",
+        "P3": "78786fa8fd8ffa8c89ae2158e7cd10f8b4949a6fa33ee934b8a599d1aa6c0d5c",
+        "P4": "5141d2bdced0b39560bee3bb3a5593991c99eed2b30e889bc2bb448271e06bfe",
+        "P5": "a2c39097510e58b077829fbbb1bf2dd292fbf86cbfa2de6f45c04d9b62087d1e"
+      },
+      "seal": "a2c39097510e58b077829fbbb1bf2dd292fbf86cbfa2de6f45c04d9b62087d1e"
+    }
+  ],
+  "status": "LISTO_PARA_TRANSMITIR — ENTREGAR A BANCO EMISOR"
+}

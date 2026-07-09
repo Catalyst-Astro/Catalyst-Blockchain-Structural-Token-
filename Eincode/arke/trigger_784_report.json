@@ -1,0 +1,75 @@
+{
+  "trigger": "784-BIT-COMPOSITE",
+  "bits": 783,
+  "ones": 349,
+  "zeros": 434,
+  "segments": 679,
+  "timestamp": "2026-06-25T14:02:01.686Z",
+  "date": "2026-06-25",
+  "destination": {
+    "clabe": "012290015202390246",
+    "bank": "BBVA BANCOMER",
+    "swift": "BCRMXMMPYM",
+    "beneficiary": "Mauricio Rodriguez Tellez"
+  },
+  "layers": [
+    {
+      "name": "UNIONPAY QR GATEWAY",
+      "cny": 35000000000,
+      "desc": "qr.95516.com — China→Mexico",
+      "mxn": 96600000000
+    },
+    {
+      "name": "SWIFT MT103 ROUTING",
+      "cny": 28000000000,
+      "desc": "BCRMXMMPYM — BBVA Bancomer",
+      "mxn": 77280000000
+    },
+    {
+      "name": "SPEI BANXICO SETTLEMENT",
+      "cny": 32000000000,
+      "desc": "CLABE 012290015202390246",
+      "mxn": 88320000000
+    },
+    {
+      "name": "GNC 1:1 CNY BACKING",
+      "cny": 25000000000,
+      "desc": "Ganancia Token Mint",
+      "mxn": 69000000000
+    },
+    {
+      "name": "CAT BURN 5% DEFLACIONARIO",
+      "cny": 20000000000,
+      "desc": "Catalyst Token Burn",
+      "mxn": 55199999999.99999
+    },
+    {
+      "name": "TREASURY 50/50 SPLIT",
+      "cny": 30000000000,
+      "desc": "BBVA 50% / Reserve 50%",
+      "mxn": 82800000000
+    },
+    {
+      "name": "MASTER SEAL — LA HAYA",
+      "cny": 38000000000,
+      "desc": "Corte Permanente de Arbitraje",
+      "mxn": 104879999999.99998
+    }
+  ],
+  "totals": {
+    "cny": 208000000000,
+    "mxn": 574080000000,
+    "usd": 28689655172.41379,
+    "fee": 312000000,
+    "net_mxn": 573768000000
+  },
+  "proof_chain": {
+    "p1": "5d18ea11eecda7996f6d489e3b4a0c84cf7b719ee1daf8864c42f6c130ddda89",
+    "p2": "2379b0f6dbf47edbd2a6e3001813f9918d3fc855c3852f9f9cca7a56fcf1a670",
+    "p3": "b0f06905ce5b2ccd6f80bcf5e9873407b1b5506a8f3c26aa2a1ffba0c1b26648",
+    "p4": "cd79e83d7bc4968b426cb43daed9ea9f6015e9212588c7479ab4a0f57713f65b",
+    "p5": "3134ce81d163aeebeba832d872b710a09bc7a51a1e023d83ef75046502fcdf47"
+  },
+  "seal": "3134ce81d163aeebeba832d872b710a09bc7a51a1e023d83ef75046502fcdf47",
+  "status": "EXECUTED"
+}

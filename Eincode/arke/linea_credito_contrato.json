@@ -1,0 +1,50 @@
+{
+  "documento": "LINEA_CREDITO_33PCT_TREASURY",
+  "fecha": "2026-06-23",
+  "acreditado": "Mauricio Rodriguez Tellez",
+  "split": "33.33% liquido / 66.67% reserva",
+  "total_disponible_mxn": 116660000,
+  "total_disponible_cny": 3729967,
+  "lineas": [
+    {
+      "id": "LC-001",
+      "nombre": "Linea Principal BBVA",
+      "moneda": "MXN",
+      "monto": 66660000,
+      "tasa": 0.0,
+      "respaldo": "33.33% CAT Treasury (33.33M CAT)"
+    },
+    {
+      "id": "LC-002",
+      "nombre": "Linea Secundaria CNY",
+      "moneda": "CNY",
+      "monto": 329967,
+      "tasa": 0.0,
+      "respaldo": "33.33% GNC Backing (330K GNC)"
+    },
+    {
+      "id": "LC-003",
+      "nombre": "Linea UnionPay Receivable",
+      "moneda": "CNY",
+      "monto": 3400000,
+      "tasa": 0.0015,
+      "respaldo": "100% QR Triggers ejecutados"
+    },
+    {
+      "id": "LC-004",
+      "nombre": "Linea SPEI Bridge",
+      "moneda": "MXN",
+      "monto": 50000000,
+      "tasa": 0.01,
+      "respaldo": "80% LTV SPEI + 33.33% reserva"
+    },
+    {
+      "id": "LC-005",
+      "nombre": "Linea Gas Relayer CAT",
+      "moneda": "CAT",
+      "monto": 333300,
+      "tasa": 0.0,
+      "respaldo": "33.33% Gas Pool (333K CAT)"
+    }
+  ]
+}

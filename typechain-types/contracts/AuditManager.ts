@@ -75,6 +75,7 @@ export declare namespace AuditManager {
 export interface AuditManagerInterface extends Interface {
   getFunction(
     nameOrSignature:
+      | "evidenceAnchor"
       | "getAllBridgedTransfers"
       | "getAllBurnedTokens"
       | "getAllEventsByAddress"
@@ -82,12 +83,20 @@ export interface AuditManagerInterface extends Interface {
       | "recordBridgeTransfer"
       | "recordEvent"
       | "registerAuditReport"
+      | "setEvidenceAnchor"
   ): FunctionFragment;
 
   getEvent(
-    nameOrSignatureOrTopic: "AuditEventRecorded" | "AuditReportRegistered"
+    nameOrSignatureOrTopic:
+      | "AuditEventRecorded"
+      | "AuditReportRegistered"
+      | "EvidenceAnchorSet"
   ): EventFragment;
 
+  encodeFunctionData(
+    functionFragment: "evidenceAnchor",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "getAllBridgedTransfers",
     values: [string]
@@ -116,7 +125,15 @@ export interface AuditManagerInterface extends Interface {
     functionFragment: "registerAuditReport",
     values: [BytesLike, BigNumberish]
   ): string;
+  encodeFunctionData(
+    functionFragment: "setEvidenceAnchor",
+    values: [AddressLike]
+  ): string;
 
+  decodeFunctionResult(
+    functionFragment: "evidenceAnchor",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "getAllBridgedTransfers",
     data: BytesLike
@@ -145,6 +162,10 @@ export interface AuditManagerInterface extends Interface {
     functionFragment: "registerAuditReport",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "setEvidenceAnchor",
+    data: BytesLike
+  ): Result;
 }
 
 export namespace AuditEventRecordedEvent {
@@ -171,6 +192,18 @@ export namespace AuditReportRegisteredEvent {
   export interface OutputObject {
     reportHash: string;
     timestamp: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace EvidenceAnchorSetEvent {
+  export type InputTuple = [anchor: AddressLike];
+  export type OutputTuple = [anchor: string];
+  export interface OutputObject {
+    anchor: string;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -221,6 +254,8 @@ export interface AuditManager extends BaseContract {
     event?: TCEvent
   ): Promise<this>;
 
+  evidenceAnchor: TypedContractMethod<[], [string], "view">;
+
   getAllBridgedTransfers: TypedContractMethod<
     [destination: string],
     [AuditManager.BridgeTransferStructOutput[]],
@@ -268,10 +303,19 @@ export interface AuditManager extends BaseContract {
     "nonpayable"
   >;
 
+  setEvidenceAnchor: TypedContractMethod<
+    [anchor: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
   ): T;
 
+  getFunction(
+    nameOrSignature: "evidenceAnchor"
+  ): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "getAllBridgedTransfers"
   ): TypedContractMethod<
@@ -318,6 +362,9 @@ export interface AuditManager extends BaseContract {
     [void],
     "nonpayable"
   >;
+  getFunction(
+    nameOrSignature: "setEvidenceAnchor"
+  ): TypedContractMethod<[anchor: AddressLike], [void], "nonpayable">;
 
   getEvent(
     key: "AuditEventRecorded"
@@ -332,6 +379,13 @@ export interface AuditManager extends BaseContract {
     AuditReportRegisteredEvent.InputTuple,
     AuditReportRegisteredEvent.OutputTuple,
     AuditReportRegisteredEvent.OutputObject
+  >;
+  getEvent(
+    key: "EvidenceAnchorSet"
+  ): TypedContractEvent<
+    EvidenceAnchorSetEvent.InputTuple,
+    EvidenceAnchorSetEvent.OutputTuple,
+    EvidenceAnchorSetEvent.OutputObject
   >;
 
   filters: {
@@ -355,6 +409,17 @@ export interface AuditManager extends BaseContract {
       AuditReportRegisteredEvent.InputTuple,
       AuditReportRegisteredEvent.OutputTuple,
       AuditReportRegisteredEvent.OutputObject
+    >;
+
+    "EvidenceAnchorSet(address)": TypedContractEvent<
+      EvidenceAnchorSetEvent.InputTuple,
+      EvidenceAnchorSetEvent.OutputTuple,
+      EvidenceAnchorSetEvent.OutputObject
+    >;
+    EvidenceAnchorSet: TypedContractEvent<
+      EvidenceAnchorSetEvent.InputTuple,
+      EvidenceAnchorSetEvent.OutputTuple,
+      EvidenceAnchorSetEvent.OutputObject
     >;
   };
 }

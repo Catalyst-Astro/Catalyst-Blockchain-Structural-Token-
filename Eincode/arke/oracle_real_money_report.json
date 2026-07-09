@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-06-23T21:02:57.759Z",
+  "oracle_rates": {
+    "cat_usd": "0.1",
+    "usd_mxn": "20.0",
+    "cat_mxn": "2.0"
+  },
+  "derived": {
+    "cat_eth": 0.00005,
+    "eth_cat": 20000,
+    "weth_per_cat": 20000,
+    "sqrt_price_x96": "11204554194957228397824552468480"
+  },
+  "treasury": {
+    "cat_balance": 100000000,
+    "value_mxn": 200000000,
+    "value_usd": 10000000
+  },
+  "uniswap_v3_ready": true,
+  "fee_tier": 3000
+}

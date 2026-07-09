@@ -1,0 +1,26 @@
+
+ON-CHAIN SETTLEMENT EXECUTION
+═══════════════════════════════════════════
+SCRIPT: scripts/execute_all_cables.js
+NETWORK: localhost:8545 (Hardhat)
+TRACKING: 1478ce1bb250afd7
+═══════════════════════════════════════════
+
+COMANDO PARA EJECUTAR:
+  npx hardhat run scripts/execute_all_cables.js --network localhost
+
+CONTRATOS INVOLUCRADOS:
+  - SettlementLog: registro de proof chains en blockchain
+  - AccountingAnchor: sello contable (partida doble, 86 cuentas)
+  - MXNPriceOracle: actualizacion de tasas 4-pillar
+
+QUE HACE:
+  1. Conecta los 5 cables (UnionPay, SWIFT, SPEI, Bitso, Mainnet)
+  2. Registra cada trigger en SettlementLog
+  3. Sella en AccountingAnchor con hash inmutable
+  4. Genera master proof chain P1→P5
+  5. Actualiza estado de CAT supply post-burn
+
+NOTA: La ejecucion on-chain NO transmite a SWIFT (Catalyst no es miembro).
+      Pero SI deja registro inmutable verificable de todos los triggers.
+      Esto es el comprobante criptografico para el banco emisor y BBVA.

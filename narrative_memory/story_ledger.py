@@ -1,6 +1,7 @@
 import json
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any, Dict, Optional
 
 
 class StoryLedger:
@@ -11,13 +12,26 @@ class StoryLedger:
         # Ensure the file exists
         self.filepath.touch(exist_ok=True)
 
-    def log_action(self, actor: str, action: str) -> None:
+    def log_action(self, actor: str, action: str, context: Optional[Dict[str, Any]] = None) -> None:
         """Log a narrative action by appending it as JSON."""
         entry = {
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "actor": actor,
             "action": action,
         }
+        context = context or {}
+        for key in ("traceId", "reqId", "ctrId", "caseId", "eid", "status"):
+            value = context.get(key)
+            if value:
+                entry[key] = value
+
+        for key in ("vids", "zkRefs", "evidenceRefs"):
+            value = context.get(key)
+            if isinstance(value, list):
+                normalized = sorted({str(item).strip() for item in value if str(item).strip()})
+                if normalized:
+                    entry[key] = normalized
+
         with self.filepath.open("a", encoding="utf-8") as f:
             f.write(json.dumps(entry, ensure_ascii=False) + "\n")
 

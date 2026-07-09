@@ -1,4 +1,14 @@
-# Guía para agentes de IA
+438
+54106
++296835740
+2+630
+96+5
+
+.
+4#235410
+974865.12
+633.
+3 Guía para agentes de IA
 
 Objetivo
 - Hacer cambios mínimos y precisos, alineados con la estructura y tooling existente.

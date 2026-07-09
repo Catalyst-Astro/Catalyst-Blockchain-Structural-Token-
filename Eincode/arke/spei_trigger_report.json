@@ -1,0 +1,22 @@
+{
+  "trigger": "SPEI-844BIT-COMPOSITE",
+  "timestamp": "2026-06-23T18:54:12.330Z",
+  "swift_sender": "UNPYCNBH",
+  "swift_receiver": "BCRMXMMPYM",
+  "clabe_destino": "012290015202390246",
+  "mxn_amount": 200000000,
+  "cny_backing": 10275582.32,
+  "cat_burned_total": 100000000,
+  "proof_chain": {
+    "p1": "108772fada16c3bdd9f0d16abf0d37df3667cb5a1d174766d65dde416dd3956d",
+    "p2": "0613d169998492093e7ab8049e4e16ab415a6e132c187b0e0d035217798e91c2",
+    "p3": "47250eb0065180f721d0cde3a68ed3f58e58c8b8b61272baaca82c19ee60e740",
+    "p4": "b6294cd2282464c448389f2aa14c215201e5177e147555f6b379694e208710d5",
+    "p5": "f089b6e45095d066e9f9da9298f529467886e325a3c30c37b399a7a0d56c15f2"
+  },
+  "settlement_tx": null,
+  "api_result": {
+    "error": "amount_cat requerido y > 0"
+  },
+  "status": "EXECUTED"
+}

@@ -1,0 +1,158 @@
+{
+  "trigger": "UNIONPAY-QR-95516-414BIT",
+  "timestamp": "2026-06-25T13:36:14.675Z",
+  "date": "2026-06-25",
+  "gateway": "qr.95516.com",
+  "merchant": "CATALYST-BANK",
+  "destination": {
+    "clabe": "012290015202390246",
+    "bank": "BBVA BANCOMER",
+    "beneficiary": "Mauricio Rodriguez Tellez",
+    "swift": "BCRMXMMPYM"
+  },
+  "layers": [
+    {
+      "id": 1,
+      "bits": 78,
+      "cny": 8500000000,
+      "desc": "UNIONPAY GATEWAY BASE LAYER",
+      "mxn": 23460000000,
+      "usd": 1172413793.1034484,
+      "cat": 11724137931
+    },
+    {
+      "id": 2,
+      "bits": 65,
+      "cny": 7800000000,
+      "desc": "QR ROUTING MATRIX BINARY LAYER",
+      "mxn": 21528000000,
+      "usd": 1075862068.9655173,
+      "cat": 10758620690
+    },
+    {
+      "id": 3,
+      "bits": 72,
+      "cny": 9200000000,
+      "desc": "AMOUNT ENCODING — MAX DAY TX",
+      "mxn": 25391999999.999996,
+      "usd": 1268965517.2413793,
+      "cat": 12689655172
+    },
+    {
+      "id": 4,
+      "bits": 56,
+      "cny": 6400000000,
+      "desc": "SWIFT BCRMXMMPYM ROUTING",
+      "mxn": 17664000000,
+      "usd": 882758620.6896552,
+      "cat": 8827586207
+    },
+    {
+      "id": 5,
+      "bits": 68,
+      "cny": 7100000000,
+      "desc": "CLABE 012290015202390246 MOD-10",
+      "mxn": 19596000000,
+      "usd": 979310344.8275862,
+      "cat": 9793103448
+    },
+    {
+      "id": 6,
+      "bits": 74,
+      "cny": 8800000000,
+      "desc": "ORACLE 4-PILLAR RATE LOCK",
+      "mxn": 24288000000,
+      "usd": 1213793103.4482758,
+      "cat": 12137931034
+    },
+    {
+      "id": 7,
+      "bits": 60,
+      "cny": 5500000000,
+      "desc": "CAT BURN 5% DEFLACIONARIO",
+      "mxn": 15179999999.999998,
+      "usd": 758620689.6551725,
+      "cat": 7586206897
+    },
+    {
+      "id": 8,
+      "bits": 82,
+      "cny": 9600000000,
+      "desc": "TREASURY 50/50 SPLIT DISTRIBUTION",
+      "mxn": 26495999999.999996,
+      "usd": 1324137931.0344827,
+      "cat": 13241379310
+    },
+    {
+      "id": 9,
+      "bits": 61,
+      "cny": 7300000000,
+      "desc": "GNC 1:1 CNY BACKING MINT",
+      "mxn": 20148000000,
+      "usd": 1006896551.7241379,
+      "cat": 10068965517
+    },
+    {
+      "id": 10,
+      "bits": 77,
+      "cny": 8100000000,
+      "desc": "SPEI PAYOUT → BBVA CLABE 0246",
+      "mxn": 22356000000,
+      "usd": 1117241379.310345,
+      "cat": 11172413793
+    },
+    {
+      "id": 11,
+      "bits": 59,
+      "cny": 4900000000,
+      "desc": "KYC/AML IDENTITY VERIFICATION",
+      "mxn": 13523999999.999998,
+      "usd": 675862068.9655173,
+      "cat": 6758620690
+    },
+    {
+      "id": 12,
+      "bits": 88,
+      "cny": 9900000000,
+      "desc": "PROOF CHAIN SHA-256 5-CAPAS ANCHOR",
+      "mxn": 27323999999.999996,
+      "usd": 1365517241.3793104,
+      "cat": 13655172414
+    },
+    {
+      "id": 13,
+      "bits": 70,
+      "cny": 7600000000,
+      "desc": "SETTLEMENT FINAL — CORTE PERMANENTE",
+      "mxn": 20976000000,
+      "usd": 1048275862.0689656,
+      "cat": 10482758621
+    },
+    {
+      "id": 14,
+      "bits": 75,
+      "cny": 10500000000,
+      "desc": "MASTER SEAL — LA HAYA HOLANDESA",
+      "mxn": 28979999999.999996,
+      "usd": 1448275862.0689654,
+      "cat": 14482758621
+    }
+  ],
+  "totals": {
+    "cny": 111200000000,
+    "mxn": 306912000000,
+    "usd": 15337931034.48276,
+    "cat": 153379310345,
+    "fee_cny": 166800000,
+    "net_mxn": 306745200000
+  },
+  "proof_chain": {
+    "p1": "487d6b25ddfcf4eb9e93c35a55dfd37f6482a600e6ac5f2526858f88021216fa",
+    "p2": "dea21e077295e1994058f0ff24ea5cd15387259be21d6020c2d19141f30d18f9",
+    "p3": "8de1e9cbd1ee6d70789f9ae54e10f5259daab9718cfc3e9f0d5e2822cc285589",
+    "p4": "b493f1ac639550d83ebed8ae11476b8ee2d497da6b3b9351d6655e75afa4613d",
+    "p5": "bb64c386cc65cdb2c9ef197359193160425a827e2cc4d84c2d87976891084021"
+  },
+  "seal": "bb64c386cc65cdb2c9ef197359193160425a827e2cc4d84c2d87976891084021",
+  "status": "AUTHORIZED"
+}

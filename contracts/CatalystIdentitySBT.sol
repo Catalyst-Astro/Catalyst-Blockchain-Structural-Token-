@@ -157,7 +157,7 @@ contract CatalystIdentitySBT is ERC721, AccessControl, IIdentitySBT {
             return (0, 0, Status.NONE, 0, bytes32(0));
         }
         IdentityInfo storage info = identityByToken[tokenId];
-        Status effectiveStatus = _effectiveStatus(info);
+        Status effectiveStatus = _effectiveStatusStorage(info);
         return (info.userTypeCode, info.kycLevelCode, effectiveStatus, info.validUntil, info.attestationHash);
     }
 
@@ -168,7 +168,7 @@ contract CatalystIdentitySBT is ERC721, AccessControl, IIdentitySBT {
     function identityRecordOf(address wallet) external view returns (IdentityInfo memory) {
         uint256 tokenId = tokenIdOfWallet[wallet];
         IdentityInfo memory info = identityByToken[tokenId];
-        info.status = _effectiveStatus(info);
+        info.status = _effectiveStatusMemory(info);
         return info;
     }
 
@@ -209,25 +209,21 @@ contract CatalystIdentitySBT is ERC721, AccessControl, IIdentitySBT {
         return super.supportsInterface(interfaceId);
     }
 
-    function _effectiveStatus(IdentityInfo storage info) internal view returns (Status) {
+    function _effectiveStatusStorage(IdentityInfo storage info) internal view returns (Status) {
         if (info.status == Status.ACTIVE && _isExpired(info)) {
             return Status.EXPIRED;
         }
         return info.status;
     }
 
-    function _effectiveStatus(IdentityInfo memory info) internal view returns (Status) {
-        if (info.status == Status.ACTIVE && _isExpired(info)) {
+    function _effectiveStatusMemory(IdentityInfo memory info) internal view returns (Status) {
+        if (info.status == Status.ACTIVE && info.validUntil != 0 && block.timestamp > info.validUntil) {
             return Status.EXPIRED;
         }
         return info.status;
     }
 
     function _isExpired(IdentityInfo storage info) internal view returns (bool) {
-        return info.validUntil != 0 && block.timestamp > info.validUntil;
-    }
-
-    function _isExpired(IdentityInfo memory info) internal view returns (bool) {
         return info.validUntil != 0 && block.timestamp > info.validUntil;
     }
 }

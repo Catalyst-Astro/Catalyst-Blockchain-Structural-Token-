@@ -1,0 +1,24 @@
+{
+  "name": "Catalyst Treasury Wallet - $100M Segregada",
+  "created": "2026-06-22",
+  "network": "Hardhat localhost:8545 (chainId 31337)",
+  "address": "0x7bb22e84217F4c8f10AD0792E1ae54d77B36D546",
+  "privateKey": "0x0b4db0bcde98a38926abfef48502dcc2c61a6957f78b001fa9865d509267b591",
+  "mnemonic": "dignity front subject rigid connect burger equal drip hammer cycle innocent tube",
+  "balances": {
+    "CAT": "99,830,000 ($9,983,000 USD)",
+    "GNC": "4,390,000 (¥4,390,000 CNY)",
+    "CTV": "10 (Libre Usanza)",
+    "FLT": "250,000,000 (Compliance)",
+    "ETH": "10.0 (gas)"
+  },
+  "total_value_usd": "$9,983,000 USD + ¥4,390,000 CNY",
+  "transactions": [
+    {"token": "CAT", "amount": "99,830,000", "tx": "0xb506c20c8673e0000cd41dcdfb3fdebaa4a3028d6e8f66a8549b2b7679290f6d"},
+    {"token": "GNC", "amount": "4,390,000", "tx": "0x105eec2c25097aba9e480b5f19668e546bda6518f969e773e835e1c591a3cb42"},
+    {"token": "CTV", "amount": "10", "tx": "0xc89df2e34978515e18b2f3d175eda66e7a239adf628ba3dee64fa532207fecbc"},
+    {"token": "FLT", "amount": "250,000,000", "tx": "0x0bdeefcd6ef62d089cedcbbe9b9944f4124e33787018c560b32deb8cdb66d1f5"},
+    {"token": "ETH", "amount": "10.0", "tx": "0xa2c115c36aeec96eb30a82c1bcd773ab181e38753b08d9087875be2b4b917e02"}
+  ],
+  "seal": "0x8f4d17a6a3a02461be71d6c3c420e7081aebfa214507e149c26e8929670a50b2"
+}

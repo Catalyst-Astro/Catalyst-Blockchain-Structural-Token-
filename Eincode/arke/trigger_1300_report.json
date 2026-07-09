@@ -1,0 +1,66 @@
+{
+  "trigger": "1300BIT-8LAYER",
+  "bits": 1855,
+  "ones": 826,
+  "zeros": 1029,
+  "segments": 1615,
+  "timestamp": "2026-06-25T14:49:53.381Z",
+  "date": "2026-06-25",
+  "dest": {
+    "clabe": "012290015202390246",
+    "bank": "BBVA",
+    "swift": "BCRMXMMPYM",
+    "name": "Mauricio Rodriguez Tellez"
+  },
+  "layers": [
+    {
+      "n": "P01 REGISTRO FINANCIERO",
+      "cny": 45000000000,
+      "mxn": 124199999999.99998
+    },
+    {
+      "n": "P02 KYC/AML SBT IDENTITY",
+      "cny": 38000000000,
+      "mxn": 104879999999.99998
+    },
+    {
+      "n": "P03 UNIONPAY QR 95516",
+      "cny": 52000000000,
+      "mxn": 143520000000
+    },
+    {
+      "n": "P04 ORACLE 4-PILLAR RATE",
+      "cny": 28000000000,
+      "mxn": 77280000000
+    },
+    {
+      "n": "P05 SWIFT MT103 BCRMXMMPYM",
+      "cny": 42000000000,
+      "mxn": 115919999999.99998
+    },
+    {
+      "n": "P06 TREASURY 50/50 BBVA",
+      "cny": 35000000000,
+      "mxn": 96600000000
+    },
+    {
+      "n": "P08 SETTLEMENT + PROOF",
+      "cny": 31000000000,
+      "mxn": 85560000000
+    },
+    {
+      "n": "P13 CIERRE CONTABLE DIARIO",
+      "cny": 20000000000,
+      "mxn": 55199999999.99999
+    }
+  ],
+  "totals": {
+    "cny": 291000000000,
+    "mxn": 803159999999.9999,
+    "fee": 436500000,
+    "net_mxn": 802723499999.9999,
+    "usd": 40137931034.48276
+  },
+  "seal": "706e7702166fa507acea7b3a7888d82a58b865196c1697d7774990053c954ed2",
+  "status": "EXECUTED"
+}

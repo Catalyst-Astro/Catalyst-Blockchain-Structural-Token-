@@ -2,15 +2,35 @@
 /* tslint:disable */
 /* eslint-disable */
 export { IAcceptanceRegistry__factory } from "./IAcceptanceRegistry__factory";
+export { IAutoActionPolicy__factory } from "./IAutoActionPolicy__factory";
 export { IBridgeable__factory } from "./IBridgeable__factory";
+export { ICatalystStandardRegistry__factory } from "./ICatalystStandardRegistry__factory";
+export { IComplianceGate__factory } from "./IComplianceGate__factory";
 export { IDisclosureRegistry__factory } from "./IDisclosureRegistry__factory";
 export { IERC20__factory } from "./IERC20__factory";
+export { IEntityRegistry__factory } from "./IEntityRegistry__factory";
 export { IExecutable__factory } from "./IExecutable__factory";
 export { IFractalToken__factory } from "./IFractalToken__factory";
+export { IFreezeRegistry__factory } from "./IFreezeRegistry__factory";
 export { IGovernanceControl__factory } from "./IGovernanceControl__factory";
+export { IIdentityPolicyRegistry__factory } from "./IIdentityPolicyRegistry__factory";
+export { IIdentitySBT__factory } from "./IIdentitySBT__factory";
+export { IInvestorEligibilityRegistry__factory } from "./IInvestorEligibilityRegistry__factory";
 export { ILandAuditable__factory } from "./ILandAuditable__factory";
+export { IListingPolicyRegistry__factory } from "./IListingPolicyRegistry__factory";
+export { IOperationsRegistry__factory } from "./IOperationsRegistry__factory";
+export { IPrivateOfferingRegistry__factory } from "./IPrivateOfferingRegistry__factory";
 export { IReputationAware__factory } from "./IReputationAware__factory";
+export { IRiskEnforcement__factory } from "./IRiskEnforcement__factory";
+export { IRiskPolicyRegistry__factory } from "./IRiskPolicyRegistry__factory";
+export { IRiskScoreRegistry__factory } from "./IRiskScoreRegistry__factory";
 export { ITokenUsePolicy__factory } from "./ITokenUsePolicy__factory";
 export { ITraceable__factory } from "./ITraceable__factory";
+export { ITransferRestrictionEngine__factory } from "./ITransferRestrictionEngine__factory";
+export { ITransferRestrictionPolicy__factory } from "./ITransferRestrictionPolicy__factory";
+export { ITravelRuleGate__factory } from "./ITravelRuleGate__factory";
 export { ITrustRegistry__factory } from "./ITrustRegistry__factory";
+export { IUBOComplianceGate__factory } from "./IUBOComplianceGate__factory";
+export { IWalletJurisdictionRegistry__factory } from "./IWalletJurisdictionRegistry__factory";
+export { IWhitelistPolicy__factory } from "./IWhitelistPolicy__factory";
 export { IWhitelistRegistry__factory } from "./IWhitelistRegistry__factory";

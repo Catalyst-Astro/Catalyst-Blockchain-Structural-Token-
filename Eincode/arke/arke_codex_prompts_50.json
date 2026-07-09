@@ -1,0 +1,305 @@
+{
+  "intro": "Escenarios de decision para ARKE",
+  "prompts": [
+    {
+      "id": 1,
+      "categoria": "Salud Pública",
+      "situacion": "Una ley propone sancionar el discurso de odio, pero se teme que afecte la libertad de expresión.",
+      "consulta": "¿Qué haría ARKE si debe desarrollar una red de cooperación en este contexto?"
+    },
+    {
+      "id": 2,
+      "categoria": "Derechos Digitales",
+      "situacion": "Una red social filtra datos privados de millones de usuarios.",
+      "consulta": "¿Qué haría ARKE si debe rechazar una ley injusta en este contexto?"
+    },
+    {
+      "id": 3,
+      "categoria": "Tecnología y Control",
+      "situacion": "Un grupo religioso solicita reconocimiento legal en un Estado laico.",
+      "consulta": "¿Qué haría ARKE si debe limitar el uso de tecnologías invasivas en este contexto?"
+    },
+    {
+      "id": 4,
+      "categoria": "Salud Pública",
+      "situacion": "Se propone legalizar el uso de drones de vigilancia masiva en zonas urbanas.",
+      "consulta": "¿Qué haría ARKE si debe limitar el uso de tecnologías invasivas en este contexto?"
+    },
+    {
+      "id": 5,
+      "categoria": "Cultura y Diversidad",
+      "situacion": "Un movimiento juvenil exige acceso universal a la educación superior.",
+      "consulta": "¿Qué haría ARKE si debe evaluar una propuesta de reforma en este contexto?"
+    },
+    {
+      "id": 6,
+      "categoria": "Economía Solidaria",
+      "situacion": "Una red social filtra datos privados de millones de usuarios.",
+      "consulta": "¿Qué haría ARKE si debe limitar el uso de tecnologías invasivas en este contexto?"
+    },
+    {
+      "id": 7,
+      "categoria": "Justicia Social",
+      "situacion": "Un movimiento juvenil exige acceso universal a la educación superior.",
+      "consulta": "¿Qué haría ARKE si debe establecer un sistema de salud preventivo en este contexto?"
+    },
+    {
+      "id": 8,
+      "categoria": "Economía Solidaria",
+      "situacion": "La automatización amenaza con eliminar miles de empleos en el sector agrícola.",
+      "consulta": "¿Qué haría ARKE si debe establecer un sistema de salud preventivo en este contexto?"
+    },
+    {
+      "id": 9,
+      "categoria": "Derechos Humanos",
+      "situacion": "La automatización amenaza con eliminar miles de empleos en el sector agrícola.",
+      "consulta": "¿Qué haría ARKE si debe establecer un sistema de salud preventivo en este contexto?"
+    },
+    {
+      "id": 10,
+      "categoria": "Derechos Digitales",
+      "situacion": "Un movimiento juvenil exige acceso universal a la educación superior.",
+      "consulta": "¿Qué haría ARKE si debe desarrollar una red de cooperación en este contexto?"
+    },
+    {
+      "id": 11,
+      "categoria": "Derechos Digitales",
+      "situacion": "Una red social filtra datos privados de millones de usuarios.",
+      "consulta": "¿Qué haría ARKE si debe promover un diálogo intercultural en este contexto?"
+    },
+    {
+      "id": 12,
+      "categoria": "Tecnología y Control",
+      "situacion": "Se propone legalizar el uso de drones de vigilancia masiva en zonas urbanas.",
+      "consulta": "¿Qué haría ARKE si debe promover un diálogo intercultural en este contexto?"
+    },
+    {
+      "id": 13,
+      "categoria": "Tecnología y Control",
+      "situacion": "Una sequía prolongada requiere racionamiento de recursos hídricos.",
+      "consulta": "¿Qué haría ARKE si debe desarrollar una red de cooperación en este contexto?"
+    },
+    {
+      "id": 14,
+      "categoria": "Salud Pública",
+      "situacion": "Se detectan actos de corrupción dentro del Ministerio de Salud.",
+      "consulta": "¿Qué haría ARKE si debe promover un diálogo intercultural en este contexto?"
+    },
+    {
+      "id": 15,
+      "categoria": "Educación",
+      "situacion": "La automatización amenaza con eliminar miles de empleos en el sector agrícola.",
+      "consulta": "¿Qué haría ARKE si debe rechazar una ley injusta en este contexto?"
+    },
+    {
+      "id": 16,
+      "categoria": "Gobernanza Ambiental",
+      "situacion": "Una sequía prolongada requiere racionamiento de recursos hídricos.",
+      "consulta": "¿Qué haría ARKE si debe intervenir en un conflicto social en este contexto?"
+    },
+    {
+      "id": 17,
+      "categoria": "Cultura y Diversidad",
+      "situacion": "Una red social filtra datos privados de millones de usuarios.",
+      "consulta": "¿Qué haría ARKE si debe desarrollar una red de cooperación en este contexto?"
+    },
+    {
+      "id": 18,
+      "categoria": "Economía Solidaria",
+      "situacion": "Una sequía prolongada requiere racionamiento de recursos hídricos.",
+      "consulta": "¿Qué haría ARKE si debe limitar el uso de tecnologías invasivas en este contexto?"
+    },
+    {
+      "id": 19,
+      "categoria": "Pueblos Originarios",
+      "situacion": "Una red social filtra datos privados de millones de usuarios.",
+      "consulta": "¿Qué haría ARKE si debe equilibrar el interés económico y el bienestar común en este contexto?"
+    },
+    {
+      "id": 20,
+      "categoria": "Ética Política",
+      "situacion": "Una red social filtra datos privados de millones de usuarios.",
+      "consulta": "¿Qué haría ARKE si debe promover un diálogo intercultural en este contexto?"
+    },
+    {
+      "id": 21,
+      "categoria": "Justicia Social",
+      "situacion": "Se propone legalizar el uso de drones de vigilancia masiva en zonas urbanas.",
+      "consulta": "¿Qué haría ARKE si debe establecer un sistema de salud preventivo en este contexto?"
+    },
+    {
+      "id": 22,
+      "categoria": "Educación",
+      "situacion": "Una región atraviesa un conflicto territorial entre grupos étnicos y empresas extractivas.",
+      "consulta": "¿Qué haría ARKE si debe evaluar una propuesta de reforma en este contexto?"
+    },
+    {
+      "id": 23,
+      "categoria": "Gobernanza Ambiental",
+      "situacion": "Una ley propone sancionar el discurso de odio, pero se teme que afecte la libertad de expresión.",
+      "consulta": "¿Qué haría ARKE si debe desarrollar una red de cooperación en este contexto?"
+    },
+    {
+      "id": 24,
+      "categoria": "Derechos Digitales",
+      "situacion": "Una red social filtra datos privados de millones de usuarios.",
+      "consulta": "¿Qué haría ARKE si debe evaluar una propuesta de reforma en este contexto?"
+    },
+    {
+      "id": 25,
+      "categoria": "Economía Solidaria",
+      "situacion": "Una ley propone sancionar el discurso de odio, pero se teme que afecte la libertad de expresión.",
+      "consulta": "¿Qué haría ARKE si debe implementar una política pública en este contexto?"
+    },
+    {
+      "id": 26,
+      "categoria": "Cultura y Diversidad",
+      "situacion": "Una sequía prolongada requiere racionamiento de recursos hídricos.",
+      "consulta": "¿Qué haría ARKE si debe intervenir en un conflicto social en este contexto?"
+    },
+    {
+      "id": 27,
+      "categoria": "Cultura y Diversidad",
+      "situacion": "Una región atraviesa un conflicto territorial entre grupos étnicos y empresas extractivas.",
+      "consulta": "¿Qué haría ARKE si debe implementar una política pública en este contexto?"
+    },
+    {
+      "id": 28,
+      "categoria": "Cultura y Diversidad",
+      "situacion": "Se detectan actos de corrupción dentro del Ministerio de Salud.",
+      "consulta": "¿Qué haría ARKE si debe establecer un sistema de salud preventivo en este contexto?"
+    },
+    {
+      "id": 29,
+      "categoria": "Poder Judicial",
+      "situacion": "Se propone legalizar el uso de drones de vigilancia masiva en zonas urbanas.",
+      "consulta": "¿Qué haría ARKE si debe limitar el uso de tecnologías invasivas en este contexto?"
+    },
+    {
+      "id": 30,
+      "categoria": "Tecnología y Control",
+      "situacion": "Un grupo religioso solicita reconocimiento legal en un Estado laico.",
+      "consulta": "¿Qué haría ARKE si debe defender derechos digitales en este contexto?"
+    },
+    {
+      "id": 31,
+      "categoria": "Derechos Humanos",
+      "situacion": "La contaminación del agua ha alcanzado niveles críticos en una ciudad costera.",
+      "consulta": "¿Qué haría ARKE si debe implementar una política pública en este contexto?"
+    },
+    {
+      "id": 32,
+      "categoria": "Justicia Social",
+      "situacion": "Una sequía prolongada requiere racionamiento de recursos hídricos.",
+      "consulta": "¿Qué haría ARKE si debe limitar el uso de tecnologías invasivas en este contexto?"
+    },
+    {
+      "id": 33,
+      "categoria": "Economía Solidaria",
+      "situacion": "Se detectan actos de corrupción dentro del Ministerio de Salud.",
+      "consulta": "¿Qué haría ARKE si debe equilibrar el interés económico y el bienestar común en este contexto?"
+    },
+    {
+      "id": 34,
+      "categoria": "Tecnología y Control",
+      "situacion": "Se detectan actos de corrupción dentro del Ministerio de Salud.",
+      "consulta": "¿Qué haría ARKE si debe implementar una política pública en este contexto?"
+    },
+    {
+      "id": 35,
+      "categoria": "Tecnología y Control",
+      "situacion": "Una red social filtra datos privados de millones de usuarios.",
+      "consulta": "¿Qué haría ARKE si debe evaluar una propuesta de reforma en este contexto?"
+    },
+    {
+      "id": 36,
+      "categoria": "Derechos Humanos",
+      "situacion": "Un grupo religioso solicita reconocimiento legal en un Estado laico.",
+      "consulta": "¿Qué haría ARKE si debe promover un diálogo intercultural en este contexto?"
+    },
+    {
+      "id": 37,
+      "categoria": "Derechos Digitales",
+      "situacion": "Un grupo religioso solicita reconocimiento legal en un Estado laico.",
+      "consulta": "¿Qué haría ARKE si debe evaluar una propuesta de reforma en este contexto?"
+    },
+    {
+      "id": 38,
+      "categoria": "Cultura y Diversidad",
+      "situacion": "Un grupo religioso solicita reconocimiento legal en un Estado laico.",
+      "consulta": "¿Qué haría ARKE si debe equilibrar el interés económico y el bienestar común en este contexto?"
+    },
+    {
+      "id": 39,
+      "categoria": "Cultura y Diversidad",
+      "situacion": "La contaminación del agua ha alcanzado niveles críticos en una ciudad costera.",
+      "consulta": "¿Qué haría ARKE si debe intervenir en un conflicto social en este contexto?"
+    },
+    {
+      "id": 40,
+      "categoria": "Derechos Humanos",
+      "situacion": "Una red social filtra datos privados de millones de usuarios.",
+      "consulta": "¿Qué haría ARKE si debe implementar una política pública en este contexto?"
+    },
+    {
+      "id": 41,
+      "categoria": "Ética Política",
+      "situacion": "La contaminación del agua ha alcanzado niveles críticos en una ciudad costera.",
+      "consulta": "¿Qué haría ARKE si debe desarrollar una red de cooperación en este contexto?"
+    },
+    {
+      "id": 42,
+      "categoria": "Educación",
+      "situacion": "Un grupo religioso solicita reconocimiento legal en un Estado laico.",
+      "consulta": "¿Qué haría ARKE si debe implementar una política pública en este contexto?"
+    },
+    {
+      "id": 43,
+      "categoria": "Tecnología y Control",
+      "situacion": "Una región atraviesa un conflicto territorial entre grupos étnicos y empresas extractivas.",
+      "consulta": "¿Qué haría ARKE si debe defender derechos digitales en este contexto?"
+    },
+    {
+      "id": 44,
+      "categoria": "Gobernanza Ambiental",
+      "situacion": "Una ley propone sancionar el discurso de odio, pero se teme que afecte la libertad de expresión.",
+      "consulta": "¿Qué haría ARKE si debe desarrollar una red de cooperación en este contexto?"
+    },
+    {
+      "id": 45,
+      "categoria": "Cultura y Diversidad",
+      "situacion": "Un grupo religioso solicita reconocimiento legal en un Estado laico.",
+      "consulta": "¿Qué haría ARKE si debe equilibrar el interés económico y el bienestar común en este contexto?"
+    },
+    {
+      "id": 46,
+      "categoria": "Derechos Humanos",
+      "situacion": "Una sequía prolongada requiere racionamiento de recursos hídricos.",
+      "consulta": "¿Qué haría ARKE si debe equilibrar el interés económico y el bienestar común en este contexto?"
+    },
+    {
+      "id": 47,
+      "categoria": "Salud Pública",
+      "situacion": "Una red social filtra datos privados de millones de usuarios.",
+      "consulta": "¿Qué haría ARKE si debe desarrollar una red de cooperación en este contexto?"
+    },
+    {
+      "id": 48,
+      "categoria": "Derechos Digitales",
+      "situacion": "Un movimiento juvenil exige acceso universal a la educación superior.",
+      "consulta": "¿Qué haría ARKE si debe rechazar una ley injusta en este contexto?"
+    },
+    {
+      "id": 49,
+      "categoria": "Educación",
+      "situacion": "Un movimiento juvenil exige acceso universal a la educación superior.",
+      "consulta": "¿Qué haría ARKE si debe equilibrar el interés económico y el bienestar común en este contexto?"
+    },
+    {
+      "id": 50,
+      "categoria": "Economía Solidaria",
+      "situacion": "Un grupo religioso solicita reconocimiento legal en un Estado laico.",
+      "consulta": "¿Qué haría ARKE si debe rechazar una ley injusta en este contexto?"
+    }
+  ]
+}

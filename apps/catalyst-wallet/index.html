@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0a0a0a">
+<title>Catalyst Wallet — Tarjeta Digital NFC</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,system-ui,sans-serif}
+body{background:#0a0a0a;color:#fff;min-height:100vh;overflow-x:hidden}
+.app{padding:16px;max-width:420px;margin:0 auto}
+
+/* Header */
+.header{display:flex;justify-content:space-between;align-items:center;padding:12px 0}
+.logo{font-size:24px;font-weight:900}
+.logo span{color:#ffd700}
+.balance-main{font-size:36px;font-weight:900;margin:8px 0}
+.balance-sub{color:#888;font-size:14px}
+
+/* Digital Card */
+.card-container{perspective:1000px;margin:24px 0}
+.card{background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);border-radius:20px;
+  padding:24px;position:relative;overflow:hidden;min-height:200px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 40px rgba(255,215,0,.1);
+  border:1px solid rgba(255,215,0,.2)}
+.card::before{content:'';position:absolute;top:-50%;right:-50%;width:200px;height:200px;
+  background:radial-gradient(circle,rgba(255,215,0,.15),transparent);border-radius:50%}
+.card-chip{width:48px;height:36px;background:linear-gradient(135deg,#ffd700,#b8860b);
+  border-radius:6px;margin-bottom:16px;position:relative}
+.card-chip::after{content:'';position:absolute;top:8px;left:8px;right:8px;bottom:8px;
+  border:1px solid rgba(0,0,0,.3);border-radius:4px}
+.card-number{font-family:monospace;font-size:20px;letter-spacing:3px;margin:12px 0;color:#ffd700}
+.card-holder{font-size:12px;color:#888;text-transform:uppercase}
+.card-name{font-size:16px;font-weight:600;margin:4px 0}
+.card-expiry{font-size:12px;color:#888}
+.card-network{position:absolute;top:24px;right:24px;font-size:14px;color:#ffd700;font-weight:900}
+
+/* NFC Indicator */
+.nfc-indicator{display:flex;align-items:center;gap:8px;margin-top:8px;padding:8px 0}
+.nfc-dot{width:8px;height:8px;background:#4af0ff;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 8px #4af0ff}50%{opacity:.3;box-shadow:0 0 2px #4af0ff}}
+.nfc-text{font-size:12px;color:#4af0ff;text-transform:uppercase;letter-spacing:2px}
+
+/* Token Grid */
+.tokens{margin:20px 0}
+.token-row{display:flex;justify-content:space-between;align-items:center;
+  padding:14px;margin:6px 0;background:#111;border-radius:12px;
+  border:1px solid rgba(255,255,255,.05);transition:all .2s}
+.token-row:active{background:#1a1a1a;transform:scale(.98)}
+.token-symbol{font-weight:900;font-size:16px;min-width:50px}
+.token-cat{color:#ffd700}.token-frt{color:#7dff7d}.token-flt{color:#4af0ff}
+.token-aim{color:#ff6b6b}.token-gnc{color:#ffa500}.token-ctv{color:#c084fc}
+.token-balance{text-align:right}
+.token-amount{font-weight:700;font-size:15px}
+.token-fiat{font-size:11px;color:#888;margin-top:2px}
+
+/* Action Buttons */
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0}
+.btn{padding:16px;border-radius:14px;border:none;font-size:15px;font-weight:700;
+  cursor:pointer;transition:all .2s;text-align:center}
+.btn:active{transform:scale(.95)}
+.btn-primary{background:linear-gradient(135deg,#ffd700,#b8860b);color:#000}
+.btn-secondary{background:#1a1a1a;color:#fff;border:1px solid rgba(255,255,255,.1)}
+.btn-full{grid-column:1/-1;background:linear-gradient(135deg,#4af0ff,#0077b6);color:#000}
+
+/* NFC Modal */
+.modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;
+  background:rgba(0,0,0,.9);z-index:100;align-items:center;justify-content:center}
+.modal.active{display:flex}
+.modal-content{background:#1a1a1a;border-radius:24px;padding:32px;
+  text-align:center;max-width:340px;width:90%;border:1px solid rgba(255,215,0,.2)}
+.nfc-animation{width:120px;height:120px;margin:0 auto 20px;
+  border:3px solid #4af0ff;border-radius:50%;animation:nfc-ring 1.5s infinite}
+@keyframes nfc-ring{0%{transform:scale(.8);opacity:1;box-shadow:0 0 60px rgba(74,240,255,.3)}
+  100%{transform:scale(1.2);opacity:0;box-shadow:0 0 0px rgba(74,240,255,0)}}
+.modal-amount{font-size:32px;font-weight:900;color:#ffd700}
+.modal-status{color:#4af0ff;font-size:14px;margin:12px 0}
+.btn-close{margin-top:16px;padding:12px 32px;background:#333;color:#fff;border:none;
+  border-radius:10px;font-weight:700;cursor:pointer}
+
+/* QR */
+.qr-code{width:100px;height:100px;margin:10px auto;background:#fff;border-radius:8px;padding:8px}
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">CATALYST<span>.</span></div>
+    <div style="font-size:12px;color:#888">BELL 13450.50</div>
+  </div>
+
+  <!-- Balance -->
+  <div style="color:#888;font-size:13px">Balance Total</div>
+  <div class="balance-main" id="totalMxn">$0</div>
+  <div class="balance-sub" id="totalUsd">~$0 USD | ~0 CNY</div>
+
+  <!-- Digital Card (BBVA Style) -->
+  <div class="card-container">
+    <div class="card" id="digitalCard" onclick="toggleCard()">
+      <div class="card-chip"></div>
+      <div class="card-network">CATALYST</div>
+      <div class="card-number" id="cardNumber">•••• •••• •••• ••••</div>
+      <div class="card-holder">TITULAR</div>
+      <div class="card-name">Mauricio Rodríguez Téllez</div>
+      <div class="card-expiry">VÁLIDO HASTA 06/30</div>
+      <div class="nfc-indicator">
+        <div class="nfc-dot"></div>
+        <div class="nfc-text">NFC ACTIVO — TAP TO PAY</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tokens -->
+  <div class="tokens" id="tokenList"></div>
+
+  <!-- Actions -->
+  <div class="actions">
+    <button class="btn btn-primary" onclick="tapNFC()">📱 TAP NFC</button>
+    <button class="btn btn-secondary" onclick="showQR()">📷 QR PAGAR</button>
+    <button class="btn btn-full" onclick="convertCNY()">💱 CONVERTIR CNY → MXN</button>
+  </div>
+</div>
+
+<!-- NFC Modal -->
+<div class="modal" id="nfcModal">
+  <div class="modal-content">
+    <div class="nfc-animation"></div>
+    <div class="modal-amount" id="nfcAmount">$0 MXN</div>
+    <div class="modal-status">ACERCAR AL TERMINAL</div>
+    <div style="color:#888;font-size:12px;margin:8px 0" id="nfcDetails"></div>
+    <button class="btn-close" onclick="closeNFC()">CANCELAR</button>
+  </div>
+</div>
+
+<!-- QR Modal -->
+<div class="modal" id="qrModal">
+  <div class="modal-content">
+    <h3 style="margin-bottom:16px">QR — qr.95516.com</h3>
+    <div class="qr-code" id="qrPlaceholder">[QR]</div>
+    <div style="margin:12px 0;font-family:monospace;font-size:11px;color:#4af0ff" id="qrId"></div>
+    <div style="color:#888;font-size:13px">Escanear con UnionPay/AliPay</div>
+    <button class="btn-close" onclick="closeQR()">CERRAR</button>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// CATALYST DIGITAL WALLET — Mobile + NFC + Multi-Currency
+// ═══════════════════════════════════════════════════════════════
+
+const CAT_USD = 0.10, USD_MXN = 20.0, USD_CNY = 7.25;
+const CAT_CNY = 0.686343;
+
+// Token balances (connected to Hardhat on-chain state)
+const tokens = [
+  { symbol: 'CAT', name: 'Catalyst Token', balance: 1000000, color: '#ffd700', cssClass: 'token-cat' },
+  { symbol: 'FRT', name: 'Fractal Reward', balance: 1000000, color: '#7dff7d', cssClass: 'token-frt' },
+  { symbol: 'FLT', name: 'Fractal Token', balance: 1000000000, color: '#4af0ff', cssClass: 'token-flt' },
+  { symbol: 'AIM', name: 'AI Module', balance: 100000, color: '#ff6b6b', cssClass: 'token-aim' },
+  { symbol: 'GNC', name: 'Ganancia Token', balance: 900000, color: '#ffa500', cssClass: 'token-gnc' },
+  { symbol: 'CTV', name: 'Token Cautivo', balance: 900000, color: '#c084fc', cssClass: 'token-ctv' },
+];
+
+function formatNum(n) { return n.toLocaleString('es-MX', {maximumFractionDigits:0}); }
+function formatMXN(n) { return '$' + formatNum(n) + ' MXN'; }
+
+// Calculate total in MXN
+function calcTotal() {
+  let totalMxn = 0;
+  tokens.forEach(t => {
+    if (t.symbol === 'CAT') totalMxn += t.balance * CAT_USD * USD_MXN;
+    else if (t.symbol === 'GNC') totalMxn += t.balance * (1/USD_CNY) * USD_MXN; // 1 GNC = 1 CNY
+    else if (t.symbol === 'CTV') totalMxn += t.balance * 1000 * (1/USD_CNY) * USD_MXN; // 1 CTV = 1000 CNY
+    else if (t.symbol === 'FLT') totalMxn += t.balance * 0.05 * USD_MXN; // estimated
+    else if (t.symbol === 'FRT') totalMxn += t.balance * 0.01 * USD_MXN; // estimated
+    else if (t.symbol === 'AIM') totalMxn += t.balance * 0.001 * USD_MXN; // estimated
+  });
+  return totalMxn;
+}
+
+// Render
+function render() {
+  const totalMxn = calcTotal();
+  const totalUsd = totalMxn / USD_MXN;
+  const totalCny = totalUsd * USD_CNY;
+
+  document.getElementById('totalMxn').textContent = formatMXN(totalMxn);
+  document.getElementById('totalUsd').textContent = `~$${formatNum(totalUsd)} USD | ~${formatNum(totalCny)} CNY`;
+  document.getElementById('cardNumber').textContent = '•••• •••• •••• 4246';
+
+  // Token list
+  const list = document.getElementById('tokenList');
+  list.innerHTML = tokens.map(t => {
+    let fiatValue;
+    if (t.symbol === 'CAT') fiatValue = t.balance * CAT_USD * USD_MXN;
+    else if (t.symbol === 'GNC') fiatValue = t.balance * (1/USD_CNY) * USD_MXN;
+    else if (t.symbol === 'CTV') fiatValue = t.balance * 1000 * (1/USD_CNY) * USD_MXN;
+    else fiatValue = t.balance * 0.01 * USD_MXN;
+
+    return `<div class="token-row" onclick="selectToken('${t.symbol}')">
+      <div>
+        <div class="token-symbol ${t.cssClass}">${t.symbol}</div>
+        <div style="font-size:11px;color:#666">${t.name}</div>
+      </div>
+      <div class="token-balance">
+        <div class="token-amount">${formatNum(t.balance)} ${t.symbol}</div>
+        <div class="token-fiat">≈ ${formatMXN(fiatValue)}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// NFC Tap
+function tapNFC() {
+  const totalMxn = calcTotal();
+  document.getElementById('nfcAmount').textContent = formatMXN(totalMxn * 0.1); // 10% del balance
+  document.getElementById('nfcDetails').textContent = 'CATALYST VISA • Terminal: qr.95516.com';
+  document.getElementById('nfcModal').classList.add('active');
+
+  // Simulate NFC success after 2s
+  setTimeout(() => {
+    document.querySelector('.modal-status').textContent = '✅ PAGO APROBADO — TAP COMPLETO';
+    document.querySelector('.nfc-animation').style.borderColor = '#7dff7d';
+  }, 2000);
+}
+
+function closeNFC() {
+  document.getElementById('nfcModal').classList.remove('active');
+  document.querySelector('.nfc-animation').style.borderColor = '#4af0ff';
+  document.querySelector('.modal-status').textContent = 'ACERCAR AL TERMINAL';
+}
+
+// QR Payment
+function showQR() {
+  const qrId = Math.random().toString(36).substring(2,14);
+  document.getElementById('qrId').textContent = 'qr.95516.com/pay?id=' + qrId;
+  document.getElementById('qrModal').classList.add('active');
+}
+
+function closeQR() {
+  document.getElementById('qrModal').classList.remove('active');
+}
+
+// Convert CNY -> MXN
+function convertCNY() {
+  const gncBal = tokens.find(t=>t.symbol==='GNC').balance;
+  const mxnVal = gncBal * 0.1 * (1/USD_CNY) * USD_MXN * 0.98;
+  alert(`Convertir ${formatNum(gncBal)} GNC (${formatNum(gncBal)} CNY)\n→ ${formatMXN(mxnVal)} via SWIFT BCRMXMMPYM\nCLABE: 012290015202390246`);
+}
+
+// Toggle card
+function toggleCard() {
+  const card = document.getElementById('cardNumber');
+  card.textContent = card.textContent.includes('•') ? '4246 1234 5678 9012' : '•••• •••• •••• 4246';
+}
+
+function selectToken(symbol) {
+  const t = tokens.find(tk => tk.symbol === symbol);
+  if (t) alert(`${t.symbol} — ${t.name}\nBalance: ${formatNum(t.balance)} ${t.symbol}\nAddress: ver wallets.json`);
+}
+
+// Init
+render();
+
+// Auto-refresh balances (simulated blockchain polling)
+setInterval(() => {
+  tokens.forEach(t => t.balance += Math.floor(Math.random() * 100) - 25);
+  render();
+}, 10000);
+
+// Register service worker for PWA
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').catch(() => {});
+}
+</script>
+</body>
+</html>

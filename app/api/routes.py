@@ -7,8 +7,10 @@ from pydantic import BaseModel, Field
 from app.core.models import SystemStatus
 
 from .dashboard import render_dashboard_html
+from .auth import router as auth_router
 
 router = APIRouter()
+router.include_router(auth_router)
 
 
 class ArcadeScoreIn(BaseModel):
@@ -89,3 +91,16 @@ def arcade_submit(payload: ArcadeScoreIn, request: Request):
 def arcade_leaderboard(request: Request):
     arcade = request.app.state.arcade
     return arcade.leaderboard()
+
+
+# ── RPC Proxy (re-envía llamadas JSON-RPC al nodo Geth local) ──
+import httpx
+
+@router.post("/api/rpc")
+async def rpc_proxy(request: Request):
+    """Proxy JSON-RPC calls to the local Geth node (http://127.0.0.1:8545)."""
+    body = await request.json()
+    rpc_url = request.app.state.settings.geth_rpc_url or "http://127.0.0.1:8545"
+    async with httpx.AsyncClient(timeout=10.0) as client:
+        resp = await client.post(rpc_url, json=body)
+        return resp.json()

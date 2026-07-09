@@ -1,0 +1,71 @@
+[
+  {
+    "report_id": "R1-BANXICO-2026-06-23",
+    "tipo": "Posicion Diaria de Liquidez",
+    "fecha": "2026-06-23",
+    "entidad": "Catalyst Blockchain Labs S.A. de C.V.",
+    "activos": 1044671953.5549,
+    "pasivos": 486995830.6312,
+    "capital_contable": 354220010.0,
+    "operaciones_dia": 5,
+    "encaje_legal": 48699583.06312001,
+    "liquidez_inmediata": 348189162.1198482,
+    "solvencia": 2.1451,
+    "seal": "9ae182fba5c18bc1a229d7c90d3ba5935f4a0af8695863a3afaa5c859c5a4eff"
+  },
+  {
+    "report_id": "R2-CNBV-2026-06-23",
+    "tipo": "Indice de Capitalizacion",
+    "fecha": "2026-06-23",
+    "entidad": "Catalyst Blockchain Labs S.A. de C.V.",
+    "capital_neto": 353577492.62,
+    "activos_ponderados_riesgo": 363862974.94,
+    "icap": 97.17,
+    "icap_minimo_requerido": 10.5,
+    "cumple": true,
+    "seal": "3c9252f6a99a1bf6bc4f134c690dfb155f34da2168c6b5c2124de1c4913a6dd7"
+  },
+  {
+    "report_id": "R3-UIF-2026-06-23",
+    "tipo": "Operaciones Relevantes",
+    "fecha": "2026-06-23",
+    "entidad": "Catalyst Blockchain Labs S.A. de C.V.",
+    "oficial_cumplimiento": "Mauricio Rodriguez Tellez",
+    "operaciones_reportadas": 0,
+    "operaciones_relevantes": [],
+    "nota": "Operaciones dentro del perfil del banquero fundador. Sin actividad inusual detectada.",
+    "seal": "05919b719c2fc985f52ed89e4a9ce64ab9235dfd30fb0bc2ab111e1755427197"
+  },
+  {
+    "report_id": "R4-SAT-2026-06-23",
+    "tipo": "Posicion Fiscal Diaria",
+    "fecha": "2026-06-23",
+    "rfc": "ROTMMXXXXXX-XXX",
+    "ingresos_acumulados": 26572.98,
+    "gastos_acumulados": 1143425.0,
+    "utilidad_perdida": -1116852.02,
+    "iva_causado": 0,
+    "isr_causado": 0,
+    "seal": "590b5f3a83f22d9fc90558c4698ef51bc394c1e80fa95d9ef7fbe4cebd1a912d"
+  },
+  {
+    "report_id": "R5-CONSOLIDADO-2026-06-23",
+    "fecha": "2026-06-23",
+    "entidad": "Catalyst Blockchain Labs S.A. de C.V.",
+    "domicilio": "Moscato 185, Zempoala, Pachuca, Hidalgo, Mexico",
+    "clabe_principal": "012290015202390246",
+    "swift_bic": "BCRMXMMPYM",
+    "contratos_on_chain": 31,
+    "red_sepolia": "29 contratos - chainId 11155111",
+    "red_localhost": "31 contratos - chainId 31337",
+    "partida_doble_balanceada": true,
+    "origen_fondos": "UnionPay QR 844-bit triggers | Bank of China",
+    "total_cny_procesado": 10292082.94,
+    "total_mxn_equivalente": 210458164.0,
+    "lineas_credito_activas": 5,
+    "credito_disponible_mxn": 116660000,
+    "credito_disponible_cny": 3729967,
+    "politicas_credito": "docs/POLITICAS_CREDITO_BANQUERO.md",
+    "seal": "6862142f95b3d1bac0badae042b6a3cd902a4632253698c15f1259a9ecc3f3b8"
+  }
+]

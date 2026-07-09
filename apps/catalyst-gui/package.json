@@ -1,0 +1,46 @@
+{
+  "name": "catalyst-gui",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist-electron/main.js",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "concurrently -k \"npm:dev:renderer\" \"npm:dev:electron\"",
+    "dev:renderer": "vite",
+    "dev:electron": "node scripts/dev-electron.cjs",
+    "build": "npm run build:renderer && npm run build:electron",
+    "build:renderer": "vite build",
+    "build:electron": "tsc -p electron/tsconfig.json",
+    "preview": "vite preview --strictPort --port 4173",
+    "test:smoke": "vitest run --config vitest.config.ts",
+    "smoke:artifacts": "node scripts/capture-smoke-artifacts.mjs"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
+    "@types/node": "^24.5.2",
+    "@types/react": "^18.3.10",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.4.0",
+    "autoprefixer": "^10.4.20",
+    "concurrently": "^9.1.0",
+    "cross-env": "^7.0.3",
+    "electron": "^40.0.0",
+    "jsdom": "^26.1.0",
+    "postcss": "^8.4.41",
+    "playwright": "^1.54.2",
+    "tailwindcss": "^3.4.14",
+    "typescript": "^5.9.2",
+    "vite": "^6.0.1",
+    "vitest": "^3.2.4",
+    "wait-on": "^7.2.0"
+  },
+  "dependencies": {
+    "@walletconnect/ethereum-provider": "^2.23.4",
+    "clsx": "^2.1.1",
+    "ethers": "^6.16.0",
+    "lucide-react": "^0.453.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}

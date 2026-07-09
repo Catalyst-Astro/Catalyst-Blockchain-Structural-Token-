@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0a0a1a">
+<meta name="apple-mobile-web-app-title" content="Catalyst">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='38' fill='%230a0a1a'/%3E%3Crect x='5' y='5' width='170' height='170' rx='34' fill='none' stroke='%23ffd700' stroke-width='3'/%3E%3Ctext x='90' y='120' font-size='90' text-anchor='middle' fill='%23ffd700' font-family='system-ui' font-weight='900'%3EC%3C/text%3E%3C/svg%3E">
+<title>Catalyst Bank — iPhone 14 Pro</title>
+<style>
+:root{--gold:#ffd700;--cyan:#4af0ff;--bg:#0a0a1a;--card:#111122;--text:#e0e0e0}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:20px;padding-top:env(safe-area-inset-top,60px);padding-bottom:env(safe-area-inset-bottom,30px)}
+
+/* Dynamic Island safe area for iPhone 14 Pro */
+.iphone-frame{max-width:393px;width:100%}
+
+h1{font-size:28px;font-weight:900;text-align:center;margin:20px 0 8px}
+h1 span{color:var(--gold)}
+.sub{text-align:center;color:#666;font-size:14px;margin-bottom:24px}
+
+/* iPhone mockup */
+.mockup{background:var(--card);border-radius:28px;padding:3px;border:2px solid rgba(255,215,0,.2);margin:16px 0;position:relative}
+.mockup-screen{background:var(--bg);border-radius:26px;padding:20px;min-height:300px}
+.mockup-notch{width:120px;height:28px;background:#000;border-radius:0 0 16px 16px;margin:0 auto 12px;position:relative}
+.mockup-notch::after{content:'';width:10px;height:10px;background:#1a1aff;border-radius:50%;position:absolute;right:16px;top:9px}
+.mockup-app-icon{width:60px;height:60px;background:var(--bg);border-radius:14px;margin:12px auto;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:900;color:var(--gold);border:2px solid var(--gold)}
+.mockup-app-name{text-align:center;font-size:11px;color:var(--gray);margin-top:4px}
+
+/* Install steps */
+.steps{margin:20px 0}
+.step{background:var(--card);border-radius:16px;padding:18px;margin:10px 0;display:flex;align-items:center;gap:14px;border:1px solid rgba(255,255,255,.03)}
+.step-num{width:32px;height:32px;background:rgba(255,215,0,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px;color:var(--gold);flex-shrink:0}
+.step-text{flex:1}.step-text h3{font-size:15px;margin-bottom:2px}.step-text p{font-size:12px;color:var(--gray)}
+
+/* Install button */
+.btn-install{width:100%;padding:18px;background:linear-gradient(135deg,#0071e3,#005bb5);color:#fff;border:none;border-radius:16px;font-size:18px;font-weight:700;cursor:pointer;margin:20px 0;text-align:center;display:block;text-decoration:none;transition:.2s}
+.btn-install:active{transform:scale(.97);opacity:.8}
+.btn-install-gold{background:linear-gradient(135deg,var(--gold),#b8860b);color:#000}
+
+/* Install options */
+.options{margin:20px 0}
+.option{background:var(--card);border:1px solid rgba(255,255,255,.05);border-radius:14px;padding:16px;margin:8px 0;cursor:pointer;transition:.2s}
+.option:active{background:#1a1a35}
+.option-title{font-weight:700;font-size:15px}.option-desc{font-size:11px;color:var(--gray);margin-top:4px}
+.option-badge{display:inline-block;padding:3px 8px;border-radius:6px;font-size:10px;font-weight:700;margin-left:8px}
+.badge-easy{background:rgba(125,255,125,.15);color:#7dff7d}
+.badge-pro{background:rgba(255,215,0,.15);color:var(--gold)}
+
+/* Footer */
+.footer{text-align:center;color:#444;font-size:11px;margin-top:24px;padding-top:16px;border-top:1px solid rgba(255,255,255,.03)}
+.footer a{color:var(--cyan)}
+</style>
+</head>
+<body>
+
+<div class="iphone-frame">
+
+  <h1>CATALYST<span>.</span></h1>
+  <div class="sub">iPhone 14 Pro · Instalación Directa · Sin App Store</div>
+
+  <!-- iPhone mockup showing app -->
+  <div class="mockup">
+    <div class="mockup-screen">
+      <div class="mockup-notch"></div>
+      <div class="mockup-app-icon">C</div>
+      <div class="mockup-app-name">Catalyst Bank</div>
+      <div style="text-align:center;color:#666;font-size:11px;margin-top:8px">Wallet + NFC + QR + SWIFT</div>
+    </div>
+  </div>
+
+  <!-- Option 1: Safari Add to Home Screen (EASIEST) -->
+  <h2 style="font-size:16px;margin:20px 0 10px">Método 1 — El más rápido ⚡</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">
+        <h3>Abrir en Safari</h3>
+        <p>Abrí esta misma página en Safari (no Chrome, no otro navegador)</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">
+        <h3>Tocar Compartir 📤</h3>
+        <p>Barra inferior de Safari → ícono de Compartir (cuadrado con flecha)</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">
+        <h3>"Agregar a inicio"</h3>
+        <p>Deslizar hasta encontrar "Agregar a la pantalla de inicio" → Tocar</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-text">
+        <h3>LISTO — App instalada</h3>
+        <p>Aparece en tu pantalla de inicio. Abrila como cualquier app. Sin App Store.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Option 2: Configuration Profile -->
+  <h2 style="font-size:16px;margin:24px 0 10px">Método 2 — Perfil de Configuración 🛠️</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">
+        <h3>Descargar Perfil</h3>
+        <p><a href="catalyst-bank.mobileconfig" download style="color:var(--cyan)">Tocar para descargar catalyst-bank.mobileconfig</a></p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">
+        <h3>Ajustes → Perfil Descargado</h3>
+        <p>Ir a Ajustes → General → VPN y Gestión de Dispositivos → Catalyst Bank → Instalar</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">
+        <h3>Confiar en el Perfil</h3>
+        <p>Tocar "Instalar" → Ingresar código → La app aparece en tu pantalla</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Option 3: AltStore (Real IPA) -->
+  <h2 style="font-size:16px;margin:24px 0 10px">Método 3 — App Nativa (.ipa) 🔧</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">
+        <h3>Instalar AltStore en tu Mac/PC</h3>
+        <p><a href="https://altstore.io" target="_blank" style="color:var(--cyan)">altstore.io</a> — gratuito, open source</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">
+        <h3>Conectar iPhone por cable</h3>
+        <p>AltStore instala la app directamente en tu iPhone sin jailbreak</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">
+        <h3>Cargar el .ipa de Catalyst</h3>
+        <p>Necesitamos compilar el .ipa con Capacitor (ver abajo)</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Catalyst Bank · BELL 13450.50 · OSHIRO Protocols<br>
+    <a href="mobile-app.html">Abrir App Web</a> ·
+    <a href="verify-face.html">KYC Facial</a> ·
+    <a href="https://github.com/Catalyst-Astro/Catalyst-Blockchain-Structural-Token-">GitHub</a>
+  </div>
+
+</div>
+
+</body>
+</html>

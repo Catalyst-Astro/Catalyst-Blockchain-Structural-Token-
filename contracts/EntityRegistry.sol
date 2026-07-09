@@ -4,101 +4,86 @@ pragma solidity ^0.8.20;
 import "@openzeppelin/contracts/access/AccessControl.sol";
 
 /// @title EntityRegistry
-/// @notice Registers corporate entities and links operational wallets.
+/// @notice Classifies wallets as individual or corporate for compliance policies.
 contract EntityRegistry is AccessControl {
+    enum EntityType {
+        UNKNOWN,
+        INDIVIDUAL,
+        CORPORATE
+    }
+
     bytes32 public constant COMPLIANCE_ADMIN = keccak256("COMPLIANCE_ADMIN");
-    bytes32 public constant UBO_VERIFIER = keccak256("UBO_VERIFIER");
-    bytes32 public constant LEGAL_AUDITOR = keccak256("LEGAL_AUDITOR");
-    bytes32 public constant DAO_COUNCIL = keccak256("DAO_COUNCIL");
 
-    enum EntityStatus {
-        ACTIVE,
-        SUSPENDED,
-        CLOSED
-    }
+    mapping(address => EntityType) private entityTypeOf;
+    mapping(address => bytes32) private entityIdOf;
+    mapping(bytes32 => EntityType) private entityTypeById;
+    mapping(bytes32 => EntityRecord) private entities;
 
-    struct Entity {
-        bytes32 entityId;
-        bytes32 jurisdictionCode;
+    struct EntityRecord {
+        bytes32 jurisdiction;
         bytes32 typeCode;
-        EntityStatus status;
-        uint64 createdAt;
-        uint64 updatedAt;
+        bool active;
+        address[] wallets;
     }
 
-    mapping(bytes32 => Entity) private entities;
-    mapping(address => bytes32) private walletToEntity;
-
-    event EntityCreated(bytes32 indexed entityId, bytes32 indexed jurisdictionCode, bytes32 indexed typeCode);
-    event EntityStatusChanged(bytes32 indexed entityId, EntityStatus status);
-    event WalletLinked(bytes32 indexed entityId, address indexed wallet);
-    event WalletUnlinked(bytes32 indexed entityId, address indexed wallet);
+    event EntityTypeSet(address indexed wallet, EntityType entityType);
 
     constructor(address admin) {
         require(admin != address(0), "admin required");
         _grantRole(DEFAULT_ADMIN_ROLE, admin);
         _grantRole(COMPLIANCE_ADMIN, admin);
-        _grantRole(UBO_VERIFIER, admin);
-        _grantRole(LEGAL_AUDITOR, admin);
-        _grantRole(DAO_COUNCIL, admin);
-        _setRoleAdmin(UBO_VERIFIER, COMPLIANCE_ADMIN);
-        _setRoleAdmin(LEGAL_AUDITOR, COMPLIANCE_ADMIN);
-        _setRoleAdmin(DAO_COUNCIL, COMPLIANCE_ADMIN);
+        _setRoleAdmin(COMPLIANCE_ADMIN, DEFAULT_ADMIN_ROLE);
     }
 
-    function createEntity(bytes32 entityId, bytes32 jurisdictionCode, bytes32 typeCode)
-        external
-        onlyRole(COMPLIANCE_ADMIN)
-    {
-        require(entityId != bytes32(0), "entity id required");
-        require(entities[entityId].createdAt == 0, "entity exists");
-        require(jurisdictionCode != bytes32(0), "jurisdiction required");
-        require(typeCode != bytes32(0), "type required");
-
-        uint64 nowTs = uint64(block.timestamp);
-        entities[entityId] = Entity({
-            entityId: entityId,
-            jurisdictionCode: jurisdictionCode,
-            typeCode: typeCode,
-            status: EntityStatus.ACTIVE,
-            createdAt: nowTs,
-            updatedAt: nowTs
-        });
-
-        emit EntityCreated(entityId, jurisdictionCode, typeCode);
+    function setEntityType(address wallet, EntityType entityType) external onlyRole(COMPLIANCE_ADMIN) {
+        require(wallet != address(0), "wallet required");
+        entityTypeOf[wallet] = entityType;
+        bytes32 entityId = keccak256(abi.encodePacked(wallet));
+        entityIdOf[wallet] = entityId;
+        entityTypeById[entityId] = entityType;
+        emit EntityTypeSet(wallet, entityType);
     }
 
-    function setEntityStatus(bytes32 entityId, EntityStatus status) external onlyRole(COMPLIANCE_ADMIN) {
-        require(entities[entityId].createdAt != 0, "entity missing");
-        entities[entityId].status = status;
-        entities[entityId].updatedAt = uint64(block.timestamp);
-        emit EntityStatusChanged(entityId, status);
+    /// @notice Legacy support to create a corporate entity with metadata.
+    function createEntity(bytes32 entityId, bytes32 jurisdiction, bytes32 typeCode) external onlyRole(COMPLIANCE_ADMIN) {
+        require(entityId != bytes32(0), "entityId required");
+        EntityRecord storage rec = entities[entityId];
+        rec.jurisdiction = jurisdiction;
+        rec.typeCode = typeCode;
+        rec.active = true;
+        entityTypeById[entityId] = EntityType.CORPORATE;
     }
 
+    /// @notice Legacy support to bind a wallet to an entityId; marks wallet as CORPORATE.
     function linkWallet(bytes32 entityId, address wallet) external onlyRole(COMPLIANCE_ADMIN) {
-        require(entities[entityId].createdAt != 0, "entity missing");
+        require(entityId != bytes32(0), "entityId required");
         require(wallet != address(0), "wallet required");
-        walletToEntity[wallet] = entityId;
-        emit WalletLinked(entityId, wallet);
+        EntityRecord storage rec = entities[entityId];
+        require(rec.active, "entity not active");
+        rec.wallets.push(wallet);
+        entityIdOf[wallet] = entityId;
+        entityTypeOf[wallet] = EntityType.CORPORATE;
+        entityTypeById[entityId] = EntityType.CORPORATE;
+        emit EntityTypeSet(wallet, EntityType.CORPORATE);
     }
 
-    function unlinkWallet(address wallet) external onlyRole(COMPLIANCE_ADMIN) {
-        require(wallet != address(0), "wallet required");
-        bytes32 entityId = walletToEntity[wallet];
-        require(entityId != bytes32(0), "wallet not linked");
-        delete walletToEntity[wallet];
-        emit WalletUnlinked(entityId, wallet);
+    function typeOf(address wallet) external view returns (EntityType) {
+        return entityTypeOf[wallet];
     }
 
+    /// @notice Backwards compatibility: returns true when an entity type is set.
+    function isActive(address wallet) external view returns (bool) {
+        return entityTypeOf[wallet] != EntityType.UNKNOWN;
+    }
+
+    /// @notice Returns the derived entity id for a wallet.
     function entityOf(address wallet) external view returns (bytes32) {
-        return walletToEntity[wallet];
+        return entityIdOf[wallet];
     }
 
-    function getEntity(bytes32 entityId) external view returns (Entity memory) {
-        return entities[entityId];
-    }
-
+    /// @notice Legacy compatibility: checks whether an entityId has a registered type.
     function isActive(bytes32 entityId) external view returns (bool) {
-        return entities[entityId].status == EntityStatus.ACTIVE;
+        EntityRecord storage rec = entities[entityId];
+        return rec.active || entityTypeById[entityId] != EntityType.UNKNOWN;
     }
 }

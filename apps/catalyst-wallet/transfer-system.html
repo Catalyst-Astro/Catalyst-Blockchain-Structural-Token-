@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0a0a1a">
+<title>Catalyst Transfer System</title>
+<style>
+:root{--gold:#ffd700;--cyan:#4af0ff;--red:#ff6b6b;--green:#7dff7d;--bg:#0a0a1a;--card:#111122;--text:#e0e0e0;--gray:#666;--phi:1.618}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);max-width:420px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
+.header{display:flex;justify-content:space-between;align-items:center;padding:16px;border-bottom:1px solid rgba(255,255,255,.05)}
+.header h1{font-size:20px}.header h1 span{color:var(--gold)}
+.back-btn{background:none;border:none;color:var(--cyan);font-size:15px;cursor:pointer}
+.content{flex:1;overflow-y:auto;padding:16px;-webkit-overflow-scrolling:touch}
+
+/* Transfer Type Selector */
+.transfer-types{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.type-card{background:var(--card);border:2px solid rgba(255,255,255,.05);border-radius:14px;padding:16px;text-align:center;cursor:pointer;transition:.2s}
+.type-card.active{border-color:var(--gold);background:rgba(255,215,0,.05)}
+.type-card .icon{font-size:28px;margin-bottom:6px}
+.type-card .label{font-size:13px;font-weight:700}
+.type-card .desc{font-size:10px;color:var(--gray);margin-top:4px}
+
+/* Form */
+.form-section{background:var(--card);border-radius:16px;padding:20px;margin:12px 0;border:1px solid rgba(255,255,255,.05)}
+.form-label{font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:1px;margin:12px 0 4px}
+.form-input, .form-select{width:100%;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;color:#fff;padding:14px;font-size:16px;outline:none;transition:.2s}
+.form-input:focus,.form-select:focus{border-color:var(--gold)}
+.form-select{appearance:none;-webkit-appearance:none;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23666' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E\");background-repeat:no-repeat;background-position:right 14px center}
+
+/* Rate display */
+.rate-box{display:flex;justify-content:space-between;align-items:center;padding:12px;background:rgba(74,240,255,.05);border-radius:10px;margin:12px 0}
+.rate-label{font-size:12px;color:var(--cyan)}.rate-value{font-weight:700;font-size:15px}
+
+/* Send button */
+.btn-send{width:100%;padding:18px;background:linear-gradient(135deg,var(--gold),#b8860b);color:#000;border:none;border-radius:14px;font-size:17px;font-weight:900;cursor:pointer;margin:16px 0;transition:.2s}
+.btn-send:active{transform:scale(.97)}
+.btn-send:disabled{opacity:.4;cursor:not-allowed}
+
+/* Result */
+.result-box{text-align:center;padding:20px;margin:16px 0;border-radius:14px;display:none}
+.result-success{background:rgba(125,255,125,.08);border:1px solid rgba(125,255,125,.2);display:block}
+.result-pending{background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.2);display:block}
+.result-error{background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.2);display:block}
+.result-amount{font-size:36px;font-weight:900}
+.result-detail{font-size:12px;color:var(--gray);margin-top:6px;font-family:monospace}
+
+/* History */
+.tx-list{margin-top:20px}
+.tx-card{display:flex;align-items:center;justify-content:space-between;padding:14px;background:var(--card);border-radius:12px;margin:6px 0;border:1px solid rgba(255,255,255,.03)}
+.tx-left{display:flex;align-items:center;gap:10px}
+.tx-dir{font-size:22px}
+.tx-info{line-height:1.3}.tx-to{font-size:13px;font-weight:600}.tx-date{font-size:10px;color:var(--gray)}
+.tx-right{text-align:right}.tx-amount{font-weight:700;font-size:14px}
+
+/* Toast */
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:var(--gold);color:#000;padding:12px 28px;border-radius:30px;font-weight:700;z-index:999;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1}
+
+/* Repo references */
+.refs{margin-top:24px;padding-top:16px;border-top:1px solid rgba(255,255,255,.05)}
+.refs-title{font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px}
+.ref-link{display:block;font-size:11px;color:var(--cyan);text-decoration:none;padding:4px 0}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>💸 <span>Transferir</span></h1>
+  <button class="back-btn" onclick="window.location='mobile-app.html'">← Wallet</button>
+</div>
+
+<div class="content">
+  <!-- Transfer Types -->
+  <div class="transfer-types">
+    <div class="type-card active" id="typeP2P" onclick="setType('P2P')">
+      <div class="icon">👤→👤</div>
+      <div class="label">P2P / CLABE</div>
+      <div class="desc">Transferir a otra cuenta</div>
+    </div>
+    <div class="type-card" id="typeQR" onclick="setType('QR')">
+      <div class="icon">📷 QR</div>
+      <div class="label">QR 95516</div>
+      <div class="desc">Escanear código QR</div>
+    </div>
+    <div class="type-card" id="typeSWIFT" onclick="setType('SWIFT')">
+      <div class="icon">🏦 SWIFT</div>
+      <div class="label">Internacional</div>
+      <div class="desc">MT103 a otro banco</div>
+    </div>
+    <div class="type-card" id="typeNFC" onclick="setType('NFC')">
+      <div class="icon">📳 NFC</div>
+      <div class="label">Contactless</div>
+      <div class="desc">Tap-to-Pay</div>
+    </div>
+  </div>
+
+  <!-- P2P / CLABE Form -->
+  <div id="formP2P" class="form-section">
+    <div class="form-label">De (Token)</div>
+    <select class="form-select" id="fromToken" onchange="updatePreview()">
+      <option value="GNC">GNC — Ganancia Token (1 GNC = 1 CNY)</option>
+      <option value="CTV">CTV — Token Cautivo (1 CTV = 1000 CNY)</option>
+      <option value="CAT">CAT — Catalyst Token</option>
+      <option value="MXN">MXN — Peso Mexicano (BBVA)</option>
+    </select>
+
+    <div class="form-label">Monto</div>
+    <input type="number" class="form-input" id="amount" value="10000" oninput="updatePreview()" placeholder="0">
+
+    <div class="form-label">Para (CLABE o Cuenta)</div>
+    <input type="text" class="form-input" id="destination" value="012290015202390246" oninput="updatePreview()" placeholder="CLABE 18 dígitos">
+
+    <div class="form-label">Concepto</div>
+    <input type="text" class="form-input" id="concept" value="Transferencia Catalyst" placeholder="Concepto">
+
+    <div class="rate-box">
+      <span class="rate-label" id="rateLabel">Rate</span>
+      <span class="rate-value" id="rateValue">1 GNC = 2.76 MXN</span>
+    </div>
+
+    <div class="rate-box">
+      <span class="rate-label">Fee</span>
+      <span class="rate-value" id="feeAmount">0.15% = 15 CNY</span>
+    </div>
+
+    <div class="rate-box" style="background:rgba(255,215,0,.05)">
+      <span class="rate-label" style="color:var(--gold)">Recibirá</span>
+      <span class="rate-value" style="color:var(--gold)" id="previewAmount">$27,600 MXN</span>
+    </div>
+
+    <button class="btn-send" onclick="executeTransfer()">⚡ ENVIAR TRANSFERENCIA</button>
+
+    <div class="result-box" id="resultBox">
+      <div class="result-amount" id="resultAmount"></div>
+      <div class="result-detail" id="resultDetail"></div>
+    </div>
+  </div>
+
+  <!-- QR Form (hidden by default) -->
+  <div id="formQR" class="form-section" style="display:none">
+    <div class="form-label">QR de qr.95516.com</div>
+    <div style="width:150px;height:150px;background:#fff;margin:12px auto;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#000;text-align:center" id="qrDisplay">
+      QR 95516<br>Escanea con<br>UnionPay/AliPay
+    </div>
+    <div class="form-label">QR ID</div>
+    <input type="text" class="form-input" id="qrId" readonly value="qr.95516.com/pay?id=8dc63036fdbe9d60">
+    <div class="form-label">Monto CNY</div>
+    <input type="number" class="form-input" id="qrAmount" value="100000">
+    <button class="btn-send" onclick="executeQR()">📷 GENERAR QR + ENVIAR</button>
+    <div class="result-box" id="resultBoxQR"></div>
+  </div>
+
+  <!-- SWIFT Form -->
+  <div id="formSWIFT" class="form-section" style="display:none">
+    <div class="form-label">SWIFT Emisor</div>
+    <input type="text" class="form-input" value="UNPYCNBH (UnionPay China)" readonly>
+    <div class="form-label">SWIFT Receptor</div>
+    <input type="text" class="form-input" value="BCRMXMMPYM (BBVA Mexico)" readonly>
+    <div class="form-label">CLABE Destino</div>
+    <input type="text" class="form-input" id="swiftClabe" value="012290015202390246">
+    <div class="form-label">Monto CNY</div>
+    <input type="number" class="form-input" id="swiftAmount" value="100000">
+    <button class="btn-send" onclick="executeSWIFT()">🏦 EMITIR MT103</button>
+    <div class="result-box" id="resultBoxSWIFT"></div>
+  </div>
+
+  <!-- NFC Form -->
+  <div id="formNFC" class="form-section" style="display:none">
+    <div style="text-align:center;padding:30px">
+      <div style="width:100px;height:100px;border:3px solid var(--cyan);border-radius:50%;margin:0 auto 20px;animation:nfc 1.5s infinite"></div>
+      <style>@keyframes nfc{0%{transform:scale(.8);opacity:1;box-shadow:0 0 40px rgba(74,240,255,.3)}100%{transform:scale(1.2);opacity:0;box-shadow:0 0 0px rgba(74,240,255,0)}}</style>
+      <div style="font-size:18px;font-weight:700">NFC ACTIVO</div>
+      <div style="color:var(--gray);margin:8px 0">Acerque su dispositivo al terminal</div>
+      <div class="form-label">Monto a Pagar (MXN)</div>
+      <input type="number" class="form-input" id="nfcAmount" value="1000" style="text-align:center;font-size:24px">
+      <button class="btn-send" onclick="executeNFC()" style="margin-top:16px">📳 TAP TO PAY</button>
+    </div>
+    <div class="result-box" id="resultBoxNFC"></div>
+  </div>
+
+  <!-- Recent Transfers -->
+  <div class="tx-list">
+    <div style="font-size:13px;color:var(--gray);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px">Transferencias Recientes</div>
+    <div id="historyList"></div>
+  </div>
+
+  <!-- References -->
+  <div class="refs">
+    <div class="refs-title">Sistema basado en patrones open source</div>
+    <a class="ref-link" href="https://github.com/ADORSYS-GIS/webank" target="_blank">• WEBANK — PWA Mobile Banking (Mifos)</a>
+    <a class="ref-link" href="https://github.com/SaamNoLimits/Digital-Wallet" target="_blank">• Digital-Wallet Horizon — Plaid + Dwolla</a>
+    <a class="ref-link" href="https://github.com/TheSupermanish/superpay-arc" target="_blank">• SuperPay — QR + Solana</a>
+    <a class="ref-link" href="https://github.com/altaga/GHOcard" target="_blank">• GHOcard — NFC + QR + Crypto/Fiat</a>
+    <a class="ref-link" href="https://github.com/devnick10/pay-wallet" target="_blank">• pay-wallet — P2P Transfer System</a>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// CATALYST TRANSFER SYSTEM — Multi-Method
+// ═══════════════════════════════════════════════════════════
+
+const CAT_USD=0.10, USD_MXN=20, USD_CNY=7.25;
+let currentType='P2P';
+const history = [];
+
+function setType(type){
+  currentType=type;
+  document.querySelectorAll('.type-card').forEach(c=>c.classList.remove('active'));
+  document.getElementById('type'+type).classList.add('active');
+  ['formP2P','formQR','formSWIFT','formNFC'].forEach(f=>document.getElementById(f).style.display='none');
+  document.getElementById('form'+type).style.display='block';
+  if(type==='QR') generateQR();
+}
+
+function getRate(from){
+  if(from==='GNC') return (1/USD_CNY)*USD_MXN; // GNC=CNY -> MXN
+  if(from==='CTV') return 1000*(1/USD_CNY)*USD_MXN; // CTV=1000CNY -> MXN
+  if(from==='CAT') return CAT_USD*USD_MXN; // CAT -> MXN
+  return 1; // MXN -> MXN
+}
+
+function updatePreview(){
+  const from=document.getElementById('fromToken').value;
+  const amt=parseFloat(document.getElementById('amount').value)||0;
+  const rate=getRate(from);
+  const fee=amt*0.0015;
+  const net=(amt-fee)*rate;
+  document.getElementById('rateLabel').textContent=`Rate (${from} → MXN)`;
+  document.getElementById('rateValue').textContent=`1 ${from} = ${rate.toFixed(2)} MXN`;
+  document.getElementById('feeAmount').textContent=`0.15% = ${fee.toFixed(2)} ${from==='MXN'?'MXN':'CNY'}`;
+  document.getElementById('previewAmount').textContent='$'+net.toLocaleString('es-MX',{maximumFractionDigits:0})+' MXN';
+}
+
+function validateCLABE(clabe){
+  if(clabe.length!==18||!/^\d+$/.test(clabe))return false;
+  const p=[3,7,1,3,7,1,3,7,1,3,7,1,3,7,1,3,7];
+  let s=0;for(let i=0;i<17;i++)s+=parseInt(clabe[i])*p[i];
+  const m=s%10,dv=m===0?0:10-m;
+  return dv===parseInt(clabe[17]);
+}
+
+function executeTransfer(){
+  const from=document.getElementById('fromToken').value;
+  const amt=parseFloat(document.getElementById('amount').value)||0;
+  const dest=document.getElementById('destination').value;
+  const concept=document.getElementById('concept').value;
+  const rate=getRate(from);
+  const fee=amt*0.0015;
+  const net=(amt-fee)*rate;
+  const clabeOK=validateCLABE(dest);
+  const result=document.getElementById('resultBox');
+  const ref='TX-'+Date.now().toString(36).toUpperCase();
+
+  if(!clabeOK&&from!=='MXN'){
+    result.className='result-box result-error';
+    result.querySelector('#resultAmount').textContent='CLABE INVALIDA';
+    result.querySelector('#resultDetail').textContent='Verifique los 18 digitos';
+    return;
+  }
+
+  result.className='result-box result-success';
+  result.querySelector('#resultAmount').textContent='$'+net.toLocaleString('es-MX',{maximumFractionDigits:0})+' MXN';
+  result.querySelector('#resultDetail').textContent='REF: '+ref+' | Destino: '+dest.slice(0,6)+'... | Fee: '+fee.toFixed(2)+' | SWIFT: BCRMXMMPYM';
+
+  history.unshift({dir:'out',to:dest.slice(0,6)+'...',date:new Date().toLocaleDateString('es-MX'),amt:net,curr:'MXN',ref});
+  renderHistory();
+  showToast('Transferencia '+ref+' enviada');
+}
+
+function generateQR(){
+  const qrId='qr'+Math.random().toString(36).substring(2,14);
+  document.getElementById('qrId').value='qr.95516.com/pay?id='+qrId;
+  document.getElementById('qrDisplay').innerHTML='QR 95516<br>ID: '+qrId+'<br>UnionPay/AliPay';
+}
+
+function executeQR(){
+  const amt=parseFloat(document.getElementById('qrAmount').value)||0;
+  const qrId=document.getElementById('qrId').value;
+  const cat=Math.round(amt/0.686343);
+  const burn=Math.round(cat*0.05);
+  const ref='QR-'+Date.now().toString(36).toUpperCase();
+  const result=document.getElementById('resultBoxQR');
+
+  result.className='result-box result-success';
+  result.innerHTML='<div class="result-amount" style="color:var(--green)">'+amt.toLocaleString()+' CNY</div><div class="result-detail">REF: '+ref+' | CAT: '+cat.toLocaleString()+' | BURN: '+burn.toLocaleString()+' CAT | '+qrId+'</div>';
+
+  history.unshift({dir:'out',to:'qr.95516.com',date:new Date().toLocaleDateString('es-MX'),amt:cat,curr:'CAT',ref});
+  renderHistory();
+  showToast('QR payment '+ref+' processed');
+}
+
+function executeSWIFT(){
+  const clabe=document.getElementById('swiftClabe').value;
+  const amt=parseFloat(document.getElementById('swiftAmount').value)||0;
+  const clabeOK=validateCLABE(clabe);
+  const uetr='UETR'+Math.random().toString(36).substring(2,10).toUpperCase();
+  const result=document.getElementById('resultBoxSWIFT');
+
+  if(!clabeOK){
+    result.className='result-box result-error';
+    result.innerHTML='<div class="result-amount">CLABE INVALIDA</div><div class="result-detail">Verifique la CLABE de 18 digitos</div>';
+    return;
+  }
+
+  result.className='result-box result-pending';
+  result.innerHTML='<div class="result-amount" style="color:var(--gold)">MT103 EMITIDO</div><div class="result-detail">SWIFT: UNPYCNBH → BCRMXMMPYM | UETR: '+uetr+' | Monto: '+amt.toLocaleString()+' CNY | Liquidacion: 24-48h | CLABE: '+clabe.slice(0,6)+'...</div>';
+
+  history.unshift({dir:'out',to:'SWIFT/'+clabe.slice(0,6),date:new Date().toLocaleDateString('es-MX'),amt,curr:'CNY',ref:uetr});
+  renderHistory();
+  showToast('MT103 '+uetr+' emitido');
+}
+
+function executeNFC(){
+  const amt=parseFloat(document.getElementById('nfcAmount').value)||0;
+  const ref='NFC-'+Date.now().toString(36).toUpperCase();
+  const result=document.getElementById('resultBoxNFC');
+
+  result.className='result-box result-success';
+  result.innerHTML='<div class="result-amount">$'+amt.toLocaleString()+' MXN</div><div class="result-detail">REF: '+ref+' | TAP COMPLETO | Terminal: qr.95516.com | Tarjeta: CATALYST VISA 4246</div>';
+
+  history.unshift({dir:'out',to:'NFC Terminal',date:new Date().toLocaleDateString('es-MX'),amt,curr:'MXN',ref});
+  renderHistory();
+  showToast('NFC '+ref+' aprobado');
+}
+
+function renderHistory(){
+  document.getElementById('historyList').innerHTML=history.slice(0,8).map(tx=>`
+    <div class="tx-card">
+      <div class="tx-left">
+        <div class="tx-dir">${tx.dir==='out'?'📤':'📥'}</div>
+        <div class="tx-info">
+          <div class="tx-to">${tx.to}</div>
+          <div class="tx-date">${tx.date} · ${tx.ref}</div>
+        </div>
+      </div>
+      <div class="tx-right">
+        <div class="tx-amount" style="color:${tx.dir==='out'?'var(--red)':'var(--green)'}">${tx.amt.toLocaleString()} ${tx.curr}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+// Init
+updatePreview();
+renderHistory();
+</script>
+</body>
+</html>

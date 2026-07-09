@@ -1,0 +1,35 @@
+{
+  "formatVersion": 1,
+  "passTypeIdentifier": "pass.com.catalyst.bank.card",
+  "serialNumber": "CAT-VISA-001",
+  "teamIdentifier": "CATALYST",
+  "organizationName": "Catalyst Blockchain Labs S.A. de C.V.",
+  "description": "Catalyst Visa Infinite — Tarjeta de Credito",
+  "foregroundColor": "#ffffff",
+  "backgroundColor": "#0a0a2e",
+  "labelColor": "#3b82f6",
+  "logoText": "CATALYST BANK",
+  "barcode": {
+    "format": "PKBarcodeFormatCode128",
+    "message": "4761122024000005|062030|049",
+    "altText": "4761 1220 2400 0005"
+  },
+  "storeCard": {
+    "primaryFields": [
+      { "key": "cardholder", "label": "TITULAR", "value": "MAURICIO RODRIGUEZ TELLEZ" },
+      { "key": "pan", "label": "TARJETA", "value": "4761 1220 2400 0005" }
+    ],
+    "secondaryFields": [
+      { "key": "network", "label": "RED", "value": "Visa Infinite" },
+      { "key": "expiry", "label": "VENCE", "value": "06/2030" }
+    ],
+    "backFields": [
+      { "key": "clabe", "label": "CLABE", "value": "012290015202390246" },
+      { "key": "swift", "label": "SWIFT", "value": "BCRMXMMPYM" },
+      { "key": "cvv", "label": "CVV DINAMICO", "value": "Actualiza cada 5 min" }
+    ]
+  },
+  "locations": [
+    { "latitude": 20.1168, "longitude": -98.7333, "relevantText": "BBVA Pachuca Suc. 290 — Moscato 185, Zempoala" }
+  ]
+}

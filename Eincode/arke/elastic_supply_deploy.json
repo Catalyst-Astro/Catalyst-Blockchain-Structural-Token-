@@ -1,0 +1,66 @@
+{
+  "protocol": "ELASTIC_TOKEN_SUPPLY_V2",
+  "version": "2.0",
+  "timestamp": "2026-07-09T02:41:38.488Z",
+  "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+  "economicOracle": "0x4A679253410272dd5232B3Ff7cF5dbB88f295319",
+  "elasticTokens": [
+    {
+      "name": "EconomicExpansionOracle",
+      "address": "0x4A679253410272dd5232B3Ff7cF5dbB88f295319",
+      "supply": "N/A — Oracle"
+    },
+    {
+      "name": "ElasticCatalystToken",
+      "address": "0xc5a5C42992dECbae36851359345FE25997F5C42d",
+      "supply": "ELASTIC — floor 1B CAT"
+    },
+    {
+      "name": "ElasticGananciaToken",
+      "address": "0x67d269191c92Caf3cD7723F116c85e6E9bf55933",
+      "supply": "ELASTIC — 1:1 CNY backing"
+    },
+    {
+      "name": "ElasticTokenCautivo",
+      "address": "0xE6E340D132b5f46d1e472DebcD681B2aBc16e57E",
+      "supply": "ELASTIC — GNC bridge"
+    },
+    {
+      "name": "ElasticAIMToken",
+      "address": "0x84eA74d481Ee0A5332c457a4d796187F6Ba67fEB",
+      "supply": "ELASTIC — AI demand"
+    }
+  ],
+  "supplyModel": {
+    "description": "All tokens now have ELASTIC supply — NO fixed MAX_SUPPLY",
+    "formula": {
+      "CAT": "elasticCap = 1B floor + (CNY_processed × 1.457) + (CAT_burned × 0.05)",
+      "GNC": "elasticCap = 1M floor + totalCnyBacked × 1.2 (20% buffer)",
+      "CTV": "elasticCap = 18B floor + GNC_cap / 1000",
+      "AIM": "elasticCap = 1B floor + totalAIBurned × 1.5 (50% buffer)"
+    },
+    "expansionDrivers": [
+      "CNY cross-border payment volume (UnionPay QR)",
+      "CAT burn rate (deflation enables inflation)",
+      "GNC treasury backing growth",
+      "AI compute consumption (AIM burns)",
+      "QR triggers processed"
+    ],
+    "hardCap": "NONE — Supply grows with the economy"
+  },
+  "economicIndicators": {
+    "totalCnyProcessed": "855986554770.0",
+    "totalMxnSettled": "2358746941497.0",
+    "totalCatBurned": "118288584.0",
+    "totalGncBacked": "855986554770.0",
+    "totalQrTransactions": "34"
+  },
+  "elasticCaps": {
+    "CAT": "1247791572047.09",
+    "GNC": "18000000000000.0",
+    "CTV": "18000000000.0",
+    "AIM": "1000000000.0"
+  },
+  "masterSeal": "178df6cac6e4ac31cf1565c2316acb10ff0beee19e870898c6126232e11b6522",
+  "status": "ELASTIC_SUPPLY_ACTIVATED"
+}

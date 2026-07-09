@@ -1,0 +1,308 @@
+{
+  "sistema": "UTF-38 PROTECTED PAN AM BEARER CHECK SYSTEM",
+  "proteccion": "UTF-38 Block Cipher + SHA-256 5-Layer Proof Chain",
+  "fecha": "2026-06-23",
+  "encriptacion": {
+    "algoritmo": "UTF-38 — Custom 38-bit block cipher",
+    "operaciones": "XOR with derived key + 19-bit rotation per block",
+    "key_derivation": "SHA-256(master_key) -> 38-bit LSB",
+    "encoding": "UTF-8 plaintext -> 38-bit blocks -> XOR+rotate -> Base64",
+    "proof_chain": "5-layer SHA-256 (identity, amount, utf38_block, bearer, final)",
+    "tamper_proof": "Cualquier alteracion en el ciphertext rompe el proof chain"
+  },
+  "total_cheques": 10,
+  "todos_integros": false,
+  "cheques": [
+    {
+      "check_id": "PANAM-UTF38-2001",
+      "monto_mxn": 5000,
+      "beneficiario": "AL PORTADOR",
+      "fecha": "2026-06-23",
+      "clabe": "012290015202390259",
+      "ubicacion": "OXXO Pachuca Centro",
+      "nonce": "e30c848adbf5",
+      "utf38_protection": {
+        "version": "UTF-38 v1.0",
+        "cipher": "UTF-38 block cipher (38-bit blocks, XOR+rotation, SHA-256 chain)",
+        "encrypted_payload": "AAAAHD3siJkAAAAsRoObRgAAABXa0+EzAAAAGeU7Fs4AAAA4aZUwiAAAADrQm/kIAAAAHPN+QJwAAAAz7Gs8hgAAABCzRarBAAAAMNeTEc4AAAA9XZhxLAAAAAE2XdlMAAAAOJV2wAsAAAAJxoMJygAAABRTcWE7AAAACXa4FY4AAAAql1bAGwAAAAHvLzPgAAAAPvF2SBYAAAAJljH2rgAAABIx5kK5AAAABecnk84AAAAesfZIkgAAACmeoveMAAAAALd2yJsAAAAvzQOLVAAAADf68P48AAAAGV6zFs4AAAAAt3bQCwAAAC/Gg41UAAAAHPN9wJcAAAAb7vP37AAAABo/9vBJAAAACeEjneAAAAA0uh9AsAAAAAO8Sz2mAAAALLd0IJsAAAA00KPPOgAAADSaP3m6AAAAEfUp/eYAAAAwE+x6+QAAABj3MRVw",
+        "payload_hash": "e88b769a07660416bdbc6215153de5f2fe9a3663619c82854e6818a4be7c369e",
+        "proof_chain": {
+          "p1": "947e1ae029374b1b98e9b5234cfa7925adeb09b8d24ab80bd4543d0ebcf157c4",
+          "p2": "04b7203e2538fcb0d36681bcc1b4e8516d303ae71d929bca37e294fc52a54486",
+          "p3": "c3710cb17dddbd16d86837cc7e341704910e4bbd096444d0687d6a553660f1ec",
+          "p4": "0626691b1d494224024e00201a6d8e2fc15dc011d5c17da9bd34bf8e1fbbfaac",
+          "p5": "3f85af94cf685607586a5fd939eecfbe9ea910c816a9b9a19fac8b8e678b3937"
+        },
+        "decoded_size": 197,
+        "utf8_encoded": true,
+        "38bit_blocks": 42,
+        "master_key_hash": "ba8c531ee67adc2059cce7887e647bc0d81a7c40083269aa19e881aa10587947",
+        "verification_code": "6502714EB1AE22AC"
+      },
+      "integrity_verified": false,
+      "qrcode_data": "CATALYST|PANAM|UTF38|3f85af94cf685607586a5fd939eecfbe|5000|OXXO Pachuca Centro"
+    },
+    {
+      "check_id": "PANAM-UTF38-2002",
+      "monto_mxn": 10000,
+      "beneficiario": "AL PORTADOR",
+      "fecha": "2026-06-23",
+      "clabe": "012290015202390259",
+      "ubicacion": "BBVA Suc. 290",
+      "nonce": "7f8dcd67d0e2",
+      "utf38_protection": {
+        "version": "UTF-38 v1.0",
+        "cipher": "UTF-38 block cipher (38-bit blocks, XOR+rotation, SHA-256 chain)",
+        "encrypted_payload": "AAAAHD3siJkAAAAsRoObRgAAABXa0+EzAAAAGeU7Fs4AAAA4aZUwiAAAADrQm/kIAAAAHPN+QJwAAAAz7Gs8hgAAABCzRarBAAAAMNeTEc4AAAA9XZhxLAAAAAE2XdlMAAAAOJN2wAsAAAAJxoMJygAAABRTcWE7AAAACXa4FY4AAAAql1bAGwAAAAHvLzPgAAAAPvF2SBYAAAAJljH2rgAAABIx5kK5AAAABecnk84AAAAesfZIkgAAACmeoveMAAAAALd2yJsAAAAvzQOLVAAAADf68P48AAAAGX6zFs4AAAA4r3bQCwAAAC9ABxVWAAAAH7M24xsAAAApNBMXZgAAADSZ/EqrAAAAAeYnMUAAAAAWW3lBmwAAABPsen3mAAAAHIN0KvsAAAA53BcVDgAAADZbV8GjAAAACT6ylYwAAAAY9zZCYg==",
+        "payload_hash": "de5dd5857981175a6df593aa7b9b2302e5cca556ce5e15dd0c2663da8442e6fb",
+        "proof_chain": {
+          "p1": "cea4f027842198206262fd8f31585f2f243f7a61a1bc8aa2ad3af68a41c35a87",
+          "p2": "7e4153e99ac0d7b86f0e48a0ed7c2c39cd33ffc63588263c7231c7b4d5a67d4a",
+          "p3": "074c4788620c4d52febfd25d20ac8d20c917ce98eab69a24edeebe415332824f",
+          "p4": "2e75de491643785ccad4d89ffbab5b5cdbb6a9b6249b8dafac7bf9dd11801beb",
+          "p5": "fa08c772491258e48062d09420f30706219d4f3aed944b5205e693527f623ca2"
+        },
+        "decoded_size": 192,
+        "utf8_encoded": true,
+        "38bit_blocks": 41,
+        "master_key_hash": "ba8c531ee67adc2059cce7887e647bc0d81a7c40083269aa19e881aa10587947",
+        "verification_code": "C3A17EC30A5EC49F"
+      },
+      "integrity_verified": false,
+      "qrcode_data": "CATALYST|PANAM|UTF38|fa08c772491258e48062d09420f30706|10000|BBVA Suc. 290"
+    },
+    {
+      "check_id": "PANAM-UTF38-2003",
+      "monto_mxn": 25000,
+      "beneficiario": "AL PORTADOR",
+      "fecha": "2026-06-23",
+      "clabe": "012290015202390259",
+      "ubicacion": "7-Eleven Blvd Marquez",
+      "nonce": "f36150d27cb9",
+      "utf38_protection": {
+        "version": "UTF-38 v1.0",
+        "cipher": "UTF-38 block cipher (38-bit blocks, XOR+rotation, SHA-256 chain)",
+        "encrypted_payload": "AAAAHD3siJkAAAAsRoObRgAAABXa0+EzAAAAGeU7Fs4AAAA4aZUwiAAAADrQm/kIAAAAHPN+QJwAAAAz7Gs8hgAAABCzRarBAAAAMNeTEc4AAAA9XZhxLAAAAAE2XdlMAAAAOJF2wAsAAAAJxoMJygAAABRTcWE7AAAACXa4FY4AAAAql1bAGwAAAAHvLzPgAAAAPvF2SBYAAAAJljH2rgAAABIx5kK5AAAABecnk84AAAAesfZIkgAAACmeoveMAAAAALd2yJsAAAAvzQOLVAAAADf68P48AAAAGWabFs4AAAA4r3bQCwAAAC9ABxVWAAAAH7M24xsAAAABRrsdTAAAABCTXvgJAAAABGYhl04AAAAWW3lBmwAAABPsen3mAAAAHIN0KvsAAAAOVYcV5AAAABRa8WMxAAAAO0QTWccAAAAaE9ZT4QAAACXmDbtAAAAAGPcx0Yo=",
+        "payload_hash": "1348be65790bd3f21f4f06291c93e0c825dfed1f55035d917594eec1a0c08d5c",
+        "proof_chain": {
+          "p1": "0ad5aaf81262468d3f23771468bef95cfef89b6488adf9f37e999f45e0cc158f",
+          "p2": "67eb40aaeb2f88c8b2cef9232a60919a8f1b99053a4a2691f246273dbda1ceb7",
+          "p3": "33eda15f5173933aea7cb376e9be8f65d71a3fd00f7bd133d64367be3d9bc380",
+          "p4": "f9ac66c406998e43781abc0248deb8f4d06df97467bdd9d55c2acab8afcac0ec",
+          "p5": "3bfcdda8d7b7884a172dcb5a245f033d6a8749e49d2b897cdf20186580edfceb"
+        },
+        "decoded_size": 200,
+        "utf8_encoded": true,
+        "38bit_blocks": 43,
+        "master_key_hash": "ba8c531ee67adc2059cce7887e647bc0d81a7c40083269aa19e881aa10587947",
+        "verification_code": "EBF6F77846D97222"
+      },
+      "integrity_verified": false,
+      "qrcode_data": "CATALYST|PANAM|UTF38|3bfcdda8d7b7884a172dcb5a245f033d|25000|7-Eleven Blvd Marquez"
+    },
+    {
+      "check_id": "PANAM-UTF38-2004",
+      "monto_mxn": 50000,
+      "beneficiario": "AL PORTADOR",
+      "fecha": "2026-06-23",
+      "clabe": "012290015202390259",
+      "ubicacion": "Santander Pachuca",
+      "nonce": "2e600e6d5905",
+      "utf38_protection": {
+        "version": "UTF-38 v1.0",
+        "cipher": "UTF-38 block cipher (38-bit blocks, XOR+rotation, SHA-256 chain)",
+        "encrypted_payload": "AAAAHD3siJkAAAAsRoObRgAAABXa0+EzAAAAGeU7Fs4AAAA4aZUwiAAAADrQm/kIAAAAHPN+QJwAAAAz7Gs8hgAAABCzRarBAAAAMNeTEc4AAAA9XZhxLAAAAAE2XdlMAAAAOJ92wAsAAAAJxoMJygAAABRTcWE7AAAACXa4FY4AAAAql1bAGwAAAAHvLzPgAAAAPvF2SBYAAAAJljH2rgAAABIx5kK5AAAABecnk84AAAAesfZIkgAAACmeoveMAAAAALd2yJsAAAAvzQOLVAAAADf68P48AAAAGV6zFs4AAAA4r3bQCwAAAC9ABxVWAAAAH7M24xsAAAAxRrMXxgAAADQ/XtKjAAAAAmYlI+oAAAAWW3lBmwAAABPsen3mAAAAHIN0KvsAAAAoQA8VLAAAABR7nWE9AAAAG/wpFYAAAAAeNXQSIQAAABj3M6uK",
+        "payload_hash": "1ab6e0b83cb6a6c3e64bfd11b3f2db9ca5fd2415afb9343e8c284a6d5acf9877",
+        "proof_chain": {
+          "p1": "5cb0e6e8cc000ec6120783c3978c59dc79daebb56a2ee20fdb8db3cfe3067c1b",
+          "p2": "f37365ff293866b59593e300ec155d1bfdf56eb0904073d60f528a154105a6da",
+          "p3": "b7455d17b3b2350e3004e8a35f333a4cb6f950f645251dbe7b628f829c233339",
+          "p4": "e4425770e175ac8c7fa9ec0a7885f4b6b971c68bb2b091c75100760d408a60cb",
+          "p5": "93169b1acbfe6abab342c7bdc7d7f3061fd7599585fa798ec986d5a365c66aa4"
+        },
+        "decoded_size": 196,
+        "utf8_encoded": true,
+        "38bit_blocks": 42,
+        "master_key_hash": "ba8c531ee67adc2059cce7887e647bc0d81a7c40083269aa19e881aa10587947",
+        "verification_code": "3F77E4C3FF29B8C6"
+      },
+      "integrity_verified": false,
+      "qrcode_data": "CATALYST|PANAM|UTF38|93169b1acbfe6abab342c7bdc7d7f306|50000|Santander Pachuca"
+    },
+    {
+      "check_id": "PANAM-UTF38-2005",
+      "monto_mxn": 100000,
+      "beneficiario": "AL PORTADOR",
+      "fecha": "2026-06-23",
+      "clabe": "012290015202390259",
+      "ubicacion": "Farmacias Guadalajara",
+      "nonce": "4304d4181e66",
+      "utf38_protection": {
+        "version": "UTF-38 v1.0",
+        "cipher": "UTF-38 block cipher (38-bit blocks, XOR+rotation, SHA-256 chain)",
+        "encrypted_payload": "AAAAHD3siJkAAAAsRoObRgAAABXa0+EzAAAAGeU7Fs4AAAA4aZUwiAAAADrQm/kIAAAAHPN+QJwAAAAz7Gs8hgAAABCzRarBAAAAMNeTEc4AAAA9XZhxLAAAAAE2XdlMAAAAOJ12wAsAAAAJxoMJygAAABRTcWE7AAAACXa4FY4AAAAql1bAGwAAAAHvLzPgAAAAPvF2SBYAAAAJljH2rgAAABIx5kK5AAAABecnk84AAAAesfZIkgAAACmeoveMAAAAALd2yJsAAAAvzQOLVAAAADf68P48AAAAGX6zFs4AAAA4l27QCwAAAC/AhxHOAAAAPLBwYDgAAAA5brNVzAAAADCVRvKrAAAAA+wnM0AAAAAcuZ5HmgAAAAP8KxymAAAABLNEGvEAAAA7x4sRzgAAADSaHmc6AAAAGsybf+4AAAAaL/RaqQAAACHHpYVIAAAAGPc2bwo=",
+        "payload_hash": "541cbf877b37db92002b6bb6133c5f308a4434b8afa12b686d24b1b76b4c5fea",
+        "proof_chain": {
+          "p1": "22f19386040baa55a9e5ce904551404d475231279f9c31e0c69aa73f3742e949",
+          "p2": "5d84a758d784d9581143e6d6e3a0bd4bc2e3487d0668774246a7d45e1c952478",
+          "p3": "14d39ff317568ad10649fd888237b6d2ad5dc4dedf6de25e14d8983c25fd4dab",
+          "p4": "489dcd4eefa34766ffe4df762da4338758c55ae3cf8947d0477ba04f90e148d6",
+          "p5": "7d5709a94ccd8a53fb92a07f43caa9da6c453e5a5cb8f124c344d440a0530361"
+        },
+        "decoded_size": 201,
+        "utf8_encoded": true,
+        "38bit_blocks": 43,
+        "master_key_hash": "ba8c531ee67adc2059cce7887e647bc0d81a7c40083269aa19e881aa10587947",
+        "verification_code": "BDD4C58E8F49CEF8"
+      },
+      "integrity_verified": false,
+      "qrcode_data": "CATALYST|PANAM|UTF38|7d5709a94ccd8a53fb92a07f43caa9da|100000|Farmacias Guadalajara"
+    },
+    {
+      "check_id": "PANAM-UTF38-2006",
+      "monto_mxn": 5000,
+      "beneficiario": "AL PORTADOR",
+      "fecha": "2026-06-23",
+      "clabe": "012290015202390259",
+      "ubicacion": "OXXO Viñedos",
+      "nonce": "6a745ea01608",
+      "utf38_protection": {
+        "version": "UTF-38 v1.0",
+        "cipher": "UTF-38 block cipher (38-bit blocks, XOR+rotation, SHA-256 chain)",
+        "encrypted_payload": "AAAAHD3siJkAAAAsRoObRgAAABXa0+EzAAAAGeU7Fs4AAAA4aZUwiAAAADrQm/kIAAAAHPN+QJwAAAAz7Gs8hgAAABCzRarBAAAAMNeTEc4AAAA9XZhxLAAAAAE2XdlMAAAAOJt2wAsAAAAJxoMJygAAABRTcWE7AAAACXa4FY4AAAAql1bAGwAAAAHvLzPgAAAAPvF2SBYAAAAJljH2rgAAABIx5kK5AAAABecnk84AAAAesfZIkgAAACmeoveMAAAAALd2yJsAAAAvzQOLVAAAADf68P48AAAAGV6zFs4AAAAAt3bQCwAAAC/Gg41UAAAAHPN1wJcAAAAhVpmdrAAAADiVXHqDAAAACeEjMfoAAAA0uh9AsAAAAAO8Sz2mAAAALLd0IJsAAAA00KPPOgAAADN5l3q+AAAAKXwZV4YAAAA+s8xy8QAAABj3NVGK",
+        "payload_hash": "f498de6f449a822adefe44715ff2ad6ca0a1614be97d134fe8e9c9ce873c141f",
+        "proof_chain": {
+          "p1": "44ddfad6fee57e30e05069595d808464ab43d65fcf9e9eff5cef526aa7a34895",
+          "p2": "4fd82e1dd89a0fa7d06c56799d8689c4e8ce0c498abdc02a952df7f38ecee41d",
+          "p3": "9edc07502fdc23c72f3328144866a21a7e317d1b84c1513d6c429750a24f0540",
+          "p4": "e2113f202041fbb60842e43cf614704f214b7d420ae6b5960c5929d6dc91e6b9",
+          "p5": "5527f199f0667a9803c3d9825392f56cb269fad9ff734fa0cf6fa858a5858d9f"
+        },
+        "decoded_size": 195,
+        "utf8_encoded": true,
+        "38bit_blocks": 42,
+        "master_key_hash": "ba8c531ee67adc2059cce7887e647bc0d81a7c40083269aa19e881aa10587947",
+        "verification_code": "B9A24BDD4E428EB5"
+      },
+      "integrity_verified": false,
+      "qrcode_data": "CATALYST|PANAM|UTF38|5527f199f0667a9803c3d9825392f56c|5000|OXXO Viñedos"
+    },
+    {
+      "check_id": "PANAM-UTF38-2007",
+      "monto_mxn": 15000,
+      "beneficiario": "AL PORTADOR",
+      "fecha": "2026-06-23",
+      "clabe": "012290015202390259",
+      "ubicacion": "HSBC Pachuca",
+      "nonce": "3f35ece08273",
+      "utf38_protection": {
+        "version": "UTF-38 v1.0",
+        "cipher": "UTF-38 block cipher (38-bit blocks, XOR+rotation, SHA-256 chain)",
+        "encrypted_payload": "AAAAHD3siJkAAAAsRoObRgAAABXa0+EzAAAAGeU7Fs4AAAA4aZUwiAAAADrQm/kIAAAAHPN+QJwAAAAz7Gs8hgAAABCzRarBAAAAMNeTEc4AAAA9XZhxLAAAAAE2XdlMAAAAOJl2wAsAAAAJxoMJygAAABRTcWE7AAAACXa4FY4AAAAql1bAGwAAAAHvLzPgAAAAPvF2SBYAAAAJljH2rgAAABIx5kK5AAAABecnk84AAAAesfZIkgAAACmeoveMAAAAALd2yJsAAAAvzQOLVAAAADf68P48AAAAGX6bFs4AAAA4r3bQCwAAAC9ABxVWAAAAH7M24xsAAAApbpsX5gAAABKXRHqRAAAAAWYnNeQAAAAWW3lBmwAAABPsen3mAAAAHIN0KvsAAAAxVhcVGgAAABTbXsGiAAAAA/4iXyYAAAAY9zS5ig==",
+        "payload_hash": "f18d809cc8197c8e9ea78e645ab5e73e4bbbca7ee1547017bfbdc8baa42b7249",
+        "proof_chain": {
+          "p1": "8d57b47f9aca8e1c9107441735b98087060c38cd3421b604dda30e5611f2fad8",
+          "p2": "41e972e85711339f7ef4cacfe9e1c53a0f0746967123799b3e3357843bfec12c",
+          "p3": "102c775e5c45ba921be3b5f0c3278dadbe380a28991a330adfadbe38d8d6434c",
+          "p4": "e9210e637c33e1e4b274fb6d74629da9664a68f960db0c5fd167de6ce70b8363",
+          "p5": "f76f9725583bbee23494faec6553c7d620e93428caa16ccb80eb85d8e24a0436"
+        },
+        "decoded_size": 191,
+        "utf8_encoded": true,
+        "38bit_blocks": 41,
+        "master_key_hash": "ba8c531ee67adc2059cce7887e647bc0d81a7c40083269aa19e881aa10587947",
+        "verification_code": "68018287D43D9C30"
+      },
+      "integrity_verified": false,
+      "qrcode_data": "CATALYST|PANAM|UTF38|f76f9725583bbee23494faec6553c7d6|15000|HSBC Pachuca"
+    },
+    {
+      "check_id": "PANAM-UTF38-2008",
+      "monto_mxn": 75000,
+      "beneficiario": "AL PORTADOR",
+      "fecha": "2026-06-23",
+      "clabe": "012290015202390259",
+      "ubicacion": "Aeropuerto CDMX T1",
+      "nonce": "2e53b1974fc6",
+      "utf38_protection": {
+        "version": "UTF-38 v1.0",
+        "cipher": "UTF-38 block cipher (38-bit blocks, XOR+rotation, SHA-256 chain)",
+        "encrypted_payload": "AAAAHD3siJkAAAAsRoObRgAAABXa0+EzAAAAGeU7Fs4AAAA4aZUwiAAAADrQm/kIAAAAHPN+QJwAAAAz7Gs8hgAAABCzRarBAAAAMNeTEc4AAAA9XZhxLAAAAAE2XdlMAAAAOId2wAsAAAAJxoMJygAAABRTcWE7AAAACXa4FY4AAAAql1bAGwAAAAHvLzPgAAAAPvF2SBYAAAAJljH2rgAAABIx5kK5AAAABecnk84AAAAesfZIkgAAACmeoveMAAAAALd2yJsAAAAvzQOLVAAAADf68P48AAAAGU6bFs4AAAA4r3bQCwAAAC9ABxVWAAAAH7M24xsAAAAxXqsXxgAAACqZXEADAAAAA+YnnUwAAAAWW3lBmwAAABPsen3mAAAAHIN0KvsAAAAqTgcVCAAAADRZeOmwAAAAGu0R3G4AAAAYX1U7SwAAABj3NRVw",
+        "payload_hash": "35cd4005477411e18d4bf51ca4441d962e43c72c510c12959d181a82b6a840bf",
+        "proof_chain": {
+          "p1": "23e229c52e566f22ebe97142dd328d763271c63be2bebd7f7740ef4e9c8439b3",
+          "p2": "4d325db63b216209c9e7592db05970db10bf8bbb7bf078fc5ba48f73d6d66b61",
+          "p3": "b274bf369ce5afbcde2681f3708f6b32d4fcf18488dac57957af49e2e596c658",
+          "p4": "0900f0f0181e6497fed5c1628ba389634052ed231f00b8ce4ed054b8b59a93b2",
+          "p5": "b1f6b0874495c2f2492d6fdf980d56078109cc44a3da2298f834ebecb9dfc409"
+        },
+        "decoded_size": 197,
+        "utf8_encoded": true,
+        "38bit_blocks": 42,
+        "master_key_hash": "ba8c531ee67adc2059cce7887e647bc0d81a7c40083269aa19e881aa10587947",
+        "verification_code": "08A99D679FD7CD9C"
+      },
+      "integrity_verified": false,
+      "qrcode_data": "CATALYST|PANAM|UTF38|b1f6b0874495c2f2492d6fdf980d5607|75000|Aeropuerto CDMX T1"
+    },
+    {
+      "check_id": "PANAM-UTF38-2009",
+      "monto_mxn": 200000,
+      "beneficiario": "AL PORTADOR",
+      "fecha": "2026-06-23",
+      "clabe": "012290015202390259",
+      "ubicacion": "Aeropuerto CDMX T2",
+      "nonce": "f3400ede6cfd",
+      "utf38_protection": {
+        "version": "UTF-38 v1.0",
+        "cipher": "UTF-38 block cipher (38-bit blocks, XOR+rotation, SHA-256 chain)",
+        "encrypted_payload": "AAAAHD3siJkAAAAsRoObRgAAABXa0+EzAAAAGeU7Fs4AAAA4aZUwiAAAADrQm/kIAAAAHPN+QJwAAAAz7Gs8hgAAABCzRarBAAAAMNeTEc4AAAA9XZhxLAAAAAE2XdlMAAAAOIV2wAsAAAAJxoMJygAAABRTcWE7AAAACXa4FY4AAAAql1bAGwAAAAHvLzPgAAAAPvF2SBYAAAAJljH2rgAAABIx5kK5AAAABecnk84AAAAesfZIkgAAACmeoveMAAAAALd2yJsAAAAvzQOLVAAAADf68P48AAAAGWazFs4AAAA4l27QCwAAAC/AhxHOAAAAPLBwYDgAAAApbpNVxgAAABI//tAJAAAAK8UlPUwAAAAcuZ5HmgAAAAP8KxymAAAABLNEGvEAAAA4RYsRzgAAABZbnmYyAAAAIfUpHwcAAAAot51z4AAAACZ3NzXO",
+        "payload_hash": "880046fad148c4a39a9197b969fb027e13615dbb787f51b05cad0e21ef88353c",
+        "proof_chain": {
+          "p1": "50ce0d7b5cc8930530c692dbac79c345db9ba613f49e3f3c826df974d1f1aa4a",
+          "p2": "28e478d9c91604c21684490611dc43a83c94d55350e7e59882be0d7849782300",
+          "p3": "988601235f88476e8ba7c415165ebadf3d8fe69dc116a63ed544110708e281f2",
+          "p4": "042afe05fd18bb2615d6af501b2bade46768e14e9be171f19be07cb6e4a99a35",
+          "p5": "f64bd4263097c10390de2b88fc5c240f4a470c52775bede01e49f630609b758d"
+        },
+        "decoded_size": 198,
+        "utf8_encoded": true,
+        "38bit_blocks": 42,
+        "master_key_hash": "ba8c531ee67adc2059cce7887e647bc0d81a7c40083269aa19e881aa10587947",
+        "verification_code": "9B0D01CE741E10C9"
+      },
+      "integrity_verified": false,
+      "qrcode_data": "CATALYST|PANAM|UTF38|f64bd4263097c10390de2b88fc5c240f|200000|Aeropuerto CDMX T2"
+    },
+    {
+      "check_id": "PANAM-UTF38-2010",
+      "monto_mxn": 1000000,
+      "beneficiario": "AL PORTADOR",
+      "fecha": "2026-06-23",
+      "clabe": "012290015202390259",
+      "ubicacion": "Camara Compensacion",
+      "nonce": "1b07d502aa43",
+      "utf38_protection": {
+        "version": "UTF-38 v1.0",
+        "cipher": "UTF-38 block cipher (38-bit blocks, XOR+rotation, SHA-256 chain)",
+        "encrypted_payload": "AAAAHD3siJkAAAAsRoObRgAAABXa0+EzAAAAGeU7Fs4AAAA4aZUwiAAAADrQm/kIAAAAHPN+QJwAAAAz7Gs8hgAAABCzRarBAAAAMNeTEc4AAAA9XZhxLAAAAAE2XdlMAAAAOpd2wAsAAAAJxoMJygAAABRTcWE7AAAACXa4FY4AAAAql1bAGwAAAAHvLzPgAAAAPvF2SBYAAAAJljH2rgAAABIx5kK5AAAABecnk84AAAAesfZIkgAAACmeoveMAAAAALd2yJsAAAAvzQOLVAAAADf68P48AAAAGX6zFs4AAAA4l1bQCwAAAAnABwnKAAAANFNw5rsAAAAJfCAVjgAAABCdVtAxAAAAKG0vNUgAAAAc837AnAAAABPsOf3HAAAABit0SsEAAAAJ1oMlygAAADa7F+c6AAAAI5yzWecAAAA+NfR6+QAAAC/mCYNUAAAAGPcx0Yo=",
+        "payload_hash": "c71563dd96d636fdbcc34e2624053a31b85224571fe4015a7c813e1bcbadefd4",
+        "proof_chain": {
+          "p1": "4227f7357277e80d7882187e2316404277f2b335187e3f6d94b115286f33688c",
+          "p2": "f2ffe45d735dbcd497f1a9006c42df2f6d938f5f239b441ba2061322c54a19a2",
+          "p3": "802413a9eec8a3e333029a76af85f63e14aa75e65d85b458a70e91b955a09ceb",
+          "p4": "db831c0cd4ca567c857cf62f8d27b7114dd2c48630e71c12775acda824cf4ba3",
+          "p5": "531649965baf87bd1af9bae0b2702c5829bd2e24e20905741d41a045fcdc2627"
+        },
+        "decoded_size": 200,
+        "utf8_encoded": true,
+        "38bit_blocks": 43,
+        "master_key_hash": "ba8c531ee67adc2059cce7887e647bc0d81a7c40083269aa19e881aa10587947",
+        "verification_code": "97658A5069D35855"
+      },
+      "integrity_verified": false,
+      "qrcode_data": "CATALYST|PANAM|UTF38|531649965baf87bd1af9bae0b2702c58|1000000|Camara Compensacion"
+    }
+  ],
+  "sello_master": "bcc4b01ebbd2d4b64f76d863e3d3ae1bb50cfd0ebabab8ade8c67a56358d5587"
+}

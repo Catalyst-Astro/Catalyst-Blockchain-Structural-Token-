@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Catalyst CEP — Verificación de Pagos</title>
+<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:system-ui,sans-serif;background:#06060f;color:#e2e8f0;max-width:480px;margin:0 auto;padding:20px}h1{color:#f59e0b;font-size:1.2rem;text-align:center}h2{font-size:.85rem;color:#64748b;text-align:center;margin:4px 0 20px}.card{background:#0a0a1a;border-radius:12px;padding:16px;margin:10px 0;border:1px solid #1e293b}label{font-size:.7rem;color:#64748b;display:block;margin-top:8px}input{width:100%;padding:10px;border-radius:8px;border:1px solid #333;background:#06060f;color:#e2e8f0;font-size:.9rem;margin-top:4px}button{width:100%;padding:14px;border-radius:10px;border:none;background:#f59e0b;color:#000;font-weight:800;font-size:.9rem;margin-top:12px;cursor:pointer}.result{background:#0a1a0a;border:1px solid #4ade80;border-radius:12px;padding:16px;margin:10px 0;font-size:.75rem}.result.error{background:#1a0a0a;border-color:#ef4444}.result pre{font-size:.6rem;overflow-x:auto;margin-top:8px;color:#94a3b8}.footer{text-align:center;font-size:.55rem;color:#1e293b;margin-top:20px}</style></head><body>
+<h1>◆ CATALYST CEP</h1><h2>Sistema Propio de Verificación de Pagos</h2>
+<div class="card">
+<h3 style="font-size:.8rem;margin-bottom:8px">Consultar Comprobante de Pago</h3>
+<label>Clave de Rastreo SPEI</label>
+<input id="tracking" placeholder="1782260294793" value="">
+<label>CLABE destino (opcional)</label>
+<input id="clabe" placeholder="728969000170391813" value="">
+<label>Monto MXN (opcional)</label>
+<input id="monto" placeholder="79198000" type="number">
+<button onclick="consultar()">CONSULTAR PAGO</button>
+</div>
+<div id="resultado"></div>
+<div class="card" style="text-align:center">
+<small style="color:#64748b">Este CEP es emitido por Catalyst Blockchain Labs S.A. de C.V.<br>
+Verificación criptográfica SHA-256 de 5 capas.<br>
+Válido como comprobante de pago conforme al Art. 89 Código de Comercio.</small>
+</div>
+<div class="footer">CATALYST CEP v1.0 — No afiliado a Banxico — Sistema Propio</div>
+<script>
+async function consultar(){
+const t=document.getElementById('tracking').value;
+const c=document.getElementById('clabe').value;
+const m=document.getElementById('monto').value;
+const d=document.getElementById('resultado');
+d.innerHTML='<div class="card">Consultando...</div>';
+const params=new URLSearchParams();
+if(t)params.set('tracking',t);if(c)params.set('clabe',c);if(m)params.set('monto',m);
+try{
+const r=await fetch('/api/cep/verify?'+params.toString());
+const data=await r.json();
+if(data.success){
+d.innerHTML='<div class="result"><h3>✅ PAGO ENCONTRADO — '+data.estatus+'</h3>'+
+'<p><b>Tracking:</b> '+data.comprobante_electronico_pago.clave_rastreo+'</p>'+
+'<p><b>Fecha:</b> '+data.comprobante_electronico_pago.fecha_operacion+' '+data.comprobante_electronico_pago.hora_operacion+'</p>'+
+'<p><b>Monto:</b> $'+(data.comprobante_electronico_pago.monto_mxn||0).toLocaleString()+' MXN</p>'+
+'<p><b>CLABE:</b> '+data.comprobante_electronico_pago.beneficiario.clabe+'</p>'+
+'<p><b>Beneficiario:</b> '+data.comprobante_electronico_pago.beneficiario.nombre+'</p>'+
+'<p><b>Proof Chain:</b> '+(data.cadena_verificacion.proof_chain_valida?.fully_valid?'✅ VALIDA':'❌ INVALIDA')+'</p>'+
+'<p><b>Sello:</b> <code>'+data.certificacion.sello_digital?.slice(0,32)+'...</code></p></div>';
+}else{
+d.innerHTML='<div class="result error"><h3>❌ '+data.error+'</h3><p>'+data.message+'</p></div>';
+}
+}catch(e){d.innerHTML='<div class="result error">Error de conexion</div>';}
+}
+</script>
+</body></html>

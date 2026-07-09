@@ -1,0 +1,27 @@
+{
+  "trigger": "EMERGENCY-10M-PACHUCA",
+  "bits": 397,
+  "ones": 184,
+  "zeros": 213,
+  "timestamp": "2026-06-25T20:32:23.742Z",
+  "date": "2026-06-25",
+  "target": {
+    "mxn": 10000000,
+    "cny": 3623188
+  },
+  "destination": {
+    "clabe": "012290015202390246",
+    "bank": "BBVA Pachuca",
+    "swift": "BCRMXMMPYM",
+    "name": "Mauricio Rodriguez Tellez"
+  },
+  "proof": {
+    "p1": "680e71072cad7391c9c774e83ed9a107e96137a312dbc36a664c5ae40ad32300",
+    "p2": "9c2e9d719bf6bbe38f5f03435d33650bc9e3649886cc99ef5e1633a3ecd38ed3",
+    "p3": "8f09c90a0c025a63852032501496b854c887d53fd31a43bf5ac85dc7a01bf307",
+    "p4": "0ae0e0bb1effcd649b6cccb8b56d05bfb7d22ed324f8aa797c1a2083e1ec3ef7",
+    "p5": "b3f64961ac712afe83d1d1d8b94da6abfa065bb5d8b5bd4a28f221eaba3766c6"
+  },
+  "seal": "b3f64961ac712afe83d1d1d8b94da6abfa065bb5d8b5bd4a28f221eaba3766c6",
+  "status": "EXECUTED"
+}

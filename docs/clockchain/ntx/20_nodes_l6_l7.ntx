@@ -1,0 +1,101 @@
+﻿# NTX nodes: L6-L7
+
+NT:N#TST-DEPLOY-001 [TST] L=6 kappa=H lang=na :
+  "Deployment smoke test verifies non-zero addresses"
+  ports{in:[rpc], out:[pass_fail]} meta{owner:qa, ver:v0.1, tags:[smoke,deploy], zref:ZK-VAL-001}
+
+NT:N#TST-NET-001 [TST] L=6 kappa=H lang=na :
+  "Network test verifies endpoint and chain-id"
+  ports{in:[rpc_response], out:[pass_fail]} meta{owner:ops, ver:v0.1, tags:[network,test]}
+
+NT:N#TST-NTX-001 [TST] L=6 kappa=H lang=na :
+  "NT-R2 validator test"
+  ports{in:[ntx_files], out:[pass_fail]} meta{owner:qa, ver:v0.1, tags:[traceability,test]}
+
+NT:N#TST-CONTRACT-001 [TST] L=6 kappa=M lang=na :
+  "Contract compile/test gate"
+  ports{in:[solidity_sources], out:[pass_fail]} meta{owner:core, ver:v0.1, tags:[compile,test]}
+
+NT:N#TST-EVT-001 [TST] L=6 kappa=H lang=na :
+  "Canonical event packet trace metadata test"
+  ports{in:[event_packet], out:[pass_fail]} meta{owner:qa, ver:v0.1, tags:[events,test], zref:ZK-EVT-001}
+
+NT:N#TST-IDC-001 [TST] L=6 kappa=H lang=na :
+  "Identity and compliance trace persistence test"
+  ports{in:[identity_logs], out:[pass_fail]} meta{owner:qa, ver:v0.1, tags:[identity,test], zref:ZK-IDC-001}
+
+NT:N#TST-RMP-001 [TST] L=6 kappa=H lang=na :
+  "Ramp trace continuity and evidence persistence test"
+  ports{in:[ramp_logs], out:[pass_fail]} meta{owner:qa, ver:v0.1, tags:[ramp,test], zref:ZK-RMP-001}
+
+NT:N#TST-KRN-001 [TST] L=6 kappa=H lang=na :
+  "Decision kernel assessment test"
+  ports{in:[case_store,report_store], out:[pass_fail]} meta{owner:qa, ver:v0.1, tags:[kernel,test], zref:ZK-KRN-001}
+
+NT:N#TST-GUI-001 [TST] L=6 kappa=H lang=na :
+  "Renderer-first smoke test with mocked Electron bridge"
+  ports{in:[renderer_shell,mock_bridge], out:[pass_fail]} meta{owner:qa, ver:v0.1, tags:[gui,test], zref:ZK-GUI-001}
+
+NT:N#MET-DEPLOY-001 [MET] L=7 kappa=H lang=na :
+  "Metrics: deploy_success_rate, tx_confirm_latency_p95"
+  ports{in:[deploy_logs], out:[deploy_slo]} meta{owner:ops, ver:v0.1, tags:[metric,deploy], zref:ZK-VAL-001}
+
+NT:N#MET-NET-001 [MET] L=7 kappa=H lang=na :
+  "Metrics: chain_id_mismatch_rate, rpc_reachability"
+  ports{in:[rpc_probe], out:[network_slo]} meta{owner:ops, ver:v0.1, tags:[metric,network]}
+
+NT:N#MET-NTX-001 [MET] L=7 kappa=H lang=na :
+  "Metrics: nt_r2_coverage_ratio"
+  ports{in:[validation_output], out:[coverage_slo]} meta{owner:qa, ver:v0.1, tags:[metric,nt-r2]}
+
+NT:N#MET-EVT-001 [MET] L=7 kappa=H lang=na :
+  "Metrics: event_trace_context_coverage, canonical_event_summary"
+  ports{in:[events_log], out:[event_trace_slo]} meta{owner:ops, ver:v0.1, tags:[metric,events], zref:ZK-EVT-001}
+
+NT:N#MET-IDC-001 [MET] L=7 kappa=H lang=na :
+  "Metrics: identity_trace_context_coverage, compliance_story_completeness"
+  ports{in:[identity_log,credential_log], out:[identity_trace_slo]} meta{owner:ops, ver:v0.1, tags:[metric,identity], zref:ZK-IDC-001}
+
+NT:N#MET-RMP-001 [MET] L=7 kappa=H lang=na :
+  "Metrics: ramp_trace_context_coverage, confirmation_evidence_rate"
+  ports{in:[ramps_log,evidence_log], out:[ramp_trace_slo]} meta{owner:ops, ver:v0.1, tags:[metric,ramp], zref:ZK-RMP-001}
+
+NT:N#MET-KRN-001 [MET] L=7 kappa=H lang=na :
+  "Metrics: decision_kernel_coverage, blocked_route_rate, radial_restriction_rate"
+  ports{in:[ai_cases,ai_reports], out:[kernel_slo]} meta{owner:ops, ver:v0.1, tags:[metric,kernel], zref:ZK-KRN-001}
+
+NT:N#MET-GUI-001 [MET] L=7 kappa=H lang=na :
+  "Metrics: renderer_smoke_pass_rate, ui_artifact_capture_rate, bridge_contract_alignment"
+  ports{in:[smoke_logs,ui_reports], out:[gui_slo]} meta{owner:ops, ver:v0.1, tags:[metric,gui], zref:ZK-GUI-001}
+
+NT:N#EVD-CHAIN-001 [EVD] L=7 kappa=H lang=na :
+  "Evidence: validated chain id and endpoint"
+  ports{in:[rpc_reply], out:[signed_evidence]} meta{owner:ops, ver:v0.1, tags:[evidence,chainid]}
+
+NT:N#EVD-CI-001 [EVD] L=7 kappa=H lang=na :
+  "Evidence: CI validation logs and artifact"
+  ports{in:[ci_log], out:[audit_evidence]} meta{owner:qa, ver:v0.1, tags:[evidence,ci]}
+
+NT:N#EVD-DEPLOY-001 [EVD] L=7 kappa=M lang=na :
+  "Evidence: deployment output and addresses"
+  ports{in:[deploy_stdout], out:[audit_evidence]} meta{owner:core, ver:v0.1, tags:[evidence,deploy], zref:ZK-VAL-001}
+
+NT:N#EVD-EVT-001 [EVD] L=7 kappa=H lang=na :
+  "Evidence: events_log.jsonl entries with causal trace context"
+  ports{in:[events_jsonl], out:[audit_evidence]} meta{owner:core, ver:v0.1, tags:[evidence,events], zref:ZK-EVT-001}
+
+NT:N#EVD-IDC-001 [EVD] L=7 kappa=H lang=na :
+  "Evidence: identity, credential and AML logs with trace metadata"
+  ports{in:[identity_jsonl,credential_jsonl,aml_jsonl], out:[audit_evidence]} meta{owner:compliance, ver:v0.1, tags:[evidence,identity], zref:ZK-IDC-001}
+
+NT:N#EVD-RMP-001 [EVD] L=7 kappa=H lang=na :
+  "Evidence: ramps_log.jsonl and anchored confirmation evidence"
+  ports{in:[ramps_jsonl,evidence_jsonl], out:[audit_evidence]} meta{owner:ops, ver:v0.1, tags:[evidence,ramp], zref:ZK-RMP-001}
+
+NT:N#EVD-KRN-001 [EVD] L=7 kappa=H lang=na :
+  "Evidence: ai_cases.jsonl and ai_reports.jsonl with decision kernel snapshots"
+  ports{in:[ai_case_jsonl,ai_report_jsonl], out:[audit_evidence]} meta{owner:ops, ver:v0.1, tags:[evidence,kernel], zref:ZK-KRN-001}
+
+NT:N#EVD-GUI-001 [EVD] L=7 kappa=H lang=na :
+  "Evidence: ui_reviews.jsonl, GUI report artifacts, and renderer screenshots"
+  ports{in:[ui_review_jsonl,gui_reports,gui_screenshots], out:[audit_evidence]} meta{owner:ops, ver:v0.1, tags:[evidence,gui], zref:ZK-GUI-001}

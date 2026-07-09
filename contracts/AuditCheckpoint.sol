@@ -3,6 +3,7 @@ pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "./interfaces/IOperationsRegistry.sol";
+import "./EvidenceAnchor.sol";
 
 /// @title AuditCheckpoint
 /// @notice Records periodic audit checkpoints with evidence hashes.
@@ -24,6 +25,7 @@ contract AuditCheckpoint is AccessControl {
     mapping(bytes32 => Checkpoint) private checkpoints;
 
     IOperationsRegistry public operationsRegistry;
+    EvidenceAnchor public evidenceAnchor;
 
     event AuditCheckpointCreated(
         bytes32 indexed checkpointId,
@@ -34,6 +36,7 @@ contract AuditCheckpoint is AccessControl {
         uint64 recordedAt
     );
     event OperationsRegistrySet(address indexed registry);
+    event EvidenceAnchorSet(address indexed anchor);
 
     constructor(address admin) {
         require(admin != address(0), "admin required");
@@ -49,6 +52,11 @@ contract AuditCheckpoint is AccessControl {
     function setOperationsRegistry(address registry) external onlyRole(COMPLIANCE_ADMIN) {
         operationsRegistry = IOperationsRegistry(registry);
         emit OperationsRegistrySet(registry);
+    }
+
+    function setEvidenceAnchor(address anchor) external onlyRole(COMPLIANCE_ADMIN) {
+        evidenceAnchor = EvidenceAnchor(anchor);
+        emit EvidenceAnchorSet(anchor);
     }
 
     function recordCheckpoint(bytes32 scope, bytes32 evidenceHash, uint64 periodStart, uint64 periodEnd)
@@ -81,6 +89,14 @@ contract AuditCheckpoint is AccessControl {
 
         if (address(operationsRegistry) != address(0)) {
             operationsRegistry.recordAuditCheckpoint(checkpointId, scope, evidenceHash, periodStart, periodEnd);
+        }
+
+        if (address(evidenceAnchor) != address(0)) {
+            try evidenceAnchor.anchorHash(evidenceHash, EvidenceAnchor.AnchorType.REPORT, checkpointId) {
+                // anchored
+            } catch {
+                // anchoring is best-effort to avoid breaking legacy flows
+            }
         }
     }
 

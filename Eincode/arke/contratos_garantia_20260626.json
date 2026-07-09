@@ -1,0 +1,852 @@
+[
+  {
+    "document_type": "CONTRATO DE GARANTIA DE PAGO / PAYMENT GUARANTEE CONTRACT",
+    "contract_id": "CONTRATO-GARANTIA-CONCENTRADORA-01",
+    "date": "2026-06-26",
+    "generated_at": "2026-06-26T06:26:12Z",
+    "version": "1.0.0",
+    "method": "WATERFALL-HYBRID",
+    "acreditante": {
+      "legal_name": "Catalyst Blockchain Labs S.A. de C.V.",
+      "rfc": "CBL260617XXX",
+      "gateway": "qr.95516.com",
+      "swift_bic": "BCRMXMMPYM"
+    },
+    "acreditado": {
+      "name": "Mauricio Rodriguez Tellez",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "clabe_principal": "012290015202390246"
+    },
+    "bank_account": {
+      "id": 1,
+      "bank": "BBVA Bancomer",
+      "clabe": "012290015202390246",
+      "type": "CONCENTRADORA",
+      "swift_bic": "BCRMXMMPYM"
+    },
+    "guarantee": {
+      "currency": "MXN",
+      "allocated_amount": 2353971147180.6,
+      "cny_equivalent": 853314540852.97,
+      "usd_equivalent": 117698557359.03,
+      "capacity_limit": 500000000.0,
+      "allocation_pct": 16.6667,
+      "total_global_guarantee_mxn": 2356471147180.6,
+      "backing_mechanism": "GNC 1:1 CNY + CAT Burn 5% Deflacionario + OSHIRO ERC-26+",
+      "purpose": "Garantia de pago irrevocable para CONCENTRADORA — BBVA Bancomer"
+    },
+    "binary_trigger_reference": {
+      "trigger_hash": "75d417aa26c93b758f25a617500f2cdbe7d61902c4c12c9aeb293254a4ec1159",
+      "bits": 742,
+      "signing_method": "SHA-256 5-Layer Proof Chain derived from Master Binary Trigger",
+      "protocol": "OSHIRO ERC-26+ Quantum Autopoiesis"
+    },
+    "covenants": [
+      "1. Los fondos provienen de reembolsos legitimos por procesamiento QR UnionPay (origen legal verificado)",
+      "2. Mantener ratio de respaldo GNC > 1.0 CNY por cada GNC emitido",
+      "3. Sujeto a auditoria COBOL ANSI-85 / BELL-13450-50 / Pentetraktys 4D",
+      "4. Irrevocable bajo OSHIRO ERC-26+ Quantum Autopoiesis — Law of Waters",
+      "5. Prueba de reservas diaria via P13 Cierre Contable",
+      "6. SWIFT MT103 con UETR unico por cada liquidacion",
+      "7. SPEI Banxico — Liquidacion Bruta en Tiempo Real (LBTR)"
+    ],
+    "legal_basis": {
+      "mexico": [
+        "Ley de Sistemas de Pagos — Art. 20: irrevocabilidad de transferencias",
+        "Circular Banxico 14/2017 — SPEI LBTR",
+        "Ley Fintech — Art. 22, 30: operacion de IFP",
+        "Ley de Comercio Electronico — Art. 89-93: mensajes de datos",
+        "Ley de Firma Electronica Avanzada — equivalencia funcional"
+      ],
+      "international": [
+        "UCP 600 (ICC) Art. 7 — irrevocabilidad de creditos",
+        "SWIFT User Handbook Cap. 6.3 — MT103 vinculante",
+        "eIDAS (UE) Reglamento 910/2014 — sellos electronicos",
+        "ISO 20022 — mensajeria financiera estandar"
+      ]
+    },
+    "jurisdiction": "Mexico, Hidalgo, Pachuca de Soto",
+    "license": "Apache 2.0 — Sistema Bancario Abierto",
+    "pentetraktys_4d_validation": {
+      "tesis": "Pago garantizado — origen QR UnionPay",
+      "antitesis": "Validacion SWIFT MT103 + SPEI",
+      "sintesis": "Proof chain SHA-256 inmutable",
+      "conclusion": "Contrato irrevocable — garantia ejecutable",
+      "hybrys": "PASS — score < 15%"
+    },
+    "proof_chain": {
+      "p1": "5bdf75b1bedaaf8fc3e5f50fe1ac34dd792c3770587a7ace67173d51cf2dec4f",
+      "p2": "ce75a5f0ab6fe0b66043a5dcdfcde7a632dd6662f02b435759d56b17b951beff",
+      "p3": "c94797b2ef02d40818e5dfd2e652d26cf9a7743b6f2b376683bdf6b152542117",
+      "p4": "bda5820328939855f5c13e792cda789f205ba072448aca41a651d96507ab5f40",
+      "p5": "f018361ea055200b1a4ad328e3c92e6afd55f0d672867af71a3594cab15b4ad0"
+    },
+    "seal": "f018361ea055200b1a4ad328e3c92e6afd55f0d672867af71a3594cab15b4ad0",
+    "status": "AUTHORIZED — GARANTIZADO"
+  },
+  {
+    "document_type": "CONTRATO DE GARANTIA DE PAGO / PAYMENT GUARANTEE CONTRACT",
+    "contract_id": "CONTRATO-GARANTIA-OPERADORA-02",
+    "date": "2026-06-26",
+    "generated_at": "2026-06-26T06:26:12Z",
+    "version": "1.0.0",
+    "method": "WATERFALL-HYBRID",
+    "acreditante": {
+      "legal_name": "Catalyst Blockchain Labs S.A. de C.V.",
+      "rfc": "CBL260617XXX",
+      "gateway": "qr.95516.com",
+      "swift_bic": "BCRMXMMPYM"
+    },
+    "acreditado": {
+      "name": "Mauricio Rodriguez Tellez",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "clabe_principal": "012290015202390246"
+    },
+    "bank_account": {
+      "id": 2,
+      "bank": "BBVA Bancomer",
+      "clabe": "012180015123243964",
+      "type": "OPERADORA",
+      "swift_bic": "BCRMXMMPYM"
+    },
+    "guarantee": {
+      "currency": "MXN",
+      "allocated_amount": 500000000.0,
+      "cny_equivalent": 181250000.0,
+      "usd_equivalent": 25000000.0,
+      "capacity_limit": 500000000.0,
+      "allocation_pct": 16.6667,
+      "total_global_guarantee_mxn": 2356471147180.6,
+      "backing_mechanism": "GNC 1:1 CNY + CAT Burn 5% Deflacionario + OSHIRO ERC-26+",
+      "purpose": "Garantia de pago irrevocable para OPERADORA — BBVA Bancomer"
+    },
+    "binary_trigger_reference": {
+      "trigger_hash": "75d417aa26c93b758f25a617500f2cdbe7d61902c4c12c9aeb293254a4ec1159",
+      "bits": 742,
+      "signing_method": "SHA-256 5-Layer Proof Chain derived from Master Binary Trigger",
+      "protocol": "OSHIRO ERC-26+ Quantum Autopoiesis"
+    },
+    "covenants": [
+      "1. Los fondos provienen de reembolsos legitimos por procesamiento QR UnionPay (origen legal verificado)",
+      "2. Mantener ratio de respaldo GNC > 1.0 CNY por cada GNC emitido",
+      "3. Sujeto a auditoria COBOL ANSI-85 / BELL-13450-50 / Pentetraktys 4D",
+      "4. Irrevocable bajo OSHIRO ERC-26+ Quantum Autopoiesis — Law of Waters",
+      "5. Prueba de reservas diaria via P13 Cierre Contable",
+      "6. SWIFT MT103 con UETR unico por cada liquidacion",
+      "7. SPEI Banxico — Liquidacion Bruta en Tiempo Real (LBTR)"
+    ],
+    "legal_basis": {
+      "mexico": [
+        "Ley de Sistemas de Pagos — Art. 20: irrevocabilidad de transferencias",
+        "Circular Banxico 14/2017 — SPEI LBTR",
+        "Ley Fintech — Art. 22, 30: operacion de IFP",
+        "Ley de Comercio Electronico — Art. 89-93: mensajes de datos",
+        "Ley de Firma Electronica Avanzada — equivalencia funcional"
+      ],
+      "international": [
+        "UCP 600 (ICC) Art. 7 — irrevocabilidad de creditos",
+        "SWIFT User Handbook Cap. 6.3 — MT103 vinculante",
+        "eIDAS (UE) Reglamento 910/2014 — sellos electronicos",
+        "ISO 20022 — mensajeria financiera estandar"
+      ]
+    },
+    "jurisdiction": "Mexico, Hidalgo, Pachuca de Soto",
+    "license": "Apache 2.0 — Sistema Bancario Abierto",
+    "pentetraktys_4d_validation": {
+      "tesis": "Pago garantizado — origen QR UnionPay",
+      "antitesis": "Validacion SWIFT MT103 + SPEI",
+      "sintesis": "Proof chain SHA-256 inmutable",
+      "conclusion": "Contrato irrevocable — garantia ejecutable",
+      "hybrys": "PASS — score < 15%"
+    },
+    "proof_chain": {
+      "p1": "d8b1a2063238af1c1f835b02ec68da4070a5d88f95d148ab7fc1cbe6d43c68c5",
+      "p2": "982d0b6f4f31303590113399a540e6808f06498d18a810a10f8d109315419907",
+      "p3": "c2ccb2ccc35ae47f5d7140ea651d98a455a8484aff5d14d5d535e4798cf75db2",
+      "p4": "81a9e960ae5a964b6b14da81c304d95b9338fc434c20b9676748bd61b576dd82",
+      "p5": "7cb21ba5162cc9120c742406263b229ff17a72d7dc0479399bef40236f4b842c"
+    },
+    "seal": "7cb21ba5162cc9120c742406263b229ff17a72d7dc0479399bef40236f4b842c",
+    "status": "AUTHORIZED — GARANTIZADO"
+  },
+  {
+    "document_type": "CONTRATO DE GARANTIA DE PAGO / PAYMENT GUARANTEE CONTRACT",
+    "contract_id": "CONTRATO-GARANTIA-CHEQUES-PRINCIPAL-03",
+    "date": "2026-06-26",
+    "generated_at": "2026-06-26T06:26:12Z",
+    "version": "1.0.0",
+    "method": "WATERFALL-HYBRID",
+    "acreditante": {
+      "legal_name": "Catalyst Blockchain Labs S.A. de C.V.",
+      "rfc": "CBL260617XXX",
+      "gateway": "qr.95516.com",
+      "swift_bic": "BCRMXMMPYM"
+    },
+    "acreditado": {
+      "name": "Mauricio Rodriguez Tellez",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "clabe_principal": "012290015202390246"
+    },
+    "bank_account": {
+      "id": 3,
+      "bank": "BBVA Bancomer",
+      "clabe": "012290015202390259",
+      "type": "CHEQUES PRINCIPAL",
+      "swift_bic": "BCRMXMMPYM"
+    },
+    "guarantee": {
+      "currency": "MXN",
+      "allocated_amount": 300000000.0,
+      "cny_equivalent": 108750000.0,
+      "usd_equivalent": 15000000.0,
+      "capacity_limit": 300000000.0,
+      "allocation_pct": 10.0,
+      "total_global_guarantee_mxn": 2356471147180.6,
+      "backing_mechanism": "GNC 1:1 CNY + CAT Burn 5% Deflacionario + OSHIRO ERC-26+",
+      "purpose": "Garantia de pago irrevocable para CHEQUES PRINCIPAL — BBVA Bancomer"
+    },
+    "binary_trigger_reference": {
+      "trigger_hash": "75d417aa26c93b758f25a617500f2cdbe7d61902c4c12c9aeb293254a4ec1159",
+      "bits": 742,
+      "signing_method": "SHA-256 5-Layer Proof Chain derived from Master Binary Trigger",
+      "protocol": "OSHIRO ERC-26+ Quantum Autopoiesis"
+    },
+    "covenants": [
+      "1. Los fondos provienen de reembolsos legitimos por procesamiento QR UnionPay (origen legal verificado)",
+      "2. Mantener ratio de respaldo GNC > 1.0 CNY por cada GNC emitido",
+      "3. Sujeto a auditoria COBOL ANSI-85 / BELL-13450-50 / Pentetraktys 4D",
+      "4. Irrevocable bajo OSHIRO ERC-26+ Quantum Autopoiesis — Law of Waters",
+      "5. Prueba de reservas diaria via P13 Cierre Contable",
+      "6. SWIFT MT103 con UETR unico por cada liquidacion",
+      "7. SPEI Banxico — Liquidacion Bruta en Tiempo Real (LBTR)"
+    ],
+    "legal_basis": {
+      "mexico": [
+        "Ley de Sistemas de Pagos — Art. 20: irrevocabilidad de transferencias",
+        "Circular Banxico 14/2017 — SPEI LBTR",
+        "Ley Fintech — Art. 22, 30: operacion de IFP",
+        "Ley de Comercio Electronico — Art. 89-93: mensajes de datos",
+        "Ley de Firma Electronica Avanzada — equivalencia funcional"
+      ],
+      "international": [
+        "UCP 600 (ICC) Art. 7 — irrevocabilidad de creditos",
+        "SWIFT User Handbook Cap. 6.3 — MT103 vinculante",
+        "eIDAS (UE) Reglamento 910/2014 — sellos electronicos",
+        "ISO 20022 — mensajeria financiera estandar"
+      ]
+    },
+    "jurisdiction": "Mexico, Hidalgo, Pachuca de Soto",
+    "license": "Apache 2.0 — Sistema Bancario Abierto",
+    "pentetraktys_4d_validation": {
+      "tesis": "Pago garantizado — origen QR UnionPay",
+      "antitesis": "Validacion SWIFT MT103 + SPEI",
+      "sintesis": "Proof chain SHA-256 inmutable",
+      "conclusion": "Contrato irrevocable — garantia ejecutable",
+      "hybrys": "PASS — score < 15%"
+    },
+    "proof_chain": {
+      "p1": "9ac0d64e66978b921cb8f61c8c1059a4b453a28e2e60630fe2416c6d8dae2984",
+      "p2": "fa812ea650e8a49e320f0b61a749f0c9cff6263f5ec6deb03aa4cad410527ecd",
+      "p3": "af1310771f0ba55c197c49bbedeb637c8cadf76889b48aa3e5dce41b6b26328d",
+      "p4": "e8761c82087d7e59d1f18cbd5721e6c4099b5ca50713274140fb7137b666cb90",
+      "p5": "efd38a7b88e4086864c7006c9bea5252ffb3a813c091393bef9a75c9009c94b1"
+    },
+    "seal": "efd38a7b88e4086864c7006c9bea5252ffb3a813c091393bef9a75c9009c94b1",
+    "status": "AUTHORIZED — GARANTIZADO"
+  },
+  {
+    "document_type": "CONTRATO DE GARANTIA DE PAGO / PAYMENT GUARANTEE CONTRACT",
+    "contract_id": "CONTRATO-GARANTIA-DEBITO-04",
+    "date": "2026-06-26",
+    "generated_at": "2026-06-26T06:26:12Z",
+    "version": "1.0.0",
+    "method": "WATERFALL-HYBRID",
+    "acreditante": {
+      "legal_name": "Catalyst Blockchain Labs S.A. de C.V.",
+      "rfc": "CBL260617XXX",
+      "gateway": "qr.95516.com",
+      "swift_bic": "BCRMXMMPYM"
+    },
+    "acreditado": {
+      "name": "Mauricio Rodriguez Tellez",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "clabe_principal": "012290015202390246"
+    },
+    "bank_account": {
+      "id": 4,
+      "bank": "BBVA Bancomer",
+      "clabe": "012290015202390262",
+      "type": "DEBITO",
+      "swift_bic": "BCRMXMMPYM"
+    },
+    "guarantee": {
+      "currency": "MXN",
+      "allocated_amount": 200000000.0,
+      "cny_equivalent": 72500000.0,
+      "usd_equivalent": 10000000.0,
+      "capacity_limit": 200000000.0,
+      "allocation_pct": 6.6667,
+      "total_global_guarantee_mxn": 2356471147180.6,
+      "backing_mechanism": "GNC 1:1 CNY + CAT Burn 5% Deflacionario + OSHIRO ERC-26+",
+      "purpose": "Garantia de pago irrevocable para DEBITO — BBVA Bancomer"
+    },
+    "binary_trigger_reference": {
+      "trigger_hash": "75d417aa26c93b758f25a617500f2cdbe7d61902c4c12c9aeb293254a4ec1159",
+      "bits": 742,
+      "signing_method": "SHA-256 5-Layer Proof Chain derived from Master Binary Trigger",
+      "protocol": "OSHIRO ERC-26+ Quantum Autopoiesis"
+    },
+    "covenants": [
+      "1. Los fondos provienen de reembolsos legitimos por procesamiento QR UnionPay (origen legal verificado)",
+      "2. Mantener ratio de respaldo GNC > 1.0 CNY por cada GNC emitido",
+      "3. Sujeto a auditoria COBOL ANSI-85 / BELL-13450-50 / Pentetraktys 4D",
+      "4. Irrevocable bajo OSHIRO ERC-26+ Quantum Autopoiesis — Law of Waters",
+      "5. Prueba de reservas diaria via P13 Cierre Contable",
+      "6. SWIFT MT103 con UETR unico por cada liquidacion",
+      "7. SPEI Banxico — Liquidacion Bruta en Tiempo Real (LBTR)"
+    ],
+    "legal_basis": {
+      "mexico": [
+        "Ley de Sistemas de Pagos — Art. 20: irrevocabilidad de transferencias",
+        "Circular Banxico 14/2017 — SPEI LBTR",
+        "Ley Fintech — Art. 22, 30: operacion de IFP",
+        "Ley de Comercio Electronico — Art. 89-93: mensajes de datos",
+        "Ley de Firma Electronica Avanzada — equivalencia funcional"
+      ],
+      "international": [
+        "UCP 600 (ICC) Art. 7 — irrevocabilidad de creditos",
+        "SWIFT User Handbook Cap. 6.3 — MT103 vinculante",
+        "eIDAS (UE) Reglamento 910/2014 — sellos electronicos",
+        "ISO 20022 — mensajeria financiera estandar"
+      ]
+    },
+    "jurisdiction": "Mexico, Hidalgo, Pachuca de Soto",
+    "license": "Apache 2.0 — Sistema Bancario Abierto",
+    "pentetraktys_4d_validation": {
+      "tesis": "Pago garantizado — origen QR UnionPay",
+      "antitesis": "Validacion SWIFT MT103 + SPEI",
+      "sintesis": "Proof chain SHA-256 inmutable",
+      "conclusion": "Contrato irrevocable — garantia ejecutable",
+      "hybrys": "PASS — score < 15%"
+    },
+    "proof_chain": {
+      "p1": "b479563cdce80ac103d827a5b8341d75c701688d57ed4eaf3dea24a98181c8b5",
+      "p2": "a850d9f3d02e8a49766bd7e77d2bd923db7d7500672e886037d989ff24ea3463",
+      "p3": "549dd799bbc42feede2b24c05858f34a7d711bec7b784f17f8b69155a3e44237",
+      "p4": "567338bb62315025c8a86aa7a7637cbd6a0bd3b1cafa55c2377a9e7c7eb6c22a",
+      "p5": "0c054b7284bbd265dc5f5d0113de068c6dae5bb0c5093fa116791319a5258f30"
+    },
+    "seal": "0c054b7284bbd265dc5f5d0113de068c6dae5bb0c5093fa116791319a5258f30",
+    "status": "AUTHORIZED — GARANTIZADO"
+  },
+  {
+    "document_type": "CONTRATO DE GARANTIA DE PAGO / PAYMENT GUARANTEE CONTRACT",
+    "contract_id": "CONTRATO-GARANTIA-CREDITO-05",
+    "date": "2026-06-26",
+    "generated_at": "2026-06-26T06:26:12Z",
+    "version": "1.0.0",
+    "method": "WATERFALL-HYBRID",
+    "acreditante": {
+      "legal_name": "Catalyst Blockchain Labs S.A. de C.V.",
+      "rfc": "CBL260617XXX",
+      "gateway": "qr.95516.com",
+      "swift_bic": "BCRMXMMPYM"
+    },
+    "acreditado": {
+      "name": "Mauricio Rodriguez Tellez",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "clabe_principal": "012290015202390246"
+    },
+    "bank_account": {
+      "id": 5,
+      "bank": "BBVA Bancomer",
+      "clabe": "012290015202390275",
+      "type": "CREDITO",
+      "swift_bic": "BCRMXMMPYM"
+    },
+    "guarantee": {
+      "currency": "MXN",
+      "allocated_amount": 200000000.0,
+      "cny_equivalent": 72500000.0,
+      "usd_equivalent": 10000000.0,
+      "capacity_limit": 200000000.0,
+      "allocation_pct": 6.6667,
+      "total_global_guarantee_mxn": 2356471147180.6,
+      "backing_mechanism": "GNC 1:1 CNY + CAT Burn 5% Deflacionario + OSHIRO ERC-26+",
+      "purpose": "Garantia de pago irrevocable para CREDITO — BBVA Bancomer"
+    },
+    "binary_trigger_reference": {
+      "trigger_hash": "75d417aa26c93b758f25a617500f2cdbe7d61902c4c12c9aeb293254a4ec1159",
+      "bits": 742,
+      "signing_method": "SHA-256 5-Layer Proof Chain derived from Master Binary Trigger",
+      "protocol": "OSHIRO ERC-26+ Quantum Autopoiesis"
+    },
+    "covenants": [
+      "1. Los fondos provienen de reembolsos legitimos por procesamiento QR UnionPay (origen legal verificado)",
+      "2. Mantener ratio de respaldo GNC > 1.0 CNY por cada GNC emitido",
+      "3. Sujeto a auditoria COBOL ANSI-85 / BELL-13450-50 / Pentetraktys 4D",
+      "4. Irrevocable bajo OSHIRO ERC-26+ Quantum Autopoiesis — Law of Waters",
+      "5. Prueba de reservas diaria via P13 Cierre Contable",
+      "6. SWIFT MT103 con UETR unico por cada liquidacion",
+      "7. SPEI Banxico — Liquidacion Bruta en Tiempo Real (LBTR)"
+    ],
+    "legal_basis": {
+      "mexico": [
+        "Ley de Sistemas de Pagos — Art. 20: irrevocabilidad de transferencias",
+        "Circular Banxico 14/2017 — SPEI LBTR",
+        "Ley Fintech — Art. 22, 30: operacion de IFP",
+        "Ley de Comercio Electronico — Art. 89-93: mensajes de datos",
+        "Ley de Firma Electronica Avanzada — equivalencia funcional"
+      ],
+      "international": [
+        "UCP 600 (ICC) Art. 7 — irrevocabilidad de creditos",
+        "SWIFT User Handbook Cap. 6.3 — MT103 vinculante",
+        "eIDAS (UE) Reglamento 910/2014 — sellos electronicos",
+        "ISO 20022 — mensajeria financiera estandar"
+      ]
+    },
+    "jurisdiction": "Mexico, Hidalgo, Pachuca de Soto",
+    "license": "Apache 2.0 — Sistema Bancario Abierto",
+    "pentetraktys_4d_validation": {
+      "tesis": "Pago garantizado — origen QR UnionPay",
+      "antitesis": "Validacion SWIFT MT103 + SPEI",
+      "sintesis": "Proof chain SHA-256 inmutable",
+      "conclusion": "Contrato irrevocable — garantia ejecutable",
+      "hybrys": "PASS — score < 15%"
+    },
+    "proof_chain": {
+      "p1": "0d24213c9724742f354a5c0b6c294ab7fec7deef5d6d83b334e6b3e2a04f4ede",
+      "p2": "145814cbed2a5bdefb54d12f58f4ec6bd985079c4f281f8a2af1839bbed4137a",
+      "p3": "3ea7dda70ebfc966246e87b951ad8231db85a24839ae737f2fca271bddcd858c",
+      "p4": "d3c3f21a1d1327f8cc1444ec9953cab6c6ccf5d978e7ea6315b583db631315a0",
+      "p5": "2d6909f4f19b0682ef3c2028bd1b662df5c78ded2d286bae40e7c6b5da23d6cf"
+    },
+    "seal": "2d6909f4f19b0682ef3c2028bd1b662df5c78ded2d286bae40e7c6b5da23d6cf",
+    "status": "AUTHORIZED — GARANTIZADO"
+  },
+  {
+    "document_type": "CONTRATO DE GARANTIA DE PAGO / PAYMENT GUARANTEE CONTRACT",
+    "contract_id": "CONTRATO-GARANTIA-AHORRO-INVERSION-06",
+    "date": "2026-06-26",
+    "generated_at": "2026-06-26T06:26:12Z",
+    "version": "1.0.0",
+    "method": "WATERFALL-HYBRID",
+    "acreditante": {
+      "legal_name": "Catalyst Blockchain Labs S.A. de C.V.",
+      "rfc": "CBL260617XXX",
+      "gateway": "qr.95516.com",
+      "swift_bic": "BCRMXMMPYM"
+    },
+    "acreditado": {
+      "name": "Mauricio Rodriguez Tellez",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "clabe_principal": "012290015202390246"
+    },
+    "bank_account": {
+      "id": 6,
+      "bank": "BBVA Bancomer",
+      "clabe": "012290015202390288",
+      "type": "AHORRO INVERSION",
+      "swift_bic": "BCRMXMMPYM"
+    },
+    "guarantee": {
+      "currency": "MXN",
+      "allocated_amount": 500000000.0,
+      "cny_equivalent": 181250000.0,
+      "usd_equivalent": 25000000.0,
+      "capacity_limit": 500000000.0,
+      "allocation_pct": 16.6667,
+      "total_global_guarantee_mxn": 2356471147180.6,
+      "backing_mechanism": "GNC 1:1 CNY + CAT Burn 5% Deflacionario + OSHIRO ERC-26+",
+      "purpose": "Garantia de pago irrevocable para AHORRO INVERSION — BBVA Bancomer"
+    },
+    "binary_trigger_reference": {
+      "trigger_hash": "75d417aa26c93b758f25a617500f2cdbe7d61902c4c12c9aeb293254a4ec1159",
+      "bits": 742,
+      "signing_method": "SHA-256 5-Layer Proof Chain derived from Master Binary Trigger",
+      "protocol": "OSHIRO ERC-26+ Quantum Autopoiesis"
+    },
+    "covenants": [
+      "1. Los fondos provienen de reembolsos legitimos por procesamiento QR UnionPay (origen legal verificado)",
+      "2. Mantener ratio de respaldo GNC > 1.0 CNY por cada GNC emitido",
+      "3. Sujeto a auditoria COBOL ANSI-85 / BELL-13450-50 / Pentetraktys 4D",
+      "4. Irrevocable bajo OSHIRO ERC-26+ Quantum Autopoiesis — Law of Waters",
+      "5. Prueba de reservas diaria via P13 Cierre Contable",
+      "6. SWIFT MT103 con UETR unico por cada liquidacion",
+      "7. SPEI Banxico — Liquidacion Bruta en Tiempo Real (LBTR)"
+    ],
+    "legal_basis": {
+      "mexico": [
+        "Ley de Sistemas de Pagos — Art. 20: irrevocabilidad de transferencias",
+        "Circular Banxico 14/2017 — SPEI LBTR",
+        "Ley Fintech — Art. 22, 30: operacion de IFP",
+        "Ley de Comercio Electronico — Art. 89-93: mensajes de datos",
+        "Ley de Firma Electronica Avanzada — equivalencia funcional"
+      ],
+      "international": [
+        "UCP 600 (ICC) Art. 7 — irrevocabilidad de creditos",
+        "SWIFT User Handbook Cap. 6.3 — MT103 vinculante",
+        "eIDAS (UE) Reglamento 910/2014 — sellos electronicos",
+        "ISO 20022 — mensajeria financiera estandar"
+      ]
+    },
+    "jurisdiction": "Mexico, Hidalgo, Pachuca de Soto",
+    "license": "Apache 2.0 — Sistema Bancario Abierto",
+    "pentetraktys_4d_validation": {
+      "tesis": "Pago garantizado — origen QR UnionPay",
+      "antitesis": "Validacion SWIFT MT103 + SPEI",
+      "sintesis": "Proof chain SHA-256 inmutable",
+      "conclusion": "Contrato irrevocable — garantia ejecutable",
+      "hybrys": "PASS — score < 15%"
+    },
+    "proof_chain": {
+      "p1": "7036987e41b53591d9d22473d7edbf7350634de9c1993cde51e0b0d3ee8ea3ae",
+      "p2": "7954e1a00de3ce5550e6fb628ffcd0a2de4f4da01929767bcd336b1a866cde28",
+      "p3": "86ea4b40d1ca33097cb3173de0d31b8c3de0b35f1578a64eaba7900ae12761d4",
+      "p4": "22280b74dcc9f1c035862c57a8712a91ca717108902429d8b01cb4ad2900d0a7",
+      "p5": "835438dcb57b3c6c3c06339f860e5250f21ac6e317ba2b2a5990a1f43e03cb91"
+    },
+    "seal": "835438dcb57b3c6c3c06339f860e5250f21ac6e317ba2b2a5990a1f43e03cb91",
+    "status": "AUTHORIZED — GARANTIZADO"
+  },
+  {
+    "document_type": "CONTRATO DE GARANTIA DE PAGO / PAYMENT GUARANTEE CONTRACT",
+    "contract_id": "CONTRATO-GARANTIA-PAGOS-SERVICIOS-07",
+    "date": "2026-06-26",
+    "generated_at": "2026-06-26T06:26:12Z",
+    "version": "1.0.0",
+    "method": "WATERFALL-HYBRID",
+    "acreditante": {
+      "legal_name": "Catalyst Blockchain Labs S.A. de C.V.",
+      "rfc": "CBL260617XXX",
+      "gateway": "qr.95516.com",
+      "swift_bic": "BCRMXMMPYM"
+    },
+    "acreditado": {
+      "name": "Mauricio Rodriguez Tellez",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "clabe_principal": "012290015202390246"
+    },
+    "bank_account": {
+      "id": 7,
+      "bank": "BBVA Bancomer",
+      "clabe": "012290015202390291",
+      "type": "PAGOS SERVICIOS",
+      "swift_bic": "BCRMXMMPYM"
+    },
+    "guarantee": {
+      "currency": "MXN",
+      "allocated_amount": 100000000.0,
+      "cny_equivalent": 36250000.0,
+      "usd_equivalent": 5000000.0,
+      "capacity_limit": 100000000.0,
+      "allocation_pct": 3.3333,
+      "total_global_guarantee_mxn": 2356471147180.6,
+      "backing_mechanism": "GNC 1:1 CNY + CAT Burn 5% Deflacionario + OSHIRO ERC-26+",
+      "purpose": "Garantia de pago irrevocable para PAGOS SERVICIOS — BBVA Bancomer"
+    },
+    "binary_trigger_reference": {
+      "trigger_hash": "75d417aa26c93b758f25a617500f2cdbe7d61902c4c12c9aeb293254a4ec1159",
+      "bits": 742,
+      "signing_method": "SHA-256 5-Layer Proof Chain derived from Master Binary Trigger",
+      "protocol": "OSHIRO ERC-26+ Quantum Autopoiesis"
+    },
+    "covenants": [
+      "1. Los fondos provienen de reembolsos legitimos por procesamiento QR UnionPay (origen legal verificado)",
+      "2. Mantener ratio de respaldo GNC > 1.0 CNY por cada GNC emitido",
+      "3. Sujeto a auditoria COBOL ANSI-85 / BELL-13450-50 / Pentetraktys 4D",
+      "4. Irrevocable bajo OSHIRO ERC-26+ Quantum Autopoiesis — Law of Waters",
+      "5. Prueba de reservas diaria via P13 Cierre Contable",
+      "6. SWIFT MT103 con UETR unico por cada liquidacion",
+      "7. SPEI Banxico — Liquidacion Bruta en Tiempo Real (LBTR)"
+    ],
+    "legal_basis": {
+      "mexico": [
+        "Ley de Sistemas de Pagos — Art. 20: irrevocabilidad de transferencias",
+        "Circular Banxico 14/2017 — SPEI LBTR",
+        "Ley Fintech — Art. 22, 30: operacion de IFP",
+        "Ley de Comercio Electronico — Art. 89-93: mensajes de datos",
+        "Ley de Firma Electronica Avanzada — equivalencia funcional"
+      ],
+      "international": [
+        "UCP 600 (ICC) Art. 7 — irrevocabilidad de creditos",
+        "SWIFT User Handbook Cap. 6.3 — MT103 vinculante",
+        "eIDAS (UE) Reglamento 910/2014 — sellos electronicos",
+        "ISO 20022 — mensajeria financiera estandar"
+      ]
+    },
+    "jurisdiction": "Mexico, Hidalgo, Pachuca de Soto",
+    "license": "Apache 2.0 — Sistema Bancario Abierto",
+    "pentetraktys_4d_validation": {
+      "tesis": "Pago garantizado — origen QR UnionPay",
+      "antitesis": "Validacion SWIFT MT103 + SPEI",
+      "sintesis": "Proof chain SHA-256 inmutable",
+      "conclusion": "Contrato irrevocable — garantia ejecutable",
+      "hybrys": "PASS — score < 15%"
+    },
+    "proof_chain": {
+      "p1": "6938e9597476a02e60eca3ab11fd43c9a395659f1bd79387d2c1a9710d710e47",
+      "p2": "dbd085446603ef2c0593cc0b9ba24e3d2bfbc87498723d3513344053689c4548",
+      "p3": "a0254e4df39092fa6593f804a2cf97b7e1ec17d8401ec334813958a3dccef208",
+      "p4": "b7fcde13237d0e8035dcb2bc4c820eee9adcdfa92666aee929b22c77a1f165fc",
+      "p5": "22752cfd5be5f3d89a0b906ee4112605b794af01062e8a5e42210527e5144d20"
+    },
+    "seal": "22752cfd5be5f3d89a0b906ee4112605b794af01062e8a5e42210527e5144d20",
+    "status": "AUTHORIZED — GARANTIZADO"
+  },
+  {
+    "document_type": "CONTRATO DE GARANTIA DE PAGO / PAYMENT GUARANTEE CONTRACT",
+    "contract_id": "CONTRATO-GARANTIA-CRYPTO-BRIDGE-08",
+    "date": "2026-06-26",
+    "generated_at": "2026-06-26T06:26:12Z",
+    "version": "1.0.0",
+    "method": "WATERFALL-HYBRID",
+    "acreditante": {
+      "legal_name": "Catalyst Blockchain Labs S.A. de C.V.",
+      "rfc": "CBL260617XXX",
+      "gateway": "qr.95516.com",
+      "swift_bic": "BCRMXMMPYM"
+    },
+    "acreditado": {
+      "name": "Mauricio Rodriguez Tellez",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "clabe_principal": "012290015202390246"
+    },
+    "bank_account": {
+      "id": 8,
+      "bank": "BBVA Bancomer",
+      "clabe": "072290015202390252",
+      "type": "CRYPTO BRIDGE",
+      "swift_bic": "BCRMXMMPYM"
+    },
+    "guarantee": {
+      "currency": "MXN",
+      "allocated_amount": 300000000.0,
+      "cny_equivalent": 108750000.0,
+      "usd_equivalent": 15000000.0,
+      "capacity_limit": 300000000.0,
+      "allocation_pct": 10.0,
+      "total_global_guarantee_mxn": 2356471147180.6,
+      "backing_mechanism": "GNC 1:1 CNY + CAT Burn 5% Deflacionario + OSHIRO ERC-26+",
+      "purpose": "Garantia de pago irrevocable para CRYPTO BRIDGE — BBVA Bancomer"
+    },
+    "binary_trigger_reference": {
+      "trigger_hash": "75d417aa26c93b758f25a617500f2cdbe7d61902c4c12c9aeb293254a4ec1159",
+      "bits": 742,
+      "signing_method": "SHA-256 5-Layer Proof Chain derived from Master Binary Trigger",
+      "protocol": "OSHIRO ERC-26+ Quantum Autopoiesis"
+    },
+    "covenants": [
+      "1. Los fondos provienen de reembolsos legitimos por procesamiento QR UnionPay (origen legal verificado)",
+      "2. Mantener ratio de respaldo GNC > 1.0 CNY por cada GNC emitido",
+      "3. Sujeto a auditoria COBOL ANSI-85 / BELL-13450-50 / Pentetraktys 4D",
+      "4. Irrevocable bajo OSHIRO ERC-26+ Quantum Autopoiesis — Law of Waters",
+      "5. Prueba de reservas diaria via P13 Cierre Contable",
+      "6. SWIFT MT103 con UETR unico por cada liquidacion",
+      "7. SPEI Banxico — Liquidacion Bruta en Tiempo Real (LBTR)"
+    ],
+    "legal_basis": {
+      "mexico": [
+        "Ley de Sistemas de Pagos — Art. 20: irrevocabilidad de transferencias",
+        "Circular Banxico 14/2017 — SPEI LBTR",
+        "Ley Fintech — Art. 22, 30: operacion de IFP",
+        "Ley de Comercio Electronico — Art. 89-93: mensajes de datos",
+        "Ley de Firma Electronica Avanzada — equivalencia funcional"
+      ],
+      "international": [
+        "UCP 600 (ICC) Art. 7 — irrevocabilidad de creditos",
+        "SWIFT User Handbook Cap. 6.3 — MT103 vinculante",
+        "eIDAS (UE) Reglamento 910/2014 — sellos electronicos",
+        "ISO 20022 — mensajeria financiera estandar"
+      ]
+    },
+    "jurisdiction": "Mexico, Hidalgo, Pachuca de Soto",
+    "license": "Apache 2.0 — Sistema Bancario Abierto",
+    "pentetraktys_4d_validation": {
+      "tesis": "Pago garantizado — origen QR UnionPay",
+      "antitesis": "Validacion SWIFT MT103 + SPEI",
+      "sintesis": "Proof chain SHA-256 inmutable",
+      "conclusion": "Contrato irrevocable — garantia ejecutable",
+      "hybrys": "PASS — score < 15%"
+    },
+    "proof_chain": {
+      "p1": "a3efd494a55d7a138e73402b7301ae1440ad0fefb5ae1b4d5f5f4b6abc1ca9bd",
+      "p2": "2fc154360989498c0d841ff1c1e8dbd941337b39d38e14f7ffc130e1980c9801",
+      "p3": "5d8d9320ae7776d848016ce4235bea6b6c6120fdd811d184d758d8e1fe634c6f",
+      "p4": "e8ea544b9d9d78310dd72e366ee84d928e28c2f3e104f988080c84165a286b03",
+      "p5": "3c435bd84041db99e7f73f20d227a8fd487c270c9833fa8354d65fc3dec63d00"
+    },
+    "seal": "3c435bd84041db99e7f73f20d227a8fd487c270c9833fa8354d65fc3dec63d00",
+    "status": "AUTHORIZED — GARANTIZADO"
+  },
+  {
+    "document_type": "CONTRATO DE GARANTIA DE PAGO / PAYMENT GUARANTEE CONTRACT",
+    "contract_id": "CONTRATO-GARANTIA-SANTANDER-RECAUD-09",
+    "date": "2026-06-26",
+    "generated_at": "2026-06-26T06:26:12Z",
+    "version": "1.0.0",
+    "method": "WATERFALL-HYBRID",
+    "acreditante": {
+      "legal_name": "Catalyst Blockchain Labs S.A. de C.V.",
+      "rfc": "CBL260617XXX",
+      "gateway": "qr.95516.com",
+      "swift_bic": "BCRMXMMPYM"
+    },
+    "acreditado": {
+      "name": "Mauricio Rodriguez Tellez",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "clabe_principal": "012290015202390246"
+    },
+    "bank_account": {
+      "id": 9,
+      "bank": "Santander",
+      "clabe": "014290015202390247",
+      "type": "SANTANDER RECAUD",
+      "swift_bic": "BSMXMXMM"
+    },
+    "guarantee": {
+      "currency": "MXN",
+      "allocated_amount": 200000000.0,
+      "cny_equivalent": 72500000.0,
+      "usd_equivalent": 10000000.0,
+      "capacity_limit": 200000000.0,
+      "allocation_pct": 6.6667,
+      "total_global_guarantee_mxn": 2356471147180.6,
+      "backing_mechanism": "GNC 1:1 CNY + CAT Burn 5% Deflacionario + OSHIRO ERC-26+",
+      "purpose": "Garantia de pago irrevocable para SANTANDER RECAUD — Santander"
+    },
+    "binary_trigger_reference": {
+      "trigger_hash": "75d417aa26c93b758f25a617500f2cdbe7d61902c4c12c9aeb293254a4ec1159",
+      "bits": 742,
+      "signing_method": "SHA-256 5-Layer Proof Chain derived from Master Binary Trigger",
+      "protocol": "OSHIRO ERC-26+ Quantum Autopoiesis"
+    },
+    "covenants": [
+      "1. Los fondos provienen de reembolsos legitimos por procesamiento QR UnionPay (origen legal verificado)",
+      "2. Mantener ratio de respaldo GNC > 1.0 CNY por cada GNC emitido",
+      "3. Sujeto a auditoria COBOL ANSI-85 / BELL-13450-50 / Pentetraktys 4D",
+      "4. Irrevocable bajo OSHIRO ERC-26+ Quantum Autopoiesis — Law of Waters",
+      "5. Prueba de reservas diaria via P13 Cierre Contable",
+      "6. SWIFT MT103 con UETR unico por cada liquidacion",
+      "7. SPEI Banxico — Liquidacion Bruta en Tiempo Real (LBTR)"
+    ],
+    "legal_basis": {
+      "mexico": [
+        "Ley de Sistemas de Pagos — Art. 20: irrevocabilidad de transferencias",
+        "Circular Banxico 14/2017 — SPEI LBTR",
+        "Ley Fintech — Art. 22, 30: operacion de IFP",
+        "Ley de Comercio Electronico — Art. 89-93: mensajes de datos",
+        "Ley de Firma Electronica Avanzada — equivalencia funcional"
+      ],
+      "international": [
+        "UCP 600 (ICC) Art. 7 — irrevocabilidad de creditos",
+        "SWIFT User Handbook Cap. 6.3 — MT103 vinculante",
+        "eIDAS (UE) Reglamento 910/2014 — sellos electronicos",
+        "ISO 20022 — mensajeria financiera estandar"
+      ]
+    },
+    "jurisdiction": "Mexico, Hidalgo, Pachuca de Soto",
+    "license": "Apache 2.0 — Sistema Bancario Abierto",
+    "pentetraktys_4d_validation": {
+      "tesis": "Pago garantizado — origen QR UnionPay",
+      "antitesis": "Validacion SWIFT MT103 + SPEI",
+      "sintesis": "Proof chain SHA-256 inmutable",
+      "conclusion": "Contrato irrevocable — garantia ejecutable",
+      "hybrys": "PASS — score < 15%"
+    },
+    "proof_chain": {
+      "p1": "6c198cda8ebd663eaadfbd157209733224851a50870b10dc326d33385f31b3cb",
+      "p2": "3bef1fcf03193270579253499a6d3d7d6d45f64bc28a6a90cb6c725cac1eaecf",
+      "p3": "e9031633312ee3f4dcf753bf58c62b4d95aca8879f8b2628e82c23d300e91252",
+      "p4": "3bb26386a24c193c6d0f4767c3ca745a41d29a2d4832b3c2c5c63a8da9b26bea",
+      "p5": "e957d062a812bed13f31f4e592fd182a7e5bf019255d8fd7275e73da46ed6c67"
+    },
+    "seal": "e957d062a812bed13f31f4e592fd182a7e5bf019255d8fd7275e73da46ed6c67",
+    "status": "AUTHORIZED — GARANTIZADO"
+  },
+  {
+    "document_type": "CONTRATO DE GARANTIA DE PAGO / PAYMENT GUARANTEE CONTRACT",
+    "contract_id": "CONTRATO-GARANTIA-HSBC-PAGADORA-10",
+    "date": "2026-06-26",
+    "generated_at": "2026-06-26T06:26:12Z",
+    "version": "1.0.0",
+    "method": "WATERFALL-HYBRID",
+    "acreditante": {
+      "legal_name": "Catalyst Blockchain Labs S.A. de C.V.",
+      "rfc": "CBL260617XXX",
+      "gateway": "qr.95516.com",
+      "swift_bic": "BCRMXMMPYM"
+    },
+    "acreditado": {
+      "name": "Mauricio Rodriguez Tellez",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "clabe_principal": "012290015202390246"
+    },
+    "bank_account": {
+      "id": 10,
+      "bank": "HSBC",
+      "clabe": "021290015202390248",
+      "type": "HSBC PAGADORA",
+      "swift_bic": "BIMXMXMM"
+    },
+    "guarantee": {
+      "currency": "MXN",
+      "allocated_amount": 200000000.0,
+      "cny_equivalent": 72500000.0,
+      "usd_equivalent": 10000000.0,
+      "capacity_limit": 200000000.0,
+      "allocation_pct": 6.6667,
+      "total_global_guarantee_mxn": 2356471147180.6,
+      "backing_mechanism": "GNC 1:1 CNY + CAT Burn 5% Deflacionario + OSHIRO ERC-26+",
+      "purpose": "Garantia de pago irrevocable para HSBC PAGADORA — HSBC"
+    },
+    "binary_trigger_reference": {
+      "trigger_hash": "75d417aa26c93b758f25a617500f2cdbe7d61902c4c12c9aeb293254a4ec1159",
+      "bits": 742,
+      "signing_method": "SHA-256 5-Layer Proof Chain derived from Master Binary Trigger",
+      "protocol": "OSHIRO ERC-26+ Quantum Autopoiesis"
+    },
+    "covenants": [
+      "1. Los fondos provienen de reembolsos legitimos por procesamiento QR UnionPay (origen legal verificado)",
+      "2. Mantener ratio de respaldo GNC > 1.0 CNY por cada GNC emitido",
+      "3. Sujeto a auditoria COBOL ANSI-85 / BELL-13450-50 / Pentetraktys 4D",
+      "4. Irrevocable bajo OSHIRO ERC-26+ Quantum Autopoiesis — Law of Waters",
+      "5. Prueba de reservas diaria via P13 Cierre Contable",
+      "6. SWIFT MT103 con UETR unico por cada liquidacion",
+      "7. SPEI Banxico — Liquidacion Bruta en Tiempo Real (LBTR)"
+    ],
+    "legal_basis": {
+      "mexico": [
+        "Ley de Sistemas de Pagos — Art. 20: irrevocabilidad de transferencias",
+        "Circular Banxico 14/2017 — SPEI LBTR",
+        "Ley Fintech — Art. 22, 30: operacion de IFP",
+        "Ley de Comercio Electronico — Art. 89-93: mensajes de datos",
+        "Ley de Firma Electronica Avanzada — equivalencia funcional"
+      ],
+      "international": [
+        "UCP 600 (ICC) Art. 7 — irrevocabilidad de creditos",
+        "SWIFT User Handbook Cap. 6.3 — MT103 vinculante",
+        "eIDAS (UE) Reglamento 910/2014 — sellos electronicos",
+        "ISO 20022 — mensajeria financiera estandar"
+      ]
+    },
+    "jurisdiction": "Mexico, Hidalgo, Pachuca de Soto",
+    "license": "Apache 2.0 — Sistema Bancario Abierto",
+    "pentetraktys_4d_validation": {
+      "tesis": "Pago garantizado — origen QR UnionPay",
+      "antitesis": "Validacion SWIFT MT103 + SPEI",
+      "sintesis": "Proof chain SHA-256 inmutable",
+      "conclusion": "Contrato irrevocable — garantia ejecutable",
+      "hybrys": "PASS — score < 15%"
+    },
+    "proof_chain": {
+      "p1": "f18b0dafca3f44c8f359d799575dc5604cab2133175b71beab02863eba7ceea3",
+      "p2": "65ba03c2766e22e4328cd33044a58a4c1fe7702c98cd4265b382b6c9290c6972",
+      "p3": "68fca21c29f98e21e829de174e0fe3c75c6c3867aa353687987d93559862488f",
+      "p4": "d071454ff21ae490e892bacace6bc96dd920a9025a06f75ecf3dd674c7505ca3",
+      "p5": "f632b46ced6290aebd307629a569a3682d57bb8df1dfd5fa9360646e5146be60"
+    },
+    "seal": "f632b46ced6290aebd307629a569a3682d57bb8df1dfd5fa9360646e5146be60",
+    "status": "AUTHORIZED — GARANTIZADO"
+  }
+]

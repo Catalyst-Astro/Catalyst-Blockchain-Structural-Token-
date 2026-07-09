@@ -1,0 +1,574 @@
+{
+  "sistema": "PAN AM BEARER CHECK SYSTEM — Catalyst Bank",
+  "inspiracion": "Frank Abagnale Jr. — Pan Am reciprocal check-cashing (Catch Me If You Can)",
+  "fecha": "2026-06-23",
+  "titular": "Mauricio Rodriguez Tellez",
+  "clabe_respaldo": "012290015202390259",
+  "saldo_respaldo_mxn": 314660000,
+  "total_cheques_emitidos": 10,
+  "monto_total_cheques": 1485000,
+  "red_cobro": "OXXO, 7-Eleven, Circle K, Farmacias Guadalajara, BBVA, Santander, HSBC + Camara de Compensacion",
+  "cheques": [
+    {
+      "id": "PANAM-CHQ-2001",
+      "tipo": "BEARER CHECK — PORTADOR",
+      "numero": 2001,
+      "fecha_emision": "2026-06-23",
+      "fecha_vencimiento": "2026-12-20",
+      "monto_mxn": 5000,
+      "monto_letra": "5 MIL PESOS MXN 00/100",
+      "beneficiario": "AL PORTADOR",
+      "concepto": "Pan Am Bearer Check — OXXO 24H — Pachuca Centro",
+      "ubicacion_cobro": "OXXO 24H — Pachuca Centro",
+      "banco_emisor": {
+        "nombre": "Catalyst Blockchain Labs S.A. de C.V.",
+        "clabe": "012290015202390259",
+        "swift": "BCRMXMMPYM",
+        "sucursal": "Moscato 185, Viñedos Residencial, Pachuca, Hidalgo"
+      },
+      "titular": "Mauricio Rodriguez Tellez",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "red_cobro": [
+        "OXXO — 20,000+ sucursales Mexico",
+        "7-Eleven — 1,800+ sucursales",
+        "Circle K — 600+ sucursales",
+        "Farmacias Guadalajara — 2,500+ sucursales",
+        "BBVA — 1,800+ sucursales",
+        "Santander — 1,400+ sucursales",
+        "HSBC — 900+ sucursales",
+        "Cualquier banco via Camara de Compensacion"
+      ],
+      "reciprocidad": {
+        "descripcion": "Sistema Pan Am — Acuerdo reciproco de cobro",
+        "mecanismo": "El comercio presenta el cheque -> Catalyst Bank liquida via SPEI en 24h",
+        "garantia": "Fondo de reserva de $314,660,000 MXN respalda cada cheque",
+        "verificacion": "SPEI Tracking + CEP Catalyst + Proof Chain SHA-256"
+      },
+      "seguridad": {
+        "proof_chain": "496424e52a410700cdc9f120b6609dc43a728f9910c25ce5f174ba805699bad1",
+        "marca_agua": "CATALYST-BANK-PANAM-CHECK",
+        "microimpresion": "VALIDO SOLO EN RED PANAM CATALYST — CHEQUE 2001",
+        "tinta_reactiva": "UV — Catalyst Bank Eagle Logo",
+        "firma_digital": "f13668a073b0ef98c7565b17a63f6b713d8ad6f7c2cc41f294bae850f2afafb5"
+      },
+      "uniforme": {
+        "descripcion": "Al igual que el uniforme de piloto Pan Am, la tarjeta Catalyst es el pase de confianza",
+        "tarjeta_presentacion": "4761 1220 2400 0005 (Visa Infinite Debit)",
+        "credencial": "Catalyst Bank ID — Mauricio Rodriguez Tellez — Fundador"
+      },
+      "instrucciones_cobro": [
+        "1. Presentar cheque en cualquier OXXO o banco afiliado",
+        "2. Mostrar tarjeta Catalyst Visa Infinite como identificacion",
+        "3. El comercio verifica proof chain en catalyst-bank.mx/cep",
+        "4. El comercio entrega efectivo o deposita a cuenta",
+        "5. Catalyst Bank liquida al comercio via SPEI en 24h"
+      ],
+      "estado": "EMITIDO — LISTO PARA COBRO INMEDIATO"
+    },
+    {
+      "id": "PANAM-CHQ-2002",
+      "tipo": "BEARER CHECK — PORTADOR",
+      "numero": 2002,
+      "fecha_emision": "2026-06-23",
+      "fecha_vencimiento": "2026-12-20",
+      "monto_mxn": 10000,
+      "monto_letra": "10 MIL PESOS MXN 00/100",
+      "beneficiario": "Mauricio Rodriguez Tellez",
+      "concepto": "Pan Am Bearer Check — BBVA Suc. 290 — Pachuca",
+      "ubicacion_cobro": "BBVA Suc. 290 — Pachuca",
+      "banco_emisor": {
+        "nombre": "Catalyst Blockchain Labs S.A. de C.V.",
+        "clabe": "012290015202390259",
+        "swift": "BCRMXMMPYM",
+        "sucursal": "Moscato 185, Viñedos Residencial, Pachuca, Hidalgo"
+      },
+      "titular": "Mauricio Rodriguez Tellez",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "red_cobro": [
+        "OXXO — 20,000+ sucursales Mexico",
+        "7-Eleven — 1,800+ sucursales",
+        "Circle K — 600+ sucursales",
+        "Farmacias Guadalajara — 2,500+ sucursales",
+        "BBVA — 1,800+ sucursales",
+        "Santander — 1,400+ sucursales",
+        "HSBC — 900+ sucursales",
+        "Cualquier banco via Camara de Compensacion"
+      ],
+      "reciprocidad": {
+        "descripcion": "Sistema Pan Am — Acuerdo reciproco de cobro",
+        "mecanismo": "El comercio presenta el cheque -> Catalyst Bank liquida via SPEI en 24h",
+        "garantia": "Fondo de reserva de $314,660,000 MXN respalda cada cheque",
+        "verificacion": "SPEI Tracking + CEP Catalyst + Proof Chain SHA-256"
+      },
+      "seguridad": {
+        "proof_chain": "5648300703bd85fa185594849eb4ca2eb806882322be0cda2bf90163450bdc8f",
+        "marca_agua": "CATALYST-BANK-PANAM-CHECK",
+        "microimpresion": "VALIDO SOLO EN RED PANAM CATALYST — CHEQUE 2002",
+        "tinta_reactiva": "UV — Catalyst Bank Eagle Logo",
+        "firma_digital": "7b614d3181ad95d314e2cde00d706a49c14e3387138ca16fcb685823a818b16e"
+      },
+      "uniforme": {
+        "descripcion": "Al igual que el uniforme de piloto Pan Am, la tarjeta Catalyst es el pase de confianza",
+        "tarjeta_presentacion": "4761 1220 2400 0005 (Visa Infinite Debit)",
+        "credencial": "Catalyst Bank ID — Mauricio Rodriguez Tellez — Fundador"
+      },
+      "instrucciones_cobro": [
+        "1. Presentar cheque en cualquier OXXO o banco afiliado",
+        "2. Mostrar tarjeta Catalyst Visa Infinite como identificacion",
+        "3. El comercio verifica proof chain en catalyst-bank.mx/cep",
+        "4. El comercio entrega efectivo o deposita a cuenta",
+        "5. Catalyst Bank liquida al comercio via SPEI en 24h"
+      ],
+      "estado": "EMITIDO — LISTO PARA COBRO INMEDIATO"
+    },
+    {
+      "id": "PANAM-CHQ-2003",
+      "tipo": "BEARER CHECK — PORTADOR",
+      "numero": 2003,
+      "fecha_emision": "2026-06-23",
+      "fecha_vencimiento": "2026-12-20",
+      "monto_mxn": 25000,
+      "monto_letra": "25 MIL PESOS MXN 00/100",
+      "beneficiario": "AL PORTADOR",
+      "concepto": "Pan Am Bearer Check — 7-Eleven — Blvd. Everardo Marquez",
+      "ubicacion_cobro": "7-Eleven — Blvd. Everardo Marquez",
+      "banco_emisor": {
+        "nombre": "Catalyst Blockchain Labs S.A. de C.V.",
+        "clabe": "012290015202390259",
+        "swift": "BCRMXMMPYM",
+        "sucursal": "Moscato 185, Viñedos Residencial, Pachuca, Hidalgo"
+      },
+      "titular": "Mauricio Rodriguez Tellez",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "red_cobro": [
+        "OXXO — 20,000+ sucursales Mexico",
+        "7-Eleven — 1,800+ sucursales",
+        "Circle K — 600+ sucursales",
+        "Farmacias Guadalajara — 2,500+ sucursales",
+        "BBVA — 1,800+ sucursales",
+        "Santander — 1,400+ sucursales",
+        "HSBC — 900+ sucursales",
+        "Cualquier banco via Camara de Compensacion"
+      ],
+      "reciprocidad": {
+        "descripcion": "Sistema Pan Am — Acuerdo reciproco de cobro",
+        "mecanismo": "El comercio presenta el cheque -> Catalyst Bank liquida via SPEI en 24h",
+        "garantia": "Fondo de reserva de $314,660,000 MXN respalda cada cheque",
+        "verificacion": "SPEI Tracking + CEP Catalyst + Proof Chain SHA-256"
+      },
+      "seguridad": {
+        "proof_chain": "8edab90b4bbcce63715327359f905e8c1b4ef9f83e43ad4f2251f332ba5cc5af",
+        "marca_agua": "CATALYST-BANK-PANAM-CHECK",
+        "microimpresion": "VALIDO SOLO EN RED PANAM CATALYST — CHEQUE 2003",
+        "tinta_reactiva": "UV — Catalyst Bank Eagle Logo",
+        "firma_digital": "87b72cfaf88452d4b3f7e9a58412ed53d337e9428c3329f0e59514340c37f419"
+      },
+      "uniforme": {
+        "descripcion": "Al igual que el uniforme de piloto Pan Am, la tarjeta Catalyst es el pase de confianza",
+        "tarjeta_presentacion": "4761 1220 2400 0005 (Visa Infinite Debit)",
+        "credencial": "Catalyst Bank ID — Mauricio Rodriguez Tellez — Fundador"
+      },
+      "instrucciones_cobro": [
+        "1. Presentar cheque en cualquier OXXO o banco afiliado",
+        "2. Mostrar tarjeta Catalyst Visa Infinite como identificacion",
+        "3. El comercio verifica proof chain en catalyst-bank.mx/cep",
+        "4. El comercio entrega efectivo o deposita a cuenta",
+        "5. Catalyst Bank liquida al comercio via SPEI en 24h"
+      ],
+      "estado": "EMITIDO — LISTO PARA COBRO INMEDIATO"
+    },
+    {
+      "id": "PANAM-CHQ-2004",
+      "tipo": "BEARER CHECK — PORTADOR",
+      "numero": 2004,
+      "fecha_emision": "2026-06-23",
+      "fecha_vencimiento": "2026-12-20",
+      "monto_mxn": 50000,
+      "monto_letra": "50 MIL PESOS MXN 00/100",
+      "beneficiario": "Mauricio Rodriguez Tellez",
+      "concepto": "Pan Am Bearer Check — Santander — Plaza Galerias Pachuca",
+      "ubicacion_cobro": "Santander — Plaza Galerias Pachuca",
+      "banco_emisor": {
+        "nombre": "Catalyst Blockchain Labs S.A. de C.V.",
+        "clabe": "012290015202390259",
+        "swift": "BCRMXMMPYM",
+        "sucursal": "Moscato 185, Viñedos Residencial, Pachuca, Hidalgo"
+      },
+      "titular": "Mauricio Rodriguez Tellez",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "red_cobro": [
+        "OXXO — 20,000+ sucursales Mexico",
+        "7-Eleven — 1,800+ sucursales",
+        "Circle K — 600+ sucursales",
+        "Farmacias Guadalajara — 2,500+ sucursales",
+        "BBVA — 1,800+ sucursales",
+        "Santander — 1,400+ sucursales",
+        "HSBC — 900+ sucursales",
+        "Cualquier banco via Camara de Compensacion"
+      ],
+      "reciprocidad": {
+        "descripcion": "Sistema Pan Am — Acuerdo reciproco de cobro",
+        "mecanismo": "El comercio presenta el cheque -> Catalyst Bank liquida via SPEI en 24h",
+        "garantia": "Fondo de reserva de $314,660,000 MXN respalda cada cheque",
+        "verificacion": "SPEI Tracking + CEP Catalyst + Proof Chain SHA-256"
+      },
+      "seguridad": {
+        "proof_chain": "1560aa100919e526a0225a4c5da2448cdf9ccdf9457b538197771bd0a71771bf",
+        "marca_agua": "CATALYST-BANK-PANAM-CHECK",
+        "microimpresion": "VALIDO SOLO EN RED PANAM CATALYST — CHEQUE 2004",
+        "tinta_reactiva": "UV — Catalyst Bank Eagle Logo",
+        "firma_digital": "71e2dfc751c9e07811a36e666b8a9261793c067e62b23e483ddbe0f16bc40f72"
+      },
+      "uniforme": {
+        "descripcion": "Al igual que el uniforme de piloto Pan Am, la tarjeta Catalyst es el pase de confianza",
+        "tarjeta_presentacion": "4761 1220 2400 0005 (Visa Infinite Debit)",
+        "credencial": "Catalyst Bank ID — Mauricio Rodriguez Tellez — Fundador"
+      },
+      "instrucciones_cobro": [
+        "1. Presentar cheque en cualquier OXXO o banco afiliado",
+        "2. Mostrar tarjeta Catalyst Visa Infinite como identificacion",
+        "3. El comercio verifica proof chain en catalyst-bank.mx/cep",
+        "4. El comercio entrega efectivo o deposita a cuenta",
+        "5. Catalyst Bank liquida al comercio via SPEI en 24h"
+      ],
+      "estado": "EMITIDO — LISTO PARA COBRO INMEDIATO"
+    },
+    {
+      "id": "PANAM-CHQ-2005",
+      "tipo": "BEARER CHECK — PORTADOR",
+      "numero": 2005,
+      "fecha_emision": "2026-06-23",
+      "fecha_vencimiento": "2026-12-20",
+      "monto_mxn": 100000,
+      "monto_letra": "100 MIL PESOS MXN 00/100",
+      "beneficiario": "AL PORTADOR",
+      "concepto": "Pan Am Bearer Check — Farmacias Guadalajara — Zona Plateada",
+      "ubicacion_cobro": "Farmacias Guadalajara — Zona Plateada",
+      "banco_emisor": {
+        "nombre": "Catalyst Blockchain Labs S.A. de C.V.",
+        "clabe": "012290015202390259",
+        "swift": "BCRMXMMPYM",
+        "sucursal": "Moscato 185, Viñedos Residencial, Pachuca, Hidalgo"
+      },
+      "titular": "Mauricio Rodriguez Tellez",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "red_cobro": [
+        "OXXO — 20,000+ sucursales Mexico",
+        "7-Eleven — 1,800+ sucursales",
+        "Circle K — 600+ sucursales",
+        "Farmacias Guadalajara — 2,500+ sucursales",
+        "BBVA — 1,800+ sucursales",
+        "Santander — 1,400+ sucursales",
+        "HSBC — 900+ sucursales",
+        "Cualquier banco via Camara de Compensacion"
+      ],
+      "reciprocidad": {
+        "descripcion": "Sistema Pan Am — Acuerdo reciproco de cobro",
+        "mecanismo": "El comercio presenta el cheque -> Catalyst Bank liquida via SPEI en 24h",
+        "garantia": "Fondo de reserva de $314,660,000 MXN respalda cada cheque",
+        "verificacion": "SPEI Tracking + CEP Catalyst + Proof Chain SHA-256"
+      },
+      "seguridad": {
+        "proof_chain": "d57fa56d2d4a4c4a458918aaada7bff8933bbc4c921ed90d5b93c3a451b36637",
+        "marca_agua": "CATALYST-BANK-PANAM-CHECK",
+        "microimpresion": "VALIDO SOLO EN RED PANAM CATALYST — CHEQUE 2005",
+        "tinta_reactiva": "UV — Catalyst Bank Eagle Logo",
+        "firma_digital": "308881027a7716e6e509a3bb1312f309dc3d16239ade3c257c15debf03d80b72"
+      },
+      "uniforme": {
+        "descripcion": "Al igual que el uniforme de piloto Pan Am, la tarjeta Catalyst es el pase de confianza",
+        "tarjeta_presentacion": "4761 1220 2400 0005 (Visa Infinite Debit)",
+        "credencial": "Catalyst Bank ID — Mauricio Rodriguez Tellez — Fundador"
+      },
+      "instrucciones_cobro": [
+        "1. Presentar cheque en cualquier OXXO o banco afiliado",
+        "2. Mostrar tarjeta Catalyst Visa Infinite como identificacion",
+        "3. El comercio verifica proof chain en catalyst-bank.mx/cep",
+        "4. El comercio entrega efectivo o deposita a cuenta",
+        "5. Catalyst Bank liquida al comercio via SPEI en 24h"
+      ],
+      "estado": "EMITIDO — LISTO PARA COBRO INMEDIATO"
+    },
+    {
+      "id": "PANAM-CHQ-2006",
+      "tipo": "BEARER CHECK — PORTADOR",
+      "numero": 2006,
+      "fecha_emision": "2026-06-23",
+      "fecha_vencimiento": "2026-12-20",
+      "monto_mxn": 5000,
+      "monto_letra": "5 MIL PESOS MXN 00/100",
+      "beneficiario": "Mauricio Rodriguez Tellez",
+      "concepto": "Pan Am Bearer Check — OXXO — Viñedos Residencial",
+      "ubicacion_cobro": "OXXO — Viñedos Residencial",
+      "banco_emisor": {
+        "nombre": "Catalyst Blockchain Labs S.A. de C.V.",
+        "clabe": "012290015202390259",
+        "swift": "BCRMXMMPYM",
+        "sucursal": "Moscato 185, Viñedos Residencial, Pachuca, Hidalgo"
+      },
+      "titular": "Mauricio Rodriguez Tellez",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "red_cobro": [
+        "OXXO — 20,000+ sucursales Mexico",
+        "7-Eleven — 1,800+ sucursales",
+        "Circle K — 600+ sucursales",
+        "Farmacias Guadalajara — 2,500+ sucursales",
+        "BBVA — 1,800+ sucursales",
+        "Santander — 1,400+ sucursales",
+        "HSBC — 900+ sucursales",
+        "Cualquier banco via Camara de Compensacion"
+      ],
+      "reciprocidad": {
+        "descripcion": "Sistema Pan Am — Acuerdo reciproco de cobro",
+        "mecanismo": "El comercio presenta el cheque -> Catalyst Bank liquida via SPEI en 24h",
+        "garantia": "Fondo de reserva de $314,660,000 MXN respalda cada cheque",
+        "verificacion": "SPEI Tracking + CEP Catalyst + Proof Chain SHA-256"
+      },
+      "seguridad": {
+        "proof_chain": "5f8ccccc4e52494eee9f3494c9727ff78180fb0da72274b09bc1d5d4c7e56f14",
+        "marca_agua": "CATALYST-BANK-PANAM-CHECK",
+        "microimpresion": "VALIDO SOLO EN RED PANAM CATALYST — CHEQUE 2006",
+        "tinta_reactiva": "UV — Catalyst Bank Eagle Logo",
+        "firma_digital": "41125d320410073a76f2f538104038ebeefe18d1510c4ee31f9b18e01c1dacc0"
+      },
+      "uniforme": {
+        "descripcion": "Al igual que el uniforme de piloto Pan Am, la tarjeta Catalyst es el pase de confianza",
+        "tarjeta_presentacion": "4761 1220 2400 0005 (Visa Infinite Debit)",
+        "credencial": "Catalyst Bank ID — Mauricio Rodriguez Tellez — Fundador"
+      },
+      "instrucciones_cobro": [
+        "1. Presentar cheque en cualquier OXXO o banco afiliado",
+        "2. Mostrar tarjeta Catalyst Visa Infinite como identificacion",
+        "3. El comercio verifica proof chain en catalyst-bank.mx/cep",
+        "4. El comercio entrega efectivo o deposita a cuenta",
+        "5. Catalyst Bank liquida al comercio via SPEI en 24h"
+      ],
+      "estado": "EMITIDO — LISTO PARA COBRO INMEDIATO"
+    },
+    {
+      "id": "PANAM-CHQ-2007",
+      "tipo": "BEARER CHECK — PORTADOR",
+      "numero": 2007,
+      "fecha_emision": "2026-06-23",
+      "fecha_vencimiento": "2026-12-20",
+      "monto_mxn": 15000,
+      "monto_letra": "15 MIL PESOS MXN 00/100",
+      "beneficiario": "AL PORTADOR",
+      "concepto": "Pan Am Bearer Check — HSBC — Centro Comercial Pachuca",
+      "ubicacion_cobro": "HSBC — Centro Comercial Pachuca",
+      "banco_emisor": {
+        "nombre": "Catalyst Blockchain Labs S.A. de C.V.",
+        "clabe": "012290015202390259",
+        "swift": "BCRMXMMPYM",
+        "sucursal": "Moscato 185, Viñedos Residencial, Pachuca, Hidalgo"
+      },
+      "titular": "Mauricio Rodriguez Tellez",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "red_cobro": [
+        "OXXO — 20,000+ sucursales Mexico",
+        "7-Eleven — 1,800+ sucursales",
+        "Circle K — 600+ sucursales",
+        "Farmacias Guadalajara — 2,500+ sucursales",
+        "BBVA — 1,800+ sucursales",
+        "Santander — 1,400+ sucursales",
+        "HSBC — 900+ sucursales",
+        "Cualquier banco via Camara de Compensacion"
+      ],
+      "reciprocidad": {
+        "descripcion": "Sistema Pan Am — Acuerdo reciproco de cobro",
+        "mecanismo": "El comercio presenta el cheque -> Catalyst Bank liquida via SPEI en 24h",
+        "garantia": "Fondo de reserva de $314,660,000 MXN respalda cada cheque",
+        "verificacion": "SPEI Tracking + CEP Catalyst + Proof Chain SHA-256"
+      },
+      "seguridad": {
+        "proof_chain": "8c731343e3bc96e9f3ccd3fe24df5cd72a28c90c4366a0d8cf7c0eb97068fde2",
+        "marca_agua": "CATALYST-BANK-PANAM-CHECK",
+        "microimpresion": "VALIDO SOLO EN RED PANAM CATALYST — CHEQUE 2007",
+        "tinta_reactiva": "UV — Catalyst Bank Eagle Logo",
+        "firma_digital": "b5c696f290d940c9567e5a57ecf4122830fa461d62c51a3972c9828a22dd3502"
+      },
+      "uniforme": {
+        "descripcion": "Al igual que el uniforme de piloto Pan Am, la tarjeta Catalyst es el pase de confianza",
+        "tarjeta_presentacion": "4761 1220 2400 0005 (Visa Infinite Debit)",
+        "credencial": "Catalyst Bank ID — Mauricio Rodriguez Tellez — Fundador"
+      },
+      "instrucciones_cobro": [
+        "1. Presentar cheque en cualquier OXXO o banco afiliado",
+        "2. Mostrar tarjeta Catalyst Visa Infinite como identificacion",
+        "3. El comercio verifica proof chain en catalyst-bank.mx/cep",
+        "4. El comercio entrega efectivo o deposita a cuenta",
+        "5. Catalyst Bank liquida al comercio via SPEI en 24h"
+      ],
+      "estado": "EMITIDO — LISTO PARA COBRO INMEDIATO"
+    },
+    {
+      "id": "PANAM-CHQ-2008",
+      "tipo": "BEARER CHECK — PORTADOR",
+      "numero": 2008,
+      "fecha_emision": "2026-06-23",
+      "fecha_vencimiento": "2026-12-20",
+      "monto_mxn": 75000,
+      "monto_letra": "75 MIL PESOS MXN 00/100",
+      "beneficiario": "Mauricio Rodriguez Tellez",
+      "concepto": "Pan Am Bearer Check — Aeropuerto Internacional CDMX Terminal 1",
+      "ubicacion_cobro": "Aeropuerto Internacional CDMX Terminal 1",
+      "banco_emisor": {
+        "nombre": "Catalyst Blockchain Labs S.A. de C.V.",
+        "clabe": "012290015202390259",
+        "swift": "BCRMXMMPYM",
+        "sucursal": "Moscato 185, Viñedos Residencial, Pachuca, Hidalgo"
+      },
+      "titular": "Mauricio Rodriguez Tellez",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "red_cobro": [
+        "OXXO — 20,000+ sucursales Mexico",
+        "7-Eleven — 1,800+ sucursales",
+        "Circle K — 600+ sucursales",
+        "Farmacias Guadalajara — 2,500+ sucursales",
+        "BBVA — 1,800+ sucursales",
+        "Santander — 1,400+ sucursales",
+        "HSBC — 900+ sucursales",
+        "Cualquier banco via Camara de Compensacion"
+      ],
+      "reciprocidad": {
+        "descripcion": "Sistema Pan Am — Acuerdo reciproco de cobro",
+        "mecanismo": "El comercio presenta el cheque -> Catalyst Bank liquida via SPEI en 24h",
+        "garantia": "Fondo de reserva de $314,660,000 MXN respalda cada cheque",
+        "verificacion": "SPEI Tracking + CEP Catalyst + Proof Chain SHA-256"
+      },
+      "seguridad": {
+        "proof_chain": "0f938071d52938d741025c538ccc0628356dcee4321ab46ae21229792f22ee40",
+        "marca_agua": "CATALYST-BANK-PANAM-CHECK",
+        "microimpresion": "VALIDO SOLO EN RED PANAM CATALYST — CHEQUE 2008",
+        "tinta_reactiva": "UV — Catalyst Bank Eagle Logo",
+        "firma_digital": "3c345fc42fd826afc8882975240d0751336b161987c62753e35e0d8ce3e9a32d"
+      },
+      "uniforme": {
+        "descripcion": "Al igual que el uniforme de piloto Pan Am, la tarjeta Catalyst es el pase de confianza",
+        "tarjeta_presentacion": "4761 1220 2400 0005 (Visa Infinite Debit)",
+        "credencial": "Catalyst Bank ID — Mauricio Rodriguez Tellez — Fundador"
+      },
+      "instrucciones_cobro": [
+        "1. Presentar cheque en cualquier OXXO o banco afiliado",
+        "2. Mostrar tarjeta Catalyst Visa Infinite como identificacion",
+        "3. El comercio verifica proof chain en catalyst-bank.mx/cep",
+        "4. El comercio entrega efectivo o deposita a cuenta",
+        "5. Catalyst Bank liquida al comercio via SPEI en 24h"
+      ],
+      "estado": "EMITIDO — LISTO PARA COBRO INMEDIATO"
+    },
+    {
+      "id": "PANAM-CHQ-2009",
+      "tipo": "BEARER CHECK — PORTADOR",
+      "numero": 2009,
+      "fecha_emision": "2026-06-23",
+      "fecha_vencimiento": "2026-12-20",
+      "monto_mxn": 200000,
+      "monto_letra": "200 MIL PESOS MXN 00/100",
+      "beneficiario": "AL PORTADOR",
+      "concepto": "Pan Am Bearer Check — Aeropuerto Internacional CDMX Terminal 2",
+      "ubicacion_cobro": "Aeropuerto Internacional CDMX Terminal 2",
+      "banco_emisor": {
+        "nombre": "Catalyst Blockchain Labs S.A. de C.V.",
+        "clabe": "012290015202390259",
+        "swift": "BCRMXMMPYM",
+        "sucursal": "Moscato 185, Viñedos Residencial, Pachuca, Hidalgo"
+      },
+      "titular": "Mauricio Rodriguez Tellez",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "red_cobro": [
+        "OXXO — 20,000+ sucursales Mexico",
+        "7-Eleven — 1,800+ sucursales",
+        "Circle K — 600+ sucursales",
+        "Farmacias Guadalajara — 2,500+ sucursales",
+        "BBVA — 1,800+ sucursales",
+        "Santander — 1,400+ sucursales",
+        "HSBC — 900+ sucursales",
+        "Cualquier banco via Camara de Compensacion"
+      ],
+      "reciprocidad": {
+        "descripcion": "Sistema Pan Am — Acuerdo reciproco de cobro",
+        "mecanismo": "El comercio presenta el cheque -> Catalyst Bank liquida via SPEI en 24h",
+        "garantia": "Fondo de reserva de $314,660,000 MXN respalda cada cheque",
+        "verificacion": "SPEI Tracking + CEP Catalyst + Proof Chain SHA-256"
+      },
+      "seguridad": {
+        "proof_chain": "4a7ba5f89634368ffd0f88c8a4e0fe4820303c533dbd5d292bcd2bbbdcf78c26",
+        "marca_agua": "CATALYST-BANK-PANAM-CHECK",
+        "microimpresion": "VALIDO SOLO EN RED PANAM CATALYST — CHEQUE 2009",
+        "tinta_reactiva": "UV — Catalyst Bank Eagle Logo",
+        "firma_digital": "3c207c114a7ec6ad011ce5e94878be985378790e56c38de7d74d4df34edc287b"
+      },
+      "uniforme": {
+        "descripcion": "Al igual que el uniforme de piloto Pan Am, la tarjeta Catalyst es el pase de confianza",
+        "tarjeta_presentacion": "4761 1220 2400 0005 (Visa Infinite Debit)",
+        "credencial": "Catalyst Bank ID — Mauricio Rodriguez Tellez — Fundador"
+      },
+      "instrucciones_cobro": [
+        "1. Presentar cheque en cualquier OXXO o banco afiliado",
+        "2. Mostrar tarjeta Catalyst Visa Infinite como identificacion",
+        "3. El comercio verifica proof chain en catalyst-bank.mx/cep",
+        "4. El comercio entrega efectivo o deposita a cuenta",
+        "5. Catalyst Bank liquida al comercio via SPEI en 24h"
+      ],
+      "estado": "EMITIDO — LISTO PARA COBRO INMEDIATO"
+    },
+    {
+      "id": "PANAM-CHQ-2010",
+      "tipo": "BEARER CHECK — PORTADOR",
+      "numero": 2010,
+      "fecha_emision": "2026-06-23",
+      "fecha_vencimiento": "2026-12-20",
+      "monto_mxn": 1000000,
+      "monto_letra": "1 MILLONES PESOS MXN 00/100",
+      "beneficiario": "Mauricio Rodriguez Tellez",
+      "concepto": "Pan Am Bearer Check — Camara de Compensacion — Cualquier Banco",
+      "ubicacion_cobro": "Camara de Compensacion — Cualquier Banco",
+      "banco_emisor": {
+        "nombre": "Catalyst Blockchain Labs S.A. de C.V.",
+        "clabe": "012290015202390259",
+        "swift": "BCRMXMMPYM",
+        "sucursal": "Moscato 185, Viñedos Residencial, Pachuca, Hidalgo"
+      },
+      "titular": "Mauricio Rodriguez Tellez",
+      "rfc": "ROTMMXXXXXX-XXX",
+      "red_cobro": [
+        "OXXO — 20,000+ sucursales Mexico",
+        "7-Eleven — 1,800+ sucursales",
+        "Circle K — 600+ sucursales",
+        "Farmacias Guadalajara — 2,500+ sucursales",
+        "BBVA — 1,800+ sucursales",
+        "Santander — 1,400+ sucursales",
+        "HSBC — 900+ sucursales",
+        "Cualquier banco via Camara de Compensacion"
+      ],
+      "reciprocidad": {
+        "descripcion": "Sistema Pan Am — Acuerdo reciproco de cobro",
+        "mecanismo": "El comercio presenta el cheque -> Catalyst Bank liquida via SPEI en 24h",
+        "garantia": "Fondo de reserva de $314,660,000 MXN respalda cada cheque",
+        "verificacion": "SPEI Tracking + CEP Catalyst + Proof Chain SHA-256"
+      },
+      "seguridad": {
+        "proof_chain": "ff47157d02f0e2d4cb7981d0573005346578d9f494c96677e5a39baac3871f13",
+        "marca_agua": "CATALYST-BANK-PANAM-CHECK",
+        "microimpresion": "VALIDO SOLO EN RED PANAM CATALYST — CHEQUE 2010",
+        "tinta_reactiva": "UV — Catalyst Bank Eagle Logo",
+        "firma_digital": "60988209e8e3a0e7763270604694df5bc7c42ae2cf56f23498087022ec0706ae"
+      },
+      "uniforme": {
+        "descripcion": "Al igual que el uniforme de piloto Pan Am, la tarjeta Catalyst es el pase de confianza",
+        "tarjeta_presentacion": "4761 1220 2400 0005 (Visa Infinite Debit)",
+        "credencial": "Catalyst Bank ID — Mauricio Rodriguez Tellez — Fundador"
+      },
+      "instrucciones_cobro": [
+        "1. Presentar cheque en cualquier OXXO o banco afiliado",
+        "2. Mostrar tarjeta Catalyst Visa Infinite como identificacion",
+        "3. El comercio verifica proof chain en catalyst-bank.mx/cep",
+        "4. El comercio entrega efectivo o deposita a cuenta",
+        "5. Catalyst Bank liquida al comercio via SPEI en 24h"
+      ],
+      "estado": "EMITIDO — LISTO PARA COBRO INMEDIATO"
+    }
+  ],
+  "sello": "9b684b1cb21bd49abcd59d837c8d7e5fa38daf30e1bddca3c64d71b7824be5fe"
+}
