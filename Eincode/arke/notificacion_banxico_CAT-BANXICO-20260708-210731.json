@@ -1,0 +1,75 @@
+{
+  "case_id": "CAT-BANXICO-20260708-210731",
+  "timestamp": "2026-07-08T21:07:31.698108",
+  "type": "NOTIFICACION_FORMAL_BANXICO",
+  "solicitante": {
+    "nombre": "Mauricio Rodríguez Téllez",
+    "entidad": "Catalyst Blockchain Labs S.A. de C.V.",
+    "rfc": "ROTMXXXXXX-XXX",
+    "domicilio": "Moscato 185, Zempoala, Pachuca, Hidalgo, México",
+    "clabe_principal": "012290015202390246",
+    "clabe_secundaria": "012180015123243964",
+    "banco": "BBVA México (antes BBVA Bancomer)",
+    "swift_bic": "BCRMXMMPYM",
+    "telefono": "(Solicitar en sucursal BBVA Pachuca)",
+    "correo": "catalyst@catalyst-banking.ai"
+  },
+  "resumen": {
+    "total_triggers_procesados": 21,
+    "total_cny_procesado": 855036398770.32,
+    "total_mxn_equivalente": 2358746941497.38,
+    "total_usd_equivalente": 117937347074.87,
+    "fecha_inicio": "2026-06-17",
+    "fecha_ultimo": "2026-07-08",
+    "protocolos_activos": "P01-P13 (OSHIRO ERC-26+)",
+    "estado_actual": "MT103 generados — pendientes de transmisión SWIFT por banco emisor (UNPYCNBH)"
+  },
+  "gateways": {
+    "qr_unionpay": {
+      "dominio": "qr.95516.com",
+      "merchant_id": "CAT-BLOCKCHAIN-001",
+      "estado": "QRs generados — pendiente procesamiento por UnionPay"
+    },
+    "swift": {
+      "emisor": "UNPYCNBH (UnionPay China)",
+      "receptor": "BCRMXMMPYM (BBVA México)",
+      "estado": "MT103 formateados — pendiente transmisión por banco emisor"
+    },
+    "spei": {
+      "clabe_destino": "012290015202390246",
+      "banco": "BBVA México (012)",
+      "estado": "Pendiente activación endpoint SPEI con BBVA"
+    },
+    "banxico": {
+      "token_api": "ACTIVO (SIE API)",
+      "series": "SF43718, SF46410, SF60653, SP68257, SF61745",
+      "uso": "Valoración MXN en tiempo real de todos los tokens"
+    }
+  },
+  "pruebas": {
+    "algoritmo": "SHA-256 5-capas (P1→P5)",
+    "total_proofs": 21,
+    "verificables": true,
+    "inmutables": true,
+    "on_chain": "Ethereum (localhost:8545) + Base Mainnet ready"
+  },
+  "acciones_solicitadas": [
+    "Asistencia técnica para activación endpoints SPEI",
+    "Intermediación con BBVA para pre-liberación de wires",
+    "Orientación regulatoria (LSP, Ley Fintech)",
+    "Verificación de proof chains SHA-256",
+    "Canal de comunicación con UnionPay China (UNPYCNBH)",
+    "Registro como entidad SPEI"
+  ],
+  "anexos": [
+    "21 proof chains SHA-256 (P1→P5)",
+    "17 facturas procesamiento QR UnionPay",
+    "10 contratos garantía bancaria COBOL ANSI-85",
+    "Dictamen origen legal de fondos",
+    "21 MT103 SWIFT",
+    "Valoración MXN vía API Banxico",
+    "Comprobantes envío UnionPay (6 correos, 12 canales)",
+    "Documentación técnica sistema autopoiético"
+  ],
+  "seal": "fd48404ebe2d84dae9a33a62cf9301b5dabb685d4b8f5da11a6998088b6862c3"
+}
