@@ -1,0 +1,29 @@
+# Boo Systems — Production Configuration (#051)
+system:
+  name: "Boo Systems"
+  version: "1.0.0"
+  environment: production
+  bell_quality: "13450.50"
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+  cors_origins: ["*"]
+  rate_limit: 100  # requests per minute
+
+pentetraktys:
+  hybrys_threshold: 0.15
+  hybrys_critical: 0.30
+  confidence_default: 7.0
+  auto_reset_on_hybrys: true
+
+simulation:
+  max_cells: 10000
+  max_pulses: 20
+  timeout_seconds: 300
+  energy_power_source: "hybrid"  # hybrid, vacuum_only, grid
+
+logging:
+  level: INFO
+  format: json
+  output: stdout

@@ -1,0 +1,27 @@
+{
+  "id": "EXP-0002-20260713202256",
+  "synthesis": "Test synthesis",
+  "params": {
+    "synthesis_hash": "c93c3334c5883410",
+    "timestamp": "2026-07-13T20:22:56.263643+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-0002",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T20:22:56.263694+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 7.09,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T20:22:56.263688+00:00",
+  "seal": "6f80620876c27900ce8e0dcf11ed2b39625efd57cc39b2541faef41d1d4d4aba"
+}

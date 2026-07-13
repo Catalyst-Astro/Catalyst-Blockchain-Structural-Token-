@@ -1,0 +1,28 @@
+{
+  "id": "EXP-7872-20260713214016",
+  "synthesis": "Pulso bifasico celula 11: prep 291 THz, principal 421 THz, amp 51%",
+  "params": {
+    "synthesis_hash": "7e3b858e88bb79da",
+    "timestamp": "2026-07-13T21:40:16.950927+00:00",
+    "parameters": {
+      "domain": "temporal_fractal",
+      "pulse_sequence": 11.0,
+      "hubble_scale": 2.27e-18
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-7872",
+    "domain": "temporal_fractal",
+    "status": "COMPLETED",
+    "energy_output": 1.1000000000000001e-08,
+    "autopoietic_integrity": 0.0011,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T21:40:16.950970+00:00"
+  },
+  "reward": 3.0,
+  "confidence": 1.0,
+  "status": "FAILED",
+  "timestamp": "2026-07-13T21:40:16.950964+00:00",
+  "seal": "c11a187434e9503b8b7925cdd30f86b73780e0a181368f9ce6d50a1e7ef4e965"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "EXP-8901-20260713214023",
+  "synthesis": "Pulso bifasico celula 0: prep 220 THz, principal 450 THz, amp 30%",
+  "params": {
+    "synthesis_hash": "c3347f4c728ef9db",
+    "timestamp": "2026-07-13T21:40:23.465179+00:00",
+    "parameters": {
+      "domain": "temporal_fractal",
+      "pulse_sequence": 0.0,
+      "hubble_scale": 2.27e-18
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-8901",
+    "domain": "temporal_fractal",
+    "status": "COMPLETED",
+    "energy_output": 0.0,
+    "autopoietic_integrity": 0.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T21:40:23.465230+00:00"
+  },
+  "reward": 3.0,
+  "confidence": 1.0,
+  "status": "FAILED",
+  "timestamp": "2026-07-13T21:40:23.465223+00:00",
+  "seal": "a31f0bba0bcf473a8d36e58a187e3496b6ce90cd724c61d434e72bf91cd39ae7"
+}

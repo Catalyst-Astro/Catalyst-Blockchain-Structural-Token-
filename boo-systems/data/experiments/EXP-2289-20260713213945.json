@@ -1,0 +1,28 @@
+{
+  "id": "EXP-2289-20260713213945",
+  "synthesis": "Pulso bifasico celula 8: prep 308 THz, principal 438 THz, amp 68%",
+  "params": {
+    "synthesis_hash": "0b8ac7137606666d",
+    "timestamp": "2026-07-13T21:39:45.971027+00:00",
+    "parameters": {
+      "domain": "temporal_fractal",
+      "pulse_sequence": 8.0,
+      "hubble_scale": 2.27e-18
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-2289",
+    "domain": "temporal_fractal",
+    "status": "COMPLETED",
+    "energy_output": 8e-09,
+    "autopoietic_integrity": 0.0008,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T21:39:45.971071+00:00"
+  },
+  "reward": 3.0,
+  "confidence": 1.0,
+  "status": "FAILED",
+  "timestamp": "2026-07-13T21:39:45.971065+00:00",
+  "seal": "22c20c7c3b59fbe3bb0c69fc0d75c1728f5858532409f41b421cbd191b31f669"
+}

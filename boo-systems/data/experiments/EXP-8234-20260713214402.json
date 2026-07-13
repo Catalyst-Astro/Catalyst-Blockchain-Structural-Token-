@@ -1,0 +1,28 @@
+{
+  "id": "EXP-8234-20260713214402",
+  "synthesis": "Pulso bifasico celula 13: prep 253 THz, principal 383 THz, amp 63%",
+  "params": {
+    "synthesis_hash": "102a131b2fa0c9c7",
+    "timestamp": "2026-07-13T21:44:02.357420+00:00",
+    "parameters": {
+      "domain": "temporal_fractal",
+      "pulse_sequence": 13.0,
+      "hubble_scale": 2.27e-18
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-8234",
+    "domain": "temporal_fractal",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-08,
+    "autopoietic_integrity": 0.0013,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T21:44:02.357475+00:00"
+  },
+  "reward": 3.0,
+  "confidence": 1.0,
+  "status": "FAILED",
+  "timestamp": "2026-07-13T21:44:02.357468+00:00",
+  "seal": "18111f308dfb8265ceed577b160eeb4eaf85b4e7e04f0ca66c3ee69287c357f1"
+}

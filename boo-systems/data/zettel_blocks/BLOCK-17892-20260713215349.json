@@ -1,0 +1,23 @@
+{
+  "block_id": "BLOCK-17892-20260713215349",
+  "phase": "tesis",
+  "thesis": null,
+  "antithesis": "Prolonged exposure at 1064nm may decrease mitochondrial biogenesis and generate oxidative stress in keratinocyte if irradiance exceeds optimal threshold. Paper (2024) notes dose-dependent tissue response.",
+  "synthesis": "Apply Frequency sweep: 447->370->306 THz descending scan, 10^-13s per step, 5 cycles targeting deep_tissue_penetration in keratinocyte. Study reference: 2024 peer-reviewed paper shows inflammation -30% at 1064nm. Dual-phase protocol minimizes off-target thermal effects while maximizing mitochondrial complex_III_cytochrome_bc1 activation.",
+  "conclusion": null,
+  "forward_action": null,
+  "reward_score": null,
+  "confidence": 7.0,
+  "hybrys_score": 0.0,
+  "hybrys_triggered": false,
+  "pillars": {
+    "td_cardinal": null,
+    "bu_ordinal": "Prolonged exposure at 1064nm may decrease mitochondrial biogenesis and generate oxidative stress in keratinocyte if irradiance exceeds optimal threshold. Paper (2024) notes dose-dependent tissue response.",
+    "forward_action": null,
+    "reward_score": null
+  },
+  "timestamp": "2026-07-13T21:53:49.419053+00:00",
+  "parent_block_id": "BLOCK-17891-20260713215349",
+  "metadata": {},
+  "seal": "34ab7789b0475f91d3017866a89613209460b264262814a1806deb62afcc85c6"
+}

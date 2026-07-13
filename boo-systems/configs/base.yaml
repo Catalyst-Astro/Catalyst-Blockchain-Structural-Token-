@@ -1,0 +1,35 @@
+# Boo Systems — Base Configuration
+# BELL 13450.50 | Pentetraktys 4D | OSHIRO ERC-26+
+
+system:
+  name: "Boo Systems"
+  version: "1.0.0"
+  bell_quality: "13450.50"
+
+pentetraktys:
+  hybrys_threshold: 0.15
+  hybrys_critical: 0.30
+  confidence_default: 7.0
+  reward_default: 5.0
+
+zetelkasten:
+  block_format: "json"
+  max_block_size_bytes: 1048576
+  seal_algorithm: "sha256"
+
+boo:
+  domains:
+    - quantum_vacuum
+    - temporal_fractal
+    - biology
+    - general
+  iterations_default: 130000
+  autopoietic_threshold: 0.73
+
+physical:
+  planck_length_m: 1.616255e-35
+  planck_time_s: 5.391247e-44
+  hubble_constant_s-1: 2.27e-18
+  vacuum_energy_density_j_m3: 5.96e-10
+  casimir_force_baseline_n_m2: 1.3e-3
+  speed_of_light_m_s: 299792458

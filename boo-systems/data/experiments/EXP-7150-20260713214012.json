@@ -1,0 +1,28 @@
+{
+  "id": "EXP-7150-20260713214012",
+  "synthesis": "Pulso bifasico celula 9: prep 269 THz, principal 499 THz, amp 79%",
+  "params": {
+    "synthesis_hash": "6f17319835e6ba0a",
+    "timestamp": "2026-07-13T21:40:12.443424+00:00",
+    "parameters": {
+      "domain": "temporal_fractal",
+      "pulse_sequence": 9.0,
+      "hubble_scale": 2.27e-18
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-7150",
+    "domain": "temporal_fractal",
+    "status": "COMPLETED",
+    "energy_output": 9.000000000000001e-09,
+    "autopoietic_integrity": 0.0009,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T21:40:12.443499+00:00"
+  },
+  "reward": 3.0,
+  "confidence": 1.0,
+  "status": "FAILED",
+  "timestamp": "2026-07-13T21:40:12.443488+00:00",
+  "seal": "e3447a4f926e3bf0601995721b98d9f00eaec7c9974805d3111b3e74f66488a9"
+}

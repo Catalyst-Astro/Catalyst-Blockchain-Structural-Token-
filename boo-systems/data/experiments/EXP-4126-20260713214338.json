@@ -1,0 +1,28 @@
+{
+  "id": "EXP-4126-20260713214338",
+  "synthesis": "Pulso bifasico celula 5: prep 245 THz, principal 475 THz, amp 55%",
+  "params": {
+    "synthesis_hash": "f1a00a20336d9550",
+    "timestamp": "2026-07-13T21:43:38.908677+00:00",
+    "parameters": {
+      "domain": "temporal_fractal",
+      "pulse_sequence": 5.0,
+      "hubble_scale": 2.27e-18
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-4126",
+    "domain": "temporal_fractal",
+    "status": "COMPLETED",
+    "energy_output": 5e-09,
+    "autopoietic_integrity": 0.0005,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T21:43:38.908721+00:00"
+  },
+  "reward": 3.0,
+  "confidence": 1.0,
+  "status": "FAILED",
+  "timestamp": "2026-07-13T21:43:38.908715+00:00",
+  "seal": "9b61821f15484ef2a0dc79b0ff17990d105fafe5e8dbb5003cb7eec407b3d260"
+}

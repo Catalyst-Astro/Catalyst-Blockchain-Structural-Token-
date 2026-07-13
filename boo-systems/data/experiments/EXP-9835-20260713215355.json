@@ -1,0 +1,27 @@
+{
+  "id": "EXP-9835-20260713215355",
+  "synthesis": "Apply Transcranial 870nm: neuron-specific at 345 THz, low irradiance 22.2 mW/cm^2, 40min targeting w",
+  "params": {
+    "synthesis_hash": "524fab5b9c0ccf8d",
+    "timestamp": "2026-07-13T21:53:55.560851+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-9835",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T21:53:55.560884+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T21:53:55.560878+00:00",
+  "seal": "2345f097d6f39047fe89d1ddbe67a282e488bab3857f3abfa4765a3320d1eb65"
+}

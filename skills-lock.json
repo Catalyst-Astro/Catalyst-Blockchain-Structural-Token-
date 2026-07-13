@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "skills": {
+    "dca-bot": {
+      "source": "uniswap/uniswap-ai",
+      "sourceType": "github",
+      "skillPath": "packages/plugins/uniswap-trading-tools/skills/dca-bot/SKILL.md",
+      "computedHash": "cf827c7ff483939a969c5091e47e4834db9694ac7c0365a1af2f14ddff066f74"
+    },
+    "liquidity-planner": {
+      "source": "uniswap/uniswap-ai",
+      "sourceType": "github",
+      "skillPath": "packages/plugins/uniswap-driver/skills/liquidity-planner/SKILL.md",
+      "computedHash": "623f8701e5db2fe57eade9cd0545c22ff762b81fd93913bf3ac314912f9fb5a2"
+    },
+    "swap-integration": {
+      "source": "uniswap/uniswap-ai",
+      "sourceType": "github",
+      "skillPath": "packages/plugins/uniswap-trading/skills/swap-integration/SKILL.md",
+      "computedHash": "9a59d52261c8b0873285c120fc69a89abb6f590ec649471bbd09705def43a8df"
+    },
+    "swap-planner": {
+      "source": "uniswap/uniswap-ai",
+      "sourceType": "github",
+      "skillPath": "packages/plugins/uniswap-driver/skills/swap-planner/SKILL.md",
+      "computedHash": "677eb6e3c6d77fa07c43fa61225319287df198d3765cf526ecf475e4df033771"
+    }
+  }
+}

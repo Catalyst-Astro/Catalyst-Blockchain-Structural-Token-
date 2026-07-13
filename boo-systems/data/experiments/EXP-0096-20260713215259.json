@@ -1,0 +1,27 @@
+{
+  "id": "EXP-0096-20260713215259",
+  "synthesis": "Apply Frequency sweep: 447->370->306 THz descending scan, 10^-13s per step, 5 cycles targeting fibro",
+  "params": {
+    "synthesis_hash": "001326892bba7ce3",
+    "timestamp": "2026-07-13T21:52:59.774961+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-0096",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T21:52:59.774995+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.960395307723697,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T21:52:59.774988+00:00",
+  "seal": "f2e729775c9b0426a39054bf82592fba9d920c0c4fed1bfb0022bf950f0aded0"
+}

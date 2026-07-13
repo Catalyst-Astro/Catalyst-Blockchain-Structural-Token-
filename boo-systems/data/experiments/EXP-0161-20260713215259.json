@@ -1,0 +1,27 @@
+{
+  "id": "EXP-0161-20260713215259",
+  "synthesis": "Apply Dual-phase: Hsp70 activation (220 THz, 10^-12s) + CcO pulse (370 THz, 10^-15s, 30% amp) target",
+  "params": {
+    "synthesis_hash": "ced3fdb35302f27a",
+    "timestamp": "2026-07-13T21:52:59.969670+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-0161",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T21:52:59.969705+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.998014061495832,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T21:52:59.969700+00:00",
+  "seal": "bfeea8070f854253ddcc1747a5042b05fe923b3fd4abc53eedf03d9a444804f6"
+}

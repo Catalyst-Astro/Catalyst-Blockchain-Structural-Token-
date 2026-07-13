@@ -67,6 +67,17 @@ jobs:
       - run: slither contracts/ --exclude-dependencies --fail-pedantic 2>&1 || true
         continue-on-error: true
 
+  # ── Boo Systems (Zettelkasten + Boo Simulator) ──
+  boo-systems:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pytest numpy pydantic fastapi uvicorn requests
+      - run: python -m pytest boo-systems/tests/ -v --tb=short -q
+
   # ── Lint ──
   lint:
     runs-on: ubuntu-latest

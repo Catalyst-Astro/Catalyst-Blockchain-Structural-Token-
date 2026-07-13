@@ -1,0 +1,33 @@
+# Boo Systems — Production Stack (#052)
+version: "3.8"
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - BOO_ENV=production
+      - BOO_API_KEY=${BOO_API_KEY:-boo-prod-key}
+    volumes:
+      - boo_data:/app/data
+      - boo_configs:/app/configs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  worker:
+    build: .
+    command: python -m src.boo.orchestrator
+    environment:
+      - BOO_ENV=production
+    volumes:
+      - boo_data:/app/data
+    restart: unless-stopped
+
+volumes:
+  boo_data:
+  boo_configs:

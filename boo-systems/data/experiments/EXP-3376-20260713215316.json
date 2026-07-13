@@ -1,0 +1,27 @@
+{
+  "id": "EXP-3376-20260713215316",
+  "synthesis": "Apply Frequency sweep: 447->370->306 THz descending scan, 10^-13s per step, 5 cycles targeting cytoc",
+  "params": {
+    "synthesis_hash": "1c959c16a35aeee3",
+    "timestamp": "2026-07-13T21:53:16.464135+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-3376",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T21:53:16.464175+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T21:53:16.464168+00:00",
+  "seal": "54dc047b49a6bcaeae5384d4b5aac02d452f536d6a2556f070a5c1a2ffce3e3f"
+}

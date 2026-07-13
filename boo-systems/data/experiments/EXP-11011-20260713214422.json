@@ -1,0 +1,28 @@
+{
+  "id": "EXP-11011-20260713214422",
+  "synthesis": "Pulso bifasico celula 10: prep 230 THz, principal 360 THz, amp 40%",
+  "params": {
+    "synthesis_hash": "d6a05eb760f32d98",
+    "timestamp": "2026-07-13T21:44:22.253037+00:00",
+    "parameters": {
+      "domain": "temporal_fractal",
+      "pulse_sequence": 10.0,
+      "hubble_scale": 2.27e-18
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-11011",
+    "domain": "temporal_fractal",
+    "status": "COMPLETED",
+    "energy_output": 1e-08,
+    "autopoietic_integrity": 0.001,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T21:44:22.253088+00:00"
+  },
+  "reward": 3.0,
+  "confidence": 1.0,
+  "status": "FAILED",
+  "timestamp": "2026-07-13T21:44:22.253081+00:00",
+  "seal": "0dec56ecc722b1554c475d3aa57babaeb4f7766a57fb682c64ba38ef5381be54"
+}

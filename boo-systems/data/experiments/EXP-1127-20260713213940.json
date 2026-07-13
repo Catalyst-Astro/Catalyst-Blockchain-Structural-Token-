@@ -1,0 +1,28 @@
+{
+  "id": "EXP-1127-20260713213940",
+  "synthesis": "Pulso bifasico celula 6: prep 246 THz, principal 476 THz, amp 56%",
+  "params": {
+    "synthesis_hash": "a0087d29c05731ca",
+    "timestamp": "2026-07-13T21:39:40.549938+00:00",
+    "parameters": {
+      "domain": "temporal_fractal",
+      "pulse_sequence": 6.0,
+      "hubble_scale": 2.27e-18
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-1127",
+    "domain": "temporal_fractal",
+    "status": "COMPLETED",
+    "energy_output": 6.000000000000001e-09,
+    "autopoietic_integrity": 0.0006,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T21:39:40.549982+00:00"
+  },
+  "reward": 3.0,
+  "confidence": 1.0,
+  "status": "FAILED",
+  "timestamp": "2026-07-13T21:39:40.549976+00:00",
+  "seal": "dfc8a9c23ea63979d0bf2797e2a0b8d22b5ecbfa15379ab8d1593765b0ce5baa"
+}

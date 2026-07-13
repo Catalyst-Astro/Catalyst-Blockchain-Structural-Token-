@@ -1,0 +1,27 @@
+{
+  "id": "EXP-4033-20260713215319",
+  "synthesis": "Apply Mid-infrared 8.3um: water channel modulation at 36 THz, pulsed 10^-12s, 10min cycles targeting",
+  "params": {
+    "synthesis_hash": "d3bcaaa7ee6367a3",
+    "timestamp": "2026-07-13T21:53:19.436760+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-4033",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T21:53:19.436794+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T21:53:19.436787+00:00",
+  "seal": "30e9070b71dd20714d27cb74b4fe4104370491dc06d274e13c2ac4ae3e758bb8"
+}

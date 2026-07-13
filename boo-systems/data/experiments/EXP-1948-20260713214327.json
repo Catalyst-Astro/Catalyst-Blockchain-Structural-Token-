@@ -1,0 +1,28 @@
+{
+  "id": "EXP-1948-20260713214327",
+  "synthesis": "Pulso bifasico celula 7: prep 267 THz, principal 497 THz, amp 77%",
+  "params": {
+    "synthesis_hash": "07711f7c53f7dd86",
+    "timestamp": "2026-07-13T21:43:27.985020+00:00",
+    "parameters": {
+      "domain": "temporal_fractal",
+      "pulse_sequence": 7.0,
+      "hubble_scale": 2.27e-18
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-1948",
+    "domain": "temporal_fractal",
+    "status": "COMPLETED",
+    "energy_output": 7.000000000000001e-09,
+    "autopoietic_integrity": 0.0007,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T21:43:27.985062+00:00"
+  },
+  "reward": 3.0,
+  "confidence": 1.0,
+  "status": "FAILED",
+  "timestamp": "2026-07-13T21:43:27.985056+00:00",
+  "seal": "322c595df8e1199e7570ab38fed88b66ea22e0742894adbfeb8cc2a62c54913f"
+}

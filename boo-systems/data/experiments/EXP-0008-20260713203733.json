@@ -1,0 +1,27 @@
+{
+  "id": "EXP-0008-20260713203733",
+  "synthesis": "Test 7 with frequency 370e12",
+  "params": {
+    "synthesis_hash": "2be21e573d971a1a",
+    "timestamp": "2026-07-13T20:37:33.836007+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-0008",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T20:37:33.836124+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 7.722544269486338,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T20:37:33.836108+00:00",
+  "seal": "77580fca367903c8b9544b1ba374f6724b7672a9f7b11f00a97c80a3c5764ccb"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "EXP-8438-20260713215345",
+  "synthesis": "Apply Intense 810nm: high power 2W laser, 370 THz, 10^-15s, single pulse for acute effect targeting ",
+  "params": {
+    "synthesis_hash": "016b4366ba2f4480",
+    "timestamp": "2026-07-13T21:53:45.935314+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-8438",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T21:53:45.935345+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T21:53:45.935339+00:00",
+  "seal": "99a62f77ed0517be26b4c8bb8f1b81e8f9d32d2a1c2a131fd9ba5a5e452e7d97"
+}

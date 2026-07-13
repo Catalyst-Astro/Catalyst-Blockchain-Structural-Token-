@@ -1,0 +1,27 @@
+{
+  "id": "EXP-9746-20260713215354",
+  "synthesis": "Apply Frequency sweep: 447->370->306 THz descending scan, 10^-13s per step, 5 cycles targeting NO_sy",
+  "params": {
+    "synthesis_hash": "16dd863af086ebf3",
+    "timestamp": "2026-07-13T21:53:54.840674+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-9746",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T21:53:54.840735+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T21:53:54.840722+00:00",
+  "seal": "37acf9df46b668465ef4a7a09e403270f2046c61b2d82c15fd7346dd3e62d358"
+}

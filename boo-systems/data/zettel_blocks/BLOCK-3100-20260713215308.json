@@ -1,0 +1,23 @@
+{
+  "block_id": "BLOCK-3100-20260713215308",
+  "phase": "tesis",
+  "thesis": null,
+  "antithesis": "Prolonged exposure at 8300nm may decrease mitochondrial biogenesis and generate oxidative stress in adipocyte if irradiance exceeds optimal threshold. Paper (2025) notes dose-dependent tissue response.",
+  "synthesis": "Apply Full spectrum cascade: 472->447->428->370->353->306->282 THz sequential, 10^-14s each, 3 cycles targeting cco_water_channel in adipocyte. Study reference: 2025 peer-reviewed paper shows ATP +15% rapid at 8300nm. Dual-phase protocol minimizes off-target thermal effects while maximizing mitochondrial citrate_synthase activation.",
+  "conclusion": null,
+  "forward_action": null,
+  "reward_score": null,
+  "confidence": 7.0,
+  "hybrys_score": 0.0,
+  "hybrys_triggered": false,
+  "pillars": {
+    "td_cardinal": null,
+    "bu_ordinal": "Prolonged exposure at 8300nm may decrease mitochondrial biogenesis and generate oxidative stress in adipocyte if irradiance exceeds optimal threshold. Paper (2025) notes dose-dependent tissue response.",
+    "forward_action": null,
+    "reward_score": null
+  },
+  "timestamp": "2026-07-13T21:53:08.531659+00:00",
+  "parent_block_id": "BLOCK-3099-20260713215308",
+  "metadata": {},
+  "seal": "b91332f454bec5a52f6ce93c15b5f9c48b2a487e955a1dbb344a1a8b652a0f0f"
+}

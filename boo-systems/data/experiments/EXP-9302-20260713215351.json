@@ -1,0 +1,27 @@
+{
+  "id": "EXP-9302-20260713215351",
+  "synthesis": "Apply Single-wavelength 810nm: CcO activation at 370 THz, 10^-15s, continuous wave 40min targeting c",
+  "params": {
+    "synthesis_hash": "d7ee27c91f52ef77",
+    "timestamp": "2026-07-13T21:53:51.752097+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-9302",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T21:53:51.752128+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T21:53:51.752123+00:00",
+  "seal": "35d8bb9f37adf2bdfe29caa7771bdc755eafa82881fd3de3a4d15f6846e4e68e"
+}

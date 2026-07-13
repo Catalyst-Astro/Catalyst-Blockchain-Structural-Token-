@@ -10,6 +10,7 @@ import Tarjetas from './pages/Tarjetas';
 import SpeiRetiro from './pages/SpeiRetiro';
 import Buzon from './pages/Buzon';
 import Cheques from './pages/Cheques';
+import Arcade from './pages/Arcade';
 import * as api from './api';
 import * as auth from './auth';
 
@@ -25,6 +26,7 @@ function Sidebar({ system }) {
     { to: '/spei', label: '🏧 SPEI + OXXO', end: false },
     { to: '/buzon', label: '📬 Buzon Regulatorio', end: false },
     { to: '/cheques', label: '✈ Pan Am Cheques', end: false },
+    { to: '/arcade', label: '🕹 Arcade', end: false },
   ];
 
   return (
@@ -113,6 +115,7 @@ export default function App() {
       case location.pathname.startsWith('/spei'): return 'SPEI + OXXO Retiro';
       case location.pathname.startsWith('/buzon'): return 'Buzon Regulatorio';
       case location.pathname.startsWith('/cheques'): return 'Cheques Certificados';
+      case location.pathname.startsWith('/arcade'): return '🕹 Catalyst Arcade';
       default: return 'Command Center';
     }
   })();
@@ -158,6 +161,7 @@ export default function App() {
             <Route path="/spei" element={<SpeiRetiro />} />
             <Route path="/buzon" element={<Buzon />} />
             <Route path="/cheques" element={<Cheques />} />
+            <Route path="/arcade" element={<Arcade />} />
           </Routes>
         </div>
       </main>

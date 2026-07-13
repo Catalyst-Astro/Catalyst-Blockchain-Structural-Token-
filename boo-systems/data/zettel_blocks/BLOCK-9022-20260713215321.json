@@ -1,0 +1,23 @@
+{
+  "block_id": "BLOCK-9022-20260713215321",
+  "phase": "tesis",
+  "thesis": null,
+  "antithesis": "Prolonged exposure at 8300nm may decrease mitochondrial biogenesis and generate oxidative stress in beta_cell if irradiance exceeds optimal threshold. Paper (2025) notes dose-dependent tissue response.",
+  "synthesis": "Apply Dual-phase: Hsp70 activation (220 THz, 10^-12s) + CcO pulse (370 THz, 10^-15s, 30% amp) targeting cco_water_channel in beta_cell. Study reference: 2025 peer-reviewed paper shows ATP +15% rapid at 8300nm. Dual-phase protocol minimizes off-target thermal effects while maximizing mitochondrial complex_I_NADH activation.",
+  "conclusion": null,
+  "forward_action": null,
+  "reward_score": null,
+  "confidence": 7.0,
+  "hybrys_score": 0.0,
+  "hybrys_triggered": false,
+  "pillars": {
+    "td_cardinal": null,
+    "bu_ordinal": "Prolonged exposure at 8300nm may decrease mitochondrial biogenesis and generate oxidative stress in beta_cell if irradiance exceeds optimal threshold. Paper (2025) notes dose-dependent tissue response.",
+    "forward_action": null,
+    "reward_score": null
+  },
+  "timestamp": "2026-07-13T21:53:21.957854+00:00",
+  "parent_block_id": "BLOCK-9021-20260713215321",
+  "metadata": {},
+  "seal": "eaa119189a45004a5dcda300e21ab5dd15d303709d52d1b77a5c1aaba845e8a8"
+}
