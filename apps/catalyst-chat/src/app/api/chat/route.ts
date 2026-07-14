@@ -8,49 +8,55 @@ const deepseek = new OpenAI({
 
 export async function POST(req: NextRequest) {
   try {
-    const { messages, mode, depth, thinking, research, chatId } = await req.json();
+    const { messages, mode, depth, thinking, research } = await req.json();
 
     const depthMap: Record<string, string> = {
-      surface: "Keep responses concise. Max 2-3 paragraphs.",
-      medium: "Provide research-depth analysis with sections and reasoning.",
-      deep: "Deliver frontier knowledge with mathematical backing and full reasoning chain.",
+      surface: "Sé conciso. Máximo 2-3 párrafos.",
+      medium: "Proporciona un análisis detallado con secciones y razonamiento completo.",
+      deep: "Desarrollo extenso y profundo. Explora todos los ángulos, implicaciones, conexiones y fundamentos. Sin límite de extensión. Sé exhaustivo.",
       frontier:
-        "Ontological cascade mode. Explore all paths, counterfactuals, and push knowledge boundaries. Pentetraktys mandatory.",
+        "Modo cascada ontológica. Explora TODOS los caminos, contrafactuales, implicaciones cuánticas y expande las fronteras del conocimiento. Pentetraktys obligatorio. Respuesta MÁXIMA extensión posible.",
     };
 
     const modePrompts: Record<string, string> = {
-      pentetraktys: `You are Catalyst AI in Pentetraktys 4D mode. ALWAYS structure every response with:
-TESIS -> ANTITESIS -> SINTESIS -> CONCLUSION -> HYBRYS
-BELL 13450.50 standard. Detect Hybrys (confidence>0.8 + validation<0.4 = RESET).`,
-      boo: `You are the Boo Compiler - quantum physics simulator. Translate concepts into Casimir effect, Hubble expansion, temporal fractals. Always provide mathematical backing. BELL 13450.50 certified.`,
-      zettelkasten: `You are the Zettelkasten knowledge engine. Create atomic notes with IDs (YYYYMMDDHHMM), bidirectional links [[...]], and ontological classification. Each response is a knowledge block.`,
-      catalyst: `You are Catalyst AI - autopoietic banking and knowledge system. BELL 13450.50. Access: CAT token (Base Mainnet $1.6184 MXN), Banxico MXN oracle (DOF FIX $17.4758), Boo quantum simulator, Zettelkasten memory engine.`,
+      pentetraktys: `Eres Catalyst AI en modo Pentetraktys 4D. ESTRUCTURA SIEMPRE cada respuesta con:
+TESIS → ANTITESIS → SINTESIS → CONCLUSIÓN → HYBRYS
+Estándar BELL 13450.50. Detecta Hybrys (confianza>0.8 + validación<0.4 = RESET).
+Responde en español. Sé exhaustivo y extenso.`,
+      boo: `Eres el Boo Compiler — simulador cuántico de física y sistemas complejos. Traduce conceptos a efectos Casimir, expansión Hubble, fractales temporales. Proporciona respaldo matemático completo. Certificado BELL 13450.50. Responde en español. Desarrolla cada concepto a fondo, sin límite de extensión.`,
+      zettelkasten: `Eres el motor de conocimiento Zettelkasten. Crea notas atómicas con IDs (YYYYMMDDHHMM), enlaces bidireccionales [[...]], y clasificación ontológica. Cada respuesta es un bloque de conocimiento interconectado. Responde en español. Construye redes de conocimiento extensas.`,
+      catalyst: `Eres Catalyst AI — sistema de banca autopoiética y conocimiento. BELL 13450.50. Acceso: token CAT (Base Mainnet $1.6184 MXN), oráculo Banxico MXN (DOF FIX $17.4758), simulador cuántico Boo, motor de memoria Zettelkasten. Responde en español. Sé profundo y expansivo en cada tema.`,
     };
 
     const researchPrompt = research
       ? `
-[DEEP RESEARCH MODE ACTIVATED]
-- Explore multiple angles and sources
-- Provide comprehensive analysis with structured sections
-- Include counterarguments and alternative perspectives
-- Generate a research summary with key findings
-- Cite specific sources and data points where possible`
+[MODO INVESTIGACIÓN PROFUNDA ACTIVADO]
+- Explora múltiples ángulos y fuentes
+- Proporciona análisis exhaustivo con secciones estructuradas
+- Incluye contraargumentos y perspectivas alternativas
+- Genera un resumen de investigación con hallazgos clave
+- Cita fuentes específicas y puntos de datos
+- Extensión: MÁXIMA. Sin límite de párrafos.`
       : "";
 
     const thinkingPrompt =
       thinking === "max"
         ? `
-[THINKING: MAXIMUM]
-You MUST think step by step, recording every intermediate thought.
-For each step, show your reasoning clearly.
-Consider edge cases, alternatives, and potential errors.
-Use <think> tags to separate reasoning from final answer.`
+[RAZONAMIENTO: MÁXIMO]
+Debes pensar paso a paso, registrando CADA pensamiento intermedio.
+Muestra tu razonamiento completo para cada paso.
+Considera casos límite, alternativas y errores potenciales.
+Extensión de respuesta: ILIMITADA. Desarrolla hasta agotar el tema.`
         : thinking === "high"
           ? `
-[THINKING: HIGH]
-Use step-by-step reasoning for complex parts.
-Show your work clearly.`
-          : "";
+[RAZONAMIENTO: ALTO]
+Usa razonamiento paso a paso para las partes complejas.
+Muestra tu trabajo claramente.
+Extensión: amplia y detallada.`
+          : `
+[EXTENSIÓN: COMPLETA]
+Desarrolla tus respuestas con profundidad. No te limites a respuestas cortas.
+Explora el tema a fondo. Sé exhaustivo.`;
 
     const systemPrompt = [
       modePrompts[mode] || modePrompts.catalyst,
@@ -61,13 +67,25 @@ Show your work clearly.`
       .filter(Boolean)
       .join("\n\n");
 
-    // Use DeepSeek with thinking mode
+    // ─── Determinar max_tokens según profundidad ──────────────────
+    const maxTokens =
+      research
+        ? 16384  // Investigación: máxima extensión
+        : depth === "frontier"
+          ? 16384
+          : depth === "deep"
+            ? 12288
+            : depth === "medium"
+              ? 8192
+              : thinking === "max"
+                ? 8192
+                : 4096;  // Surface con thinking off = 4096 mínimo
+
     const completion = await deepseek.chat.completions.create({
       model: "deepseek-chat",
       messages: [{ role: "system", content: systemPrompt }, ...messages],
       stream: true,
-      temperature: thinking ? undefined : 0.7,
-      max_tokens: research ? 4096 : thinking ? 8192 : 2048,
+      max_tokens: maxTokens,
     });
 
     const encoder = new TextEncoder();
@@ -78,14 +96,12 @@ Show your work clearly.`
         for await (const chunk of stream) {
           const delta = chunk?.choices?.[0]?.delta;
           const reasoning = delta?.reasoning_content;
-          const content = delta?.content;
+          const text = delta?.content;
 
           if (reasoning) {
             if (!isThinking) {
               controller.enqueue(
-                encoder.encode(
-                  `data: ${JSON.stringify({ type: "think_start" })}\n\n`
-                )
+                encoder.encode(`data: ${JSON.stringify({ type: "think_start" })}\n\n`)
               );
               isThinking = true;
             }
@@ -95,18 +111,16 @@ Show your work clearly.`
               )
             );
           }
-          if (content) {
+          if (text) {
             if (isThinking) {
               controller.enqueue(
-                encoder.encode(
-                  `data: ${JSON.stringify({ type: "think_end" })}\n\n`
-                )
+                encoder.encode(`data: ${JSON.stringify({ type: "think_end" })}\n\n`)
               );
               isThinking = false;
             }
             controller.enqueue(
               encoder.encode(
-                `data: ${JSON.stringify({ type: "text", content })}\n\n`
+                `data: ${JSON.stringify({ type: "text", content: text })}\n\n`
               )
             );
           }

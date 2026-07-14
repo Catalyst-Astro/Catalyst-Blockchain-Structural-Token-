@@ -1,18 +1,52 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root { --bg: #0a0a1a; --sidebar: #0d0d2a; --chat: #0a0a1a; --bubble-user: #00ff8815; --bubble-ai: #1a1a3a; --border: #00ff8833; }
-.light { --bg: #ffffff; --sidebar: #f9fafb; --chat: #ffffff; --bubble-user: #f4f4f5; --bubble-ai: #ffffff; --border: #e5e7eb; }
+/* ─── Catalyst Editorial Design System ──────────────────────────────
+   Tipografía: Times New Roman Bold (serif) — carácter editorial
+   Metodología: Swiss Industrial + Golden Ratio (φ=1.618) + Editorial
+   ───────────────────────────────────────────────────────────────────── */
 
-body { margin: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); }
+/* ─── Base ─────────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    font-family: "Times New Roman", Times, serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    background: #f4f4f0;
+    color: #1a1a1a;
+    line-height: 1.55;
+    margin: 0;
+    font-weight: 700;
+  }
+  ::selection {
+    background: rgba(0, 168, 90, 0.15);
+    color: #1a1a1a;
+  }
+  *:focus-visible {
+    outline: 2px solid #00a85a;
+    outline-offset: 2px;
+  }
+  h1, h2, h3, h4 {
+    font-family: "Times New Roman", Times, serif;
+    font-weight: 900;
+  }
+  b, strong {
+    font-weight: 900;
+  }
+}
 
-::-webkit-scrollbar { width: 6px; }
+/* ─── Scrollbar ─────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #00ff8833; border-radius: 3px; }
-.light ::-webkit-scrollbar-thumb { background: #d1d5db; }
+::-webkit-scrollbar-thumb { background: #c8c8c0; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #a8a8a0; }
 
-@keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.3} }
-.typing-dot { animation: pulse-dot 1.2s infinite; }
+/* ─── Typing dots ───────────────────────────────────────────────────── */
+.typing-dot { animation: dotPulse 1.4s infinite both; }
 .typing-dot:nth-child(2) { animation-delay: 0.2s; }
 .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes dotPulse {
+  0%, 80%, 100% { opacity: 0.12; transform: scale(0.6); }
+  40% { opacity: 1; transform: scale(1); }
+}

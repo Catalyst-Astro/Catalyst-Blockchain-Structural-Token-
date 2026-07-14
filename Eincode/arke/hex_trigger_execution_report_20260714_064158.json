@@ -1,0 +1,290 @@
+{
+  "execution_id": "HEX-TRIGGER-EXEC-20260714-064158",
+  "timestamp": "2026-07-14T06:41:58.865282",
+  "hex_trigger": "1554A5554B2A952A954AA554A8A99554954A52A54A54AA52A552A54A94A952AA5542903F",
+  "hex_length": 72,
+  "binary_bits": 288,
+  "header_hex": "0x1554A555",
+  "trigger_hash": "e49a12671394232388d0d2b93e99935a2429d002c84c767e6a9ecff82f7578da",
+  "protocols": [
+    {
+      "protocol": "P01",
+      "codigo": "REG-FIN-001",
+      "nombre": "Registro de Institucion Financiera",
+      "estado_blockchain": "ON-CHAIN",
+      "trigger_activation": "ACTIVATED",
+      "activation_pct": 45.0,
+      "cuenta": {
+        "id": "C-01",
+        "nombre": "CONCENTRADORA Principal",
+        "clabe": "012290015202390246",
+        "tipo": "BBVA",
+        "retorno": true
+      },
+      "amount_cny": 109000.0,
+      "amount_cat": 158812,
+      "burn_cat": 7940,
+      "fee_cny": 163.5,
+      "amount_mxn": 257134.82
+    },
+    {
+      "protocol": "P02",
+      "codigo": "KYC-001",
+      "nombre": "Onboarding de Cliente (KYC/AML)",
+      "estado_blockchain": "ON-CHAIN",
+      "trigger_activation": "ACTIVATED",
+      "activation_pct": 45.0,
+      "cuenta": {
+        "id": "C-02",
+        "nombre": "OPERADORA Secundaria",
+        "clabe": "012180015123243964",
+        "tipo": "BBVA",
+        "retorno": false
+      },
+      "amount_cny": 218000.0,
+      "amount_cat": 317625,
+      "burn_cat": 15881,
+      "fee_cny": 327.0,
+      "amount_mxn": 514619.64
+    },
+    {
+      "protocol": "P03",
+      "codigo": "QR-CROSS-001",
+      "nombre": "Pago QR Transfronterizo (CN->MX)",
+      "estado_blockchain": "ON-CHAIN",
+      "trigger_activation": "ACTIVATED",
+      "activation_pct": 45.0,
+      "cuenta": {
+        "id": "C-03",
+        "nombre": "CHEQUES Principal",
+        "clabe": "012290015202390259",
+        "tipo": "BBVA",
+        "retorno": false
+      },
+      "amount_cny": 436000.0,
+      "amount_cat": 635250,
+      "burn_cat": 31762,
+      "fee_cny": 654.0,
+      "amount_mxn": 1029589.29
+    },
+    {
+      "protocol": "P04",
+      "codigo": "FX-ORACLE-001",
+      "nombre": "Conversion Multidivisa con Oracle",
+      "estado_blockchain": "ON-CHAIN",
+      "trigger_activation": "STANDBY",
+      "activation_pct": 40.0,
+      "cuenta": {
+        "id": "C-04",
+        "nombre": "DEBITO Operaciones",
+        "clabe": "012290015202390262",
+        "tipo": "BBVA",
+        "retorno": false
+      },
+      "amount_cny": 864000.0,
+      "amount_cat": 1258845,
+      "burn_cat": 62942,
+      "fee_cny": 1296.0,
+      "amount_mxn": 2040630.6
+    },
+    {
+      "protocol": "P05",
+      "codigo": "SWIFT-001",
+      "nombre": "Transferencia SWIFT Internacional",
+      "estado_blockchain": "PENDIENTE",
+      "trigger_activation": "ACTIVATED",
+      "activation_pct": 45.0,
+      "cuenta": {
+        "id": "C-05",
+        "nombre": "CREDITO Puente",
+        "clabe": "012290015202390275",
+        "tipo": "BBVA",
+        "retorno": false
+      },
+      "amount_cny": 1744000.0,
+      "amount_cat": 2541003,
+      "burn_cat": 127050,
+      "fee_cny": 2616.0,
+      "amount_mxn": 4119407.14
+    },
+    {
+      "protocol": "P06",
+      "codigo": "TREASURY-001",
+      "nombre": "Gestion de Treasury Fraccionario",
+      "estado_blockchain": "ON-CHAIN",
+      "trigger_activation": "STANDBY",
+      "activation_pct": 40.0,
+      "cuenta": {
+        "id": "C-06",
+        "nombre": "AHORRO-INVERSION",
+        "clabe": "012290015202390288",
+        "tipo": "BBVA",
+        "retorno": false
+      },
+      "amount_cny": 3456000.0,
+      "amount_cat": 5035383,
+      "burn_cat": 251769,
+      "fee_cny": 5184.0,
+      "amount_mxn": 8163572.41
+    },
+    {
+      "protocol": "P07",
+      "codigo": "BURN-001",
+      "nombre": "Burn Tokenomico y Control de Supply",
+      "estado_blockchain": "ACTIVO",
+      "trigger_activation": "ACTIVATED",
+      "activation_pct": 45.0,
+      "cuenta": {
+        "id": "C-07",
+        "nombre": "PAGOS SERVICIOS",
+        "clabe": "012290015202390291",
+        "tipo": "BBVA",
+        "retorno": false
+      },
+      "amount_cny": 6976000.0,
+      "amount_cat": 10164014,
+      "burn_cat": 508200,
+      "fee_cny": 10464.0,
+      "amount_mxn": 16478678.58
+    },
+    {
+      "protocol": "P08",
+      "codigo": "SETTLE-001",
+      "nombre": "Liquidacion y Settlement Criptografico",
+      "estado_blockchain": "ACTIVO",
+      "trigger_activation": "STANDBY",
+      "activation_pct": 40.0,
+      "cuenta": {
+        "id": "C-08",
+        "nombre": "CRYPTO BRIDGE (ETH→MXN)",
+        "clabe": "072290015202390252",
+        "tipo": "BANORTE",
+        "retorno": false
+      },
+      "amount_cny": 13824000.0,
+      "amount_cat": 20141532,
+      "burn_cat": 1007076,
+      "fee_cny": 20736.0,
+      "amount_mxn": 32655339.66
+    },
+    {
+      "protocol": "P09",
+      "codigo": "ACCT-001",
+      "nombre": "Validacion de Cuentas (CLABE/IBAN)",
+      "estado_blockchain": "VALIDADO",
+      "trigger_activation": "ACTIVATED",
+      "activation_pct": 45.0,
+      "cuenta": {
+        "id": "C-09",
+        "nombre": "SANTANDER RECAUDADORA",
+        "clabe": "014290015202390247",
+        "tipo": "SANTANDER",
+        "retorno": false
+      },
+      "amount_cny": 27904000.0,
+      "amount_cat": 40656056,
+      "burn_cat": 2032802,
+      "fee_cny": 41856.0,
+      "amount_mxn": 65915764.31
+    },
+    {
+      "protocol": "P10",
+      "codigo": "RESERVE-001",
+      "nombre": "Reservas y Encaje Fraccionario",
+      "estado_blockchain": "PARCIAL",
+      "trigger_activation": "ACTIVATED",
+      "activation_pct": 42.1,
+      "cuenta": {
+        "id": "C-10",
+        "nombre": "HSBC PAGADORA",
+        "clabe": "021290015202390248",
+        "tipo": "HSBC",
+        "retorno": false
+      },
+      "amount_cny": 55296000.0,
+      "amount_cat": 80566130,
+      "burn_cat": 4028306,
+      "fee_cny": 82944.0,
+      "amount_mxn": 130622408.63
+    },
+    {
+      "protocol": "P11",
+      "codigo": "AUDIT-001",
+      "nombre": "Reporte Regulatorio y Auditoria",
+      "estado_blockchain": "PARCIAL",
+      "trigger_activation": "ACTIVATED",
+      "activation_pct": 42.1,
+      "cuenta": {
+        "id": "C-11",
+        "nombre": "SCOTIABANK BRIDGE",
+        "clabe": "044290015202390249",
+        "tipo": "SCOTIABANK",
+        "retorno": false
+      },
+      "amount_cny": 110592000.0,
+      "amount_cat": 161132261,
+      "burn_cat": 8056613,
+      "fee_cny": 165888.0,
+      "amount_mxn": 261245167.26
+    },
+    {
+      "protocol": "P12",
+      "codigo": "DISPUTE-001",
+      "nombre": "Recuperacion de Fondos y Disputas",
+      "estado_blockchain": "TRAZABLE",
+      "trigger_activation": "ACTIVATED",
+      "activation_pct": 42.1,
+      "cuenta": {
+        "id": "C-12",
+        "nombre": "INBURSA EMERGENCIA",
+        "clabe": "036290015202390250",
+        "tipo": "INBURSA",
+        "retorno": false
+      },
+      "amount_cny": 221184000.0,
+      "amount_cat": 322264523,
+      "burn_cat": 16113226,
+      "fee_cny": 331776.0,
+      "amount_mxn": 522490684.52
+    },
+    {
+      "protocol": "P13",
+      "codigo": "CLOSE-001",
+      "nombre": "Cierre Contable Diario y Proof of Reserves",
+      "estado_blockchain": "ACTIVO",
+      "trigger_activation": "ACTIVATED",
+      "activation_pct": 47.4,
+      "cuenta": {
+        "id": "C-13",
+        "nombre": "RETORNO FINAL COPACABANA",
+        "clabe": "012290015202390246",
+        "tipo": "BBVA",
+        "retorno": true
+      },
+      "amount_cny": 446464000.0,
+      "amount_cat": 650496908,
+      "burn_cat": 32524845,
+      "fee_cny": 669696.0,
+      "amount_mxn": 1054657478.93
+    }
+  ],
+  "totals": {
+    "total_cny": 889067000.0,
+    "total_cat": 1295368342,
+    "total_burn_cat": 64768412,
+    "total_fees_cny": 1333600.5,
+    "total_mxn": 2100190475.79,
+    "total_usd": 120177072.05
+  },
+  "proof_chain": {
+    "P1": "a6d6728c5570aa5856c5867f726421f7111888fe5cf59d1c9a44fea69d49e985",
+    "P2": "a7d953ac1c916c3416bc0473068bc4a51fc7b463a5ad82c48aa74a15c7b6b48e",
+    "P3": "32c3dd14730b6b887dea71aac9380b2574af197c176e7365fb9ecd0e85be5610",
+    "P4": "a8eeda7e3799a48bb695164cb696bdb1652129b579354a0ed9fe0c8bfe520273",
+    "P5": "90fd5ceafbf7121c85f5d62b255a610c838113a8f33074410650c3ce71020b56"
+  },
+  "master_seal": "90fd5ceafbf7121c85f5d62b255a610c838113a8f33074410650c3ce71020b56",
+  "clabe_principal": "012290015202390246",
+  "swift_sender": "UNPYCNBH",
+  "swift_receiver": "BCRMXMMPYM"
+}

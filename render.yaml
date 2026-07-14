@@ -114,3 +114,31 @@ services:
       - key: LICENSE_VERSION
         value: "BELL-13450.50"
     healthCheckPath: /api/health
+
+  # ── Catalyst Chat (Next.js — AI Chat + Auth) ──
+  - type: web
+    name: catalyst-chat
+    env: node
+    region: oregon
+    plan: starter
+    buildCommand: cd apps/catalyst-chat && npm install && npm run build
+    startCommand: cd apps/catalyst-chat && npx next start -p $PORT
+    autoDeploy: true
+    envVars:
+      - key: PORT
+        value: "3000"
+      - key: AUTH_SECRET
+        generateValue: true
+      - key: AUTH_URL
+        value: "https://catalyst-chat.onrender.com"
+      - key: DEEPSEEK_API_KEY
+        sync: false
+      - key: AUTH_GOOGLE_ID
+        sync: false
+      - key: AUTH_GOOGLE_SECRET
+        sync: false
+      - key: AUTH_GITHUB_ID
+        sync: false
+      - key: AUTH_GITHUB_SECRET
+        sync: false
+    healthCheckPath: /login

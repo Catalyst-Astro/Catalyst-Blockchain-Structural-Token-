@@ -5,6 +5,7 @@ import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Canvas from "./Canvas";
 import Artifact from "./Artifact";
+import Markdown from "./Markdown";
 import Fuse from "fuse.js";
 
 type Msg = {
@@ -20,80 +21,65 @@ type Depth = "surface" | "medium" | "deep" | "frontier";
 type Think = "off" | "high" | "max";
 
 interface Chat {
-  id: string;
-  title: string;
-  date: string;
-  messages: Msg[];
-  mode: Mode;
-  depth: Depth;
-  thinking: Think;
-  folder: string;
+  id: string; title: string; date: string; messages: Msg[];
+  mode: Mode; depth: Depth; thinking: Think; folder: string;
 }
 
 function load<T>(k: string, d: T): T {
-  try {
-    const v = localStorage.getItem(k);
-    return v ? JSON.parse(v) : d;
-  } catch {
-    return d;
-  }
-}
-function save(k: string, v: any) {
-  localStorage.setItem(k, JSON.stringify(v));
+  try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; }
 }
 
 const MODES = [
-  { k: "catalyst" as Mode, l: "Catalyst", i: "◆", c: "#00ff88" },
-  { k: "pentetraktys" as Mode, l: "Pentetraktys 4D", i: "🔺", c: "#ffaa00" },
-  { k: "boo" as Mode, l: "Boo Compiler", i: "🧬", c: "#ff6600" },
-  { k: "zettelkasten" as Mode, l: "Zettelkasten", i: "📝", c: "#4488ff" },
+  { k: "catalyst" as Mode, l: "Catalyst", i: "◆", c: "#00a85a" },
+  { k: "pentetraktys" as Mode, l: "Pentetraktys 4D", i: "Δ", c: "#d4442c" },
+  { k: "boo" as Mode, l: "Boo Compiler", i: "ψ", c: "#b83820" },
+  { k: "zettelkasten" as Mode, l: "Zettelkasten", i: "‡", c: "#4a4a4a" },
 ];
 const DEPTHS = [
-  { k: "surface" as Depth, l: "Surface", c: "#00ff88" },
-  { k: "medium" as Depth, l: "Medium", c: "#ffaa00" },
-  { k: "deep" as Depth, l: "Deep", c: "#ff6600" },
-  { k: "frontier" as Depth, l: "Frontier", c: "#ff0044" },
+  { k: "surface" as Depth, l: "Superficie", c: "#00a85a" },
+  { k: "medium" as Depth, l: "Medio", c: "#d4902c" },
+  { k: "deep" as Depth, l: "Profundo", c: "#b83820" },
+  { k: "frontier" as Depth, l: "Frontera", c: "#d4442c" },
 ];
 const THINKS = [
-  { k: "off" as Think, l: "Fast", i: "⚡" },
-  { k: "high" as Think, l: "Think", i: "🧠" },
-  { k: "max" as Think, l: "Deep Think", i: "🔬" },
+  { k: "off" as Think, l: "Rápido", i: "→" },
+  { k: "high" as Think, l: "Pensar", i: "⊞" },
+  { k: "max" as Think, l: "Profundo", i: "⊡" },
 ];
-const DFOLDERS = ["General", "Research", "Code", "Creative", "Business", "Personal"];
+const DFOLDERS = ["General", "Investigación", "Código", "Creativo", "Negocios", "Personal"];
 
 function dateGroup(chats: Chat[]): Record<string, Chat[]> {
   const g: Record<string, Chat[]> = {};
   const n = new Date();
   for (const c of chats) {
     const d = Math.floor((n.getTime() - new Date(c.date).getTime()) / 864e5);
-    const k =
-      d === 0
-        ? "Today"
-        : d === 1
-          ? "Yesterday"
-          : d < 7
-            ? "This Week"
-            : d < 30
-              ? "This Month"
-              : new Date(c.date).toLocaleDateString("en-US", {
-                  month: "short",
-                  year: "numeric",
-                });
+    const k = d === 0 ? "Hoy" : d === 1 ? "Ayer" : d < 7 ? "Esta semana" : d < 30 ? "Este mes"
+      : new Date(c.date).toLocaleDateString("es-MX", { month: "short", year: "numeric" });
     (g[k] ||= []).push(c);
   }
   return g;
 }
 
 const PROMPTS = [
-  { i: "📊", l: "Analyze data", p: "Analyze this data and give me key insights, trends, and recommendations:" },
-  { i: "🐛", l: "Debug code", p: "Debug this error and explain the root cause:\n\n```\n\n```" },
-  { i: "📝", l: "Summarize", p: "Summarize the following in 3 key points:\n\n" },
-  { i: "✉️", l: "Write email", p: "Write a professional email about:\n\nSubject: \nBody: " },
-  { i: "🧠", l: "Brainstorm", p: "Brainstorm 10 creative ideas for:\n\n" },
-  { i: "🔍", l: "Research", p: "Research this topic deeply with structured analysis:\n\n" },
-  { i: "💻", l: "Code review", p: "Review this code and suggest improvements:\n\n```\n\n```" },
-  { i: "📄", l: "Summarize doc", p: "Summarize this document in bullet points:\n\n" },
+  { i: "→", l: "Analizar", p: "Analiza estos datos y dame las claves:" },
+  { i: "→", l: "Depurar", p: "Depura este error y explica la causa raíz:\n\n```\n\n```" },
+  { i: "→", l: "Resumir", p: "Resume en 3 puntos clave:\n\n" },
+  { i: "→", l: "Redactar", p: "Redacta un texto profesional sobre:\n\n" },
+  { i: "→", l: "Idear", p: "Genera 10 ideas creativas para:\n\n" },
+  { i: "→", l: "Investigar", p: "Investigación profunda con análisis estructurado:\n\n" },
 ];
+
+const FONT = "'Times New Roman', Times, serif";
+
+// ─── Swiss color system ────────────────────────────────────────────────
+const C = {
+  bg: "#f4f4f0", surface: "#fff", sidebar: "#ecece6",
+  text: "#1a1a1a", muted: "#8b8b82", subtle: "#b4b4ac", border: "#d4d4cc",
+  accent: "#00a85a", accentBg: "rgba(0,168,90,0.08)",
+  red: "#d4442c", redBg: "rgba(212,68,44,0.06)",
+  amber: "#d4902c", amberBg: "rgba(212,144,44,0.08)",
+  charcoal: "#2d2d2d",
+};
 
 export default function Page() {
   const { data: session, status } = useSession();
@@ -118,61 +104,47 @@ export default function Page() {
   const [filtFolder, setFiltFolder] = useState("");
   const [nf, setNf] = useState("");
   const [search, setSearch] = useState("");
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [shareLink, setShareLink] = useState("");
   const [voice, setVoice] = useState(false);
   const [templates, setTemplates] = useState(false);
-  const [memory, setMemory] = useState<string[]>([]);
   const [compare, setCompare] = useState(false);
   const [cMode, setCMode] = useState<Mode>("pentetraktys");
   const [loaded, setLoaded] = useState(false);
-  const [importBanner, setImportBanner] = useState(0); // number of local-only chats
+  const [importBanner, setImportBanner] = useState(0);
+  const [userOpen, setUserOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [sideOpen, setSideOpen] = useState(false);
   const chatRef = useRef<HTMLDivElement>(null);
+
+  // Detectar móvil
+  useEffect(() => {
+    const check = () => { const m = window.innerWidth < 768; setIsMobile(m); if (!m) setSideOpen(false); };
+    check(); window.addEventListener("resize", check); return () => window.removeEventListener("resize", check);
+  }, []);
   const fileRef = useRef<HTMLInputElement>(null);
   const inpRef = useRef<HTMLTextAreaElement>(null);
 
-  // ─── Auth guard ────────────────────────────────────────────────────
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.replace("/login");
-    }
-  }, [status, router]);
+  // ─── Auth ──────────────────────────────────────────────────────────
+  useEffect(() => { if (status === "unauthenticated") router.replace("/login"); }, [status, router]);
 
-  // ─── Load chats from server ────────────────────────────────────────
-  useEffect(() => {
-    if (status !== "authenticated" || loaded) return;
-    fetchChats();
-  }, [status, loaded]);
+  // ─── Cargar chats ──────────────────────────────────────────────────
+  useEffect(() => { if (status === "authenticated" && !loaded) fetchChats(); }, [status, loaded]);
 
   const fetchChats = async () => {
     try {
       const res = await fetch("/api/chats");
-      if (!res.ok) return;
+      if (!res.ok) { setLoaded(true); return; }
       const data = await res.json();
       const serverChats: Chat[] = data.chats.map((c: any) => ({
-        id: c.id,
-        title: c.title,
-        date: new Date(c.createdAt).toISOString(),
-        mode: c.mode as Mode,
-        depth: c.depth as Depth,
-        thinking: c.thinking as Think,
-        folder: c.folder,
-        messages: [],
+        id: c.id, title: c.title, date: new Date(c.createdAt).toISOString(),
+        mode: c.mode, depth: c.depth, thinking: c.thinking, folder: c.folder, messages: [],
       }));
-
-      // Check localStorage for chats not yet on server
       const local: Chat[] = load("catalyst_v3", []);
       const serverIds = new Set(serverChats.map((c) => c.id));
       const missing = local.filter((c) => !serverIds.has(c.id));
-      if (missing.length > 0) {
-        setImportBanner(missing.length);
-      }
-
+      if (missing.length > 0) setImportBanner(missing.length);
       setChats(serverChats);
-    } catch {
-      // Fallback to localStorage
-      setChats(load("catalyst_v3", []));
-    }
+    } catch { setChats(load("catalyst_v3", [])); }
     setLoaded(true);
   };
 
@@ -180,312 +152,160 @@ export default function Page() {
     const local: Chat[] = load("catalyst_v3", []);
     const serverIds = new Set(chats.map((c) => c.id));
     const missing = local.filter((c) => !serverIds.has(c.id));
-
     for (const chat of missing) {
       try {
-        await fetch("/api/chats", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            id: chat.id,
-            title: chat.title,
-            mode: chat.mode,
-            depth: chat.depth,
-            thinking: chat.thinking,
-            folder: chat.folder,
-          }),
-        });
-        // Save messages
+        await fetch("/api/chats", { method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id: chat.id, title: chat.title, mode: chat.mode, depth: chat.depth, thinking: chat.thinking, folder: chat.folder }) });
         for (const msg of chat.messages) {
-          await fetch(`/api/chats/${chat.id}`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              id: msg.id,
-              role: msg.role,
-              content: msg.content,
-              thinking: msg.thinking,
-              feedback: msg.feedback,
-            }),
-          });
+          await fetch(`/api/chats/${chat.id}`, { method: "POST", headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id: msg.id, role: msg.role, content: msg.content, thinking: msg.thinking, feedback: msg.feedback }) });
         }
-      } catch { /* skip failed imports */ }
+      } catch { /* skip */ }
     }
-
-    setImportBanner(0);
-    setLoaded(false); // trigger reload
+    setImportBanner(0); setLoaded(false);
   };
 
-  // ─── Load messages for selected chat ───────────────────────────────
   const loadChatMessages = async (chatId: string) => {
     try {
       const res = await fetch(`/api/chats/${chatId}`);
       if (!res.ok) return [];
       const data = await res.json();
       return data.messages.map((m: any) => ({
-        id: m.id,
-        role: m.role as "user" | "assistant",
-        content: m.content,
-        thinking: m.thinking,
-        citations: m.citations ? JSON.parse(m.citations) : undefined,
-        feedback: m.feedback,
-      })) as Msg[];
-    } catch {
-      return [];
-    }
+        id: m.id, role: m.role, content: m.content, thinking: m.thinking,
+        citations: m.citations ? JSON.parse(m.citations) : undefined, feedback: m.feedback,
+      }));
+    } catch { return []; }
   };
 
-  // ─── Effects ───────────────────────────────────────────────────────
   useEffect(() => { chatRef.current?.scrollTo(0, chatRef.current.scrollHeight); }, [msgs, streamThink]);
-  useEffect(() => {
-    const f: string[] = [];
-    for (const m of msgs) {
-      if (m.role === "user") {
-        const x = m.content.match(/(?:I am|I'm|my |I prefer|I like|I work|I live)[^.!?]+/gi);
-        if (x) f.push(...x.map((s) => s.trim()));
-      }
-    }
-    if (f.length) setMemory((p) => [...new Set([...p, ...f.slice(-10)])]);
-  }, [msgs]);
 
   const active = chats.find((c) => c.id === aid);
   const fuse = useMemo(() => new Fuse(chats, { keys: ["title", "messages.content"], threshold: 0.4 }), [chats]);
   const searched = search ? fuse.search(search).map((r) => r.item) : chats;
   const filtered = filtFolder ? searched.filter((c) => c.folder === filtFolder) : searched;
 
-  // ─── Chat actions ──────────────────────────────────────────────────
+  // ─── Acciones ──────────────────────────────────────────────────────
   const newChat = () => {
     const c: Chat = {
       id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
-      title: "New chat",
-      date: new Date().toISOString(),
-      messages: [],
-      mode,
-      depth,
-      thinking: think,
-      folder: filtFolder || "General",
+      title: "Nuevo chat", date: new Date().toISOString(), messages: [],
+      mode, depth, thinking: think, folder: filtFolder || "General",
     };
-    // Save to server
-    fetch("/api/chats", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: c.id, title: c.title, mode: c.mode, depth: c.depth, thinking: c.thinking, folder: c.folder }),
-    }).catch(() => {});
-    setChats((p) => [c, ...p]);
-    setAid(c.id);
-    setMsgs([]);
-    setCanvas(false);
-    setCContent("");
+    fetch("/api/chats", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: c.id, title: c.title, mode: c.mode, depth: c.depth, thinking: c.thinking, folder: c.folder }) }).catch(() => {});
+    setChats((p) => [c, ...p]); setAid(c.id); setMsgs([]); setCanvas(false); setCContent("");
   };
 
   const select = async (id: string) => {
     setAid(id);
     const c = chats.find((x) => x.id === id);
     if (c) {
-      setMode(c.mode);
-      setDepth(c.depth);
-      setThink(c.thinking);
-      // Load messages from server
+      setMode(c.mode); setDepth(c.depth); setThink(c.thinking);
       if (c.messages.length === 0) {
         const serverMsgs = await loadChatMessages(id);
         setMsgs(serverMsgs.length > 0 ? serverMsgs : c.messages);
-        if (serverMsgs.length > 0) {
-          setChats((p) => p.map((ch) => (ch.id === id ? { ...ch, messages: serverMsgs } : ch)));
-        }
-      } else {
-        setMsgs(c.messages);
-      }
+        if (serverMsgs.length > 0) setChats((p) => p.map((ch) => (ch.id === id ? { ...ch, messages: serverMsgs } : ch)));
+      } else setMsgs(c.messages);
     }
   };
 
   const del = (id: string) => {
     fetch(`/api/chats?id=${id}`, { method: "DELETE" }).catch(() => {});
     setChats((p) => p.filter((c) => c.id !== id));
-    if (aid === id) {
-      setAid("");
-      setMsgs([]);
-    }
+    if (aid === id) { setAid(""); setMsgs([]); }
   };
 
   const addF = () => {
     if (nf.trim() && !folders.includes(nf.trim())) {
-      setFolders((p) => [...p, nf.trim()]);
-      setNf("");
+      setFolders((p) => [...p, nf.trim()]); setNf("");
     }
+  };
+
+  const moveToFolder = async (chatId: string, folder: string) => {
+    setChats((p) => p.map((c) => (c.id === chatId ? { ...c, folder } : c)));
+    fetch(`/api/chats/${chatId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ folder }),
+    }).catch(() => {});
   };
 
   const fb = (idx: number, v: "up" | "down") => {
     const u = msgs.map((m, i) => (i === idx ? { ...m, feedback: v } : m));
-    setMsgs(u);
-    setChats((p) => p.map((c) => (c.id === aid ? { ...c, messages: u } : c)));
+    setMsgs(u); setChats((p) => p.map((c) => (c.id === aid ? { ...c, messages: u } : c)));
   };
 
-  const speak = (t: string) => {
-    window.speechSynthesis.speak(new SpeechSynthesisUtterance(t.replace(/[#*`>\[\]]/g, "")));
+  const shareChat = () => {
+    const d = encodeURIComponent(JSON.stringify({ messages: msgs, mode, title: active?.title }));
+    const l = `${window.location.origin}?share=${d}`; setShareLink(l); navigator.clipboard.writeText(l);
+    setTimeout(() => setShareLink(""), 3000);
   };
 
   const startVoice = () => {
     const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     if (!SR) return;
-    const r = new SR();
-    r.lang = "es-MX";
+    const r = new SR(); r.lang = "es-MX";
     r.onresult = (e: any) => { setInp((p) => p + " " + e.results[0][0].transcript); setVoice(false); };
-    r.onerror = () => setVoice(false);
-    r.onend = () => setVoice(false);
-    setVoice(true);
-    r.start();
+    r.onerror = () => setVoice(false); r.onend = () => setVoice(false);
+    setVoice(true); r.start();
   };
 
-  const shareChat = () => {
-    const d = encodeURIComponent(JSON.stringify({ messages: msgs, mode, title: active?.title }));
-    const l = `${window.location.origin}?share=${d}`;
-    setShareLink(l);
-    navigator.clipboard.writeText(l);
-    setTimeout(() => setShareLink(""), 3000);
-  };
-
-  const exportChat = (fmt: "md" | "json" | "txt") => {
-    let c = "";
-    const t = active?.title || "chat";
-    if (fmt === "md") c = msgs.map((m) => `### ${m.role === "user" ? "You" : "Catalyst"}\n${m.content}\n`).join("\n---\n");
-    else if (fmt === "json") c = JSON.stringify(msgs, null, 2);
-    else c = msgs.map((m) => `[${m.role}] ${m.content}`).join("\n\n");
-    const b = new Blob([c], { type: "text/plain" });
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(b);
-    a.download = `${t}.${fmt}`;
-    a.click();
-  };
-
-  const detectChart = (c: string) => {
-    const t = c.match(/\|.+\|[\s\S]*?\n\n/);
-    return t ? { type: "table", rows: t[0].split("\n").filter((l) => l.includes("|")).length - 2 } : null;
-  };
-
-  const detectArtifact = (c: string) => {
-    const m = c.match(/```(?:html|jsx|tsx)\n([\s\S]*?)```/);
-    return m ? m[1] : null;
-  };
+  const detectArtifact = (c: string) => { const m = c.match(/```(?:html|jsx|tsx)\n([\s\S]*?)```/); return m ? m[1] : null; };
 
   const send = async () => {
     if (!inp.trim() || ld || !session?.user) return;
     if (!aid) newChat();
-
     const u: Msg = { id: Date.now().toString(36), role: "user", content: inp };
-    const n = [...msgs, u];
-    setMsgs(n);
-    setInp("");
-    setStreamThink("");
-    setLd(true);
-
-    // Save user message to server
+    const n = [...msgs, u]; setMsgs(n); setInp(""); setStreamThink(""); setLd(true);
     if (aid) {
-      fetch(`/api/chats/${aid}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: u.id, role: u.role, content: u.content }),
-      }).catch(() => {});
+      fetch(`/api/chats/${aid}`, { method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: u.id, role: u.role, content: u.content }) }).catch(() => {});
     }
-
-    setChats((p) =>
-      p.map((c) =>
-        c.id === aid
-          ? {
-              ...c,
-              messages: n,
-              title: n.find((m) => m.role === "user")?.content?.slice(0, 50) || c.title,
-              mode,
-              depth,
-              thinking: think,
-            }
-          : c
-      )
-    );
-
+    setChats((p) => p.map((c) => c.id === aid ? { ...c, messages: n, title: n.find((m) => m.role === "user")?.content?.slice(0, 60) || c.title, mode, depth, thinking: think } : c));
     try {
       const r = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          messages: n,
-          mode,
-          depth,
-          thinking: think === "off" ? undefined : think,
-          research,
-          webSearch: web,
-          chatId: aid,
-        }),
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: n, mode, depth, thinking: think === "off" ? undefined : think, research, webSearch: web, chatId: aid })
       });
-      const reader = r.body?.getReader();
-      const dec = new TextDecoder();
-      let cont = "", tt = "";
+      const reader = r.body?.getReader(); const dec = new TextDecoder(); let cont = "", tt = "";
       setMsgs((p) => [...p, { role: "assistant", content: "" }]);
       while (reader) {
-        const { done, value } = await reader.read();
-        if (done) break;
+        const { done, value } = await reader.read(); if (done) break;
         for (const l of dec.decode(value).split("\n").filter((l) => l.startsWith("data: "))) {
-          const d = l.slice(6);
-          if (d === "[DONE]") continue;
+          const d = l.slice(6); if (d === "[DONE]") continue;
           try {
             const p = JSON.parse(d);
-            if (p.type === "thinking") {
-              tt += p.content;
-              setStreamThink(tt);
-            } else if (p.type === "text" || p.content) {
+            if (p.type === "thinking") { tt += p.content; setStreamThink(tt); }
+            else if (p.type === "text" || p.content) {
               cont += p.content || p.text || "";
-              setMsgs((p) => {
-                const c = [...p];
-                c[c.length - 1] = { role: "assistant", content: cont, thinking: tt || undefined };
-                return c;
-              });
+              setMsgs((p) => { const c = [...p]; c[c.length - 1] = { role: "assistant", content: cont, thinking: tt || undefined }; return c; });
             }
-          } catch { /* skip malformed chunks */ }
+          } catch { /* skip */ }
         }
       }
       const f = [...n, { id: Date.now().toString(36), role: "assistant" as const, content: cont, thinking: tt || undefined }];
-      setMsgs(f);
-      setChats((p) => p.map((c) => (c.id === aid ? { ...c, messages: f } : c)));
-
-      // Save assistant message to server
-      const aiMsg = f[f.length - 1];
+      setMsgs(f); setChats((p) => p.map((c) => (c.id === aid ? { ...c, messages: f } : c)));
       if (aid && cont) {
-        fetch(`/api/chats/${aid}`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id: aiMsg.id, role: "assistant", content: cont, thinking: tt || undefined }),
-        }).catch(() => {});
-        // Update chat title
-        fetch(`/api/chats/${aid}`, {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ title: n.find((m) => m.role === "user")?.content?.slice(0, 50) || "New chat" }),
-        }).catch(() => {});
+        const aiMsg = f[f.length - 1];
+        fetch(`/api/chats/${aid}`, { method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id: aiMsg.id, role: "assistant", content: cont, thinking: tt || undefined }) }).catch(() => {});
+        fetch(`/api/chats/${aid}`, { method: "PATCH", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ title: n.find((m) => m.role === "user")?.content?.slice(0, 60) || "Nuevo chat" }) }).catch(() => {});
       }
-
-      if (cont.length > 300) {
-        setCContent(cont);
-        setCanvas(true);
-      }
-    } catch {
-      setMsgs((p) => [...p, { role: "assistant", content: "Error connecting." }]);
-    }
+      if (cont.length > 300) { setCContent(cont); setCanvas(true); }
+    } catch { setMsgs((p) => [...p, { role: "assistant", content: "Error de conexión." }]); }
     setLd(false);
   };
 
-  const keyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); }
-  };
+  const keyDown = (e: React.KeyboardEvent) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } };
 
   const canvasQA = (action: string, sel?: string) => {
     const t = sel || cContent;
     const m: Record<string, string> = {
-      polish: `Polish this for clarity:\n\n${t}`,
-      expand: `Expand with more detail:\n\n${t}`,
-      shorten: `Make more concise:\n\n${t}`,
-      fix_bugs: `Fix bugs in this code:\n\n${t}`,
-      add_comments: `Add explanatory comments:\n\n${t}`,
-      review: `Review and suggest improvements:\n\n${t}`,
-      summarize: `Summarize in 3-5 bullets:\n\n${t}`,
+      polish: `Pule este texto:\n\n${t}`, expand: `Expande con más detalle:\n\n${t}`,
+      shorten: `Haz más conciso:\n\n${t}`, fix_bugs: `Corrige errores:\n\n${t}`,
+      add_comments: `Agrega comentarios:\n\n${t}`, review: `Revisa y sugiere mejoras:\n\n${t}`,
+      summarize: `Resume en 3-5 puntos:\n\n${t}`,
     };
     setInp(m[action] || t);
     if (["polish", "expand", "shorten", "fix_bugs", "add_comments"].includes(action)) setTimeout(send, 100);
@@ -493,222 +313,233 @@ export default function Page() {
 
   const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
-    if (f) {
-      const t = await f.text();
-      setInp((p) => p + `\n\n[${f.name}]\n${t.slice(0, 4000)}`);
-      if (fileRef.current) fileRef.current.value = "";
-    }
+    if (f) { const t = await f.text(); setInp((p) => p + `\n\n[${f.name}]\n${t.slice(0, 8000)}`); if (fileRef.current) fileRef.current.value = ""; }
   };
 
-  // ─── Loading state ─────────────────────────────────────────────────
+  // ─── Cargando ────────────────────────────────────────────────────
   if (status === "loading" || (status === "authenticated" && !loaded)) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0a0a1a]">
+      <div className="min-h-screen flex items-center justify-center" style={{ background: C.bg }}>
         <div className="text-center">
-          <div className="text-5xl mb-4 text-[#00ff88] animate-pulse">◆</div>
-          <p className="text-gray-500 text-sm">Loading Catalyst AI...</p>
+          <div className="text-4xl mb-4" style={{ color: C.accent, fontFamily: FONT }}>◆</div>
+          <p className="text-[12px] tracking-[0.12em] uppercase font-black" style={{ color: C.muted, fontFamily: FONT }}>Cargando…</p>
         </div>
       </div>
     );
   }
-
-  if (status === "unauthenticated") return null; // middleware redirects
-
-  // ─── Theme colors ───────────────────────────────────────────────────
-  const bg = theme === "dark" ? "#0a0a1a" : "#ffffff";
-  const sidebarBg = theme === "dark" ? "#0d0d2a" : "#f9fafb";
-  const chatBg = theme === "dark" ? "#0a0a1a" : "#ffffff";
-  const userBg = theme === "dark" ? "#00ff8815" : "#f4f4f5";
-  const aiBg = theme === "dark" ? "#1a1a3a" : "#ffffff";
-  const border = theme === "dark" ? "#00ff8833" : "#e5e7eb";
-  const subCol = theme === "dark" ? "text-gray-400" : "text-gray-500";
-  const inputBg = theme === "dark" ? "#111133" : "#ffffff";
-  const topBg = theme === "dark" ? "#0d0d20" : "#ffffff";
+  if (status === "unauthenticated") return null;
 
   const user = session?.user;
 
   return (
-    <div className={`flex h-screen ${theme === "dark" ? "text-white" : "text-gray-900"}`} style={{ background: bg }}>
-      {/* ── Sidebar ────────────────────────────────────────────────── */}
-      {side && (
-        <aside className="w-[260px] flex flex-col shrink-0 border-r" style={{ background: sidebarBg, borderColor: border }}>
-          <div className="p-3 space-y-2">
-            <button
-              onClick={newChat}
-              className="w-full bg-[#00ff8822] border border-[#00ff8844] text-[#00ff88] rounded-xl py-2.5 font-semibold hover:bg-[#00ff8833] transition text-sm"
-            >
-              + New chat
+    <div className="flex h-screen" style={{ background: C.bg, color: C.text, fontFamily: FONT }}>
+      {/* ═══════════════ BARRA LATERAL ═══════════════ */}
+      {/* Mobile backdrop */}
+      {isMobile && sideOpen && (
+        <div className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm" onClick={() => setSideOpen(false)} />
+      )}
+      {/* Sidebar: desktop siempre, mobile overlay */}
+      {(isMobile ? sideOpen : side) && (
+        <aside className={`${isMobile ? 'fixed left-0 top-0 bottom-0 z-50 w-[280px] shadow-2xl' : 'w-[260px]'} flex flex-col shrink-0`} style={{ background: C.sidebar, borderRight: `1px solid ${C.border}` }}>
+          {/* Encabezado */}
+          <div className="px-4 pt-5 pb-3" style={{ borderBottom: `1px solid ${C.border}` }}>
+            <div className="flex items-center gap-2 mb-4">
+              <span className="text-lg" style={{ color: C.accent }}>◆</span>
+              <span className="text-[14px] font-black tracking-tight" style={{ color: C.text }}>Catalyst</span>
+              <span className="text-[9px] tracking-[0.14em] uppercase ml-auto font-black" style={{ color: C.subtle }}>BELL</span>
+              {isMobile && (
+                <button onClick={() => setSideOpen(false)} className="text-[16px] font-black ml-2" style={{ color: C.muted }}>×</button>
+              )}
+            </div>
+            <button onClick={newChat}
+              className="w-full py-2.5 text-[12px] font-black tracking-[0.04em] transition-all duration-150 border"
+              style={{ background: C.text, color: "#fff", borderColor: C.text }}>
+              + Nuevo chat
             </button>
-            <input
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search chats..."
-              className="w-full bg-transparent border rounded-lg px-3 py-1.5 text-xs outline-none"
-              style={{ borderColor: border }}
-            />
           </div>
 
-          {/* Import banner */}
+          {/* Búsqueda */}
+          <div className="px-4 py-2.5" style={{ borderBottom: `1px solid ${C.border}` }}>
+            <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Buscar…"
+              className="w-full bg-transparent text-[12px] font-bold py-1.5 outline-none placeholder:text-[#b4b4ac]"
+              style={{ color: C.text, fontFamily: FONT }} />
+          </div>
+
+          {/* Banner importar */}
           {importBanner > 0 && (
-            <div className="mx-3 mb-2 p-2 bg-[#ffaa0011] border border-[#ffaa0033] rounded-lg text-xs text-[#ffaa00] text-center">
-              {importBanner} chat{importBanner > 1 ? "s" : ""} in this browser.{" "}
-              <button onClick={importLocalChats} className="underline hover:text-white">
-                Import
-              </button>
+            <div className="mx-4 mt-3 px-3 py-2.5 text-[11px] leading-relaxed font-bold border"
+              style={{ background: C.amberBg, borderColor: "rgba(212,144,44,0.2)", color: C.amber, fontFamily: FONT }}>
+              {importBanner} chat{importBanner > 1 ? "s" : ""} local{importBanner > 1 ? "es" : ""}.{" "}
+              <button onClick={importLocalChats} className="underline font-black">Importar</button>
             </div>
           )}
 
-          <div className="flex-1 overflow-y-auto px-2 space-y-3">
-            {filtFolder && (
-              <div className="text-xs px-3 py-1 text-gray-500">
-                Filtered: {filtFolder}{" "}
-                <button onClick={() => setFiltFolder("")} className="ml-1 hover:text-white">×</button>
-              </div>
-            )}
+          {/* Lista de chats */}
+          <div className="flex-1 overflow-y-auto px-3 py-2 space-y-0.5">
             {Object.entries(dateGroup(filtered)).map(([date, chs]) => (
               <div key={date}>
-                <div className="text-[10px] text-gray-600 px-3 py-1 uppercase tracking-wider font-semibold">{date}</div>
+                <div className="text-[9px] tracking-[0.12em] uppercase px-2 py-2 font-black" style={{ color: C.subtle }}>{date}</div>
                 {chs.map((c) => (
-                  <div
-                    key={c.id}
-                    onClick={() => select(c.id)}
-                    className={`group flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer text-[13px] transition ${aid === c.id ? "bg-[#00ff8811] text-[#00ff88]" : "text-gray-400 hover:bg-[#ffffff06]"}`}
-                  >
-                    <span className="text-xs opacity-50">{MODES.find((m) => m.k === c.mode)?.i}</span>
-                    <span className="truncate flex-1">{c.title?.slice(0, 35) || "New chat"}</span>
-                    <button
-                      onClick={(e) => { e.stopPropagation(); del(c.id); }}
-                      className="opacity-0 group-hover:opacity-100 text-gray-600 hover:text-red-400 text-xs"
-                    >
-                      ×
-                    </button>
+                  <div key={c.id}
+                    className="group flex items-center gap-1.5 px-2 py-1.5 cursor-pointer text-[12px] font-bold transition-colors duration-100 relative"
+                    style={{ background: aid === c.id ? C.accentBg : "transparent", color: aid === c.id ? C.accent : C.muted }}>
+                    <span className="text-[10px] opacity-60 shrink-0">{MODES.find((m) => m.k === c.mode)?.i}</span>
+                    <span onClick={() => select(c.id)} className="truncate flex-1">{c.title?.slice(0, 28) || "Nuevo chat"}</span>
+                    {/* Folder badge */}
+                    <span className="text-[8px] tracking-[0.08em] uppercase font-black opacity-0 group-hover:opacity-100 shrink-0 px-1" style={{ color: C.subtle }}>
+                      {c.folder?.slice(0, 6) || "General"}
+                    </span>
+                    {/* Move to folder — aparece en hover */}
+                    <select
+                      value=""
+                      onChange={(e) => { if (e.target.value) { e.stopPropagation(); moveToFolder(c.id, e.target.value); e.target.value = ""; } }}
+                      onClick={(e) => e.stopPropagation()}
+                      className="absolute right-6 opacity-0 group-hover:opacity-100 text-[9px] bg-transparent outline-none cursor-pointer font-black"
+                      style={{ color: C.subtle, border: "none", width: "14px" }}>
+                      <option value="">▾</option>
+                      {folders.filter((f) => f !== c.folder).map((f) => (
+                        <option key={f} value={f}>{f}</option>
+                      ))}
+                    </select>
+                    <button onClick={(e) => { e.stopPropagation(); del(c.id); }}
+                      className="opacity-0 group-hover:opacity-100 text-[12px] font-black shrink-0"
+                      style={{ color: C.subtle }}>×</button>
                   </div>
                 ))}
               </div>
             ))}
           </div>
 
-          {/* User section */}
-          <div className="p-3 border-t space-y-2" style={{ borderColor: border }}>
-            <select
-              value={filtFolder}
-              onChange={(e) => setFiltFolder(e.target.value)}
-              className="w-full bg-transparent border rounded-lg px-3 py-1.5 text-xs text-gray-400"
-              style={{ borderColor: border }}
-            >
-              <option value="">All folders</option>
-              {folders.map((f) => (
-                <option key={f} value={f}>📁 {f}</option>
-              ))}
-            </select>
-            <div className="flex gap-1">
-              <input
-                value={nf}
-                onChange={(e) => setNf(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && addF()}
-                placeholder="New folder..."
-                className="flex-1 bg-transparent border rounded px-2 py-1 text-xs outline-none"
-                style={{ borderColor: border }}
-              />
-              <button onClick={addF} className="text-xs text-gray-500 hover:text-white">+</button>
-            </div>
-            {/* User bar */}
-            <div className="flex items-center gap-2 pt-2 border-t" style={{ borderColor: border }}>
-              {user?.image ? (
-                <img src={user.image} alt="" className="w-7 h-7 rounded-full" />
-              ) : (
-                <div className="w-7 h-7 rounded-full bg-[#00ff8833] flex items-center justify-center text-xs text-[#00ff88] font-bold">
-                  {user?.name?.charAt(0)?.toUpperCase() || "?"}
-                </div>
+          {/* Usuario */}
+          <div className="relative" style={{ borderTop: `1px solid ${C.border}` }}>
+            {/* Carpetas */}
+            <div className="px-3 pt-2.5 pb-2 space-y-1.5" style={{ borderBottom: `1px solid ${C.border}` }}>
+              <select value={filtFolder} onChange={(e) => setFiltFolder(e.target.value)}
+                className="w-full bg-transparent text-[11px] font-black py-1.5 outline-none cursor-pointer"
+                style={{ color: filtFolder ? C.accent : C.subtle, fontFamily: FONT }}>
+                <option value="">Todas las carpetas</option>
+                {folders.map((f) => (<option key={f} value={f}>📁 {f}</option>))}
+              </select>
+              {filtFolder && (
+                <button onClick={() => setFiltFolder("")}
+                  className="text-[10px] font-black tracking-[0.06em] uppercase block" style={{ color: C.red }}>
+                  Limpiar filtro
+                </button>
               )}
-              <div className="flex-1 min-w-0">
-                <div className="text-xs text-gray-300 truncate">{user?.name || user?.email}</div>
-                <div className="text-[10px] text-gray-600 truncate">{user?.email}</div>
+              <div className="flex gap-1.5">
+                <input value={nf} onChange={(e) => setNf(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === "Enter") addF(); }}
+                  placeholder="Nueva carpeta…"
+                  className="flex-1 bg-transparent text-[11px] font-bold py-1 outline-none placeholder:text-[#b4b4ac]"
+                  style={{ color: C.text, fontFamily: FONT }} />
+                <button onClick={addF}
+                  className="text-[11px] font-black px-1.5 hover:opacity-70 transition-opacity" style={{ color: C.muted }}>+</button>
               </div>
-              <button
-                onClick={() => signOut({ callbackUrl: "/login" })}
-                className="text-xs text-gray-500 hover:text-red-400 transition"
-                title="Sign out"
-              >
-                🚪
-              </button>
             </div>
+
+            {/* Perfil usuario */}
+            <button onClick={() => setUserOpen(!userOpen)}
+              className="w-full flex items-center gap-2.5 px-4 py-3 text-left hover:bg-[#00000004] transition-colors">
+              <div className="w-7 h-7 flex items-center justify-center text-[12px] font-black border"
+                style={{ background: C.surface, borderColor: C.border, color: C.text }}>
+                {user?.name?.charAt(0)?.toUpperCase() || "?"}
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-[12px] font-black truncate" style={{ color: C.text }}>{user?.name}</div>
+                <div className="text-[10px] font-bold truncate" style={{ color: C.subtle }}>{user?.email}</div>
+              </div>
+            </button>
+            {userOpen && (
+              <div className="absolute bottom-full left-4 right-4 mb-1 border shadow-sm" style={{ background: C.surface, borderColor: C.border }}>
+                <button onClick={() => signOut({ callbackUrl: "/login" })}
+                  className="w-full text-left px-3 py-2 text-[12px] font-black hover:bg-[#00000004] transition-colors" style={{ color: C.red }}>
+                  Cerrar sesión
+                </button>
+              </div>
+            )}
           </div>
         </aside>
       )}
 
-      {/* ── Main ─────────────────────────────────────────────────────── */}
-      <main className="flex-1 flex flex-col min-w-0" style={{ background: chatBg }}>
-        {/* Top bar */}
-        <div className="flex items-center gap-1.5 px-3 py-2 border-b overflow-x-auto" style={{ background: topBg, borderColor: border }}>
-          <button onClick={() => setSide(!side)} className="text-gray-400 hover:text-white px-1">☰</button>
+      {/* ═══════════════ PRINCIPAL ═══════════════ */}
+      <main className="flex-1 flex flex-col min-w-0" style={{ background: C.bg }}>
+        {/* Barra superior */}
+        <div className="flex items-center gap-1 px-3 py-2 overflow-x-auto shrink-0" style={{ borderBottom: `1px solid ${C.border}`, background: C.sidebar }}>
+          <button onClick={() => isMobile ? setSideOpen(true) : setSide(!side)} className="px-1.5 py-1 text-[14px] font-black md:hidden" style={{ color: C.muted }}>☰</button>
+          <button onClick={() => setSide(!side)} className="px-1.5 py-1 text-[14px] font-black hidden md:block" style={{ color: C.muted }}>☰</button>
+          <div className="h-4 w-px mx-0.5" style={{ background: C.border }} />
+
           <select value={mode} onChange={(e) => setMode(e.target.value as Mode)}
-            className="bg-transparent border rounded-lg px-2 py-1 text-xs"
-            style={{ color: MODES.find((m) => m.k === mode)?.c, borderColor: border }}>
+            className="bg-transparent text-[11px] font-black px-2 py-1 outline-none cursor-pointer"
+            style={{ color: MODES.find((m) => m.k === mode)?.c, fontFamily: FONT, border: "none" }}>
             {MODES.map((m) => (<option key={m.k} value={m.k}>{m.i} {m.l}</option>))}
           </select>
+
           <select value={depth} onChange={(e) => setDepth(e.target.value as Depth)}
-            className="bg-transparent border rounded-lg px-2 py-1 text-xs"
-            style={{ borderColor: border }}>
+            className="bg-transparent text-[11px] font-black px-2 py-1 outline-none cursor-pointer"
+            style={{ color: C.muted, fontFamily: FONT, border: "none" }}>
             {DEPTHS.map((d) => (<option key={d.k} value={d.k}>{d.l}</option>))}
           </select>
+
           <select value={think} onChange={(e) => setThink(e.target.value as Think)}
-            className="bg-transparent border rounded-lg px-2 py-1 text-xs text-gray-400"
-            style={{ borderColor: border }}>
+            className="bg-transparent text-[11px] font-black px-2 py-1 outline-none cursor-pointer"
+            style={{ color: C.muted, fontFamily: FONT, border: "none" }}>
             {THINKS.map((t) => (<option key={t.k} value={t.k}>{t.i} {t.l}</option>))}
           </select>
+
+          <div className="h-4 w-px mx-0.5" style={{ background: C.border }} />
+
           <button onClick={() => setResearch(!research)}
-            className={`text-xs px-2 py-1 rounded-lg border transition ${research ? "bg-[#ff660022] border-[#ff660044] text-[#ff6600]" : "text-gray-500"}`}
-            style={{ borderColor: research ? "#ff660044" : border }}>🔬 Research</button>
+            className="text-[10px] tracking-[0.06em] uppercase px-2 py-1 transition-colors font-black"
+            style={{ color: research ? C.amber : C.subtle }}>Investigación</button>
           <button onClick={() => setWeb(!web)}
-            className={`text-xs px-2 py-1 rounded-lg border transition ${web ? "bg-[#4488ff22] border-[#4488ff44] text-[#4488ff]" : "text-gray-500"}`}
-            style={{ borderColor: web ? "#4488ff44" : border }}>🌐 Web</button>
+            className="text-[10px] tracking-[0.06em] uppercase px-2 py-1 transition-colors font-black"
+            style={{ color: web ? "#4a7ab5" : C.subtle }}>Web</button>
           <button onClick={() => setCompare(!compare)}
-            className={`text-xs px-2 py-1 rounded-lg border transition ${compare ? "bg-[#ffaa0022] border-[#ffaa0044] text-[#ffaa00]" : "text-gray-500"}`}
-            style={{ borderColor: compare ? "#ffaa0044" : border }}>⚖️ Compare</button>
+            className="text-[10px] tracking-[0.06em] uppercase px-2 py-1 transition-colors font-black"
+            style={{ color: compare ? C.red : C.subtle }}>Comparar</button>
+
           <div className="flex-1" />
+
           <button onClick={() => { setCanvas(!canvas); if (!canvas) { const l = [...msgs].reverse().find((m) => m.role === "assistant"); if (l) setCContent(l.content); } }}
-            className={`text-xs px-2 py-1 rounded-lg border transition ${canvas ? "bg-[#00ff8822] border-[#00ff8844] text-[#00ff88]" : "text-gray-500"}`}
-            style={{ borderColor: canvas ? "#00ff8844" : border }}>📄 Canvas</button>
-          <button onClick={shareChat}
-            className="text-xs px-2 py-1 rounded-lg border text-gray-500 hover:text-white" style={{ borderColor: border }}>🔗 Share</button>
-          {shareLink && <span className="text-[10px] text-[#00ff88] animate-pulse">Copied!</span>}
-          <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="text-xs px-2 py-1 rounded-lg border text-gray-400" style={{ borderColor: border }}>{theme === "dark" ? "☀️" : "🌙"}</button>
-          <button onClick={() => exportChat("md")}
-            className="text-xs px-2 py-1 rounded-lg border text-gray-400" style={{ borderColor: border }} title="Export">📥</button>
-          <label className="cursor-pointer text-gray-400 hover:text-white text-sm">📎
-            <input ref={fileRef} type="file" onChange={handleFile} className="hidden" accept=".txt,.md,.json,.csv,.py,.js,.ts,.tsx,.sol,.pdf" />
-          </label>
+            className="text-[10px] tracking-[0.06em] uppercase px-2 py-1 font-black" style={{ color: canvas ? C.accent : C.subtle }}>Editor</button>
+          <button onClick={shareChat} className="text-[10px] tracking-[0.06em] uppercase px-2 py-1 font-black" style={{ color: C.subtle }}>Compartir</button>
+          {shareLink && <span className="text-[9px] font-black" style={{ color: C.accent }}>Copiado</span>}
         </div>
 
-        {/* Chat area */}
+        {/* Área de chat */}
         <div ref={chatRef} className="flex-1 overflow-y-auto">
-          <div className="max-w-3xl mx-auto px-6 py-6 space-y-6">
+          <div className="max-w-[720px] mx-auto px-4 md:px-8 py-4 md:py-8 space-y-4 md:space-y-6">
             {msgs.length === 0 && (
-              <div className="text-center mt-16">
-                <div className="text-5xl mb-4">◆</div>
-                <h1 className={`text-2xl font-bold ${theme === "dark" ? "text-[#00ff88]" : "text-gray-800"} mb-1`}>Catalyst AI</h1>
-                <p className={subCol + " text-sm mb-6"}>
-                  {MODES.find((m) => m.k === mode)?.l} · {DEPTHS.find((d) => d.k === depth)?.l}
-                  {think !== "off" && ` · ${THINKS.find((t) => t.k === think)?.l}`}
-                  {research && " · Deep Research"}
+              <div className="text-center mt-20">
+                <div className="text-5xl mb-6" style={{ color: C.accent }}>◆</div>
+                <h1 className="text-[32px] font-black tracking-tight mb-2" style={{ color: C.text, letterSpacing: "-0.025em", fontFamily: FONT }}>
+                  Catalyst AI
+                </h1>
+                <p className="text-[13px] leading-relaxed mb-8 font-bold" style={{ color: C.muted, fontFamily: FONT }}>
+                  {MODES.find((m) => m.k === mode)?.l} · {DEPTHS.find((d) => d.k === depth)?.l}{think !== "off" && ` · ${THINKS.find((t) => t.k === think)?.l}`}{research && " · Investigación profunda"}
                 </p>
-                <div className="flex justify-center gap-2 flex-wrap max-w-lg mx-auto">
+                <div className="flex justify-center gap-2 flex-wrap max-w-md mx-auto">
                   {PROMPTS.slice(0, 4).map((p, i) => (
                     <button key={i} onClick={() => { setInp(p.p); setTimeout(send, 100); }}
-                      className="border rounded-full px-4 py-2 text-[13px] text-gray-400 hover:text-white hover:border-[#00ff8844] transition"
-                      style={{ borderColor: border }}>{p.i} {p.l}</button>
+                      className="text-[12px] font-bold px-4 py-2 border transition-colors duration-150"
+                      style={{ background: C.surface, borderColor: C.border, color: C.muted, fontFamily: FONT }}>
+                      {p.i} {p.l}
+                    </button>
                   ))}
                 </div>
                 <button onClick={() => setTemplates(!templates)}
-                  className="text-[11px] text-gray-500 mt-4 hover:text-white">More prompts ▾</button>
+                  className="text-[10px] tracking-[0.08em] uppercase mt-5 font-black" style={{ color: C.subtle }}>
+                  {templates ? "Menos" : "Más opciones"}
+                </button>
                 {templates && (
-                  <div className="flex justify-center gap-2 flex-wrap mt-2 max-w-lg mx-auto">
+                  <div className="flex justify-center gap-2 flex-wrap mt-3 max-w-md mx-auto">
                     {PROMPTS.slice(4).map((p, i) => (
                       <button key={i} onClick={() => { setInp(p.p); setTemplates(false); setTimeout(send, 100); }}
-                        className="border rounded-full px-4 py-2 text-[13px] text-gray-400 hover:text-white hover:border-[#00ff8844] transition"
-                        style={{ borderColor: border }}>{p.i} {p.l}</button>
+                        className="text-[12px] font-bold px-4 py-2 border transition-colors duration-150"
+                        style={{ background: C.surface, borderColor: C.border, color: C.muted, fontFamily: FONT }}>
+                        {p.i} {p.l}
+                      </button>
                     ))}
                   </div>
                 )}
@@ -717,49 +548,63 @@ export default function Page() {
 
             {msgs.map((m, i) => (
               <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
-                <div className="max-w-[85%]">
-                  <div className={`px-5 py-3.5 rounded-2xl ${m.role === "user" ? "border" : ""}`}
-                    style={{ background: m.role === "user" ? userBg : aiBg, borderColor: m.role === "user" ? border : "transparent" }}>
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-[11px] font-semibold" style={{ color: theme === "dark" ? "#888" : "#666" }}>
-                        {m.role === "user" ? "You" : MODES.find((x) => x.k === mode)?.i + " Catalyst"}
-                      </span>
-                      {m.thinking && (
-                        <button onClick={() => setShowThink((p) => ({ ...p, [i]: !p[i] }))}
-                          className="text-[10px] text-[#ffaa00] hover:text-[#ffcc00]">
-                          🧠 {showThink[i] ? "Hide" : "Think"}
-                        </button>
-                      )}
-                    </div>
-                    {m.thinking && showThink[i] && (
-                      <div className="bg-[#0a0a12] border border-[#ffaa0033] rounded-lg p-3 mb-2 text-xs text-[#ffaa00] font-mono whitespace-pre-wrap max-h-48 overflow-y-auto">
-                        {m.thinking}
-                      </div>
+                <div className="max-w-[92%] md:max-w-[85%]">
+                  {/* Etiqueta */}
+                  <div className="flex items-center gap-2 mb-1.5 px-1">
+                    <span className="text-[9px] tracking-[0.1em] uppercase font-black" style={{ color: C.subtle, fontFamily: FONT }}>
+                      {m.role === "user" ? "Tú" : MODES.find((x) => x.k === mode)?.i + " Catalyst"}
+                    </span>
+                    {m.thinking && (
+                      <button onClick={() => setShowThink((p) => ({ ...p, [i]: !p[i] }))}
+                        className="text-[9px] tracking-[0.08em] uppercase font-black" style={{ color: C.amber }}>
+                        {showThink[i] ? "Ocultar" : "Razonamiento"}
+                      </button>
                     )}
-                    <div className="whitespace-pre-wrap text-[15px] leading-relaxed"
-                      style={{ color: m.role === "user" ? (theme === "dark" ? "#eee" : "#111") : (theme === "dark" ? "#ddd" : "#333") }}>
-                      {m.content || (ld && i === msgs.length - 1 ? "..." : "")}
+                  </div>
+
+                  {/* Burbuja de razonamiento */}
+                  {m.thinking && showThink[i] && (
+                    <div className="mb-2 px-4 py-3 border font-bold text-[13px] leading-relaxed whitespace-pre-wrap max-h-56 overflow-y-auto"
+                      style={{ background: C.amberBg, borderColor: "rgba(212,144,44,0.2)", color: C.amber, fontFamily: FONT }}>
+                      {m.thinking}
                     </div>
+                  )}
+
+                  {/* Contenido */}
+                  <div className="px-5 py-4 border"
+                    style={{
+                      background: m.role === "user" ? C.accentBg : C.surface,
+                      borderColor: m.role === "user" ? "rgba(0,168,90,0.15)" : C.border,
+                      color: C.text,
+                      fontFamily: FONT,
+                    }}>
+                    {m.content ? (
+                      <Markdown content={m.content} mode={m.role === "assistant" ? mode : undefined} />
+                    ) : (ld && i === msgs.length - 1 ? <span className="text-[15px] font-bold">…</span> : null)}
+
                     {m.citations && m.citations.length > 0 && (
-                      <div className="mt-2 pt-2 border-t" style={{ borderColor: border }}>
+                      <div className="mt-3 pt-3" style={{ borderTop: `1px solid ${C.border}` }}>
                         {m.citations.map((c, ci) => (
                           <a key={ci} href={c.url} target="_blank" rel="noopener"
-                            className="block text-[11px] text-[#4488ff] hover:underline truncate">{c.title}</a>
+                            className="block text-[12px] font-bold underline underline-offset-2" style={{ color: "#4a7ab5" }}>{c.title}</a>
                         ))}
                       </div>
                     )}
-                    {(() => { const cd = detectChart(m.content); if (cd) return <div className="mt-2 text-[10px] text-[#ffaa00]">📊 Chart data ({cd.rows} rows)</div>; return null; })()}
-                    {(() => { const af = detectArtifact(m.content); if (af) return <Artifact code={af} lang="html" />; return null; })()}
+
+                    {(() => { const af = detectArtifact(m.content); if (af) return <div className="mt-3"><Artifact code={af} lang="html" /></div>; return null; })()}
+
+                    {/* Retroalimentación */}
                     {m.role === "assistant" && (
-                      <div className="flex gap-1 mt-2 pt-1.5 border-t border-[#ffffff08]">
-                        <button onClick={() => { fb(i, "up"); navigator.clipboard.writeText(m.content); }}
-                          className={`text-xs px-2 py-0.5 rounded ${m.feedback === "up" ? "bg-[#00ff8822] text-[#00ff88]" : "text-gray-600 hover:text-gray-400"}`}>👍</button>
-                        <button onClick={() => fb(i, "down")}
-                          className={`text-xs px-2 py-0.5 rounded ${m.feedback === "down" ? "bg-[#ff004422] text-[#ff0044]" : "text-gray-600 hover:text-gray-400"}`}>👎</button>
-                        <button onClick={() => speak(m.content)}
-                          className="text-xs px-2 py-0.5 rounded text-gray-600 hover:text-gray-400">🔊</button>
+                      <div className="flex gap-3 mt-3 pt-3" style={{ borderTop: `1px solid ${C.border}` }}>
+                        {(["up", "down"] as const).map((v) => (
+                          <button key={v} onClick={() => fb(i, v)}
+                            className="text-[11px] tracking-[0.04em] font-black transition-colors"
+                            style={{ color: m.feedback === v ? C.accent : C.subtle }}>
+                            {v === "up" ? "Útil" : "No útil"}
+                          </button>
+                        ))}
                         <button onClick={() => navigator.clipboard.writeText(m.content)}
-                          className="text-xs px-2 py-0.5 rounded text-gray-600 hover:text-gray-400">📋</button>
+                          className="text-[11px] tracking-[0.04em] font-black ml-auto" style={{ color: C.subtle }}>Copiar</button>
                       </div>
                     )}
                   </div>
@@ -767,72 +612,78 @@ export default function Page() {
               </div>
             ))}
 
-            {/* Comparison mode */}
+            {/* Modo comparar */}
             {compare && msgs.length > 0 && (
-              <div className="border rounded-2xl p-4" style={{ borderColor: border }}>
-                <div className="text-xs text-gray-500 mb-2">
-                  Compare with:{" "}
+              <div className="border p-4 font-bold" style={{ borderColor: C.border, background: C.surface }}>
+                <div className="text-[11px] tracking-[0.06em] uppercase mb-2 font-black" style={{ color: C.muted }}>
+                  Comparar con:{" "}
                   <select value={cMode} onChange={(e) => setCMode(e.target.value as Mode)}
-                    className="bg-transparent border rounded px-2 py-0.5 text-xs ml-1"
-                    style={{ borderColor: border }}>
+                    className="bg-transparent text-[11px] font-black outline-none cursor-pointer ml-1" style={{ color: C.text }}>
                     {MODES.filter((m) => m.k !== mode).map((m) => (<option key={m.k} value={m.k}>{m.i} {m.l}</option>))}
                   </select>
                 </div>
-                <div className="text-xs text-gray-500 italic">Send the same prompt for side-by-side comparison</div>
+                <div className="text-[12px]" style={{ color: C.subtle }}>Envía el mismo mensaje para comparar respuestas lado a lado.</div>
               </div>
             )}
 
+            {/* Razonamiento en vivo */}
             {streamThink && (
               <div className="flex justify-start">
-                <div className="max-w-[85%] bg-[#0a0a12] border border-[#ffaa0033] rounded-2xl p-4 text-xs text-[#ffaa00] font-mono whitespace-pre-wrap max-h-48 overflow-y-auto">
-                  <div className="text-[10px] text-gray-500 mb-1">🧠 Thinking...</div>
+                <div className="max-w-[85%] px-4 py-3 border text-[13px] leading-relaxed whitespace-pre-wrap max-h-56 overflow-y-auto font-bold"
+                  style={{ background: C.amberBg, borderColor: "rgba(212,144,44,0.2)", color: C.amber, fontFamily: FONT }}>
+                  <div className="text-[9px] tracking-[0.1em] uppercase mb-2 font-black" style={{ color: C.amber }}>Razonamiento…</div>
                   {streamThink}
                 </div>
               </div>
             )}
+
+            {/* Cargando */}
             {ld && !streamThink && (
               <div className="flex justify-start">
-                <div className="px-5 py-3.5 rounded-2xl text-sm" style={{ background: aiBg }}>
-                  <span className="typing-dot inline-block w-1.5 h-1.5 rounded-full bg-gray-400 mr-1" />
-                  <span className="typing-dot inline-block w-1.5 h-1.5 rounded-full bg-gray-400 mr-1" />
-                  <span className="typing-dot inline-block w-1.5 h-1.5 rounded-full bg-gray-400" />
+                <div className="px-5 py-4 border" style={{ background: C.surface, borderColor: C.border }}>
+                  <span className="typing-dot inline-block w-2 h-2 mr-1" style={{ background: C.subtle }} />
+                  <span className="typing-dot inline-block w-2 h-2 mr-1" style={{ background: C.subtle }} />
+                  <span className="typing-dot inline-block w-2 h-2" style={{ background: C.subtle }} />
                 </div>
               </div>
             )}
           </div>
         </div>
 
-        {/* Input bar */}
-        <div className="p-4" style={{ background: chatBg }}>
-          <div className="max-w-3xl mx-auto">
-            {research && <div className="text-[11px] text-[#ff6600] mb-2 text-center">🔬 Deep Research — Multi-angle analysis with citations</div>}
-            {web && <div className="text-[11px] text-[#4488ff] mb-2 text-center">🌐 Web Search enabled — responses include sources</div>}
-            <div className="flex items-end gap-2 border rounded-2xl px-4 py-3 shadow-lg" style={{ background: inputBg, borderColor: border }}>
+        {/* Barra de entrada */}
+        <div className="p-3 md:p-4 shrink-0 sticky bottom-0 z-10" style={{ borderTop: `1px solid ${C.border}`, background: C.sidebar }}>
+          <div className="max-w-[720px] mx-auto">
+            {research && <div className="text-[10px] tracking-[0.06em] uppercase mb-2 text-center font-black" style={{ color: C.amber }}>Investigación profunda — análisis multi-ángulo</div>}
+            {web && <div className="text-[10px] tracking-[0.06em] uppercase mb-2 text-center font-black" style={{ color: "#4a7ab5" }}>Búsqueda web activada</div>}
+            <div className="flex items-end gap-2 px-4 py-3 border" style={{ background: C.surface, borderColor: C.border }}>
               <textarea ref={inpRef} value={inp} onChange={(e) => setInp(e.target.value)} onKeyDown={keyDown}
-                placeholder="Message Catalyst AI..."
-                className="flex-1 bg-transparent resize-none outline-none text-[15px] leading-relaxed max-h-48 placeholder-gray-500"
-                style={{ color: theme === "dark" ? "white" : "#111" }} rows={1} disabled={ld} />
-              <div className="flex items-center gap-1">
+                placeholder="Escribe tu mensaje…"
+                className="flex-1 bg-transparent resize-none outline-none text-[15px] leading-relaxed max-h-48 placeholder:text-[#b4b4ac] font-bold"
+                style={{ color: C.text, fontFamily: FONT }} rows={1} disabled={ld} />
+              <div className="flex items-center gap-1.5">
                 <button onClick={startVoice} disabled={ld || voice}
-                  className={`px-2 py-1 rounded-lg text-sm transition ${voice ? "text-[#ff0044] animate-pulse" : "text-gray-400 hover:text-white"}`} title="Voice">🎤</button>
+                  className="text-[12px] px-1.5 transition-colors font-black" style={{ color: voice ? C.red : C.subtle }}>🎤</button>
+                <label className="cursor-pointer text-[12px] px-1.5 transition-colors font-black" style={{ color: C.subtle }}>
+                  📎<input ref={fileRef} type="file" onChange={handleFile} className="hidden" accept=".txt,.md,.json,.csv,.py,.js,.ts,.tsx,.sol,.pdf" />
+                </label>
                 <button onClick={send} disabled={ld || !inp.trim()}
-                  className="p-2 rounded-lg transition disabled:opacity-30"
-                  style={{ background: ld || !inp.trim() ? "transparent" : "#00ff88", color: ld || !inp.trim() ? "#888" : "#0a0a1a" }}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 2L11 13" /><path d="M22 2L15 22 11 13 2 9 22 2z" /></svg>
+                  className="ml-1 px-4 py-1.5 text-[12px] font-black tracking-[0.04em] transition-all duration-150 disabled:opacity-20"
+                  style={{ background: ld || !inp.trim() ? "transparent" : C.text, color: ld || !inp.trim() ? C.subtle : "#fff" }}>
+                  Enviar
                 </button>
               </div>
             </div>
-            <div className="text-[11px] text-gray-500 text-center mt-2">
-              Catalyst AI may produce inaccurate information. BELL 13450.50 · DeepSeek V4
-              {user && <span className="ml-2">· {user.name || user.email}</span>}
+            <div className="flex justify-between mt-2 px-1">
+              <span className="text-[9px] tracking-[0.08em] uppercase font-black" style={{ color: C.subtle }}>BELL 13450.50 · DeepSeek V4</span>
+              {user && <span className="text-[9px] tracking-[0.08em] uppercase font-black" style={{ color: C.subtle }}>{user.name}</span>}
             </div>
           </div>
         </div>
       </main>
 
-      {/* Canvas side panel */}
+      {/* Editor Canvas — fullscreen on mobile */}
       {canvas && (
-        <div className="w-[45%] shrink-0">
+        <div className={`${isMobile ? 'fixed inset-0 z-50' : 'w-[45%]'} shrink-0`}>
           <Canvas content={cContent} onContentChange={setCContent} onQuickAction={canvasQA} onClose={() => setCanvas(false)} />
         </div>
       )}
