@@ -1,0 +1,27 @@
+{
+  "id": "EXP-12542-20260713220230",
+  "synthesis": "S_generic_12541: Generic bifasic pulse 261+491 THz",
+  "params": {
+    "synthesis_hash": "5ef30c2dd50f33df",
+    "timestamp": "2026-07-13T22:02:30.163350+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-12542",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:02:30.163416+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:02:30.163402+00:00",
+  "seal": "0bf16d1c2028c6a1ec14d32c04e99cc093fcd322cd8f49ada0ad86c30a03722e"
+}

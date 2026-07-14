@@ -1,0 +1,27 @@
+{
+  "id": "EXP-12277-20260713222115",
+  "synthesis": "Apply resonance water-lipid protocol at 306 THz pulsed at 10 femtoseconds for membrane repair target",
+  "params": {
+    "synthesis_hash": "4fafb26f2cec31ea",
+    "timestamp": "2026-07-13T22:21:15.088932+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-12277",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:21:15.089034+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:21:15.089021+00:00",
+  "seal": "031c3a7b914e97f3b34bea313a5a22ada1613b5feb51e53d2dd683595b97ae32"
+}

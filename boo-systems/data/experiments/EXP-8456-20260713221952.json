@@ -1,0 +1,27 @@
+{
+  "id": "EXP-8456-20260713221952",
+  "synthesis": "Apply frequency sweep descending from 447 to 282 THz in 10 steps of 10 seconds each targeting PDH co",
+  "params": {
+    "synthesis_hash": "9df78cb8746aecfd",
+    "timestamp": "2026-07-13T22:19:52.761649+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-8456",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:19:52.761730+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:19:52.761721+00:00",
+  "seal": "078a3427553d45efa495ec1c15c923511ea4042d7428b2ba6e1ac084e3cbaeaa"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "EXP-0834-20260713220110",
+  "synthesis": "S_generic_833: Generic bifasic pulse 253+383 THz",
+  "params": {
+    "synthesis_hash": "01561aa3d7807ca7",
+    "timestamp": "2026-07-13T22:01:10.543507+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-0834",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:10.543542+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:10.543535+00:00",
+  "seal": "bd26b201e6068da5411f2e523b093e12ffb98f06b84e19fe46d1abbc75e80692"
+}

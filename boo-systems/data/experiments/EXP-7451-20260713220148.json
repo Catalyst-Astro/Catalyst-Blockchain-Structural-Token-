@@ -1,0 +1,27 @@
+{
+  "id": "EXP-7451-20260713220148",
+  "synthesis": "S_generic_7450: Generic bifasic pulse 270+400 THz",
+  "params": {
+    "synthesis_hash": "23caf8f8c78303b3",
+    "timestamp": "2026-07-13T22:01:48.767757+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-7451",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:48.767791+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:48.767785+00:00",
+  "seal": "69fe2da30bedcbd2b925451ab2b28be00df30c8192c192c833c88f7b03987b3b"
+}

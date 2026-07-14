@@ -1,0 +1,27 @@
+{
+  "id": "EXP-6008-20260713220139",
+  "synthesis": "S_generic_6007: Generic bifasic pulse 227+357 THz",
+  "params": {
+    "synthesis_hash": "e7c26951e9054265",
+    "timestamp": "2026-07-13T22:01:39.290109+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-6008",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:39.290143+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:39.290135+00:00",
+  "seal": "cedf9c3a85ffd174c6b9c84b104297998741809b708455be861ed458cd8a43d2"
+}

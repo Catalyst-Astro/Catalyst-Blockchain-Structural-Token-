@@ -1,0 +1,27 @@
+{
+  "id": "EXP-5506-20260713220135",
+  "synthesis": "S_generic_5505: Generic bifasic pulse 225+455 THz",
+  "params": {
+    "synthesis_hash": "a78374f866e56f73",
+    "timestamp": "2026-07-13T22:01:35.963960+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-5506",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:35.963991+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:35.963985+00:00",
+  "seal": "80537527f28adbc9fc7ec2e06b7afb08c063e693a06475a968aa589af46d68e8"
+}

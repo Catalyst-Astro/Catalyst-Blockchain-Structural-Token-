@@ -1,0 +1,27 @@
+{
+  "id": "EXP-0587-20260713220109",
+  "synthesis": "S_generic_586: Generic bifasic pulse 306+536 THz",
+  "params": {
+    "synthesis_hash": "9e0c4329164141ba",
+    "timestamp": "2026-07-13T22:01:09.518025+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-0587",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:09.518061+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999398,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:09.518054+00:00",
+  "seal": "a964485fa4c8b8d53b3ffbc2c933d7ef9cd9f36fb081430cf7689b27d241eb22"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "EXP-6381-20260713220141",
+  "synthesis": "S_generic_6380: Generic bifasic pulse 300+530 THz",
+  "params": {
+    "synthesis_hash": "4e8c2fa768cf0a67",
+    "timestamp": "2026-07-13T22:01:41.578846+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-6381",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:41.578877+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:41.578870+00:00",
+  "seal": "f201141e9afdc0a6a92f8d2b50dd0ca2fd24cebbcf6d33790e85231c4fc27470"
+}

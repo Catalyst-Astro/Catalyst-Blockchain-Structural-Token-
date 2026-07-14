@@ -1,0 +1,27 @@
+{
+  "id": "EXP-3013-20260713220120",
+  "synthesis": "S_generic_3012: Generic bifasic pulse 232+362 THz",
+  "params": {
+    "synthesis_hash": "d03ce3f0aeff9d24",
+    "timestamp": "2026-07-13T22:01:20.889300+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-3013",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:20.889328+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:20.889322+00:00",
+  "seal": "179c868c5c4f9023897ba9a43e71c43d451041ae47b0d56f5fb5d1e31b704534"
+}

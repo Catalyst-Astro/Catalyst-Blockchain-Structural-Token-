@@ -1,0 +1,27 @@
+{
+  "id": "EXP-5096-20260713220133",
+  "synthesis": "S_generic_5095: Generic bifasic pulse 315+445 THz",
+  "params": {
+    "synthesis_hash": "d60c5cc2597fd200",
+    "timestamp": "2026-07-13T22:01:33.419965+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-5096",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:33.420027+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:33.420019+00:00",
+  "seal": "64e6576e2f58a83ba14a786fdee1b6fb8e0892e41e3b19058580e5451777fb1a"
+}

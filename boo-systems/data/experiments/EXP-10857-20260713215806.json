@@ -1,0 +1,27 @@
+{
+  "id": "EXP-10857-20260713215806",
+  "synthesis": "Apply Resonance water-lipid: 306 THz (980nm) targeting membrane fluidity, 10^-14s pulses targeting n",
+  "params": {
+    "synthesis_hash": "14c755fd9e34168c",
+    "timestamp": "2026-07-13T21:58:06.820422+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-10857",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T21:58:06.820454+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T21:58:06.820448+00:00",
+  "seal": "4c4b10ddd80cc19fcb9550a5f1d3c2830db47df30d9c591cc320ccbc27e40d25"
+}

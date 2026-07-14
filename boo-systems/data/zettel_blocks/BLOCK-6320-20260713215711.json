@@ -1,0 +1,23 @@
+{
+  "block_id": "BLOCK-6320-20260713215711",
+  "phase": "tesis",
+  "thesis": null,
+  "antithesis": "Prolonged exposure at 810nm may decrease mitochondrial biogenesis and generate oxidative stress in enterocyte if irradiance exceeds optimal threshold. Paper (2025) notes dose-dependent tissue response.",
+  "synthesis": "Apply Full spectrum cascade: 472->447->428->370->353->306->282 THz sequential, 10^-14s each, 3 cycles targeting cytochrome_c_oxidase in enterocyte. Study reference: 2025 peer-reviewed paper shows ATP +28% at 810nm. Dual-phase protocol minimizes off-target thermal effects while maximizing mitochondrial complex_III_cytochrome_bc1 activation.",
+  "conclusion": null,
+  "forward_action": null,
+  "reward_score": null,
+  "confidence": 7.0,
+  "hybrys_score": 0.0,
+  "hybrys_triggered": false,
+  "pillars": {
+    "td_cardinal": null,
+    "bu_ordinal": "Prolonged exposure at 810nm may decrease mitochondrial biogenesis and generate oxidative stress in enterocyte if irradiance exceeds optimal threshold. Paper (2025) notes dose-dependent tissue response.",
+    "forward_action": null,
+    "reward_score": null
+  },
+  "timestamp": "2026-07-13T21:57:11.700345+00:00",
+  "parent_block_id": "BLOCK-6319-20260713215711",
+  "metadata": {},
+  "seal": "91f505f62ac35f494930505a068a842244317a91f3d5b4f0853dd0fdb02d578e"
+}

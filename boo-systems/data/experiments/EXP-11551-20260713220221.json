@@ -1,0 +1,27 @@
+{
+  "id": "EXP-11551-20260713220221",
+  "synthesis": "S_generic_11550: Generic bifasic pulse 270+500 THz",
+  "params": {
+    "synthesis_hash": "48eae2369b18f424",
+    "timestamp": "2026-07-13T22:02:21.924543+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-11551",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:02:21.924602+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:02:21.924594+00:00",
+  "seal": "5f2ffbe9bd1381dcce96904989343420ca9e15201263d105eeb793ae4c9440c1"
+}

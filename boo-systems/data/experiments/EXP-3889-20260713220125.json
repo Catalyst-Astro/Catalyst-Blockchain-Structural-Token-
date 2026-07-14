@@ -1,0 +1,27 @@
+{
+  "id": "EXP-3889-20260713220125",
+  "synthesis": "S_generic_3888: Generic bifasic pulse 308+438 THz",
+  "params": {
+    "synthesis_hash": "62d42912ec23577b",
+    "timestamp": "2026-07-13T22:01:25.983937+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-3889",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:25.983971+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:25.983965+00:00",
+  "seal": "2e3edb977592dc0a9e8ed394b08fb93832232355ee57fdb6b59658ff1374949d"
+}

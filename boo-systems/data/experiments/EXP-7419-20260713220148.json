@@ -1,0 +1,27 @@
+{
+  "id": "EXP-7419-20260713220148",
+  "synthesis": "S_generic_7418: Generic bifasic pulse 238+368 THz",
+  "params": {
+    "synthesis_hash": "0bdbc5ab1d3d79fc",
+    "timestamp": "2026-07-13T22:01:48.569279+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-7419",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:48.569315+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:48.569308+00:00",
+  "seal": "f101de73499cc3ab1279918cbdc1a73266d0602439ededa4a014ace06dc46b12"
+}

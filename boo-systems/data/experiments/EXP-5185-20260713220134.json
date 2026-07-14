@@ -1,0 +1,27 @@
+{
+  "id": "EXP-5185-20260713220134",
+  "synthesis": "S_generic_5184: Generic bifasic pulse 304+534 THz",
+  "params": {
+    "synthesis_hash": "d7a551003127938d",
+    "timestamp": "2026-07-13T22:01:34.020531+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-5185",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:34.020565+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:34.020558+00:00",
+  "seal": "43b2b33b1f113e01f606dc433350b40915c1b8b3696f862c58423ca7395efa76"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "EXP-2412-20260713221823",
+  "synthesis": "Apply single-wavelength 810nm continuous wave at 370 THz for 40 minutes targeting CcO directly targe",
+  "params": {
+    "synthesis_hash": "61aea6cfabf1a275",
+    "timestamp": "2026-07-13T22:18:23.775718+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-2412",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:18:23.775771+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:18:23.775762+00:00",
+  "seal": "717acd9128580140cc623eba04e6812b6348028dde82c9a7f80f920fc2a2416d"
+}

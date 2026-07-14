@@ -1,0 +1,27 @@
+{
+  "id": "EXP-4126-20260713215718",
+  "synthesis": "Apply Frequency sweep: 447->370->306 THz descending scan, 10^-13s per step, 5 cycles targeting osteo",
+  "params": {
+    "synthesis_hash": "accd0815473659a9",
+    "timestamp": "2026-07-13T21:57:18.890281+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-4126",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T21:57:18.890346+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T21:57:18.890335+00:00",
+  "seal": "ad470be3498c1a88cc8f392f1f71a77bb80c471f4e35285cb60a52c9e6b19629"
+}

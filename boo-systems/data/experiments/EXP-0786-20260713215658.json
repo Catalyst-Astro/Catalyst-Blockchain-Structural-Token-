@@ -1,0 +1,27 @@
+{
+  "id": "EXP-0786-20260713215658",
+  "synthesis": "Apply Frequency sweep: 447->370->306 THz descending scan, 10^-13s per step, 5 cycles targeting neuro",
+  "params": {
+    "synthesis_hash": "154d064401f5d473",
+    "timestamp": "2026-07-13T21:56:58.139597+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-0786",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T21:56:58.139641+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T21:56:58.139633+00:00",
+  "seal": "30160518f7d0e1523c0c283e0e6091ef22d2d7b00a0c5f0c8b31d5fdf6e8e0c1"
+}

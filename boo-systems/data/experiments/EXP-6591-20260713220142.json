@@ -1,0 +1,27 @@
+{
+  "id": "EXP-6591-20260713220142",
+  "synthesis": "S_generic_6590: Generic bifasic pulse 310+540 THz",
+  "params": {
+    "synthesis_hash": "ec95439e95cb9a37",
+    "timestamp": "2026-07-13T22:01:42.951042+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-6591",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:42.951076+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:42.951070+00:00",
+  "seal": "a463a7a188e7c62ef26fa218c90ce7989a2585147a3dcab8121f4413d280963b"
+}

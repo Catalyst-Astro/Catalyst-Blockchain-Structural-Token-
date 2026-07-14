@@ -1,0 +1,27 @@
+{
+  "id": "EXP-3100-20260713215711",
+  "synthesis": "Apply Full spectrum cascade: 472->447->428->370->353->306->282 THz sequential, 10^-14s each, 3 cycle",
+  "params": {
+    "synthesis_hash": "1a71431dcdde4403",
+    "timestamp": "2026-07-13T21:57:11.391799+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-3100",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T21:57:11.391832+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T21:57:11.391826+00:00",
+  "seal": "0af0a102e37214fb7f9a0f26999aa232cb84ce3d7937d3274a350870ea3bfd96"
+}

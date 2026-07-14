@@ -1,0 +1,27 @@
+{
+  "id": "EXP-0346-20260713220108",
+  "synthesis": "S_generic_345: Generic bifasic pulse 265+495 THz",
+  "params": {
+    "synthesis_hash": "92b2296fbc873c75",
+    "timestamp": "2026-07-13T22:01:08.563775+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-0346",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:08.563805+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.999999603183666,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:08.563800+00:00",
+  "seal": "27e85b7c93698035705aae131e3f44660ec31704a4c4821aad83474eb314873f"
+}

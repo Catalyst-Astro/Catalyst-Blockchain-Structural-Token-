@@ -1,0 +1,27 @@
+{
+  "id": "EXP-7316-20260713220147",
+  "synthesis": "S_generic_7315: Generic bifasic pulse 235+465 THz",
+  "params": {
+    "synthesis_hash": "45dd253289d7cd2d",
+    "timestamp": "2026-07-13T22:01:47.907893+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-7316",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:47.907925+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:47.907919+00:00",
+  "seal": "b304b9ed6baa453b25c0219e4410e94170ac376ac99cb4680c52cf228026f430"
+}

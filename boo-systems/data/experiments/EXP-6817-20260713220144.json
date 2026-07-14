@@ -1,0 +1,27 @@
+{
+  "id": "EXP-6817-20260713220144",
+  "synthesis": "S_generic_6816: Generic bifasic pulse 236+366 THz",
+  "params": {
+    "synthesis_hash": "00dc709093c21807",
+    "timestamp": "2026-07-13T22:01:44.570920+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-6817",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:44.570950+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:44.570944+00:00",
+  "seal": "37ffaa483244d0859aefe22594e0062618f3151161ed792cba896dfae2b0edb9"
+}

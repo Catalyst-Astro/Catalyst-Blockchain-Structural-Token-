@@ -1,0 +1,27 @@
+{
+  "id": "EXP-8971-20260713220201",
+  "synthesis": "S_generic_8970: Generic bifasic pulse 290+520 THz",
+  "params": {
+    "synthesis_hash": "670e8d696b0e0395",
+    "timestamp": "2026-07-13T22:02:01.171751+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-8971",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:02:01.171781+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:02:01.171775+00:00",
+  "seal": "d4c764c3324c99cf1c22dcac4c4b997c7821356cccddd1307fa6a8c8f81bde6e"
+}

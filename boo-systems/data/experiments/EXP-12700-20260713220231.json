@@ -1,0 +1,27 @@
+{
+  "id": "EXP-12700-20260713220231",
+  "synthesis": "S_generic_12699: Generic bifasic pulse 319+449 THz",
+  "params": {
+    "synthesis_hash": "594d7843576f17ff",
+    "timestamp": "2026-07-13T22:02:31.577860+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-12700",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:02:31.577896+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:02:31.577889+00:00",
+  "seal": "08528d6391441117f9a97bd1ea9aaff803c761915879852fd6e28a9fc645b58d"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "EXP-12548-20260713222120",
+  "synthesis": "Apply high-power 2W laser at 370 THz single pulse 10 attoseconds for acute mitochondrial effect targ",
+  "params": {
+    "synthesis_hash": "6b295d228d2888a7",
+    "timestamp": "2026-07-13T22:21:20.840428+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-12548",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:21:20.840536+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:21:20.840524+00:00",
+  "seal": "cbdf50c06493c6745ead2be9421d97c2fe5a07c8a0836d9f4a1e7f5de2871343"
+}

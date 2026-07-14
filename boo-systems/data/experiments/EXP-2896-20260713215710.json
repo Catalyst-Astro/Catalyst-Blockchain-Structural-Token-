@@ -1,0 +1,27 @@
+{
+  "id": "EXP-2896-20260713215710",
+  "synthesis": "Apply Frequency sweep: 447->370->306 THz descending scan, 10^-13s per step, 5 cycles targeting water",
+  "params": {
+    "synthesis_hash": "d0975ef969faa8b6",
+    "timestamp": "2026-07-13T21:57:10.221548+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-2896",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T21:57:10.221594+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T21:57:10.221585+00:00",
+  "seal": "ba7315347aa2500f536d5e71aa1f5872fa91e235ad137935680d47c4048ed8f8"
+}

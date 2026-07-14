@@ -1,0 +1,27 @@
+{
+  "id": "EXP-3661-20260713220124",
+  "synthesis": "S_generic_3660: Generic bifasic pulse 280+410 THz",
+  "params": {
+    "synthesis_hash": "247f97ffadff919e",
+    "timestamp": "2026-07-13T22:01:24.521505+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-3661",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:24.521570+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:24.521528+00:00",
+  "seal": "718fe34d99c2d929b50f98dc403dec35f3347fa71c78ccba72ab7ba841477780"
+}

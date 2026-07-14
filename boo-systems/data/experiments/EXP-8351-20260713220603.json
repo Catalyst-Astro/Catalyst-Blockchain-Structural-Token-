@@ -1,0 +1,27 @@
+{
+  "id": "EXP-8351-20260713220603",
+  "synthesis": "Apply dual-phase Hsp70 activation at 220 THz followed by main pulse at 370 THz with 30% reduced ampl",
+  "params": {
+    "synthesis_hash": "4d609406408fb010",
+    "timestamp": "2026-07-13T22:06:03.431730+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-8351",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:06:03.431809+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:06:03.431800+00:00",
+  "seal": "60dc1191fc5564ad8400ca4bfa1e803492126d4eb24cd04bf76e0f18f9e2b6c5"
+}

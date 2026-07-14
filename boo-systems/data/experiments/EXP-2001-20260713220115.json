@@ -1,0 +1,27 @@
+{
+  "id": "EXP-2001-20260713220115",
+  "synthesis": "S_generic_2000: Generic bifasic pulse 220+350 THz",
+  "params": {
+    "synthesis_hash": "2c332d7b27c6b001",
+    "timestamp": "2026-07-13T22:01:15.944790+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-2001",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:15.944826+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:15.944819+00:00",
+  "seal": "1465091ff8e9e602bb1697052cabad151f8b7355e41ca9723c31e380c8835f84"
+}

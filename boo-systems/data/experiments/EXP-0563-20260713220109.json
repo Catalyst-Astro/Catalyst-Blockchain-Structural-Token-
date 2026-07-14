@@ -1,0 +1,27 @@
+{
+  "id": "EXP-0563-20260713220109",
+  "synthesis": "S_generic_562: Generic bifasic pulse 282+512 THz",
+  "params": {
+    "synthesis_hash": "5c9c4b1ceb57e86a",
+    "timestamp": "2026-07-13T22:01:09.360816+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-0563",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:09.360847+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999998183,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:09.360841+00:00",
+  "seal": "9c0a2dda8fdbf0710c0a5873ff216bd90449ecc6b0789cb30b480cf9076b3be8"
+}

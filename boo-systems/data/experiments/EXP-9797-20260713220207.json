@@ -1,0 +1,27 @@
+{
+  "id": "EXP-9797-20260713220207",
+  "synthesis": "S_generic_9796: Generic bifasic pulse 316+546 THz",
+  "params": {
+    "synthesis_hash": "7cfaa3b2df34af01",
+    "timestamp": "2026-07-13T22:02:07.686362+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-9797",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:02:07.686405+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:02:07.686397+00:00",
+  "seal": "d988d787076542cae1651f96791c76987d36271357651cd134f68678cd5643fc"
+}

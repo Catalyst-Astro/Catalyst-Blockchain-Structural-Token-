@@ -1,0 +1,23 @@
+{
+  "block_id": "BLOCK-13952-20260713215737",
+  "phase": "tesis",
+  "thesis": null,
+  "antithesis": "Prolonged exposure at 810nm may decrease mitochondrial biogenesis and generate oxidative stress in tenocyte if irradiance exceeds optimal threshold. Paper (2025) notes dose-dependent tissue response.",
+  "synthesis": "Apply Frequency sweep: 447->370->306 THz descending scan, 10^-13s per step, 5 cycles targeting cytochrome_c_oxidase in tenocyte. Study reference: 2025 peer-reviewed paper shows ATP +28% at 810nm. Dual-phase protocol minimizes off-target thermal effects while maximizing mitochondrial complex_II_SDH activation.",
+  "conclusion": null,
+  "forward_action": null,
+  "reward_score": null,
+  "confidence": 7.0,
+  "hybrys_score": 0.0,
+  "hybrys_triggered": false,
+  "pillars": {
+    "td_cardinal": null,
+    "bu_ordinal": "Prolonged exposure at 810nm may decrease mitochondrial biogenesis and generate oxidative stress in tenocyte if irradiance exceeds optimal threshold. Paper (2025) notes dose-dependent tissue response.",
+    "forward_action": null,
+    "reward_score": null
+  },
+  "timestamp": "2026-07-13T21:57:37.448328+00:00",
+  "parent_block_id": "BLOCK-13951-20260713215737",
+  "metadata": {},
+  "seal": "732dfeb5f8be02125e7b2187ab10fcef329c27bfe0e0ae28e5cc4d406102fd69"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "EXP-12914-20260713215824",
+  "synthesis": "Apply Multi-wavelength cascade: 447 THz (670nm) prep + 370 THz (810nm) main + 306 THz (980nm) recove",
+  "params": {
+    "synthesis_hash": "dc5799a5bd4ac200",
+    "timestamp": "2026-07-13T21:58:24.593095+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-12914",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T21:58:24.593130+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T21:58:24.593124+00:00",
+  "seal": "cacf95fd9fac5b5a9a6656996f242aaac14c0123c5acef19273276164dc9b87d"
+}

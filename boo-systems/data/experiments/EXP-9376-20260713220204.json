@@ -1,0 +1,27 @@
+{
+  "id": "EXP-9376-20260713220204",
+  "synthesis": "S_generic_9375: Generic bifasic pulse 295+525 THz",
+  "params": {
+    "synthesis_hash": "70db58b69353262f",
+    "timestamp": "2026-07-13T22:02:04.311195+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-9376",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:02:04.311225+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:02:04.311219+00:00",
+  "seal": "49eb8a3e967aaf445c8b3f5cb78748222a2ab275d0b7ffa8303cc2ece57fe0db"
+}

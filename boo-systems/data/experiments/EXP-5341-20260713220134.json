@@ -1,0 +1,27 @@
+{
+  "id": "EXP-5341-20260713220134",
+  "synthesis": "S_generic_5340: Generic bifasic pulse 260+490 THz",
+  "params": {
+    "synthesis_hash": "796c026ec4dbc1da",
+    "timestamp": "2026-07-13T22:01:34.940461+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-5341",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:34.940493+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:34.940485+00:00",
+  "seal": "bca1c83dbf056b4ab1d9920b396fadbf87a5e935f6d25fff0ae86e9c3a2418c8"
+}

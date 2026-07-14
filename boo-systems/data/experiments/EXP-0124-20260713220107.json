@@ -1,0 +1,27 @@
+{
+  "id": "EXP-0124-20260713220107",
+  "synthesis": "S_generic_123: Generic bifasic pulse 243+473 THz",
+  "params": {
+    "synthesis_hash": "d6bf69c3087f9c3f",
+    "timestamp": "2026-07-13T22:01:07.627691+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-0124",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:07.627744+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.989089590592577,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:07.627733+00:00",
+  "seal": "a1ab4225d657242376ee4811c810d86277491f383d608afba032f88d72919619"
+}

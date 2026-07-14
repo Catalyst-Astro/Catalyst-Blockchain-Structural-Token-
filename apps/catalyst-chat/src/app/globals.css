@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { --bg: #0a0a1a; --sidebar: #0d0d2a; --chat: #0a0a1a; --bubble-user: #00ff8815; --bubble-ai: #1a1a3a; --border: #00ff8833; }
+.light { --bg: #ffffff; --sidebar: #f9fafb; --chat: #ffffff; --bubble-user: #f4f4f5; --bubble-ai: #ffffff; --border: #e5e7eb; }
+
+body { margin: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #00ff8833; border-radius: 3px; }
+.light ::-webkit-scrollbar-thumb { background: #d1d5db; }
+
+@keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.typing-dot { animation: pulse-dot 1.2s infinite; }
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }

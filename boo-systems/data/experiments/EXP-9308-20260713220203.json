@@ -1,0 +1,27 @@
+{
+  "id": "EXP-9308-20260713220203",
+  "synthesis": "S_generic_9307: Generic bifasic pulse 227+457 THz",
+  "params": {
+    "synthesis_hash": "8c302f19de46b92f",
+    "timestamp": "2026-07-13T22:02:03.798309+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-9308",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:02:03.798343+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:02:03.798336+00:00",
+  "seal": "ddfe825b0b65759c74b259c18a55f144052a8cea89b1c04175e168d6b2b389fb"
+}

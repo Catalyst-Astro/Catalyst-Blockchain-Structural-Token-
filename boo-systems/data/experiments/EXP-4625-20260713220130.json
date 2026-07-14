@@ -1,0 +1,27 @@
+{
+  "id": "EXP-4625-20260713220130",
+  "synthesis": "S_generic_4624: Generic bifasic pulse 244+374 THz",
+  "params": {
+    "synthesis_hash": "a469de47caadca19",
+    "timestamp": "2026-07-13T22:01:30.303489+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-4625",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:30.303522+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:30.303515+00:00",
+  "seal": "cd40c7f9bf2143772d3e69e43a95d22316f1b302d4c08172006a532cdef9f7e9"
+}

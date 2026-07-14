@@ -1,0 +1,27 @@
+{
+  "id": "EXP-9460-20260713220204",
+  "synthesis": "S_generic_9459: Generic bifasic pulse 279+409 THz",
+  "params": {
+    "synthesis_hash": "93cbab57346887bd",
+    "timestamp": "2026-07-13T22:02:04.985210+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-9460",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:02:04.985240+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:02:04.985234+00:00",
+  "seal": "8bb1c7b55a24fe72e5b3b7d386c5a038978aa1084aac8ae46705548f60b21c16"
+}

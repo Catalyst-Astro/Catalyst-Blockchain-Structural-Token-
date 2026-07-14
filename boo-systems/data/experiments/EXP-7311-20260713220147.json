@@ -1,0 +1,27 @@
+{
+  "id": "EXP-7311-20260713220147",
+  "synthesis": "S_generic_7310: Generic bifasic pulse 230+460 THz",
+  "params": {
+    "synthesis_hash": "ea0272957aa61069",
+    "timestamp": "2026-07-13T22:01:47.874827+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-7311",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:47.874866+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:47.874859+00:00",
+  "seal": "2a326a52419865e0e69c9b77bdd436e06ed605cee53c39b9f3ad3576a36bc0c3"
+}

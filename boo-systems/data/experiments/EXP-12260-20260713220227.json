@@ -1,0 +1,27 @@
+{
+  "id": "EXP-12260-20260713220227",
+  "synthesis": "S_generic_12259: Generic bifasic pulse 279+409 THz",
+  "params": {
+    "synthesis_hash": "8ed330a4893927e5",
+    "timestamp": "2026-07-13T22:02:27.731033+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-12260",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:02:27.731065+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:02:27.731058+00:00",
+  "seal": "8b21c575a7b7815a41bc10c091fc560c94591ac834710b8c3b2cca7c7bbfed65"
+}

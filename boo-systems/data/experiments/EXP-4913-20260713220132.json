@@ -1,0 +1,27 @@
+{
+  "id": "EXP-4913-20260713220132",
+  "synthesis": "S_generic_4912: Generic bifasic pulse 232+462 THz",
+  "params": {
+    "synthesis_hash": "29d21abc88cb0090",
+    "timestamp": "2026-07-13T22:01:32.134048+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-4913",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:32.134077+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:32.134072+00:00",
+  "seal": "d37e337191abfb87e9978335b6646fd6a599171b6d52d7dfbffbaa6c205f35ef"
+}

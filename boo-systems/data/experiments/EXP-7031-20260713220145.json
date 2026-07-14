@@ -1,0 +1,27 @@
+{
+  "id": "EXP-7031-20260713220145",
+  "synthesis": "S_generic_7030: Generic bifasic pulse 250+380 THz",
+  "params": {
+    "synthesis_hash": "3df07c54505ad3ed",
+    "timestamp": "2026-07-13T22:01:45.985458+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-7031",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:45.985487+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:45.985481+00:00",
+  "seal": "0b23cb9db616c6a24b86732a0b231fb85989392842247df999af314636b01248"
+}

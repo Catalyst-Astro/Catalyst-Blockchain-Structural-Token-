@@ -1,0 +1,27 @@
+{
+  "id": "EXP-9856-20260713220208",
+  "synthesis": "S_generic_9855: Generic bifasic pulse 275+405 THz",
+  "params": {
+    "synthesis_hash": "2c4b5d9a4112a0e1",
+    "timestamp": "2026-07-13T22:02:08.157542+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-9856",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:02:08.157576+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:02:08.157570+00:00",
+  "seal": "c6bb49257234d672c074c661a291b0bde68ade8c00a6d5dab027a7121981dff4"
+}

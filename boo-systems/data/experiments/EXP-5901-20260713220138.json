@@ -1,0 +1,27 @@
+{
+  "id": "EXP-5901-20260713220138",
+  "synthesis": "S_generic_5900: Generic bifasic pulse 220+450 THz",
+  "params": {
+    "synthesis_hash": "ef746a9e4e7e3cac",
+    "timestamp": "2026-07-13T22:01:38.597342+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-5901",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:38.597389+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:38.597380+00:00",
+  "seal": "d4c0d6c041776bb523de0d8cabeaae92ac8ed8a77f73d0c59f63bdbe8a30abe3"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "EXP-2103-20260713220116",
+  "synthesis": "S_generic_2102: Generic bifasic pulse 222+452 THz",
+  "params": {
+    "synthesis_hash": "46b7ae7dcb6f462e",
+    "timestamp": "2026-07-13T22:01:16.460101+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-2103",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:16.460146+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:16.460138+00:00",
+  "seal": "93496cd76487bfa2befd11dbacfce47a4b219a6ac8923a5d4b82dc8dd9b1c336"
+}

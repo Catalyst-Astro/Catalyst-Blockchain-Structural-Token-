@@ -1,0 +1,27 @@
+{
+  "id": "EXP-4391-20260713220128",
+  "synthesis": "S_generic_4390: Generic bifasic pulse 310+540 THz",
+  "params": {
+    "synthesis_hash": "985909597a8f1a33",
+    "timestamp": "2026-07-13T22:01:28.945057+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-4391",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:28.945094+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:28.945088+00:00",
+  "seal": "4316be60fc75875e62ee5ce73b73b56ac3725613e7c2d28ae18d55aa579135c0"
+}

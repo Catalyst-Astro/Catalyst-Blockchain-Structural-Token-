@@ -1,0 +1,27 @@
+{
+  "id": "EXP-2428-20260713220117",
+  "synthesis": "S_generic_2427: Generic bifasic pulse 247+377 THz",
+  "params": {
+    "synthesis_hash": "f7f2b6536b85f022",
+    "timestamp": "2026-07-13T22:01:17.877532+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-2428",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:17.877563+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:17.877557+00:00",
+  "seal": "139dbe415965a58351eb597d7f082edd9a1ce7c680c61a1ef0a05897bbadf435"
+}

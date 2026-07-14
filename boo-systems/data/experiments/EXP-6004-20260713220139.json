@@ -1,0 +1,27 @@
+{
+  "id": "EXP-6004-20260713220139",
+  "synthesis": "S_generic_6003: Generic bifasic pulse 223+353 THz",
+  "params": {
+    "synthesis_hash": "415f8815ed99cadc",
+    "timestamp": "2026-07-13T22:01:39.264392+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-6004",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:39.264425+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:39.264418+00:00",
+  "seal": "ddcd08a4f0e4694208707a5aab018e5c36f6035db279d639e9b41edcf14cf35a"
+}

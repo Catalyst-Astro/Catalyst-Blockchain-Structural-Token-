@@ -1,0 +1,27 @@
+{
+  "id": "EXP-8700-20260713220158",
+  "synthesis": "S_generic_8699: Generic bifasic pulse 319+449 THz",
+  "params": {
+    "synthesis_hash": "4264cee020feb8ac",
+    "timestamp": "2026-07-13T22:01:58.996260+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-8700",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:58.996302+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:58.996295+00:00",
+  "seal": "51d87b1b5c93a2151fa110c01b381d480a305f2165a0e4132942290779cf5c9c"
+}

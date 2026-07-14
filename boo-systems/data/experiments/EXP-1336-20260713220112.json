@@ -1,0 +1,27 @@
+{
+  "id": "EXP-1336-20260713220112",
+  "synthesis": "S_generic_1335: Generic bifasic pulse 255+485 THz",
+  "params": {
+    "synthesis_hash": "0085095106eb1262",
+    "timestamp": "2026-07-13T22:01:12.839141+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-1336",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:12.839174+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:12.839167+00:00",
+  "seal": "d29b00a4c1b830c2e88f46b8807ac81c36ce8939f3c8cd456645dd084587a76b"
+}

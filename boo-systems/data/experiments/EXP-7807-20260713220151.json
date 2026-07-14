@@ -1,0 +1,27 @@
+{
+  "id": "EXP-7807-20260713220151",
+  "synthesis": "S_generic_7806: Generic bifasic pulse 226+356 THz",
+  "params": {
+    "synthesis_hash": "9a50aa50ae0b66ba",
+    "timestamp": "2026-07-13T22:01:51.496303+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-7807",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:51.496335+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:51.496329+00:00",
+  "seal": "b29b141455674995a00200847d15bfd8158d5b1a0f964936befe0c4e82115408"
+}

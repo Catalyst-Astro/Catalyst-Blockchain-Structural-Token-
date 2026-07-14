@@ -1,0 +1,27 @@
+{
+  "id": "EXP-5636-20260713220136",
+  "synthesis": "S_generic_5635: Generic bifasic pulse 255+385 THz",
+  "params": {
+    "synthesis_hash": "49387b644268b8bd",
+    "timestamp": "2026-07-13T22:01:36.818402+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-5636",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:36.818434+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:36.818427+00:00",
+  "seal": "905c2f49c69442fda5b20d9f8eaf61399cb6a6b7a8d1051556fd22f0299ad2ff"
+}

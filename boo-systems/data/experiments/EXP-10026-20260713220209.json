@@ -1,0 +1,27 @@
+{
+  "id": "EXP-10026-20260713220209",
+  "synthesis": "S_generic_10025: Generic bifasic pulse 245+375 THz",
+  "params": {
+    "synthesis_hash": "a4942ad7551ecdf2",
+    "timestamp": "2026-07-13T22:02:09.647485+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-10026",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:02:09.647519+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:02:09.647513+00:00",
+  "seal": "b06cf20a69378bed22be9f6752ef56aae2a0d525a24bc3c6f6fe67487d3a75fb"
+}

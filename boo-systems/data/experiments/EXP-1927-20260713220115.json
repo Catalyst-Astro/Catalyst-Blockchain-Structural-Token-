@@ -1,0 +1,27 @@
+{
+  "id": "EXP-1927-20260713220115",
+  "synthesis": "S_generic_1926: Generic bifasic pulse 246+476 THz",
+  "params": {
+    "synthesis_hash": "61977c96b4522ffd",
+    "timestamp": "2026-07-13T22:01:15.566728+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-1927",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:15.566786+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:15.566776+00:00",
+  "seal": "28db1109a37261e4f633ec234fbd9a964085d804cb98b086c1c712f2f9ccde30"
+}

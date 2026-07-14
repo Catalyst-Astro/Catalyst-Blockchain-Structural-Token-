@@ -1,0 +1,27 @@
+{
+  "id": "EXP-0630-20260713220109",
+  "synthesis": "S_generic_629: Generic bifasic pulse 249+379 THz",
+  "params": {
+    "synthesis_hash": "267252b59150bff1",
+    "timestamp": "2026-07-13T22:01:09.689376+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-0630",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:09.689408+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.999999999999169,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:09.689402+00:00",
+  "seal": "748d628c516e364ab0d1f0eaa64bc398a291634d7acfcd71fd912a22a009f4cb"
+}

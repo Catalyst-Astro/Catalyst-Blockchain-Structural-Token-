@@ -1,0 +1,27 @@
+{
+  "id": "EXP-8709-20260713220159",
+  "synthesis": "S_generic_8708: Generic bifasic pulse 228+458 THz",
+  "params": {
+    "synthesis_hash": "024f1756ea9ccdfe",
+    "timestamp": "2026-07-13T22:01:59.059992+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-8709",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:59.060056+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:59.060044+00:00",
+  "seal": "0324696ad23257db3969e4e9bf7c8f7ad3891635bac51fad71f84b8fcecfb4d1"
+}

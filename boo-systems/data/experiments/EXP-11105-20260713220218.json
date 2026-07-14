@@ -1,0 +1,27 @@
+{
+  "id": "EXP-11105-20260713220218",
+  "synthesis": "S_generic_11104: Generic bifasic pulse 224+454 THz",
+  "params": {
+    "synthesis_hash": "104a89df09be9c5e",
+    "timestamp": "2026-07-13T22:02:18.312749+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-11105",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:02:18.312778+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:02:18.312773+00:00",
+  "seal": "a6b17edfff19583d80ce3a9cb965c2f9bebb1896071bc5e14c9f6330f7fd42ac"
+}

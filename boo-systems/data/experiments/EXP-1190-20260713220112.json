@@ -1,0 +1,27 @@
+{
+  "id": "EXP-1190-20260713220112",
+  "synthesis": "S_generic_1189: Generic bifasic pulse 309+539 THz",
+  "params": {
+    "synthesis_hash": "8c08801ec19c45ff",
+    "timestamp": "2026-07-13T22:01:12.223139+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-1190",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:12.223170+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:12.223164+00:00",
+  "seal": "3b90d00af9ae0053893aa7c6db4c2b28c6e9169049d1645e233aa72abe72c5eb"
+}

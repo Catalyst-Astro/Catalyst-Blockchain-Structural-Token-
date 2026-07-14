@@ -1,0 +1,27 @@
+{
+  "id": "EXP-12662-20260713220231",
+  "synthesis": "S_generic_12661: Generic bifasic pulse 281+411 THz",
+  "params": {
+    "synthesis_hash": "5d9a4de232e911da",
+    "timestamp": "2026-07-13T22:02:31.278387+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-12662",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:02:31.278419+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:02:31.278412+00:00",
+  "seal": "0d9ec7372d9c0cd79fa95ae310da256937d7ec4cf16ce7c7155adfe9e9aa19a3"
+}

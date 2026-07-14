@@ -1,0 +1,27 @@
+{
+  "id": "EXP-1348-20260713220112",
+  "synthesis": "S_generic_1347: Generic bifasic pulse 267+497 THz",
+  "params": {
+    "synthesis_hash": "4d257b6829353201",
+    "timestamp": "2026-07-13T22:01:12.889165+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-1348",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:12.889216+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:12.889205+00:00",
+  "seal": "ad5c087bdd85ff1ff5c365f46d2fc9565c3d5be82e0dcad299969c47fb3e381c"
+}

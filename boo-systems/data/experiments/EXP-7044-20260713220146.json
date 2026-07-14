@@ -1,0 +1,27 @@
+{
+  "id": "EXP-7044-20260713220146",
+  "synthesis": "S_generic_7043: Generic bifasic pulse 263+393 THz",
+  "params": {
+    "synthesis_hash": "25a5bd6974b2dcd8",
+    "timestamp": "2026-07-13T22:01:46.070146+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-7044",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:46.070179+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:46.070173+00:00",
+  "seal": "08afa686f05cb824162bfaacb432d047d27ff9ac7003946565fb3c40ae48d0c8"
+}

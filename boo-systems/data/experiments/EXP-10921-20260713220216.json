@@ -1,0 +1,27 @@
+{
+  "id": "EXP-10921-20260713220216",
+  "synthesis": "S_generic_10920: Generic bifasic pulse 240+470 THz",
+  "params": {
+    "synthesis_hash": "46bd9513b00ce240",
+    "timestamp": "2026-07-13T22:02:16.830379+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-10921",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:02:16.830424+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:02:16.830415+00:00",
+  "seal": "caaa25aee64f4f6d4e397f3c59c77c2f203a6204c919b4a597620512f0137ec1"
+}

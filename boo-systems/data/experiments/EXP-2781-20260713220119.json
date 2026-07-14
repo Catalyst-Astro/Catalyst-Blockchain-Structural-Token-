@@ -1,0 +1,27 @@
+{
+  "id": "EXP-2781-20260713220119",
+  "synthesis": "S_generic_2780: Generic bifasic pulse 300+530 THz",
+  "params": {
+    "synthesis_hash": "fc26077d1359add7",
+    "timestamp": "2026-07-13T22:01:19.687774+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-2781",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:19.687808+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:19.687801+00:00",
+  "seal": "295d43a606dc2f0251f13e869952383b0ae666d7d19c17046fbaa6a56635d7bb"
+}

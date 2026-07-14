@@ -1,0 +1,27 @@
+{
+  "id": "EXP-1839-20260713215703",
+  "synthesis": "Apply Gentle regeneration: 345 THz (870nm) at low power, continuous, targets neuron mitochondria tar",
+  "params": {
+    "synthesis_hash": "26f6fbcf3b699798",
+    "timestamp": "2026-07-13T21:57:03.485767+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-1839",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T21:57:03.485828+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T21:57:03.485816+00:00",
+  "seal": "a0cefe3bcc05e9b254f18fad9b5e82c672e3c5f87f34466cdac4dd834d0e0fb6"
+}

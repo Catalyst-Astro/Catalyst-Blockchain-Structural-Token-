@@ -1,0 +1,27 @@
+{
+  "id": "EXP-2055-20260713220116",
+  "synthesis": "S_generic_2054: Generic bifasic pulse 274+404 THz",
+  "params": {
+    "synthesis_hash": "2946ec7ec0505ffc",
+    "timestamp": "2026-07-13T22:01:16.188565+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-2055",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:16.188593+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:16.188588+00:00",
+  "seal": "881a39b38b46f461f170594cb48e49a300ec263cb3ef985abb410e69d6a20b0f"
+}

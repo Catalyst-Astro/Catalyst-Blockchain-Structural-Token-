@@ -1,0 +1,27 @@
+{
+  "id": "EXP-13101-20260713220235",
+  "synthesis": "S_generic_13100: Generic bifasic pulse 220+450 THz",
+  "params": {
+    "synthesis_hash": "1b03f9626b7f4ad5",
+    "timestamp": "2026-07-13T22:02:35.034832+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-13101",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:02:35.034866+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:02:35.034860+00:00",
+  "seal": "93b77bc12eb8c654b420566d9c6a2c7945df93119524e7e5fcd2da67a78fc1ab"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "EXP-8822-20260713220159",
+  "synthesis": "S_generic_8821: Generic bifasic pulse 241+371 THz",
+  "params": {
+    "synthesis_hash": "198a0140c53cd946",
+    "timestamp": "2026-07-13T22:01:59.961614+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-8822",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:59.961694+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:59.961682+00:00",
+  "seal": "ff25d56a1cb6d93b85edc8e653acad71367714ce7225f28d15d3ff0ba52d3b4f"
+}

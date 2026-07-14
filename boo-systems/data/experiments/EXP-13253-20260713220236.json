@@ -1,0 +1,27 @@
+{
+  "id": "EXP-13253-20260713220236",
+  "synthesis": "S_generic_13252: Generic bifasic pulse 272+402 THz",
+  "params": {
+    "synthesis_hash": "5b13e4d5b6f48549",
+    "timestamp": "2026-07-13T22:02:36.496374+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-13253",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:02:36.496410+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:02:36.496403+00:00",
+  "seal": "71bb00041a200a65546dfb740357785aeeeea23ff41a015eac4de9336f77a8d0"
+}

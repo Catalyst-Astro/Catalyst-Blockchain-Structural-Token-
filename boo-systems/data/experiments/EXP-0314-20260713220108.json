@@ -1,0 +1,27 @@
+{
+  "id": "EXP-0314-20260713220108",
+  "synthesis": "S_generic_313: Generic bifasic pulse 233+463 THz",
+  "params": {
+    "synthesis_hash": "bddc6bab3e45cc54",
+    "timestamp": "2026-07-13T22:01:08.436315+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-0314",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:08.436348+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.999998268264147,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:08.436342+00:00",
+  "seal": "42d8e77daa4997c95453648ac61695537c5a67d51bd0115af69e608f302d71bf"
+}

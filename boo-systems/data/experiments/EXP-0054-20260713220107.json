@@ -1,0 +1,27 @@
+{
+  "id": "EXP-0054-20260713220107",
+  "synthesis": "S_generic_53: Generic bifasic pulse 273+403 THz",
+  "params": {
+    "synthesis_hash": "1fc60f9c432c8628",
+    "timestamp": "2026-07-13T22:01:07.395395+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-0054",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:07.395423+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.726091798254844,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:07.395418+00:00",
+  "seal": "0f6f27b5f458b086e62e22260e6de15fecc389cb4873d57997f56e08a67da450"
+}

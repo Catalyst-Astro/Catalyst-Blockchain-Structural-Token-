@@ -1,0 +1,27 @@
+{
+  "id": "EXP-0364-20260713221803",
+  "synthesis": "Apply multi-wavelength cascade starting at 447 THz prep, 370 THz main, 306 THz recovery, 10 cycles t",
+  "params": {
+    "synthesis_hash": "4a4d953cd10cbd88",
+    "timestamp": "2026-07-13T22:18:03.405383+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-0364",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:18:03.405574+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999982675918,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:18:03.405559+00:00",
+  "seal": "ad264181807db0bfaff12acd01065fc955991fe9fe44489eddb9d03837141c0c"
+}

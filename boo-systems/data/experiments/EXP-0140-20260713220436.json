@@ -1,0 +1,27 @@
+{
+  "id": "EXP-0140-20260713220436",
+  "synthesis": "Apply full spectrum protocol sweeping all 7 wavelengths with 10 attosecond pulses each targeting cyt",
+  "params": {
+    "synthesis_hash": "0c5113f98127ab55",
+    "timestamp": "2026-07-13T22:04:36.495836+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-0140",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:04:36.495925+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99477730104739,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:04:36.495917+00:00",
+  "seal": "42d770d51e18019e0bd36f5d47891ece2624c23eaf5040447410e64484b371d1"
+}

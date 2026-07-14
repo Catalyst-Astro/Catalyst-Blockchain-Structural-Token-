@@ -1,0 +1,27 @@
+{
+  "id": "EXP-1194-20260713220112",
+  "synthesis": "S_generic_1193: Generic bifasic pulse 313+543 THz",
+  "params": {
+    "synthesis_hash": "d6ce3c06f40a238e",
+    "timestamp": "2026-07-13T22:01:12.242468+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-1194",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:12.242502+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:12.242496+00:00",
+  "seal": "3bf092a63fafe58488990dc8d56651202f741b5eabec4f04e29b93b61282e2c6"
+}

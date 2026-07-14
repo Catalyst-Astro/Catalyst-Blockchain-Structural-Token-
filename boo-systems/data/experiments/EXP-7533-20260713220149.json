@@ -1,0 +1,27 @@
+{
+  "id": "EXP-7533-20260713220149",
+  "synthesis": "S_generic_7532: Generic bifasic pulse 252+482 THz",
+  "params": {
+    "synthesis_hash": "f60297ff7a3bb047",
+    "timestamp": "2026-07-13T22:01:49.399253+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-7533",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:49.399293+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:49.399286+00:00",
+  "seal": "7313032cfce17c9be6a00bf5556af6c289193a286c62b4affe31e4e73cb8649d"
+}

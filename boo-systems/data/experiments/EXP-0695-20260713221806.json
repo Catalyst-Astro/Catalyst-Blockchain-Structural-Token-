@@ -1,0 +1,27 @@
+{
+  "id": "EXP-0695-20260713221806",
+  "synthesis": "Apply transcranial 870nm at 345 THz with low irradiance 22.2 mW/cm2 for 40 minutes targeting UCP1 in",
+  "params": {
+    "synthesis_hash": "80c4674650f45e1c",
+    "timestamp": "2026-07-13T22:18:06.777530+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-0695",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:18:06.777589+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.999999999999956,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:18:06.777581+00:00",
+  "seal": "ae8421468205461f69e19b15494208fad62e464bef5dfbf1cd7f99c89b591899"
+}

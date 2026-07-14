@@ -1,0 +1,27 @@
+{
+  "id": "EXP-3331-20260713220122",
+  "synthesis": "S_generic_3330: Generic bifasic pulse 250+480 THz",
+  "params": {
+    "synthesis_hash": "2394591762a32678",
+    "timestamp": "2026-07-13T22:01:22.667555+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-3331",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:22.667583+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:22.667577+00:00",
+  "seal": "67679cf4e2e61d09aa20757ee93be32c669667c022e82eda22851f597c39fb21"
+}

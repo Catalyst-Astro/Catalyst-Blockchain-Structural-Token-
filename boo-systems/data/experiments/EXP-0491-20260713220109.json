@@ -1,0 +1,27 @@
+{
+  "id": "EXP-0491-20260713220109",
+  "synthesis": "S_generic_490: Generic bifasic pulse 310+440 THz",
+  "params": {
+    "synthesis_hash": "e4b54ac2496340c2",
+    "timestamp": "2026-07-13T22:01:09.058515+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-0491",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:09.058592+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.999999999499874,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:09.058582+00:00",
+  "seal": "70b1c1aa3581f7c31ffa0898f2e63431208a78e77aca3d734749d76f8706b674"
+}

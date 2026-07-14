@@ -1,0 +1,27 @@
+{
+  "id": "EXP-10883-20260713220216",
+  "synthesis": "S_generic_10882: Generic bifasic pulse 302+432 THz",
+  "params": {
+    "synthesis_hash": "5066b326eb8e7c99",
+    "timestamp": "2026-07-13T22:02:16.505080+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-10883",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:02:16.505114+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:02:16.505107+00:00",
+  "seal": "25ab8a45cdf9f29a51644bf62da2c8d65e010b7fa005ce740f2e90aecec16e93"
+}

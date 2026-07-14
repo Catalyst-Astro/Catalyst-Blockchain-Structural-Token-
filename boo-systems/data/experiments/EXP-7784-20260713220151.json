@@ -1,0 +1,27 @@
+{
+  "id": "EXP-7784-20260713220151",
+  "synthesis": "S_generic_7783: Generic bifasic pulse 303+533 THz",
+  "params": {
+    "synthesis_hash": "bc76837cdec3220f",
+    "timestamp": "2026-07-13T22:01:51.324513+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-7784",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:51.324555+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:51.324547+00:00",
+  "seal": "418c052804396cf8dc5efa130d3bb12b84d5c966d086c81e267ea7b5b881e83e"
+}

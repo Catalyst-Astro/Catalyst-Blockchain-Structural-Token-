@@ -1,0 +1,27 @@
+{
+  "id": "EXP-0643-20260713220109",
+  "synthesis": "S_generic_642: Generic bifasic pulse 262+392 THz",
+  "params": {
+    "synthesis_hash": "eec2cc55c81db139",
+    "timestamp": "2026-07-13T22:01:09.735583+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-0643",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:09.735628+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.999999999999543,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:09.735619+00:00",
+  "seal": "d6a64dfa797426d95616fa45cda3b21edc045b119b6363ff0fcc3c10ca975e64"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "EXP-11782-20260713220223",
+  "synthesis": "S_generic_11781: Generic bifasic pulse 301+531 THz",
+  "params": {
+    "synthesis_hash": "951c77d23aeef048",
+    "timestamp": "2026-07-13T22:02:23.912832+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-11782",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:02:23.912865+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:02:23.912858+00:00",
+  "seal": "fd1337e0d8d522af16b1f91996f9604816cb7abd8d139b2d9249b779c7e36500"
+}

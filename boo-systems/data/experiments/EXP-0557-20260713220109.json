@@ -1,0 +1,27 @@
+{
+  "id": "EXP-0557-20260713220109",
+  "synthesis": "S_generic_556: Generic bifasic pulse 276+506 THz",
+  "params": {
+    "synthesis_hash": "007baaa592efd974",
+    "timestamp": "2026-07-13T22:01:09.339133+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-0557",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:09.339171+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999997605,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:09.339164+00:00",
+  "seal": "35a3129c32d7fc863c936c6c0c0b7bed30637f600b84eae8eecba7859063056c"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "EXP-1429-20260713221204",
+  "synthesis": "Apply gentle 345 THz continuous wave targeting neuron mitochondria specifically targeting Complex II",
+  "params": {
+    "synthesis_hash": "9952fe478f1d75ac",
+    "timestamp": "2026-07-13T22:12:04.361319+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-1429",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:12:04.361377+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:12:04.361370+00:00",
+  "seal": "2042ef10c37719110ae5e4f7e07c633d2cacfc7913206223ac3ef7f4c3da32eb"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "EXP-8920-20260713220200",
+  "synthesis": "S_generic_8919: Generic bifasic pulse 239+469 THz",
+  "params": {
+    "synthesis_hash": "38b58856ea0a3ea5",
+    "timestamp": "2026-07-13T22:02:00.740138+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-8920",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:02:00.740173+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:02:00.740166+00:00",
+  "seal": "aef0314938eda6338454045a6b531623a18a1d3f82642b7e7880173b3d3cb168"
+}

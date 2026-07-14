@@ -1,0 +1,27 @@
+{
+  "id": "EXP-11599-20260713220222",
+  "synthesis": "S_generic_11598: Generic bifasic pulse 318+548 THz",
+  "params": {
+    "synthesis_hash": "a3ea2c5c779027ef",
+    "timestamp": "2026-07-13T22:02:22.286703+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-11599",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:02:22.286734+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:02:22.286728+00:00",
+  "seal": "c0b19a1aa0adecf72de3383aa3a089353e415e8a9e6166236f0f833277c337b8"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "EXP-12271-20260713220227",
+  "synthesis": "S_generic_12270: Generic bifasic pulse 290+420 THz",
+  "params": {
+    "synthesis_hash": "612b2e7d04f9ea66",
+    "timestamp": "2026-07-13T22:02:27.813805+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-12271",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:02:27.813837+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:02:27.813831+00:00",
+  "seal": "c042b9d1d33081d5db3a049bdc7608dadca1c1d94d56a88d93c1e333e4a6ecc8"
+}

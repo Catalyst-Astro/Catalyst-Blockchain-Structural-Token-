@@ -1,0 +1,27 @@
+{
+  "id": "EXP-6593-20260713220142",
+  "synthesis": "S_generic_6592: Generic bifasic pulse 312+542 THz",
+  "params": {
+    "synthesis_hash": "0bf02f3c3bf220b5",
+    "timestamp": "2026-07-13T22:01:42.964459+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-6593",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:42.964508+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:42.964499+00:00",
+  "seal": "c3199e53357c8d1bb028a5bf3e02867a42972bd7c8232db5264f061a0ac5c851"
+}

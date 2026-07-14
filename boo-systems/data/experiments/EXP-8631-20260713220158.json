@@ -1,0 +1,27 @@
+{
+  "id": "EXP-8631-20260713220158",
+  "synthesis": "S_generic_8630: Generic bifasic pulse 250+380 THz",
+  "params": {
+    "synthesis_hash": "a66e60d89cf5b383",
+    "timestamp": "2026-07-13T22:01:58.477933+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-8631",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:58.477962+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:58.477957+00:00",
+  "seal": "a865336a7e4c01debf761774e659ece3bd7218d43b1b88a654597d99e2b65037"
+}

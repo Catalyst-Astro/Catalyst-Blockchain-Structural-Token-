@@ -1,0 +1,27 @@
+{
+  "id": "EXP-4290-20260713220128",
+  "synthesis": "S_generic_4289: Generic bifasic pulse 309+439 THz",
+  "params": {
+    "synthesis_hash": "a53be644aa4ef66b",
+    "timestamp": "2026-07-13T22:01:28.367608+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-4290",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:28.367653+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:28.367643+00:00",
+  "seal": "ce0e98d8c07ae8b47724c53454b4633229a96a76b0e10991560465e733877c90"
+}

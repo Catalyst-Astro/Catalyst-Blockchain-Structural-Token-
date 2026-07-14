@@ -1,0 +1,27 @@
+{
+  "id": "EXP-10811-20260713220215",
+  "synthesis": "S_generic_10810: Generic bifasic pulse 230+360 THz",
+  "params": {
+    "synthesis_hash": "69bd2a1fe0c86c7b",
+    "timestamp": "2026-07-13T22:02:15.887626+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-10811",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:02:15.887655+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:02:15.887649+00:00",
+  "seal": "f7c8ef59965773c51958b88c6a6cce70fda4a6c66ff64145b9e4238c5833ca93"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "EXP-2239-20260713220117",
+  "synthesis": "S_generic_2238: Generic bifasic pulse 258+388 THz",
+  "params": {
+    "synthesis_hash": "c176ad91882ad159",
+    "timestamp": "2026-07-13T22:01:17.043059+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-2239",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:17.043090+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:17.043084+00:00",
+  "seal": "95a6ccd569aebc309ec9a01a9b9031d53c3ddcb3fef1db4625616e3acb978e8a"
+}

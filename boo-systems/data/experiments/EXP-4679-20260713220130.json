@@ -1,0 +1,27 @@
+{
+  "id": "EXP-4679-20260713220130",
+  "synthesis": "S_generic_4678: Generic bifasic pulse 298+428 THz",
+  "params": {
+    "synthesis_hash": "939f34d70d9dcf4a",
+    "timestamp": "2026-07-13T22:01:30.574539+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-4679",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:30.574567+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:30.574562+00:00",
+  "seal": "7cb45d455c99045a94afadb6a7c54206d3e02971cb9dbdcbeef57dc3b2aa9dbe"
+}

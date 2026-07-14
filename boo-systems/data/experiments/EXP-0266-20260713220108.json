@@ -1,0 +1,27 @@
+{
+  "id": "EXP-0266-20260713220108",
+  "synthesis": "S_generic_265: Generic bifasic pulse 285+415 THz",
+  "params": {
+    "synthesis_hash": "bb1da74cfe464b1b",
+    "timestamp": "2026-07-13T22:01:08.232745+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-0266",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:08.232785+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.999984212265565,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:08.232777+00:00",
+  "seal": "a69cd42d299fe4fb8bea6a0a6edd94cf6fb506263599df02b789447272db779e"
+}

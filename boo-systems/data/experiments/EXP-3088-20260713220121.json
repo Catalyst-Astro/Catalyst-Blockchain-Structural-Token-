@@ -1,0 +1,27 @@
+{
+  "id": "EXP-3088-20260713220121",
+  "synthesis": "S_generic_3087: Generic bifasic pulse 307+437 THz",
+  "params": {
+    "synthesis_hash": "8d0647ea6a644f86",
+    "timestamp": "2026-07-13T22:01:21.279397+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-3088",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:21.279447+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:21.279437+00:00",
+  "seal": "ab34bb80957e059607f3752033e87519e4d016afe704f6898ad71bcbbecb774d"
+}

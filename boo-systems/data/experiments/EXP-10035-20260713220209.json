@@ -1,0 +1,27 @@
+{
+  "id": "EXP-10035-20260713220209",
+  "synthesis": "S_generic_10034: Generic bifasic pulse 254+384 THz",
+  "params": {
+    "synthesis_hash": "22d3c2fd03d4f9b2",
+    "timestamp": "2026-07-13T22:02:09.712162+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-10035",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:02:09.712192+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:02:09.712186+00:00",
+  "seal": "9124bc2c91ca7591da53e9f9186fb47fce10d6f8d1bc3725e7d7a2aa9739bcf1"
+}

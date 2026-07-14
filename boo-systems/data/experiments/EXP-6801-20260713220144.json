@@ -1,0 +1,27 @@
+{
+  "id": "EXP-6801-20260713220144",
+  "synthesis": "S_generic_6800: Generic bifasic pulse 220+350 THz",
+  "params": {
+    "synthesis_hash": "11fb151bdf666dee",
+    "timestamp": "2026-07-13T22:01:44.433562+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-6801",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:44.433592+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:44.433586+00:00",
+  "seal": "cf8e018beb7ae7244d8ecac67f11efc745fcd89952796fc9647cfba4a76e75a6"
+}

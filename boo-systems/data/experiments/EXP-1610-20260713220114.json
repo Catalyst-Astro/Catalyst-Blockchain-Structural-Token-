@@ -1,0 +1,27 @@
+{
+  "id": "EXP-1610-20260713220114",
+  "synthesis": "S_generic_1609: Generic bifasic pulse 229+359 THz",
+  "params": {
+    "synthesis_hash": "7279cc7ef8cfa0b0",
+    "timestamp": "2026-07-13T22:01:14.172484+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-1610",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:14.172522+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:14.172514+00:00",
+  "seal": "6ccecef264878b346a826dce470450bc28d2a34de7e1a8dd4f119dfd45b357f4"
+}

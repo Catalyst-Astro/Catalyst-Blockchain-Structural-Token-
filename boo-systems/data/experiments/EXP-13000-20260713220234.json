@@ -1,0 +1,27 @@
+{
+  "id": "EXP-13000-20260713220234",
+  "synthesis": "S_generic_12999: Generic bifasic pulse 319+549 THz",
+  "params": {
+    "synthesis_hash": "6c43a7083e49b932",
+    "timestamp": "2026-07-13T22:02:34.209067+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-13000",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:02:34.209106+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:02:34.209099+00:00",
+  "seal": "ee7f2450c865cc0a306a65bf8b6c6b0ca8d0d82e028cc2aaa6b66f406da33bc0"
+}

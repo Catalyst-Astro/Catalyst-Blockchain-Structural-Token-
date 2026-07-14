@@ -1,0 +1,27 @@
+{
+  "id": "EXP-12685-20260713220231",
+  "synthesis": "S_generic_12684: Generic bifasic pulse 304+434 THz",
+  "params": {
+    "synthesis_hash": "009f1cdb6a2e89ff",
+    "timestamp": "2026-07-13T22:02:31.457044+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-12685",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:02:31.457098+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:02:31.457089+00:00",
+  "seal": "99e2d10ff6ba65028cdfdf61e9f1eb9b8ae30d99bf71fb967d5360b11763f7bc"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "EXP-9184-20260713220202",
+  "synthesis": "S_generic_9183: Generic bifasic pulse 303+533 THz",
+  "params": {
+    "synthesis_hash": "084a594ebddf4958",
+    "timestamp": "2026-07-13T22:02:02.927138+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-9184",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:02:02.927170+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:02:02.927164+00:00",
+  "seal": "68688135e8b552c9919e785c343526cdaf20b7a24418e9927cb0dc4ce6e283be"
+}

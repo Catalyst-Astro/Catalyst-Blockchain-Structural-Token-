@@ -1,0 +1,27 @@
+{
+  "id": "EXP-2405-20260713220117",
+  "synthesis": "S_generic_2404: Generic bifasic pulse 224+354 THz",
+  "params": {
+    "synthesis_hash": "166a2b7d99885f27",
+    "timestamp": "2026-07-13T22:01:17.764481+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-2405",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:17.764519+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:17.764511+00:00",
+  "seal": "28aa934566c12601a341a603656fac7e49cbb236ef49fa3bac68efa0bdf74fd0"
+}

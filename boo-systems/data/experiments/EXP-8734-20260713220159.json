@@ -1,0 +1,27 @@
+{
+  "id": "EXP-8734-20260713220159",
+  "synthesis": "S_generic_8733: Generic bifasic pulse 253+483 THz",
+  "params": {
+    "synthesis_hash": "6e99683c51bc2cf6",
+    "timestamp": "2026-07-13T22:01:59.255033+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-8734",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:59.255064+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:59.255057+00:00",
+  "seal": "0ae55ee7524ec49d8383930b4106f12ce3afd4c5fb4f18ad222bbf882945b238"
+}

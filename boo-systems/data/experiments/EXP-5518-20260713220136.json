@@ -1,0 +1,27 @@
+{
+  "id": "EXP-5518-20260713220136",
+  "synthesis": "S_generic_5517: Generic bifasic pulse 237+467 THz",
+  "params": {
+    "synthesis_hash": "c308e80184768012",
+    "timestamp": "2026-07-13T22:01:36.043566+00:00",
+    "parameters": {
+      "domain": "general",
+      "iterations": 130000
+    }
+  },
+  "results": {
+    "simulation_id": "BOO-SIM-5518",
+    "domain": "general",
+    "status": "COMPLETED",
+    "energy_output": 1.3e-15,
+    "autopoietic_integrity": 1.0,
+    "iterations": 130000,
+    "anomalies_detected": 0,
+    "timestamp": "2026-07-13T22:01:36.043625+00:00"
+  },
+  "reward": 8.0,
+  "confidence": 9.99999999999998,
+  "status": "VALIDATED",
+  "timestamp": "2026-07-13T22:01:36.043613+00:00",
+  "seal": "7119daa52cbae9e07955780f5b0c6a14437977c2f86090efc993e9fc5c70791a"
+}
