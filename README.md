@@ -1,3 +1,15 @@
+
+# Catalyst Blockchain Structural Token (CBST)
+
+```
+ ██████╗ █████╗ ████████╗ █████╗ ██╗   ██╗██╗     ██╗███████╗████████╗
+██╔════╝██╔══██╗╚══██╔══╝██╔══██╗██║   ██║██║     ██║██╔════╝╚══██╔══╝
+██║     ███████║   ██║   ███████║██║   ██║██║     ██║███████╗   ██║
+██║     ██╔══██║   ██║   ██╔══██║██║   ██║██║     ██║╚════██║   ██║
+╚██████╗██║  ██║   ██║   ██║  ██║╚██████╔╝███████╗██║███████║   ██║
+ ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝╚══════╝   ╚═╝
+```
+=======
 # ◆ Catalyst Bank — Sistema Bancario Autopoiético con Tokenomics Elástica
 
 [![BELL License](https://img.shields.io/badge/license-BELL%2013450.50-gold)](docs/BELL_LICENSE_13450.50.md) [![Apache 2.0](https://img.shields.io/badge/code-Apache%202.0-blue)](LICENSE)
@@ -9,16 +21,21 @@
 
 **Catalyst Bank** es el primer sistema bancario autopoiético del mundo. Procesa pagos transfronterizos China→México a través del gateway UnionPay QR (`qr.95516.com`), convierte CNY a tokens CAT con valor real en pesos mexicanos (vía Banxico DOF FIX), y liquida en cualquier CLABE mexicana a través de SPEI — todo en menos de 6 minutos.
 
+
 > **Autopoiesis económica:** El supply de tokens NO es fijo. Crece con la actividad económica real. Cada quema de CAT (5%) habilita expansión futura. Lo contrario a la entropía: el sistema se auto-crea.
 
 ---
 
 ## 🎯 ¿Qué hace Catalyst Bank?
 
+
+Este repositorio no intenta ser un producto terminado. Es un **laboratorio de arquitectura**: piezas pequeñas, legibles y deliberadamente desacopladas que permiten estudiar **cómo** y **por qué** funciona una blockchain.
+=======
 ```
 QR UnionPay (China)  →  COBOL ANSI-85  →  CAT Token (Base L2)  →  Uniswap V3  →  USDC  →  Bitso  →  SPEI  →  BBVA (México)
     ¥855B CNY              88-LEVEL           Elastic Supply          DEX           Stable    IFPE      CLABE 012290015202390246
 ```
+
 
 1. **Recibe pagos QR** desde China (`qr.95516.com`) mediante triggers binarios de 278 a 1855 bits
 2. **Procesa en COBOL ANSI-85** con 88-LEVEL conditions y partida doble NIF (86 cuentas)
@@ -26,6 +43,72 @@ QR UnionPay (China)  →  COBOL ANSI-85  →  CAT Token (Base L2)  →  Uniswap 
 4. **Valoriza en MXN real** vía Banxico API (DOF FIX serie SF43718) — tipo de cambio oficial del Diario Oficial de la Federación
 5. **Liquida en BBVA** a través de SPEI vía Bitso Business (NVIO Pagos, IFPE autorizada por CNBV)
 
+
+- Arquitectos de sistemas distribuidos
+- Investigadores en criptografía aplicada
+- Diseñadores de gobernanza on‑chain
+- Ingenieros que prefieren entender el motor antes de usar el tablero
+
+---
+
+## Qué incluye (actualizado)
+
+### ⛓ Core Blockchain
+
+- Nodos completos P2P sobre TCP y red HTTP auxiliar.
+- Nodos SPV y verificación ligera.
+- Estructuras de bloque/tx minimalistas con validación y minería simplificada.
+- Ledger narrativo y auditor automático de transacciones.
+
+### 🔐 Criptografía aplicada
+
+- Wallets ECDSA y utilidades de hashing.
+- Árboles de Merkle y firmas Schnorr.
+- Multisig, firmas ciegas y utilidades de cifrado.
+
+### 🧠 Consenso & gobernanza
+
+- Controlador de consenso conmutables: PoW, PoA, BFT y variantes simbólicas.
+- Componentes de gobernanza para DAO, auditoría y trazabilidad semántica.
+
+### 📜 Smart Contracts
+
+- Solidity + Hardhat.
+- ERC‑20 extendidos, DAO básica, bridges y registries.
+- Compatibilidad con OpenZeppelin 5.x.
+
+### 🖥 Interfaces y apps
+
+- API Flask/REST y panel FastAPI (dashboard).
+- Dashboard GTK de escritorio.
+- Dapp web (`catalyst-dapp`).
+- Cliente móvil experimental (React Native + Expo).
+
+---
+
+## Estructura del repositorio
+
+```
+auditor/                 Auditoría automática de transacciones
+blockchain/              Nodo completo y SPV (sockets TCP)
+catalyst/                Bridge e interoperabilidad crypto
+catalyst-dapp/           Dapp web experimental
+consensus/               Controlador de consenso intercambiable
+contracts/               Smart contracts Solidity (ERC‑20, DAO, bridge)
+crypto/                  Utilidades criptográficas
+dashboard/               UI/Panel de control
+docs/                    Documentación extendida
+network/                 Red HTTP de pares
+narrative_memory/        Ledger narrativo (JSONL)
+scripts/                 Scripts de pruebas y testnet
+simplechain/             Blockchain mínima expuesta vía HTTP
+src/cbst/                Wallet, Merkle, multisig, Schnorr
+src/fractalmanagergtk/   Dashboard GTK
+src/structural_token/    Identidad y firmas ciegas
+api/                     API Flask
+app/                     Core FastAPI (dashboard y endpoints)
+```
+=======
 **Tiempo total: 6 minutos.** Del QR en China al peso en tu cuenta BBVA.
 
 ---
@@ -84,24 +167,36 @@ AIM:  elasticCap = 1B floor + totalAIBurned × 1.5
 | P12 | Recuperación de Fondos y Disputas | ✅ Proof chain trazable |
 | P13 | Cierre Contable Diario | ✅ Proof of Reserves |
 
+
 ---
 
 ## ⚡ Arranque Rápido
 
 ### Requisitos
 
+
+- Python **3.10+**
+- Entorno virtual recomendado
+=======
 - **Node.js 18+** | **Python 3.10+** | **Hardhat** | **MetaMask**
 - **ETH en Base Mainnet** (~$5 USD para gas de deploy)
 - **Cuenta Bitso** (KYC Nivel 3) para SPEI payouts
 - **Token Banxico SIE API** (gratuito) para valoración MXN oficial
 
+
 ### Instalación
 
 ```bash
+
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+=======
 git clone https://github.com/Rinthae/Catalyst-Blockchain-Structural-Token-.git
 cd Catalyst-Blockchain-Structural-Token-
 npm install
 python -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt
+
 ```
 
 ### Compilar contratos
@@ -112,6 +207,9 @@ npx hardhat compile
 
 ### Desplegar en Base Mainnet (~$5 USD gas)
 
+
+## Ejemplos de ejecución
+=======
 ```bash
 # Asegúrate de tener >0.002 ETH en Base Mainnet
 # Wallet: configurada en .env (PRIVATE_KEY)
@@ -123,6 +221,7 @@ npx hardhat run scripts/deploy_base_minimal.js --network base
 - `MXNPriceOracle` (4-pillar pricing)
 - `Treasury` (100M CAT funded)
 - `SettlementLog` (proof chain registry)
+
 
 ### Probar en Sepolia (GRATIS)
 
@@ -155,6 +254,35 @@ python Eincode/arke/verificador_cobol_swift.py  # Verificación SWIFT COBOL 88-L
 
 ---
 
+
+## Catalyst Blockchain Core (FastAPI)
+
+Dashboard modular y API de estado del core blockchain.
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn app.api.main:app --host 0.0.0.0 --port 8000
+```
+
+Abrir:
+
+- http://127.0.0.1:8000/dashboard
+- http://127.0.0.1:8000/api/status
+
+### Variables de entorno
+
+- `APP_ENV` (dev/staging/prod)
+- `LOG_LEVEL` (INFO/DEBUG)
+- `DATA_BACKEND` (memory/sqlite)
+- `EVENTS_LIMIT` (default 50)
+- `MODULES` (lista separada por comas)
+
+---
+
+## Smart Contracts (Hardhat)
+=======
 ## 🔄 Flujo de Conversión a Pesos (6 minutos)
 
 | Paso | Acción | Tiempo | Costo |
@@ -183,6 +311,7 @@ python Eincode/arke/verificador_cobol_swift.py  # Verificación SWIFT COBOL 88-L
 
 Catalyst Bank opera bajo el modelo cognitivo **Pentetraktys 4D** con 5 fases por cada tarea:
 
+
 ```
 PILLAR 1 (Top-Down):    Reglas, protocolos, estructura fija
 PILLAR 2 (Bottom-Up):   Evidencia, datos crudos, hechos
@@ -192,6 +321,11 @@ PILLAR 4 (Reward):      Validación, feedback, detección Hybrys
 Ciclo: TESIS → ANTITESIS → SINTESIS → CONCLUSION → HYBRYS → RESET
 ```
 
+
+- `CatalystToken.sol`
+- `FractalDAO.sol`
+- `InflationaryRewardToken.sol`
+=======
 **Hybrys detection:** Si confianza > 0.9 y validación < 0.3 → HYBRYS → RESET automático.
 
 ---
@@ -235,6 +369,7 @@ Ciclo: TESIS → ANTITESIS → SINTESIS → CONCLUSION → HYBRYS → RESET
 └── CLAUDE.md                     # 🧠 Cerebro cognitivo del sistema
 ```
 
+
 ---
 
 ## 🔐 Seguridad y Cumplimiento
@@ -246,7 +381,15 @@ Ciclo: TESIS → ANTITESIS → SINTESIS → CONCLUSION → HYBRYS → RESET
 - **Licencia:** Apache 2.0 — código abierto, auditable, sin restricciones de uso comercial
 - **Regulado:** Bitso Business opera como IFPE (NVIO Pagos) bajo Ley Fintech MX
 
+
+```bash
+cd FractalApp
+npm install
+npm run start
+```
+=======
 ---
+
 
 ## 📜 Licencias y Dockets Activos
 
@@ -272,10 +415,36 @@ Ciclo: TESIS → ANTITESIS → SINTESIS → CONCLUSION → HYBRYS → RESET
 | **Q4 2026** | CNBV Registro IFPE + Banxico PSP | 📋 Planeado |
 | **2027** | Banco Digital (Sociedad Financiera Popular) | 📋 Visión |
 
----
+s
+```bash
+pyinstaller fractal_manager.py --onefile --noconsole --icon=fractal.ico
+```
+=======
+--
 
 ## 🛡️ BELL License 13450.50 — Protección de Patente Estructurada
 
+
+```
+PRIVATE_KEY=
+RPC_URL=http://localhost:8545
+TOKEN_ADDRESS=
+DAO_CONTROLLER_ADDRESS=
+```
+
+---
+
+## Deploy en Render
+
+1. Push del repo a GitHub.
+2. Crear un Render Web Service.
+3. Usar `render.yaml` o configurar:
+   - Build: `pip install -r requirements.render.txt`
+   - Start: `uvicorn app.api.main:app --host 0.0.0.0 --port $PORT`
+4. Definir variables de entorno según el entorno.
+
+---
+=======
 Catalyst Bank está protegido por la **BELL License 13450.50** — una licencia de patente estructurada diseñada específicamente para sistemas autopoiéticos.
 
 ### ¿Qué protege?
@@ -287,6 +456,7 @@ Catalyst Bank está protegido por la **BELL License 13450.50** — una licencia 
 
 ### Fundamento Jurídico Internacional
 
+
 | Tratado | Año | Base |
 |---|---|---|
 | Convenio de París (Propiedad Industrial) | 1883 | Art. 10bis — Competencia desleal |
@@ -294,6 +464,13 @@ Catalyst Bank está protegido por la **BELL License 13450.50** — una licencia 
 | TRIPS (OMC) | 1994 | Art. 45-46 — Daños y medidas provisionales |
 | T-MEC / USMCA | 2020 | Cap. 20 — Propiedad Intelectual |
 | Principios UNIDROIT | 2016 | Art. 7.4.9 — Pago convenido por incumplimiento |
+
+
+- Mantén los módulos pequeños.
+- Añade pruebas cuando introduzcas lógica crítica.
+- Documenta la intención y las decisiones de diseño.
+- No ocultes la complejidad: domestícala.
+
 
 ### Por qué 13× no es una penalización — es compensación autopoiética
 
@@ -309,6 +486,9 @@ Catalyst Bank está protegido por la **BELL License 13450.50** — una licencia 
 
 **Licencia completa:** [`docs/BELL_LICENSE_13450.50.md`](docs/BELL_LICENSE_13450.50.md)
 
+
+> *"La seguridad no es un producto. Es un proceso."*
+> — espíritu cypherpunk
 ---
 
 ## 🤝 Contribuciones
@@ -340,3 +520,4 @@ Catalyst Bank está protegido por la **BELL License 13450.50** — una licencia 
 > **BELL 13450.50:** La calidad que se protege a sí misma. 13× no es castigo — es justicia.  
 >
 > *"La seguridad no es un producto. Es un proceso."*
+
