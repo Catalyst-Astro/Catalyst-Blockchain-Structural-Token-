@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import type { Components } from "react-markdown";
 
-interface Props { content: string; mode?: "catalyst" | "pentetraktys" | "boo" | "zettelkasten"; }
+interface Props { content: string; mode?: "catalyst" | "pentetraktys" | "boo" | "zettelkasten" | "cobol"; }
 
 const FONT = "'Times New Roman', Times, serif";
 

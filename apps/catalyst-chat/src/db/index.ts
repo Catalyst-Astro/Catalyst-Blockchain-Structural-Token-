@@ -52,6 +52,8 @@ export function initDB() {
       depth TEXT NOT NULL DEFAULT 'surface',
       thinking TEXT NOT NULL DEFAULT 'off',
       folder TEXT NOT NULL DEFAULT 'General',
+      summary TEXT,
+      concepts TEXT,
       createdAt INTEGER NOT NULL,
       updatedAt INTEGER NOT NULL
     );
@@ -62,10 +64,34 @@ export function initDB() {
       content TEXT NOT NULL,
       thinking TEXT,
       citations TEXT,
+      tool_calls TEXT,
       feedback TEXT,
       createdAt INTEGER NOT NULL
     );
+    CREATE TABLE IF NOT EXISTS note (
+      id TEXT PRIMARY KEY,
+      userId TEXT NOT NULL REFERENCES user(id) ON DELETE CASCADE,
+      concept TEXT NOT NULL,
+      title TEXT NOT NULL,
+      content TEXT NOT NULL,
+      sources TEXT NOT NULL,
+      createdAt INTEGER NOT NULL
+    );
   `);
+  // Migración para bases existentes: columnas hermenéuticas (summary/concepts)
+  for (const col of ["summary", "concepts"]) {
+    try {
+      sqlite.exec(`ALTER TABLE chat ADD COLUMN ${col} TEXT;`);
+    } catch {
+      /* la columna ya existe */
+    }
+  }
+  // Migración: tool_calls en message (Catalyst CLI)
+  try {
+    sqlite.exec(`ALTER TABLE message ADD COLUMN tool_calls TEXT;`);
+  } catch {
+    /* la columna ya existe */
+  }
 }
 
 // Auto-init on module load

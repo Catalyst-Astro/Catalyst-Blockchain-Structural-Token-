@@ -1,28 +1,27 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/auth";
-import { getUserChats, createChat, deleteChat } from "@/db/queries";
+import { getUserChats, createChat, deleteChat, getDefaultUserId } from "@/db/queries";
+
+// Acceso directo: sin sesión se usa la cuenta Catalyst por defecto (app local/LAN)
+async function resolveUserId(): Promise<string> {
+  const session = await auth();
+  return session?.user?.id || (await getDefaultUserId());
+}
 
 export async function GET() {
-  const session = await auth();
-  if (!session?.user?.id) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
-  const chats = await getUserChats(session.user.id);
+  const userId = await resolveUserId();
+  const chats = await getUserChats(userId);
   return NextResponse.json({ chats });
 }
 
 export async function POST(req: NextRequest) {
-  const session = await auth();
-  if (!session?.user?.id) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const userId = await resolveUserId();
 
   try {
     const { id, title, mode, depth, thinking, folder } = await req.json();
     const chat = await createChat({
       id: id || crypto.randomUUID(),
-      userId: session.user.id,
+      userId,
       title,
       mode,
       depth,
@@ -36,10 +35,7 @@ export async function POST(req: NextRequest) {
 }
 
 export async function DELETE(req: NextRequest) {
-  const session = await auth();
-  if (!session?.user?.id) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  await resolveUserId();
 
   const id = req.nextUrl.searchParams.get("id");
   if (!id) {

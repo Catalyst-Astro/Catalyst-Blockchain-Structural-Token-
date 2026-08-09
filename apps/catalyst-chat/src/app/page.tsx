@@ -2,12 +2,21 @@
 
 import { useState, useRef, useEffect, useMemo } from "react";
 import { useSession, signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import Canvas from "./Canvas";
 import Artifact from "./Artifact";
 import Markdown from "./Markdown";
+import Graph, { type GraphLink } from "./Graph";
 import Fuse from "fuse.js";
 
+type ToolCall = {
+  id: string;
+  name: string;
+  arguments: string; // JSON string
+  output?: string;
+  error?: string;
+  success?: boolean;
+  status: "pending" | "running" | "done";
+};
 type Msg = {
   id?: string;
   role: "user" | "assistant";
@@ -15,14 +24,17 @@ type Msg = {
   thinking?: string;
   citations?: { title: string; url: string; snippet: string }[];
   feedback?: "up" | "down";
+  hybrys?: { confianza: number; validacion: number; hybrys: number; nivel: "ok" | "warning" | "critical"; razon: string };
+  toolCalls?: ToolCall[];
 };
-type Mode = "catalyst" | "pentetraktys" | "boo" | "zettelkasten";
+type Mode = "catalyst" | "pentetraktys" | "boo" | "zettelkasten" | "cobol";
 type Depth = "surface" | "medium" | "deep" | "frontier";
 type Think = "off" | "high" | "max";
 
 interface Chat {
   id: string; title: string; date: string; messages: Msg[];
   mode: Mode; depth: Depth; thinking: Think; folder: string;
+  summary?: string; concepts?: string[];
 }
 
 function load<T>(k: string, d: T): T {
@@ -34,6 +46,7 @@ const MODES = [
   { k: "pentetraktys" as Mode, l: "Pentetraktys 4D", i: "Δ", c: "#d4442c" },
   { k: "boo" as Mode, l: "Boo Compiler", i: "ψ", c: "#b83820" },
   { k: "zettelkasten" as Mode, l: "Zettelkasten", i: "‡", c: "#4a4a4a" },
+  { k: "cobol" as Mode, l: "COBOL Empresarial", i: "⌬", c: "#4a7ab5" },
 ];
 const DEPTHS = [
   { k: "surface" as Depth, l: "Superficie", c: "#00a85a" },
@@ -82,8 +95,7 @@ const C = {
 };
 
 export default function Page() {
-  const { data: session, status } = useSession();
-  const router = useRouter();
+  const { data: session } = useSession();
 
   const [chats, setChats] = useState<Chat[]>([]);
   const [aid, setAid] = useState("");
@@ -99,7 +111,7 @@ export default function Page() {
   const [canvas, setCanvas] = useState(false);
   const [cContent, setCContent] = useState("");
   const [streamThink, setStreamThink] = useState("");
-  const [showThink, setShowThink] = useState<Record<number, boolean>>({});
+  const [showThink, setShowThink] = useState<Record<string, boolean>>({});
   const [folders, setFolders] = useState<string[]>(DFOLDERS);
   const [filtFolder, setFiltFolder] = useState("");
   const [nf, setNf] = useState("");
@@ -114,6 +126,12 @@ export default function Page() {
   const [userOpen, setUserOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [sideOpen, setSideOpen] = useState(false);
+  const [graph, setGraph] = useState(false);
+  const [organizing, setOrganizing] = useState(false);
+  const [links, setLinks] = useState<GraphLink[]>([]);
+  const [dialectic, setDialectic] = useState(false);
+  const [cliMode, setCliMode] = useState(false);
+  const [streamTools, setStreamTools] = useState<ToolCall[]>([]);
   const chatRef = useRef<HTMLDivElement>(null);
 
   // Detectar móvil
@@ -124,28 +142,93 @@ export default function Page() {
   const fileRef = useRef<HTMLInputElement>(null);
   const inpRef = useRef<HTMLTextAreaElement>(null);
 
-  // ─── Auth ──────────────────────────────────────────────────────────
-  useEffect(() => { if (status === "unauthenticated") router.replace("/login"); }, [status, router]);
-
-  // ─── Cargar chats ──────────────────────────────────────────────────
-  useEffect(() => { if (status === "authenticated" && !loaded) fetchChats(); }, [status, loaded]);
+  // ─── Acceso directo: chat carga instantáneamente ─────────────────
+  // Carga inmediata desde localStorage. El servidor sincroniza en segundo plano.
+  // Sin pantalla de carga, sin watchdog, sin bloquear la UI.
+  // iPhone Safari: el chat debe estar listo en 0ms para evitar el "white screen" de PWA.
 
   const fetchChats = async () => {
     try {
-      const res = await fetch("/api/chats");
-      if (!res.ok) { setLoaded(true); return; }
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 5000); // 5s timeout ágil
+      const res = await fetch("/api/chats", { signal: ctrl.signal });
+      clearTimeout(timer);
+      if (!res.ok) return;
       const data = await res.json();
       const serverChats: Chat[] = data.chats.map((c: any) => ({
         id: c.id, title: c.title, date: new Date(c.createdAt).toISOString(),
         mode: c.mode, depth: c.depth, thinking: c.thinking, folder: c.folder, messages: [],
+        summary: c.summary || undefined,
+        concepts: c.concepts ? JSON.parse(c.concepts) : undefined,
       }));
-      const local: Chat[] = load("catalyst_v3", []);
-      const serverIds = new Set(serverChats.map((c) => c.id));
-      const missing = local.filter((c) => !serverIds.has(c.id));
-      if (missing.length > 0) setImportBanner(missing.length);
-      setChats(serverChats);
-    } catch { setChats(load("catalyst_v3", [])); }
+      const localIds = new Set(chats.map((c) => c.id));
+      const missing = serverChats.filter((c) => !localIds.has(c.id));
+      // Merge: servidor + local (servidor gana en conflictos)
+      setChats((prev) => {
+        const serverIds = new Set(serverChats.map((c) => c.id));
+        const merged = [...serverChats, ...prev.filter((c) => !serverIds.has(c.id))];
+        return merged;
+      });
+      if (missing.length > 0 && !loaded) setImportBanner(missing.length);
+      setFolders((p) => [...new Set([...p, ...serverChats.map((c) => c.folder || "General")])]);
+      fetchGraph();
+    } catch { /* sin cambios — se queda con datos locales */ }
     setLoaded(true);
+  };
+
+  // Carga inmediata desde localStorage en el primer render
+  useEffect(() => {
+    const local: Chat[] = load("catalyst_v3", []);
+    if (local.length > 0) {
+      setChats(local);
+      setFolders((p) => [...new Set([...p, ...local.map((c) => c.folder || "General")])]);
+    }
+    // Sincronizar con servidor en segundo plano (no bloquea)
+    fetchChats();
+  }, []);
+
+  // ─── Sistema hermenéutico Zettelkasten ─────────────────────────────
+  const fetchGraph = async () => {
+    try {
+      const res = await fetch("/api/organize");
+      if (!res.ok) return;
+      const data = await res.json();
+      setLinks(data.links || []);
+    } catch { /* sin grafo */ }
+  };
+
+  const applyGraph = (data: { chats?: any[]; links?: GraphLink[] }) => {
+    setLinks(data.links || []);
+    setChats((p) => p.map((c) => {
+      const g = data.chats?.find((x) => x.id === c.id);
+      return g ? { ...c, folder: g.folder, summary: g.summary || undefined, concepts: g.concepts } : c;
+    }));
+    setFolders((p) => [...new Set([...p, ...(data.chats || []).map((x) => x.folder || "General")])]);
+  };
+
+  // Clasifica todo el historial con IA (carpetas + conceptos + resumen)
+  const organizeAll = async (force = false) => {
+    if (organizing) return;
+    setOrganizing(true);
+    try {
+      const res = await fetch("/api/organize", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ force }),
+      });
+      if (res.ok) { applyGraph(await res.json()); setGraph(true); }
+    } catch { /* proveedor IA no disponible */ }
+    setOrganizing(false);
+  };
+
+  // Clasificación automática de un chat recién conversado
+  const autoOrganize = (chatId: string) => {
+    fetch("/api/organize", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chatId }),
+    })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => { if (d) applyGraph(d); })
+      .catch(() => {});
   };
 
   const importLocalChats = async () => {
@@ -172,7 +255,9 @@ export default function Page() {
       const data = await res.json();
       return data.messages.map((m: any) => ({
         id: m.id, role: m.role, content: m.content, thinking: m.thinking,
-        citations: m.citations ? JSON.parse(m.citations) : undefined, feedback: m.feedback,
+        citations: m.citations ? JSON.parse(m.citations) : undefined,
+        toolCalls: m.toolCalls ? JSON.parse(m.toolCalls) : undefined,
+        feedback: m.feedback,
       }));
     } catch { return []; }
   };
@@ -183,6 +268,16 @@ export default function Page() {
   const fuse = useMemo(() => new Fuse(chats, { keys: ["title", "messages.content"], threshold: 0.4 }), [chats]);
   const searched = search ? fuse.search(search).map((r) => r.item) : chats;
   const filtered = filtFolder ? searched.filter((c) => c.folder === filtFolder) : searched;
+
+  // Chats relacionados al activo (enlaces Zettelkasten por conceptos compartidos)
+  const relatedOfActive = useMemo(() => {
+    if (!aid) return [] as Chat[];
+    return links
+      .filter((l) => l.source === aid || l.target === aid)
+      .sort((a, b) => b.weight - a.weight)
+      .map((l) => chats.find((c) => c.id === (l.source === aid ? l.target : l.source)))
+      .filter((c): c is Chat => !!c);
+  }, [aid, links, chats]);
 
   // ─── Acciones ──────────────────────────────────────────────────────
   const newChat = () => {
@@ -230,6 +325,22 @@ export default function Page() {
     }).catch(() => {});
   };
 
+  // Los toggles (modo/profundidad/razonamiento) se fijan POR CHAT:
+  // se persisten al servidor al cambiarlos, para que no se reinicien nunca
+  const setChatSetting = (data: { mode?: Mode; depth?: Depth; thinking?: Think }) => {
+    if (data.mode) setMode(data.mode);
+    if (data.depth) setDepth(data.depth);
+    if (data.thinking) setThink(data.thinking);
+    if (aid) {
+      setChats((p) => p.map((c) => (c.id === aid ? { ...c, ...data } : c)));
+      fetch(`/api/chats/${aid}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }).catch(() => {});
+    }
+  };
+
   const fb = (idx: number, v: "up" | "down") => {
     const u = msgs.map((m, i) => (i === idx ? { ...m, feedback: v } : m));
     setMsgs(u); setChats((p) => p.map((c) => (c.id === aid ? { ...c, messages: u } : c)));
@@ -253,7 +364,7 @@ export default function Page() {
   const detectArtifact = (c: string) => { const m = c.match(/```(?:html|jsx|tsx)\n([\s\S]*?)```/); return m ? m[1] : null; };
 
   const send = async () => {
-    if (!inp.trim() || ld || !session?.user) return;
+    if (!inp.trim() || ld) return;
     if (!aid) newChat();
     const u: Msg = { id: Date.now().toString(36), role: "user", content: inp };
     const n = [...msgs, u]; setMsgs(n); setInp(""); setStreamThink(""); setLd(true);
@@ -265,10 +376,12 @@ export default function Page() {
     try {
       const r = await fetch("/api/chat", {
         method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: n, mode, depth, thinking: think === "off" ? undefined : think, research, webSearch: web, chatId: aid })
+        body: JSON.stringify({ messages: n, mode, depth, thinking: think === "off" ? undefined : think, research, webSearch: web, dialectic, cliMode, chatId: aid })
       });
       const reader = r.body?.getReader(); const dec = new TextDecoder(); let cont = "", tt = "";
+      const pendingTools: ToolCall[] = [];
       setMsgs((p) => [...p, { role: "assistant", content: "" }]);
+      setStreamTools([]);
       while (reader) {
         const { done, value } = await reader.read(); if (done) break;
         for (const l of dec.decode(value).split("\n").filter((l) => l.startsWith("data: "))) {
@@ -276,6 +389,45 @@ export default function Page() {
           try {
             const p = JSON.parse(d);
             if (p.type === "thinking") { tt += p.content; setStreamThink(tt); }
+            else if (p.type === "tool_call") {
+              // Modelo quiere llamar una herramienta (streaming de tool call)
+              const existing = pendingTools.findIndex((t) => t.id === p.id);
+              if (existing >= 0) {
+                pendingTools[existing] = { ...pendingTools[existing], arguments: (pendingTools[existing].arguments || "") + (p.arguments || ""), status: "pending" };
+              } else {
+                pendingTools.push({ id: p.id, name: p.name, arguments: p.arguments || "", status: "pending" });
+              }
+              setStreamTools([...pendingTools]);
+            }
+            else if (p.type === "tool_start") {
+              // Tool call confirmada, se va a ejecutar
+              const idx = pendingTools.findIndex((t) => t.id === p.id);
+              if (idx >= 0) {
+                pendingTools[idx] = { ...pendingTools[idx], status: "running", arguments: p.arguments || pendingTools[idx].arguments };
+              } else {
+                pendingTools.push({ id: p.id, name: p.name, arguments: p.arguments || "", status: "running" });
+              }
+              setStreamTools([...pendingTools]);
+            }
+            else if (p.type === "tool_result") {
+              // Resultado de herramienta
+              const idx = pendingTools.findIndex((t) => t.id === p.id);
+              if (idx >= 0) {
+                pendingTools[idx] = {
+                  ...pendingTools[idx],
+                  status: "done",
+                  output: p.output || "",
+                  error: p.error,
+                  success: p.success,
+                };
+              } else {
+                pendingTools.push({
+                  id: p.id, name: p.name, arguments: "",
+                  status: "done", output: p.output, error: p.error, success: p.success,
+                });
+              }
+              setStreamTools([...pendingTools]);
+            }
             else if (p.type === "text" || p.content) {
               cont += p.content || p.text || "";
               setMsgs((p) => { const c = [...p]; c[c.length - 1] = { role: "assistant", content: cont, thinking: tt || undefined }; return c; });
@@ -283,14 +435,40 @@ export default function Page() {
           } catch { /* skip */ }
         }
       }
-      const f = [...n, { id: Date.now().toString(36), role: "assistant" as const, content: cont, thinking: tt || undefined }];
+      // Al terminar el stream, adjuntar tool calls al último mensaje
+      setMsgs((prev) => {
+        const c = [...prev];
+        const last = c[c.length - 1];
+        if (last && last.role === "assistant" && pendingTools.length > 0) {
+          c[c.length - 1] = { ...last, toolCalls: pendingTools.filter((t) => t.status === "done" || t.output) };
+        }
+        return c;
+      });
+      const f = [...n, { id: Date.now().toString(36), role: "assistant" as const, content: cont, thinking: tt || undefined, toolCalls: pendingTools.length > 0 ? pendingTools.filter((t) => t.status === "done" || t.output) : undefined }];
       setMsgs(f); setChats((p) => p.map((c) => (c.id === aid ? { ...c, messages: f } : c)));
       if (aid && cont) {
         const aiMsg = f[f.length - 1];
         fetch(`/api/chats/${aid}`, { method: "POST", headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id: aiMsg.id, role: "assistant", content: cont, thinking: tt || undefined }) }).catch(() => {});
+          body: JSON.stringify({ id: aiMsg.id, role: "assistant", content: cont, thinking: tt || undefined, toolCalls: aiMsg.toolCalls }) }).catch(() => {});
+        // Persistir título Y configuración del chat (modo/profundidad/razonamiento)
         fetch(`/api/chats/${aid}`, { method: "PATCH", headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ title: n.find((m) => m.role === "user")?.content?.slice(0, 60) || "Nuevo chat" }) }).catch(() => {});
+          body: JSON.stringify({ title: n.find((m) => m.role === "user")?.content?.slice(0, 60) || "Nuevo chat", mode, depth, thinking: think }) }).catch(() => {});
+        // Hermenéutica automática: clasifica el chat en cuanto tiene contenido
+        const cur = chats.find((c) => c.id === aid);
+        if (!cur?.concepts?.length) setTimeout(() => autoOrganize(aid), 1500);
+        // Δ Juicio de Hybrys: segundo veredicto sobre la respuesta
+        const qText = [...n].reverse().find((m) => m.role === "user")?.content || "";
+        fetch("/api/hybrys", { method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ question: qText, answer: cont }) })
+          .then((r) => (r.ok ? r.json() : null))
+          .then((h) => {
+            if (!h || h.error) return;
+            setMsgs((p) => p.map((m) => (m.id === aiMsg.id ? { ...m, hybrys: h } : m)));
+            setChats((p) => p.map((c) => (c.id === aid
+              ? { ...c, messages: c.messages.map((m) => (m.id === aiMsg.id ? { ...m, hybrys: h } : m)) }
+              : c)));
+          })
+          .catch(() => {});
       }
       if (cont.length > 300) { setCContent(cont); setCanvas(true); }
     } catch { setMsgs((p) => [...p, { role: "assistant", content: "Error de conexión." }]); }
@@ -298,6 +476,14 @@ export default function Page() {
   };
 
   const keyDown = (e: React.KeyboardEvent) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } };
+
+  // Δ RESET Pentetraktys: fuerza la antítesis cuando el Hybrys es crítico
+  const hybrysReset = () => {
+    setInp(
+      "Δ RESET PENTETRAKTYS: tu respuesta anterior mostró Hybrys (sobreconfianza sin validación suficiente). Genera la ANTÍTESIS de tu propia respuesta — refuta tus afirmaciones más débiles — y entrega después una SÍNTESIS corregida, honesta sobre sus límites y con la validación explícita de cada afirmación."
+    );
+    setTimeout(send, 100);
+  };
 
   const canvasQA = (action: string, sel?: string) => {
     const t = sel || cContent;
@@ -316,20 +502,10 @@ export default function Page() {
     if (f) { const t = await f.text(); setInp((p) => p + `\n\n[${f.name}]\n${t.slice(0, 8000)}`); if (fileRef.current) fileRef.current.value = ""; }
   };
 
-  // ─── Cargando ────────────────────────────────────────────────────
-  if (status === "loading" || (status === "authenticated" && !loaded)) {
-    return (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: C.bg }}>
-        <div className="text-center">
-          <div className="text-4xl mb-4" style={{ color: C.accent, fontFamily: FONT }}>◆</div>
-          <p className="text-[12px] tracking-[0.12em] uppercase font-black" style={{ color: C.muted, fontFamily: FONT }}>Cargando…</p>
-        </div>
-      </div>
-    );
-  }
-  if (status === "unauthenticated") return null;
-
-  const user = session?.user;
+  // ─── Chat listo al instante ──────────────────────────────────────
+  // Sin pantalla de carga — el chat se renderiza en 0ms con datos de localStorage.
+  // El servidor sincroniza en segundo plano sin bloquear la experiencia.
+  const user = session?.user || { name: "Catalyst", email: "acceso directo" };
 
   return (
     <div className="flex h-screen" style={{ background: C.bg, color: C.text, fontFamily: FONT }}>
@@ -435,6 +611,12 @@ export default function Page() {
                 <button onClick={addF}
                   className="text-[11px] font-black px-1.5 hover:opacity-70 transition-opacity" style={{ color: C.muted }}>+</button>
               </div>
+              {/* Motor hermenéutico: clasifica todo el historial con IA */}
+              <button onClick={() => organizeAll(false)} disabled={organizing}
+                className="w-full py-1.5 text-[10px] tracking-[0.06em] uppercase font-black border transition-colors disabled:opacity-50"
+                style={{ background: organizing ? "transparent" : C.accentBg, borderColor: "rgba(0,168,90,0.25)", color: C.accent, fontFamily: FONT }}>
+                {organizing ? "Organizando…" : "‡ Auto-organizar chats"}
+              </button>
             </div>
 
             {/* Perfil usuario */}
@@ -469,19 +651,19 @@ export default function Page() {
           <button onClick={() => setSide(!side)} className="px-1.5 py-1 text-[14px] font-black hidden md:block" style={{ color: C.muted }}>☰</button>
           <div className="h-4 w-px mx-0.5" style={{ background: C.border }} />
 
-          <select value={mode} onChange={(e) => setMode(e.target.value as Mode)}
+          <select value={mode} onChange={(e) => setChatSetting({ mode: e.target.value as Mode })}
             className="bg-transparent text-[11px] font-black px-2 py-1 outline-none cursor-pointer"
             style={{ color: MODES.find((m) => m.k === mode)?.c, fontFamily: FONT, border: "none" }}>
             {MODES.map((m) => (<option key={m.k} value={m.k}>{m.i} {m.l}</option>))}
           </select>
 
-          <select value={depth} onChange={(e) => setDepth(e.target.value as Depth)}
+          <select value={depth} onChange={(e) => setChatSetting({ depth: e.target.value as Depth })}
             className="bg-transparent text-[11px] font-black px-2 py-1 outline-none cursor-pointer"
             style={{ color: C.muted, fontFamily: FONT, border: "none" }}>
             {DEPTHS.map((d) => (<option key={d.k} value={d.k}>{d.l}</option>))}
           </select>
 
-          <select value={think} onChange={(e) => setThink(e.target.value as Think)}
+          <select value={think} onChange={(e) => setChatSetting({ thinking: e.target.value as Think })}
             className="bg-transparent text-[11px] font-black px-2 py-1 outline-none cursor-pointer"
             style={{ color: C.muted, fontFamily: FONT, border: "none" }}>
             {THINKS.map((t) => (<option key={t.k} value={t.k}>{t.i} {t.l}</option>))}
@@ -498,18 +680,56 @@ export default function Page() {
           <button onClick={() => setCompare(!compare)}
             className="text-[10px] tracking-[0.06em] uppercase px-2 py-1 transition-colors font-black"
             style={{ color: compare ? C.red : C.subtle }}>Comparar</button>
+          <button onClick={() => setDialectic(!dialectic)}
+            className="text-[10px] tracking-[0.06em] uppercase px-2 py-1 transition-colors font-black"
+            style={{ color: dialectic ? "#8a5ab5" : C.subtle }}>⚔ Dialéctica</button>
+          <button onClick={() => setCliMode(!cliMode)}
+            className="text-[10px] tracking-[0.06em] uppercase px-2 py-1 transition-colors font-black"
+            style={{ color: cliMode ? C.charcoal : C.subtle }}>💻 CLI</button>
 
           <div className="flex-1" />
 
           <button onClick={() => { setCanvas(!canvas); if (!canvas) { const l = [...msgs].reverse().find((m) => m.role === "assistant"); if (l) setCContent(l.content); } }}
             className="text-[10px] tracking-[0.06em] uppercase px-2 py-1 font-black" style={{ color: canvas ? C.accent : C.subtle }}>Editor</button>
+          <button onClick={() => setGraph(!graph)}
+            className="text-[10px] tracking-[0.06em] uppercase px-2 py-1 font-black" style={{ color: graph ? C.accent : C.subtle }}>‡ Grafo</button>
           <button onClick={shareChat} className="text-[10px] tracking-[0.06em] uppercase px-2 py-1 font-black" style={{ color: C.subtle }}>Compartir</button>
           {shareLink && <span className="text-[9px] font-black" style={{ color: C.accent }}>Copiado</span>}
         </div>
 
+        {/* Grafo hermenéutico Zettelkasten (estilo Obsidian) */}
+        {graph && (
+          <Graph chats={chats} links={links}
+            onOpen={(id) => { setGraph(false); select(id); }} />
+        )}
+
+        {!graph && (<>
         {/* Área de chat */}
         <div ref={chatRef} className="flex-1 overflow-y-auto">
           <div className="max-w-[720px] mx-auto px-4 md:px-8 py-4 md:py-8 space-y-4 md:space-y-6">
+            {/* Ficha hermenéutica del chat activo */}
+            {active && (active.concepts?.length || 0) > 0 && msgs.length > 0 && (
+              <div className="px-4 py-3 border" style={{ background: C.surface, borderColor: C.border }}>
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <span className="text-[9px] tracking-[0.1em] uppercase font-black" style={{ color: C.subtle }}>📁 {active.folder}</span>
+                  {active.concepts!.map((k) => (
+                    <span key={k} className="text-[10px] font-black px-1.5 py-0.5 border"
+                      style={{ color: C.accent, borderColor: "rgba(0,168,90,0.25)", background: C.accentBg }}>[[{k}]]</span>
+                  ))}
+                </div>
+                {relatedOfActive.length > 0 && (
+                  <div className="flex flex-wrap items-center gap-2 mt-1.5">
+                    <span className="text-[9px] tracking-[0.1em] uppercase font-black" style={{ color: C.subtle }}>Relacionados:</span>
+                    {relatedOfActive.slice(0, 3).map((r) => (
+                      <button key={r.id} onClick={() => select(r.id)}
+                        className="text-[11px] font-bold underline underline-offset-2" style={{ color: C.muted }}>
+                        {r.title?.slice(0, 30)}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
             {msgs.length === 0 && (
               <div className="text-center mt-20">
                 <div className="text-5xl mb-6" style={{ color: C.accent }}>◆</div>
@@ -570,6 +790,47 @@ export default function Page() {
                     </div>
                   )}
 
+                  {/* 💻 Tool calls — burbujas terminal colapsables */}
+                  {m.toolCalls && m.toolCalls.length > 0 && (
+                    <div className="mb-2 space-y-1">
+                      {m.toolCalls.map((tc) => {
+                        const toolOpen = showThink[`tc-${tc.id}`] ?? false;
+                        const toggleTool = () => setShowThink((p) => ({ ...p, [`tc-${tc.id}`]: !toolOpen }));
+                        let parsedArgs: Record<string, any> = {};
+                        try { parsedArgs = JSON.parse(tc.arguments); } catch { parsedArgs = { raw: tc.arguments }; }
+                        const label = tc.name === "bash" || tc.name === "powershell"
+                          ? `$ ${parsedArgs.command || tc.arguments?.slice(0, 60) || "?"}`
+                          : tc.name === "read_file" ? `📄 read ${parsedArgs.path || "?"}`
+                          : tc.name === "write_file" ? `✏️ write ${parsedArgs.path || "?"}`
+                          : tc.name === "edit_file" ? `🔧 edit ${parsedArgs.path || "?"}`
+                          : tc.name === "grep" ? `🔎 grep "${parsedArgs.pattern || "?"}"`
+                          : tc.name === "glob" ? `🔍 glob ${parsedArgs.pattern || "?"}`
+                          : tc.name === "list_dir" ? `📁 ls ${parsedArgs.path || "."}`
+                          : `${tc.name}`;
+                        return (
+                          <div key={tc.id} className="border font-mono text-[11px]"
+                            style={{ borderColor: "rgba(45,45,45,0.3)", background: tc.status === "running" ? "#1a1a2e" : C.charcoal }}>
+                            <button onClick={toggleTool}
+                              className="w-full text-left px-3 py-1.5 flex items-center gap-2 font-bold"
+                              style={{ color: tc.success === false ? "#ff6b6b" : tc.status === "running" ? "#ffd93d" : "#a0ffa0" }}>
+                              <span className="text-[10px]">{toolOpen ? "▾" : "▸"}</span>
+                              <span className="truncate flex-1">{label}</span>
+                              <span className="text-[9px] shrink-0" style={{ color: tc.status === "running" ? "#ffd93d" : tc.success === false ? "#ff6b6b" : "#6b6b6b" }}>
+                                {tc.status === "running" ? "…" : tc.success === false ? "✗" : "✓"}
+                              </span>
+                            </button>
+                            {toolOpen && (
+                              <div className="px-3 py-2 whitespace-pre-wrap break-all max-h-48 overflow-y-auto"
+                                style={{ borderTop: "1px solid rgba(255,255,255,0.08)", color: "#d4d4d4", background: "#0d0d0d" }}>
+                                {tc.output || tc.error || "(sin salida)"}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+
                   {/* Contenido */}
                   <div className="px-5 py-4 border"
                     style={{
@@ -592,6 +853,40 @@ export default function Page() {
                     )}
 
                     {(() => { const af = detectArtifact(m.content); if (af) return <div className="mt-3"><Artifact code={af} lang="html" /></div>; return null; })()}
+
+                    {/* Δ Medidor de Hybrys — sobreconfianza vs validación */}
+                    {m.role === "assistant" && m.hybrys && (
+                      <div className="mt-3 pt-3" style={{ borderTop: `1px solid ${C.border}` }}>
+                        {(() => {
+                          const hc = m.hybrys!.nivel === "critical" ? C.red : m.hybrys!.nivel === "warning" ? C.amber : C.accent;
+                          return (
+                            <>
+                              <div className="flex items-center gap-2">
+                                <span className="text-[9px] tracking-[0.1em] uppercase font-black shrink-0" style={{ color: hc }}>
+                                  Δ Hybrys {m.hybrys!.hybrys}%
+                                </span>
+                                <div className="flex-1 h-1.5 border" style={{ borderColor: C.border, background: C.surface }}>
+                                  <div style={{ width: `${Math.min(100, m.hybrys!.hybrys)}%`, height: "100%", background: hc }} />
+                                </div>
+                                <span className="text-[9px] font-black shrink-0" style={{ color: C.subtle }}>
+                                  C {Math.round(m.hybrys!.confianza * 100)} · V {Math.round(m.hybrys!.validacion * 100)}
+                                </span>
+                              </div>
+                              {m.hybrys!.razon && (
+                                <div className="text-[10px] font-bold mt-1" style={{ color: C.muted }}>{m.hybrys!.razon}</div>
+                              )}
+                              {m.hybrys!.nivel === "critical" && (
+                                <button onClick={hybrysReset} disabled={ld}
+                                  className="mt-1.5 px-2.5 py-1 text-[10px] tracking-[0.06em] uppercase font-black border"
+                                  style={{ color: C.red, borderColor: "rgba(212,68,44,0.3)", background: C.redBg }}>
+                                  Δ RESET — forzar antítesis
+                                </button>
+                              )}
+                            </>
+                          );
+                        })()}
+                      </div>
+                    )}
 
                     {/* Retroalimentación */}
                     {m.role === "assistant" && (
@@ -637,6 +932,44 @@ export default function Page() {
               </div>
             )}
 
+            {/* 💻 Herramientas CLI en vivo */}
+            {streamTools.length > 0 && (
+              <div className="flex justify-start">
+                <div className="max-w-[85%] space-y-1">
+                  {streamTools.map((tc) => {
+                    let parsedArgs: Record<string, any> = {};
+                    try { parsedArgs = JSON.parse(tc.arguments); } catch { parsedArgs = {}; }
+                    const label = tc.name === "bash" || tc.name === "powershell"
+                      ? `$ ${parsedArgs.command || "?"}`
+                      : tc.name === "read_file" ? `📄 ${parsedArgs.path || "?"}`
+                      : tc.name === "write_file" ? `✏️ ${parsedArgs.path || "?"}`
+                      : tc.name === "edit_file" ? `🔧 ${parsedArgs.path || "?"}`
+                      : tc.name === "grep" ? `🔎 "${parsedArgs.pattern || "?"}"`
+                      : `${tc.name}`;
+                    return (
+                      <div key={tc.id} className="px-3 py-1.5 border font-mono text-[11px] font-bold"
+                        style={{ borderColor: "rgba(45,45,45,0.3)", background: tc.status === "running" ? "#1a1a2e" : C.charcoal }}>
+                        <div className="flex items-center gap-2">
+                          <span className="text-[10px]">
+                            {tc.status === "running" ? "⏳" : tc.status === "done" ? (tc.success === false ? "❌" : "✅") : "💻"}
+                          </span>
+                          <span className="truncate" style={{ color: tc.status === "running" ? "#ffd93d" : tc.success === false ? "#ff6b6b" : "#a0ffa0" }}>
+                            {label.slice(0, 80)}
+                          </span>
+                        </div>
+                        {tc.output && (
+                          <div className="mt-1 whitespace-pre-wrap break-all max-h-32 overflow-y-auto text-[10px]"
+                            style={{ color: "#b4b4b4", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "4px" }}>
+                            {tc.output.slice(0, 500)}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
             {/* Cargando */}
             {ld && !streamThink && (
               <div className="flex justify-start">
@@ -655,6 +988,8 @@ export default function Page() {
           <div className="max-w-[720px] mx-auto">
             {research && <div className="text-[10px] tracking-[0.06em] uppercase mb-2 text-center font-black" style={{ color: C.amber }}>Investigación profunda — análisis multi-ángulo</div>}
             {web && <div className="text-[10px] tracking-[0.06em] uppercase mb-2 text-center font-black" style={{ color: "#4a7ab5" }}>Búsqueda web activada</div>}
+            {dialectic && <div className="text-[10px] tracking-[0.06em] uppercase mb-2 text-center font-black" style={{ color: "#8a5ab5" }}>⚔ Dialéctica adversarial — tesis · antítesis · síntesis</div>}
+            {cliMode && <div className="text-[10px] tracking-[0.06em] uppercase mb-2 text-center font-black" style={{ color: C.charcoal }}>💻 Modo CLI — herramientas de terminal activadas</div>}
             <div className="flex items-end gap-2 px-4 py-3 border" style={{ background: C.surface, borderColor: C.border }}>
               <textarea ref={inpRef} value={inp} onChange={(e) => setInp(e.target.value)} onKeyDown={keyDown}
                 placeholder="Escribe tu mensaje…"
@@ -679,6 +1014,7 @@ export default function Page() {
             </div>
           </div>
         </div>
+        </>)}
       </main>
 
       {/* Editor Canvas — fullscreen on mobile */}

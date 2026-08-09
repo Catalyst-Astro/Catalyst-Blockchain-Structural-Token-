@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0a0a1a">
+<title>◆ Catalyst — Launcher</title>
+<style>
+:root {
+  --bg: #0a0a1a; --surface: #111133; --surface2: #161640;
+  --border: rgba(0,255,136,0.12); --text: #e0e0e0; --muted: #888;
+  --subtle: #555; --accent: #00ff88; --red: #ff4466; --amber: #ffaa22;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:var(--font); background:var(--bg); color:var(--text); min-height:100vh; }
+header {
+  background:var(--surface); border-bottom:1px solid var(--border);
+  padding:12px 16px; display:flex; align-items:center; gap:10px;
+  position:sticky; top:0; z-index:10;
+}
+header .logo { color:var(--accent); font-size:24px; }
+header h1 { font-size:15px; letter-spacing:1px; font-weight:800; }
+header .sub { font-size:10px; color:var(--subtle); letter-spacing:2px; text-transform:uppercase; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:12px; padding:16px; max-width:1200px; margin:0 auto; }
+.card {
+  background:var(--surface); border:1px solid var(--border); border-radius:10px;
+  padding:16px; cursor:pointer; transition:all .15s; position:relative;
+}
+.card:hover { border-color:var(--accent); transform:translateY(-1px); }
+.card.hot { border-left:3px solid var(--red); }
+.card.warm { border-left:3px solid var(--amber); }
+.card.cold { border-left:3px solid #4a7ab5; }
+.card .mode-badge {
+  font-size:9px; font-weight:800; text-transform:uppercase; letter-spacing:1px;
+  padding:2px 8px; border-radius:4px; display:inline-block; margin-bottom:8px;
+}
+.card h3 { font-size:14px; margin-bottom:6px; color:var(--text); }
+.card .reason { font-size:11px; color:var(--muted); margin-bottom:8px; line-height:1.4; }
+.card .concepts { display:flex; flex-wrap:wrap; gap:4px; margin:8px 0; }
+.card .concept {
+  font-size:9px; padding:2px 6px; background:var(--surface2);
+  border:1px solid var(--border); border-radius:3px; color:var(--accent);
+}
+.card .metrics { font-size:9px; color:var(--subtle); margin-top:8px; }
+.card .score {
+  position:absolute; top:12px; right:12px; font-size:20px; font-weight:900;
+}
+.stats-bar {
+  display:flex; gap:16px; padding:8px 16px; background:var(--surface);
+  border-bottom:1px solid var(--border); font-size:10px; color:var(--muted);
+  flex-wrap:wrap; justify-content:center;
+}
+.stats-bar span { color:var(--accent); font-weight:800; }
+.graph-section { padding:16px; max-width:1200px; margin:0 auto; }
+.graph-section h2 { font-size:13px; letter-spacing:2px; margin-bottom:12px; color:var(--muted); text-transform:uppercase; }
+#graph { width:100%; height:300px; background:var(--surface); border:1px solid var(--border); border-radius:10px; }
+.quick-actions { display:flex; gap:8px; padding:8px 16px; flex-wrap:wrap; justify-content:center; }
+.quick-actions button {
+  background:var(--surface2); border:1px solid var(--border); color:var(--text);
+  padding:8px 16px; border-radius:8px; cursor:pointer; font-size:11px; font-weight:700;
+  font-family:var(--font); letter-spacing:.5px;
+}
+.quick-actions button:hover { border-color:var(--accent); color:var(--accent); }
+.quick-actions button.primary { background:var(--accent); color:var(--bg); border-color:var(--accent); }
+@media (max-width:600px) {
+  .grid { grid-template-columns:1fr; padding:8px; }
+  header h1 { font-size:13px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <span class="logo">◆</span>
+  <div>
+    <h1>Catalyst Launcher</h1>
+    <div class="sub">Sugerencias Filológicas · Obsidian Graph · BELL 13450.50</div>
+  </div>
+</header>
+
+<div class="stats-bar" id="stats">Cargando métricas...</div>
+
+<div class="quick-actions">
+  <button class="primary" onclick="window.open('/messenger','_self')">◆ Nuevo Chat</button>
+  <button onclick="window.open('/messenger?mode=pentetraktys','_self')">Δ Pentetraktys</button>
+  <button onclick="window.open('/messenger?mode=boo','_self')">ψ Boo Casimir</button>
+  <button onclick="window.open('/messenger?mode=zettelkasten','_self')">‡ Zettelkasten</button>
+  <button onclick="window.open('/messenger?mode=cobol','_self')">⌬ COBOL</button>
+  <button onclick="window.open('http://localhost:3000','_self')">Chat PWA</button>
+</div>
+
+<div class="graph-section">
+  <h2>‡ Grafo de Conexiones — Obsidian-style</h2>
+  <svg id="graph"></svg>
+</div>
+
+<h2 style="padding:0 16px;font-size:13px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;max-width:1200px;margin:0 auto;">
+  Sugerencias por Actividad Filológica
+</h2>
+
+<div class="grid" id="suggestions"></div>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+const API = '/suggestions';
+
+async function load() {
+  try {
+    const r = await fetch(API);
+    const data = await r.json();
+
+    document.getElementById('stats').innerHTML =
+      `<span>${data.total_suggestions}</span> sugerencias · ` +
+      `<span>${data.graph_links.length}</span> conexiones · BELL 13450.50`;
+
+    renderSuggestions(data.suggestions);
+    if (data.suggestions.length > 1) renderGraph(data);
+  } catch(e) {
+    document.getElementById('stats').innerHTML = 'Motor de sugerencias iniciando...';
+    document.getElementById('suggestions').innerHTML =
+      '<div class="card" onclick="window.open(\'/messenger\',\'_self\')"><h3>◆ Iniciar nuevo chat</h3><div class="reason">Sin historial previo. Comienza en modo Catalyst para banca y conocimiento.</div></div>';
+  }
+}
+
+function renderSuggestions(list) {
+  const modeColors = {catalyst:'#00ff88',pentetraktys:'#ff4466',boo:'#ffaa22',zettelkasten:'#888',cobol:'#4a7ab5'};
+  const urgencyIcons = {hot:'🔴',warm:'🟡',cold:'🔵',archived:'⚫'};
+  const el = document.getElementById('suggestions');
+
+  el.innerHTML = list.map((s,i) => `
+    <div class="card ${s.urgency}" onclick="window.open('/messenger?chat='+s.conv_id+'&mode='+s.suggested_mode+'&depth='+s.suggested_depth,'_self')">
+      <span class="mode-badge" style="background:${modeColors[s.suggested_mode]}22;color:${modeColors[s.suggested_mode]}">
+        ${urgencyIcons[s.urgency]||'⚫'} ${s.suggested_mode} · ${s.suggested_depth}
+      </span>
+      <div class="score" style="color:${modeColors[s.suggested_mode]}">${(s.philological_score*100).toFixed(0)}</div>
+      <h3>${s.title}</h3>
+      <div class="reason">${s.reason}</div>
+      <div class="concepts">${s.concepts.map(c=>`<span class="concept">[[${c}]]</span>`).join('')}</div>
+      <div class="metrics">${Object.entries(s.metrics).sort((a,b)=>b[1]-a[1]).slice(0,4).map(([k,v])=>`${k}: ${(v*100).toFixed(0)}%`).join(' · ')}</div>
+    </div>
+  `).join('');
+}
+
+function renderGraph(data) {
+  const modeColors = {catalyst:'#00ff88',pentetraktys:'#ff4466',boo:'#ffaa22',zettelkasten:'#888',cobol:'#4a7ab5'};
+  const W=document.getElementById('graph').clientWidth, H=300;
+  const svg=d3.select('#graph'), g=svg.append('g');
+
+  const sim=d3.forceSimulation(data.suggestions)
+    .force('link',d3.forceLink(data.graph_links).id(d=>d.conv_id).distance(80))
+    .force('charge',d3.forceManyBody().strength(-150))
+    .force('center',d3.forceCenter(W/2,H/2))
+    .force('collision',d3.forceCollide().radius(25));
+
+  const link=g.selectAll('.link').data(data.graph_links).join('line')
+    .attr('stroke','#ffffff15').attr('stroke-width',d=>d.weight*3);
+
+  const node=g.selectAll('.node').data(data.suggestions).join('g')
+    .attr('cursor','pointer')
+    .call(d3.drag().on('start',(e,d)=>{if(!e.active)sim.alphaTarget(0.3).restart();d.fx=d.x;d.fy=d.y;})
+      .on('drag',(e,d)=>{d.fx=e.x;d.fy=e.y;})
+      .on('end',(e,d)=>{if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null;}));
+
+  node.append('circle').attr('r',d=>10+d.philological_score*15)
+    .attr('fill',d=>modeColors[d.suggested_mode]||'#888')
+    .attr('opacity',0.8);
+
+  node.append('text').text(d=>d.title.slice(0,15)).attr('dy',20).attr('text-anchor','middle')
+    .attr('fill','#888').attr('font-size','8px');
+
+  node.on('click',(e,d)=>window.open('/messenger?chat='+d.conv_id+'&mode='+d.suggested_mode,'_self'));
+
+  sim.on('tick',()=>{
+    link.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y).attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
+    node.attr('transform',d=>`translate(${d.x},${d.y})`);
+  });
+}
+
+load();
+setInterval(load, 60000);
+</script>
+</body>
+</html>

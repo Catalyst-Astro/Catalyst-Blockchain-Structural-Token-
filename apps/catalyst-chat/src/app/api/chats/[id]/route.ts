@@ -1,16 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@/auth";
 import { getChatMessages, saveMessage, updateChat } from "@/db/queries";
+
+// Acceso directo sin login (app local/LAN) — sin candado de sesión
 
 export async function GET(
   _req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const session = await auth();
-  if (!session?.user?.id) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
   const { id } = await params;
   const msgs = await getChatMessages(id);
   return NextResponse.json({ messages: msgs });
@@ -20,14 +16,9 @@ export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const session = await auth();
-  if (!session?.user?.id) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
   const { id: chatId } = await params;
   try {
-    const { id, role, content, thinking, citations, feedback } =
+    const { id, role, content, thinking, citations, feedback, toolCalls } =
       await req.json();
     const msg = await saveMessage({
       id: id || crypto.randomUUID(),
@@ -36,6 +27,7 @@ export async function POST(
       content,
       thinking,
       citations: citations ? JSON.stringify(citations) : undefined,
+      toolCalls: toolCalls ? JSON.stringify(toolCalls) : undefined,
       feedback,
     });
     return NextResponse.json({ message: msg });
@@ -48,11 +40,6 @@ export async function PATCH(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const session = await auth();
-  if (!session?.user?.id) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
   const { id: chatId } = await params;
   try {
     const { title, mode, depth, thinking, folder } = await req.json();

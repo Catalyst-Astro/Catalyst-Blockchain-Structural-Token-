@@ -1,6 +1,22 @@
 import { db } from "./index";
-import { chats, messages } from "./schema";
+import { chats, messages, notes, users } from "./schema";
 import { eq, desc, and } from "drizzle-orm";
+
+// ─── Usuario por defecto (acceso directo sin login — app local/LAN) ────
+
+const DEFAULT_EMAIL = "incubadoracatalyst@gmail.com";
+
+export async function getDefaultUserId(): Promise<string> {
+  let u = db.select().from(users).where(eq(users.email, DEFAULT_EMAIL)).get();
+  if (!u) {
+    u = db
+      .insert(users)
+      .values({ id: crypto.randomUUID(), name: "Catalyst Incubadora", email: DEFAULT_EMAIL })
+      .returning()
+      .get();
+  }
+  return u.id;
+}
 
 // ─── Chat CRUD ─────────────────────────────────────────────────────────
 
@@ -46,7 +62,15 @@ export async function createChat(chat: {
 
 export async function updateChat(
   chatId: string,
-  data: { title?: string; mode?: string; depth?: string; thinking?: string; folder?: string }
+  data: {
+    title?: string;
+    mode?: string;
+    depth?: string;
+    thinking?: string;
+    folder?: string;
+    summary?: string;
+    concepts?: string;
+  }
 ) {
   return db
     .update(chats)
@@ -78,6 +102,7 @@ export async function saveMessage(msg: {
   content: string;
   thinking?: string;
   citations?: string;
+  toolCalls?: string;
   feedback?: string;
 }) {
   return db
@@ -89,6 +114,7 @@ export async function saveMessage(msg: {
       content: msg.content,
       thinking: msg.thinking,
       citations: msg.citations,
+      toolCalls: msg.toolCalls,
       feedback: msg.feedback,
       createdAt: new Date(),
     })
@@ -105,6 +131,49 @@ export async function updateMessageFeedback(
     .set({ feedback })
     .where(eq(messages.id, messageId))
     .run();
+}
+
+// ─── Meta-notas autopoiéticas ──────────────────────────────────────────
+
+export async function getUserNotes(userId: string) {
+  return db
+    .select()
+    .from(notes)
+    .where(eq(notes.userId, userId))
+    .orderBy(desc(notes.createdAt))
+    .all();
+}
+
+// Una nota por concepto: si ya existe, se regenera (autopoiesis = re-síntesis)
+export async function upsertNote(note: {
+  userId: string;
+  concept: string;
+  title: string;
+  content: string;
+  sources: string;
+}) {
+  const existing = db
+    .select()
+    .from(notes)
+    .where(and(eq(notes.userId, note.userId), eq(notes.concept, note.concept)))
+    .get();
+  if (existing) {
+    return db
+      .update(notes)
+      .set({ title: note.title, content: note.content, sources: note.sources, createdAt: new Date() })
+      .where(eq(notes.id, existing.id))
+      .returning()
+      .get();
+  }
+  return db
+    .insert(notes)
+    .values({ id: crypto.randomUUID(), ...note, createdAt: new Date() })
+    .returning()
+    .get();
+}
+
+export async function deleteNote(noteId: string) {
+  return db.delete(notes).where(eq(notes.id, noteId)).run();
 }
 
 // ─── Bulk operations ───────────────────────────────────────────────────

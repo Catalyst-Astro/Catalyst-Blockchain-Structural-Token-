@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-type Mode = 'catalyst' | 'pentetraktys' | 'boo' | 'zettelkasten';
+type Mode = 'catalyst' | 'pentetraktys' | 'boo' | 'zettelkasten' | 'cobol';
 type Depth = 'surface' | 'medium' | 'deep' | 'frontier';
 type ThinkingLevel = 'off' | 'high' | 'max';
 

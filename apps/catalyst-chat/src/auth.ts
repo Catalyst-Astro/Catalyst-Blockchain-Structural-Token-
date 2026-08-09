@@ -6,9 +6,8 @@ import { eq } from "drizzle-orm";
 
 const uid = () => crypto.randomUUID();
 
-// ─── Hardcoded Catalyst account ────────────────────────────────────
+// ─── Cuenta Catalyst por defecto — acceso directo solo con correo ───
 const CATALYST_EMAIL = "incubadoracatalyst@gmail.com";
-const CATALYST_PASSWORD = "CuentaIncubadora1891@";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
@@ -16,33 +15,28 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       name: "Email",
       credentials: {
         email: { label: "Email", type: "email", placeholder: "you@email.com" },
-        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const email = credentials?.email as string;
-        const password = credentials?.password as string;
-
-        if (!email || !password) return null;
-
-        // Check against hardcoded account
-        if (email !== CATALYST_EMAIL || password !== CATALYST_PASSWORD) {
-          return null;
-        }
+        // Acceso directo: solo el correo, sin contraseña (app local/LAN)
+        const email = ((credentials?.email as string) || CATALYST_EMAIL).trim().toLowerCase();
+        if (!email.includes("@")) return null;
 
         // Find or create user in database
         let user = db.select().from(users).where(eq(users.email, email)).get();
 
         if (!user) {
           const id = uid();
+          const name =
+            email === CATALYST_EMAIL ? "Catalyst Incubadora" : email.split("@")[0];
           db.insert(users)
             .values({
               id,
-              name: "Catalyst Incubadora",
+              name,
               email,
               image: null,
             })
             .run();
-          user = { id, name: "Catalyst Incubadora", email, emailVerified: null, image: null };
+          user = { id, name, email, emailVerified: null, image: null };
         }
 
         return {
