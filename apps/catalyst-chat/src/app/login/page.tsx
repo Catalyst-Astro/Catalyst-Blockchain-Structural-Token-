@@ -1,52 +1,75 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState, Suspense } from "react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 
+const DEFAULT_EMAIL = "incubadoracatalyst@gmail.com";
+
+// useSearchParams exige un límite de Suspense para el prerender de producción
 export default function LoginPage() {
-  const { data: session, status } = useSession();
+  return (
+    <Suspense fallback={null}>
+      <LoginInner />
+    </Suspense>
+  );
+}
+
+function LoginInner() {
+  const { status } = useSession();
   const router = useRouter();
   const params = useSearchParams();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState(DEFAULT_EMAIL);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const autoTried = useRef(false);
 
   const callbackUrl = params.get("callbackUrl") || "/";
 
-  if (status === "authenticated") {
-    router.replace(callbackUrl);
-    return null;
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email.trim() || !password) return;
+  const doLogin = async (mail: string) => {
+    if (!mail.trim()) return;
     setLoading(true);
     setError("");
-    const result = await signIn("credentials", {
-      email: email.trim(),
-      password,
-      callbackUrl,
-      redirect: false,
-    });
-    if (result?.error) {
-      setError("Credenciales incorrectas");
-      setLoading(false);
-    } else if (result?.ok) {
-      router.replace(callbackUrl);
-    } else {
+    try {
+      const result = await signIn("credentials", {
+        email: mail.trim(),
+        callbackUrl,
+        redirect: false,
+      });
+      if (result?.error) {
+        setError("Error al iniciar sesión");
+        setLoading(false);
+      } else if (result?.ok) {
+        router.replace(callbackUrl);
+      } else {
+        setLoading(false);
+      }
+    } catch {
+      // iOS Safari puede dejar el fetch colgado o fallar — nunca bloquear el botón
+      setError("Error de conexión — reintenta");
       setLoading(false);
     }
   };
 
-  const err = params.get("error");
-  const msg =
-    error ||
-    (err === "CredentialsSignin" && "Credenciales incorrectas") ||
-    (err && "Error al iniciar sesión") ||
-    "";
+  // ── Entrada automática: solo con el correo, sin contraseña ──────
+  useEffect(() => {
+    if (status === "unauthenticated" && !autoTried.current) {
+      autoTried.current = true;
+      doLogin(DEFAULT_EMAIL);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status]);
+
+  useEffect(() => {
+    if (status === "authenticated") router.replace(callbackUrl);
+  }, [status, router, callbackUrl]);
+
+  if (status === "authenticated") return null;
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    doLogin(email);
+  };
 
   return (
     <div
@@ -89,16 +112,16 @@ export default function LoginPage() {
         </div>
 
         {/* ── Error ────────────────────────────────────────── */}
-        {msg && (
+        {error && (
           <div
             className="mb-6 px-4 py-3 text-[13px] leading-relaxed font-bold border"
             style={{ background: "#fff", color: "#b83820", borderColor: "rgba(212,68,44,0.25)", fontFamily: "'Times New Roman', Times, serif" }}
           >
-            {msg}
+            {error}
           </div>
         )}
 
-        {/* ── Formulario ───────────────────────────────────── */}
+        {/* ── Formulario: solo correo, entrada directa ─────── */}
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label
@@ -111,35 +134,8 @@ export default function LoginPage() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="incubadoracatalyst@gmail.com"
+              placeholder={DEFAULT_EMAIL}
               autoComplete="email"
-              autoFocus
-              disabled={loading}
-              className="w-full px-0 py-3 text-[15px] font-bold bg-transparent border-0 border-b border-[#c8c8c0] placeholder:text-[#b4b4ac] outline-none transition-colors duration-200"
-              style={{
-                color: "#1a1a1a",
-                letterSpacing: "-0.01em",
-                fontFamily: "'Times New Roman', Times, serif",
-                borderBottom: "1px solid #c8c8c0",
-              }}
-              onFocus={(e) => { e.target.style.borderBottom = "1px solid #1a1a1a"; }}
-              onBlur={(e) => { e.target.style.borderBottom = "1px solid #c8c8c0"; }}
-            />
-          </div>
-
-          <div>
-            <label
-              className="block text-[11px] tracking-[0.12em] uppercase mb-2 font-black"
-              style={{ color: "#8b8b82", fontFamily: "'Times New Roman', Times, serif" }}
-            >
-              Contraseña
-            </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••••••"
-              autoComplete="current-password"
               disabled={loading}
               className="w-full px-0 py-3 text-[15px] font-bold bg-transparent border-0 border-b border-[#c8c8c0] placeholder:text-[#b4b4ac] outline-none transition-colors duration-200"
               style={{
@@ -157,16 +153,16 @@ export default function LoginPage() {
           <div className="pt-6">
             <button
               type="submit"
-              disabled={loading || !email.trim() || !password}
+              disabled={loading || !email.trim()}
               className="w-full py-3.5 text-[14px] font-black tracking-[0.06em] uppercase transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
               style={{
-                background: loading || !email.trim() || !password ? "#e8e8e4" : "#1a1a1a",
+                background: loading || !email.trim() ? "#e8e8e4" : "#1a1a1a",
                 color: "#fff",
                 letterSpacing: "0.08em",
                 fontFamily: "'Times New Roman', Times, serif",
               }}
             >
-              {loading ? "Verificando…" : "Iniciar sesión"}
+              {loading ? "Entrando…" : "Entrar"}
             </button>
           </div>
         </form>

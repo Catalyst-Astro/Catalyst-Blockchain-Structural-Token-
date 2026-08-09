@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Catalyst Messenger">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0a0a1a">
+<title>Catalyst Messenger — BELL 13450.50</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>">
+<style>
+:root {
+  --bg: #0a0a1a;
+  --surface: #111133;
+  --surface2: #161640;
+  --border: rgba(0,255,136,0.12);
+  --text: #e0e0e0;
+  --muted: #888;
+  --subtle: #555;
+  --accent: #00ff88;
+  --accentBg: rgba(0,255,136,0.08);
+  --red: #ff4466;
+  --amber: #ffaa22;
+  --userBubble: rgba(0,255,136,0.12);
+  --aiBubble: #111133;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { height:100%; overflow:hidden; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  display:flex; flex-direction:column;
+  height:100vh; height:100dvh;
+}
+
+/* ─── Header ──────────────────────────── */
+header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 14px;
+  display:flex; align-items:center; gap:8px;
+  flex-shrink:0;
+  -webkit-app-region: drag;
+}
+header .logo { color:var(--accent); font-size:20px; }
+header .title { font-size:13px; font-weight:800; letter-spacing:.5px; }
+header .subtitle { font-size:9px; color:var(--subtle); letter-spacing:1px; text-transform:uppercase; }
+
+/* ─── Controls ──────────────────────── */
+.controls {
+  display:flex; gap:4px; padding:6px 10px; overflow-x:auto;
+  background: var(--surface); border-bottom:1px solid var(--border);
+  flex-shrink:0; -webkit-overflow-scrolling:touch;
+}
+.controls button, .controls select {
+  background: var(--surface2); border:1px solid var(--border);
+  color: var(--text); font-size:10px; font-weight:700;
+  padding:5px 8px; border-radius:6px; cursor:pointer;
+  white-space:nowrap; font-family:var(--font);
+  letter-spacing:.3px;
+}
+.controls button.active, .controls button.on {
+  background: var(--accentBg); border-color: var(--accent);
+  color: var(--accent);
+}
+.controls select { color: var(--accent); }
+
+/* ─── Chat Area ───────────────────────── */
+.chat {
+  flex:1; overflow-y:auto; padding:12px 10px;
+  display:flex; flex-direction:column; gap:8px;
+  -webkit-overflow-scrolling:touch;
+}
+.msg {
+  max-width:88%; padding:10px 14px; border-radius:12px;
+  font-size:14px; line-height:1.5; word-wrap:break-word;
+}
+.msg.user {
+  align-self:flex-end; background:var(--userBubble);
+  border:1px solid rgba(0,255,136,0.18);
+}
+.msg.ai {
+  align-self:flex-start; background:var(--aiBubble);
+  border:1px solid var(--border);
+}
+.msg .label {
+  font-size:9px; text-transform:uppercase; letter-spacing:1px;
+  font-weight:800; margin-bottom:4px;
+}
+.msg.user .label { color: var(--accent); }
+.msg.ai .label { color: var(--muted); }
+.msg .thinking {
+  font-size:11px; color:var(--amber); margin-top:6px;
+  padding:6px 8px; background:rgba(255,170,34,0.06);
+  border-left:2px solid var(--amber); border-radius:4px;
+  max-height:150px; overflow-y:auto; display:none;
+}
+.msg .thinking.show { display:block; }
+.msg .hybrys {
+  font-size:10px; margin-top:6px; padding:4px 8px;
+  border-radius:4px; display:flex; align-items:center; gap:6px;
+}
+.hybrys.ok { background:rgba(0,255,136,0.06); color:var(--accent); }
+.hybrys.warning { background:rgba(255,170,34,0.06); color:var(--amber); }
+.hybrys.critical { background:rgba(255,68,102,0.08); color:var(--red); }
+
+/* ─── Input ─────────────────────────── */
+.input-area {
+  padding:8px 10px; background:var(--surface);
+  border-top:1px solid var(--border); flex-shrink:0;
+  padding-bottom: max(8px, env(safe-area-inset-bottom));
+}
+.input-row {
+  display:flex; gap:6px; align-items:flex-end;
+  background:var(--surface2); border:1px solid var(--border);
+  border-radius:12px; padding:8px 12px;
+}
+.input-row textarea {
+  flex:1; background:transparent; border:none; outline:none;
+  color:var(--text); font-size:14px; font-family:var(--font);
+  resize:none; max-height:100px; line-height:1.4;
+}
+.input-row textarea::placeholder { color:var(--subtle); }
+.input-row button {
+  background:var(--accent); border:none; color:var(--bg);
+  font-size:12px; font-weight:800; padding:8px 14px;
+  border-radius:8px; cursor:pointer;
+  letter-spacing:.5px; flex-shrink:0;
+}
+.input-row button:disabled { opacity:0.3; }
+
+/* ─── Loading dots ─────────────────── */
+.typing { display:flex; gap:4px; padding:10px 14px; }
+.typing span { width:6px; height:6px; background:var(--subtle); border-radius:50%; animation: bounce 1.2s infinite; }
+.typing span:nth-child(2) { animation-delay:0.2s; }
+.typing span:nth-child(3) { animation-delay:0.4s; }
+@keyframes bounce { 0%,60%,100% { transform:translateY(0); } 30% { transform:translateY(-6px); } }
+
+/* ─── Responsive ───────────────────── */
+@media (max-width:480px) {
+  .msg { max-width:92%; font-size:13px; }
+  .controls { padding:4px 6px; gap:2px; }
+  .controls button, .controls select { font-size:9px; padding:4px 6px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <span class="logo">◆</span>
+  <div>
+    <div class="title">Catalyst Messenger</div>
+    <div class="subtitle">BELL 13450.50 · E2E</div>
+  </div>
+  <div style="flex:1"></div>
+  <select id="modeSelect" onchange="setMode(this.value)" style="font-size:10px;background:var(--surface2);border:1px solid var(--border);color:var(--accent);padding:4px 6px;border-radius:6px;font-weight:700;">
+    <option value="catalyst">◆ Catalyst</option>
+    <option value="pentetraktys">Δ Pentetraktys</option>
+    <option value="boo">ψ Boo</option>
+    <option value="zettelkasten">‡ Zettelkasten</option>
+    <option value="cobol">⌬ COBOL</option>
+  </select>
+</header>
+
+<div class="controls" id="controls">
+  <select id="depthSelect" onchange="setDepth(this.value)">
+    <option value="surface">Superficie</option>
+    <option value="medium" selected>Medio</option>
+    <option value="deep">Profundo</option>
+    <option value="frontier">Frontera</option>
+  </select>
+  <select id="thinkSelect" onchange="setThink(this.value)">
+    <option value="off" selected>→ Rápido</option>
+    <option value="high">⊞ Pensar</option>
+    <option value="max">⊡ Profundo</option>
+  </select>
+  <button id="btnResearch" onclick="toggleResearch()">🔬 Inv</button>
+  <button id="btnDialectic" onclick="toggleDialectic()">⚔ Dialéctica</button>
+  <button id="btnNew" onclick="newChat()" style="margin-left:auto;">+ Nuevo</button>
+</div>
+
+<div class="chat" id="chat"></div>
+
+<div class="input-area">
+  <div class="input-row">
+    <textarea id="input" rows="1" placeholder="Escribe tu mensaje…" onkeydown="onKey(event)"></textarea>
+    <button id="sendBtn" onclick="send()">Enviar</button>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// CATALYST MESSENGER — Cliente
+// ═══════════════════════════════════════════════════════════════
+
+const API = '/api/chat';  // mismo endpoint que el bot
+const TOKEN = localStorage.getItem('catalyst_token') || '';
+
+let mode = 'catalyst', depth = 'medium', think = 'off';
+let research = false, dialectic = false;
+let loading = false;
+let messages = [];
+let chatId = 'msg-' + Date.now().toString(36);
+
+// ─── Init ────────────────────────────────────────────────────
+function init() {
+  // Solicitar token si no hay
+  if (!TOKEN) {
+    const t = prompt('Token de acceso (déjalo vacío si es local):');
+    if (t) { localStorage.setItem('catalyst_token', t); }
+  }
+  scrollBottom();
+}
+
+// ─── Send ────────────────────────────────────────────────────
+async function send() {
+  const inp = document.getElementById('input');
+  const text = inp.value.trim();
+  if (!text || loading) return;
+
+  loading = true;
+  inp.value = '';
+  inp.style.height = 'auto';
+  document.getElementById('sendBtn').disabled = true;
+
+  // Agregar mensaje usuario
+  addMsg('user', text);
+
+  // Loading dots
+  const loadId = addLoading();
+
+  try {
+    const res = await fetch(API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-API-Key': TOKEN },
+      body: JSON.stringify({
+        message: text, conv_id: chatId,
+        mode, depth, thinking: think === 'off' ? undefined : think,
+        research, dialectic
+      })
+    });
+
+    if (!res.ok) throw new Error(await res.text());
+    const data = await res.json();
+
+    // Remover loading
+    removeLoading(loadId);
+
+    // Agregar respuesta
+    addMsg('ai', data.content, data.thinking, data.hybrys, data.dialectic);
+
+  } catch(e) {
+    removeLoading(loadId);
+    addMsg('ai', '⚠ Error: ' + e.message);
+  }
+
+  loading = false;
+  document.getElementById('sendBtn').disabled = false;
+  inp.focus();
+}
+
+// ─── UI functions ─────────────────────────────────────────────
+function addMsg(role, content, thinking, hybrys, dialecticStages) {
+  const el = document.createElement('div');
+  el.className = 'msg ' + role;
+
+  let html = `<div class="label">${role === 'user' ? 'Tú' : '◆ Catalyst'}</div>`;
+
+  if (thinking) {
+    html += `<div class="thinking show" onclick="this.classList.toggle('show')">💭 ${escapeHtml(thinking)}</div>`;
+  }
+
+  html += `<div>${formatText(content)}</div>`;
+
+  // Dialectic
+  if (dialecticStages) {
+    if (dialecticStages.antithesis) {
+      html += `<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-size:12px;color:var(--amber);"><strong>⚔ ANTÍTESIS</strong><br>${escapeHtml(dialecticStages.antithesis).slice(0, 500)}</div>`;
+    }
+    if (dialecticStages.synthesis) {
+      html += `<div style="margin-top:4px;font-size:12px;color:var(--accent);"><strong>◆ SÍNTESIS</strong><br>${escapeHtml(dialecticStages.synthesis).slice(0, 500)}</div>`;
+    }
+  }
+
+  // Hybrys
+  if (hybrys) {
+    const level = hybrys.nivel === 'critical' ? 'critical' : hybrys.nivel === 'warning' ? 'warning' : 'ok';
+    const icon = level === 'critical' ? '🚨' : level === 'warning' ? '⚠' : '✓';
+    html += `<div class="hybrys ${level}">Δ Hybrys ${icon} ${Math.round(hybrys.hybrys*100)}% &nbsp;C:${Math.round(hybrys.confianza*100)}% V:${Math.round(hybrys.validacion*100)}%</div>`;
+  }
+
+  el.innerHTML = html;
+  document.getElementById('chat').appendChild(el);
+  messages.push({role, content, thinking, hybrys});
+  scrollBottom();
+}
+
+function addLoading() {
+  const el = document.createElement('div');
+  el.className = 'typing';
+  el.id = 'loading-' + Date.now();
+  el.innerHTML = '<span></span><span></span><span></span>';
+  document.getElementById('chat').appendChild(el);
+  scrollBottom();
+  return el.id;
+}
+
+function removeLoading(id) {
+  document.getElementById(id)?.remove();
+}
+
+function scrollBottom() {
+  setTimeout(() => {
+    const c = document.getElementById('chat');
+    c.scrollTop = c.scrollHeight;
+  }, 50);
+}
+
+// ─── Helpers ──────────────────────────────────────────────────
+function escapeHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function formatText(s) {
+  return s
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/```(\w*)\n([\s\S]*?)```/g, '<pre style="background:rgba(0,0,0,0.3);padding:8px;border-radius:4px;overflow-x:auto;font-size:11px;">$2</pre>')
+    .replace(/`(.*?)`/g, '<code style="background:rgba(0,0,0,0.3);padding:1px 4px;border-radius:3px;font-size:12px;">$1</code>')
+    .replace(/\n/g, '<br>');
+}
+
+function onKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
+}
+
+// Auto-resize textarea
+document.getElementById('input').addEventListener('input', function(){
+  this.style.height = 'auto';
+  this.style.height = Math.min(this.scrollHeight, 100) + 'px';
+});
+
+// ─── Controls ──────────────────────────────────────────────────
+function setMode(v) { mode = v; highlightBtn(); }
+function setDepth(v) { depth = v; highlightBtn(); }
+function setThink(v) { think = v; highlightBtn(); }
+function toggleResearch() { research = !research; document.getElementById('btnResearch').classList.toggle('on', research); }
+function toggleDialectic() { dialectic = !dialectic; document.getElementById('btnDialectic').classList.toggle('on', dialectic); }
+function newChat() {
+  chatId = 'msg-' + Date.now().toString(36);
+  messages = [];
+  document.getElementById('chat').innerHTML = '';
+  addMsg('ai', '◆ Nuevo chat iniciado. BELL 13450.50.\n\nSelecciona modo y profundidad arriba, o simplemente escribe tu mensaje.');
+}
+function highlightBtn() {}
+
+init();
+</script>
+</body>
+</html>
